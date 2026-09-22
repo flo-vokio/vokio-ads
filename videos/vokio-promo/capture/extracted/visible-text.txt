@@ -1,0 +1,605 @@
+[a] Aller au contenu
+[a] Fonctionnement
+[a] Calculateur
+[a] Comparer
+[a] Questions
+[a] Mon espace
+[a] Essayer Vokio
+[span] En ligne · 24 h/24
+[h1] Votre téléphone sonne.
+[em] Vokio décroche.
+[p] Il prend le rendez-vous, envoie la confirmation par SMS, et vous laisse votre métier. Un appel sans réponse, c'est un client chez le concurrent.
+[a] Écouter Vokio répondre dans mon métier
+[a] Créer mon espace gratuit
+[p] Votre numéro ne change pas · en place en une journée
+[p] Un appel, en direct — dans votre métier
+[button] Dépannage urgent
+[button] Artisan BTP
+[button] Vétérinaire
+[button] Auto-école
+[button] Coiffure & beauté
+[button] Restaurant
+[span] Ligne de garde · mardi
+[time] 02:07
+[span] Appel entrant — 06 •• •• •• 47
+[span] Vokio · Plomberie Azur
+[p] Plomberie Azur, bonsoir. Que puis-je faire pour vous ?
+[span] Client
+[p] J’ai une fuite sous l’évier, ça coule beaucoup là…
+[span] Vokio · Plomberie Azur
+[p] D’accord, c’est une urgence. Je préviens le plombier de garde. La fuite vient d’où — de la robinetterie, de l’arrivée d’eau ?
+[span] Client
+[p] Du flexible d’arrivée d’eau, je crois. Je suis au douze rue des Lices, à Toulon.
+[span] Vokio · Plomberie Azur
+[p] C’est noté. En attendant, fermez le robinet d’arrêt sous l’évier si vous pouvez. Vous recevez un SMS, et le plombier de garde vous rappelle dans les cinq minutes.
+[span] SMS · 02:09
+[span] Demande transmise : fuite arrivée d’eau sous évier — 12 rue des Lices. Le plombier de garde vous rappelle sous 5 min.
+[span] Urgence transmise à l’artisan de garde — 02:09
+[button] Rejouer l'appel
+[p] Ou composez le numéro de cette démo
+[b] Plomberie
+[a] 09 74 99 41 41
+[span] Un autre métier ? Sélectionnez sa démo juste au-dessus.
+[p] Vivez-le en vrai : laissez votre numéro,
+[b] Vokio vous rappelle
+[p] dans les dix secondes.
+[button] Me faire rappeler
+[b] 24 h/24
+[span] — y compris fermé
+[span] RDV dans
+[b] votre agenda
+[b] SMS
+[span] de confirmation et de rappel
+[span] Hébergé en
+[b] France
+[p] Pourquoi Vokio existe
+[blockquote] Les mains dans la couleur, sous un évier, sur un échafaudage — le téléphone sonne. Celui qui n'a pas de réponse
+[em] rappelle rarement
+[blockquote] : il appelle le suivant sur la liste.
+[p] Vokio est né de ce constat, en travaillant avec de vrais commerçants et artisans. Pas un standard téléphonique de plus — une présence qui connaît
+[strong] votre métier
+[p] , vos prestations et leurs durées, vos horaires, vos urgences.
+[p] Elle ne prend pas un message. Elle consulte votre agenda en direct, propose un créneau réellement libre, et
+[strong] le rendez-vous est posé
+[p] avant même que vous ayez reposé vos outils. Et quand c'est une vraie urgence, elle vous alerte tout de suite.
+[p] Vous restez maître de tout : chaque appel, chaque rendez-vous et chaque SMS est visible dans votre espace, et votre agenda reste le vôtre.
+[p] Comment ça marche
+[h2] Trois temps,
+[em] et c'est fait.
+[p] Le même déroulé à chaque appel — que vous soyez ouvert, fermé, sur un chantier ou en pleine consultation.
+[span] L'écran de votre client
+[span] 21:47
+[div] Plomberie Azur
+[div] appel en cours
+[div] silence
+[div] clavier
+[div] audio
+[div] ajouter
+[div] vidéo
+[div] contacts
+[div] — 01
+[em] sonne.
+[p] Le client appelle votre numéro habituel. Rien ne change pour lui.
+[span] Votre agenda
+[span] 21:48
+[div] mer. 10 septembre
+[span] Vokio · maintenant
+[span] Rendez-vous posé : demain 10:30
+[time] 09:00
+[time] 10:00
+[time] 11:00
+[time] 12:00
+[time] 13:00
+[time] 14:00
+[time] 15:00
+[time] 16:00
+[div] Chantier rue des Lilas
+[small] 09:00 à 10:00
+[small] 10:30 · posé par Vokio
+[div] Devis salle de bain
+[small] 12:00 à 13:00
+[div] Chantier avenue Foch
+[small] 14:00 à 16:00
+[div] — 02
+[div] Vokio
+[em] décroche.
+[p] Elle se présente, écoute, trie l'urgence du rendez-vous, et consulte votre agenda pour proposer un créneau réellement libre.
+[span] Le SMS qu'il reçoit
+[span] 21:49
+[div] Vokio
+[b] Aujourd'hui
+[div] 21:49
+[span] SMS
+[div] — 03
+[div] C'est
+[em] confirmé.
+[p] Le rendez-vous est posé, le client reçoit un SMS — et s'il y a urgence, vous êtes alerté immédiatement.
+[p] Le relais
+[h2] Vous êtes pris ailleurs ?
+[em] Vokio prend le relais.
+[p] Vous ne pouvez pas être à deux endroits à la fois, Vokio si. Plutôt que de vous l’expliquer, voici trois appels, à l’heure et au jour où ils sont arrivés.
+[div] En plein service
+[div] Mercredi,
+[em] 20 h 07.
+[p] La Table des Halles est ouverte, la salle est pleine. Clara prend la réservation pendant le coup de feu.
+[span] 0:41
+[summary] Lire la transcription
+[b] Clara
+[p] Bonjour, je suis Clara, l’assistante vocale de La Table des Halles ! Comment puis-je vous aider ?
+[b] L’appelant
+[p] Euh, bonjour, j’voudrais réserver une table pour, euh, samedi soir, s’il vous plaît.
+[b] Clara
+[p] Ce serait pour combien de personnes ?
+[b] L’appelant
+[p] Ce serait pour, euh, six personnes.
+[b] Clara
+[p] Un instant.
+[b] Clara
+[p] Pour six personnes, le samedi vingt-deux août au soir, c’est bien cela ?
+[b] L’appelant
+[p] C’est ça.
+[b] Clara
+[p] Je vérifie les disponibilités.
+[b] Clara
+[p] D’accord, c’est disponible. C’est pour quel prénom ?
+[b] L’appelant
+[p] C’est pour Florian.
+[b] Clara
+[p] Un instant.
+[b] Clara
+[p] C’est réservé, Florian : une table pour six le samedi vingt-deux août à vingt heures. Vous recevrez un SMS de confirmation.
+[b] L’appelant
+[p] Merci, au revoir.
+[b] Clara
+[p] Merci à vous, au revoir.
+[div] Rideau baissé
+[div] Lundi,
+[em] 13 h 28.
+[p] Le salon est fermé le lundi. Blandine pose quand même la couleur du jeudi, à dix heures, avec Julie.
+[span] 0:59
+[summary] Lire la transcription
+[b] Blandine
+[p] Bonjour, je suis Blandine, l’assistante vocale du Salon Marchand ! Comment puis-je vous aider ?
+[b] L’appelant
+[p] Oui, bonjour, j’voudrais prendre rendez-vous pour une couleur, s’il vous plaît.
+[b] Blandine
+[p] Très bien. C’est pour quel prénom ?
+[b] L’appelant
+[p] Euh, ça serait pour Florian.
+[b] Blandine
+[p] Très bien, Florian. Pour une couleur, avez-vous une préférence pour un jour ou une date ?
+[b] L’appelant
+[p] Euh, pour ce jeudi, c’est possible.
+[b] Blandine
+[p] Je regarde ça.
+[b] Blandine
+[p] Un instant. Pour ce jeudi trois septembre, à quelle heure souhaiteriez-vous votre rendez-vous ?
+[b] L’appelant
+[p] Euh, le matin, vous avez quoi comme créneau?
+[b] Blandine
+[p] Laissez-moi voir.
+[b] Blandine
+[p] Nous avons des disponibilités à neuf heures, dix heures ou onze heures ce jeudi.
+[b] L’appelant
+[p] Mmh, dix heures.
+[b] Blandine
+[p] Je vérifie les disponibilités.
+[b] Blandine
+[p] Parfait, je vous note ça pour Florian, une couleur, le jeudi trois septembre à dix heures avec Julie. Vous recevrez un SMS de confirmation.
+[b] L’appelant
+[p] Merci, au revoir.
+[b] Blandine
+[p] Merci à vous, au revoir.
+[div] Après la fermeture
+[div] Vendredi,
+[em] 19 h 18.
+[p] L’auto-école a fermé à 19 h. Manon explique la conduite accompagnée à un père qui s’y prend un an à l’avance.
+[span] 0:54
+[summary] Lire la transcription
+[b] Manon
+[p] Auto-école du Centre, bonjour ! Moi c’est Manon, son assistante vocale. Qu’est-ce que je peux faire pour vous ?
+[b] L’appelant
+[p] Bonjour, euh, j’voulais savoir si c’était possible de prendre un rendez-vous.
+[b] Manon
+[p] Oui, bien sûr ! C’est pour une première inscription chez nous, ou vous êtes déjà élève à l’auto-école ?
+[b] L’appelant
+[p] Euh, c’est pour une première inscription, ce serait pour mon fils. En fait, il a, il a 16 ans, mais j’voudrais anticiper, euh, la conduite accompagnée. J’sais pas comment ça se passe.
+[b] Manon
+[p] C’est une excellente idée d’anticiper ! Pour commencer la conduite accompagnée, nous devons d’abord faire une évaluation de conduite initiale obligatoire avec lui. C’est pour quel prénom ?
+[b] L’appelant
+[p] Euh, c’est pour, euh, Florian.
+[b] Manon
+[p] Très bien, Florian. Quel jour vous conviendrait pour cette évaluation de conduite ?
+[b] L’appelant
+[p] Euh, attendez, j’ai un souci, j’vous rappellerai plus tard. J’vous remercie, au revoir.
+[b] Manon
+[p] Pas de problème, je comprends tout à fait. N’hésitez pas à nous rappeler quand vous serez disponible. Bonne fin de journée, au revoir !
+[p] Appels réels sur nos lignes de démo
+[p] Spécialisée par métier
+[h2] Vokio parle
+[em] votre
+[h2] métier.
+[p] Pas une standardiste générique : chaque agent connaît le vocabulaire, les prestations et les urgences de votre activité.
+[h3] Dépannage urgent
+[small] Plombier · serrurier · électricien
+[p] À deux heures du matin, un appel manqué part chez le concurrent en dix minutes. Vokio trie l'urgence, prend l'adresse, et alerte l'artisan de garde.
+[p] « C'est une urgence — je préviens le plombier de garde, vous êtes rappelé dans cinq minutes. »
+[a] Plombiers →
+[a] Serruriers →
+[a] Électriciens →
+[h3] Artisan BTP
+[small] Devis · chantiers · rénovation
+[p] Sur un chantier, on ne décroche pas — et un devis raté se chiffre en milliers d'euros. Vokio qualifie la demande et pose le créneau de visite.
+[p] « Je note la nature des travaux et je vous propose une visite mardi pour le devis. »
+[a] Vokio pour les artisans →
+[h3] Vétérinaire
+[small] Clinique · cabinet
+[p] Vokio distingue l'urgence vitale du rendez-vous de routine, note l'espèce et le motif, et oriente vers la garde quand il le faut.
+[p] « Il est blessé ? Je vous oriente vers les urgences tout de suite. »
+[a] Vokio pour les vétérinaires →
+[h3] Auto-école
+[small] Inscriptions · évaluations · forfaits
+[p] Les élèves — et leurs parents — appellent après les cours, quand la ligne est prise. Vokio présente les forfaits et cale l'évaluation.
+[p] « Pour l'inscription, je vous propose une évaluation samedi à dix heures. »
+[a] Vokio pour les auto-écoles →
+[p] Vokio répond aussi pour
+[a] Barbiers
+[a] Boulangeries
+[a] Chauffagistes
+[a] Coiffure
+[a] Dentistes
+[a] Fleuristes
+[a] Garages
+[a] Instituts de beauté
+[a] Kinés
+[a] Médecins
+[a] Ongleries
+[a] Opticiens
+[a] Ostéopathes
+[a] Restaurants
+[a] Toiletteurs
+[a] Traiteurs
+[p] Votre métier n'y est pas ?
+[a] Écrivez-nous.
+[p] Faites le compte
+[h2] Combien vous coûte
+[em] un appel sans réponse ?
+[p] Trois chiffres suffisent. Le résultat pique un peu — c'est normal, c'est votre chiffre d'affaires.
+[label] Votre métier
+[option] Dépannage urgent
+[option] Artisan BTP
+[option] Vétérinaire
+[option] Auto-école
+[option] Coiffure & beauté
+[option] Restaurant
+[option] Autre
+[label] Appels manqués par semaine
+[label] Valeur moyenne d'un client (€)
+[label] Sur ces appels manqués, combien auraient pris rendez-vous ?
+[option] Un sur deux
+[option] Un sur trois
+[option] Un sur quatre
+[p] Vous perdez environ
+[p] 1 790 €
+[small] /mois
+[p] qui partent chez le concurrent.
+[p] Vokio coûte
+[b] dès 59 €/mois
+[a] Récupérez ce chiffre d'affaires
+[p] Estimation : appels manqués × part qui aurait pris rendez-vous × valeur moyenne, sur un mois. Vos vrais chiffres apparaissent dans votre espace Vokio.
+[p] Pendant ce temps
+[h2] Vous travaillez.
+[em] Vokio écoute.
+[div] Vokio · écoute
+[div] 24 h/24 · 7 j/7
+[span] Touchez
+[div] : le son devient rendez-vous
+[b] Rendez-vous posé · demain 10:30
+[small] Fuite sous évier · SMS envoyé
+[span] — Chaque appel pris, noté, confirmé
+[span] le son devient rendez-vous.
+[span] La barre solaire, c'est Vokio
+[p] Votre espace client
+[h2] Vous voyez tout,
+[em] sans rien gérer
+[p] Chaque appel résumé par écrit, la valeur captée en euros, les clients à rappeler — dans un espace épuré, sur votre téléphone comme au bureau. Explorez-le :
+[i] app.vokio.fr
+[button] Ma ligne
+[button] Mon impact
+[button] Appels
+[button] Rendez-vous
+[button] Mon assistant
+[button] Facturation
+[button] ◉ Ma ligne
+[button] ↗ Mon impact
+[button] ✆ Appels
+[button] ⊞ Rendez-vous
+[button] ☏ Mon assistant
+[button] € Facturation
+[p] En ligne · répond à vos appels
+[p] Camille veille sur votre ligne, jour et nuit.
+[span] 620
+[b] € captés ce mois-ci
+[span] · voir mon impact →
+[p] À faire — 2 clients à recontacter
+[span] Urgence
+[span] 06 12 44 ·· ··
+[span] Fuite sous l'évier — rappelle avant 18 h
+[span] Devis
+[span] 07 81 33 ·· ··
+[span] Remplacement du chauffe-eau
+[span] Pro
+[p] Relance automatique envoyée hier au client resté sans réponse — aucun prospect ne meurt en silence.
+[span] appels reçus aujourd'hui
+[span] rendez-vous pris
+[p] Mon impact · ce mois-ci
+[span] 620
+[p] de rendez-vous captés par votre assistant — pendant que vous étiez sur le terrain.
+[span] mars
+[span] avril
+[span] mai
+[span] juin
+[span] juil.
+[span] août
+[span] appels décrochés hors horaires
+[span] urgences transmises
+[b] +18 %
+[span] vs semaine dernière · Pro
+[p] Appels · aujourd'hui
+[span] RDV
+[span] Mme Martin
+[span] Remplacement robinetterie — jeudi 10 h confirmé
+[p] Résumé de l'appel
+[p] Mme Martin souhaite remplacer la robinetterie de sa salle de bain. Rendez-vous confirmé jeudi à 10 h, adresse notée : 12 rue des Lilas. SMS de confirmation envoyé.
+[span] Rappeler · 06 12 44 ·· ··
+[span] Urgence
+[span] M. Costa
+[span] Ballon d'eau chaude en panne — transmis immédiatement
+[span] Devis
+[span] 07 81 33 ·· ··
+[span] Chauffe-eau — demande notée, à chiffrer
+[p] Rendez-vous · cette semaine
+[p] Aujourd'hui
+[span] 09:00
+[span] Débouchage canalisation · Restaurant du Port
+[span] Confirmé
+[span] 14:30
+[span] Fuite sous évier · M. Lefèvre, Marseille 8e
+[span] Posé par Camille
+[p] Jeudi
+[span] 10:00
+[span] Remplacement robinetterie · Mme Martin
+[span] Confirmé
+[span] 16:00
+[span] Visite devis salle de bain · M. Garnier
+[span] Posé par Camille
+[p] Rappel SMS envoyé au client la veille de chaque rendez-vous : les lapins se font rares.
+[p] Mon assistant · Camille
+[b] Tout se personnalise ici
+[span] · voix, prestations, horaires, consignes
+[p] Vos prestations · durée et créneaux réservés
+[span] Fuite / dépannage
+[span] 1 h · urgence possible 24 h/24
+[span] Remplacement chauffe-eau
+[span] 2 h 30 · sur devis accepté
+[span] Visite devis
+[span] 45 min · fin de journée de préférence
+[p] Consigne du moment
+[em] « Pour toute fuite, demander si l'arrivée d'eau est coupée et donner le premier geste avant de raccrocher. »
+[p] Agenda Google connecté · horaires Lun-Ven 8 h à 19 h, urgences 24 h/24 · voix : Camille
+[p] Facturation · formule Starter
+[small] €/mois
+[p] sans engagement · prochaine facture le 1er du mois
+[p] Minutes du mois · 74 sur ~100 incluses
+[p] Alerte automatique à 80 % puis 100 %. Au-delà, rien ne se coupe : chaque tranche de 50 min entamée est facturée 12 €.
+[span] factures disponibles
+[b] 0 €
+[span] de dépassement ce mois-ci
+[li] votre agent se personnalise : prestations, horaires, consignes
+[li] chaque appel résumé par écrit
+[li] la valeur captée, en euros
+[li] mode congés en un geste
+[li] inclus dans toutes les formules
+[p] Comparer
+[h2] Trois façons de
+[em] ne plus manquer d'appel.
+[p] Le répondeur, le télésecrétariat et Vokio ne coûtent pas la même chose et ne rendent pas le même service. Voici les cinq points sur lesquels ils diffèrent vraiment.
+[p] Fourchettes de marché relevées en 2026, détaillées et sourcées dans l'article du blog.
+[th] Répondeur
+[span] Votre messagerie actuelle
+[th] Télésecrétariat
+[span] Des secrétaires mutualisées
+[th] Vokio
+[span] Un accueil qui décroche
+[th] Ce que ça coûte
+[td] Rien
+[td] 50 à 300 € HT par mois selon le volume, plus les appels hors forfait
+[td] 59 € par mois, sans engagement
+[th] Quand ça répond
+[td] À toute heure, sans jamais répondre
+[td] Aux heures ouvrées. Le soir et le week-end sont une option facturée
+[td] À toute heure, au même prix le dimanche à 22 h qu'un mardi matin
+[th] Après l'appel
+[td] Un message vocal, quand la personne accepte d'en laisser un
+[td] Un message transmis selon vos consignes
+[td] Un résumé écrit, et le rendez-vous déjà posé dans votre agenda
+[th] Pour démarrer
+[td] Rien
+[td] Rédiger des consignes, parfois des frais de mise en service, souvent 12 à 24 mois d'engagement
+[td] Une mise en route en ligne, rien à installer
+[th] Le bon choix
+[td] Quand vos clients ont l'habitude de rappeler
+[td] Quand l'écoute humaine décide : médical, juridique, situations tendues
+[td] Sur les appels courants : horaires, tarifs, prise de rendez-vous
+[p] Ce que Vokio ne fait pas : trier une urgence vitale, négocier, ou tenir une conversation qui sort du cadre de votre métier. Dans ces cas, un humain reste le bon choix, et nous le disons. Le détail des coûts et les sources sont dans l'article
+[a] Combien coûte une permanence téléphonique
+[p] Tarifs
+[h2] Moins cher qu'un
+[em] seul
+[h2] rendez-vous manqué.
+[p] Des prix prévisibles : des minutes incluses, un éventuel dépassement connu d'avance, jamais de coupure. Sans engagement : vous démarrez accompagné, vous arrêtez quand vous voulez. Pas encore décidé ?
+[a] Créez votre espace gratuitement
+[p] : vous verrez à quoi ressemblerait votre planning, sans carte bancaire.
+[h3] Starter
+[p] 59 €
+[small] /mois
+[p] Pour l'indépendant seul, qui ne peut pas décrocher en pleine intervention.
+[li] Vos appels décrochés 24 h/24, 7 j/7
+[li] ~100 min de conversation, soit ~80 appels/mois
+[li] RDV pris directement dans votre Google Agenda
+[li] SMS de confirmation + rappel la veille à vos clients
+[li] Votre numéro dédié, vos horaires, vos prestations
+[li] Chaque appel résumé par écrit dans votre espace
+[li] Mise en route accompagnée, en une journée
+[a] Démarrer avec Starter
+[p] Paiement en ligne : votre espace client est créé immédiatement, puis on vous accompagne pour la mise en route.
+[a] ou préférez être rappelé d'abord
+[h3] Pro
+[span] Le plus choisi
+[p] 119 €
+[small] /mois
+[p] Pour l'équipe qui reçoit beaucoup d'appels.
+[p] Tout Starter compris, et en plus
+[li] 3× plus de conversation : ~300 min, soit ~240 appels/mois
+[li] Jusqu'à 5 praticiens, chacun son agenda
+[li] 2 numéros dédiés — deux lignes, deux activités
+[li] SMS 2 h avant le RDV : moins de rendez-vous manqués
+[li] Relance auto des clients restés sans réponse
+[li] Notes clients : votre mémoire de chaque client
+[li] Support prioritaire
+[a] Démarrer avec Pro
+[p] Paiement en ligne : votre espace client est créé immédiatement, puis on vous accompagne pour la mise en route.
+[a] ou préférez être rappelé d'abord
+[h3] Sur-mesure
+[p] Sur devis
+[p] Pour les structures qui sortent du cadre.
+[p] Tout Pro compris, et en plus
+[li] Numéros et praticiens illimités
+[li] Volume d'appels négocié à votre mesure
+[li] Plusieurs établissements sous une même enseigne
+[li] Connexion à votre logiciel métier
+[li] Interlocuteur dédié
+[a] Parler de votre besoin
+[b] Et si je dépasse les minutes incluses ?
+[p] On vous alerte à 80 % puis à 100 % — jamais de coupure de ligne. Au-delà, chaque tranche de 50 minutes est facturée 12 € : le dépassement le plus cher reste moins cher qu'un seul rendez-vous manqué. Numéro supplémentaire : +9 €/mois.
+[h3] Comparez les plans
+[em] en détail
+[p] Tout ce qui est inclus, plan par plan — sans ligne cachée.
+[th] Ce qui est inclus
+[th] Starter
+[th] Pro
+[th] Sur-mesure
+[th] Appels
+[th] Réponse 24 h/24, 7 j/7
+[th] Appels simultanés — jamais de ligne occupée
+[th] Numéros dédiés
+[td] Illimités
+[th] Minutes d'appels incluses
+[td] ~100 /mois (~80 appels)
+[td] ~300 /mois (~240 appels)
+[td] Volume négocié
+[th] Au-delà des minutes incluses
+[td] 12 € / 50 min
+[td] 12 € / 50 min
+[td] Volume négocié
+[th] Alerte à 80 % et 100 % des minutes — jamais de coupure
+[th] Numéro supplémentaire
+[td] +9 €/mois
+[td] +9 €/mois
+[td] Inclus
+[th] Rendez-vous
+[th] Prise de rendez-vous automatique
+[th] Praticiens / agendas gérés
+[td] Jusqu'à 5
+[td] Plus de 5
+[th] Google Agenda synchronisé
+[th] SMS de confirmation au client
+[th] SMS de rappel la veille
+[th] SMS 2 h avant le rendez-vous (anti no-show)
+[th] Relance automatique des clients restés sans réponse (SMS)
+[th] Mode congés — fermeture annoncée, rendez-vous décalés à votre retour
+[th] Prise de message si ce n'est pas un rendez-vous
+[th] Suivi & données
+[th] Espace de suivi des appels
+[th] Résumé écrit après chaque appel
+[th] Fiche client — l'historique complet par numéro
+[th] Notes clients — votre mémoire de chaque client
+[th] Résumé hebdomadaire par e-mail
+[th] Comparatif d'activité semaine par semaine
+[th] Données hébergées en France
+[th] Accompagnement
+[th] Mise en route accompagnée (une journée)
+[th] Support
+[td] Email
+[td] Prioritaire
+[td] Dédié
+[th] Intégrations spécifiques (logiciel métier…)
+[th] Multi-établissements
+[p] Questions fréquentes
+[h2] Ce qu'on nous demande
+[em] avant
+[h2] de dire oui.
+[summary] Est-ce que je dois changer de numéro de téléphone ?
+[p] Non. Vos clients continuent d'appeler le numéro qu'ils connaissent. Vous pouvez confier tous vos appels à Vokio, ou seulement ceux que vous manquez et ceux qui arrivent en dehors de vos horaires.
+[summary] Une voix d'IA, ça ne va pas faire fuir mes clients ?
+[p] Vokio parle d'une voix naturelle, se présente comme une assistante et va droit au but : trouver un créneau qui arrange le client. Pour quelqu'un qui appelait dans le vide à 20 h — ou à 2 h du matin — obtenir une réponse en une minute est une bien meilleure expérience qu'un répondeur.
+[summary] Pourquoi pas simplement un répondeur ?
+[p] Parce que la plupart des clients ne laissent pas de message : ils raccrochent et appellent le suivant sur la liste. Un répondeur prend un message — quand il en prend un. Vokio prend le rendez-vous, tout de suite, et le confirme par SMS.
+[span] Ce que dit le répondeur
+[span] Ce que le client entend
+[span] « Votre correspondant n'est pas disponible »
+[span] « Je ne saurai jamais que vous avez appelé »
+[span] « Merci de laisser un message après le bip »
+[span] « Racontez votre problème à une machine »
+[span] « Nous vous rappellerons dès que possible »
+[span] « Un jour. Peut-être. »
+[span] « Bip »
+[span] Il raccroche. Et appelle le suivant.
+[summary] Et si la demande n'est pas un rendez-vous ?
+[p] Vokio qualifie la demande. Une urgence vous est signalée immédiatement ; une question de devis ou une demande particulière vous est transmise avec les coordonnées du client, pour que vous rappeliez au bon moment.
+[summary] Que devient mon agenda ?
+[p] Il reste le vôtre. Vokio se connecte à votre Google Agenda existant : elle y lit les disponibilités et y pose les rendez-vous. Vous pouvez déplacer ou annuler un rendez-vous comme d'habitude — le client est prévenu par SMS.
+[summary] Où vont les données de mes clients ?
+[p] Elles sont hébergées en France. Elles servent uniquement à gérer vos rendez-vous et vos SMS — jamais revendues, jamais utilisées pour autre chose.
+[summary] Et si Vokio tombe en panne ?
+[p] Vos appels basculent alors vers votre téléphone, exactement comme avant Vokio — vous ne perdez rien. Et nous sommes prévenus en même temps que vous : un incident se traite en priorité absolue, avec un point écrit sur ce qui s'est passé.
+[summary] Combien de temps pour démarrer ?
+[p] Une journée, accompagné. On configure ensemble vos prestations, vos horaires et votre agenda, on teste avec vous, puis Vokio prend les appels.
+[a] Écouter un appel
+[a] Créer mon espace
+[p] Prochaine étape
+[h2] Cette nuit, à deux heures du matin,
+[em] votre téléphone répondra.
+[p] Écoutez Vokio prendre un vrai rendez-vous — la démo dure cinq minutes.
+[a] Créer mon espace gratuit
+[a] Réécouter un appel
+[span] La présence qui décroche pour les artisans, commerçants et indépendants.
+[a] Fonctionnement
+[a] Comparer
+[a] Mon espace
+[a] Mentions légales
+[a] Confidentialité
+[span] Hébergé en France
+[h3] On vous
+[em] rappelle.
+[p] Laissez vos coordonnées : on revient vers vous sous 24 h, avec une démo dans votre métier.
+[label] Votre nom
+[label] Téléphone
+[label] Email
+[label] Entreprise
+[span] · facultatif
+[label] Votre métier
+[option] Dépannage urgent
+[option] Artisan BTP
+[option] Vétérinaire
+[option] Auto-école
+[option] Coiffure & beauté
+[option] Restaurant
+[option] Autre
+[label] Ce qui vous intéresse
+[option] Une démo d'abord
+[option] Starter — 59 €/mois
+[option] Pro — 119 €/mois
+[option] Sur-mesure
+[button] Être rappelé
+[p] Ces informations servent uniquement à vous recontacter. Jamais partagées.

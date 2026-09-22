@@ -1,0 +1,357 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "Instrument Serif",
+      "fontSize": "86px",
+      "fontWeight": "400",
+      "lineHeight": "84.28px",
+      "letterSpacing": "-2.58px",
+      "color": "#262019",
+      "sampleText": "Votre téléphone sonne.Vokio décroche."
+    },
+    {
+      "role": "heading",
+      "fontFamily": "Instrument Serif",
+      "fontSize": "48px",
+      "fontWeight": "400",
+      "lineHeight": "51.84px",
+      "letterSpacing": "-0.96px",
+      "color": "#262019",
+      "sampleText": "Trois temps, et c'est fait."
+    },
+    {
+      "role": "heading-3",
+      "fontFamily": "Instrument Serif",
+      "fontSize": "24px",
+      "fontWeight": "400",
+      "lineHeight": "36px",
+      "letterSpacing": "-0.24px",
+      "color": "#262019",
+      "sampleText": "Dépannage urgentPlombier · serrurier · électricien"
+    },
+    {
+      "role": "body",
+      "fontFamily": "Geist",
+      "fontSize": "18px",
+      "fontWeight": "400",
+      "lineHeight": "28.8px",
+      "letterSpacing": "normal",
+      "color": "#262019",
+      "sampleText": "Il prend le rendez-vous, envoie la confirmation par SMS, et "
+    },
+    {
+      "role": "link",
+      "fontFamily": "Geist",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "color": "#262019",
+      "sampleText": "Vokıo"
+    },
+    {
+      "role": "code",
+      "fontFamily": "Geist Mono",
+      "fontSize": "15.5px",
+      "fontWeight": "400",
+      "lineHeight": "26.35px",
+      "letterSpacing": "0.93px",
+      "color": "#262019",
+      "sampleText": "Pourquoi Vokio existe"
+    },
+    {
+      "role": "body-small",
+      "fontFamily": "Geist Mono",
+      "fontSize": "10px",
+      "fontWeight": "400",
+      "lineHeight": "15px",
+      "letterSpacing": "1px",
+      "color": "#262019",
+      "sampleText": "Plombier · serrurier · électricien"
+    },
+    {
+      "role": "label",
+      "fontFamily": "Geist Mono",
+      "fontSize": "8.5px",
+      "fontWeight": "400",
+      "lineHeight": "12.75px",
+      "letterSpacing": "1.02px",
+      "color": "#262019",
+      "sampleText": "L'écran de votre client"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16,
+      18,
+      20
+    ],
+    "baseUnit": 4
+  },
+  "radius": [
+    "4px",
+    "9px",
+    "50%",
+    "999px"
+  ],
+  "shadows": [
+    {
+      "value": "rgba(38, 32, 25, 0.55) 0px 26px 48px -22px",
+      "count": 3
+    },
+    {
+      "value": "rgb(229, 112, 31) 2px 0px 0px 0px inset",
+      "count": 1
+    },
+    {
+      "value": "rgba(38, 32, 25, 0.25) 0px 30px 60px -40px",
+      "count": 1
+    },
+    {
+      "value": "rgba(38, 32, 25, 0.32) 0px 32px 80px -36px",
+      "count": 1
+    }
+  ],
+  "buttons": [
+    {
+      "label": "Essayer Vokio",
+      "background": "#262019",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#F4F1E8",
+      "padding": "11px 20px",
+      "borderRadius": "999px",
+      "border": "1px solid rgba(0, 0, 0, 0)",
+      "boxShadow": "none",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "height": "45px"
+    },
+    {
+      "label": "Écouter Vokio répondre dans mon métier\n ",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#262019",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(38, 32, 25)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "54.5px"
+    },
+    {
+      "label": "Créer mon espace gratuit",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#262019",
+      "padding": "15px 25px",
+      "borderRadius": "999px",
+      "border": "1px solid rgb(38, 32, 25)",
+      "boxShadow": "none",
+      "fontSize": "15px",
+      "fontWeight": "500",
+      "height": "54.5px"
+    },
+    {
+      "label": "Dépannage urgent",
+      "background": "#262019",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#F4F1E8",
+      "padding": "14px 16px",
+      "borderRadius": "999px",
+      "border": "1px solid rgb(38, 32, 25)",
+      "boxShadow": "none",
+      "fontSize": "11px",
+      "fontWeight": "400",
+      "height": "44px"
+    },
+    {
+      "label": "Artisan BTP",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#262019",
+      "padding": "14px 16px",
+      "borderRadius": "999px",
+      "border": "1px solid rgba(38, 32, 25, 0.1)",
+      "boxShadow": "none",
+      "fontSize": "11px",
+      "fontWeight": "400",
+      "height": "44px"
+    },
+    {
+      "label": "button",
+      "background": "#262019",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#F4F1E8",
+      "padding": "0px",
+      "borderRadius": "50%",
+      "border": "0px none rgb(244, 241, 232)",
+      "boxShadow": "none",
+      "fontSize": "13.3333px",
+      "fontWeight": "400",
+      "height": "44px"
+    }
+  ],
+  "cards": [
+    {
+      "label": "card",
+      "background": "#F4F1E8",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#262019",
+      "padding": "32px 28px",
+      "borderRadius": "4px",
+      "border": "1px solid rgba(38, 32, 25, 0.1)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "741.188px"
+    }
+  ],
+  "nav": {
+    "label": "navigation",
+    "background": "#FBF9F2",
+    "backgroundImage": "",
+    "backdropFilter": "blur(10px)",
+    "color": "#262019",
+    "padding": "0px",
+    "borderRadius": "0px",
+    "border": "",
+    "boxShadow": "none",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "height": "77px"
+  },
+  "chips": [
+    {
+      "label": "En ligne · 24 h/24",
+      "background": "transparent",
+      "color": "#E5701F",
+      "padding": "7px 15px",
+      "borderRadius": "999px",
+      "border": "1px solid color(srgb 0.937255 0.643137 0.141176 / 0.32)",
+      "boxShadow": "none",
+      "fontSize": "11px",
+      "fontWeight": "400",
+      "height": "32.5px"
+    },
+    {
+      "label": "L'écran de votre client",
+      "background": "transparent",
+      "color": "#262019",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(38, 32, 25)",
+      "boxShadow": "none",
+      "fontSize": "8.5px",
+      "fontWeight": "400",
+      "height": "12.75px"
+    },
+    {
+      "label": "Urgence",
+      "background": "#C0452C",
+      "color": "#262019",
+      "padding": "3px 8px",
+      "borderRadius": "999px",
+      "border": "0px none rgb(38, 32, 25)",
+      "boxShadow": "none",
+      "fontSize": "8.5px",
+      "fontWeight": "400",
+      "height": "18.7382px"
+    },
+    {
+      "label": "Devis",
+      "background": "#EFA424",
+      "color": "#262019",
+      "padding": "3px 8px",
+      "borderRadius": "999px",
+      "border": "0px none rgb(38, 32, 25)",
+      "boxShadow": "none",
+      "fontSize": "8.5px",
+      "fontWeight": "400",
+      "height": "18.7382px"
+    }
+  ],
+  "statCells": [],
+  "tabs": [
+    {
+      "label": "Dépannage urgent",
+      "background": "#262019",
+      "color": "#F4F1E8",
+      "padding": "14px 16px",
+      "borderRadius": "999px",
+      "border": "1px solid rgb(38, 32, 25)",
+      "boxShadow": "none",
+      "fontSize": "11px",
+      "fontWeight": "400",
+      "height": "44px"
+    },
+    {
+      "label": "Artisan BTP",
+      "background": "transparent",
+      "color": "#262019",
+      "padding": "14px 16px",
+      "borderRadius": "999px",
+      "border": "1px solid rgba(38, 32, 25, 0.1)",
+      "boxShadow": "none",
+      "fontSize": "11px",
+      "fontWeight": "400",
+      "height": "44px"
+    }
+  ],
+  "backgrounds": [
+    {
+      "value": "linear-gradient(rgb(251, 249, 242), rgb(236, 230, 216))",
+      "area": 1371690
+    },
+    {
+      "value": "radial-gradient(circle, color(srgb 0.937255 0.643137 0.141176 / 0.14) 0%, color(srgb 0.937255 0.643137 0.141176 / 0.04) 32%, rgba(0, 0, 0, 0) 68%)",
+      "area": 1000000
+    },
+    {
+      "value": "radial-gradient(circle, color(srgb 0.937255 0.643137 0.141176 / 0.12) 0%, rgba(0, 0, 0, 0) 60%)",
+      "area": 1000000
+    },
+    {
+      "value": "radial-gradient(color(srgb 0.937255 0.643137 0.141176 / 0.1) 0%, rgba(0, 0, 0, 0) 60%)",
+      "area": 720000
+    },
+    {
+      "value": "linear-gradient(rgba(244, 241, 232, 0.04) 1px, rgba(0, 0, 0, 0) 1px), linear-gradient(90deg, rgba(244, 241, 232, 0.04) 1px, rgba(0, 0, 0, 0) 1px)",
+      "area": 435420
+    },
+    {
+      "value": "linear-gradient(rgb(236, 230, 216), rgb(251, 249, 242))",
+      "area": 408845
+    }
+  ],
+  "glass": [
+    {
+      "backdropFilter": "blur(10px)",
+      "background": "rgba(251, 249, 242, 0.85)",
+      "border": "",
+      "borderRadius": "0px",
+      "boxShadow": "",
+      "area": 147840
+    }
+  ]
+}
