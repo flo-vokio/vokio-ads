@@ -285,15 +285,14 @@
         p.style.strokeDashoffset = String(len);
       });
 
-      /* viewport-change, focus-lock form : one state object, one writer.
-         The solar rule descends the day column and locks softly onto the
-         08:00–10:00 band, coming to rest on the 08:30 line. */
+      /* viewport-change, focus-lock form : the solar rule descends the day
+         column in two legs and locks softly onto the 08:00–10:00 band,
+         coming to rest on the 08:30 line.
+         The travel is tweened straight onto the element's transform, never
+         through an onUpdate writer: this runtime SEEKS frame by frame and
+         gsap suppresses callbacks on seek, so a writer-driven position
+         silently stops updating. */
       var scanEl = byId("04-agenda-scan");
-      var scan = { y: 0 };
-      function applyScan() {
-        scanEl.style.transform = "translate3d(0px," + scan.y + "px,0px)";
-      }
-      applyScan();
 
       var HOUR_08 = 402.325; /* the 08:00 rule, in day-column space */
       var HALF_08 = 502.4;   /* the 08:30 line — where the booking lands */
@@ -343,15 +342,15 @@
         1.51
       );
       tl.fromTo(
-        scan,
+        scanEl,
         { y: 0 },
-        { y: HOUR_08, duration: 0.39, ease: "power2.in", immediateRender: false, onUpdate: applyScan },
+        { y: HOUR_08, duration: 0.39, ease: "power2.in", immediateRender: false },
         1.51
       );
       tl.fromTo(
-        scan,
+        scanEl,
         { y: HOUR_08 },
-        { y: HALF_08, duration: 0.28, ease: "power3.out", immediateRender: false, onUpdate: applyScan },
+        { y: HALF_08, duration: 0.28, ease: "power3.out", immediateRender: false },
         1.9
       );
 

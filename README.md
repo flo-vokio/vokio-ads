@@ -70,7 +70,7 @@ La deuxième commande n'est pas optionnelle : Whisper entend « Vocuez au » pou
 « Vokio » et perd la ponctuation, qui commande le découpage des sous-titres.
 `recaler_mots.py` garde ses minutages et lui impose les mots de `SCRIPT.md`.
 
-## Trois pièges déjà payés
+## Quatre pièges déjà payés
 
 1. **Ne jamais lancer `audio.mjs sync-durations` sur ce projet.** Il écrase la
    durée d'un plan par celle de sa voix. Ici il ramènerait le film de 30,0 s à
@@ -79,7 +79,14 @@ La deuxième commande n'est pas optionnelle : Whisper entend « Vocuez au » pou
    l'anglais, donc sur le modèle Whisper `small.en`, qui *traduit* au lieu de
    transcrire. Corrigé dans les skills vendues, mais c'est le premier endroit
    où regarder si une transcription revient en anglais.
-3. **La bande de sous-titres par défaut est dans la zone interdite** (y 1600 à
+3. **Ce qui doit bouger ne bouge pas toujours.** Le moteur avance image par
+   image : une valeur écrite depuis un `onUpdate` peut rester muette sous ce
+   déplacement, et le plan sort figé sans qu'aucun contrôle ne s'en plaigne.
+   Un ouvrier s'est fait prendre sur le plan 04, où le liseré de l'agenda
+   restait bloqué sur 8 h. Le contrôle automatique ne voit pas ce défaut :
+   **vérifier par écart d'images** que ce qui doit bouger bouge, plutôt que de
+   croire le code. L'onde du plan 03 a été validée ainsi, sur le MP4 rendu.
+4. **La bande de sous-titres par défaut est dans la zone interdite** (y 1600 à
    1920) : Reels et TikTok y dessinent leur interface, et la charte Vokio
    interdit tout texte important sous y=1500. `monter.sh` la remonte via
    `HF_CAPTION_BAND_TOP` et `HF_CAPTION_BAND_HEIGHT`.
