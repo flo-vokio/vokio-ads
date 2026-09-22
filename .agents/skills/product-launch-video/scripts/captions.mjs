@@ -95,9 +95,26 @@ function runBuild(argv) {
   }
   const total = r3(acc);
 
+  // Opt-out par plan : `captions: none` dans le bloc d'un plan retire SA voix du
+  // flux de sous-titres. Un plan dont le texte à l'écran EST déjà la phrase
+  // prononcée n'a pas besoin d'une bande qui la répète 800 px plus bas ; en
+  // revanche un plan qui montre autre chose que ce qu'on entend en a besoin.
+  // Sans cette clé, rien ne change : le seul réglage existant, `captions:
+  // skipped`, est tout ou rien.
+  const SANS_SOUSTITRE = new Set(["none", "no", "off", "aucun", "skip", "-"]);
+  const plansSansSousTitre = new Set(
+    manifest.frames
+      .filter((f) => SANS_SOUSTITRE.has(String(f.extra?.captions ?? "").trim().toLowerCase()))
+      .map((f) => f.number),
+  );
+  if (plansSansSousTitre.size) {
+    console.log(`  · sans sous-titre : plan(s) ${[...plansSansSousTitre].join(", ")}`);
+  }
+
   // absolute word stream: frame start + frame-relative word timing.
   const words = [];
   for (const v of meta.voices) {
+    if (plansSansSousTitre.has(v.frame)) continue;
     const base = startByFrame.get(v.frame);
     if (base == null || !Array.isArray(v.words)) continue;
     for (const w of v.words) {

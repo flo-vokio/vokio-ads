@@ -1,0 +1,325 @@
+{
+  "total_duration_s": 30,
+  "width": 1080,
+  "height": 1920,
+  "groups": [
+    {
+      "id": "caption-group-0",
+      "frame": 3,
+      "start": 9.04,
+      "end": 10.05,
+      "text": "Vokio décroche à",
+      "words": [
+        {
+          "id": "caption-word-0-0",
+          "text": "Vokio",
+          "start": 9.04,
+          "end": 9.49
+        },
+        {
+          "id": "caption-word-0-1",
+          "text": "décroche",
+          "start": 9.49,
+          "end": 9.94
+        },
+        {
+          "id": "caption-word-0-2",
+          "text": "à",
+          "start": 10,
+          "end": 10.05
+        }
+      ]
+    },
+    {
+      "id": "caption-group-1",
+      "frame": 3,
+      "start": 10.05,
+      "end": 10.71,
+      "text": "votre place,",
+      "words": [
+        {
+          "id": "caption-word-1-0",
+          "text": "votre",
+          "start": 10.05,
+          "end": 10.36
+        },
+        {
+          "id": "caption-word-1-1",
+          "text": "place,",
+          "start": 10.36,
+          "end": 10.59
+        }
+      ]
+    },
+    {
+      "id": "caption-group-2",
+      "frame": 3,
+      "start": 10.8,
+      "end": 10.95,
+      "text": "et dit",
+      "words": [
+        {
+          "id": "caption-word-2-0",
+          "text": "et",
+          "start": 10.8,
+          "end": 10.81
+        },
+        {
+          "id": "caption-word-2-1",
+          "text": "dit",
+          "start": 10.81,
+          "end": 10.95
+        }
+      ]
+    },
+    {
+      "id": "caption-group-3",
+      "frame": 3,
+      "start": 10.95,
+      "end": 11.23,
+      "text": "tout de",
+      "words": [
+        {
+          "id": "caption-word-3-0",
+          "text": "tout",
+          "start": 10.95,
+          "end": 11.06
+        },
+        {
+          "id": "caption-word-3-1",
+          "text": "de",
+          "start": 11.18,
+          "end": 11.23
+        }
+      ]
+    },
+    {
+      "id": "caption-group-4",
+      "frame": 3,
+      "start": 11.23,
+      "end": 11.72,
+      "text": "suite qui",
+      "words": [
+        {
+          "id": "caption-word-4-0",
+          "text": "suite",
+          "start": 11.23,
+          "end": 11.45
+        },
+        {
+          "id": "caption-word-4-1",
+          "text": "qui",
+          "start": 11.45,
+          "end": 11.6
+        }
+      ]
+    },
+    {
+      "id": "caption-group-5",
+      "frame": 3,
+      "start": 11.74,
+      "end": 12.22,
+      "text": "elle est.",
+      "words": [
+        {
+          "id": "caption-word-5-0",
+          "text": "elle",
+          "start": 11.74,
+          "end": 11.8
+        },
+        {
+          "id": "caption-word-5-1",
+          "text": "est.",
+          "start": 11.8,
+          "end": 12.1
+        }
+      ]
+    },
+    {
+      "id": "caption-group-6",
+      "frame": 4,
+      "start": 14.43,
+      "end": 15.19,
+      "text": "Elle comprend",
+      "words": [
+        {
+          "id": "caption-word-6-0",
+          "text": "Elle",
+          "start": 14.43,
+          "end": 14.59
+        },
+        {
+          "id": "caption-word-6-1",
+          "text": "comprend",
+          "start": 14.68,
+          "end": 15.19
+        }
+      ]
+    },
+    {
+      "id": "caption-group-7",
+      "frame": 4,
+      "start": 15.19,
+      "end": 15.91,
+      "text": "la demande,",
+      "words": [
+        {
+          "id": "caption-word-7-0",
+          "text": "la",
+          "start": 15.19,
+          "end": 15.32
+        },
+        {
+          "id": "caption-word-7-1",
+          "text": "demande,",
+          "start": 15.32,
+          "end": 15.91
+        }
+      ]
+    },
+    {
+      "id": "caption-group-8",
+      "frame": 4,
+      "start": 15.91,
+      "end": 17.07,
+      "text": "regarde votre agenda,",
+      "words": [
+        {
+          "id": "caption-word-8-0",
+          "text": "regarde",
+          "start": 15.91,
+          "end": 16.3
+        },
+        {
+          "id": "caption-word-8-1",
+          "text": "votre",
+          "start": 16.3,
+          "end": 16.58
+        },
+        {
+          "id": "caption-word-8-2",
+          "text": "agenda,",
+          "start": 16.58,
+          "end": 16.95
+        }
+      ]
+    },
+    {
+      "id": "caption-group-9",
+      "frame": 4,
+      "start": 17.1,
+      "end": 17.98,
+      "text": "pose le rendez-vous.",
+      "words": [
+        {
+          "id": "caption-word-9-0",
+          "text": "pose",
+          "start": 17.1,
+          "end": 17.21
+        },
+        {
+          "id": "caption-word-9-1",
+          "text": "le",
+          "start": 17.21,
+          "end": 17.29
+        },
+        {
+          "id": "caption-word-9-2",
+          "text": "rendez-vous.",
+          "start": 17.29,
+          "end": 17.86
+        }
+      ]
+    },
+    {
+      "id": "caption-group-10",
+      "frame": 5,
+      "start": 20.44,
+      "end": 20.93,
+      "text": "Le client",
+      "words": [
+        {
+          "id": "caption-word-10-0",
+          "text": "Le",
+          "start": 20.44,
+          "end": 20.53
+        },
+        {
+          "id": "caption-word-10-1",
+          "text": "client",
+          "start": 20.53,
+          "end": 20.91
+        }
+      ]
+    },
+    {
+      "id": "caption-group-11",
+      "frame": 5,
+      "start": 20.93,
+      "end": 22.41,
+      "text": "reçoit sa confirmation.",
+      "words": [
+        {
+          "id": "caption-word-11-0",
+          "text": "reçoit",
+          "start": 20.93,
+          "end": 21.31
+        },
+        {
+          "id": "caption-word-11-1",
+          "text": "sa",
+          "start": 21.32,
+          "end": 21.45
+        },
+        {
+          "id": "caption-word-11-2",
+          "text": "confirmation.",
+          "start": 21.45,
+          "end": 22.29
+        }
+      ]
+    },
+    {
+      "id": "caption-group-12",
+      "frame": 5,
+      "start": 22.56,
+      "end": 23.23,
+      "text": "Vous recevez",
+      "words": [
+        {
+          "id": "caption-word-12-0",
+          "text": "Vous",
+          "start": 22.56,
+          "end": 22.7
+        },
+        {
+          "id": "caption-word-12-1",
+          "text": "recevez",
+          "start": 22.7,
+          "end": 23.23
+        }
+      ]
+    },
+    {
+      "id": "caption-group-13",
+      "frame": 5,
+      "start": 23.23,
+      "end": 24.52,
+      "text": "le récapitulatif.",
+      "words": [
+        {
+          "id": "caption-word-13-0",
+          "text": "le",
+          "start": 23.23,
+          "end": 23.38
+        },
+        {
+          "id": "caption-word-13-1",
+          "text": "récapitulatif.",
+          "start": 23.38,
+          "end": 24.4
+        }
+      ]
+    }
+  ]
+}

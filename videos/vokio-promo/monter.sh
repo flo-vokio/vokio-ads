@@ -18,9 +18,18 @@ export HF_CAPTION_BAND_HEIGHT=130
 
 hf(){ npx --yes hyperframes@0.8.62 "$@"; }
 
+# Les ouvriers de plan déposent des fichiers de sonde à la racine pendant qu'ils
+# travaillent. Un second fichier racine portant data-composition-id est une
+# ERREUR de lint, et une erreur de lint désactive les audits de mise en page et
+# de contraste : le rapport devient vert sans que rien n'ait tourné.
+rm -f _*.html _*.js
+
 echo "· sous-titres"
 node $S/captions.mjs build --storyboard ./STORYBOARD.md --audio-meta ./audio_meta.json \
      --hyperframes . --out ./caption_groups.json
+
+echo "· emplacement musique"
+python3 /opt/vokio-ads/outils/piste_musique.py .
 
 echo "· assemblage"
 node $S/assemble-index.mjs --storyboard ./STORYBOARD.md --hyperframes .

@@ -1,5 +1,10 @@
 {
-  "bgm": null,
+  "bgm": {
+    "path": "assets/musique.mp3",
+    "volume": 0.18,
+    "query": null,
+    "duration_s": 30.041
+  },
   "bgm_pending": false,
   "voices": [
     {

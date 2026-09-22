@@ -1,35 +1,29 @@
-<!--
-  Biennale Yellow — caption skin (preset-local source).
-
-  This is the preset's own lower-third karaoke caption look. product-launch-video's
-  Step 2 copies it into the project as caption-skin.html; captions.mjs then fills the
-  three reserved holes, wraps the fragment in a <template>, and writes
-  compositions/captions.html:
-    · the empty GROUPS array            → the engine's scene-aware word groups
-    · the 0 duration + 0 width/height   → real total + canvas size
-    · the empty data-brand-tokens style → :root tokens derived from the project's frame.md
-
-  Token contract — reference ONLY this fixed vocab (captions.mjs injects it from
-  frame.md, so the Step-2 brand overlay flows through; each var has a biennale literal
-  fallback for standalone preview):
-    --cap-ink · --cap-canvas · --cap-accent · --cap-accent-2 · --font-display ·
-    --font-body · --cap-band-top · --cap-band-height
-  Hooks (do not rename): .caption-group / .caption-word + states .is-active / .is-spoken,
-  root data-composition-id="captions", timeline at window.__timelines["captions"].
-  State changes use gsap.set({className}) (applied on the engine's frame-by-frame seek);
-  never tl.call() callbacks (seek does not fire them → wrong state on render).
-
-  Visual: a warm-parchment card on a single 1px hairline indigo-ink border — biennale's
-  ONLY border — square corners, NO shadow (biennale's depth is atmospheric, never cast).
-  Instrument Serif, sentence case, ink glyphs. Upcoming words sit in faint ink; the
-  current word gets a solar-yellow underprint (the brand's signature "sun as panel /
-  underprint", a hard square block, no blur) with ink reading on top; spoken words
-  settle to solid ink, underprint cleared.
--->
+<template id="captions-template" data-composition-id="captions" data-width="1080" data-height="1920">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 
-<!-- captions.mjs injects the project's :root tokens here -->
-<style data-brand-tokens></style>
+
+<style data-brand-tokens>
+      @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: block; }
+      @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+      @font-face { font-family: 'Geist'; src: url('assets/fonts/Geist-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+      :root {
+      --paper: #F4F1E8;
+      --paper-deep: #F9DBA7;
+      --sun: #EFA424;
+      --sun-soft: #F8D69B;
+      --haze: #F5C677;
+      --ink: #262019;
+      --ember: #E5701F;
+      --cap-ink: #262019;
+      --cap-canvas: #F4F1E8;
+      --cap-accent: #EFA424;
+      --cap-accent-2: #E5701F;
+      --font-display: "Instrument Serif", system-ui, serif;
+      --font-body: "Geist", system-ui, sans-serif;
+      --cap-band-top: 1360px;
+      --cap-band-height: 130px;
+      }
+    </style>
 
 <style>
   #captions-root {
@@ -79,7 +73,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.1em 0.34em;
-    font-family: var(--font-sans, "Geist"), var(--font-body, "Geist"), system-ui, sans-serif;
+    font-family: var(--font-sans, "Geist"), "Geist", system-ui, sans-serif;
     font-weight: 400;
     font-size: clamp(40px, 4.4vw, 58px);
     line-height: 1.16;
@@ -113,7 +107,7 @@
   }
   /* numerals / data — the mono voice, slightly recessed */
   .caption-word.cap-num {
-    font-family: var(--font-body, "JetBrains Mono"), ui-monospace, monospace;
+    font-family: "Geist", ui-monospace, monospace;
     color: color-mix(in srgb, var(--cap-ink, #1b2566) 72%, var(--cap-canvas, #e9e5db));
   }
   /* emphasis — an ember-red hairline underline (the counter-temperature accent) */
@@ -139,10 +133,10 @@
   data-composition-id="captions"
   data-timeline-locked
   data-start="0"
-  data-duration="0"
+  data-duration="30"
   data-fps="30"
-  data-width="0"
-  data-height="0"
+  data-width="1080"
+  data-height="1920"
 >
   <div class="caption-layer" aria-hidden="true">
     <div id="caption-stage" class="caption-stage"></div>
@@ -151,8 +145,8 @@
 
 <script>
   // captions.mjs injects the engine's scene-aware groups + real duration here.
-  var GROUPS = [];
-  var DURATION = 0;
+  var GROUPS = [{"id":"caption-group-0","frame":3,"start":9.04,"end":10.05,"text":"Vokio décroche à","words":[{"id":"caption-word-0-0","text":"Vokio","start":9.04,"end":9.49},{"id":"caption-word-0-1","text":"décroche","start":9.49,"end":9.94},{"id":"caption-word-0-2","text":"à","start":10,"end":10.05}]},{"id":"caption-group-1","frame":3,"start":10.05,"end":10.71,"text":"votre place,","words":[{"id":"caption-word-1-0","text":"votre","start":10.05,"end":10.36},{"id":"caption-word-1-1","text":"place,","start":10.36,"end":10.59}]},{"id":"caption-group-2","frame":3,"start":10.8,"end":10.95,"text":"et dit","words":[{"id":"caption-word-2-0","text":"et","start":10.8,"end":10.81},{"id":"caption-word-2-1","text":"dit","start":10.81,"end":10.95}]},{"id":"caption-group-3","frame":3,"start":10.95,"end":11.23,"text":"tout de","words":[{"id":"caption-word-3-0","text":"tout","start":10.95,"end":11.06},{"id":"caption-word-3-1","text":"de","start":11.18,"end":11.23}]},{"id":"caption-group-4","frame":3,"start":11.23,"end":11.72,"text":"suite qui","words":[{"id":"caption-word-4-0","text":"suite","start":11.23,"end":11.45},{"id":"caption-word-4-1","text":"qui","start":11.45,"end":11.6}]},{"id":"caption-group-5","frame":3,"start":11.74,"end":12.22,"text":"elle est.","words":[{"id":"caption-word-5-0","text":"elle","start":11.74,"end":11.8},{"id":"caption-word-5-1","text":"est.","start":11.8,"end":12.1}]},{"id":"caption-group-6","frame":4,"start":14.43,"end":15.19,"text":"Elle comprend","words":[{"id":"caption-word-6-0","text":"Elle","start":14.43,"end":14.59},{"id":"caption-word-6-1","text":"comprend","start":14.68,"end":15.19}]},{"id":"caption-group-7","frame":4,"start":15.19,"end":15.91,"text":"la demande,","words":[{"id":"caption-word-7-0","text":"la","start":15.19,"end":15.32},{"id":"caption-word-7-1","text":"demande,","start":15.32,"end":15.91}]},{"id":"caption-group-8","frame":4,"start":15.91,"end":17.07,"text":"regarde votre agenda,","words":[{"id":"caption-word-8-0","text":"regarde","start":15.91,"end":16.3},{"id":"caption-word-8-1","text":"votre","start":16.3,"end":16.58},{"id":"caption-word-8-2","text":"agenda,","start":16.58,"end":16.95}]},{"id":"caption-group-9","frame":4,"start":17.1,"end":17.98,"text":"pose le rendez-vous.","words":[{"id":"caption-word-9-0","text":"pose","start":17.1,"end":17.21},{"id":"caption-word-9-1","text":"le","start":17.21,"end":17.29},{"id":"caption-word-9-2","text":"rendez-vous.","start":17.29,"end":17.86}]},{"id":"caption-group-10","frame":5,"start":20.44,"end":20.93,"text":"Le client","words":[{"id":"caption-word-10-0","text":"Le","start":20.44,"end":20.53},{"id":"caption-word-10-1","text":"client","start":20.53,"end":20.91}]},{"id":"caption-group-11","frame":5,"start":20.93,"end":22.41,"text":"reçoit sa confirmation.","words":[{"id":"caption-word-11-0","text":"reçoit","start":20.93,"end":21.31},{"id":"caption-word-11-1","text":"sa","start":21.32,"end":21.45},{"id":"caption-word-11-2","text":"confirmation.","start":21.45,"end":22.29}]},{"id":"caption-group-12","frame":5,"start":22.56,"end":23.23,"text":"Vous recevez","words":[{"id":"caption-word-12-0","text":"Vous","start":22.56,"end":22.7},{"id":"caption-word-12-1","text":"recevez","start":22.7,"end":23.23}]},{"id":"caption-group-13","frame":5,"start":23.23,"end":24.52,"text":"le récapitulatif.","words":[{"id":"caption-word-13-0","text":"le","start":23.23,"end":23.38},{"id":"caption-word-13-1","text":"récapitulatif.","start":23.38,"end":24.4}]}];
+  var DURATION = 30;
 
   (function () {
     var stage = document.getElementById("caption-stage");
@@ -224,3 +218,8 @@
     window.__timelines["captions"] = tl;
   })();
 </script>
+
+<style>
+  .caption-line { line-height: 1.1 !important; }
+</style>
+</template>

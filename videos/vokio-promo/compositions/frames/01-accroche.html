@@ -1,0 +1,235 @@
+<template>
+  <style>
+    @font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/GeistMono-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");}
+
+    #root{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      container-type:size;
+      font-family:"Geist",sans-serif;
+      color:#262019;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* full-bleed parchment ground — its own full-duration clip layer */
+    .f01-paper{
+      position:absolute;
+      inset:0;
+      background:#F4F1E8;
+    }
+
+    /* ── display lines (Instrument Serif 400, tight, negative tracking) ── */
+    .f01-line{
+      position:absolute;
+      left:0;
+      right:0;
+      text-align:center;
+      font-family:"Instrument Serif",serif;
+      font-weight:400;
+      font-size:13.4cqw;
+      line-height:0.86;
+      letter-spacing:-0.018em;
+      color:#262019;
+    }
+    .f01-measure{
+      display:block;
+      width:74cqw;
+      margin:0 auto;
+    }
+    .f01-row{
+      display:block;
+    }
+    .f01-w{
+      display:inline-block;
+      opacity:0;
+    }
+
+    .f01-line-1{
+      top:17cqh;
+      transform-origin:50% 0%;
+    }
+    .f01-line-2{
+      top:31cqh;
+    }
+
+    /* ── sun bloom : the single solar usage, behind the call chip ── */
+    .f01-halo{
+      position:absolute;
+      left:50%;
+      top:62cqh;
+      width:74cqw;
+      height:16.6cqh;
+      margin-left:-37cqw;
+      margin-top:-8.3cqh;
+      opacity:0;
+      background:radial-gradient(ellipse at 50% 50%,
+        rgba(239,164,36,0.92) 0%,
+        rgba(248,214,155,0.52) 36%,
+        rgba(245,198,119,0.20) 60%,
+        rgba(244,241,232,0) 78%);
+    }
+
+    /* ── incoming-call chip : strict rectangle, 1px ink hairline ── */
+    .f01-chip{
+      position:absolute;
+      left:50%;
+      top:62cqh;
+      width:54cqw;
+      height:6.8cqh;
+      margin-left:-27cqw;
+      margin-top:-3.4cqh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:3.2cqw;
+      background:#F4F1E8;
+      border:1px solid #262019;
+      border-radius:0;
+      opacity:0;
+      transform-origin:50% 50%;
+    }
+    .f01-chip-label{
+      font-family:"Geist Mono",monospace;
+      font-weight:600;
+      font-size:2.4cqw;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:#262019;
+    }
+    .f01-chip-rule{
+      width:1px;
+      height:3.4cqh;
+      background:#262019;
+      opacity:0.2;
+    }
+    .f01-chip-time{
+      font-family:"Geist Mono",monospace;
+      font-weight:400;
+      font-size:4cqw;
+      letter-spacing:0.04em;
+      color:#262019;
+    }
+  </style>
+
+  <div id="root" data-composition-id="01-accroche" data-width="1080" data-height="1920">
+    <div class="f01-paper clip" id="01-accroche-paper" data-start="0" data-duration="4.2" data-track-index="0"></div>
+
+    <div class="f01-line f01-line-1" id="01-accroche-line-1">
+      <span class="f01-measure">
+        <span class="f01-row">
+          <span class="f01-w" data-layout-allow-overlap id="01-accroche-l1-w0">Les</span>
+          <span class="f01-w" data-layout-allow-overlap id="01-accroche-l1-w1">mains</span>
+        </span>
+        <span class="f01-row">
+          <span class="f01-w" data-layout-allow-overlap id="01-accroche-l1-w2">sous</span>
+          <span class="f01-w" data-layout-allow-overlap id="01-accroche-l1-w3">un</span>
+          <span class="f01-w" data-layout-allow-overlap id="01-accroche-l1-w4">évier.</span>
+        </span>
+      </span>
+    </div>
+
+    <div class="f01-line f01-line-2" id="01-accroche-line-2">
+      <span class="f01-measure">
+        <span class="f01-row">
+          <span class="f01-w" data-layout-allow-overlap id="01-accroche-l2-w0">Le</span>
+          <span class="f01-w" data-layout-allow-overlap id="01-accroche-l2-w1">téléphone</span>
+        </span>
+        <span class="f01-row">
+          <span class="f01-w" data-layout-allow-overlap id="01-accroche-l2-w2">sonne.</span>
+        </span>
+      </span>
+    </div>
+
+    <div class="f01-halo" id="01-accroche-halo"></div>
+
+    <div class="f01-chip" id="01-accroche-chip">
+      <span class="f01-chip-label">Appel entrant</span>
+      <span class="f01-chip-rule"></span>
+      <span class="f01-chip-time">02:07</span>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var byId = function (id) { return document.getElementById(id); };
+
+      /* ── dynamic-content-sequencing : the word beats are reduced ONCE, at
+         build time, into a flat table of absolute start times. Nothing is
+         recomputed while the timeline runs. ─────────────────────────────── */
+      var WORD_REVEAL_DUR = 0.78;   /* long deceleration */
+      var WORD_RISE = 34;
+
+      var BEATS = [
+        { id: "01-accroche-l1-w0", at: 0.04 },
+        { id: "01-accroche-l1-w1", at: 0.19 },
+        { id: "01-accroche-l1-w2", at: 0.54 },
+        { id: "01-accroche-l1-w3", at: 0.77 },
+        { id: "01-accroche-l1-w4", at: 0.90 },
+        { id: "01-accroche-l2-w0", at: 1.36 },
+        { id: "01-accroche-l2-w1", at: 1.48 },
+        { id: "01-accroche-l2-w2", at: 2.03 }
+      ];
+
+      var line1 = byId("01-accroche-line-1");
+      var halo  = byId("01-accroche-halo");
+      var chip  = byId("01-accroche-chip");
+
+      var tl = gsap.timeline({ paused: true });
+
+      /* Scene 1 (0.00–1.35) + Scene 2 second line (1.36–2.60) :
+         word-by-word arrival on the real spoken words. */
+      for (var i = 0; i < BEATS.length; i++) {
+        tl.fromTo(
+          byId(BEATS[i].id),
+          { opacity: 0, y: WORD_RISE, filter: "blur(7px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: WORD_REVEAL_DUR, ease: "power3.out" },
+          BEATS[i].at
+        );
+      }
+
+      /* Scene 2 (1.35–2.60) : line 1 steps down one notch and drops to the
+         headline-sm rung. Scale + position only, no cross-fade. */
+      tl.fromTo(
+        line1,
+        { y: 0, scale: 1 },
+        { y: 78, scale: 0.27, duration: 0.72, ease: "power3.out" },
+        1.35
+      );
+
+      /* Scene 3 (2.60–4.20) : the type freezes; the incoming-call chip
+         arrives on a damped spring-pop (power3, no overshoot) and the solar
+         bloom opens behind it. */
+      tl.fromTo(
+        chip,
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.62, ease: "power3.out" },
+        2.60
+      );
+
+      tl.fromTo(
+        halo,
+        { scale: 0.58, opacity: 0 },
+        { scale: 1, opacity: 0.5, duration: 0.35, ease: "power3.out" },
+        2.55
+      );
+
+      /* Two pulses, placed by hand as four finite tweens. No repeat, no yoyo. */
+      tl.to(halo, { scale: 1.11, opacity: 0.74, duration: 0.35, ease: "power2.out" }, 2.90);
+      tl.to(halo, { scale: 1.00, opacity: 0.50, duration: 0.30, ease: "power2.inOut" }, 3.25);
+      tl.to(halo, { scale: 1.11, opacity: 0.74, duration: 0.25, ease: "power2.out" }, 3.60);
+      tl.to(halo, { scale: 1.00, opacity: 0.50, duration: 0.25, ease: "power2.inOut" }, 3.85);
+
+      /* hold to the full frame duration */
+      tl.to({}, { duration: 0.1 }, 4.1);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["01-accroche"] = tl;
+    })();
+  </script>
+</template>

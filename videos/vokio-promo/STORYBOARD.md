@@ -73,6 +73,7 @@ figé) et l'économiseur d'écran (tout qui flotte en même temps sans raison).
 - focal: la pastille d'appel entrant
 - roles: pastille = cutout · les deux lignes = supporting
 - sfx: none
+- captions: none
 - src: compositions/frames/01-accroche.html
 
 Adapt : on garde le principe des temps de texte qui se posent seuls sur un fond
@@ -121,6 +122,7 @@ objet : la pastille d'appel entrant qui apparaît et pulse. Aucun numéro lisibl
 - focal: la liste des trois lignes
 - roles: pastille héritée = supporting · liste = cutout
 - sfx: none
+- captions: none
 - src: compositions/frames/02-probleme.html
 
 Adapt : les temps de texte du blueprint deviennent des temps de **liste**. On
@@ -314,7 +316,7 @@ C'est le plan de repos du film : la preuve n'a pas besoin d'être agitée.
 - blueprint: logo-assemble-lockup
 - scene: L'onde vocale se resserre, sa barre solaire monte et devient le point du i de Vokio
 - duration: 4.0s
-- transition_in: crossfade
+- transition_in: cut
 - status: outline
 - voiceover: "Ne ratez plus un seul appel."
 - asset_candidates: assets/symbole-onde.svg
@@ -324,6 +326,7 @@ C'est le plan de repos du film : la preuve n'a pas besoin d'être agitée.
 - focal: assets/symbole-onde.svg
 - roles: onde = cutout · wordmark = cutout · ligne d'adresse = supporting
 - sfx: none
+- captions: none
 - src: compositions/frames/06-cta.html
 
 Adapt : le blueprint demande que la marque **vienne à exister** à l'écran. On

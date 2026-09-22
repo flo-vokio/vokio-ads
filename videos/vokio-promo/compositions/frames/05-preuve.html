@@ -1,0 +1,230 @@
+<template>
+  <style>
+    @font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/GeistMono-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");}
+
+    /* root: styled by #root only (never by a class) */
+    #root{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      container-type:size;
+      font-family:"Geist",sans-serif;
+      color:#262019;
+    }
+
+    /* ---- full-bleed paper ground (its own clip layer, never a bg on #root) ---- */
+    .f05-preuve-ground{
+      position:absolute;
+      inset:0;
+      background:#F4F1E8;
+    }
+    .f05-preuve-sun{           /* sun bloom — the primary depth layer, upper-left, behind the client slip */
+      position:absolute;
+      left:-8%;
+      top:-6%;
+      width:94%;
+      height:44%;
+      background:radial-gradient(closest-side,
+        rgba(239,164,36,0.22) 0%,
+        rgba(248,214,155,0.15) 42%,
+        rgba(245,198,119,0.07) 70%,
+        rgba(244,241,232,0) 100%);
+    }
+
+    /* ---- stage: the perspective parent (REQUIRED for rotationY) ---- */
+    .f05-preuve-stage{
+      position:absolute;
+      inset:0;
+      perspective:1800px;
+      perspective-origin:50% 38%;
+      transform-style:preserve-3d;
+    }
+
+    /* ---- the two slips of paper: ink on paper, hairlines only, no shadow, no radius ---- */
+    .f05-preuve-slip{
+      position:absolute;
+      box-sizing:border-box;
+      width:79.6%;
+      background:rgba(236,230,216,0.55);
+      border-top:1px solid rgba(38,32,25,0.55);
+      border-radius:0;
+      padding:3.5cqw 4.07cqw;
+      display:flex;
+      flex-direction:column;
+      transform-style:preserve-3d;
+      will-change:transform;
+    }
+    .f05-preuve-slip-client{
+      left:6.5%;
+      top:15.63%;
+      height:14.85%;
+    }
+    .f05-preuve-slip-pro{
+      left:13.9%;
+      top:40.63%;
+      min-height:15.2%;
+    }
+
+    .f05-preuve-stamp{          /* Geist Mono timestamp */
+      align-self:flex-end;
+      font-family:"Geist Mono",monospace;
+      font-weight:400;
+      font-size:2.41cqw;
+      letter-spacing:0.04em;
+      line-height:1.2;
+      color:rgba(38,32,25,0.62);
+    }
+    .f05-preuve-hair{           /* 1px hairline — the only border that exists */
+      height:1px;
+      width:100%;
+      background:rgba(38,32,25,0.20);
+      margin:2.2cqw 0 2.4cqw;
+      transform-origin:left center;
+    }
+    .f05-preuve-say{            /* card body copy — Geist */
+      font-family:"Geist",sans-serif;
+      font-weight:400;
+      font-size:3.89cqw;
+      line-height:1.45;
+      color:#262019;
+    }
+    .f05-preuve-say-when{
+      margin-top:1.1cqw;
+    }
+
+    /* ---- inner-edge badges: the ONE solar usage of the frame ---- */
+    /* on the stage, never inside a slip (inside they would inherit the rotationY) */
+    .f05-preuve-badge{
+      position:absolute;
+      background:#EFA424;
+      color:#262019;
+      border-radius:0;
+      font-family:"Geist Mono",monospace;
+      font-weight:600;
+      font-size:2.22cqw;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      line-height:1;
+      padding:1.2cqw 1.66cqw 1.2cqw 1.85cqw;
+      white-space:nowrap;
+    }
+    .f05-preuve-badge-client{   /* bottom edge of the client slip, toward the gutter */
+      right:17.6%;
+      top:29.43%;
+    }
+    .f05-preuve-badge-pro{      /* top edge of the artisan slip, mirrored across the gutter */
+      left:17.6%;
+      top:39.06%;
+    }
+
+    .f05-preuve-pagenum{
+      position:absolute;
+      right:4cqw;
+      top:66.67%;
+      font-family:"Geist Mono",monospace;
+      font-weight:400;
+      font-size:2.04cqw;
+      letter-spacing:0.08em;
+      color:rgba(38,32,25,0.75);
+    }
+  </style>
+
+  <div id="root" data-composition-id="05-preuve" data-width="1080" data-height="1920" data-duration="6.1">
+
+    <div id="05-preuve-ground" class="f05-preuve-ground clip" data-start="0" data-duration="6.1" data-track-index="0">
+      <div id="05-preuve-sun" class="f05-preuve-sun"></div>
+    </div>
+
+    <div id="05-preuve-stage" class="f05-preuve-stage clip" data-start="0" data-duration="6.1" data-track-index="1">
+
+      <div id="05-preuve-slip-client" class="f05-preuve-slip f05-preuve-slip-client">
+        <div id="05-preuve-stamp-client" class="f05-preuve-stamp f05-preuve-copy-client">02:09</div>
+        <div id="05-preuve-hair-client" class="f05-preuve-hair"></div>
+        <div id="05-preuve-say-client" class="f05-preuve-say f05-preuve-copy-client">Rendez-vous confirmé, jeudi 8 h 30. Plomberie Azur.</div>
+      </div>
+
+      <div id="05-preuve-slip-pro" class="f05-preuve-slip f05-preuve-slip-pro">
+        <div id="05-preuve-stamp-pro" class="f05-preuve-stamp f05-preuve-copy-pro">02:09</div>
+        <div id="05-preuve-hair-pro" class="f05-preuve-hair"></div>
+        <div id="05-preuve-say-pro" class="f05-preuve-say f05-preuve-copy-pro">Fuite sous évier · 12 rue des Lices</div>
+        <div id="05-preuve-when-pro" class="f05-preuve-say f05-preuve-say-when f05-preuve-copy-pro">jeudi 8 h 30</div>
+      </div>
+
+      <div id="05-preuve-badge-client" class="f05-preuve-badge f05-preuve-badge-client">Client</div>
+      <div id="05-preuve-badge-pro" class="f05-preuve-badge f05-preuve-badge-pro">Vous</div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var slipClient = document.getElementById("05-preuve-slip-client");
+      var slipPro = document.getElementById("05-preuve-slip-pro");
+      var hairClient = document.getElementById("05-preuve-hair-client");
+      var hairPro = document.getElementById("05-preuve-hair-pro");
+      var copyClient = document.querySelectorAll(".f05-preuve-copy-client");
+      var copyPro = document.querySelectorAll(".f05-preuve-copy-pro");
+      var badgeClient = document.getElementById("05-preuve-badge-client");
+      var badgePro = document.getElementById("05-preuve-badge-pro");
+
+      var tl = gsap.timeline({ paused: true });
+
+      /* the frame runs 5.6s: the last beat is deliberate stillness, held by this pad */
+      tl.to({}, { duration: 5.6 }, 0);
+
+      /* ---------- Scene 1 (0.00–1.05) — papier nu, puis le reçu du client ---------- */
+      /* split-tilt-cards: entry from its own wing, mirrored book-open rotationY, flattening to 0 */
+      tl.fromTo(slipClient,
+        { x: -460, rotationY: 18, scale: 0.92, opacity: 0 },
+        { x: 0, rotationY: 0, scale: 1, opacity: 1, duration: 1.0, ease: "power3.out" },
+        0.04);
+      tl.fromTo(hairClient,
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.6, ease: "power3.out" },
+        0.34);
+      /* copy fades up during the settle, not after it */
+      tl.fromTo(copyClient,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.52, stagger: 0.09, ease: "power2.out" },
+        0.30);
+
+      /* ---------- Scene 2 (1.05–2.90) — 1.05 à 2.16 : rien ne bouge, le silence est tenu ---------- */
+      /* 2.16 : le récapitulatif de l'artisan entre du bord opposé, inclinaison miroir */
+      tl.fromTo(slipPro,
+        { x: 460, rotationY: -18, scale: 0.92, opacity: 0 },
+        { x: 0, rotationY: 0, scale: 1, opacity: 1, duration: 1.0, ease: "power3.out" },
+        2.16);
+      tl.fromTo(hairPro,
+        { scaleX: 0, opacity: 0 },
+        { scaleX: 1, opacity: 1, duration: 0.6, ease: "power3.out" },
+        2.46);
+      tl.fromTo(copyPro,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.52, stagger: 0.09, ease: "power2.out" },
+        2.42);
+
+      /* ---------- Scene 3 (2.90–4.30) — la ponctuation : une pastille sur le bord intérieur ---------- */
+      /* smooth scale-in, no overshoot anywhere in this frame */
+      tl.fromTo(badgeClient,
+        { opacity: 0, scale: 0.82, y: 14 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "power3.out" },
+        2.98);
+      tl.fromTo(badgePro,
+        { opacity: 0, scale: 0.82, y: -14 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "power3.out" },
+        3.22);
+
+      /* ---------- Scene 4 (4.30–5.60) — temps de repos, immobile ---------- */
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["05-preuve"] = tl;
+      tl.seek(0);
+    })();
+  </script>
+</template>

@@ -1,35 +1,90 @@
 # vokio-ads
 
-Pubs Vokio en motion design, rendues par [HyperFrames](https://hyperframes.heygen.com)
-(composition HTML seekable -> MP4). Une composition, plusieurs métiers, trois formats.
+Pubs Vokio en motion design, rendues par [HyperFrames](https://hyperframes.heygen.com) :
+une composition HTML dont la timeline se déplace image par image, encodée en MP4.
 
-## Lancer une commande
+## La règle d'or
 
-Toujours par l'enveloppe, jamais `npx hyperframes` directement :
+Toute commande passe par l'enveloppe, jamais `npx hyperframes` en direct :
 
 ```bash
 /opt/vokio-ads/bin/hf <commande>
 ```
 
-Le VPS tourne sous Node 20 pour le reste de la machine et HyperFrames exige Node 22.
-L'enveloppe met `/opt/node22` en tête de PATH pour elle seule et pointe
-`HYPERFRAMES_PYTHON` vers le venv qui porte Kokoro. `/usr/bin/node` ne bouge pas.
+La machine tourne sous Node 20 pour le reste de ses services et HyperFrames
+exige Node 22. L'enveloppe met `/opt/node22` en tête de PATH pour elle seule et
+pointe `HYPERFRAMES_PYTHON` vers le venv qui porte Kokoro. `/usr/bin/node` ne
+bouge pas.
 
-## Le projet
+## Le film de référence
 
-`videos/vokio-promo/` : la pub de référence, 30 s, verticale 1080x1920.
+`videos/vokio-promo/` : 30,0 s, 1080x1920, métier plombier.
 
-## Chaîne son
+| Fichier | Rôle |
+| --- | --- |
+| `BRIEF.md` | l'intention, et toutes les règles éditoriales qui ne se négocient pas |
+| `SCRIPT.md` | la narration verrouillée, une section par ligne parlée |
+| `STORYBOARD.md` | les six plans, leurs durées, et la séquence chronométrée de chacun |
+| `frame.md` | le système visuel : couleurs, rampe typographique, composants |
+| `references/agenda-reel.md` | les mesures relevées sur le vrai agenda client |
+| `compositions/frames/` | un fichier HTML par plan |
+| `index.html` | le montage, écrit par l'assembleur, jamais à la main |
 
-Voix off provisoire locale, puis calage des sous-titres sur l'audio réel :
+## Refaire le film
 
 ```bash
-bin/hf tts videos/vokio-promo/SCRIPT.txt --voice ff_siwis --output videos/vokio-promo/assets/voix.wav
-bin/hf transcribe videos/vokio-promo/assets/voix.wav --model small --language fr
+cd videos/vokio-promo
+./monter.sh            # sous-titres, assemblage, transitions, contrôle
+./monter.sh --rendre   # et le MP4
 ```
 
-`--language fr` n'est pas optionnel : sans lui le modèle par défaut (`small.en`)
-traduit silencieusement le français en anglais.
+## La musique
 
-La musique n'est pas générée ici : la piste est un emplacement vide que Florian
-remplit lui-même.
+`assets/musique.mp3` est un silence de 30 s : la piste existe et se valide déjà.
+Pour poser un vrai morceau :
+
+```bash
+cd videos/vokio-promo
+./poser_musique.sh ~/mon-morceau.wav
+./monter.sh --rendre
+```
+
+Le script le normalise à -26 LUFS avec fondus, pour qu'il passe **sous** la voix.
+
+## La voix off
+
+Provisoirement locale (Kokoro, voix `ff_siwis`), à remplacer par ElevenLabs.
+Le montage ne contient **aucune durée écrite en dur** : il se recale sur les
+horodatages du nouveau fichier.
+
+```bash
+cd videos/vokio-promo
+node /opt/vokio-ads/.agents/skills/product-launch-video/scripts/audio.mjs \
+  --script ./SCRIPT.md --storyboard ./STORYBOARD.md --hyperframes . \
+  --out ./audio_meta.json --provider kokoro --voice ff_siwis
+python3 /opt/vokio-ads/outils/recaler_mots.py . --ecrire
+./monter.sh --rendre
+```
+
+La deuxième commande n'est pas optionnelle : Whisper entend « Vocuez au » pour
+« Vokio » et perd la ponctuation, qui commande le découpage des sous-titres.
+`recaler_mots.py` garde ses minutages et lui impose les mots de `SCRIPT.md`.
+
+## Trois pièges déjà payés
+
+1. **Ne jamais lancer `audio.mjs sync-durations` sur ce projet.** Il écrase la
+   durée d'un plan par celle de sa voix. Ici il ramènerait le film de 30,0 s à
+   18,8 s et supprimerait tous les silences, qui sont la moitié du montage.
+2. **La langue doit descendre jusqu'au moteur.** Sans elle il retombe sur
+   l'anglais, donc sur le modèle Whisper `small.en`, qui *traduit* au lieu de
+   transcrire. Corrigé dans les skills vendues, mais c'est le premier endroit
+   où regarder si une transcription revient en anglais.
+3. **La bande de sous-titres par défaut est dans la zone interdite** (y 1600 à
+   1920) : Reels et TikTok y dessinent leur interface, et la charte Vokio
+   interdit tout texte important sous y=1500. `monter.sh` la remonte via
+   `HF_CAPTION_BAND_TOP` et `HF_CAPTION_BAND_HEIGHT`.
+
+## Décliner par métier
+
+En préparation. Le storyboard porte déjà un champ `metier:`, et les chaînes
+propres au métier sont isolées dans `SCRIPT.md` et dans les plans 03 à 05.
