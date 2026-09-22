@@ -1,0 +1,11 @@
+node_modules/
+.npm/
+# Sorties de rendu : lourdes, reconstruites par `bin/hf render`
+videos/*/renders/
+videos/*/snapshots/
+videos/*/.hyperframes/frame-packets/
+# Médias générés (voix off provisoire, musique déposée par Florian)
+videos/*/.media/
+# Caches
+.DS_Store
+*.log

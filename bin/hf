@@ -1,0 +1,9 @@
+#!/bin/bash
+# Enveloppe HyperFrames.
+# Le VPS tourne sous Node 20 (nodesource, utilisé par le reste de la machine) ;
+# HyperFrames exige Node >= 22. On garde les deux côte à côte : /opt/node22 n'est
+# ajouté au PATH que pour cette commande, /usr/bin/node ne bouge pas.
+# HYPERFRAMES_PYTHON pointe le venv qui porte Kokoro (voix off) et soundfile.
+export PATH=/opt/node22/bin:$PATH
+export HYPERFRAMES_PYTHON=/root/.venvs/hyperframes/bin/python
+exec npx --yes hyperframes@0.8.62 "$@"
