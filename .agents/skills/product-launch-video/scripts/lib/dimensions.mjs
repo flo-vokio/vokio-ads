@@ -37,9 +37,19 @@ export function parseFormat(format) {
 // at h=1080). Frame content must end `safetyPx` above the band top. Holds even
 // when captions are disabled (bottom-edge consistency).
 export const CAPTION_BAND_FRACTION = 0.1667;
+// La bande par défaut colle au bas du cadre (1600→1920 en 9:16). Sur une
+// verticale destinée à Reels et TikTok c'est doublement faux : les plateformes
+// dessinent leur propre interface dans ces 320 px, et la charte Vokio interdit
+// tout texte important sous y=1500. HF_CAPTION_BAND_TOP et
+// HF_CAPTION_BAND_HEIGHT permettent de remonter la bande sans toucher au reste
+// du calcul ; sans eux le comportement d'origine est inchangé.
+function entierEnv(nom) {
+  const v = parseInt(process.env[nom] ?? "", 10);
+  return Number.isFinite(v) && v > 0 ? v : null;
+}
 export function captionBand(height, safetyPx = 20) {
   const h = Number.isFinite(height) ? height : DEFAULT_DIMENSIONS.height;
-  const bandHeight = Math.round(h * CAPTION_BAND_FRACTION);
-  const bandTopY = h - bandHeight; // foreground must end at/above this y
+  const bandHeight = entierEnv("HF_CAPTION_BAND_HEIGHT") ?? Math.round(h * CAPTION_BAND_FRACTION);
+  const bandTopY = entierEnv("HF_CAPTION_BAND_TOP") ?? h - bandHeight;
   return { bandHeight, bandTopY, foregroundMaxY: bandTopY - safetyPx };
 }

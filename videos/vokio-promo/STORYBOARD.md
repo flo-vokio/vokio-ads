@@ -65,7 +65,7 @@ figé) et l'économiseur d'écran (tout qui flotte en même temps sans raison).
 - transition_in: cut
 - status: outline
 - voiceover: "Les mains sous un évier. Le téléphone sonne."
-- asset_candidates: aucun visuel capturé — composition typographique + la pastille d'appel reconstruite aux tokens de marque
+- asset_candidates: none
 - handoff_out: pastille d'appel « Appel entrant · 02:07 » centrée x 50 % y 62 %, échelle 1, opacité 1, pulsation lente en cours
 - persuasion: reconnaissance du moment
 - beat: le monde d'avant
@@ -85,16 +85,17 @@ révèle **mot à mot** (`dynamic-content-sequencing`) sur les mots réels — 0
 supérieur, bloc à ~70 % de la largeur utile.
 
 Scene 2 (1,35–2,60 s) : la première ligne descend d'un cran et passe en
-`headline-sm` (`scale-swap-transition`, pas de fondu) ; « Le téléphone sonne. »
+`headline-sm` (échelle et position uniquement, pas de fondu croisé) ; « Le téléphone sonne. »
 arrive sous elle en `display`, mot à mot sur 1,36 et 2,03. Deux lignes, deux
 tailles : la hiérarchie se fait par l'échelle, pas par la couleur.
 
 Scene 3 (2,60–4,20 s) : le texte se fige, plus une seule lettre ne bouge. La
 pastille d'appel entrant entre au centre de la zone utile par une arrivée en
 ressort **amorti** (`spring-pop-entrance`, réglage lisse, aucun dépassement),
-halo solaire qui s'ouvre derrière elle (`ambient-glow-bloom`). Elle porte
+halo solaire qui s'ouvre derrière elle en opacité et en échelle. Elle porte
 « Appel entrant » en `micro-label` et « 02:07 » en `mono-data`, aucun numéro.
-Le halo bat **deux fois**, en tweens finis, entre 2,80 et 4,10, puis tient.
+Le halo bat **exactement deux fois**, en tweens finis posés à la main entre
+2,80 et 4,10 — jamais `repeat`, jamais `yoyo` — puis tient.
 Trois objets à l'écran, pas un de plus.
 
 Ouvrir sur le moment, pas sur le produit. La première ligne est reprise mot pour
@@ -112,7 +113,7 @@ objet : la pastille d'appel entrant qui apparaît et pulse. Aucun numéro lisibl
 - transition_in: cut
 - status: outline
 - voiceover: "Vous ne décrochez pas. Le client appelle le suivant sur la liste."
-- asset_candidates: aucun visuel capturé — la pastille héritée de Frame 1, un filet 1 px, une liste en Geist Mono
+- asset_candidates: none
 - handoff_in: pastille d'appel au même x 50 % y 62 %, échelle 1, opacité 1, pulsation encore en cours à l'entrée ; elle s'éteint sur place, ne réapparaît pas
 - persuasion: agitation de la douleur
 - beat: le coût, sans le chiffrer
@@ -159,7 +160,7 @@ travail. Aucun montant, aucun pourcentage.
 - transition_in: crossfade
 - status: outline
 - voiceover: "Vokio décroche à votre place, et dit tout de suite qui elle est."
-- asset_candidates: assets/symbole-onde.svg (les cinq barres du symbole Vokio, barre centrale solaire)
+- asset_candidates: assets/symbole-onde.svg
 - handoff_out: fil de conversation calé à gauche, dernière bulle client visible en bas ; l'onde vocale reste allumée sous le fil, x 50 % y 84 %, échelle 1, opacité 1
 - persuasion: le renversement
 - beat: quelqu'un a décroché
@@ -213,7 +214,7 @@ le client parle. C'est là qu'elle entre dans le film ; elle en ressortira au CT
 - transition_in: cut
 - status: outline
 - voiceover: "Elle comprend la demande, regarde votre agenda, pose le rendez-vous."
-- asset_candidates: aucun visuel capturé — agenda reconstruit d'après les mesures relevées sur le vrai écran client, references/agenda-reel.md
+- asset_candidates: none
 - handoff_in: fil de conversation au même calage qu'en sortie de Frame 3, il glisse vers la gauche sans se recomposer
 - handoff_out: carte du créneau « jeudi 8 h 30 » posée x 62 % y 48 %, échelle 1, opacité 1, immobile
 - persuasion: la preuve mécanique
@@ -270,7 +271,7 @@ heure ouvrable, pas une case qui clignote.
 - transition_in: cut
 - status: outline
 - voiceover: "Le client reçoit sa confirmation. Vous recevez le récapitulatif."
-- asset_candidates: aucun visuel capturé — deux cartes aux tokens de frame.md, texte repris de la démo réelle du site
+- asset_candidates: none
 - persuasion: le reçu
 - beat: les deux bouts de la chaîne
 - blueprint: comparison-split (Reproduce)
@@ -316,7 +317,7 @@ C'est le plan de repos du film : la preuve n'a pas besoin d'être agitée.
 - transition_in: crossfade
 - status: outline
 - voiceover: "Ne ratez plus un seul appel."
-- asset_candidates: assets/symbole-onde.svg ; wordmark reconstruit selon le site (point solaire à left 63,5 %)
+- asset_candidates: assets/symbole-onde.svg
 - persuasion: l'adresse
 - beat: le logo se termine
 - blueprint: logo-assemble-lockup (Adapt)
