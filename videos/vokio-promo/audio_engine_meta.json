@@ -1,0 +1,413 @@
+{
+  "tts_provider": "kokoro",
+  "voice_id": "ff_siwis",
+  "bgm": null,
+  "bgm_pending": false,
+  "bgm_provider": null,
+  "bgm_pid": null,
+  "bgm_log": null,
+  "bgm_mode": null,
+  "bgm_target_duration_s": null,
+  "bgm_seed_duration_s": null,
+  "bgm_loop_count": null,
+  "voices": [
+    {
+      "id": "01",
+      "path": "assets/voice/01.wav",
+      "duration_s": 2.539,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Les",
+          "start": 0.04,
+          "end": 0.19
+        },
+        {
+          "id": "w1",
+          "text": "mains",
+          "start": 0.19,
+          "end": 0.43
+        },
+        {
+          "id": "w2",
+          "text": "sous",
+          "start": 0.54,
+          "end": 0.77
+        },
+        {
+          "id": "w3",
+          "text": "un",
+          "start": 0.77,
+          "end": 0.89
+        },
+        {
+          "id": "w4",
+          "text": "évier,",
+          "start": 0.9,
+          "end": 1.36
+        },
+        {
+          "id": "w5",
+          "text": "le",
+          "start": 1.36,
+          "end": 1.44
+        },
+        {
+          "id": "w6",
+          "text": "téléphone",
+          "start": 1.52,
+          "end": 1.97
+        },
+        {
+          "id": "w7",
+          "text": "sonne.",
+          "start": 2.03,
+          "end": 2.41
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "path": "assets/voice/02.wav",
+      "duration_s": 3.477,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Vous",
+          "start": 0.04,
+          "end": 0.24
+        },
+        {
+          "id": "w1",
+          "text": "ne",
+          "start": 0.24,
+          "end": 0.36
+        },
+        {
+          "id": "w2",
+          "text": "décrochez",
+          "start": 0.36,
+          "end": 0.83
+        },
+        {
+          "id": "w3",
+          "text": "pas,",
+          "start": 0.95,
+          "end": 1.11
+        },
+        {
+          "id": "w4",
+          "text": "le",
+          "start": 1.11,
+          "end": 1.37
+        },
+        {
+          "id": "w5",
+          "text": "client",
+          "start": 1.37,
+          "end": 1.7
+        },
+        {
+          "id": "w6",
+          "text": "appelle",
+          "start": 1.7,
+          "end": 2.1
+        },
+        {
+          "id": "w7",
+          "text": "le",
+          "start": 2.1,
+          "end": 2.21
+        },
+        {
+          "id": "w8",
+          "text": "suivant",
+          "start": 2.21,
+          "end": 2.6
+        },
+        {
+          "id": "w9",
+          "text": "sur",
+          "start": 2.7,
+          "end": 2.78
+        },
+        {
+          "id": "w10",
+          "text": "la",
+          "start": 2.78,
+          "end": 2.89
+        },
+        {
+          "id": "w11",
+          "text": "liste.",
+          "start": 2.89,
+          "end": 3.35
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "path": "assets/voice/03.wav",
+      "duration_s": 3.243,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Vocuez",
+          "start": 0.04,
+          "end": 0.37
+        },
+        {
+          "id": "w1",
+          "text": "au",
+          "start": 0.37,
+          "end": 0.49
+        },
+        {
+          "id": "w2",
+          "text": "décroche",
+          "start": 0.49,
+          "end": 0.94
+        },
+        {
+          "id": "w3",
+          "text": "à",
+          "start": 1,
+          "end": 1.05
+        },
+        {
+          "id": "w4",
+          "text": "votre",
+          "start": 1.05,
+          "end": 1.36
+        },
+        {
+          "id": "w5",
+          "text": "place",
+          "start": 1.36,
+          "end": 1.59
+        },
+        {
+          "id": "w6",
+          "text": "et",
+          "start": 1.8,
+          "end": 1.81
+        },
+        {
+          "id": "w7",
+          "text": "dis",
+          "start": 1.81,
+          "end": 1.95
+        },
+        {
+          "id": "w8",
+          "text": "tout",
+          "start": 1.95,
+          "end": 2.06
+        },
+        {
+          "id": "w9",
+          "text": "de",
+          "start": 2.18,
+          "end": 2.23
+        },
+        {
+          "id": "w10",
+          "text": "suite",
+          "start": 2.23,
+          "end": 2.45
+        },
+        {
+          "id": "w11",
+          "text": "qui",
+          "start": 2.45,
+          "end": 2.6
+        },
+        {
+          "id": "w12",
+          "text": "elle",
+          "start": 2.74,
+          "end": 2.8
+        },
+        {
+          "id": "w13",
+          "text": "est.",
+          "start": 2.8,
+          "end": 3.1
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "path": "assets/voice/04.wav",
+      "duration_s": 3.627,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Elle",
+          "start": 0.03,
+          "end": 0.19
+        },
+        {
+          "id": "w1",
+          "text": "comprend",
+          "start": 0.28,
+          "end": 0.79
+        },
+        {
+          "id": "w2",
+          "text": "la",
+          "start": 0.79,
+          "end": 0.92
+        },
+        {
+          "id": "w3",
+          "text": "demande,",
+          "start": 0.92,
+          "end": 1.51
+        },
+        {
+          "id": "w4",
+          "text": "regarde",
+          "start": 1.51,
+          "end": 1.9
+        },
+        {
+          "id": "w5",
+          "text": "votre",
+          "start": 1.9,
+          "end": 2.18
+        },
+        {
+          "id": "w6",
+          "text": "agenda,",
+          "start": 2.18,
+          "end": 2.55
+        },
+        {
+          "id": "w7",
+          "text": "pose",
+          "start": 2.7,
+          "end": 2.81
+        },
+        {
+          "id": "w8",
+          "text": "le",
+          "start": 2.81,
+          "end": 2.89
+        },
+        {
+          "id": "w9",
+          "text": "rendez-vous.",
+          "start": 2.89,
+          "end": 3.46
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "path": "assets/voice/05.wav",
+      "duration_s": 4.117,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Le",
+          "start": 0.04,
+          "end": 0.13
+        },
+        {
+          "id": "w1",
+          "text": "client",
+          "start": 0.13,
+          "end": 0.51
+        },
+        {
+          "id": "w2",
+          "text": "reçoit",
+          "start": 0.53,
+          "end": 0.91
+        },
+        {
+          "id": "w3",
+          "text": "sa",
+          "start": 0.92,
+          "end": 1.05
+        },
+        {
+          "id": "w4",
+          "text": "confirmation,",
+          "start": 1.05,
+          "end": 1.89
+        },
+        {
+          "id": "w5",
+          "text": "vous",
+          "start": 2.16,
+          "end": 2.3
+        },
+        {
+          "id": "w6",
+          "text": "recevez",
+          "start": 2.3,
+          "end": 2.83
+        },
+        {
+          "id": "w7",
+          "text": "le",
+          "start": 2.83,
+          "end": 2.98
+        },
+        {
+          "id": "w8",
+          "text": "récapitulatif.",
+          "start": 2.98,
+          "end": 4
+        }
+      ]
+    },
+    {
+      "id": "06",
+      "path": "assets/voice/06.wav",
+      "duration_s": 1.813,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Ne",
+          "start": 0.03,
+          "end": 0.13
+        },
+        {
+          "id": "w1",
+          "text": "ratez",
+          "start": 0.13,
+          "end": 0.46
+        },
+        {
+          "id": "w2",
+          "text": "plus",
+          "start": 0.46,
+          "end": 0.73
+        },
+        {
+          "id": "w3",
+          "text": "en",
+          "start": 0.73,
+          "end": 0.86
+        },
+        {
+          "id": "w4",
+          "text": "seul",
+          "start": 0.86,
+          "end": 1.13
+        },
+        {
+          "id": "w5",
+          "text": "appel.",
+          "start": 1.13,
+          "end": 1.63
+        }
+      ]
+    }
+  ],
+  "sfx": [],
+  "total_duration_s": 18.816
+}

@@ -237,6 +237,21 @@ audio = client.text_to_speech.convert(
 save(audio, sys.argv[3])
 `;
 
+// Un seul champ `lang` traverse ce fichier, mais il alimente deux vocabulaires
+// qui ne se recouvrent pas : le phonémiseur de Kokoro attend une étiquette
+// régionale (`fr-fr`, `en-us`, `pt-br`) tandis que Whisper attend un code ISO
+// nu (`fr`). Passer l'un à l'autre échoue des deux côtés — « fr » fait sortir
+// `hyperframes tts` en erreur 1, « fr-fr » fait rendre à Whisper « Whisper did
+// not produce output ». On traduit donc à chaque point d'appel.
+const PHONEMIZER = {
+  en: "en-us", "en-us": "en-us", "en-gb": "en-gb",
+  fr: "fr-fr", "fr-fr": "fr-fr",
+  es: "es", it: "it", hi: "hi", ja: "ja", zh: "zh",
+  pt: "pt-br", "pt-br": "pt-br",
+};
+const versPhonemiseur = (l) => PHONEMIZER[String(l).toLowerCase()] ?? l;
+const versISO = (l) => String(l).toLowerCase().split("-")[0];
+
 // ── synthesize one line ───────────────────────────────────────────────────────
 // Writes wav at wavAbs. Returns { ok, words, error } — words is the raw
 // [{text,start,end}] array for HeyGen (native), or null for ElevenLabs/Kokoro
@@ -278,7 +293,7 @@ export async function synthesizeOne({
   // kokoro — via the published CLI; --output is relative to the project dir.
   const wavRel = relTo(hyperframesDir, wavAbs);
   const args = ["hyperframes", "tts", writeTmpText(text), "--voice", voiceId, "--output", wavRel];
-  if (lang !== "en") args.push("--lang", lang);
+  if (versISO(lang) !== "en") args.push("--lang", versPhonemiseur(lang));
   const r = await spawnP("npx", args, { cwd: hyperframesDir });
   return synthResult(r, wavAbs, "kokoro (npx hyperframes tts)");
 }
@@ -348,10 +363,11 @@ export async function synthesizeHeygen({ text, voiceId, lang, speed, wavAbs }, d
 // flat [{id,text,start,end}] word array, or null. Each call uses a throwaway
 // --dir so parallel scenes don't collide on transcript.json.
 export async function transcribeWav({ wavRel, lang = "en", hyperframesDir }) {
-  const model = lang === "en" ? "small.en" : "small";
+  const iso = versISO(lang);
+  const model = iso === "en" ? "small.en" : "small";
   const td = mkdtempSync(join(tmpdir(), "hf-trans-"));
   const args = ["hyperframes", "transcribe", wavRel, "--model", model, "--dir", td];
-  if (lang !== "en") args.push("--language", lang);
+  if (iso !== "en") args.push("--language", iso);
   const r = await spawnP("npx", args, { cwd: hyperframesDir });
   let words = null;
   if (r.status === 0) {

@@ -7,6 +7,7 @@ audience: artisans et commerçants TPE, métiers de terrain
 mode: collaborative
 language: fr
 metier: plombier
+music: none
 ---
 
 ## Frame 1 — Les mains sous un évier
@@ -14,7 +15,7 @@ metier: plombier
 - type: hook
 - blueprint: kinetic-type-beats
 - scene: Deux constats en Instrument Serif, puis la pastille d'appel entrant qui se met à pulser
-- duration: 3.2s
+- duration: 4.2s
 - transition_in: cut
 - status: outline
 - voiceover: "Les mains sous un évier. Le téléphone sonne."
@@ -52,7 +53,7 @@ travail. Aucun montant, aucun pourcentage.
 - type: feature_showcase
 - blueprint: agent-progress-theater
 - scene: Le fil de conversation se construit message par message, l'onde vocale bat quand l'agent parle
-- duration: 6.0s
+- duration: 5.4s
 - transition_in: crossfade
 - status: outline
 - voiceover: "Vokio décroche à votre place, et dit tout de suite qui elle est."
@@ -95,7 +96,7 @@ heure ouvrable, pas une case qui clignote.
 - type: feature_showcase
 - blueprint: comparison-split
 - scene: Deux reçus entrent des deux bords : le SMS du client à gauche, le récapitulatif de l'artisan à droite
-- duration: 6.0s
+- duration: 5.6s
 - transition_in: cut
 - status: outline
 - voiceover: "Le client reçoit sa confirmation. Vous recevez le récapitulatif."

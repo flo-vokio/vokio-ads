@@ -163,9 +163,15 @@ function runGenerate(argv) {
   // BGM mood: storyboard `music:` → message → arc → default. `mode: retrieve` is
   // strict here (no wait-bgm step downstream).
   const query = (g.extra && g.extra.music) || g.message || g.arc || "calm cinematic underscore";
+  // La langue du storyboard doit descendre jusqu'au moteur : sans elle il
+  // retombe sur "en", donc sur le modèle Whisper `small.en`, qui TRADUIT
+  // silencieusement. Sur la voix française du 22/09 il a rendu « Thank you for
+  // watching and see you next week » à la place de la ligne 3.
+  const lang = String(g.language ?? g.extra?.language ?? "en").trim() || "en";
   const request = {
     provider,
     speed,
+    lang,
     lines,
     bgm: bgmOff
       ? { mode: "none" }
