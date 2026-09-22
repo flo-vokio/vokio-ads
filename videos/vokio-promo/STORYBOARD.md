@@ -79,7 +79,7 @@ le client parle. C'est là qu'elle entre dans le film ; elle en ressortira au CT
 - transition_in: cut
 - status: outline
 - voiceover: "Elle comprend la demande, regarde votre agenda, pose le rendez-vous."
-- asset_candidates: agenda de app.vokio.fr à capturer par lien magique (décision ouverte, voir Notes) — sinon reconstruction aux tokens de frame.md
+- asset_candidates: aucun visuel capturé — agenda reconstruit d'après les mesures relevées sur le vrai écran client, references/agenda-reel.md
 - handoff_in: fil de conversation au même calage qu'en sortie de Frame 3, il glisse vers la gauche sans se recomposer
 - handoff_out: carte du créneau « jeudi 8 h 30 » posée x 62 % y 48 %, échelle 1, opacité 1, immobile
 - src: compositions/frames/04-agenda.html
