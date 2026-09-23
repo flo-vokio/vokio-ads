@@ -1,0 +1,22 @@
+{
+  "_": "Le service du soir : l'appel tombe pendant le coup de feu, la table est posée pour le lendemain midi.",
+  "metier": "restaurant",
+  "etablissement": "Le Comptoir des Lices",
+  "accroche": "Les mains dans le service.",
+  "demande_client": "Une table pour quatre, demain midi.",
+  "motif": "Table pour 4",
+  "confrere": "Restaurant suivant",
+  "client_nom": "Mme Vasseur",
+  "adresse": "quatre couverts, en terrasse",
+  "jour": "Vendredi",
+  "jour_texte": "vendredi 12 h 30",
+  "rail": [
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00"
+  ],
+  "heure_appel": "20:41",
+  "heure_sms": "20:43"
+}

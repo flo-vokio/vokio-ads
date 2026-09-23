@@ -54,8 +54,14 @@ def repartir(mots_ecrits, debut, fin):
     return sortie
 
 
-def recaler(entendus, phrase):
+def recaler(entendus, phrase, duree=None):
     ecrits = phrase.split()
+    # Whisper peut ne rien rendre du tout sur une ligne courte ou mal articulée.
+    # Dans ce cas il n'y a pas d'alignement à faire : on étale les mots écrits
+    # sur la durée du fichier, ce qui vaut mieux qu'un plantage ou qu'un plan
+    # sans sous-titre.
+    if not entendus:
+        return [dict(w, id=f"w{k}") for k, w in enumerate(repartir(ecrits, 0.0, duree or 1.0))]
     a = [normaliser(w["text"]) for w in entendus]
     b = [normaliser(w) for w in ecrits]
     sortie = []
@@ -103,7 +109,7 @@ for v in meta["voices"]:
         print(f"frame {v['frame']} : aucune ligne dans SCRIPT.md, laissée telle quelle", file=sys.stderr)
         continue
     avant = " ".join(w["text"] for w in v.get("words", []))
-    v["words"] = recaler(v.get("words", []), phrase)
+    v["words"] = recaler(v.get("words", []), phrase, v.get("duration_s"))
     apres = " ".join(w["text"] for w in v["words"])
     if avant != apres:
         change += 1

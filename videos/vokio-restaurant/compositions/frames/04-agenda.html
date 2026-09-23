@@ -1,0 +1,332 @@
+<template>
+  <style>
+    /* — fonts: local files only, copied from frame.md — */
+    @font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/GeistMono-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");}
+
+    /* sub-composition root — sized by the host, never hardcoded px */
+    #root{
+      position:relative;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      color:#262019;
+    }
+
+    /* class names are prefixed f04- (a CSS identifier cannot begin with a digit,
+       so the literal frame id is carried on every element id instead) */
+    #root, #root *, #root *::before, #root *::after{box-sizing:border-box;}
+    .f04-layer{position:absolute;inset:0;}
+
+    /* — full-bleed paper ground, its own clip layer (never a background on #root) — */
+    .f04-ground{
+      background:#F4F1E8;
+      background-image:radial-gradient(118% 88% at 31% 25%, #F7F5EE 0%, #F4F1E8 46%, #EFEBE0 100%);
+    }
+
+
+    /* — the agenda (right 55%) : every value scaled x3.85 from references/agenda-reel.md — */
+    .f04-dayhead{
+      position:absolute;
+      left:241.4px;
+      top:300px;
+      width:766.6px;
+      height:46px;
+      line-height:46px;
+      text-align:center;
+      text-indent:0.32em;
+      font-family:"Geist Mono",monospace;
+      font-weight:400;
+      font-size:38.5px;
+      letter-spacing:0.32em;
+      text-transform:uppercase;
+      color:rgba(38,32,25,0.7);
+    }
+    .f04-rail{
+      position:absolute;
+      left:72px;
+      top:376px;
+      width:169.4px;
+      height:910.8px;
+    }
+    .f04-hourlabel{
+      position:absolute;
+      left:0;
+      width:169.4px;
+      height:38.5px;
+      line-height:38.5px;
+      text-align:center;
+      font-family:"Geist Mono",monospace;
+      font-weight:400;
+      font-size:38.5px;
+      color:rgba(38,32,25,0.52);
+    }
+    .f04-daycol{
+      position:absolute;
+      left:241.4px;
+      top:376px;
+      width:766.6px;
+      height:910.8px;
+      border-radius:30.8px;
+      overflow:hidden;
+    }
+    .f04-field{
+      position:absolute;
+      inset:0;
+      background:rgba(38,32,25,0.02);
+    }
+    .f04-grid{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      overflow:visible;
+    }
+    .f04-grid line{
+      fill:none;
+      stroke:rgba(38,32,25,0.06);
+      stroke-width:3.85;
+    }
+    .f04-scanwrap{
+      position:absolute;
+      inset:0;
+    }
+    .f04-scan{
+      position:absolute;
+      left:0;
+      top:-136px;
+      width:100%;
+      height:136px;
+      box-sizing:border-box;
+      border-bottom:3.85px solid #EFA424;
+      background:linear-gradient(to top, rgba(239,164,36,0.16) 0%, rgba(239,164,36,0) 100%);
+    }
+
+    /* — the booking card : the one object that must be right to the pixel — */
+    .f04-card{
+      position:absolute;
+      left:15.4px;
+      top:502.4px;
+      width:735.8px;
+      height:150.2px;
+      box-sizing:border-box;
+      padding:15.4px 23.1px;
+      border:3.85px solid rgba(239,164,36,0.55);
+      border-radius:23.1px;
+      background:rgba(239,164,36,0.20);
+      font-family:"Geist",sans-serif;
+      color:#262019;
+      line-height:1.2;
+    }
+    .f04-card-l1{
+      font-size:42.35px;
+      font-weight:500;
+    }
+    .f04-card-l2{
+      font-size:42.35px;
+      font-weight:400;
+      opacity:0.70;
+    }
+    .f04-card-time{
+      font-family:"Geist Mono",monospace;
+      font-weight:400;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="04-agenda"
+    data-width="1080"
+    data-height="1920"
+    data-start="0"
+    data-duration="6"
+  >
+    <div
+      id="04-agenda-ground"
+      class="clip f04-layer f04-ground"
+      data-start="0"
+      data-duration="6"
+      data-track-index="0"
+    ></div>
+
+    <div
+      id="04-agenda-stage"
+      class="clip f04-layer"
+      data-start="0"
+      data-duration="6"
+      data-track-index="1"
+    >
+      <div id="04-agenda-dayhead" class="f04-dayhead">Vendredi</div>
+
+      <div id="04-agenda-rail" class="f04-rail">
+        <div id="04-agenda-hour-0" class="f04-hourlabel" style="top:-17.325px">10:00</div>
+        <div id="04-agenda-hour-1" class="f04-hourlabel" style="top:182.875px">11:00</div>
+        <div id="04-agenda-hour-2" class="f04-hourlabel" style="top:383.075px">12:00</div>
+        <div id="04-agenda-hour-3" class="f04-hourlabel" style="top:583.275px">13:00</div>
+        <div id="04-agenda-hour-4" class="f04-hourlabel" style="top:783.475px">14:00</div>
+      </div>
+
+      <div id="04-agenda-daycol" class="f04-daycol">
+        <div id="04-agenda-field" class="f04-field"></div>
+
+        <svg
+          id="04-agenda-grid"
+          class="f04-grid"
+          viewBox="0 0 369.8 910.8"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line id="04-agenda-line-0" x1="0" y1="1.925" x2="369.8" y2="1.925"></line>
+          <line id="04-agenda-line-1" x1="0" y1="202.125" x2="369.8" y2="202.125"></line>
+          <line id="04-agenda-line-2" x1="0" y1="402.325" x2="369.8" y2="402.325"></line>
+          <line id="04-agenda-line-3" x1="0" y1="602.525" x2="369.8" y2="602.525"></line>
+          <line id="04-agenda-line-4" x1="0" y1="802.725" x2="369.8" y2="802.725"></line>
+        </svg>
+
+        <div id="04-agenda-scanwrap" class="f04-scanwrap">
+          <div id="04-agenda-scan" class="f04-scan"></div>
+        </div>
+
+        <div id="04-agenda-card" class="f04-card">
+          <div id="04-agenda-card-l1" class="f04-card-l1">Mme Vasseur</div>
+          <div id="04-agenda-card-l2" class="f04-card-l2">
+            <span id="04-agenda-card-time" class="f04-card-time">12:30</span> · Table pour 4
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var byId = function (id) {
+        return document.getElementById(id);
+      };
+
+      /* The real screen moves a booking with `transition: top .18s ease`.
+         GSAP has no built-in CSS `ease`, so the curve is solved here:
+         cubic-bezier(.25,.1,.25,1). No overshoot, no settle bounce. */
+      var cssEase = (function () {
+        var x1 = 0.25, y1 = 0.1, x2 = 0.25, y2 = 1;
+        var cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx;
+        var cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+        function fx(t) { return ((ax * t + bx) * t + cx) * t; }
+        function dfx(t) { return (3 * ax * t + 2 * bx) * t + cx; }
+        return function (p) {
+          var t = p, i, x, d;
+          for (i = 0; i < 8; i++) {
+            x = fx(t) - p;
+            if (x < 0) { x = -x; }
+            if (x < 1e-6) { break; }
+            d = dfx(t);
+            if (d < 1e-6 && d > -1e-6) { break; }
+            t -= (fx(t) - p) / d;
+          }
+          if (t < 0) { t = 0; }
+          if (t > 1) { t = 1; }
+          return ((ay * t + by) * t + cy) * t;
+        };
+      })();
+
+      /* svg-path-draw : the dash pattern comes from the measured geometry */
+      var LINE_IDS = [
+        "04-agenda-line-0",
+        "04-agenda-line-1",
+        "04-agenda-line-2",
+        "04-agenda-line-3",
+        "04-agenda-line-4"
+      ];
+      var lines = LINE_IDS.map(byId);
+      lines.forEach(function (p) {
+        var len = p.getTotalLength();
+        p.style.strokeDasharray = String(len);
+        p.style.strokeDashoffset = String(len);
+      });
+
+      /* viewport-change, focus-lock form : the solar rule descends the day
+         column in two legs and locks softly onto the 08:00–10:00 band,
+         coming to rest on the 08:30 line.
+         The travel is tweened straight onto the element's transform, never
+         through an onUpdate writer: this runtime SEEKS frame by frame and
+         gsap suppresses callbacks on seek, so a writer-driven position
+         silently stops updating. */
+      var scanEl = byId("04-agenda-scan");
+
+      var HOUR_08 = 402.325; /* the 08:00 rule, in day-column space */
+      var HALF_08 = 502.4;   /* the 08:30 line — where the booking lands */
+
+      var tl = gsap.timeline({ paused: true });
+
+      /* ——— Scene 1 (0.00–0.95) : la grille se dessine, seule ——— */
+      tl.fromTo(
+        byId("04-agenda-field"),
+        { opacity: 0 },
+        { opacity: 1, duration: 0.46, ease: "power2.out" },
+        0.2
+      );
+      tl.fromTo(
+        byId("04-agenda-dayhead"),
+        { opacity: 0 },
+        { opacity: 1, duration: 0.46, ease: "power1.out" },
+        0.2
+      );
+
+      var DRAW_START = 0.28;
+      var DRAW_DUR = 0.18;
+      var DRAW_STEP = 0.125;
+      lines.forEach(function (p, i) {
+        var at = DRAW_START + i * DRAW_STEP;
+        tl.to(p, { strokeDashoffset: 0, duration: DRAW_DUR, ease: "power2.out" }, at);
+        tl.fromTo(
+          byId("04-agenda-hour-" + i),
+          { opacity: 0 },
+          { opacity: 1, duration: 0.2, ease: "power1.out" },
+          at
+        );
+      });
+
+      /* ——— Scene 2 (0.95–2.70) : the solar rule scans, and nothing else moves ——— */
+      tl.fromTo(
+        byId("04-agenda-scanwrap"),
+        { opacity: 0 },
+        { opacity: 1, duration: 0.12, ease: "power1.out" },
+        1.51
+      );
+      tl.fromTo(
+        scanEl,
+        { y: 0 },
+        { y: HOUR_08, duration: 0.39, ease: "power2.in", immediateRender: false },
+        1.51
+      );
+      tl.fromTo(
+        scanEl,
+        { y: HOUR_08 },
+        { y: HALF_08, duration: 0.28, ease: "power3.out", immediateRender: false },
+        1.9
+      );
+
+      /* ——— Scene 3 (2.70–4.20) : the booking lands. 0.18s, CSS `ease`, no bounce ——— */
+      tl.fromTo(
+        byId("04-agenda-card"),
+        { y: -62, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.18, ease: cssEase },
+        2.7
+      );
+      tl.to(
+        byId("04-agenda-scanwrap"),
+        { opacity: 0, duration: 0.31, ease: "power1.out" },
+        2.89
+      );
+
+      /* ——— Scene 4 (4.20–6.00) : held read. Nothing moves. ——— */
+      tl.to({ hold: 0 }, { hold: 1, duration: 0.001 }, 5.999);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["04-agenda"] = tl;
+      tl.seek(0);
+    })();
+  </script>
+</template>

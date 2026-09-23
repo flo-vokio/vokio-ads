@@ -1,0 +1,22 @@
+{
+  "_": "Le métier de référence. Tout autre fichier de ce dossier décrit les MÊMES clés ; decliner.py fait la substitution d'un fichier à l'autre. Ne jamais éditer celui-ci sans relancer une déclinaison de contrôle.",
+  "metier": "plombier",
+  "etablissement": "Plomberie Azur",
+  "accroche": "Les mains sous un évier.",
+  "demande_client": "J'ai une fuite sous l'évier.",
+  "motif": "Fuite sous évier",
+  "confrere": "Artisan suivant",
+  "client_nom": "M. Lefort",
+  "adresse": "12 rue des Lices",
+  "jour": "Jeudi",
+  "jour_texte": "jeudi 8 h 30",
+  "rail": [
+    "06:00",
+    "07:00",
+    "08:00",
+    "09:00",
+    "10:00"
+  ],
+  "heure_appel": "02:07",
+  "heure_sms": "02:09"
+}

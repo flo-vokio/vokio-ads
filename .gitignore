@@ -9,3 +9,4 @@ videos/*/.media/
 # Caches
 .DS_Store
 *.log
+videos/*/capture/

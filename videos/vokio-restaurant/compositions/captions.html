@@ -1,0 +1,225 @@
+<template id="captions-template" data-composition-id="captions" data-width="1080" data-height="1920">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+
+
+<style data-brand-tokens>
+      @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: block; }
+      @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+      @font-face { font-family: 'Geist'; src: url('assets/fonts/Geist-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
+      :root {
+      --paper: #F4F1E8;
+      --paper-deep: #F9DBA7;
+      --sun: #EFA424;
+      --sun-soft: #F8D69B;
+      --haze: #F5C677;
+      --ink: #262019;
+      --ember: #E5701F;
+      --cap-ink: #262019;
+      --cap-canvas: #F4F1E8;
+      --cap-accent: #EFA424;
+      --cap-accent-2: #E5701F;
+      --font-display: "Instrument Serif", system-ui, serif;
+      --font-body: "Geist", system-ui, sans-serif;
+      --cap-band-top: 1310px;
+      --cap-band-height: 190px;
+      }
+    </style>
+
+<style>
+  #captions-root {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .caption-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+  }
+  /* the keep-out band, from captionBand(H) — frame content stays above it */
+  .caption-stage {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: var(--cap-band-top, 900px);
+    height: var(--cap-band-height, 180px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .caption-group {
+    /* every group is absolutely stacked over the SAME band — exactly one shown at a
+       time via opacity. Must be absolute: in-flow groups would lay out side-by-side. */
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+  }
+
+  /* THE parchment card — single 1px hairline ink border (biennale's only border),
+     square corners, NO shadow */
+  .caption-pill {
+    max-width: 88%;
+    padding: 8px 0 12px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+  }
+  .caption-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.1em 0.34em;
+    font-family: var(--font-sans, "Geist"), "Geist", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(40px, 4.4vw, 58px);
+    line-height: 1.16;
+    letter-spacing: -0.01em;
+  }
+
+  /* upcoming — faint indigo ink, no underprint */
+  .caption-word {
+    display: inline-block;
+    padding: 0 0.06em;
+    color: color-mix(in srgb, var(--cap-ink, #1b2566) 42%, var(--cap-canvas, #e9e5db));
+  }
+  /* current word — THE solar-yellow underprint (box-shadow spread = a hard square
+     block w/o layout shift; no blur), indigo ink reading on top */
+  .caption-word.is-active {
+    color: var(--cap-ink, #1b2566);
+    background: transparent;
+    box-shadow: 0 0.08em 0 0 var(--cap-accent, #f1ee2e);
+  }
+  /* already spoken — solid indigo ink, underprint cleared */
+  .caption-word.is-spoken {
+    color: var(--cap-ink, #1b2566);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* optional per-word accents (dormant until a word-classer tags them) */
+  /* brand / key term — Instrument Serif italic, biennale's only display inflection */
+  .caption-word.cap-brand {
+    font-style: italic;
+  }
+  /* numerals / data — the mono voice, slightly recessed */
+  .caption-word.cap-num {
+    font-family: "Geist", ui-monospace, monospace;
+    color: color-mix(in srgb, var(--cap-ink, #1b2566) 72%, var(--cap-canvas, #e9e5db));
+  }
+  /* emphasis — an ember-red hairline underline (the counter-temperature accent) */
+  .caption-word.cap-cta {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--cap-accent-2, #e26b4a);
+    text-underline-offset: 0.1em;
+  }
+
+  @media (max-aspect-ratio: 9/16) {
+    .caption-pill {
+      max-width: 92%;
+    }
+    .caption-line {
+      font-size: clamp(34px, 5.4vw, 48px);
+    }
+  }
+</style>
+
+<div
+  id="captions-root"
+  data-composition-id="captions"
+  data-timeline-locked
+  data-start="0"
+  data-duration="30"
+  data-fps="30"
+  data-width="1080"
+  data-height="1920"
+>
+  <div class="caption-layer" aria-hidden="true">
+    <div id="caption-stage" class="caption-stage"></div>
+  </div>
+</div>
+
+<script>
+  // captions.mjs injects the engine's scene-aware groups + real duration here.
+  var GROUPS = [{"id":"caption-group-0","frame":3,"start":9.04,"end":10.71,"text":"Vokio décroche à votre place,","words":[{"id":"caption-word-0-0","text":"Vokio","start":9.04,"end":9.49},{"id":"caption-word-0-1","text":"décroche","start":9.49,"end":9.94},{"id":"caption-word-0-2","text":"à","start":10,"end":10.05},{"id":"caption-word-0-3","text":"votre","start":10.05,"end":10.36},{"id":"caption-word-0-4","text":"place,","start":10.36,"end":10.59}]},{"id":"caption-group-1","frame":3,"start":10.8,"end":12.22,"text":"et dit tout de suite qui elle est.","words":[{"id":"caption-word-1-0","text":"et","start":10.8,"end":10.81},{"id":"caption-word-1-1","text":"dit","start":10.81,"end":10.95},{"id":"caption-word-1-2","text":"tout","start":10.95,"end":11.06},{"id":"caption-word-1-3","text":"de","start":11.18,"end":11.23},{"id":"caption-word-1-4","text":"suite","start":11.23,"end":11.45},{"id":"caption-word-1-5","text":"qui","start":11.45,"end":11.6},{"id":"caption-word-1-6","text":"elle","start":11.74,"end":11.8},{"id":"caption-word-1-7","text":"est.","start":11.8,"end":12.1}]},{"id":"caption-group-2","frame":4,"start":14.43,"end":17.98,"text":"Elle comprend la demande, regarde votre agenda, pose le rendez-vous.","words":[{"id":"caption-word-2-0","text":"Elle","start":14.43,"end":14.59},{"id":"caption-word-2-1","text":"comprend","start":14.68,"end":15.19},{"id":"caption-word-2-2","text":"la","start":15.19,"end":15.32},{"id":"caption-word-2-3","text":"demande,","start":15.32,"end":15.91},{"id":"caption-word-2-4","text":"regarde","start":15.91,"end":16.3},{"id":"caption-word-2-5","text":"votre","start":16.3,"end":16.58},{"id":"caption-word-2-6","text":"agenda,","start":16.58,"end":16.95},{"id":"caption-word-2-7","text":"pose","start":17.1,"end":17.21},{"id":"caption-word-2-8","text":"le","start":17.21,"end":17.29},{"id":"caption-word-2-9","text":"rendez-vous.","start":17.29,"end":17.86}]},{"id":"caption-group-3","frame":5,"start":20.44,"end":22.41,"text":"Le client reçoit sa confirmation.","words":[{"id":"caption-word-3-0","text":"Le","start":20.44,"end":20.53},{"id":"caption-word-3-1","text":"client","start":20.53,"end":20.91},{"id":"caption-word-3-2","text":"reçoit","start":20.93,"end":21.31},{"id":"caption-word-3-3","text":"sa","start":21.32,"end":21.45},{"id":"caption-word-3-4","text":"confirmation.","start":21.45,"end":22.29}]},{"id":"caption-group-4","frame":5,"start":22.56,"end":24.52,"text":"Vous recevez le récapitulatif.","words":[{"id":"caption-word-4-0","text":"Vous","start":22.56,"end":22.7},{"id":"caption-word-4-1","text":"recevez","start":22.7,"end":23.23},{"id":"caption-word-4-2","text":"le","start":23.23,"end":23.38},{"id":"caption-word-4-3","text":"récapitulatif.","start":23.38,"end":24.4}]}];
+  var DURATION = 30;
+
+  (function () {
+    var stage = document.getElementById("caption-stage");
+
+    // build DOM: one .caption-group per group, .caption-word per word
+    GROUPS.forEach(function (group, g) {
+      var groupEl = document.createElement("div");
+      groupEl.className = "caption-group";
+      groupEl.id = "caption-group-" + g;
+      var pill = document.createElement("div");
+      pill.className = "caption-pill";
+      var line = document.createElement("div");
+      line.className = "caption-line";
+      (group.words || []).forEach(function (w, i) {
+        var span = document.createElement("span");
+        span.className = "caption-word";
+        span.id = "caption-word-" + g + "-" + i;
+        span.textContent = String(w.text);
+        line.appendChild(span);
+      });
+      pill.appendChild(line);
+      groupEl.appendChild(pill);
+      stage.appendChild(groupEl);
+    });
+
+    window.__timelines = window.__timelines || {};
+    var tl = gsap.timeline({ paused: true });
+
+    GROUPS.forEach(function (group, g) {
+      var groupEl = document.getElementById("caption-group-" + g);
+      var words = group.words || [];
+      var next = GROUPS[g + 1];
+      var isLast = g === GROUPS.length - 1;
+      var start = Math.max(0, Number(group.start));
+      // `isLast ? DURATION` suppose que la narration va jusqu'à la dernière
+      // image. Ici le CTA est muet, et la phrase du plan 05 restait affichée
+      // par-dessus pendant plus de cinq secondes. On la borne comme les autres.
+      var end = isLast
+        ? Math.min(DURATION, Number(group.end) + 1.1)
+        : Math.min(Number(next.start), Number(group.end) + 1.1);
+      if (end <= start) end = start + 0.01;
+
+      // group on/off — exactly one group visible at a time
+      tl.set(groupEl, { opacity: 1 }, start);
+      tl.set(groupEl, { opacity: 0 }, end);
+
+      // 3-state karaoke via className SETS — seek-safe (gsap.set applies on the
+      // engine's frame-by-frame seek; .call callbacks would NOT fire).
+      words.forEach(function (w, i) {
+        var el = document.getElementById("caption-word-" + g + "-" + i);
+        var at = Math.max(start, Number(w.start));
+        tl.set(el, { className: "caption-word" }, start); // upcoming (also resets on reverse-seek)
+        tl.set(el, { className: "caption-word is-active" }, at); // current
+        tl.fromTo(el, { scale: 0.97 }, { scale: 1, duration: 0.14, ease: "power2.out" }, at);
+        if (i + 1 < words.length) {
+          var nextAt = Math.max(start, Number(words[i + 1].start));
+          tl.set(el, { className: "caption-word is-spoken" }, nextAt); // demote when next activates
+        }
+      });
+      if (words.length) {
+        var lastEl = document.getElementById("caption-word-" + g + "-" + (words.length - 1));
+        var lastSpoken = Math.min(end, Number(words[words.length - 1].end) + 0.1);
+        tl.set(lastEl, { className: "caption-word is-spoken" }, lastSpoken);
+      }
+    });
+
+    // full-span anchor so the sub-comp timeline spans the whole video
+    tl.to({}, { duration: DURATION }, 0);
+    window.__timelines["captions"] = tl;
+  })();
+</script>
+
+<style>
+  .caption-line { line-height: 1.1 !important; }
+</style>
+</template>
