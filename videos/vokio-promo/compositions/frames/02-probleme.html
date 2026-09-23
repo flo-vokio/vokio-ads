@@ -54,6 +54,7 @@
     /* ---------- inherited call chip (x 50%, y 62%, scale 1, opacity 1) ---------- */
     .f02p-chip{
       position:absolute;
+      transform-origin:50% 50%;
       left:248.4px;
       top:1125.12px;
       width:583.2px;
@@ -104,18 +105,14 @@
       letter-spacing:0.04em;
       color:#262019;
     }
-    .f02p-strike-svg{
+    /* — l'échec : la seule couleur négative du film, celle que l'espace
+         client emploie déjà pour un créneau bloqué (#C0452C) — */
+    .f02p-chip-fail{
       position:absolute;
-      left:-28px;
-      top:59px;
-      width:640px;
-      height:12px;
-      overflow:visible;
-    }
-    .f02p-strike-path{
-      fill:none;
-      stroke:rgba(38,32,25,0.72);
-      stroke-width:1;
+      inset:0;
+      border-radius:30px;
+      background:rgba(192,69,44,0.18);
+      opacity:0;
     }
 
     /* ---------- the list (three hairline rows) ---------- */
@@ -222,9 +219,7 @@
         <span class="f02p-chip-rule"></span>
         <span id="02-probleme-chip-time" class="f02p-chip-time">02:07</span>
       </div>
-      <svg id="02-probleme-strike-svg" class="f02p-strike-svg" viewBox="0 0 640 12" xmlns="http://www.w3.org/2000/svg">
-        <path id="02-probleme-strike" class="f02p-strike-path" d="M 0 6 L 640 6" />
-      </svg>
+      <div id="02-probleme-chip-fail" class="f02p-chip-fail"></div>
     </div>
   </div>
 
@@ -249,12 +244,10 @@
         return len;
       };
 
-      var strike = q("strike");
       var rule1 = q("rule1-path");
       var rule2 = q("rule2-path");
       var rule3 = q("rule3-path");
 
-      var strikeLen = measure(strike, 640);
       var rule1Len = measure(rule1, 904);
       var rule2Len = measure(rule2, 904);
       var rule3Len = measure(rule3, 904);
@@ -280,18 +273,27 @@
       tl.to(q("halo"), { opacity: 0, scale: 0.9, duration: 0.09, ease: "power4.out" }, 0.95);
       // the paper goes cold with it
       tl.to(q("haze"), { opacity: 0.3, duration: 0.26, ease: "power2.out" }, 0.95);
-      // the chip loses its solar and keeps only pale ink
-      tl.to(q("chip-ink"), { opacity: 0.42, duration: 0.14, ease: "power3.out" }, 0.95);
+      /* --------- L'ÉCHEC — sur « pas. », et sans traîner ---------------------
+         Une erreur ne s'installe pas en douceur : la bascule est sèche (0,10 s),
+         pas de décélération longue ici. C'est la seule entorse assumée à la
+         grammaire du film, et elle dure un dixième de seconde. */
+      tl.to(q("chip-ink"), {
+        borderColor: "#C0452C", color: "#C0452C",
+        duration: 0.10, ease: "power4.out"
+      }, 0.95);
+      tl.to(q("chip-label"), { color: "#C0452C", duration: 0.10, ease: "power4.out" }, 0.95);
+      tl.to(q("chip-time"), { color: "#C0452C", duration: 0.10, ease: "power4.out" }, 0.95);
 
-      /* --------- Scene 2 (1.05–2.90) — struck through, lifted out, replaced --------- */
-      // svg-path-draw, left → right, across the chip
-      tl.fromTo(strike,
-        { strokeDashoffset: strikeLen },
-        { strokeDashoffset: 0, duration: 0.52, ease: "power2.out" }, 1.05);
+      // le voile négatif passe : il monte vite, il redescend lentement
+      tl.fromTo(q("chip-fail"), { opacity: 0 }, { opacity: 1, duration: 0.09, ease: "none" }, 0.96);
+      tl.to(q("chip-fail"), { opacity: 0.45, duration: 0.30, ease: "power2.out" }, 1.05);
 
-      // the chip slides up out of the useful frame while the line is still drawing
-      tl.to(q("chip"), { y: -332, duration: 0.95, ease: "power2.inOut" }, 1.28);
-      tl.to(q("chip"), { opacity: 0, duration: 0.62, ease: "power2.in" }, 1.62);
+      /* --------- Scene 2 (1.00–1.38) — l'appel tombe ------------------------
+         Il descend, il ne remonte pas : un appel perdu s'enfonce. Compression
+         légère, pas de rebond. Tout est effacé avant le premier filet de la
+         liste, à 1,37. */
+      tl.to(q("chip"), { y: 96, scale: 0.962, duration: 0.38, ease: "power2.in" }, 1.00);
+      tl.to(q("chip"), { opacity: 0, duration: 0.30, ease: "power2.in" }, 1.08);
 
       // three hairline rows write themselves, one per beat: "client" 1.37 · "appelle" 1.70 · "suivant" 2.21
       tl.fromTo(rule1, { strokeDashoffset: rule1Len }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 1.37);

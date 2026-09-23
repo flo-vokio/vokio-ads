@@ -21,7 +21,12 @@ le contraste vient de la taille, jamais de la couleur. Le solaire `sun` est
 rationné à **un seul usage par plan** et il signale toujours la même chose,
 *l'agent agit* : le halo de l'appel, la barre centrale de l'onde, le liseré de
 l'agenda, la carte du rendez-vous, les pastilles des reçus, le point du i. Le
-`ember` n'apparaît pas. Aucun fond sombre nulle part.
+`ember` n'apparaît pas.
+
+Une seule couleur négative dans tout le film, décidée le 23/09 : au plan 02,
+sur le mot « pas. », la pastille d'appel bascule en **terracotta `#C0452C`**,
+celle que l'espace client emploie déjà pour un créneau bloqué. Elle dure un
+dixième de seconde et ne réapparaît jamais. Aucun fond sombre nulle part.
 
 **Type** — par rôle, jamais par famille : `display` et `headline` pour ce qui
 parle, `body` pour ce qui se lit, `micro-label` et `mono-data` pour les heures,
@@ -135,12 +140,17 @@ au-dessus d'elle en `headline` sur 0,04 / 0,24 / 0,36. Sur « pas. » (0,95) le
 halo **s'éteint d'un coup** et la pastille perd son solaire pour de l'encre
 pâle. C'est la seule coupure sèche du film, et elle tombe sur le mot.
 
-Scene 2 (1,05–2,90 s) : un filet 1 px se trace en travers de la pastille
-(`svg-path-draw`, gauche vers droite) pendant qu'elle glisse vers le haut et
-sort du cadre utile. Dessous, trois rangs à filets s'écrivent un par un, calés
-sur « client » (1,37), « appelle » (1,70), « suivant » (2,21) : le premier
-porte « Vous » barré, les deux suivants sont **vides**. Personne n'est nommé,
-aucun concurrent n'est désigné, et c'est le vide qui fait le travail.
+Scene 2 (0,95–1,38 s) : **l'échec**. Sur « pas. » l'encre de la pastille
+bascule d'un coup en terracotta, en 0,10 s, sans décélération : une erreur ne
+s'installe pas en douceur. Un voile négatif passe dessus, et la pastille
+**descend** en se comprimant légèrement, puis s'efface. Elle ne remonte pas :
+un appel perdu s'enfonce, il ne s'excuse pas. Tout est effacé à 1,38 s, juste
+avant que le premier filet de la liste ne se trace.
+
+Scene 2b (1,37–2,90 s) : trois rangs à filets s'écrivent un par un, calés sur
+« client » (1,37), « appelle » (1,70), « suivant » (2,21). Le premier porte
+« Vous » barré, les deux suivants « Artisan suivant ». Aucun concurrent n'est
+nommé : c'est « le suivant », et ça suffit.
 
 Scene 3 (2,90–4,80 s) : sur « liste. » (2,89) le troisième rang s'allume en
 solaire, seul usage du solaire dans ce plan. Puis plus rien : tenue immobile
