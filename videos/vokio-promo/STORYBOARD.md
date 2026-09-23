@@ -163,7 +163,7 @@ travail. Aucun montant, aucun pourcentage.
 - status: outline
 - voiceover: "Vokio décroche à votre place, et dit tout de suite qui elle est."
 - asset_candidates: assets/symbole-onde.svg
-- handoff_out: fil de conversation calé à gauche, dernière bulle client visible en bas ; l'onde vocale reste allumée sous le fil, x 50 % y 84 %, échelle 1, opacité 1
+- handoff_out: aucun report. Le plan 04 repart sur un agenda seul, pleine largeur (décision Florian du 23/09 : le fil a déjà été lu en entier ici, le relire en petit divise le regard)
 - persuasion: le renversement
 - beat: quelqu'un a décroché
 - blueprint: agent-progress-theater (Adapt)
@@ -217,7 +217,6 @@ le client parle. C'est là qu'elle entre dans le film ; elle en ressortira au CT
 - status: outline
 - voiceover: "Elle comprend la demande, regarde votre agenda, pose le rendez-vous."
 - asset_candidates: none
-- handoff_in: fil de conversation au même calage qu'en sortie de Frame 3, il glisse vers la gauche sans se recomposer
 - handoff_out: carte du créneau « jeudi 8 h 30 » posée x 62 % y 48 %, échelle 1, opacité 1, immobile
 - persuasion: la preuve mécanique
 - beat: ce n'est pas un répondeur
@@ -237,10 +236,10 @@ relevées sur le vrai écran client. La plus importante : le rendez-vous se pose
 en **0,18 s, en `ease`, sans retombée**. Un ressort sur cet objet trahirait la
 reconstruction d'un seul coup d'œil.
 
-Scene 1 (0,00–0,95 s) : le fil du plan 3 glisse vers la gauche et rétrécit
-(`scale-swap-transition`) sans se recomposer. À droite, la grille se dessine :
-les filets d'heures se tracent de haut en bas (`svg-path-draw`) sur « comprend
-la demande, » (0,28–0,92). Asymétrique 45/55, l'agenda plus large.
+Scene 1 (0,00–0,95 s) : l'agenda seul, pleine largeur, marges de 72 px. Les
+filets d'heures se tracent de haut en bas (`svg-path-draw`) sur « comprend la
+demande, » (0,28–0,92). Le rail d'heures garde sa largeur, qui est une
+constante de l'écran réel ; c'est la colonne du jour qui s'étire.
 
 Scene 2 (0,95–2,70 s) : sur « regarde » (1,51) un liseré solaire descend la
 colonne du jour (`viewport-change`, verrouillage doux sur la bande 8 h–10 h) et
@@ -254,7 +253,7 @@ porte « M. Lefort » en ligne 1 et « 08:30 · Fuite sous évier » en ligne 2,
 exactement la disposition du vrai écran. Sur « rendez-vous. » (2,89) le liseré
 s'éteint, la carte reste.
 
-Scene 4 (4,20–6,00 s) : temps de repos. Le couple entier tient, immobile, 1,8 s.
+Scene 4 (4,20–6,00 s) : temps de repos. L'agenda tient, immobile, 1,8 s.
 Aucun re-push de caméra, aucune respiration. C'est le plan qui convainc, il a
 besoin d'être lu, pas animé.
 

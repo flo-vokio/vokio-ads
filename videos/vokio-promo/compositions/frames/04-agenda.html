@@ -26,42 +26,13 @@
       background-image:radial-gradient(118% 88% at 31% 25%, #F7F5EE 0%, #F4F1E8 46%, #EFEBE0 100%);
     }
 
-    /* — the inherited conversation thread (left 45%) — */
-    .f04-thread{
-      position:absolute;
-      left:44px;
-      top:480px;
-      width:440.8px;
-      transform-origin:50% 50%;
-    }
-    .f04-bubble{
-      border:1px solid rgba(38,32,25,0.18);
-      border-radius:0;
-      font-family:"Geist",sans-serif;
-      font-weight:400;
-      color:#262019;
-      line-height:1.5;
-    }
-    .f04-bubble-agent{
-      width:440.8px;
-      padding:24px 26px;
-      font-size:32px;
-      background:rgba(38,32,25,0.035);
-    }
-    .f04-bubble-client{
-      width:400px;
-      margin:34px 0 0 auto;
-      padding:20px 24px;
-      font-size:28px;
-      background:transparent;
-    }
 
     /* — the agenda (right 55%) : every value scaled x3.85 from references/agenda-reel.md — */
     .f04-dayhead{
       position:absolute;
-      left:654.2px;
-      top:343.2px;
-      width:369.8px;
+      left:241.4px;
+      top:300px;
+      width:766.6px;
       height:46px;
       line-height:46px;
       text-align:center;
@@ -75,8 +46,8 @@
     }
     .f04-rail{
       position:absolute;
-      left:484.8px;
-      top:419.2px;
+      left:72px;
+      top:376px;
       width:169.4px;
       height:910.8px;
     }
@@ -94,9 +65,9 @@
     }
     .f04-daycol{
       position:absolute;
-      left:654.2px;
-      top:419.2px;
-      width:369.8px;
+      left:241.4px;
+      top:376px;
+      width:766.6px;
       height:910.8px;
       border-radius:30.8px;
       overflow:hidden;
@@ -138,8 +109,8 @@
       position:absolute;
       left:15.4px;
       top:502.4px;
-      width:339px;
-      height:192px;
+      width:735.8px;
+      height:150.2px;
       box-sizing:border-box;
       padding:15.4px 23.1px;
       border:3.85px solid rgba(239,164,36,0.55);
@@ -187,16 +158,6 @@
       data-duration="6"
       data-track-index="1"
     >
-      <!-- le fil du plan 3, déjà présent : il glisse et rétrécit, il ne se recompose pas -->
-      <div id="04-agenda-thread" class="f04-thread">
-        <div id="04-agenda-bubble-agent" class="f04-bubble f04-bubble-agent">
-          Plomberie Azur, bonjour. Je suis l’assistante vocale de l’entreprise.
-        </div>
-        <div id="04-agenda-bubble-client" class="f04-bubble f04-bubble-client">
-          J’ai une fuite sous l’évier.
-        </div>
-      </div>
-
       <div id="04-agenda-dayhead" class="f04-dayhead">Jeudi</div>
 
       <div id="04-agenda-rail" class="f04-rail">
@@ -299,14 +260,7 @@
 
       var tl = gsap.timeline({ paused: true });
 
-      /* ——— Scene 1 (0.00–0.95) : the thread docks left, the grid draws ——— */
-      tl.fromTo(
-        byId("04-agenda-thread"),
-        { x: 86, y: 64, scale: 1.28, opacity: 1 },
-        { x: 0, y: 0, scale: 1, duration: 0.9, ease: "power3.out" },
-        0
-      );
-
+      /* ——— Scene 1 (0.00–0.95) : la grille se dessine, seule ——— */
       tl.fromTo(
         byId("04-agenda-field"),
         { opacity: 0 },
