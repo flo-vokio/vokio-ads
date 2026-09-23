@@ -1,0 +1,32 @@
+{
+  "texte": "Je décroche. Toujours.",
+  "voix": "YxrwjAKoUKULGd0g8K9Y",
+  "modele": "eleven_multilingual_v2",
+  "graine": 44,
+  "reglages": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "style": 0.2,
+    "use_speaker_boost": true,
+    "speed": 1.0
+  },
+  "empreinte": "434698ca11d6",
+  "duree": 1.515,
+  "mots": [
+    {
+      "mot": "Je",
+      "debut": 0.0,
+      "fin": 0.139
+    },
+    {
+      "mot": "décroche.",
+      "debut": 0.163,
+      "fin": 0.673
+    },
+    {
+      "mot": "Toujours.",
+      "debut": 0.743,
+      "fin": 1.486
+    }
+  ]
+}

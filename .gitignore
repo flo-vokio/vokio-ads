@@ -12,3 +12,6 @@ videos/*/.media/
 videos/*/capture/
 # Essais de voix : régénérables en une commande (outils/voix.py --essai --sur)
 essais/
+
+# Prises d’essai par graine de la pub sonnerie : le choix est inscrit dans variantes.json
+videos/vokio-sonnerie/assets/voix/graines/

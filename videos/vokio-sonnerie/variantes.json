@@ -1,0 +1,38 @@
+{
+  "_": "Pub « sonnerie » : 8 à 10 s, universelle, aucun métier. Chaque combinaison vide × phrase est un film. Validé par Florian le 23/09 : les trois phrases, Lucie, signature muette, fond du site.",
+
+  "voix": {
+    "id": "YxrwjAKoUKULGd0g8K9Y",
+    "_id": "« Lucie · Support Agent », la voix des agents qui décrochent en production : c'est ce qu'entend un vrai appelant. N'a RIEN à voir avec « Lucie · Narration » (LFtQ…). Vérifier l'identifiant, jamais le prénom.",
+    "modele": "eleven_multilingual_v2",
+    "reglages": { "stability": 0.5, "similarity_boost": 0.8, "style": 0.2, "use_speaker_boost": true, "speed": 1.0 },
+    "_reglages": "stability 0,5 comme les agents en production : la voix doit sonner comme au téléphone, pas comme une annonce."
+  },
+
+  "vide_defaut": 5,
+  "vides": [5, 3],
+  "_vides": "Durée du plan 1, en secondes. Le compteur de sonneries suit les débuts réels de sonnerie du fichier déposé, pas un rythme écrit en dur.",
+
+  "phrases": {
+    "allo":     "Allô, bonjour ! Je suis l'assistante IA, je vous écoute.",
+    "decroche": "Je décroche. Toujours.",
+    "jamais":   "Plus jamais ça."
+  },
+
+  "graines": { "allo": 44, "decroche": 44, "jamais": 11 },
+  "_graines": "Prises choisies le 23/09 sur 4 graines chacune. allo : la 22 fait entendre « l'assistant Tia » (liaison), la 44 dit « IA » net et tient en 3,06 s. decroche : la 44 a la vraie pause avant « Toujours » (0,20 s). Changer une phrase ⇒ refaire le choix de graine.",
+
+  "label_ia": "Assistante IA · Vokio",
+  "_label_ia": "Affiché sous l'onde sur les TROIS phrases (AI Act art. 50), y compris celle qui dit « IA » : l'écran reste identique d'une variante à l'autre, l'A/B ne mesure que la phrase.",
+
+  "signature": { "texte": "Ne ratez plus un seul appel", "url": "vokio.fr", "dite": false },
+
+  "fond": "#F4F1E8",
+  "_fond": "--ivoire du site en ligne. Pas #F2EDE2, absent de la palette.",
+
+  "sonnerie": "assets/sonnerie/sonnerie.wav",
+  "_sonnerie": "Emplacement : Florian dépose le fichier (libre de droits). Rien n'est téléchargé.",
+  "musique_signature": null,
+
+  "formats": ["1080x1920", "1080x1080"]
+}

@@ -1,0 +1,32 @@
+{
+  "texte": "Plus jamais ça.",
+  "voix": "YxrwjAKoUKULGd0g8K9Y",
+  "modele": "eleven_multilingual_v2",
+  "graine": 11,
+  "reglages": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "style": 0.2,
+    "use_speaker_boost": true,
+    "speed": 1.0
+  },
+  "empreinte": "20764dde57da",
+  "duree": 1.097,
+  "mots": [
+    {
+      "mot": "Plus",
+      "debut": 0.0,
+      "fin": 0.313
+    },
+    {
+      "mot": "jamais",
+      "debut": 0.337,
+      "fin": 0.604
+    },
+    {
+      "mot": "ça.",
+      "debut": 0.627,
+      "fin": 1.068
+    }
+  ]
+}
