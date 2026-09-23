@@ -1,29 +1,35 @@
-<template id="captions-template" data-composition-id="captions" data-width="1080" data-height="1920">
+<!--
+  Biennale Yellow — caption skin (preset-local source).
+
+  This is the preset's own lower-third karaoke caption look. product-launch-video's
+  Step 2 copies it into the project as caption-skin.html; captions.mjs then fills the
+  three reserved holes, wraps the fragment in a <template>, and writes
+  compositions/captions.html:
+    · the empty GROUPS array            → the engine's scene-aware word groups
+    · the 0 duration + 0 width/height   → real total + canvas size
+    · the empty data-brand-tokens style → :root tokens derived from the project's frame.md
+
+  Token contract — reference ONLY this fixed vocab (captions.mjs injects it from
+  frame.md, so the Step-2 brand overlay flows through; each var has a biennale literal
+  fallback for standalone preview):
+    --cap-ink · --cap-canvas · --cap-accent · --cap-accent-2 · --font-display ·
+    --font-body · --cap-band-top · --cap-band-height
+  Hooks (do not rename): .caption-group / .caption-word + states .is-active / .is-spoken,
+  root data-composition-id="captions", timeline at window.__timelines["captions"].
+  State changes use gsap.set({className}) (applied on the engine's frame-by-frame seek);
+  never tl.call() callbacks (seek does not fire them → wrong state on render).
+
+  Visual: a warm-parchment card on a single 1px hairline indigo-ink border — biennale's
+  ONLY border — square corners, NO shadow (biennale's depth is atmospheric, never cast).
+  Instrument Serif, sentence case, ink glyphs. Upcoming words sit in faint ink; the
+  current word gets a solar-yellow underprint (the brand's signature "sun as panel /
+  underprint", a hard square block, no blur) with ink reading on top; spoken words
+  settle to solid ink, underprint cleared.
+-->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 
-
-<style data-brand-tokens>
-      @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: block; }
-      @font-face { font-family: 'Instrument Serif'; src: url('assets/fonts/InstrumentSerif-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
-      @font-face { font-family: 'Geist'; src: url('assets/fonts/Geist-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: block; }
-      :root {
-      --paper: #F4F1E8;
-      --paper-deep: #F9DBA7;
-      --sun: #EFA424;
-      --sun-soft: #F8D69B;
-      --haze: #F5C677;
-      --ink: #262019;
-      --ember: #E5701F;
-      --cap-ink: #262019;
-      --cap-canvas: #F4F1E8;
-      --cap-accent: #EFA424;
-      --cap-accent-2: #E5701F;
-      --font-display: "Instrument Serif", system-ui, serif;
-      --font-body: "Geist", system-ui, sans-serif;
-      --cap-band-top: 1310px;
-      --cap-band-height: 190px;
-      }
-    </style>
+<!-- captions.mjs injects the project's :root tokens here -->
+<style data-brand-tokens></style>
 
 <style>
   #captions-root {
@@ -73,7 +79,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.1em 0.34em;
-    font-family: var(--font-sans, "Geist"), "Geist", system-ui, sans-serif;
+    font-family: var(--font-sans, "Geist"), var(--font-body, "Geist"), system-ui, sans-serif;
     font-weight: 400;
     font-size: clamp(40px, 4.4vw, 58px);
     line-height: 1.16;
@@ -107,7 +113,7 @@
   }
   /* numerals / data — the mono voice, slightly recessed */
   .caption-word.cap-num {
-    font-family: "Geist", ui-monospace, monospace;
+    font-family: var(--font-body, "JetBrains Mono"), ui-monospace, monospace;
     color: color-mix(in srgb, var(--cap-ink, #1b2566) 72%, var(--cap-canvas, #e9e5db));
   }
   /* emphasis — an ember-red hairline underline (the counter-temperature accent) */
@@ -133,10 +139,10 @@
   data-composition-id="captions"
   data-timeline-locked
   data-start="0"
-  data-duration="30"
+  data-duration="0"
   data-fps="30"
-  data-width="1080"
-  data-height="1920"
+  data-width="0"
+  data-height="0"
 >
   <div class="caption-layer" aria-hidden="true">
     <div id="caption-stage" class="caption-stage"></div>
@@ -145,8 +151,8 @@
 
 <script>
   // captions.mjs injects the engine's scene-aware groups + real duration here.
-  var GROUPS = [{"id":"caption-group-0","frame":3,"start":9,"end":12.3,"text":"Vokio décroche à votre place, et dit tout de suite qui elle est.","words":[{"id":"caption-word-0-0","text":"Vokio","start":9,"end":9.318},{"id":"caption-word-0-1","text":"décroche","start":9.318,"end":9.827},{"id":"caption-word-0-2","text":"à","start":9.827,"end":9.89},{"id":"caption-word-0-3","text":"votre","start":9.89,"end":10.209},{"id":"caption-word-0-4","text":"place,","start":10.209,"end":10.526},{"id":"caption-word-0-5","text":"et","start":10.526,"end":10.654},{"id":"caption-word-0-6","text":"dit","start":10.654,"end":10.844},{"id":"caption-word-0-7","text":"tout","start":10.844,"end":11.099},{"id":"caption-word-0-8","text":"de","start":11.099,"end":11.226},{"id":"caption-word-0-9","text":"suite","start":11.226,"end":11.544},{"id":"caption-word-0-10","text":"qui","start":11.544,"end":11.735},{"id":"caption-word-0-11","text":"elle","start":11.735,"end":11.99},{"id":"caption-word-0-12","text":"est.","start":11.99,"end":12.18}]},{"id":"caption-group-1","frame":4,"start":14.442,"end":17.856,"text":"Elle comprend la demande, regarde votre service, pose la réservation.","words":[{"id":"caption-word-1-0","text":"Elle","start":14.442,"end":14.673},{"id":"caption-word-1-1","text":"comprend","start":14.673,"end":15.135},{"id":"caption-word-1-2","text":"la","start":15.135,"end":15.251},{"id":"caption-word-1-3","text":"demande,","start":15.251,"end":15.656},{"id":"caption-word-1-4","text":"regarde","start":15.656,"end":16.06},{"id":"caption-word-1-5","text":"votre","start":16.06,"end":16.349},{"id":"caption-word-1-6","text":"service,","start":16.349,"end":16.753},{"id":"caption-word-1-7","text":"pose","start":16.753,"end":16.985},{"id":"caption-word-1-8","text":"la","start":16.985,"end":17.1},{"id":"caption-word-1-9","text":"réservation.","start":17.1,"end":17.736}]},{"id":"caption-group-2","frame":5,"start":20.4,"end":23.814,"text":"Le client reçoit sa confirmation. Vous recevez le récapitulatif.","words":[{"id":"caption-word-2-0","text":"Le","start":20.4,"end":20.522},{"id":"caption-word-2-1","text":"client","start":20.522,"end":20.888},{"id":"caption-word-2-2","text":"reçoit","start":20.888,"end":21.254},{"id":"caption-word-2-3","text":"sa","start":21.254,"end":21.376},{"id":"caption-word-2-4","text":"confirmation.","start":21.376,"end":22.108},{"id":"caption-word-2-5","text":"Vous","start":22.108,"end":22.352},{"id":"caption-word-2-6","text":"recevez","start":22.352,"end":22.779},{"id":"caption-word-2-7","text":"le","start":22.779,"end":22.901},{"id":"caption-word-2-8","text":"récapitulatif.","start":22.901,"end":23.694}]}];
-  var DURATION = 30;
+  var GROUPS = [];
+  var DURATION = 0;
 
   (function () {
     var stage = document.getElementById("caption-stage");
@@ -218,8 +224,3 @@
     window.__timelines["captions"] = tl;
   })();
 </script>
-
-<style>
-  .caption-line { line-height: 1.1 !important; }
-</style>
-</template>

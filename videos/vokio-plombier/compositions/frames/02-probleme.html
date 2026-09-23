@@ -1,0 +1,338 @@
+<template>
+  <style>
+    @font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/GeistMono-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");}
+    @font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");}
+
+    /* ids are prefixed "02-probleme-" per the dispatch and are used ONLY via
+       getElementById; styling goes through letter-prefixed classes because a CSS
+       ident may not begin with a digit. */
+    #root{
+      position:relative;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      container-type:size;
+      font-family:"Geist",sans-serif;
+      color:#262019;
+    }
+
+    /* ---------- full-bleed ground (its own clip layer, never a bg on #root) ---------- */
+    .f02p-ground{
+      position:absolute;
+      inset:0;
+      background:#F4F1E8;
+    }
+    .f02p-haze{
+      position:absolute;
+      inset:0;
+      background:radial-gradient(60% 34% at 50% 62%,
+        rgba(245,198,119,0.10) 0%,
+        rgba(248,214,155,0.06) 44%,
+        rgba(244,241,232,0) 78%);
+    }
+
+    /* ---------- headline ---------- */
+    .f02p-headline{
+      position:absolute;
+      left:88px;
+      top:392px;
+      width:904px;
+      text-align:center;
+    }
+    .f02p-hl{
+      font-family:"Instrument Serif",serif;
+      font-weight:400;
+      font-size:11.5cqw;
+      line-height:1.06;
+      letter-spacing:-0.005em;
+      color:#262019;
+    }
+    .f02p-w{display:inline-block;}
+
+    /* ---------- inherited call chip (x 50%, y 62%, scale 1, opacity 1) ---------- */
+    .f02p-chip{
+      position:absolute;
+      transform-origin:50% 50%;
+      left:248.4px;
+      top:1125.12px;
+      width:583.2px;
+      height:130.56px;
+    }
+    .f02p-halo{
+      position:absolute;
+      left:-168.4px;
+      top:-194.72px;
+      width:920px;
+      height:520px;
+      transform-origin:50% 50%;
+      background:radial-gradient(closest-side,
+        rgba(239,164,36,0.58) 0%,
+        rgba(248,214,155,0.34) 40%,
+        rgba(245,198,119,0.15) 66%,
+        rgba(244,241,232,0) 80%);
+    }
+    .f02p-chip-ink{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:34.56px;
+      background:#F4F1E8;
+      border:1px solid #262019;
+      border-radius:30px;
+    }
+    .f02p-chip-label{
+      font-family:"Geist Mono",monospace;
+      font-weight:600;
+      font-size:2.4cqw;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:#262019;
+    }
+    .f02p-chip-rule{
+      width:1px;
+      height:65.28px;
+      background:#262019;
+      opacity:0.2;
+    }
+    .f02p-chip-time{
+      font-family:"Geist Mono",monospace;
+      font-weight:400;
+      font-size:4cqw;
+      letter-spacing:0.04em;
+      color:#262019;
+    }
+    /* — l'échec : la seule couleur négative du film, celle que l'espace
+         client emploie déjà pour un créneau bloqué (#C0452C) — */
+    .f02p-chip-fail{
+      position:absolute;
+      inset:0;
+      border-radius:30px;
+      background:rgba(192,69,44,0.18);
+      opacity:0;
+    }
+
+    /* ---------- the list (three hairline rows) ---------- */
+    .f02p-list{
+      position:absolute;
+      left:88px;
+      top:948px;
+      width:904px;
+      height:400px;
+    }
+    .f02p-row3-fill{
+      position:absolute;
+      left:0;
+      top:388px;
+      width:904px;
+      height:8px;
+      background:rgba(239,164,36,0.85);
+      transform-origin:left center;
+    }
+    .f02p-rule{
+      position:absolute;
+      left:0;
+      width:904px;
+      height:2px;
+      overflow:visible;
+    }
+    .f02p-rule path{
+      fill:none;
+      stroke:rgba(38,32,25,0.2);
+      stroke-width:1;
+    }
+    .f02p-rule-1{top:131px;}
+    .f02p-rule-2{top:263px;}
+    .f02p-rule-3{top:395px;}
+    .f02p-row-name{
+      position:absolute;
+      left:0;
+      top:36px;
+    }
+    .f02p-row-name-2{top:168px;}
+    .f02p-row-name-3{top:300px;}
+    .f02p-vous{
+      position:relative;
+      display:inline-block;
+      font-family:"Instrument Serif",serif;
+      font-weight:400;
+      font-size:5.4cqw;
+      line-height:1;
+      letter-spacing:-0.005em;
+      color:#262019;
+    }
+    .f02p-vous-strike{
+      position:absolute;
+      left:-8px;
+      right:-11px;
+      top:36px;
+      height:1px;
+      background:rgba(38,32,25,0.66);
+      transform-origin:left center;
+    }
+  </style>
+
+  <div id="root" data-composition-id="02-probleme" data-width="1080" data-height="1920" data-duration="5.3">
+    <!-- track 0 · full-bleed paper ground + atmospheric haze -->
+    <div id="02-probleme-ground" class="clip f02p-ground" data-start="0" data-duration="5.3" data-track-index="0">
+      <div id="02-probleme-haze" class="f02p-haze"></div>
+    </div>
+
+    <!-- track 1 · the statement -->
+    <div id="02-probleme-headline" class="clip f02p-headline" data-start="0" data-duration="5.3" data-track-index="1">
+      <div class="f02p-hl"><span id="02-probleme-w0" class="f02p-w">Vous</span> <span id="02-probleme-w1" class="f02p-w">ne</span></div>
+      <div class="f02p-hl"><span id="02-probleme-w2" class="f02p-w">décrochez</span></div>
+      <div class="f02p-hl"><span id="02-probleme-w3" class="f02p-w">pas.</span></div>
+    </div>
+
+    <!-- track 2 · the list that takes the call's place -->
+    <div id="02-probleme-list-jitter" class="clip f02p-list" data-start="0" data-duration="5.3" data-track-index="2">
+      <div id="02-probleme-row3-fill" class="f02p-row3-fill"></div>
+      <div id="02-probleme-row1-name" class="f02p-row-name">
+        <span id="02-probleme-vous" class="f02p-vous">Vous<i id="02-probleme-vous-strike" class="f02p-vous-strike"></i></span>
+      </div>
+      <div id="02-probleme-row2-name" class="f02p-row-name f02p-row-name-2">
+        <span class="f02p-vous">Artisan suivant</span>
+      </div>
+      <div id="02-probleme-row3-name" class="f02p-row-name f02p-row-name-3">
+        <span class="f02p-vous">Artisan suivant</span>
+      </div>
+      <svg id="02-probleme-rule1" class="f02p-rule f02p-rule-1" viewBox="0 0 904 2" xmlns="http://www.w3.org/2000/svg">
+        <path id="02-probleme-rule1-path" d="M 0 1 L 904 1" />
+      </svg>
+      <svg id="02-probleme-rule2" class="f02p-rule f02p-rule-2" viewBox="0 0 904 2" xmlns="http://www.w3.org/2000/svg">
+        <path id="02-probleme-rule2-path" d="M 0 1 L 904 1" />
+      </svg>
+      <svg id="02-probleme-rule3" class="f02p-rule f02p-rule-3" viewBox="0 0 904 2" xmlns="http://www.w3.org/2000/svg">
+        <path id="02-probleme-rule3-path" d="M 0 1 L 904 1" />
+      </svg>
+    </div>
+
+    <!-- track 3 · the inherited incoming-call chip, dying on screen -->
+    <div id="02-probleme-chip" class="clip f02p-chip" data-start="0" data-duration="5.3" data-track-index="3">
+      <div id="02-probleme-halo" class="f02p-halo"></div>
+      <div id="02-probleme-chip-ink" class="f02p-chip-ink">
+        <span id="02-probleme-chip-label" class="f02p-chip-label">Appel entrant</span>
+        <span class="f02p-chip-rule"></span>
+        <span id="02-probleme-chip-time" class="f02p-chip-time">02:07</span>
+      </div>
+      <div id="02-probleme-chip-fail" class="f02p-chip-fail"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <script>
+    (function () {
+      var ID = "02-probleme";
+      // getElementById, never querySelector — these ids begin with a digit.
+      var q = function (name) { return document.getElementById(ID + "-" + name); };
+
+      // svg-path-draw setup — measured geometry, dash pattern laid in before any tween.
+      var measure = function (pathEl, fallback) {
+        var len = fallback;
+        if (pathEl && typeof pathEl.getTotalLength === "function") {
+          var m = pathEl.getTotalLength();
+          if (m && isFinite(m) && m > 1) { len = m; }
+        }
+        if (pathEl) {
+          pathEl.style.strokeDasharray = String(len);
+          pathEl.style.strokeDashoffset = String(len);
+        }
+        return len;
+      };
+
+      var rule1 = q("rule1-path");
+      var rule2 = q("rule2-path");
+      var rule3 = q("rule3-path");
+
+      var rule1Len = measure(rule1, 904);
+      var rule2Len = measure(rule2, 904);
+      var rule3Len = measure(rule3, 904);
+
+      var tl = gsap.timeline({ paused: true });
+
+      /* --------- Scene 1 (0.00–1.05) — the inherited call, and the word that kills it ---------
+         The chip is already on screen at x 50% / y 62%, scale 1, opacity 1. It never re-enters.
+         Its halo is still breathing: finite, hand-placed tweens, no repeat / no yoyo. */
+      tl.fromTo(q("halo"),
+        { scale: 1, opacity: 1 },
+        { scale: 1.055, opacity: 0.84, duration: 0.47, ease: "sine.inOut" }, 0);
+      tl.to(q("halo"), { scale: 1, opacity: 1, duration: 0.45, ease: "sine.inOut" }, 0.47);
+
+      // "Vous ne décrochez pas." lands word by word, on the real voice:
+      // Vous 0.04 · ne 0.24 · décrochez 0.36 · pas. 0.95
+      tl.fromTo(q("w0"), { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.72, ease: "power3.out" }, 0.04);
+      tl.fromTo(q("w1"), { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.72, ease: "power3.out" }, 0.24);
+      tl.fromTo(q("w2"), { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.72, ease: "power3.out" }, 0.36);
+      tl.fromTo(q("w3"), { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" }, 0.95);
+
+      // 0.95 — "pas." lands and the halo goes OUT on the same frame. The hard cut of the film.
+      tl.to(q("halo"), { opacity: 0, scale: 0.9, duration: 0.09, ease: "power4.out" }, 0.95);
+      // the paper goes cold with it
+      tl.to(q("haze"), { opacity: 0.3, duration: 0.26, ease: "power2.out" }, 0.95);
+      /* --------- L'ÉCHEC — sur « pas. », et sans traîner ---------------------
+         Une erreur ne s'installe pas en douceur : la bascule est sèche (0,10 s),
+         pas de décélération longue ici. C'est la seule entorse assumée à la
+         grammaire du film, et elle dure un dixième de seconde. */
+      tl.to(q("chip-ink"), {
+        borderColor: "#C0452C", color: "#C0452C",
+        duration: 0.10, ease: "power4.out"
+      }, 0.95);
+      tl.to(q("chip-label"), { color: "#C0452C", duration: 0.10, ease: "power4.out" }, 0.95);
+      tl.to(q("chip-time"), { color: "#C0452C", duration: 0.10, ease: "power4.out" }, 0.95);
+
+      // le voile négatif passe : il monte vite, il redescend lentement
+      tl.fromTo(q("chip-fail"), { opacity: 0 }, { opacity: 1, duration: 0.09, ease: "none" }, 0.96);
+      tl.to(q("chip-fail"), { opacity: 0.45, duration: 0.30, ease: "power2.out" }, 1.05);
+
+      /* --------- Scene 2 (1.00–1.38) — l'appel tombe ------------------------
+         Il descend, il ne remonte pas : un appel perdu s'enfonce. Compression
+         légère, pas de rebond. Tout est effacé avant le premier filet de la
+         liste, à 1,37. */
+      tl.to(q("chip"), { y: 96, scale: 0.962, duration: 0.38, ease: "power2.in" }, 1.00);
+      tl.to(q("chip"), { opacity: 0, duration: 0.30, ease: "power2.in" }, 1.08);
+
+      // three hairline rows write themselves, one per beat: "client" 1.37 · "appelle" 1.70 · "suivant" 2.21
+      tl.fromTo(rule1, { strokeDashoffset: rule1Len }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 1.37);
+      tl.fromTo(q("row1-name"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.45);
+      tl.fromTo(q("vous-strike"), { scaleX: 0 }, { scaleX: 1, duration: 0.34, ease: "power2.out" }, 1.62);
+      tl.fromTo(rule2, { strokeDashoffset: rule2Len }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 1.70);
+      tl.fromTo(q("row2-name"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.78);
+      tl.fromTo(rule3, { strokeDashoffset: rule3Len }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 2.21);
+      tl.fromTo(q("row3-name"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.29);
+
+      /* --------- Scene 3 (2.90–5.30) — the third row lights up, then nothing --------- */
+      // the single solar moment of the frame: the row nobody is named in
+      tl.fromTo(q("row3-fill"),
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.62, ease: "power3.out" }, 2.89);
+      tl.fromTo(rule3,
+        { stroke: "rgba(38,32,25,0.2)" },
+        { stroke: "#EFA424", duration: 0.2, ease: "power2.out" }, 2.89);
+
+      // sine-wave-loop, low register: 2.2px, ~2.9s period, amplitude enveloped to zero at the tail
+      // so the frame is visibly STILL when the cut to frame 3 arrives at 5.30.
+      var phase = { p: 0 };
+      var CYCLES = 0.74;
+      var TOTAL = Math.PI * 2 * CYCLES;
+      var listEl = q("list-jitter");
+      tl.to(phase, {
+        p: TOTAL,
+        duration: 2.15,
+        ease: "none",
+        onUpdate: function () {
+          var t = phase.p / TOTAL;
+          var env = t < 0.8 ? 1 : (1 - t) / 0.2;
+          listEl.style.transform = "translateY(" + (Math.sin(phase.p) * 2.2 * env).toFixed(3) + "px)";
+        }
+      }, 3.15);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines[ID] = tl;
+      tl.seek(0);
+    })();
+  </script>
+</template>

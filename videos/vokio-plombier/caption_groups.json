@@ -7,155 +7,155 @@
       "id": "caption-group-0",
       "frame": 3,
       "start": 9,
-      "end": 12.3,
+      "end": 12.028,
       "text": "Vokio décroche à votre place, et dit tout de suite qui elle est.",
       "words": [
         {
           "id": "caption-word-0-0",
           "text": "Vokio",
           "start": 9,
-          "end": 9.318
+          "end": 9.29
         },
         {
           "id": "caption-word-0-1",
           "text": "décroche",
-          "start": 9.318,
-          "end": 9.827
+          "start": 9.29,
+          "end": 9.756
         },
         {
           "id": "caption-word-0-2",
           "text": "à",
-          "start": 9.827,
-          "end": 9.89
+          "start": 9.756,
+          "end": 9.814
         },
         {
           "id": "caption-word-0-3",
           "text": "votre",
-          "start": 9.89,
-          "end": 10.209
+          "start": 9.814,
+          "end": 10.105
         },
         {
           "id": "caption-word-0-4",
           "text": "place,",
-          "start": 10.209,
-          "end": 10.526
+          "start": 10.105,
+          "end": 10.396
         },
         {
           "id": "caption-word-0-5",
           "text": "et",
-          "start": 10.526,
-          "end": 10.654
+          "start": 10.396,
+          "end": 10.512
         },
         {
           "id": "caption-word-0-6",
           "text": "dit",
-          "start": 10.654,
-          "end": 10.844
+          "start": 10.512,
+          "end": 10.687
         },
         {
           "id": "caption-word-0-7",
           "text": "tout",
-          "start": 10.844,
-          "end": 11.099
+          "start": 10.687,
+          "end": 10.919
         },
         {
           "id": "caption-word-0-8",
           "text": "de",
-          "start": 11.099,
-          "end": 11.226
+          "start": 10.919,
+          "end": 11.036
         },
         {
           "id": "caption-word-0-9",
           "text": "suite",
-          "start": 11.226,
-          "end": 11.544
+          "start": 11.036,
+          "end": 11.326
         },
         {
           "id": "caption-word-0-10",
           "text": "qui",
-          "start": 11.544,
-          "end": 11.735
+          "start": 11.326,
+          "end": 11.501
         },
         {
           "id": "caption-word-0-11",
           "text": "elle",
-          "start": 11.735,
-          "end": 11.99
+          "start": 11.501,
+          "end": 11.733
         },
         {
           "id": "caption-word-0-12",
           "text": "est.",
-          "start": 11.99,
-          "end": 12.18
+          "start": 11.733,
+          "end": 11.908
         }
       ]
     },
     {
       "id": "caption-group-1",
       "frame": 4,
-      "start": 14.442,
-      "end": 17.856,
-      "text": "Elle comprend la demande, regarde votre service, pose la réservation.",
+      "start": 14.629,
+      "end": 17.77,
+      "text": "Elle comprend la demande, regarde votre agenda, pose le rendez-vous.",
       "words": [
         {
           "id": "caption-word-1-0",
           "text": "Elle",
-          "start": 14.442,
-          "end": 14.673
+          "start": 14.629,
+          "end": 14.849
         },
         {
           "id": "caption-word-1-1",
           "text": "comprend",
-          "start": 14.673,
-          "end": 15.135
+          "start": 14.849,
+          "end": 15.288
         },
         {
           "id": "caption-word-1-2",
           "text": "la",
-          "start": 15.135,
-          "end": 15.251
+          "start": 15.288,
+          "end": 15.398
         },
         {
           "id": "caption-word-1-3",
           "text": "demande,",
-          "start": 15.251,
-          "end": 15.656
+          "start": 15.398,
+          "end": 15.782
         },
         {
           "id": "caption-word-1-4",
           "text": "regarde",
-          "start": 15.656,
-          "end": 16.06
+          "start": 15.782,
+          "end": 16.167
         },
         {
           "id": "caption-word-1-5",
           "text": "votre",
-          "start": 16.06,
-          "end": 16.349
+          "start": 16.167,
+          "end": 16.441
         },
         {
           "id": "caption-word-1-6",
-          "text": "service,",
-          "start": 16.349,
-          "end": 16.753
+          "text": "agenda,",
+          "start": 16.441,
+          "end": 16.771
         },
         {
           "id": "caption-word-1-7",
           "text": "pose",
-          "start": 16.753,
-          "end": 16.985
+          "start": 16.771,
+          "end": 16.991
         },
         {
           "id": "caption-word-1-8",
-          "text": "la",
-          "start": 16.985,
+          "text": "le",
+          "start": 16.991,
           "end": 17.1
         },
         {
           "id": "caption-word-1-9",
-          "text": "réservation.",
+          "text": "rendez-vous.",
           "start": 17.1,
-          "end": 17.736
+          "end": 17.65
         }
       ]
     },
@@ -163,62 +163,62 @@
       "id": "caption-group-2",
       "frame": 5,
       "start": 20.4,
-      "end": 23.814,
+      "end": 23.745,
       "text": "Le client reçoit sa confirmation. Vous recevez le récapitulatif.",
       "words": [
         {
           "id": "caption-word-2-0",
           "text": "Le",
           "start": 20.4,
-          "end": 20.522
+          "end": 20.519
         },
         {
           "id": "caption-word-2-1",
           "text": "client",
-          "start": 20.522,
-          "end": 20.888
+          "start": 20.519,
+          "end": 20.877
         },
         {
           "id": "caption-word-2-2",
           "text": "reçoit",
-          "start": 20.888,
-          "end": 21.254
+          "start": 20.877,
+          "end": 21.237
         },
         {
           "id": "caption-word-2-3",
           "text": "sa",
-          "start": 21.254,
-          "end": 21.376
+          "start": 21.237,
+          "end": 21.356
         },
         {
           "id": "caption-word-2-4",
           "text": "confirmation.",
-          "start": 21.376,
-          "end": 22.108
+          "start": 21.356,
+          "end": 22.072
         },
         {
           "id": "caption-word-2-5",
           "text": "Vous",
-          "start": 22.108,
-          "end": 22.352
+          "start": 22.072,
+          "end": 22.311
         },
         {
           "id": "caption-word-2-6",
           "text": "recevez",
-          "start": 22.352,
-          "end": 22.779
+          "start": 22.311,
+          "end": 22.73
         },
         {
           "id": "caption-word-2-7",
           "text": "le",
-          "start": 22.779,
-          "end": 22.901
+          "start": 22.73,
+          "end": 22.849
         },
         {
           "id": "caption-word-2-8",
           "text": "récapitulatif.",
-          "start": 22.901,
-          "end": 23.694
+          "start": 22.849,
+          "end": 23.625
         }
       ]
     }

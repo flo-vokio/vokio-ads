@@ -175,12 +175,37 @@ par plan » lui fait lire `HF_VOICE_BY_LINE`. Le journal de montage écrit la
 voix réellement employée sur chaque ligne d'exception, pour que la
 distribution soit un fait vérifiable et pas une intention.
 
-`amorce_par_plan` retarde une ligne à l'intérieur de son plan. Le monteur pose
-chaque voix au **début** de son plan et n'offre aucun décalage : l'attente est
-donc mise dans le fichier son lui-même, et les horodatages des mots glissent
-d'autant, sinon les sous-titres du plan partiraient en avance. Le plan 6 s'en
-sert pour que « Vokio » se dise **sur** le logo qui finit de s'écrire à
-1,14 s, et non sur un écran encore vide.
+### Le débit d'une voix, et le calage sur l'image
+
+```json
+"tempo_par_voix":  { "FFXYdAYPzn8Tw8KiHZqg": 1.15 },
+"ancres_par_plan": { "4": {"mot": -1, "a": 2.70}, "6": {"mot": 0, "a": 0.76} }
+```
+
+`tempo_par_voix` accélère **après** la synthèse. Le réglage `speed` de l'API
+plafonne et vaut pour la requête entière : il ne sait pas accélérer une voix
+sans toucher à l'autre. `atempo` conserve la hauteur, et les horodatages des
+mots se divisent par le même facteur.
+
+`ancres_par_plan` vise **un mot et un instant de l'animation**, jamais un
+silence écrit en dur. Une amorce fixe se démode dès qu'on change de voix ou de
+débit, et personne ne le voit avant de regarder le film. L'indice de mot vaut
+pour tous les métiers, la phrase ayant la même forme partout, alors que le mot
+change : `-1` désigne « le rendez-vous » chez le plombier et « la réservation »
+au restaurant. Le monteur posant chaque voix au début de son plan sans
+décalage possible, l'attente va dans le fichier son.
+
+- plan 4 : le dernier mot se dit quand la carte se pose, à 2,70 s
+- plan 6 : « Vokio » se dit quand le mot finit de s'écrire, à 0,76 s
+
+Un mot ne peut être que **retardé**. Si la voix le dit déjà après son repère,
+l'outil le signale au lieu de tricher.
+
+**Les deux passent APRÈS `recaler_mots.py`, jamais avant.** À la sortie du
+moteur, `audio_meta.json` porte les fichiers mais pas encore les mots. Placé
+plus haut, le tempo accélérait bien les sons et ne divisait aucun horodatage :
+les sous-titres auraient dérivé de 15 % en retard croissant, sans qu'aucun
+contrôle ne bronche.
 
 `voix.json` garde l'identifiant retenu. Il vaut `null` au départ, et
 `voix.choisir()` **refuse de produire** tant qu'il vaut `null` alors qu'une

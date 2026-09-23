@@ -88,20 +88,68 @@ def distribution():
     return {f"{int(k):02d}": v for k, v in par.items()}
 
 
-def amorces():
-    """Silence à poser AVANT la ligne, par numéro de plan (secondes)."""
-    a = config().get("elevenlabs", {}).get("amorce_par_plan") or {}
-    return {int(k): float(v) for k, v in a.items()}
+def tempos():
+    """Accélération par VOIX, pas par plan : « la partie d'Ingrid »."""
+    return config().get("elevenlabs", {}).get("tempo_par_voix") or {}
 
 
-def poser_amorces(projet, table, journal=print):
-    """Décale des lignes de voix dans leur plan, et recale leurs mots.
+def ancres():
+    """Le mot d'un plan qui doit tomber sur un repère de l'animation.
+
+    On vise un MOT et un INSTANT, jamais un silence fixe : une amorce écrite
+    en dur se démode dès qu'on change de voix ou de débit, et personne ne s'en
+    aperçoit avant de regarder le film. L'indice de mot vaut pour tous les
+    métiers, puisque la phrase a la même forme partout ; le mot, lui, change.
+    """
+    a = config().get("elevenlabs", {}).get("ancres_par_plan") or {}
+    return {int(k): v for k, v in a.items() if isinstance(v, dict)}
+
+
+def _duree(f):
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                        "-of", "csv=p=0", str(f)], capture_output=True, text=True, check=True)
+    return round(float(r.stdout.strip()), 3)
+
+
+def poser_tempo(projet, voix_du_plan, journal=print):
+    """Accélère les lignes d'une voix donnée, et recale leurs mots.
+
+    Le réglage `speed` de l'API plafonne et ne s'applique qu'à la requête
+    entière, donc pas à une voix sur deux. On accélère après coup : `atempo`
+    conserve la hauteur, et les horodatages des mots se divisent par le même
+    facteur, sinon les sous-titres partiraient en retard croissant.
+    """
+    table = tempos()
+    if not table:
+        return
+    projet = Path(projet)
+    meta_f = projet / "audio_meta.json"
+    meta = json.loads(meta_f.read_text())
+    for v in meta.get("voices", []):
+        t = float(table.get(voix_du_plan.get(v.get("frame")), 1) or 1)
+        if abs(t - 1) < 1e-6:
+            continue
+        src = projet / v["path"]
+        tmp = src.with_suffix(".tempo.wav")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src),
+                        "-af", f"atempo={t}", str(tmp)], check=True)
+        tmp.replace(src)
+        for w in v.get("words") or []:
+            w["start"] = round(w["start"] / t, 3)
+            w["end"] = round(w["end"] / t, 3)
+        avant = v["duration_s"]
+        v["duration_s"] = _duree(src)
+        journal(f"· plan {v['frame']} : ×{t} ({avant:.2f} → {v['duration_s']:.2f} s)")
+    meta_f.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n")
+
+
+def poser_ancres(projet, table, journal=print):
+    """Décale une ligne pour qu'un de ses mots tombe sur son repère d'image.
 
     Le monteur pose chaque voix au DÉBUT de son plan, sans décalage possible :
     il n'existe pas de champ pour retarder une ligne. On met donc l'attente
-    dans le fichier lui-même. Les horodatages des mots, eux, viennent de la
-    transcription : ils doivent glisser d'autant, sinon les sous-titres du
-    plan partent avec le décalage en moins.
+    dans le fichier lui-même. Un mot ne peut être que RETARDÉ : si la voix dit
+    déjà le mot après son repère, on le signale au lieu de tricher.
     """
     if not table:
         return
@@ -110,23 +158,28 @@ def poser_amorces(projet, table, journal=print):
     meta = json.loads(meta_f.read_text())
     for v in meta.get("voices", []):
         a = table.get(v.get("frame"))
-        if not a:
+        mots = v.get("words") or []
+        if not a or not mots:
+            continue
+        i = int(a["mot"])
+        vise, actuel = float(a["a"]), mots[i]["start"]
+        retard = round(vise - actuel, 3)
+        if retard <= 0.02:
+            journal(f"· plan {v['frame']} : « {mots[i]['text']} » à {actuel:.2f} s "
+                    f"pour un repère à {vise:.2f} s — déjà passé, rien à décaler")
             continue
         src = projet / v["path"]
-        tmp = src.with_suffix(".amorce.wav")
-        subprocess.run(
-            ["ffmpeg", "-y", "-loglevel", "error", "-i", str(src),
-             "-af", f"adelay={int(round(a * 1000))}:all=1", str(tmp)],
-            check=True)
+        tmp = src.with_suffix(".ancre.wav")
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src),
+                        "-af", f"adelay={int(round(retard * 1000))}:all=1", str(tmp)],
+                       check=True)
         tmp.replace(src)
-        for w in v.get("words") or []:
-            w["start"] = round(w["start"] + a, 3)
-            w["end"] = round(w["end"] + a, 3)
-        duree = subprocess.run(
-            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
-             "-of", "csv=p=0", str(src)], capture_output=True, text=True, check=True)
-        v["duration_s"] = round(float(duree.stdout.strip()), 3)
-        journal(f"· plan {v['frame']} : {a} s d'amorce, ligne à {v['duration_s']} s")
+        for w in mots:
+            w["start"] = round(w["start"] + retard, 3)
+            w["end"] = round(w["end"] + retard, 3)
+        v["duration_s"] = _duree(src)
+        journal(f"· plan {v['frame']} : « {mots[i]['text']} » calé sur {vise:.2f} s "
+                f"({retard:+.2f} s), ligne à {v['duration_s']:.2f} s")
     meta_f.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n")
 
 

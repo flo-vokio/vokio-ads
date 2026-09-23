@@ -1,0 +1,35 @@
+{
+  "provider": "elevenlabs",
+  "speed": 1,
+  "lang": "fr",
+  "lines": [
+    {
+      "id": "01",
+      "text": "Les mains sous un évier. Le téléphone sonne."
+    },
+    {
+      "id": "02",
+      "text": "Vous ne décrochez pas. Le client appelle le suivant sur la liste."
+    },
+    {
+      "id": "03",
+      "text": "Vokio décroche à votre place, et dit tout de suite qui elle est."
+    },
+    {
+      "id": "04",
+      "text": "Elle comprend la demande, regarde votre agenda, pose le rendez-vous."
+    },
+    {
+      "id": "05",
+      "text": "Le client reçoit sa confirmation. Vous recevez le récapitulatif."
+    },
+    {
+      "id": "06",
+      "text": "Vokio. Ne ratez plus un seul appel."
+    }
+  ],
+  "bgm": {
+    "mode": "none"
+  },
+  "voice": "FFXYdAYPzn8Tw8KiHZqg"
+}

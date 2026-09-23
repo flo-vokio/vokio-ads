@@ -335,10 +335,20 @@ if len(produit) != attendu:
         f"Le moteur était « {moteur} », voix « {voix_id} ».\n"
         "Relancer outils/rustines.py, puis la synthèse à la main pour voir l'erreur.")
 print(f"· voix off complète ({attendu} lignes)")
-voix.poser_amorces(projet, voix.amorces() if moteur == "elevenlabs" else {})
-
 lancer(["python3", str(RACINE / "outils/recaler_mots.py"), str(projet), "--ecrire"],
        projet, "mots recalés sur le script")
+
+# APRÈS le recalage, jamais avant : à la sortie du moteur, audio_meta.json
+# porte les fichiers mais pas encore les mots, que recaler_mots y écrit. Placé
+# plus haut, le tempo accélérait bien les sons et ne divisait aucun
+# horodatage — les sous-titres auraient dérivé de 15 % en retard croissant,
+# sans qu'aucun contrôle ne bronche.
+if moteur == "elevenlabs":
+    # Quelle voix a servi sur quel plan : le tempo se règle par voix, pas par
+    # plan, puisque c'est « la partie d'Ingrid » qu'on accélère.
+    attribution = {n: repartition.get(f"{n:02d}", voix_id) for n in range(1, 40)}
+    voix.poser_tempo(projet, attribution)
+    voix.poser_ancres(projet, voix.ancres())
 
 # ── Les deux phrases découpées en mots ───────────────────────────────────────
 meta = json.loads((projet / "audio_meta.json").read_text())
