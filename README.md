@@ -30,8 +30,26 @@ Elle crée `videos/vokio-restaurant/`, substitue les chaînes, régénère la vo
 off, recale les sous-titres sur les nouveaux horodatages, assemble et rend le
 MP4. Compter trois minutes.
 
-Pour ajouter un métier, copier `metiers/plombier.json`, changer les valeurs,
-enregistrer sous `metiers/<nom>.json` :
+### L'ordre des étapes, et pourquoi c'est cet ordre-là
+
+La moitié des défauts payés dans ce dépôt venaient d'une étape juste, placée au
+mauvais endroit. Aucune ne s'était plainte : elles produisaient un film faux.
+
+| # | étape | pourquoi là |
+| --- | --- | --- |
+| 1 | copie du gabarit | `renders`, `snapshots` et les trois fichiers de métadonnées audio sont exclus : un reste de montage précédent ferait croire à une voix produite |
+| 2 | substitution des chaînes, puis **recopie de `SCRIPT.md` dans le storyboard** | voir « un texte en double » plus bas |
+| 3 | synthèse de la voix off | lit `SCRIPT.md`, déjà traduit |
+| 4 | **contrôle « voix off complète »** | `audio.mjs` sort en 0 même quand rien n'a été synthétisé |
+| 5 | `recaler_mots.py` | impose les mots du script aux minutages de Whisper |
+| 6 | tempo par voix, puis ancres | **jamais avant 5** : les mots n'existent dans `audio_meta.json` qu'une fois que 5 les y a écrits |
+| 7 | reconstruction de l'accroche et de la salutation | l'accroche se découpe sur les horodatages définitifs, donc après 6 |
+| 8 | **`langue.py --strict`** | après 7, sinon l'accroche à l'écran parle encore le métier source ; avant 9, pour qu'un mot du mauvais métier ne coûte pas un encodage |
+| 9 | `monter.sh --rendre` | |
+
+Un métier = un `metiers/<code>.json`. **Ne jamais partir d'une fiche
+existante** : `outils/nouveau_metier.py <code>` sort un gabarit à la bonne
+forme et sans aucune valeur, pour la raison expliquée plus bas. Les champs :
 
 | clé | ce que c'est |
 | --- | --- |
@@ -78,16 +96,32 @@ Deux phrases ne sont pas de simples substitutions, et le script les reconstruit 
 
 ---
 
-## Refaire un film sans rien décliner
+## Les trois projets, et lequel on livre
+
+| dossier | ce que c'est |
+| --- | --- |
+| `videos/vokio-promo/` | **le gabarit, qu'on ne livre pas.** C'est lui que `decliner.py` copie |
+| `videos/vokio-plombier/` | une déclinaison, comme les autres depuis le 23/09 |
+| `videos/vokio-restaurant/` | une déclinaison |
+
+Le plombier a longtemps été le gabarit **et** un film livrable à la fois. Tant
+qu'il l'était, il ne passait pas les contrôles de langue qu'il imposait aux
+autres : on ne vérifie pas une traduction contre elle-même. Le gabarit est
+désormais neutre et le plombier se produit comme n'importe quel métier.
+
+Refaire un film sans rien décliner :
 
 ```bash
-cd videos/vokio-promo
+cd videos/vokio-plombier
 ./monter.sh            # sous-titres, musique, assemblage, transitions, contrôle
 ./monter.sh --rendre   # et le MP4
 ```
 
 Le nom de sortie suit le champ `metier:` du storyboard, donc une déclinaison
-n'écrase jamais le film de référence.
+n'écrase jamais une autre. Les MP4 se livrent **par le Drive de Florian ou en
+SSH**, jamais par un lien public. Une seule version par métier sur le Drive :
+trois restaurants côte à côte ont déjà fait croire à un défaut de montage qui
+n'existait pas.
 
 ## La musique
 
@@ -111,15 +145,11 @@ casse pas le montage.
 
 ```bash
 outils/voix.py                  # ce qui serait utilisé, et pourquoi
-outils/voix.py --bibliotheque   # voix publiques françaises, filtrables
-outils/voix.py --retenir <id>   # inscrit la voix dans voix.json
-outils/voix.py --essai          # une prise, pour écouter avant
-outils/voix.py --essai "<texte>" --sur ID,ID,ID   # comparer plusieurs voix
+outils/voix.py --catalogue      # les voix du compte
 ```
 
-Les essais atterrissent dans `essais/` (hors dépôt, régénérables). Les
-étiquettes du catalogue ne disent rien du timbre réel : une voix se choisit à
-l'oreille, sur le texte du film, jamais sur `narrative_story`.
+Le choix d'une voix a sa section plus bas, « Choisir une voix, c'est
+l'écouter ».
 
 **Déposer la clé** (en SSH, jamais en conversation ni par un outil) :
 
@@ -165,15 +195,55 @@ lui ferait imiter sa cadence.
 et des exceptions plan par plan.
 
 ```json
-"voice": "m5U7XCsc8v988k2RJAqN",          // Manon, le récit
-"par_plan":        { "6": "LFtQZWdaqmvamcTNGpwl" },   // Lucie, la signature
-"amorce_par_plan": { "6": 0.75 }
+"voice":    "FFXYdAYPzn8Tw8KiHZqg",                 // Ingrid, le récit
+"par_plan": { "6": "LFtQZWdaqmvamcTNGpwl" }         // Lucie · Narration, la signature
 ```
+
+Le dernier plan dit « Vokio. Ne ratez plus un seul appel. » La signature de
+marque n'est pas dite par la même bouche que le récit : c'est ce qui la fait
+entendre comme une signature et non comme une phrase de plus.
 
 Le moteur ne résolvait qu'une voix pour tout le film ; la rustine « une voix
 par plan » lui fait lire `HF_VOICE_BY_LINE`. Le journal de montage écrit la
 voix réellement employée sur chaque ligne d'exception, pour que la
-distribution soit un fait vérifiable et pas une intention.
+distribution soit un fait vérifiable et pas une intention. Elle l'a été : un
+film livré a été cru muet d'une de ses voix, et c'est le journal plus le
+`voice_id` de `audio_engine_meta.json` qui ont tranché, pas l'oreille.
+
+**Trois « Lucie » traînent dans le compte.** `LFtQZWdaqmvamcTNGpwl`
+(« Lucie · Narration ») n'a rien à voir avec `YxrwjAKoUKULGd0g8K9Y`
+(« Lucie · Support Agent »), la voix des agents qui décrochent au téléphone.
+Vérifier l'identifiant, jamais le prénom.
+
+### Choisir une voix, c'est l'écouter
+
+Les étiquettes du catalogue ne disent rien du timbre réel. Le seul protocole
+qui tienne : faire dire à plusieurs voix **le texte du film**, bout à bout,
+et écouter.
+
+```bash
+outils/voix.py --bibliotheque --genre female --cherche narration
+outils/voix.py --essai "<le texte du film>" --sur ID,ID,ID    # comparer
+outils/voix.py --essai "<texte>" --modele eleven_v3 \
+               --reglages '{"speed":1.12}' --etiquette d-v3-x1.12
+outils/voix.py --retenir <id>
+```
+
+`--etiquette` n'est pas un confort : sans elle, deux réglages de la même voix
+sur le même modèle écrivent le **même nom de fichier** et la deuxième prise
+écrase la première en silence. C'est arrivé.
+
+Les prises atterrissent dans `essais/`, hors dépôt et régénérables. Ce qui a
+été écarté, pour ne pas y revenir : **Yariq** (voix masculine, jugée « cheap et
+très IA »), **Manon** et **Lucie · Narration** en voix de corps (justes mais sans
+élan). **Ingrid** a été retenue, avec une réserve de Florian qui vaut
+consigne : *« lent et robotique »*. D'où la direction de voix, la continuité
+entre les lignes, et le débit, ci-dessous. Les trois traitaient la même plainte.
+
+Une voix de la **bibliothèque publique** doit d'abord entrer dans le compte.
+`outils/voix.py --ajouter <id> --nom "<nom>"` sait le faire, mais la clé n'a
+pas le droit `voices_write` : l'API refuse, et c'est Florian qui l'ajoute d'un
+clic depuis l'interface. Une fois ajoutée, elle est utilisable normalement.
 
 ### Le débit d'une voix, et le calage sur l'image
 
@@ -331,16 +401,27 @@ outils/rustines.py            # dit ce qui manque
 outils/rustines.py --poser    # réapplique
 ```
 
-Cinq défauts des skills HyperFrames livrées sont corrigés dans
-`.agents/skills/`, et `hyperframes skills update` les réécrirait. **Trois de
-ces cinq ne se voient pas** : ils ne cassent rien, ils produisent un film faux.
-Le plus vicieux fait retomber le moteur sur le modèle Whisper anglais, qui
-*traduit* la voix française au lieu de la transcrire ; la ligne 3 est revenue
-un jour en « Thank you for watching and see you next week ».
+**Huit** défauts des skills HyperFrames livrées sont corrigés dans
+`.agents/skills/`, et `hyperframes skills update` les réécrirait.
+
+| # | rustine | ce qui se passe sans elle |
+| --- | --- | --- |
+| 1 | shims media-use | deux fichiers réexportent un chemin du dépôt amont qui n'existe pas dans une installation normale |
+| 2 | langue transmise au moteur | le moteur retombe sur « en », donc sur Whisper `small.en`, **qui traduit** : la ligne 3 est revenue un jour en « Thank you for watching and see you next week » |
+| 3 | fr-fr contre fr | un seul champ `lang` alimente deux vocabulaires incompatibles, le phonémiseur veut `fr-fr` et Whisper veut `fr` |
+| 4 | bande de sous-titres réglable | la bande occupe les 320 px du bas, zone interdite par la charte et couverte par l'interface de Reels |
+| 5 | sous-titres : opt-out et regroupement | un plan dont le texte à l'écran **est** la phrase prononcée ne peut pas refuser la bande, et les groupes durent une demi-seconde |
+| 6 | interpréteur python imposé | `HYPERFRAMES_PYTHON` est ignoré, ElevenLabs tombe sur le python du système et **échoue sur les six lignes** |
+| 7 | voix par plan et continuité | une seule voix pour tout le film, et chaque ligne synthétisée isolément |
+| 8 | modèle et direction de voix | `eleven_multilingual_v2` écrit en dur, aucun `voice_settings` envoyé |
+
+**Cinq de ces huit ne se voient pas** : elles ne cassent rien, elles produisent
+un film faux, muet ou robotique. C'est la raison d'être de `rustines.py`, qui
+vérifie la présence de chacune avant de la reposer.
 
 ---
 
-## Cinq pièges déjà payés
+## Les pièges déjà payés
 
 1. **Ne jamais lancer `audio.mjs sync-durations` sur ces projets.** Il écrase
    la durée d'un plan par celle de sa voix. Ici il ramènerait le film de 30,0 s
@@ -358,6 +439,21 @@ un jour en « Thank you for watching and see you next week ».
    et de contraste : le rapport devient vert sans que rien n'ait tourné.
    `monter.sh` efface d'abord les fichiers de sonde que les ouvriers laissent
    à la racine, qui sont la cause habituelle.
+6. **Un texte en double finit toujours par diverger.** Les répliques vivaient
+   dans `SCRIPT.md` **et** dans `STORYBOARD.md`, et la déclinaison ne
+   traduisait que la première. Le film parlait juste, la voix se fabriquant
+   depuis `SCRIPT.md` ; mais le storyboard du restaurant racontait une fuite
+   sous un évier depuis six montages, et c'est le document que lit la
+   personne suivante. `decliner.py` recopie désormais `SCRIPT.md` dans le
+   storyboard, et dit combien de répliques il a recopiées.
+7. **Un traitement d'horodatage placé trop tôt ne se plaint pas.** Le tempo
+   posé avant `recaler_mots.py` accélérait les sons sans diviser un seul
+   horodatage : sous-titres en retard croissant de 15 %, zéro erreur. Tout ce
+   qui touche aux minutages passe après lui. Voir le tableau des étapes.
+8. **Le catalogue de voix ment sur les prénoms et les prises s'écrasent.**
+   Trois « Lucie » sans rapport dans le compte, et deux réglages de la même
+   voix produisaient le même nom de fichier d'essai. Identifiant, jamais
+   prénom ; `--etiquette` sur chaque prise.
 
 ---
 
@@ -368,6 +464,34 @@ cadre 1080x1920, les autres en unités relatives à la largeur. Changer de ratio
 demande donc une passe de mise en page par plan, pas un drapeau de rendu :
 `--resolution` n'accepte qu'un multiple entier du **même** ratio. Le travail
 est réel et il n'est pas commencé.
+
+**La musique et l'ambiance de salle.** Florian fournit les morceaux ; la piste
+existe déjà en silence et se valide (voir plus haut).
+
+**Le contraste des deux voix.** Ingrid et Lucie sont deux voix féminines.
+Le risque, signalé et non tranché : que le changement s'entende comme un
+raccord raté plutôt que comme une signature. Ça se juge à l'oreille, pas ici.
+
+**Le ménage du Drive.** Sept films de restaurant et de plombier s'y
+accumulent, la plupart périmés. Attendre le mot de Florian : ce sont ses
+fichiers.
+
+**Les métiers.** Deux fiches existent, `plombier` et `restaurant`. Chaque
+nouvelle verticale passe par `nouveau_metier.py`, jamais par la copie d'une
+fiche voisine.
+
+## Les outils
+
+| outil | ce qu'il fait |
+| --- | --- |
+| `bin/hf` | l'enveloppe Node 22. Toute commande HyperFrames passe par elle |
+| `outils/decliner.py <metier>` | le geste courant : un métier, un MP4. `--voix <id>` force une voix pour ce film seulement, `--sans-rendu` s'arrête avant l'encodage, `--source <metier>` change le gabarit |
+| `outils/nouveau_metier.py <code>` | un gabarit de fiche, toutes valeurs à `TODO` |
+| `outils/langue.py <metier>` | le contrôle de langue et la relecture. `--toutes`, `--strict` (bloquant), `--sans-relecture` |
+| `outils/voix.py` | le moteur, le catalogue, les essais, la distribution, le débit, les ancres |
+| `outils/recaler_mots.py <projet>` | impose les mots de `SCRIPT.md` aux minutages de Whisper. `--ecrire` pour appliquer |
+| `outils/rustines.py` | l'état des huit correctifs. `--poser` les réapplique |
+| `outils/piste_musique.py` | déclare l'emplacement musique dans `audio_meta.json`. Le storyboard porte `music: none` pour que le moteur n'aille pas piocher dans un catalogue, donc l'assembleur n'écrirait aucune piste. `monter.sh` le relance après chaque régénération de la voix |
 
 ## Les fichiers d'un projet
 
