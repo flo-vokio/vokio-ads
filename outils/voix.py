@@ -237,7 +237,7 @@ def noms():
             for v in appeler("/v2/voices", {"page_size": 100}).get("voices", [])}
 
 
-def essai(texte, ids=None):
+def essai(texte, ids=None, modele=None, reglages=None):
     """Une prise par voix, dans essais/. Sert à choisir à l'oreille.
 
     Sans --sur, la voix retenue. Avec, autant de prises que d'identifiants :
@@ -249,17 +249,21 @@ def essai(texte, ids=None):
         raise SystemExit("Pas de clé : essai inutile, la voix serait Kokoro.")
     if not ids:
         ids = [choisir()[1]]
-    modele = config().get("elevenlabs", {}).get("modele", "eleven_multilingual_v2")
+    modele = modele or config().get("elevenlabs", {}).get("modele", "eleven_multilingual_v2")
     dossier = RACINE / "essais"
     dossier.mkdir(exist_ok=True)
-    table = noms() if len(ids) > 1 else {}
+    table = noms()  # toujours : un fichier d'essai doit se lire sans décodeur
     for v in ids:
-        corps = json.dumps({"text": texte, "model_id": modele}).encode()
+        charge = {"text": texte, "model_id": modele}
+        if reglages:
+            charge["voice_settings"] = reglages
+        corps = json.dumps(charge).encode()
         req = urllib.request.Request(
             f"{API}/v1/text-to-speech/{v}", data=corps,
             headers={"xi-api-key": k, "Content-Type": "application/json"})
         lisible = re.sub(r"[^a-zA-Z0-9]+", "-", table.get(v, v)).strip("-").lower()
-        out = dossier / (f"{lisible}-{v}.mp3" if lisible else f"{v}.mp3")
+        suffixe = f"-{modele}" + ("-regle" if reglages else "")
+        out = dossier / ((f"{lisible}-{v}" if lisible else v) + suffixe + ".mp3")
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
                 out.write_bytes(r.read())
@@ -287,6 +291,9 @@ if __name__ == "__main__":
     p.add_argument("--cherche", default="")
     p.add_argument("--sur", default="", metavar="ID,ID",
                    help="essaie plusieurs voix d'un coup, pour comparer")
+    p.add_argument("--modele", default=None, help="eleven_v3, eleven_multilingual_v2…")
+    p.add_argument("--reglages", default="", metavar="JSON",
+                   help='voice_settings, ex. \'{"stability":0.45,"style":0.3}\'')
     a = p.parse_args()
 
     if a.catalogue:
@@ -298,7 +305,8 @@ if __name__ == "__main__":
     elif a.retenir:
         retenir(a.retenir)
     elif a.essai is not None:
-        essai(a.essai, [i.strip() for i in a.sur.split(",") if i.strip()])
+        essai(a.essai, [i.strip() for i in a.sur.split(",") if i.strip()],
+              a.modele, json.loads(a.reglages) if a.reglages else None)
     else:
         k = cle()
         print(f"coffre  : {COFFRE} — {'clé présente' if k else 'vide'}")
