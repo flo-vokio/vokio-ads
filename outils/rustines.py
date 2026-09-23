@@ -234,6 +234,52 @@ def python_impose(poser):
     return ["python.mjs"]
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+@rustine("une voix par plan", "media-use/audio/scripts/audio.mjs",
+         "Le moteur résout UNE voix pour tout le film. Une pub a souvent "
+         "besoin d'une seconde voix sur la signature finale. On lit "
+         "HF_VOICE_BY_LINE dans le moteur plutôt que dans le storyboard : "
+         "c'est un seul fichier à re-rustiner au lieu de deux, et la "
+         "distribution reste une donnée de projet, pas de mise en page.")
+def voix_par_plan(poser):
+    p = S / "media-use/audio/scripts/audio.mjs"
+    t = p.read_text()
+    if "const VOIX_PAR_PLAN" in t:
+        return []
+    if not poser:
+        return ["audio.mjs (moteur)"]
+    av = """  const synthLine = async (line) => {
+    const id = String(line.id);"""
+    ap = """  // RUSTINE VOKIO - une voix par plan (voir outils/rustines.py).
+  const VOIX_PAR_PLAN = (() => {
+    try {
+      return JSON.parse(process.env.HF_VOICE_BY_LINE || "{}");
+    } catch {
+      // Un JSON casse ne doit pas faire tomber le film sur une voix muette :
+      // on le signale et on retombe sur la voix unique.
+      console.error("· HF_VOICE_BY_LINE illisible, ignore");
+      return {};
+    }
+  })();
+  const synthLine = async (line) => {
+    const id = String(line.id);
+    const voixDuPlan = VOIX_PAR_PLAN[id] || VOIX_PAR_PLAN[String(Number(id))] || voiceId;
+    if (voixDuPlan !== voiceId) console.error(`  line ${id}: voix ${voixDuPlan}`);"""
+    assert t.count(av) == 1, "ancrage de synthLine introuvable"
+    t = t.replace(av, ap)
+    av2 = """    const { ok, words, error } = await synthesizeOne({
+      provider: ttsProvider,
+      text,
+      voiceId,"""
+    ap2 = """    const { ok, words, error } = await synthesizeOne({
+      provider: ttsProvider,
+      text,
+      voiceId: voixDuPlan,"""
+    assert t.count(av2) == 1, "ancrage de synthesizeOne introuvable"
+    p.write_text(t.replace(av2, ap2))
+    return ["audio.mjs (moteur)"]
+
+
 a.add_argument("--poser", action="store_true")
 a = a.parse_args()
 

@@ -1,9 +1,17 @@
 {
   "elevenlabs": {
-    "voice": null,
+    "voice": "m5U7XCsc8v988k2RJAqN",
     "modele": "eleven_multilingual_v2",
-    "_voice": "Identifiant de la voix retenue pour les pubs. Reste à null tant que personne n'a écouté : un film livré avec la voix anglaise par défaut d'ElevenLabs passerait le montage sans erreur. Se remplit avec outils/voix.py --retenir <id>.",
-    "_pas_lucie": "Lucie (YxrwjAKoUKULGd0g8K9Y) est la voix des agents qui décrochent. Une pub raconte une histoire, ce n'est pas le même métier : entendre l'agent narrer sa propre publicité brouille les deux rôles."
+    "_voice": "Voix du corps du film. « Manon - Serious & spontaneous », française, registre publicitaire.",
+    "par_plan": {
+      "6": "LFtQZWdaqmvamcTNGpwl"
+    },
+    "_par_plan": "Exceptions plan par plan. Le plan 6 passe à « Lucie - Narration » : la signature de marque n'est pas dite par la même bouche que le récit, c'est ce qui la fait entendre comme une signature et non comme une phrase de plus.",
+    "amorce_par_plan": {
+      "6": 0.75
+    },
+    "_amorce_par_plan": "Silence ajouté AVANT la ligne, en secondes. Le moteur pose chaque voix au début de son plan, sans décalage possible. Le mot « Vokio » doit tomber sur le logo qui finit de s'écrire à 1,14 s, pas sur un écran encore vide : 0,75 s d'amorce et le mot se termine avec le dessin.",
+    "_deux_lucie": "« Lucie - Narration » (LFtQZWdaqmvamcTNGpwl) n'a RIEN à voir avec « Lucie - Support Agent » (YxrwjAKoUKULGd0g8K9Y), la voix des agents qui décrochent. Trois « Lucie » différentes traînent dans le compte, vérifier l'identifiant et jamais le prénom."
   },
   "kokoro": {
     "voice": "ff_siwis",

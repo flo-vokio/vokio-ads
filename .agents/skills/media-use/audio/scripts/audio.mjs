@@ -138,8 +138,21 @@ if (only.has("tts") && lines.length) {
     lang,
   });
   console.error(`· tts: ${ttsProvider} · voice ${voiceId} · ${lines.length} line(s)`);
+  // RUSTINE VOKIO - une voix par plan (voir outils/rustines.py).
+  const VOIX_PAR_PLAN = (() => {
+    try {
+      return JSON.parse(process.env.HF_VOICE_BY_LINE || "{}");
+    } catch {
+      // Un JSON casse ne doit pas faire tomber le film sur une voix muette :
+      // on le signale et on retombe sur la voix unique.
+      console.error("· HF_VOICE_BY_LINE illisible, ignore");
+      return {};
+    }
+  })();
   const synthLine = async (line) => {
     const id = String(line.id);
+    const voixDuPlan = VOIX_PAR_PLAN[id] || VOIX_PAR_PLAN[String(Number(id))] || voiceId;
+    if (voixDuPlan !== voiceId) console.error(`  line ${id}: voix ${voixDuPlan}`);
     const text = String(line.text ?? "").trim();
     if (!text) {
       anomalies.push(`line ${id}: empty text — skipped`);
@@ -150,7 +163,7 @@ if (only.has("tts") && lines.length) {
     const { ok, words, error } = await synthesizeOne({
       provider: ttsProvider,
       text,
-      voiceId,
+      voiceId: voixDuPlan,
       lang,
       speed,
       wavAbs: abs,

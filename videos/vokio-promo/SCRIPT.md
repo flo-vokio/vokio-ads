@@ -49,10 +49,12 @@ est 75 mots ; la marge est volontaire, les silences font le rythme.
 
 ## Ligne 6 — CTA (Frame 6)
 
-**Time:** 26,0 – 30,0 s
-**Delivery:** Une seule phrase, posée. Ne pas monter à la fin.
+**Time:** 26,8 – 30,0 s
+**Delivery:** « Vokio » se pose SUR le mot qui s'écrit, pas avant : la ligne
+entre après une amorce de silence, calée sur la fin de l'essuyage du logo.
+Enchaîner sans respirer sur la signature. Ne pas monter à la fin.
 
-    Ne ratez plus un seul appel.
+    Vokio. Ne ratez plus un seul appel.
 
 ---
 

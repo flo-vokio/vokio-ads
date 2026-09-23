@@ -31,6 +31,7 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 import urllib.error
 import urllib.parse
@@ -75,6 +76,58 @@ def choisir(force=None):
             "Clé ElevenLabs déposée, mais aucune voix retenue.\n"
             "  outils/voix.py --bibliotheque   puis   outils/voix.py --retenir <id>")
     return "elevenlabs", v, {"ELEVENLABS_API_KEY": k}
+
+
+def distribution():
+    """Les exceptions de voix, prêtes pour HF_VOICE_BY_LINE.
+
+    Le moteur attend des identifiants de ligne à deux chiffres (« 06 ») ; on
+    écrit le numéro de plan tel qu'on le lit dans le storyboard (« 6 »).
+    """
+    par = config().get("elevenlabs", {}).get("par_plan") or {}
+    return {f"{int(k):02d}": v for k, v in par.items()}
+
+
+def amorces():
+    """Silence à poser AVANT la ligne, par numéro de plan (secondes)."""
+    a = config().get("elevenlabs", {}).get("amorce_par_plan") or {}
+    return {int(k): float(v) for k, v in a.items()}
+
+
+def poser_amorces(projet, table, journal=print):
+    """Décale des lignes de voix dans leur plan, et recale leurs mots.
+
+    Le monteur pose chaque voix au DÉBUT de son plan, sans décalage possible :
+    il n'existe pas de champ pour retarder une ligne. On met donc l'attente
+    dans le fichier lui-même. Les horodatages des mots, eux, viennent de la
+    transcription : ils doivent glisser d'autant, sinon les sous-titres du
+    plan partent avec le décalage en moins.
+    """
+    if not table:
+        return
+    projet = Path(projet)
+    meta_f = projet / "audio_meta.json"
+    meta = json.loads(meta_f.read_text())
+    for v in meta.get("voices", []):
+        a = table.get(v.get("frame"))
+        if not a:
+            continue
+        src = projet / v["path"]
+        tmp = src.with_suffix(".amorce.wav")
+        subprocess.run(
+            ["ffmpeg", "-y", "-loglevel", "error", "-i", str(src),
+             "-af", f"adelay={int(round(a * 1000))}:all=1", str(tmp)],
+            check=True)
+        tmp.replace(src)
+        for w in v.get("words") or []:
+            w["start"] = round(w["start"] + a, 3)
+            w["end"] = round(w["end"] + a, 3)
+        duree = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+             "-of", "csv=p=0", str(src)], capture_output=True, text=True, check=True)
+        v["duration_s"] = round(float(duree.stdout.strip()), 3)
+        journal(f"· plan {v['frame']} : {a} s d'amorce, ligne à {v['duration_s']} s")
+    meta_f.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n")
 
 
 def appeler(chemin, params=None):

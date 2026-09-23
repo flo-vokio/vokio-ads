@@ -137,6 +137,29 @@ catalogue pour choisir une voix ; et sa consommation est surveillée au titre
 du coût par appel client, une pub qui s'y mélange fausse le suivi. Droits
 nécessaires sur la nouvelle clé : **Text to Speech** et **Voices: read**.
 
+### Deux voix dans le même film
+
+`voix.json` porte la distribution : une voix par défaut pour le corps du film,
+et des exceptions plan par plan.
+
+```json
+"voice": "m5U7XCsc8v988k2RJAqN",          // Manon, le récit
+"par_plan":        { "6": "LFtQZWdaqmvamcTNGpwl" },   // Lucie, la signature
+"amorce_par_plan": { "6": 0.75 }
+```
+
+Le moteur ne résolvait qu'une voix pour tout le film ; la rustine « une voix
+par plan » lui fait lire `HF_VOICE_BY_LINE`. Le journal de montage écrit la
+voix réellement employée sur chaque ligne d'exception, pour que la
+distribution soit un fait vérifiable et pas une intention.
+
+`amorce_par_plan` retarde une ligne à l'intérieur de son plan. Le monteur pose
+chaque voix au **début** de son plan et n'offre aucun décalage : l'attente est
+donc mise dans le fichier son lui-même, et les horodatages des mots glissent
+d'autant, sinon les sous-titres du plan partiraient en avance. Le plan 6 s'en
+sert pour que « Vokio » se dise **sur** le logo qui finit de s'écrire à
+1,14 s, et non sur un écran encore vide.
+
 `voix.json` garde l'identifiant retenu. Il vaut `null` au départ, et
 `voix.choisir()` **refuse de produire** tant qu'il vaut `null` alors qu'une
 clé est présente : sans ce garde-fou le film sortirait avec la voix anglaise

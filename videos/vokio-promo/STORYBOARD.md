@@ -327,7 +327,7 @@ C'est le plan de repos du film : la preuve n'a pas besoin d'être agitée.
 - duration: 4.0s
 - transition_in: cut
 - status: outline
-- voiceover: "Ne ratez plus un seul appel."
+- voiceover: "Vokio. Ne ratez plus un seul appel."
 - asset_candidates: assets/symbole-onde.svg
 - persuasion: l'adresse
 - beat: le logo se termine

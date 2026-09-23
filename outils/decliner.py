@@ -143,13 +143,24 @@ def rebatir_salutation(projet, phrase):
     return len(mots)
 
 
-def lancer(cmd, cwd, titre, env_plus=None):
+def lancer(cmd, cwd, titre, env_plus=None, echo=None):
+    """`echo` remonte les lignes du sous-processus qui comptent pour nous.
+
+    Le moteur audio journalise sur la sortie d'erreur, qu'on avale en cas de
+    succès. Or la voix réellement employée par ligne ne s'y lit que là : sans
+    ce filtre, « une voix par plan » resterait une affirmation invérifiable
+    dans le journal de montage.
+    """
     print(f"· {titre}")
     r = subprocess.run(cmd, cwd=cwd, env={**ENV, **(env_plus or {})},
                        capture_output=True, text=True)
     if r.returncode != 0:
         sys.stderr.write(r.stdout[-3000:] + r.stderr[-3000:])
         raise SystemExit(f"échec : {titre}")
+    if echo:
+        for l in (r.stdout + r.stderr).splitlines():
+            if re.search(echo, l):
+                print("  " + l.strip())
     return r.stdout
 
 
@@ -220,10 +231,18 @@ print("· chaînes substituées")
 
 # ── La voix, puis les mots recalés dessus ────────────────────────────────────
 moteur, voix_id, env_voix = voix.choisir(force=a.voix)
+# La distribution ne vaut que pour ElevenLabs : les identifiants de voix de
+# Kokoro n'ont rien à voir, et une exception posée sur le repli local
+# produirait une ligne dans une voix inexistante.
+repartition = voix.distribution() if moteur == "elevenlabs" and not a.voix else {}
+if repartition:
+    env_voix = {**env_voix, "HF_VOICE_BY_LINE": json.dumps(repartition)}
+titre = f"voix off ({moteur} · {voix_id}"
+titre += f" · plan(s) {', '.join(sorted(repartition))} à part)" if repartition else ")"
 lancer(["node", str(RACINE / ".agents/skills/product-launch-video/scripts/audio.mjs"),
         "--script", "./SCRIPT.md", "--storyboard", "./STORYBOARD.md", "--hyperframes", ".",
         "--out", "./audio_meta.json", "--provider", moteur, "--voice", voix_id],
-       projet, f"voix off ({moteur} · {voix_id})", env_voix)
+       projet, titre, env_voix, echo=r"line \d+: voix ")
 
 # audio.mjs classe un échec de synthèse en « anomalie non fatale » et SORT EN
 # 0. Le 23/09, les six lignes ont échoué ensemble (mauvais interpréteur python)
@@ -237,6 +256,7 @@ if len(produit) != attendu:
         f"Le moteur était « {moteur} », voix « {voix_id} ».\n"
         "Relancer outils/rustines.py, puis la synthèse à la main pour voir l'erreur.")
 print(f"· voix off complète ({attendu} lignes)")
+voix.poser_amorces(projet, voix.amorces() if moteur == "elevenlabs" else {})
 
 lancer(["python3", str(RACINE / "outils/recaler_mots.py"), str(projet), "--ecrire"],
        projet, "mots recalés sur le script")
