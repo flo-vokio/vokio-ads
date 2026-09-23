@@ -113,8 +113,13 @@ casse pas le montage.
 outils/voix.py                  # ce qui serait utilisé, et pourquoi
 outils/voix.py --bibliotheque   # voix publiques françaises, filtrables
 outils/voix.py --retenir <id>   # inscrit la voix dans voix.json
-outils/voix.py --essai          # une phrase témoin, pour écouter avant
+outils/voix.py --essai          # une prise, pour écouter avant
+outils/voix.py --essai "<texte>" --sur ID,ID,ID   # comparer plusieurs voix
 ```
+
+Les essais atterrissent dans `essais/` (hors dépôt, régénérables). Les
+étiquettes du catalogue ne disent rien du timbre réel : une voix se choisit à
+l'oreille, sur le texte du film, jamais sur `narrative_story`.
 
 **Déposer la clé** (en SSH, jamais en conversation ni par un outil) :
 

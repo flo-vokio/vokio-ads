@@ -10,3 +10,5 @@ videos/*/.media/
 .DS_Store
 *.log
 videos/*/capture/
+# Essais de voix : régénérables en une commande (outils/voix.py --essai --sur)
+essais/

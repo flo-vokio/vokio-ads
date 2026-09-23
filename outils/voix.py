@@ -30,6 +30,7 @@ titre du coût par appel client, une pub qui s'y mélange fausse le suivi.
 import argparse
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -137,25 +138,43 @@ def retenir(vid):
     print("Le prochain decliner.py / monter.sh la prendra sans autre geste.")
 
 
-def essai(texte):
-    provider, v, env = choisir()
-    if provider != "elevenlabs":
+def noms():
+    """id → nom lisible, pour que les essais soient écoutables sans décodeur."""
+    return {v["voice_id"]: v.get("name", v["voice_id"])
+            for v in appeler("/v2/voices", {"page_size": 100}).get("voices", [])}
+
+
+def essai(texte, ids=None):
+    """Une prise par voix, dans essais/. Sert à choisir à l'oreille.
+
+    Sans --sur, la voix retenue. Avec, autant de prises que d'identifiants :
+    c'est la seule façon honnête de trancher, les étiquettes du catalogue
+    (« narrative_story », « standard ») ne disent rien du timbre réel.
+    """
+    k = cle()
+    if not k:
         raise SystemExit("Pas de clé : essai inutile, la voix serait Kokoro.")
+    if not ids:
+        ids = [choisir()[1]]
     modele = config().get("elevenlabs", {}).get("modele", "eleven_multilingual_v2")
-    corps = json.dumps({"text": texte, "model_id": modele}).encode()
-    req = urllib.request.Request(
-        f"{API}/v1/text-to-speech/{v}",
-        data=corps,
-        headers={"xi-api-key": env["ELEVENLABS_API_KEY"],
-                 "Content-Type": "application/json"})
-    out = RACINE / "essais" / f"{v}.mp3"
-    out.parent.mkdir(exist_ok=True)
-    try:
-        with urllib.request.urlopen(req, timeout=60) as r:
-            out.write_bytes(r.read())
-    except urllib.error.HTTPError as e:
-        raise SystemExit(f"ElevenLabs {e.code} : {e.read().decode('utf-8','replace')[:400]}")
-    print(f"{out}  ({out.stat().st_size // 1024} Ko)")
+    dossier = RACINE / "essais"
+    dossier.mkdir(exist_ok=True)
+    table = noms() if len(ids) > 1 else {}
+    for v in ids:
+        corps = json.dumps({"text": texte, "model_id": modele}).encode()
+        req = urllib.request.Request(
+            f"{API}/v1/text-to-speech/{v}", data=corps,
+            headers={"xi-api-key": k, "Content-Type": "application/json"})
+        lisible = re.sub(r"[^a-zA-Z0-9]+", "-", table.get(v, v)).strip("-").lower()
+        out = dossier / (f"{lisible}-{v}.mp3" if lisible else f"{v}.mp3")
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                out.write_bytes(r.read())
+        except urllib.error.HTTPError as e:
+            print(f"  {v} : ElevenLabs {e.code} — "
+                  f"{e.read().decode('utf-8','replace')[:200]}")
+            continue
+        print(f"{out}  ({out.stat().st_size // 1024} Ko)")
 
 
 if __name__ == "__main__":
@@ -170,6 +189,8 @@ if __name__ == "__main__":
     p.add_argument("--usage", default="narrative_story")
     p.add_argument("--genre", default="")
     p.add_argument("--cherche", default="")
+    p.add_argument("--sur", default="", metavar="ID,ID",
+                   help="essaie plusieurs voix d'un coup, pour comparer")
     a = p.parse_args()
 
     if a.catalogue:
@@ -179,7 +200,7 @@ if __name__ == "__main__":
     elif a.retenir:
         retenir(a.retenir)
     elif a.essai is not None:
-        essai(a.essai)
+        essai(a.essai, [i.strip() for i in a.sur.split(",") if i.strip()])
     else:
         k = cle()
         print(f"coffre  : {COFFRE} — {'clé présente' if k else 'vide'}")
