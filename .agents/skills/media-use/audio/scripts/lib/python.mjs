@@ -31,7 +31,14 @@ function defaultProbe(cmd, args) {
  * If nothing probes OK, falls back to the canonical name for the platform so
  * the eventual spawn fails loudly exactly as it did before — never worse.
  */
-export function resolvePythonCommand(platform = process.platform, probe = defaultProbe) {
+export function resolvePythonCommand(
+  platform = process.platform,
+  probe = defaultProbe,
+  env = process.env,
+) {
+  // RUSTINE VOKIO - honorer HYPERFRAMES_PYTHON (voir outils/rustines.py).
+  const impose = env.HYPERFRAMES_PYTHON;
+  if (impose && probe(impose, ["--version"])) return [impose];
   const candidates =
     platform === "win32" ? [["python3"], ["python"], ["py", "-3"]] : [["python3"], ["python"]];
   for (const prefix of candidates) {

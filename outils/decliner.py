@@ -224,6 +224,20 @@ lancer(["node", str(RACINE / ".agents/skills/product-launch-video/scripts/audio.
         "--script", "./SCRIPT.md", "--storyboard", "./STORYBOARD.md", "--hyperframes", ".",
         "--out", "./audio_meta.json", "--provider", moteur, "--voice", voix_id],
        projet, f"voix off ({moteur} · {voix_id})", env_voix)
+
+# audio.mjs classe un échec de synthèse en « anomalie non fatale » et SORT EN
+# 0. Le 23/09, les six lignes ont échoué ensemble (mauvais interpréteur python)
+# et rien n'a bronché : sans ce contrôle, un film MUET traverse tout le
+# montage, passe la vérification, et se livre.
+attendu = len(re.findall(r"^\s*-?\s*voiceover:", (projet / "STORYBOARD.md").read_text(), re.M))
+produit = json.loads((projet / "audio_meta.json").read_text()).get("voices", [])
+if len(produit) != attendu:
+    raise SystemExit(
+        f"voix off incomplète : {len(produit)} ligne(s) produite(s) sur {attendu}.\n"
+        f"Le moteur était « {moteur} », voix « {voix_id} ».\n"
+        "Relancer outils/rustines.py, puis la synthèse à la main pour voir l'erreur.")
+print(f"· voix off complète ({attendu} lignes)")
+
 lancer(["python3", str(RACINE / "outils/recaler_mots.py"), str(projet), "--ecrire"],
        projet, "mots recalés sur le script")
 

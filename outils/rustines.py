@@ -199,6 +199,41 @@ def sous_titres(poser):
 
 # ─────────────────────────────────────────────────────────────────────────────
 a = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+# ─────────────────────────────────────────────────────────────────────────────
+@rustine("interpréteur python imposé", "media-use/audio/scripts/lib/python.mjs",
+         "Le fichier sonde un `python3` nu dans le PATH et ignore "
+         "HYPERFRAMES_PYTHON. Kokoro s'en sort parce qu'il passe par "
+         "`npx hyperframes tts`, qui lit la variable lui-même ; ElevenLabs "
+         "exécute son extrait python en direct et tombe sur le python du "
+         "système, sans le paquet `elevenlabs`. Les six lignes échouent "
+         "ensemble, audio.mjs les classe en « non-fatal » et SORT EN 0 : le "
+         "montage continue sur un film muet sans qu'un garde-fou bronche.")
+def python_impose(poser):
+    p = S / "media-use/audio/scripts/lib/python.mjs"
+    t = p.read_text()
+    # On vise la LIGNE DE CODE, pas le commentaire qui la justifie : le
+    # commentaire cite lui aussi HYPERFRAMES_PYTHON, et une détection posée
+    # dessus se déclarerait satisfaite par sa propre explication.
+    if "const impose = env.HYPERFRAMES_PYTHON;" in t:
+        return []
+    if not poser:
+        return ["python.mjs"]
+    av = """export function resolvePythonCommand(platform = process.platform, probe = defaultProbe) {
+  const candidates ="""
+    ap = """export function resolvePythonCommand(
+  platform = process.platform,
+  probe = defaultProbe,
+  env = process.env,
+) {
+  // RUSTINE VOKIO - honorer HYPERFRAMES_PYTHON (voir outils/rustines.py).
+  const impose = env.HYPERFRAMES_PYTHON;
+  if (impose && probe(impose, ["--version"])) return [impose];
+  const candidates ="""
+    assert t.count(av) == 1, "ancrage de resolvePythonCommand introuvable"
+    p.write_text(t.replace(av, ap))
+    return ["python.mjs"]
+
+
 a.add_argument("--poser", action="store_true")
 a = a.parse_args()
 

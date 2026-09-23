@@ -1,5 +1,5 @@
 {
-  "provider": "kokoro",
+  "provider": "elevenlabs",
   "speed": 1,
   "lang": "fr",
   "lines": [
@@ -31,5 +31,5 @@
   "bgm": {
     "mode": "none"
   },
-  "voice": "ff_siwis"
+  "voice": "LFtQZWdaqmvamcTNGpwl"
 }

@@ -153,6 +153,20 @@ de `SCRIPT.md` : sans lui les sous-titres affichent « Vocuez au » pour
 
 ---
 
+## Le piège du film muet
+
+`audio.mjs` classe un échec de synthèse en « anomalie non fatale » et **sort
+en 0**. Le 23/09 les six lignes ont échoué ensemble, parce que la voie
+ElevenLabs exécute son extrait python en direct et tombait sur le python du
+système, sans le paquet `elevenlabs` : Kokoro n'avait jamais rien vu, lui
+passe par `npx hyperframes tts` qui lit `HYPERFRAMES_PYTHON` tout seul.
+
+Deux garde-fous depuis, et il en fallait deux : la rustine
+« interpréteur python imposé » supprime la cause, et `decliner.py` compte les
+lignes produites contre les `voiceover:` du storyboard et **s'arrête** si le
+compte n'y est pas. Le premier peut sauter à la prochaine mise à jour des
+skills ; le second, non.
+
 ## Après toute mise à jour des skills
 
 ```bash
