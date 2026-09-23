@@ -82,7 +82,7 @@
     /* each segment wipes on its own; the dot lives OUTSIDE the clipped glyph */
     [id="06-cta-word"] .seg{
       display:inline-block;
-      clip-path:inset(-28% 0% -28% 0%);
+      clip-path:inset(-28% -14% -28% -14%);
     }
     [id="06-cta-word"] .glyph-i{
       position:relative;
@@ -206,8 +206,8 @@
       var DX = -144.92;
       var DY = 217.80;
 
-      var SHUT = "inset(-28% 100% -28% 0%)";
-      var OPEN = "inset(-28% 0% -28% 0%)";
+      var SHUT = "inset(-28% 100% -28% -14%)";
+      var OPEN = "inset(-28% -14% -28% -14%)";
 
       /* ---- Scene 1 (0.00-0.75) — the wave, still alive, sheds its four ink bars ---- */
 
