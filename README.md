@@ -231,9 +231,31 @@ Et ce qu'une machine ne peut pas vérifier, c'est si une phrase *sonne juste*
 dans un métier. D'où la **relecture** : l'outil imprime en un écran tout ce
 que le film dit et tout ce qu'il montre. Ça se lit à voix haute.
 
+### C'est un prérequis, pas un conseil
+
 `decliner.py` l'appelle en `--strict` **après la reconstruction de l'accroche
 et avant le rendu** : l'accroche à l'écran n'existe qu'une fois la voix faite,
 et un mot du mauvais métier ne doit pas coûter un encodage pour se faire voir.
+La relecture s'imprime **en entier**, à l'écran, à ce moment-là. C'est le
+dernier instant où corriger coûte trois minutes au lieu d'une livraison.
+
+Une fiche neuve ne peut pas passer entre les mailles :
+
+```bash
+outils/nouveau_metier.py coiffure    # gabarit où chaque valeur porte TODO
+```
+
+Le gabarit sort une fiche à la forme de la référence et **sans aucune de ses
+valeurs**. Copier une fiche existante, ce serait repartir des mots d'un autre
+métier, ce qui est précisément l'origine de « Les mains dans le service ».
+`langue.py` refuse tant qu'il reste un `TODO`, et refuse aussi une fiche sans
+`vocabulaire.interdits`, sans `vocabulaire.attendus`, ou à qui il manque une
+clé de `lexique` / `lexique_notes`. **Un prérequis qui n'arrête pas le montage
+n'est pas un prérequis, c'est un conseil.**
+
+Quand `/opt/vokio-n8n/verticals/<code>.md` existe, le gabarit le signale : ce
+fichier dit déjà comment le métier parle, c'est la meilleure source pour
+remplir le vocabulaire.
 
 Les codes métier sont ceux du produit (`verticals.code`), pour qu'une verticale
 porte le même nom dans l'agent vocal et dans la pub.

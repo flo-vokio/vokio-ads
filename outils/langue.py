@@ -106,6 +106,8 @@ def mots_interdits(fiche, nom):
     durs, doux = [], []
     vus = set()
     for mot, remede in voc.items():
+        if mot == "TODO":
+            continue          # fiche à peine créée : `complet` le dit mieux
         motif = re.compile(rf"\b{re.escape(mot)}\w*", re.I)
         for ou, texte in list(champs(fiche, "")) and \
                 [(f"fiche · {c}", x) for c, x in champs(fiche, "")]:
@@ -173,6 +175,33 @@ def attendus(fiche, nom):
     return [], [f"aucune occurrence de « {m} »" for m in absents]
 
 
+def complet(fiche, ref, nom):
+    """La fiche déclare-t-elle tout ce qu'une verticale doit déclarer ?
+
+    Sans ce contrôle, une fiche neuve sans bloc `vocabulaire` passait avec un
+    simple avertissement : la verticale se montait, en silence, avec les mots
+    du plombier. Un prérequis qui n'arrête pas le montage n'est pas un
+    prérequis, c'est un conseil.
+    """
+    durs = []
+    voc = fiche.get("vocabulaire") or {}
+    if not voc.get("interdits"):
+        durs.append("vocabulaire.interdits absent : quels mots d'un AUTRE métier "
+                    "ne doivent jamais apparaître, et que dire à la place ?")
+    if not voc.get("attendus"):
+        durs.append("vocabulaire.attendus absent : quels mots propres à ce métier "
+                    "doivent apparaître quelque part ?")
+    for bloc in ("lexique", "lexique_notes"):
+        manque = set(ref.get(bloc) or {}) - set(fiche.get(bloc) or {})
+        if manque:
+            durs.append(f"{bloc} : clés manquantes {sorted(manque)}")
+    restes = [c for c, x in champs(fiche) if "TODO" in x]
+    if restes:
+        durs.append(f"{len(restes)} valeur(s) jamais écrite(s) : "
+                    + ", ".join(restes[:12]) + (" …" if len(restes) > 12 else ""))
+    return durs, []
+
+
 def relecture(fiche, nom):
     print(f"\n── Relecture · {nom} ──────────────────────────────────────────")
     p = RACINE / "videos" / f"vokio-{nom}"
@@ -201,6 +230,9 @@ def passer(nom, strict, muet=False):
         durs += d
         doux += s
     if nom != REFERENCE:
+        d, s = complet(fiche, ref, nom)
+        durs += d
+        doux += s
         d, s = calques(fiche, ref, nom)
         durs += d
         doux += s

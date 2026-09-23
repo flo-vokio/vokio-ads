@@ -14,40 +14,40 @@
     {
       "id": "01",
       "path": "assets/voice/01.wav",
-      "duration_s": 2.638,
+      "duration_s": 2.926,
       "words": []
     },
     {
       "id": "02",
       "path": "assets/voice/02.wav",
-      "duration_s": 3.605,
+      "duration_s": 3.527,
       "words": []
     },
     {
       "id": "03",
       "path": "assets/voice/03.wav",
-      "duration_s": 3.344,
+      "duration_s": 3.892,
       "words": []
     },
     {
       "id": "04",
       "path": "assets/voice/04.wav",
-      "duration_s": 4.859,
+      "duration_s": 4.023,
       "words": []
     },
     {
       "id": "05",
       "path": "assets/voice/05.wav",
-      "duration_s": 3.605,
+      "duration_s": 3.762,
       "words": []
     },
     {
       "id": "06",
       "path": "assets/voice/06.wav",
-      "duration_s": 2.22,
+      "duration_s": 2.09,
       "words": []
     }
   ],
   "sfx": [],
-  "total_duration_s": 20.271
+  "total_duration_s": 20.22
 }

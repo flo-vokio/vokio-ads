@@ -35,6 +35,11 @@ from pathlib import Path
 
 import voix  # le choix du moteur vit là, pas ici
 
+# Sans ça, les `print` du script sortent par blocs quand la sortie est
+# redirigée, et la relecture imprimée par langue.py apparaît AVANT les étapes
+# qui l'ont précédée : un journal qui ment sur l'ordre des choses.
+sys.stdout.reconfigure(line_buffering=True)
+
 RACINE = Path("/opt/vokio-ads")
 REF = RACINE / "videos/vokio-promo"
 ENV = {"PATH": "/opt/node22/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
@@ -346,8 +351,14 @@ print(f"· accroche rebâtie ({n} mots, sur la voix) · salutation rebâtie ({m}
 # Après la reconstruction de l'accroche, pas avant : elle se cale sur les
 # horodatages de la voix, donc à l'écran elle parle encore plombier jusqu'ici.
 # Et avant monter.sh, pour qu'un mot du mauvais métier ne coûte pas un rendu.
-lancer(["python3", str(RACINE / "outils/langue.py"), a.metier, "--strict", "--sans-relecture"],
-       projet, "langue du métier", echo=r"^\[|^  ·")
+# La relecture s'imprime en entier, et volontairement à l'écran plutôt que
+# dans un journal : c'est le seul contrôle qu'aucune machine ne sait faire, et
+# il tombe juste avant le rendu, au dernier moment où corriger coûte trois
+# minutes au lieu d'une livraison.
+print("· langue du métier")
+if subprocess.run(["python3", str(RACINE / "outils/langue.py"), a.metier, "--strict"],
+                  cwd=projet, env=ENV).returncode != 0:
+    raise SystemExit("échec : langue du métier")
 
 # ── Montage ──────────────────────────────────────────────────────────────────
 sortie = lancer(["./monter.sh"] + ([] if a.sans_rendu else ["--rendre"]), projet, "montage")
