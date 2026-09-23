@@ -62,13 +62,22 @@ def lire(nom):
 
 
 def remplacer(chemin, paires):
-    """Substitution comptée. Une occurrence manquante arrête tout."""
+    """Substitution comptée. Une occurrence manquante arrête tout.
+
+    `attendu = None` veut dire « toutes les occurrences, au moins une ». C'est
+    pour la prose : dans les notes de conception un même mot revient un nombre
+    de fois qui change à chaque relecture du gabarit, et compter les
+    occurrences d'un paragraphe reviendrait à casser la déclinaison à chaque
+    virgule ajoutée. Le « au moins une » garde le garde-fou qui compte : une
+    tournure disparue du gabarit s'arrête toujours ici.
+    """
     t = chemin.read_text()
     for av, ap, attendu in paires:
         n = t.count(av)
-        if n != attendu:
+        if (attendu is None and n == 0) or (attendu is not None and n != attendu):
             raise SystemExit(
-                f"{chemin.name} : « {av[:48]} » trouvé {n} fois, {attendu} attendu(es).\n"
+                f"{chemin.name} : « {av[:48]} » trouvé {n} fois, "
+                f"{'au moins 1' if attendu is None else attendu} attendu(es).\n"
                 "Le gabarit a changé depuis le dernier passage : mettre à jour decliner.py.")
         t = t.replace(av, ap)
     chemin.write_text(t)
@@ -235,7 +244,29 @@ remplacer(projet / "SCRIPT.md", [
     # était celle du créneau, que `doc_creneau` traduit désormais en entier.
     # Le compteur l'a signalé au premier passage, comme prévu.
 ])
-remplacer(projet / "STORYBOARD.md", [(f"metier: {src['metier']}", f"metier: {cible['metier']}", 1)])
+# Les notes de conception du storyboard décrivent le film plan par plan. Elles
+# ne s'entendent ni ne se voient, mais c'est le document que lit quiconque
+# reprend le film : un storyboard de restaurant qui raconte une fuite sous un
+# évier envoie la personne suivante dans le mur. Du plus spécifique au plus
+# général, sinon une tournure courte mange la longue qui la contient.
+notes_src, notes_cible = src.get("lexique_notes", {}), cible.get("lexique_notes", {})
+if set(notes_src) != set(notes_cible):
+    raise SystemExit(f"notes incompatibles : {sorted(set(notes_src) ^ set(notes_cible))}")
+ordre = ["n_sms", "n_recap_contenu", "n_carte_client", "n_recap_de", "n_recap_carte",
+         "n_mot_surface", "n_mot_pose", "n_carte", "n_carte_focal",
+         "n_surface_seule", "n_surface_grille", "n_surface_couple",
+         "n_surface_preuve", "n_surface_tient", "n_surface",
+         "n_titre_pose", "n_pose_min", "n_audience", "n_ligne_heure"]
+if set(ordre) != set(notes_src):
+    raise SystemExit(f"ordre des notes à revoir : {sorted(set(ordre) ^ set(notes_src))}")
+remplacer(projet / "STORYBOARD.md",
+          [(f"metier: {src['metier']}", f"metier: {cible['metier']}", 1)]
+          + [(notes_src[k], notes_cible[k], None) for k in ordre]
+          + [(src["accroche"].rstrip("."), cible["accroche"].rstrip("."), None),
+             (src["demande_client"].rstrip("."), cible["demande_client"].rstrip("."), None),
+             (src["confrere"], cible["confrere"], None),
+             (src["client_nom"], cible["client_nom"], None),
+             (src["etablissement"], cible["etablissement"], None)])
 remplacer(F / "01-accroche.html", [(src["heure_appel"], cible["heure_appel"], 1)])
 remplacer(F / "02-probleme.html", [(src["heure_appel"], cible["heure_appel"], 1),
                                    (src["confrere"], cible["confrere"], 2)])

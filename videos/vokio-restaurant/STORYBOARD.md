@@ -2,8 +2,8 @@
 format: 1080x1920
 duration: 30s
 message: "Un appel sans réponse, c'est un client chez le concurrent — Vokio décroche à votre place"
-arc: Accroche → Problème → Vokio décroche → Le rendez-vous se pose → La preuve → CTA
-audience: artisans et commerçants TPE, métiers de terrain
+arc: Accroche → Problème → Vokio décroche → La réservation se pose → La preuve → CTA
+audience: restaurateurs indépendants et petites équipes de salle
 mode: collaborative
 language: fr
 metier: restaurant
@@ -20,7 +20,7 @@ sol de tous les plans et ne change jamais. L'encre `ink` porte 100 % du texte :
 le contraste vient de la taille, jamais de la couleur. Le solaire `sun` est
 rationné à **un seul usage par plan** et il signale toujours la même chose,
 *l'agent agit* : le halo de l'appel, la barre centrale de l'onde, le liseré de
-l'agenda, la carte du rendez-vous, les pastilles des reçus, le point du i. Le
+le livre de réservations, la carte de la réservation, les pastilles des reçus, le point du i. Le
 `ember` n'apparaît pas.
 
 Une seule couleur négative dans tout le film, décidée le 23/09 : au plan 02,
@@ -61,7 +61,7 @@ décorative qui tienne lieu d'objet réel. Pas de dégradé bleu-violet. Et les
 deux échecs de mouvement : le diaporama (tout posé dans les 25 % du début puis
 figé) et l'économiseur d'écran (tout qui flotte en même temps sans raison).
 
-## Frame 1 — Les mains sous un évier
+## Frame 1 — Pris par le service
 
 - type: hook
 - blueprint: kinetic-type-beats
@@ -85,7 +85,7 @@ Adapt : on garde le principe des temps de texte qui se posent seuls sur un fond
 nu, mais le dernier temps n'est pas un mot, c'est un objet. Le blueprint l'autorise
 explicitement, et c'est ce qui empêche l'accroche de n'être qu'un carton de titre.
 
-Scene 1 (0,00–1,35 s) : papier nu, rien d'autre. « Les mains sous un évier. » se
+Scene 1 (0,00–1,35 s) : papier nu, rien d'autre. « Pris par le service. » se
 révèle **mot à mot** (`dynamic-content-sequencing`) sur les mots réels — 0,04 /
 0,19 / 0,54 / 0,77 / 0,90 — en `display`, décélération longue. Centré, tiers
 supérieur, bloc à ~70 % de la largeur utile.
@@ -149,7 +149,7 @@ avant que le premier filet de la liste ne se trace.
 
 Scene 2b (1,37–2,90 s) : trois rangs à filets s'écrivent un par un, calés sur
 « client » (1,37), « appelle » (1,70), « suivant » (2,21). Le premier porte
-« Vous » barré, les deux suivants « Artisan suivant ». Aucun concurrent n'est
+« Vous » barré, les deux suivants « Restaurant suivant ». Aucun concurrent n'est
 nommé : c'est « le suivant », et ça suffit.
 
 Scene 3 (2,90–4,80 s) : sur « liste. » (2,89) le troisième rang s'allume en
@@ -173,7 +173,7 @@ travail. Aucun montant, aucun pourcentage.
 - status: outline
 - voiceover: "Vokio décroche à votre place, et dit tout de suite qui elle est."
 - asset_candidates: assets/symbole-onde.svg
-- handoff_out: aucun report. Le plan 04 repart sur un agenda seul, pleine largeur (décision Florian du 23/09 : le fil a déjà été lu en entier ici, le relire en petit divise le regard)
+- handoff_out: aucun report. Le plan 04 repart sur un livre de réservations seul, pleine largeur (décision Florian du 23/09 : le fil a déjà été lu en entier ici, le relire en petit divise le regard)
 - persuasion: le renversement
 - beat: quelqu'un a décroché
 - blueprint: agent-progress-theater (Adapt)
@@ -196,32 +196,32 @@ parle, pas une carte qui respire.
 
 Scene 2 (1,00–2,40 s) : la bulle de l'agent se déplie sous l'onde
 (`card-morph-anchor`, décélération longue). Son texte arrive en deux morceaux,
-sur les mots : « Plomberie Azur, bonjour. » sur 1,00–1,36, puis **« Je suis
+sur les mots : « Le Comptoir des Lices, bonjour. » sur 1,00–1,36, puis **« Je suis
 l'assistante vocale de l'entreprise. »** sur 1,80–2,80. Cette seconde moitié
 reçoit un `asr-keyword-glow` solaire qui s'allume exactement sur « qui elle
 est » (2,45) et retombe. La mention de l'article 50 n'est pas un astérisque de
 bas de cadre : c'est le mot que la voix désigne et que l'image allume.
 
 Scene 3 (2,40–5,40 s) : l'onde ralentit et s'immobilise. La bulle du client
-arrive en bas à droite, plus petite, « J'ai une fuite sous l'évier. », entrée
+arrive en bas à droite, plus petite, « Une table pour quatre, demain midi. », entrée
 simple entre 3,00 et 3,40. Puis tout tient jusqu'à 5,40. Seule l'onde garde un
 jitter très faible : le reste est mort, et c'est voulu.
 
 Le seul plan où la marque parle. Deux bulles arrivent, dans cet ordre : celle de
 l'agent, puis celle du client. La première porte la mention légale, et elle est
-**montrée, jamais prononcée** : « Plomberie Azur, bonjour. Je suis l'assistante
+**montrée, jamais prononcée** : « Le Comptoir des Lices, bonjour. Je suis l'assistante
 vocale de l'entreprise. » Article 50 réglé par l'image, ce qui est aussi plus
 convaincant qu'une voix off qui l'affirmerait. La deuxième est la vraie demande
-entendue sur la démo du site : « J'ai une fuite sous l'évier. »
+entendue sur la démo du site : « Une table pour quatre, demain midi. »
 
 L'onde vocale de marque bat pendant la bulle de l'agent et s'immobilise dès que
 le client parle. C'est là qu'elle entre dans le film ; elle en ressortira au CTA.
 
-## Frame 4 — Le rendez-vous se pose
+## Frame 4 — La réservation se pose
 
 - type: feature_showcase
 - blueprint: panel-edit-live-sync
-- scene: Le fil à gauche, l'agenda à droite ; la demande comprise fait apparaître un créneau réel
+- scene: Le fil à gauche, le livre de réservations à droite ; la demande comprise fait apparaître un créneau réel
 - duration: 6.0s
 - transition_in: cut
 - status: outline
@@ -231,43 +231,43 @@ le client parle. C'est là qu'elle entre dans le film ; elle en ressortira au CT
 - persuasion: la preuve mécanique
 - beat: ce n'est pas un répondeur
 - blueprint: panel-edit-live-sync (Adapt)
-- focal: la carte de rendez-vous
-- roles: fil hérité = supporting · grille d'agenda = background · carte = cutout
+- focal: la carte de réservation
+- roles: fil hérité = supporting · grille du livre de réservations = background · carte = cutout
 - sfx: none
 - src: compositions/frames/04-agenda.html
 
-Adapt : le couple panneau-surface du blueprint est ici conversation-agenda, et
+Adapt : le couple panneau-surface du blueprint est ici conversation-réservations, et
 le « contrôle manipulé » n'est pas un curseur mais la compréhension de l'agent.
 La signature reste intacte : ce qui se passe à gauche modifie la droite **dans
 le même temps**, et les deux restent visibles en permanence.
 
 Toutes les mesures de la grille et de la carte viennent de `references/agenda-reel.md`,
-relevées sur le vrai écran client. La plus importante : le rendez-vous se pose
+relevées sur le vrai écran client. La plus importante : la réservation se pose
 en **0,18 s, en `ease`, sans retombée**. Un ressort sur cet objet trahirait la
 reconstruction d'un seul coup d'œil.
 
-Scene 1 (0,00–0,95 s) : l'agenda seul, pleine largeur, marges de 72 px. Les
+Scene 1 (0,00–0,95 s) : le livre de réservations seul, pleine largeur, marges de 72 px. Les
 filets d'heures se tracent de haut en bas (`svg-path-draw`) sur « comprend la
 demande, » (0,28–0,92). Le rail d'heures garde sa largeur, qui est une
 constante de l'écran réel ; c'est la colonne du jour qui s'étire.
 
 Scene 2 (0,95–2,70 s) : sur « regarde » (1,51) un liseré solaire descend la
 colonne du jour (`viewport-change`, verrouillage doux sur la bande 8 h–10 h) et
-s'arrête sur la ligne de 8:30 sur « agenda, » (2,18). Rien d'autre ne bouge
+s'arrête sur la ligne de 12:30 sur « service, » (2,18). Rien d'autre ne bouge
 pendant ce temps : un seul objet en mouvement, c'est ce qui rend le geste
 lisible.
 
 Scene 3 (2,70–4,20 s) : sur « pose » (2,70) la carte se pose — translation
 courte depuis le haut jusqu'à sa ligne, 0,18 s, `ease`, **aucun rebond**. Elle
-porte « M. Lefort » en ligne 1 et « 08:30 · Fuite sous évier » en ligne 2,
-exactement la disposition du vrai écran. Sur « rendez-vous. » (2,89) le liseré
+porte « Mme Vasseur » en ligne 1 et « 12:30 · Table pour 4 » en ligne 2,
+exactement la disposition du vrai écran. Sur « réservation. » (2,89) le liseré
 s'éteint, la carte reste.
 
-Scene 4 (4,20–6,00 s) : temps de repos. L'agenda tient, immobile, 1,8 s.
+Scene 4 (4,20–6,00 s) : temps de repos. Le livre de réservations tient, immobile, 1,8 s.
 Aucun re-push de caméra, aucune respiration. C'est le plan qui convainc, il a
 besoin d'être lu, pas animé.
 
-Le plan qui doit convaincre : ce n'est pas un répondeur, c'est un agenda qui
+Le plan qui doit convaincre : ce n'est pas un répondeur, c'est un livre de réservations qui
 bouge. Trois appuis calés sur les trois virgules de la phrase — comprend /
 regarde / pose. Le couple gauche-droite reste visible en permanence, c'est le
 lien entre les deux qui est le produit. Le créneau qui se pose est une vraie
@@ -277,7 +277,7 @@ heure ouvrable, pas une case qui clignote.
 
 - type: feature_showcase
 - blueprint: comparison-split
-- scene: Deux reçus entrent des deux bords : le SMS du client à gauche, le récapitulatif de l'artisan à droite
+- scene: Deux reçus entrent des deux bords : le SMS du client à gauche, le récapitulatif du restaurant à droite
 - duration: 5.6s
 - transition_in: cut
 - status: outline
@@ -287,7 +287,7 @@ heure ouvrable, pas une case qui clignote.
 - beat: les deux bouts de la chaîne
 - blueprint: comparison-split (Reproduce)
 - focal: les deux cartes
-- roles: carte client = cutout · carte artisan = cutout
+- roles: carte client = cutout · carte restaurant = cutout
 - sfx: none
 - src: compositions/frames/05-preuve.html
 
@@ -299,13 +299,13 @@ moitiés symétriques, le plan aussi.
 Scene 1 (0,00–1,05 s) : papier nu. Sur « Le client reçoit sa confirmation. »
 (0,04–1,05) la carte de gauche entre depuis le bord gauche avec son inclinaison
 `rotationY` miroir (`split-tilt-cards`, décélération longue) et se pose à plat.
-C'est le SMS : « Rendez-vous confirmé, jeudi 8 h 30. Plomberie Azur. » avec
+C'est le SMS : « Réservation confirmée, vendredi 12 h 30. Le Comptoir des Lices. » avec
 « 02:09 » en `mono-data`.
 
 Scene 2 (1,05–2,90 s) : la carte de gauche tient, immobile. Le silence de la
 voix entre 1,05 et 2,16 est tenu à l'écran, il n'est pas comblé. Sur « Vous »
 (2,16) la carte de droite entre depuis le bord droit, inclinaison miroir de la
-première : le récapitulatif artisan, « Fuite sous évier · 12 rue des Lices »,
+première : le récapitulatif restaurant, « Table pour 4 · quatre couverts, en terrasse »,
 « jeudi 8 h 30 », « 02:09 ».
 
 Scene 3 (2,90–4,30 s) : sur « récapitulatif. » (2,98) une pastille solaire se

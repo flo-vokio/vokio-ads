@@ -39,9 +39,30 @@
     },
     "attendus": [
       "rendez-vous",
-      "agenda",
-      "intervention"
+      "agenda"
     ]
   },
-  "_vocabulaire": "Les mots d'un AUTRE métier, avec ce qu'il faut dire à la place. Contrôlé par outils/langue.py, bloquant."
+  "_vocabulaire": "Les mots d'un AUTRE métier, avec ce qu'il faut dire à la place. Contrôlé par outils/langue.py, bloquant.",
+  "lexique_notes": {
+    "n_titre_pose": "Le rendez-vous se pose",
+    "n_audience": "artisans et commerçants TPE, métiers de terrain",
+    "n_surface": "l'agenda",
+    "n_surface_seule": "un agenda seul",
+    "n_surface_grille": "grille d'agenda",
+    "n_surface_couple": "conversation-agenda",
+    "n_surface_preuve": "c'est un agenda qui",
+    "n_surface_tient": "L'agenda tient",
+    "n_carte": "la carte du rendez-vous",
+    "n_carte_focal": "la carte de rendez-vous",
+    "n_mot_surface": "sur « agenda, »",
+    "n_mot_pose": "Sur « rendez-vous. »",
+    "n_ligne_heure": "la ligne de 8:30",
+    "n_recap_de": "le récapitulatif de l'artisan",
+    "n_recap_carte": "carte artisan",
+    "n_recap_contenu": "le récapitulatif artisan, « Fuite sous évier · 12 rue des Lices »",
+    "n_sms": "« Rendez-vous confirmé, jeudi 8 h 30. Plomberie Azur. »",
+    "n_carte_client": "« 08:30 · Fuite sous évier »",
+    "n_pose_min": "le rendez-vous se pose"
+  },
+  "_lexique_notes": "Les notes de conception du storyboard, qui décrivent le film plan par plan. Mêmes clés d'une fiche à l'autre, mêmes phrases entières : « l'agenda » ne devient pas « le service » mot à mot, il devient « le livre de réservations », et la préposition qui le précède change avec lui."
 }

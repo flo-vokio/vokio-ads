@@ -100,6 +100,7 @@ def notes_du_projet(nom):
 def mots_interdits(fiche, nom):
     """Le vocabulaire d'un autre métier, dans la fiche et dans le film monté."""
     voc = (fiche.get("vocabulaire") or {}).get("interdits") or {}
+    toleres = (fiche.get("vocabulaire") or {}).get("toleres") or []
     if not voc:
         return [], [f"{nom} n'a pas de vocabulaire interdit déclaré"]
     durs, doux = [], []
@@ -114,14 +115,17 @@ def mots_interdits(fiche, nom):
                     durs.append(f"{ou} : « {m} » → dire « {remede} »")
         for ou, texte in textes_du_film(nom):
             for m in set(motif.findall(texte)):
+                if any(c.lower() in texte.lower() for c in toleres):
+                    continue
                 if (ou, m) not in vus:
                     vus.add((ou, m))
                     durs.append(f"{ou} : « {m} » → dire « {remede} »")
         for f in notes_du_projet(nom):
-            trouves = set(motif.findall(f.read_text()))
-            if trouves:
-                doux.append(f"{f.name} parle encore de « {', '.join(sorted(trouves))} » "
-                            f"(document de travail, invisible à l'écran)")
+            for i, ligne in enumerate(f.read_text().splitlines(), 1):
+                if any(c.lower() in ligne.lower() for c in toleres):
+                    continue
+                for m in set(motif.findall(ligne)):
+                    doux.append(f"{f.name}:{i} « {m} » — {ligne.strip()[:88]}")
     return durs, doux
 
 
@@ -138,6 +142,12 @@ def calques(fiche, ref, nom):
             continue
         if texte.strip() == avant.strip():
             durs.append(f"{chemin} : identique à {REFERENCE} (« {texte} »)")
+            continue
+        # Les lexiques sont DÉLIBÉRÉMENT parallèles : « le récapitulatif de
+        # l'artisan » et « le récapitulatif du restaurant » partagent leurs
+        # premiers mots parce que c'est la même phrase dans deux métiers. Le
+        # contrôle de calque ne vise que la rédaction libre.
+        if chemin.startswith(("lexique.", "lexique_notes.")):
             continue
         a = re.findall(r"\w+", avant.lower())
         b = re.findall(r"\w+", texte.lower())

@@ -238,6 +238,31 @@ et un mot du mauvais métier ne doit pas coûter un encodage pour se faire voir.
 Les codes métier sont ceux du produit (`verticals.code`), pour qu'une verticale
 porte le même nom dans l'agent vocal et dans la pub.
 
+### Les notes de conception suivent aussi le métier
+
+Le storyboard décrit le film plan par plan. Rien de tout ça ne se voit ni ne
+s'entend, mais **c'est le document que lit quiconque reprend le film** : un
+storyboard de restaurant qui raconte une fuite sous un évier envoie la
+personne suivante dans le mur.
+
+`lexique_notes` porte ces phrases, mêmes clés d'une fiche à l'autre. Toujours
+des phrases entières : « l'agenda » ne devient pas « le service » mot à mot,
+il devient « le livre de réservations », et la préposition qui le précède
+change avec lui. Les substitutions vont du plus spécifique au plus général,
+sinon une tournure courte mange la longue qui la contient.
+
+Deux réglages évitent les fausses alertes :
+
+- `vocabulaire.toleres` — les citations et les **chemins de fichier** où le
+  mot d'un autre métier est légitime. `references/agenda-reel.md` ne se
+  traduit pas, sous peine de casser le chemin ;
+- le contrôle de calque saute `lexique.*` et `lexique_notes.*`, qui sont
+  **délibérément** parallèles d'un métier à l'autre.
+
+Et `attendu = None` dans `remplacer()` veut dire « toutes les occurrences, au
+moins une » : dans la prose, compter les occurrences d'un paragraphe
+casserait la déclinaison à chaque virgule ajoutée au gabarit.
+
 ## Le piège du film muet
 
 `audio.mjs` classe un échec de synthèse en « anomalie non fatale » et **sort
