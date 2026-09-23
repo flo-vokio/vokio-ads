@@ -30,8 +30,23 @@
   "fond": "#F4F1E8",
   "_fond": "--ivoire du site en ligne. Pas #F2EDE2, absent de la palette.",
 
-  "sonnerie": "assets/sonnerie/sonnerie.wav",
-  "_sonnerie": "Emplacement : Florian dépose le fichier (libre de droits). Rien n'est téléchargé.",
+  "sonnerie": {
+    "tons": [880, 1175],
+    "trille_hz": 20,
+    "motif": [[0, 0.4], [0.6, 0.4]],
+    "vibration": 0.18,
+    "premiere": 0.15,
+    "coupe_apres": 0.35,
+    "rythme_cible": 1.7,
+    "montee_db": 1.5,
+    "lufs": -18
+  },
+  "_sonnerie": "SYNTHÉTISÉE par outils/sonnerie_son.py (choix de Florian le 23/09 : rien à déposer, rien à télécharger). Trille la / ré (quarte, neutre), motif « brr · brr » de 1 s, vibration du boîtier dessous. Construite à rebours depuis la bascule : la dernière sonnerie commence coupe_apres secondes avant V et y est coupée en pleine trille. Nombre de sonneries = round(V / rythme_cible) : 3 pour 5 s, 2 pour 3 s. Chaque sonnerie +montee_db.",
+  "voix_apres_bascule": 0.25,
+  "voix_lufs": -14,
+  "_voix_lufs": "La voix passe 4 dB AU-DESSUS de la sonnerie (lufs -18) : c'est elle le soulagement. -14 LUFS, le niveau des réseaux sociaux.",
+  "_voix_apres_bascule": "La voix entre quand le téléphone a fini de devenir l'onde (6 images + un souffle).",
+  "signature_duree": 2.0,
   "musique_signature": null,
 
   "formats": ["1080x1920", "1080x1080"]
