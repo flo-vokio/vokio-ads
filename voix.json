@@ -1,8 +1,8 @@
 {
   "elevenlabs": {
-    "voice": "Ht4OibD14Nq9LzMUT7HK",
+    "voice": "FFXYdAYPzn8Tw8KiHZqg",
     "modele": "eleven_multilingual_v2",
-    "_voice": "Voix du corps du film. « Yariq (FR masculin) », française, registre narratif. Le contraste avec la signature féminine du plan 6 est franc : le changement s'entend comme une intention, pas comme un raccord.",
+    "_voice": "Voix du corps du film. « Ingrid », française, registre conversationnel.",
     "par_plan": {
       "6": "LFtQZWdaqmvamcTNGpwl"
     },
@@ -11,7 +11,16 @@
       "6": 0.75
     },
     "_amorce_par_plan": "Silence ajouté AVANT la ligne, en secondes. Le moteur pose chaque voix au début de son plan, sans décalage possible. Le mot « Vokio » doit tomber sur le logo qui finit de s'écrire à 1,14 s, pas sur un écran encore vide : 0,75 s d'amorce et le mot se termine avec le dessin.",
-    "_deux_lucie": "« Lucie - Narration » (LFtQZWdaqmvamcTNGpwl) n'a RIEN à voir avec « Lucie - Support Agent » (YxrwjAKoUKULGd0g8K9Y), la voix des agents qui décrochent. Trois « Lucie » différentes traînent dans le compte, vérifier l'identifiant et jamais le prénom."
+    "_deux_lucie": "« Lucie - Narration » (LFtQZWdaqmvamcTNGpwl) n'a RIEN à voir avec « Lucie - Support Agent » (YxrwjAKoUKULGd0g8K9Y), la voix des agents qui décrochent. Trois « Lucie » différentes traînent dans le compte, vérifier l'identifiant et jamais le prénom.",
+    "_modele": "Le moteur écrivait ce modèle EN DUR : personne ne l'avait choisi. Le compte accepte aussi eleven_v3, plus expressif, mais qui IGNORE le réglage de vitesse (mesuré : -1,5 % là où v2 donne -9,6 %). Tant que le débit est le sujet, on reste sur v2.",
+    "reglages": {
+      "stability": 0.3,
+      "similarity_boost": 0.75,
+      "style": 0.55,
+      "use_speaker_boost": true,
+      "speed": 1.12
+    },
+    "_reglages": "La direction de voix de SCRIPT.md n'était transmise nulle part : le document la décrivait, la synthèse tournait sur les valeurs par défaut. stability basse et style haut donnent du relief, speed règle le débit."
   },
   "kokoro": {
     "voice": "ff_siwis",

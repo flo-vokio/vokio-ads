@@ -138,7 +138,7 @@ if (only.has("tts") && lines.length) {
     lang,
   });
   console.error(`· tts: ${ttsProvider} · voice ${voiceId} · ${lines.length} line(s)`);
-  // RUSTINE VOKIO - une voix par plan (voir outils/rustines.py).
+  // RUSTINE VOKIO - voix par plan + continuite (voir outils/rustines.py).
   const VOIX_PAR_PLAN = (() => {
     try {
       return JSON.parse(process.env.HF_VOICE_BY_LINE || "{}");
@@ -149,10 +149,20 @@ if (only.has("tts") && lines.length) {
       return {};
     }
   })();
-  const synthLine = async (line) => {
+  const synthLine = async (line, rang) => {
     const id = String(line.id);
     const voixDuPlan = VOIX_PAR_PLAN[id] || VOIX_PAR_PLAN[String(Number(id))] || voiceId;
     if (voixDuPlan !== voiceId) console.error(`  line ${id}: voix ${voixDuPlan}`);
+    // La continuite ne traverse pas un changement de voix : donner a la
+    // signature le texte du narrateur precedent lui ferait imiter sa cadence.
+    const memeVoix = (l) =>
+      (VOIX_PAR_PLAN[String(l.id)] || VOIX_PAR_PLAN[String(Number(l.id))] || voiceId) ===
+      voixDuPlan;
+    const avant = rang > 0 && memeVoix(lines[rang - 1]) ? String(lines[rang - 1].text ?? "") : "";
+    const apres =
+      rang < lines.length - 1 && memeVoix(lines[rang + 1])
+        ? String(lines[rang + 1].text ?? "")
+        : "";
     const text = String(line.text ?? "").trim();
     if (!text) {
       anomalies.push(`line ${id}: empty text — skipped`);
@@ -164,6 +174,7 @@ if (only.has("tts") && lines.length) {
       provider: ttsProvider,
       text,
       voiceId: voixDuPlan,
+      contexte: { previous_text: avant, next_text: apres },
       lang,
       speed,
       wavAbs: abs,

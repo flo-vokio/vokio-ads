@@ -137,6 +137,28 @@ catalogue pour choisir une voix ; et sa consommation est surveillée au titre
 du coût par appel client, une pub qui s'y mélange fausse le suivi. Droits
 nécessaires sur la nouvelle clé : **Text to Speech** et **Voices: read**.
 
+### Le modèle et la direction de voix
+
+Le moteur écrivait `eleven_multilingual_v2` **en dur** et n'envoyait aucun
+`voice_settings`. La direction écrite dans `SCRIPT.md` ne décorait donc que le
+document. `voix.json` porte maintenant les deux :
+
+```json
+"modele": "eleven_multilingual_v2",
+"reglages": { "stability": 0.30, "style": 0.55, "speed": 1.12 }
+```
+
+Le compte accepte aussi `eleven_v3`, plus expressif, mais qui **ignore la
+vitesse** : mesuré sur la même phrase, v2 raccourcit de 9,6 % à `speed 1.12`,
+v3 de 1,5 %. Tant que le débit est le sujet, rester sur v2.
+
+Chaque ligne était aussi synthétisée **isolément**, donc l'intonation repartait
+de zéro à chaque plan : six annonces bout à bout, ce qui s'entend exactement
+comme une machine. Le moteur reçoit désormais la ligne d'avant et celle
+d'après, qu'il ne prononce pas mais qui lui donnent la cadence. La continuité
+s'arrête à un changement de voix : donner à la signature le texte du narrateur
+lui ferait imiter sa cadence.
+
 ### Deux voix dans le même film
 
 `voix.json` porte la distribution : une voix par défaut pour le corps du film,

@@ -225,15 +225,24 @@ function transcodeToWav(bytes, destWav) {
 }
 
 const ELEVENLABS_PY = `
-import os, sys
+import os, sys, json
 from elevenlabs.client import ElevenLabs
 from elevenlabs import save
 client = ElevenLabs(api_key=os.environ["ELEVENLABS_API_KEY"])
 text = open(sys.argv[1]).read()
-audio = client.text_to_speech.convert(
+contexte = json.loads(sys.argv[4]) if len(sys.argv) > 4 else {}
+kw = dict(
     text=text, voice_id=sys.argv[2],
-    model_id="eleven_multilingual_v2", output_format="mp3_44100_128",
+    model_id=os.environ.get("HF_TTS_MODEL", "eleven_multilingual_v2"),
+    output_format="mp3_44100_128",
 )
+reglages = os.environ.get("HF_TTS_SETTINGS")
+if reglages:
+    kw["voice_settings"] = json.loads(reglages)
+for cle in ("previous_text", "next_text"):
+    if contexte.get(cle):
+        kw[cle] = contexte[cle]
+audio = client.text_to_speech.convert(**kw)
 save(audio, sys.argv[3])
 `;
 
@@ -265,6 +274,7 @@ export async function synthesizeOne({
   speed = 1.0,
   wavAbs,
   hyperframesDir,
+  contexte = null,
 }) {
   if (provider === "heygen") return synthesizeHeygen({ text, voiceId, lang, speed, wavAbs });
   if (provider === "elevenlabs") {
@@ -286,6 +296,7 @@ export async function synthesizeOne({
       writeTmpText(text),
       voiceId,
       wavAbs,
+      JSON.stringify(contexte || {}),
     ]);
     const r = await spawnP(cmd, args, {});
     return synthResult(r, wavAbs, "elevenlabs (python)");

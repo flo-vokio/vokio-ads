@@ -235,12 +235,14 @@ def python_impose(poser):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-@rustine("une voix par plan", "media-use/audio/scripts/audio.mjs",
-         "Le moteur résout UNE voix pour tout le film. Une pub a souvent "
-         "besoin d'une seconde voix sur la signature finale. On lit "
-         "HF_VOICE_BY_LINE dans le moteur plutôt que dans le storyboard : "
-         "c'est un seul fichier à re-rustiner au lieu de deux, et la "
-         "distribution reste une donnée de projet, pas de mise en page.")
+@rustine("voix par plan et continuité", "media-use/audio/scripts/audio.mjs",
+         "Deux manques dans la même boucle. Le moteur résout UNE voix pour "
+         "tout le film, alors qu'une pub a besoin d'une seconde voix sur la "
+         "signature finale : il lit maintenant HF_VOICE_BY_LINE. Et il "
+         "synthétise chaque ligne ISOLÉMENT, donc l'intonation repart de zéro "
+         "à chaque plan et le film s'entend comme six annonces bout à bout ; "
+         "on lui donne désormais la ligne d'avant et celle d'après, que "
+         "l'API sait utiliser pour enchaîner sans les prononcer.")
 def voix_par_plan(poser):
     p = S / "media-use/audio/scripts/audio.mjs"
     t = p.read_text()
@@ -250,7 +252,7 @@ def voix_par_plan(poser):
         return ["audio.mjs (moteur)"]
     av = """  const synthLine = async (line) => {
     const id = String(line.id);"""
-    ap = """  // RUSTINE VOKIO - une voix par plan (voir outils/rustines.py).
+    ap = """  // RUSTINE VOKIO - voix par plan + continuite (voir outils/rustines.py).
   const VOIX_PAR_PLAN = (() => {
     try {
       return JSON.parse(process.env.HF_VOICE_BY_LINE || "{}");
@@ -261,10 +263,20 @@ def voix_par_plan(poser):
       return {};
     }
   })();
-  const synthLine = async (line) => {
+  const synthLine = async (line, rang) => {
     const id = String(line.id);
     const voixDuPlan = VOIX_PAR_PLAN[id] || VOIX_PAR_PLAN[String(Number(id))] || voiceId;
-    if (voixDuPlan !== voiceId) console.error(`  line ${id}: voix ${voixDuPlan}`);"""
+    if (voixDuPlan !== voiceId) console.error(`  line ${id}: voix ${voixDuPlan}`);
+    // La continuite ne traverse pas un changement de voix : donner a la
+    // signature le texte du narrateur precedent lui ferait imiter sa cadence.
+    const memeVoix = (l) =>
+      (VOIX_PAR_PLAN[String(l.id)] || VOIX_PAR_PLAN[String(Number(l.id))] || voiceId) ===
+      voixDuPlan;
+    const avant = rang > 0 && memeVoix(lines[rang - 1]) ? String(lines[rang - 1].text ?? "") : "";
+    const apres =
+      rang < lines.length - 1 && memeVoix(lines[rang + 1])
+        ? String(lines[rang + 1].text ?? "")
+        : "";"""
     assert t.count(av) == 1, "ancrage de synthLine introuvable"
     t = t.replace(av, ap)
     av2 = """    const { ok, words, error } = await synthesizeOne({
@@ -274,10 +286,41 @@ def voix_par_plan(poser):
     ap2 = """    const { ok, words, error } = await synthesizeOne({
       provider: ttsProvider,
       text,
-      voiceId: voixDuPlan,"""
+      voiceId: voixDuPlan,
+      contexte: { previous_text: avant, next_text: apres },"""
     assert t.count(av2) == 1, "ancrage de synthesizeOne introuvable"
     p.write_text(t.replace(av2, ap2))
     return ["audio.mjs (moteur)"]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+@rustine("modèle et direction de voix", "media-use/audio/scripts/lib/tts.mjs",
+         "L'extrait python écrit `eleven_multilingual_v2` EN DUR et n'envoie "
+         "aucun voice_settings. La direction de voix écrite dans SCRIPT.md "
+         "(stability, style) ne décorait donc que le document, et le compte "
+         "tournait sur une génération de modèle antérieure sans que personne "
+         "l'ait choisi. Le modèle et les réglages viennent maintenant de "
+         "HF_TTS_MODEL et HF_TTS_SETTINGS, et la ligne reçoit son contexte.")
+def modele_et_reglages(poser):
+    p = S / "media-use/audio/scripts/lib/tts.mjs"
+    t = p.read_text()
+    if "HF_TTS_MODEL" in t:
+        return []
+    if not poser:
+        return ["tts.mjs (modèle)"]
+    av = 'const ELEVENLABS_PY = `\nimport os, sys\nfrom elevenlabs.client import ElevenLabs\nfrom elevenlabs import save\nclient = ElevenLabs(api_key=os.environ["ELEVENLABS_API_KEY"])\ntext = open(sys.argv[1]).read()\naudio = client.text_to_speech.convert(\n    text=text, voice_id=sys.argv[2],\n    model_id="eleven_multilingual_v2", output_format="mp3_44100_128",\n)\nsave(audio, sys.argv[3])\n`;'
+    ap = 'const ELEVENLABS_PY = `\nimport os, sys, json\nfrom elevenlabs.client import ElevenLabs\nfrom elevenlabs import save\nclient = ElevenLabs(api_key=os.environ["ELEVENLABS_API_KEY"])\ntext = open(sys.argv[1]).read()\ncontexte = json.loads(sys.argv[4]) if len(sys.argv) > 4 else {}\nkw = dict(\n    text=text, voice_id=sys.argv[2],\n    model_id=os.environ.get("HF_TTS_MODEL", "eleven_multilingual_v2"),\n    output_format="mp3_44100_128",\n)\nreglages = os.environ.get("HF_TTS_SETTINGS")\nif reglages:\n    kw["voice_settings"] = json.loads(reglages)\nfor cle in ("previous_text", "next_text"):\n    if contexte.get(cle):\n        kw[cle] = contexte[cle]\naudio = client.text_to_speech.convert(**kw)\nsave(audio, sys.argv[3])\n`;'
+    assert t.count(av) == 1, "ancrage de ELEVENLABS_PY introuvable"
+    t = t.replace(av, ap)
+    av2 = '  lang = "en",\n  speed = 1.0,\n  wavAbs,\n  hyperframesDir,\n}) {'
+    ap2 = '  lang = "en",\n  speed = 1.0,\n  wavAbs,\n  hyperframesDir,\n  contexte = null,\n}) {'
+    assert t.count(av2) == 1, "ancrage de la signature introuvable"
+    t = t.replace(av2, ap2)
+    av3 = '    const { cmd, args } = pythonInvocation([\n      "-c",\n      ELEVENLABS_PY,\n      writeTmpText(text),\n      voiceId,\n      wavAbs,\n    ]);'
+    ap3 = '    const { cmd, args } = pythonInvocation([\n      "-c",\n      ELEVENLABS_PY,\n      writeTmpText(text),\n      voiceId,\n      wavAbs,\n      JSON.stringify(contexte || {}),\n    ]);'
+    assert t.count(av3) == 1, "ancrage de l'invocation introuvable"
+    p.write_text(t.replace(av3, ap3))
+    return ["tts.mjs (modèle)"]
 
 
 a.add_argument("--poser", action="store_true")

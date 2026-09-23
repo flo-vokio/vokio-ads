@@ -130,6 +130,19 @@ def poser_amorces(projet, table, journal=print):
     meta_f.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n")
 
 
+def reglages_moteur():
+    """Ce qui doit descendre au moteur de synthèse, en variables d'environnement.
+
+    Le modèle et la direction de voix étaient écrits en dur dans l'extrait
+    python du moteur. Ils sont maintenant des données de projet.
+    """
+    el = config().get("elevenlabs", {})
+    env = {"HF_TTS_MODEL": el.get("modele", "eleven_multilingual_v2")}
+    if el.get("reglages"):
+        env["HF_TTS_SETTINGS"] = json.dumps(el["reglages"])
+    return env
+
+
 def appeler(chemin, params=None):
     k = cle()
     if not k:
@@ -237,7 +250,7 @@ def noms():
             for v in appeler("/v2/voices", {"page_size": 100}).get("voices", [])}
 
 
-def essai(texte, ids=None, modele=None, reglages=None):
+def essai(texte, ids=None, modele=None, reglages=None, etiquette=""):
     """Une prise par voix, dans essais/. Sert à choisir à l'oreille.
 
     Sans --sur, la voix retenue. Avec, autant de prises que d'identifiants :
@@ -262,7 +275,10 @@ def essai(texte, ids=None, modele=None, reglages=None):
             f"{API}/v1/text-to-speech/{v}", data=corps,
             headers={"xi-api-key": k, "Content-Type": "application/json"})
         lisible = re.sub(r"[^a-zA-Z0-9]+", "-", table.get(v, v)).strip("-").lower()
-        suffixe = f"-{modele}" + ("-regle" if reglages else "")
+        # Deux jeux de réglages sur la même voix et le même modèle donnaient le
+        # MÊME nom de fichier : la deuxième prise écrasait la première en
+        # silence. L'étiquette est ce qui distingue une comparaison d'un écrasement.
+        suffixe = f"-{etiquette}" if etiquette else f"-{modele}" + ("-regle" if reglages else "")
         out = dossier / ((f"{lisible}-{v}" if lisible else v) + suffixe + ".mp3")
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
@@ -292,6 +308,8 @@ if __name__ == "__main__":
     p.add_argument("--sur", default="", metavar="ID,ID",
                    help="essaie plusieurs voix d'un coup, pour comparer")
     p.add_argument("--modele", default=None, help="eleven_v3, eleven_multilingual_v2…")
+    p.add_argument("--etiquette", default="", metavar="NOM",
+                   help="distingue deux prises de la même voix (sinon écrasement)")
     p.add_argument("--reglages", default="", metavar="JSON",
                    help='voice_settings, ex. \'{"stability":0.45,"style":0.3}\'')
     a = p.parse_args()
@@ -306,7 +324,7 @@ if __name__ == "__main__":
         retenir(a.retenir)
     elif a.essai is not None:
         essai(a.essai, [i.strip() for i in a.sur.split(",") if i.strip()],
-              a.modele, json.loads(a.reglages) if a.reglages else None)
+              a.modele, json.loads(a.reglages) if a.reglages else None, a.etiquette)
     else:
         k = cle()
         print(f"coffre  : {COFFRE} — {'clé présente' if k else 'vide'}")

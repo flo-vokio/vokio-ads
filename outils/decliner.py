@@ -237,6 +237,8 @@ moteur, voix_id, env_voix = voix.choisir(force=a.voix)
 repartition = voix.distribution() if moteur == "elevenlabs" and not a.voix else {}
 if repartition:
     env_voix = {**env_voix, "HF_VOICE_BY_LINE": json.dumps(repartition)}
+if moteur == "elevenlabs":
+    env_voix = {**env_voix, **voix.reglages_moteur()}
 titre = f"voix off ({moteur} · {voix_id}"
 titre += f" · plan(s) {', '.join(sorted(repartition))} à part)" if repartition else ")"
 lancer(["node", str(RACINE / ".agents/skills/product-launch-video/scripts/audio.mjs"),
