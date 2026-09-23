@@ -191,8 +191,8 @@
       // image. Ici le CTA est muet, et la phrase du plan 05 restait affichée
       // par-dessus pendant plus de cinq secondes. On la borne comme les autres.
       var end = isLast
-        ? Math.min(DURATION, Number(group.end) + 0.3)
-        : Math.min(Number(next.start), Number(group.end) + 0.3);
+        ? Math.min(DURATION, Number(group.end) + 1.1)
+        : Math.min(Number(next.start), Number(group.end) + 1.1);
       if (end <= start) end = start + 0.01;
 
       // group on/off — exactly one group visible at a time

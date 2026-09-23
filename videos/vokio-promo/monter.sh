@@ -13,8 +13,11 @@ export HYPERFRAMES_PYTHON=/root/.venvs/hyperframes/bin/python
 # La bande par défaut tombe entre y=1600 et y=1920 : c'est là que Reels et
 # TikTok posent leur interface, et la charte Vokio interdit tout texte
 # important sous y=1500. On la remonte.
-export HF_CAPTION_BAND_TOP=1360
-export HF_CAPTION_BAND_HEIGHT=130
+export HF_CAPTION_BAND_TOP=1310
+export HF_CAPTION_BAND_HEIGHT=190
+# Un groupe par plan plutôt qu'un par bout de phrase : le sous-titre reste
+# 4 à 5 s au lieu d'une demi-seconde, et le surlignage suit toujours la voix.
+export HF_CAPTION_GROUP=frame
 
 hf(){ npx --yes hyperframes@0.8.62 "$@"; }
 

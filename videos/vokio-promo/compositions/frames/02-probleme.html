@@ -54,14 +54,15 @@
     /* ---------- inherited call chip (x 50%, y 62%, scale 1, opacity 1) ---------- */
     .f02p-chip{
       position:absolute;
-      left:320px;
-      top:1133px;
-      width:440px;
+      left:248.4px;
+      top:1125.12px;
+      width:583.2px;
+      height:130.56px;
     }
     .f02p-halo{
       position:absolute;
-      left:-240px;
-      top:-206px;
+      left:-168.4px;
+      top:-194.72px;
       width:920px;
       height:520px;
       transform-origin:50% 50%;
@@ -72,41 +73,42 @@
         rgba(244,241,232,0) 80%);
     }
     .f02p-chip-ink{
-      position:relative;
-      text-align:center;
-      padding:17px 0 16px;
-    }
-    .f02p-chip-rule{
       position:absolute;
-      left:0;
-      width:440px;
-      height:1px;
-      background:rgba(38,32,25,0.34);
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:34.56px;
+      background:#F4F1E8;
+      border:1px solid #262019;
+      border-radius:30px;
     }
-    .f02p-chip-rule-top{top:0;}
-    .f02p-chip-rule-bot{bottom:0;}
     .f02p-chip-label{
       font-family:"Geist Mono",monospace;
-      font-weight:400;
-      font-size:1.75cqw;
+      font-weight:600;
+      font-size:2.4cqw;
       letter-spacing:0.18em;
       text-transform:uppercase;
       color:#262019;
     }
+    .f02p-chip-rule{
+      width:1px;
+      height:65.28px;
+      background:#262019;
+      opacity:0.2;
+    }
     .f02p-chip-time{
-      margin-top:9px;
       font-family:"Geist Mono",monospace;
       font-weight:400;
-      font-size:3.3cqw;
+      font-size:4cqw;
       letter-spacing:0.04em;
-      line-height:1.02;
       color:#262019;
     }
     .f02p-strike-svg{
       position:absolute;
-      left:-50px;
-      top:50px;
-      width:540px;
+      left:-28px;
+      top:59px;
+      width:640px;
       height:12px;
       overflow:visible;
     }
@@ -153,6 +155,8 @@
       left:0;
       top:36px;
     }
+    .f02p-row-name-2{top:168px;}
+    .f02p-row-name-3{top:300px;}
     .f02p-vous{
       position:relative;
       display:inline-block;
@@ -193,6 +197,12 @@
       <div id="02-probleme-row1-name" class="f02p-row-name">
         <span id="02-probleme-vous" class="f02p-vous">Vous<i id="02-probleme-vous-strike" class="f02p-vous-strike"></i></span>
       </div>
+      <div id="02-probleme-row2-name" class="f02p-row-name f02p-row-name-2">
+        <span class="f02p-vous">Artisan suivant</span>
+      </div>
+      <div id="02-probleme-row3-name" class="f02p-row-name f02p-row-name-3">
+        <span class="f02p-vous">Artisan suivant</span>
+      </div>
       <svg id="02-probleme-rule1" class="f02p-rule f02p-rule-1" viewBox="0 0 904 2" xmlns="http://www.w3.org/2000/svg">
         <path id="02-probleme-rule1-path" d="M 0 1 L 904 1" />
       </svg>
@@ -208,13 +218,12 @@
     <div id="02-probleme-chip" class="clip f02p-chip" data-start="0" data-duration="5.3" data-track-index="3">
       <div id="02-probleme-halo" class="f02p-halo"></div>
       <div id="02-probleme-chip-ink" class="f02p-chip-ink">
-        <div class="f02p-chip-rule f02p-chip-rule-top"></div>
-        <div id="02-probleme-chip-label" class="f02p-chip-label">Appel entrant</div>
-        <div id="02-probleme-chip-time" class="f02p-chip-time">02:07</div>
-        <div class="f02p-chip-rule f02p-chip-rule-bot"></div>
+        <span id="02-probleme-chip-label" class="f02p-chip-label">Appel entrant</span>
+        <span class="f02p-chip-rule"></span>
+        <span id="02-probleme-chip-time" class="f02p-chip-time">02:07</span>
       </div>
-      <svg id="02-probleme-strike-svg" class="f02p-strike-svg" viewBox="0 0 540 12" xmlns="http://www.w3.org/2000/svg">
-        <path id="02-probleme-strike" class="f02p-strike-path" d="M 0 6 L 540 6" />
+      <svg id="02-probleme-strike-svg" class="f02p-strike-svg" viewBox="0 0 640 12" xmlns="http://www.w3.org/2000/svg">
+        <path id="02-probleme-strike" class="f02p-strike-path" d="M 0 6 L 640 6" />
       </svg>
     </div>
   </div>
@@ -245,7 +254,7 @@
       var rule2 = q("rule2-path");
       var rule3 = q("rule3-path");
 
-      var strikeLen = measure(strike, 540);
+      var strikeLen = measure(strike, 640);
       var rule1Len = measure(rule1, 904);
       var rule2Len = measure(rule2, 904);
       var rule3Len = measure(rule3, 904);
@@ -281,15 +290,17 @@
         { strokeDashoffset: 0, duration: 0.52, ease: "power2.out" }, 1.05);
 
       // the chip slides up out of the useful frame while the line is still drawing
-      tl.to(q("chip"), { y: -332, duration: 0.82, ease: "power3.out" }, 1.28);
-      tl.to(q("chip"), { opacity: 0, duration: 0.46, ease: "power2.in" }, 1.30);
+      tl.to(q("chip"), { y: -332, duration: 0.95, ease: "power2.inOut" }, 1.28);
+      tl.to(q("chip"), { opacity: 0, duration: 0.62, ease: "power2.in" }, 1.62);
 
       // three hairline rows write themselves, one per beat: "client" 1.37 · "appelle" 1.70 · "suivant" 2.21
       tl.fromTo(rule1, { strokeDashoffset: rule1Len }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 1.37);
       tl.fromTo(q("row1-name"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.45);
       tl.fromTo(q("vous-strike"), { scaleX: 0 }, { scaleX: 1, duration: 0.34, ease: "power2.out" }, 1.62);
       tl.fromTo(rule2, { strokeDashoffset: rule2Len }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 1.70);
+      tl.fromTo(q("row2-name"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.78);
       tl.fromTo(rule3, { strokeDashoffset: rule3Len }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 2.21);
+      tl.fromTo(q("row3-name"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.29);
 
       /* --------- Scene 3 (2.90–5.30) — the third row lights up, then nothing --------- */
       // the single solar moment of the frame: the row nobody is named in

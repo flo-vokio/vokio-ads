@@ -51,7 +51,11 @@ const TAIL_PAD = 0.12; // s the group lingers after its last word
 const SENT_END = /[.?!,;:—]$/;
 const DENSITY_WINDOW = 1.0; // s window for words/sec density
 function wordCap(density) {
-  return density > 3.5 ? 2 : density > 2.5 ? 3 : 4;
+  // Groupes plus longs : à 2-4 mots le sous-titre change presque à chaque mot,
+  // et le spectateur qui regarde aussi l'animation n'a pas le temps de lire.
+  // En allongeant les groupes on réduit le nombre de changements sans toucher
+  // au calage sur la voix.
+  return density > 3.5 ? 3 : density > 2.5 ? 4 : 5;
 }
 
 function runBuild(argv) {
@@ -137,6 +141,15 @@ function runBuild(argv) {
 
   // group: split on frame change / silence gap / word cap; always flush after a
   // sentence-ending word.
+  //
+  // HF_CAPTION_GROUP=frame supprime les deux coupures internes — plafond de
+  // mots et fin de phrase — pour ne garder qu'un groupe par plan. Le découpage
+  // par défaut casse sur chaque virgule : sur une voix française posée ça
+  // produit des fragments d'une demi-seconde (« place, », « demande, ») qu'on
+  // n'a pas le temps de lire quand l'image bouge en même temps. Un groupe par
+  // plan reste affiché 4 à 5 s, et le surlignage mot à mot continue d'indiquer
+  // où en est la voix.
+  const parPlan = String(process.env.HF_CAPTION_GROUP ?? "").toLowerCase() === "frame";
   const groups = [];
   let cur = null;
   for (let i = 0; i < words.length; i++) {
@@ -144,13 +157,13 @@ function runBuild(argv) {
     const prev = cur && cur.words[cur.words.length - 1];
     const crossFrame = cur && w.frame !== cur.frame;
     const gap = prev && w.start - prev.end > SILENCE_GAP;
-    const full = cur && cur.words.length >= cur.cap;
+    const full = !parPlan && cur && cur.words.length >= cur.cap;
     if (!cur || crossFrame || gap || full) {
       if (cur) groups.push(cur);
       cur = { frame: w.frame, cap: wordCap(densityAt(i)), words: [] };
     }
     cur.words.push(w);
-    if (SENT_END.test(w.text)) {
+    if (!parPlan && SENT_END.test(w.text)) {
       groups.push(cur);
       cur = null;
     }
