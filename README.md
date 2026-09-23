@@ -102,9 +102,45 @@ Le script le normalise à -26 LUFS avec fondus, pour qu'il passe **sous** la voi
 
 ## La voix off
 
-Provisoirement locale (Kokoro, voix `ff_siwis`), à remplacer par ElevenLabs.
+Deux moteurs, un seul point de décision : `outils/voix.py`. **Si le coffre
+contient une clé ElevenLabs dédiée aux pubs, la voix vient d'ElevenLabs ;
+sinon elle vient de Kokoro, en local.** Aucun script d'assemblage n'écrit le
+nom d'un moteur en dur, tous appellent `voix.choisir()`. La bascule ne
+demande donc pas de modifier une ligne de code, et le retrait de la clé ne
+casse pas le montage.
+
+```bash
+outils/voix.py                  # ce qui serait utilisé, et pourquoi
+outils/voix.py --bibliotheque   # voix publiques françaises, filtrables
+outils/voix.py --retenir <id>   # inscrit la voix dans voix.json
+outils/voix.py --essai          # une phrase témoin, pour écouter avant
+```
+
+**Déposer la clé** (en SSH, jamais en conversation ni par un outil) :
+
+```bash
+install -m 600 /dev/null /root/.secrets/vokio-ads-elevenlabs
+read -rs K && printf '%s' "$K" > /root/.secrets/vokio-ads-elevenlabs; unset K
+```
+
+`read -rs` n'affiche rien et ne laisse rien dans l'historique du shell, au
+contraire d'un `echo sk_... >`.
+
+Il faut une clé **dédiée**, pas celle de production : cette dernière sait
+synthétiser mais n'a pas `voices_read`, donc impossible de parcourir le
+catalogue pour choisir une voix ; et sa consommation est surveillée au titre
+du coût par appel client, une pub qui s'y mélange fausse le suivi. Droits
+nécessaires sur la nouvelle clé : **Text to Speech** et **Voices: read**.
+
+`voix.json` garde l'identifiant retenu. Il vaut `null` au départ, et
+`voix.choisir()` **refuse de produire** tant qu'il vaut `null` alors qu'une
+clé est présente : sans ce garde-fou le film sortirait avec la voix anglaise
+par défaut d'ElevenLabs, sans la moindre erreur, et personne ne le verrait
+avant l'écoute.
+
 Le montage ne contient **aucune durée écrite en dur** : il se recale sur les
-horodatages du nouveau fichier. `decliner.py` accepte `--voix <id>`.
+horodatages du nouveau fichier. `decliner.py --voix <id>` force une voix pour
+un seul film, sans toucher au réglage.
 
 `outils/recaler_mots.py` garde les minutages de Whisper et lui impose les mots
 de `SCRIPT.md` : sans lui les sous-titres affichent « Vocuez au » pour

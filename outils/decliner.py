@@ -33,6 +33,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import voix  # le choix du moteur vit là, pas ici
+
 RACINE = Path("/opt/vokio-ads")
 REF = RACINE / "videos/vokio-promo"
 ENV = {"PATH": "/opt/node22/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
@@ -141,9 +143,10 @@ def rebatir_salutation(projet, phrase):
     return len(mots)
 
 
-def lancer(cmd, cwd, titre):
+def lancer(cmd, cwd, titre, env_plus=None):
     print(f"· {titre}")
-    r = subprocess.run(cmd, cwd=cwd, env=ENV, capture_output=True, text=True)
+    r = subprocess.run(cmd, cwd=cwd, env={**ENV, **(env_plus or {})},
+                       capture_output=True, text=True)
     if r.returncode != 0:
         sys.stderr.write(r.stdout[-3000:] + r.stderr[-3000:])
         raise SystemExit(f"échec : {titre}")
@@ -154,7 +157,7 @@ a = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDes
 a.add_argument("metier")
 a.add_argument("--source", default="plombier")
 a.add_argument("--sans-rendu", action="store_true")
-a.add_argument("--voix", default="ff_siwis")
+a.add_argument("--voix", default=None, help="force une voix ; par défaut celle de voix.json")
 a = a.parse_args()
 
 src, cible = lire(a.source), lire(a.metier)
@@ -216,10 +219,13 @@ remplacer(F / "05-preuve.html", [
 print("· chaînes substituées")
 
 # ── La voix, puis les mots recalés dessus ────────────────────────────────────
+moteur, voix_id, env_voix = voix.choisir()
+if a.voix:
+    voix_id = a.voix
 lancer(["node", str(RACINE / ".agents/skills/product-launch-video/scripts/audio.mjs"),
         "--script", "./SCRIPT.md", "--storyboard", "./STORYBOARD.md", "--hyperframes", ".",
-        "--out", "./audio_meta.json", "--provider", "kokoro", "--voice", a.voix],
-       projet, "voix off")
+        "--out", "./audio_meta.json", "--provider", moteur, "--voice", voix_id],
+       projet, f"voix off ({moteur} · {voix_id})", env_voix)
 lancer(["python3", str(RACINE / "outils/recaler_mots.py"), str(projet), "--ecrire"],
        projet, "mots recalés sur le script")
 

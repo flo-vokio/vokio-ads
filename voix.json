@@ -1,0 +1,12 @@
+{
+  "elevenlabs": {
+    "voice": null,
+    "modele": "eleven_multilingual_v2",
+    "_voice": "Identifiant de la voix retenue pour les pubs. Reste à null tant que personne n'a écouté : un film livré avec la voix anglaise par défaut d'ElevenLabs passerait le montage sans erreur. Se remplit avec outils/voix.py --retenir <id>.",
+    "_pas_lucie": "Lucie (YxrwjAKoUKULGd0g8K9Y) est la voix des agents qui décrochent. Une pub raconte une histoire, ce n'est pas le même métier : entendre l'agent narrer sa propre publicité brouille les deux rôles."
+  },
+  "kokoro": {
+    "voice": "ff_siwis",
+    "_voice": "Repli local, sans clé ni réseau. Correcte pour valider un montage, pas pour une livraison."
+  }
+}
