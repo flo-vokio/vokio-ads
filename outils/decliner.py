@@ -219,9 +219,7 @@ remplacer(F / "05-preuve.html", [
 print("· chaînes substituées")
 
 # ── La voix, puis les mots recalés dessus ────────────────────────────────────
-moteur, voix_id, env_voix = voix.choisir()
-if a.voix:
-    voix_id = a.voix
+moteur, voix_id, env_voix = voix.choisir(force=a.voix)
 lancer(["node", str(RACINE / ".agents/skills/product-launch-video/scripts/audio.mjs"),
         "--script", "./SCRIPT.md", "--storyboard", "./STORYBOARD.md", "--hyperframes", ".",
         "--out", "./audio_meta.json", "--provider", moteur, "--voice", voix_id],

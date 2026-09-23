@@ -55,17 +55,21 @@ def config():
     return json.loads(CONFIG.read_text()) if CONFIG.is_file() else {}
 
 
-def choisir():
+def choisir(force=None):
     """(provider, voice, env_supplémentaire) — le seul point de décision.
 
-    Lève si la clé est là mais qu'aucune voix n'a été retenue : produire un
-    film avec la voix anglaise par défaut d'ElevenLabs serait pire que de
-    rester sur Kokoro, et ça passerait inaperçu jusqu'à l'écoute.
+    `force` court-circuite le réglage, pour essayer une voix sur un film sans
+    l'inscrire pour tous les autres.
+
+    Lève si la clé est là, qu'aucune voix n'a été retenue et qu'aucune n'est
+    forcée : produire un film avec la voix anglaise par défaut d'ElevenLabs
+    serait pire que de rester sur Kokoro, et ça passerait inaperçu jusqu'à
+    l'écoute.
     """
     c, k = config(), cle()
     if not k:
-        return "kokoro", c.get("kokoro", {}).get("voice", "ff_siwis"), {}
-    v = c.get("elevenlabs", {}).get("voice")
+        return "kokoro", force or c.get("kokoro", {}).get("voice", "ff_siwis"), {}
+    v = force or c.get("elevenlabs", {}).get("voice")
     if not v:
         raise SystemExit(
             "Clé ElevenLabs déposée, mais aucune voix retenue.\n"
@@ -128,6 +132,42 @@ def bibliotheque(a):
         print("  (aucune — élargir avec --usage '' ou --langue '')")
 
 
+def ajouter(vid, nom=None):
+    """Copie une voix de la bibliothèque publique vers le compte.
+
+    Une voix partagée ne se synthétise pas directement : son identifiant est
+    « introuvable » tant qu'elle n'est pas dans le compte. Il faut son
+    propriétaire public, que seule la recherche connaît. Elle occupe ensuite
+    un emplacement de voix du forfait, et se retire depuis le tableau de bord.
+    """
+    d = appeler("/v1/shared-voices", {"page_size": 100, "search": nom or ""})
+    v = next((x for x in d.get("voices", []) if x.get("voice_id") == vid), None)
+    if not v:
+        for p in ({"page_size": 100, "language": "fr"}, {"page_size": 100}):
+            d = appeler("/v1/shared-voices", p)
+            v = next((x for x in d.get("voices", []) if x.get("voice_id") == vid), None)
+            if v:
+                break
+    if not v:
+        raise SystemExit(
+            f"{vid} n'est ni dans le compte ni retrouvable dans la bibliothèque.\n"
+            "Donne son nom : outils/voix.py --ajouter <id> --nom \"Lucie - Narration\"")
+    corps = json.dumps({"new_name": v.get("name", vid)}).encode()
+    req = urllib.request.Request(
+        f"{API}/v1/voices/add/{v['public_owner_id']}/{vid}", data=corps,
+        headers={"xi-api-key": cle(), "Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            neuf = json.loads(r.read()).get("voice_id", vid)
+    except urllib.error.HTTPError as e:
+        raise SystemExit(f"ElevenLabs {e.code} : {e.read().decode('utf-8','replace')[:400]}")
+    print(f"« {v.get('name')} » ajoutée au compte : {neuf}")
+    if neuf != vid:
+        print("  ⚠ l'identifiant dans le compte diffère de celui de la bibliothèque, "
+              "c'est celui-ci qu'il faut retenir")
+    return neuf
+
+
 def retenir(vid):
     c = config()
     el = c.setdefault("elevenlabs", {})
@@ -183,6 +223,9 @@ if __name__ == "__main__":
     p.add_argument("--catalogue", action="store_true")
     p.add_argument("--bibliotheque", action="store_true")
     p.add_argument("--retenir", metavar="ID")
+    p.add_argument("--ajouter", metavar="ID",
+                   help="copie une voix de la bibliothèque publique vers le compte")
+    p.add_argument("--nom", default="", help="nom de la voix, pour la retrouver")
     p.add_argument("--essai", nargs="?", const="Vokio décroche à votre place, "
                    "et dit tout de suite qui elle est.", metavar="TEXTE")
     p.add_argument("--langue", default="fr")
@@ -197,6 +240,8 @@ if __name__ == "__main__":
         catalogue()
     elif a.bibliotheque:
         bibliotheque(a)
+    elif a.ajouter:
+        ajouter(a.ajouter, a.nom)
     elif a.retenir:
         retenir(a.retenir)
     elif a.essai is not None:
