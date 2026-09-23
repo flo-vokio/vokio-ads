@@ -23,7 +23,25 @@
     "vo_agenda": "regarde votre agenda",
     "vo_pose": "pose le rendez-vous",
     "sms_confirme": "Rendez-vous confirmé",
-    "badge_client": "Client"
+    "badge_client": "Client",
+    "doc_titre": "Le rendez-vous se pose",
+    "doc_creneau": "Le créneau posé dans l'agenda : « Jeudi 8 h 30 »",
+    "doc_recap": "le récapitulatif artisan"
   },
-  "_lexique": "Des PHRASES entières, jamais des mots : « le rendez-vous » devient « la réservation », le genre change, et « confirmé » devient « confirmée ». Substituer « rendez-vous » par « réservation » produirait des fautes d'accord."
+  "_lexique": "Des PHRASES entières, jamais des mots : « le rendez-vous » devient « la réservation », le genre change, et « confirmé » devient « confirmée ». Substituer « rendez-vous » par « réservation » produirait des fautes d'accord. Les clés « doc_ » servent au SCRIPT.md lui-même : un document de travail qui décrit le film d'un autre métier égare celui qui le lit ensuite.",
+  "vocabulaire": {
+    "interdits": {
+      "réservation": "rendez-vous",
+      "table": "intervention",
+      "couvert": "—",
+      "service du soir": "—",
+      "convive": "client"
+    },
+    "attendus": [
+      "rendez-vous",
+      "agenda",
+      "intervention"
+    ]
+  },
+  "_vocabulaire": "Les mots d'un AUTRE métier, avec ce qu'il faut dire à la place. Contrôlé par outils/langue.py, bloquant."
 }

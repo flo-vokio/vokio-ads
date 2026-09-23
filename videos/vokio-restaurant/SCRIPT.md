@@ -17,7 +17,7 @@ est 75 mots ; la marge est volontaire, les silences font le rythme.
 **Time:** 0,0 – 3,2 s
 **Delivery:** Deux constats secs, séparés d'un vrai silence. Pas d'inquiétude dans la voix.
 
-    Les mains dans le service. Le téléphone sonne.
+    Pris par le service. Le téléphone sonne.
 
 ## Ligne 2 — Le problème (Frame 2)
 
@@ -33,7 +33,7 @@ est 75 mots ; la marge est volontaire, les silences font le rythme.
 
     Vokio décroche à votre place, et dit tout de suite qui elle est.
 
-## Ligne 4 — Le rendez-vous se pose (Frame 4)
+## Ligne 4 — La réservation se pose (Frame 4)
 
 **Time:** 14,0 – 20,0 s
 **Delivery:** Trois gestes, trois appuis. Marquer la virgule, le visuel suit chaque cue.
@@ -67,6 +67,6 @@ que la narration, et ils libèrent le budget de mots.
   Je suis l'assistante vocale de l'entreprise. » C'est la transparence IA
   exigée par l'article 50, et elle est **montrée**, pas racontée.
 - La demande du client, en bulle : « Une table pour quatre, demain midi. »
-- Le créneau posé dans l'agenda : « Vendredi 8 h 30 ».
-- Le SMS client et le récapitulatif artisan, scène 5.
+- La table posée dans le service : « vendredi 12 h 30 ».
+- Le SMS client et le récapitulatif restaurant, scène 5.
 - L'adresse `vokio.fr` et « Votre numéro ne change pas », scène 6.

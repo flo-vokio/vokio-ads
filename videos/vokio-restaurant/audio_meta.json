@@ -10,133 +10,127 @@
     {
       "frame": 1,
       "path": "assets/voice/01.wav",
-      "duration_s": 3.004,
+      "duration_s": 2.926,
       "words": [
         {
-          "text": "Les",
-          "start": 0.05,
-          "end": 0.21,
+          "text": "Pris",
+          "start": 0.0,
+          "end": 0.366,
           "id": "w0"
         },
         {
-          "text": "mains",
-          "start": 0.21,
-          "end": 0.56,
+          "text": "par",
+          "start": 0.366,
+          "end": 0.64,
           "id": "w1"
         },
         {
-          "text": "dans",
-          "start": 0.56,
-          "end": 0.84,
+          "text": "le",
+          "start": 0.64,
+          "end": 0.823,
           "id": "w2"
         },
         {
-          "text": "le",
-          "start": 0.86,
-          "end": 0.99,
+          "text": "service.",
+          "start": 0.823,
+          "end": 1.463,
           "id": "w3"
         },
         {
-          "text": "service.",
-          "start": 0.99,
-          "end": 1.6,
+          "text": "Le",
+          "start": 1.463,
+          "end": 1.646,
           "id": "w4"
         },
         {
-          "text": "Le",
-          "start": 1.6,
-          "end": 1.65,
+          "text": "téléphone",
+          "start": 1.646,
+          "end": 2.469,
           "id": "w5"
         },
         {
-          "text": "téléphone",
-          "start": 1.69,
-          "end": 2.04,
-          "id": "w6"
-        },
-        {
           "text": "sonne.",
-          "start": 2.04,
-          "end": 2.36,
-          "id": "w7"
+          "start": 2.469,
+          "end": 2.926,
+          "id": "w6"
         }
       ]
     },
     {
       "frame": 2,
       "path": "assets/voice/02.wav",
-      "duration_s": 3.762,
+      "duration_s": 3.709,
       "words": [
         {
           "text": "Vous",
-          "start": 0.1,
-          "end": 0.22,
+          "start": 0.0,
+          "end": 0.285,
           "id": "w0"
         },
         {
           "text": "ne",
-          "start": 0.22,
-          "end": 0.33,
+          "start": 0.285,
+          "end": 0.428,
           "id": "w1"
         },
         {
           "text": "décrochez",
-          "start": 0.33,
-          "end": 0.8,
+          "start": 0.428,
+          "end": 1.07,
           "id": "w2"
         },
         {
           "text": "pas.",
-          "start": 0.8,
-          "end": 1,
+          "start": 1.07,
+          "end": 1.284,
           "id": "w3"
         },
         {
           "text": "Le",
-          "start": 1,
-          "end": 1.31,
+          "start": 1.284,
+          "end": 1.427,
           "id": "w4"
         },
         {
           "text": "client",
-          "start": 1.31,
-          "end": 1.62,
+          "start": 1.427,
+          "end": 1.855,
           "id": "w5"
         },
         {
           "text": "appelle",
-          "start": 1.62,
-          "end": 1.87,
+          "start": 1.855,
+          "end": 2.354,
           "id": "w6"
         },
         {
           "text": "le",
-          "start": 1.87,
-          "end": 1.98,
+          "start": 2.354,
+          "end": 2.496,
           "id": "w7"
         },
         {
           "text": "suivant",
-          "start": 1.98,
-          "end": 2.33,
+          "start": 2.496,
+          "end": 2.996,
           "id": "w8"
         },
         {
           "text": "sur",
-          "start": 2.33,
-          "end": 2.55,
+          "start": 2.996,
+          "end": 3.21,
           "id": "w9"
         },
         {
           "text": "la",
-          "start": 2.55,
-          "end": 2.66,
+          "start": 3.21,
+          "end": 3.352,
           "id": "w10"
         },
         {
           "text": "liste.",
-          "start": 2.66,
-          "end": 3.17,
+          "start": 3.352,
+          "end": 3.709,
           "id": "w11"
         }
       ]
@@ -144,84 +138,84 @@
     {
       "frame": 3,
       "path": "assets/voice/03.wav",
-      "duration_s": 3.37,
+      "duration_s": 3.291,
       "words": [
         {
           "text": "Vokio",
-          "start": 0.04,
-          "end": 0.421,
+          "start": 0.0,
+          "end": 0.329,
           "id": "w0"
         },
         {
           "text": "décroche",
-          "start": 0.421,
-          "end": 1.03,
+          "start": 0.329,
+          "end": 0.856,
           "id": "w1"
         },
         {
           "text": "à",
-          "start": 1.04,
-          "end": 1.09,
+          "start": 0.856,
+          "end": 0.921,
           "id": "w2"
         },
         {
           "text": "votre",
-          "start": 1.09,
-          "end": 1.25,
+          "start": 0.921,
+          "end": 1.251,
           "id": "w3"
         },
         {
           "text": "place,",
-          "start": 1.25,
-          "end": 1.66,
+          "start": 1.251,
+          "end": 1.58,
           "id": "w4"
         },
         {
           "text": "et",
-          "start": 1.66,
-          "end": 1.7,
+          "start": 1.58,
+          "end": 1.711,
           "id": "w5"
         },
         {
           "text": "dit",
-          "start": 1.7,
-          "end": 1.84,
+          "start": 1.711,
+          "end": 1.909,
           "id": "w6"
         },
         {
           "text": "tout",
-          "start": 1.9,
-          "end": 2.04,
+          "start": 1.909,
+          "end": 2.172,
           "id": "w7"
         },
         {
           "text": "de",
-          "start": 2.04,
-          "end": 2.14,
+          "start": 2.172,
+          "end": 2.304,
           "id": "w8"
         },
         {
           "text": "suite",
-          "start": 2.14,
-          "end": 2.33,
+          "start": 2.304,
+          "end": 2.633,
           "id": "w9"
         },
         {
           "text": "qui",
-          "start": 2.33,
-          "end": 2.49,
+          "start": 2.633,
+          "end": 2.83,
           "id": "w10"
         },
         {
           "text": "elle",
-          "start": 2.49,
-          "end": 2.56,
+          "start": 2.83,
+          "end": 3.094,
           "id": "w11"
         },
         {
           "text": "est.",
-          "start": 2.56,
-          "end": 2.72,
+          "start": 3.094,
+          "end": 3.291,
           "id": "w12"
         }
       ]
@@ -229,66 +223,66 @@
     {
       "frame": 4,
       "path": "assets/voice/04.wav",
-      "duration_s": 4.258,
+      "duration_s": 3.657,
       "words": [
         {
           "text": "Elle",
-          "start": 0.08,
-          "end": 0.17,
+          "start": 0.0,
+          "end": 0.257,
           "id": "w0"
         },
         {
           "text": "comprend",
-          "start": 0.17,
-          "end": 0.51,
+          "start": 0.257,
+          "end": 0.77,
           "id": "w1"
         },
         {
           "text": "la",
-          "start": 0.51,
-          "end": 0.59,
+          "start": 0.77,
+          "end": 0.898,
           "id": "w2"
         },
         {
           "text": "demande,",
-          "start": 0.59,
-          "end": 0.97,
+          "start": 0.898,
+          "end": 1.347,
           "id": "w3"
         },
         {
           "text": "regarde",
-          "start": 1.24,
-          "end": 1.36,
+          "start": 1.347,
+          "end": 1.796,
           "id": "w4"
         },
         {
           "text": "votre",
-          "start": 1.36,
-          "end": 1.61,
+          "start": 1.796,
+          "end": 2.117,
           "id": "w5"
         },
         {
           "text": "service,",
-          "start": 1.62,
-          "end": 2.12,
+          "start": 2.117,
+          "end": 2.566,
           "id": "w6"
         },
         {
           "text": "pose",
-          "start": 2.12,
-          "end": 2.15,
+          "start": 2.566,
+          "end": 2.823,
           "id": "w7"
         },
         {
           "text": "la",
-          "start": 2.15,
-          "end": 2.58,
+          "start": 2.823,
+          "end": 2.951,
           "id": "w8"
         },
         {
           "text": "réservation.",
-          "start": 2.58,
-          "end": 3.47,
+          "start": 2.951,
+          "end": 3.657,
           "id": "w9"
         }
       ]
@@ -296,60 +290,60 @@
     {
       "frame": 5,
       "path": "assets/voice/05.wav",
-      "duration_s": 3.657,
+      "duration_s": 3.605,
       "words": [
         {
           "text": "Le",
-          "start": 0.03,
-          "end": 0.13,
+          "start": 0.0,
+          "end": 0.134,
           "id": "w0"
         },
         {
           "text": "client",
-          "start": 0.21,
-          "end": 0.56,
+          "start": 0.134,
+          "end": 0.534,
           "id": "w1"
         },
         {
           "text": "reçoit",
-          "start": 0.56,
-          "end": 0.98,
+          "start": 0.534,
+          "end": 0.935,
           "id": "w2"
         },
         {
           "text": "sa",
-          "start": 0.98,
-          "end": 1.12,
+          "start": 0.935,
+          "end": 1.068,
           "id": "w3"
         },
         {
           "text": "confirmation.",
-          "start": 1.12,
-          "end": 2.06,
+          "start": 1.068,
+          "end": 1.869,
           "id": "w4"
         },
         {
           "text": "Vous",
-          "start": 2.06,
-          "end": 2.18,
+          "start": 1.869,
+          "end": 2.136,
           "id": "w5"
         },
         {
           "text": "recevez",
-          "start": 2.18,
-          "end": 2.4,
+          "start": 2.136,
+          "end": 2.604,
           "id": "w6"
         },
         {
           "text": "le",
-          "start": 2.4,
-          "end": 2.53,
+          "start": 2.604,
+          "end": 2.737,
           "id": "w7"
         },
         {
           "text": "récapitulatif.",
-          "start": 2.53,
-          "end": 3.44,
+          "start": 2.737,
+          "end": 3.605,
           "id": "w8"
         }
       ]
@@ -357,48 +351,48 @@
     {
       "frame": 6,
       "path": "assets/voice/06.wav",
-      "duration_s": 2.886,
+      "duration_s": 3.072,
       "words": [
         {
           "text": "Vokio.",
-          "start": 0.78,
-          "end": 1.234,
+          "start": 0.0,
+          "end": 0.569,
           "id": "w0"
         },
         {
           "text": "Ne",
-          "start": 1.234,
-          "end": 1.416,
+          "start": 0.569,
+          "end": 0.796,
           "id": "w1"
         },
         {
           "text": "ratez",
-          "start": 1.416,
-          "end": 1.87,
+          "start": 0.796,
+          "end": 1.365,
           "id": "w2"
         },
         {
           "text": "plus",
-          "start": 1.87,
-          "end": 2.04,
+          "start": 1.365,
+          "end": 1.82,
           "id": "w3"
         },
         {
           "text": "un",
-          "start": 2.09,
-          "end": 2.2,
+          "start": 1.82,
+          "end": 2.048,
           "id": "w4"
         },
         {
           "text": "seul",
-          "start": 2.2,
-          "end": 2.42,
+          "start": 2.048,
+          "end": 2.503,
           "id": "w5"
         },
         {
           "text": "appel.",
-          "start": 2.42,
-          "end": 2.75,
+          "start": 2.503,
+          "end": 3.072,
           "id": "w6"
         }
       ]

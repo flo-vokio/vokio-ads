@@ -143,6 +143,41 @@ def rebatir_salutation(projet, phrase):
     return len(mots)
 
 
+def aligner_storyboard(projet):
+    """Recopie les répliques de SCRIPT.md dans le storyboard.
+
+    Elles y étaient en double, et la déclinaison n'en traduisait qu'une : le
+    film parlait bien restaurant, parce que la voix se fabrique depuis
+    SCRIPT.md, mais son storyboard racontait encore une fuite sous un évier.
+    Personne ne l'a vu pendant six montages. Le document qui sert de référence
+    à toute l'équipe ne peut pas être celui qui ment.
+    """
+    s = (projet / "SCRIPT.md").read_text()
+    dits = {}
+    for bloc in re.split(r"\n## ", s)[1:]:
+        m = re.search(r"\(Frame (\d+)\)", bloc)
+        if not m:
+            continue
+        lignes = [l[4:].strip() for l in bloc.splitlines()
+                  if l.startswith("    ") and l.strip()]
+        if lignes:
+            dits[int(m.group(1))] = " ".join(lignes)
+    sb = projet / "STORYBOARD.md"
+    texte, plan, n = sb.read_text(), 0, 0
+    sorties = []
+    for ligne in texte.splitlines():
+        m = re.match(r"^## Frame (\d+)", ligne)
+        if m:
+            plan = int(m.group(1))
+        if re.match(r"^\s*-\s*voiceover:", ligne) and plan in dits:
+            sorties.append(f'- voiceover: "{dits[plan]}"')
+            n += 1
+        else:
+            sorties.append(ligne)
+    sb.write_text("\n".join(sorties) + ("\n" if texte.endswith("\n") else ""))
+    return n
+
+
 def lancer(cmd, cwd, titre, env_plus=None, echo=None):
     """`echo` remonte les lignes du sous-processus qui comptent pour nous.
 
@@ -188,12 +223,17 @@ if set(lex_src) != set(lex_cible):
     raise SystemExit(f"lexiques incompatibles : {sorted(set(lex_src) ^ set(lex_cible))}")
 
 remplacer(projet / "SCRIPT.md", [
+    (lex_src["doc_creneau"], lex_cible["doc_creneau"], 1),
+    (lex_src["doc_titre"], lex_cible["doc_titre"], 1),
+    (lex_src["doc_recap"], lex_cible["doc_recap"], 1),
     (lex_src["vo_agenda"], lex_cible["vo_agenda"], 1),
     (lex_src["vo_pose"], lex_cible["vo_pose"], 1),
     (src["accroche"], cible["accroche"], 1),
     (src["etablissement"], cible["etablissement"], 1),
     (src["demande_client"], cible["demande_client"], 1),
-    (src["jour"], cible["jour"], 1),
+    # Plus de substitution du jour ici : sa seule occurrence dans SCRIPT.md
+    # était celle du créneau, que `doc_creneau` traduit désormais en entier.
+    # Le compteur l'a signalé au premier passage, comme prévu.
 ])
 remplacer(projet / "STORYBOARD.md", [(f"metier: {src['metier']}", f"metier: {cible['metier']}", 1)])
 remplacer(F / "01-accroche.html", [(src["heure_appel"], cible["heure_appel"], 1)])
@@ -227,7 +267,8 @@ remplacer(F / "05-preuve.html", [
     (src["adresse"], cible["adresse"], 1),
     (src["heure_sms"], cible["heure_sms"], 2),
 ])
-print("· chaînes substituées")
+n = aligner_storyboard(projet)
+print(f"· chaînes substituées · {n} réplique(s) recopiée(s) dans le storyboard")
 
 # ── La voix, puis les mots recalés dessus ────────────────────────────────────
 moteur, voix_id, env_voix = voix.choisir(force=a.voix)
@@ -269,6 +310,13 @@ l1 = next(v for v in meta["voices"] if v["frame"] == 1)
 n = rebatir_accroche(projet, cible["accroche"], [w["start"] for w in l1["words"]])
 m = rebatir_salutation(projet, f'{cible["etablissement"]}, bonjour.')
 print(f"· accroche rebâtie ({n} mots, sur la voix) · salutation rebâtie ({m} mots)")
+
+# ── La langue du métier, avant le rendu ──────────────────────────────────────
+# Après la reconstruction de l'accroche, pas avant : elle se cale sur les
+# horodatages de la voix, donc à l'écran elle parle encore plombier jusqu'ici.
+# Et avant monter.sh, pour qu'un mot du mauvais métier ne coûte pas un rendu.
+lancer(["python3", str(RACINE / "outils/langue.py"), a.metier, "--strict", "--sans-relecture"],
+       projet, "langue du métier", echo=r"^\[|^  ·")
 
 # ── Montage ──────────────────────────────────────────────────────────────────
 sortie = lancer(["./monter.sh"] + ([] if a.sans_rendu else ["--rendre"]), projet, "montage")

@@ -2,7 +2,7 @@
   "_": "Le service du soir : l'appel tombe pendant le coup de feu, la table est posée pour le lendemain midi.",
   "metier": "restaurant",
   "etablissement": "Le Comptoir des Lices",
-  "accroche": "Les mains dans le service.",
+  "accroche": "Pris par le service.",
   "demande_client": "Une table pour quatre, demain midi.",
   "motif": "Table pour 4",
   "confrere": "Restaurant suivant",
@@ -23,7 +23,34 @@
     "vo_agenda": "regarde votre service",
     "vo_pose": "pose la réservation",
     "sms_confirme": "Réservation confirmée",
-    "badge_client": "Client"
+    "badge_client": "Client",
+    "doc_titre": "La réservation se pose",
+    "doc_creneau": "La table posée dans le service : « vendredi 12 h 30 »",
+    "doc_recap": "le récapitulatif restaurant"
   },
-  "_lexique": "Des PHRASES entières, jamais des mots : « le rendez-vous » devient « la réservation », le genre change, et « confirmé » devient « confirmée ». Substituer « rendez-vous » par « réservation » produirait des fautes d'accord."
+  "_lexique": "Des PHRASES entières, jamais des mots : « le rendez-vous » devient « la réservation », le genre change, et « confirmé » devient « confirmée ». Substituer « rendez-vous » par « réservation » produirait des fautes d'accord. Les clés « doc_ » servent au SCRIPT.md lui-même : un document de travail qui décrit le film d'un autre métier égare celui qui le lit ensuite.",
+  "vocabulaire": {
+    "interdits": {
+      "rendez-vous": "réservation",
+      "agenda": "service, ou livre de réservations",
+      "artisan": "restaurant",
+      "intervention": "réservation",
+      "dépannage": "—",
+      "chantier": "—",
+      "devis": "—",
+      "évier": "—",
+      "fuite": "—"
+    },
+    "attendus": [
+      "réservation",
+      "table",
+      "service",
+      "couvert"
+    ]
+  },
+  "_vocabulaire": "Les mots d'un AUTRE métier, avec ce qu'il faut dire à la place. Contrôlé par outils/langue.py, bloquant.",
+  "_calques_admis": [
+    "lexique.badge_client"
+  ],
+  "__calques_admis": "Un client de restaurant reste un « Client » : le calque est voulu."
 }

@@ -69,7 +69,7 @@ figé) et l'économiseur d'écran (tout qui flotte en même temps sans raison).
 - duration: 4.2s
 - transition_in: cut
 - status: outline
-- voiceover: "Les mains sous un évier. Le téléphone sonne."
+- voiceover: "Pris par le service. Le téléphone sonne."
 - asset_candidates: none
 - handoff_out: pastille d'appel « Appel entrant · 02:07 » centrée x 50 % y 62 %, échelle 1, opacité 1, pulsation lente en cours
 - persuasion: reconnaissance du moment
@@ -225,7 +225,7 @@ le client parle. C'est là qu'elle entre dans le film ; elle en ressortira au CT
 - duration: 6.0s
 - transition_in: cut
 - status: outline
-- voiceover: "Elle comprend la demande, regarde votre agenda, pose le rendez-vous."
+- voiceover: "Elle comprend la demande, regarde votre service, pose la réservation."
 - asset_candidates: none
 - handoff_out: carte du créneau « jeudi 8 h 30 » posée x 62 % y 48 %, échelle 1, opacité 1, immobile
 - persuasion: la preuve mécanique

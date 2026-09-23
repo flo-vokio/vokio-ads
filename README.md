@@ -198,6 +198,46 @@ de `SCRIPT.md` : sans lui les sous-titres affichent « Vocuez au » pour
 
 ---
 
+## La langue de la verticale
+
+```bash
+outils/langue.py restaurant          contrôles + relecture
+outils/langue.py --toutes            toutes les fiches
+```
+
+Le film se décline par substitution, et c'est exactement le danger : le
+mécanisme est fidèle. Il a produit **« Les mains dans le service »**, calqué
+mot à mot sur « Les mains sous un évier » du plombier. La phrase passe tous
+les contrôles techniques, se prononce parfaitement, et ne veut rien dire.
+
+`outils/langue.py` vérifie ce qu'une machine peut vérifier :
+
+- **les mots d'un autre métier** — un restaurant n'a pas d'« agenda » et ne
+  prend pas de « rendez-vous ». Déclarés par fiche dans `vocabulaire.interdits`,
+  avec le mot à dire à la place. **Bloquant** ;
+- **les champs jamais réécrits**, identiques à la fiche de référence ;
+- **les calques de structure** — un champ d'au moins quatre mots qui garde les
+  deux premiers de la référence. C'est le contrôle qui aurait attrapé la
+  phrase ci-dessus. Un calque voulu se déclare dans `_calques_admis` ;
+- **le vocabulaire attendu**, qui doit apparaître quelque part.
+
+Le contrôle ne relit que **ce qui se voit ou s'entend** : les répliques du
+storyboard et le texte des compositions, balises et scripts retirés. Le
+premier jet relisait les fichiers entiers et sortait soixante alertes sur
+l'identifiant CSS `04-agenda` — une alerte qu'on apprend à ignorer ne protège
+plus rien.
+
+Et ce qu'une machine ne peut pas vérifier, c'est si une phrase *sonne juste*
+dans un métier. D'où la **relecture** : l'outil imprime en un écran tout ce
+que le film dit et tout ce qu'il montre. Ça se lit à voix haute.
+
+`decliner.py` l'appelle en `--strict` **après la reconstruction de l'accroche
+et avant le rendu** : l'accroche à l'écran n'existe qu'une fois la voix faite,
+et un mot du mauvais métier ne doit pas coûter un encodage pour se faire voir.
+
+Les codes métier sont ceux du produit (`verticals.code`), pour qu'une verticale
+porte le même nom dans l'agent vocal et dans la pub.
+
 ## Le piège du film muet
 
 `audio.mjs` classe un échec de synthèse en « anomalie non fatale » et **sort
