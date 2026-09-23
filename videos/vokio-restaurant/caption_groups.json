@@ -102,14 +102,14 @@
     {
       "id": "caption-group-2",
       "frame": 4,
-      "start": 14.43,
-      "end": 17.98,
-      "text": "Elle comprend la demande, regarde votre agenda, pose le rendez-vous.",
+      "start": 14.44,
+      "end": 18.52,
+      "text": "Elle comprend la demande, regarde votre service, pose la réservation.",
       "words": [
         {
           "id": "caption-word-2-0",
           "text": "Elle",
-          "start": 14.43,
+          "start": 14.44,
           "end": 14.59
         },
         {
@@ -128,43 +128,43 @@
           "id": "caption-word-2-3",
           "text": "demande,",
           "start": 15.32,
-          "end": 15.91
+          "end": 15.93
         },
         {
           "id": "caption-word-2-4",
           "text": "regarde",
-          "start": 15.91,
-          "end": 16.3
+          "start": 15.93,
+          "end": 16.38
         },
         {
           "id": "caption-word-2-5",
           "text": "votre",
-          "start": 16.3,
-          "end": 16.58
+          "start": 16.38,
+          "end": 16.62
         },
         {
           "id": "caption-word-2-6",
-          "text": "agenda,",
-          "start": 16.58,
-          "end": 16.95
+          "text": "service,",
+          "start": 16.7,
+          "end": 17.18
         },
         {
           "id": "caption-word-2-7",
           "text": "pose",
-          "start": 17.1,
-          "end": 17.21
+          "start": 17.33,
+          "end": 17.55
         },
         {
           "id": "caption-word-2-8",
-          "text": "le",
-          "start": 17.21,
-          "end": 17.29
+          "text": "la",
+          "start": 17.55,
+          "end": 17.67
         },
         {
           "id": "caption-word-2-9",
-          "text": "rendez-vous.",
-          "start": 17.29,
-          "end": 17.86
+          "text": "réservation.",
+          "start": 17.67,
+          "end": 18.4
         }
       ]
     },

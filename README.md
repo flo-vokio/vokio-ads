@@ -44,6 +44,22 @@ enregistrer sous `metiers/<nom>.json` :
 | `jour`, `jour_texte` | le jour affiché, en capitales sur l'agenda et en toutes lettres sur le reçu. |
 | `rail` | les **cinq** étiquettes d'heures de l'agenda. Le rendez-vous se pose toujours sur la troisième + 30 min, donc la géométrie ne bouge jamais : un restaurant peut travailler à midi et un plombier à 8 h. |
 | `heure_appel`, `heure_sms` | l'horodatage de la pastille d'appel et des deux reçus. |
+| `lexique` | **le vocabulaire de la verticale**. Un restaurant ne dit pas « rendez-vous », il dit « réservation ». |
+
+### Le lexique : des phrases, jamais des mots
+
+`lexique` porte des **phrases entières** et c'est délibéré. « le rendez-vous »
+devient « la réservation » : le genre change. « Rendez-vous confirmé » devient
+« Réservation confirmée » : l'accord change. Substituer le mot « rendez-vous »
+par « réservation » produirait des fautes dans les deux cas.
+
+C'est la même discipline que les prompts de l'agent vocal, où aucun mot de
+métier n'est écrit en dur. Une pub qui parle de rendez-vous à un restaurateur
+sonne comme un logiciel générique, ce que Vokio n'est pas.
+
+Le lexique traverse `SCRIPT.md`, donc il change la voix off, donc il change
+les sous-titres : tout se régénère seul. Les deux fiches doivent déclarer les
+**mêmes clés**, sinon le script s'arrête.
 
 **Chaque substitution est comptée.** Si une chaîne attendue n'est pas trouvée le
 bon nombre de fois, le script s'arrête au lieu d'écrire un film à moitié

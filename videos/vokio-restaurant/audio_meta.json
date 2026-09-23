@@ -229,11 +229,11 @@
     {
       "frame": 4,
       "path": "assets/voice/04.wav",
-      "duration_s": 3.627,
+      "duration_s": 4.032,
       "words": [
         {
           "text": "Elle",
-          "start": 0.03,
+          "start": 0.04,
           "end": 0.19,
           "id": "w0"
         },
@@ -252,43 +252,43 @@
         {
           "text": "demande,",
           "start": 0.92,
-          "end": 1.51,
+          "end": 1.53,
           "id": "w3"
         },
         {
           "text": "regarde",
-          "start": 1.51,
-          "end": 1.9,
+          "start": 1.53,
+          "end": 1.98,
           "id": "w4"
         },
         {
           "text": "votre",
-          "start": 1.9,
-          "end": 2.18,
+          "start": 1.98,
+          "end": 2.22,
           "id": "w5"
         },
         {
-          "text": "agenda,",
-          "start": 2.18,
-          "end": 2.55,
+          "text": "service,",
+          "start": 2.3,
+          "end": 2.78,
           "id": "w6"
         },
         {
           "text": "pose",
-          "start": 2.7,
-          "end": 2.81,
+          "start": 2.93,
+          "end": 3.15,
           "id": "w7"
         },
         {
-          "text": "le",
-          "start": 2.81,
-          "end": 2.89,
+          "text": "la",
+          "start": 3.15,
+          "end": 3.27,
           "id": "w8"
         },
         {
-          "text": "rendez-vous.",
-          "start": 2.89,
-          "end": 3.46,
+          "text": "réservation.",
+          "start": 3.27,
+          "end": 4,
           "id": "w9"
         }
       ]

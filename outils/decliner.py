@@ -169,7 +169,13 @@ print(f"· projet {projet.name} créé depuis {REF.name}")
 
 # ── Les chaînes entières ─────────────────────────────────────────────────────
 F = projet / "compositions/frames"
+lex_src, lex_cible = src.get("lexique", {}), cible.get("lexique", {})
+if set(lex_src) != set(lex_cible):
+    raise SystemExit(f"lexiques incompatibles : {sorted(set(lex_src) ^ set(lex_cible))}")
+
 remplacer(projet / "SCRIPT.md", [
+    (lex_src["vo_agenda"], lex_cible["vo_agenda"], 1),
+    (lex_src["vo_pose"], lex_cible["vo_pose"], 1),
     (src["accroche"], cible["accroche"], 1),
     (src["etablissement"], cible["etablissement"], 1),
     (src["demande_client"], cible["demande_client"], 1),
@@ -199,6 +205,8 @@ for i, h in enumerate(cible["rail"]):
         raise SystemExit(f"04-agenda.html : étiquette d'heure {i} introuvable ({n} fois)")
 rail_f.write_text(rail_t)
 remplacer(F / "05-preuve.html", [
+    (lex_src["sms_confirme"], lex_cible["sms_confirme"], 1),
+    (f'>{lex_src["badge_client"]}<', f'>{lex_cible["badge_client"]}<', 1),
     (src["jour_texte"], typo_fr(cible["jour_texte"]), 2),
     (src["etablissement"], cible["etablissement"], 1),
     (src["motif"], cible["motif"], 1),

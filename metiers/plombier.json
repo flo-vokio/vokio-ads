@@ -18,5 +18,12 @@
     "10:00"
   ],
   "heure_appel": "02:07",
-  "heure_sms": "02:09"
+  "heure_sms": "02:09",
+  "lexique": {
+    "vo_agenda": "regarde votre agenda",
+    "vo_pose": "pose le rendez-vous",
+    "sms_confirme": "Rendez-vous confirmé",
+    "badge_client": "Client"
+  },
+  "_lexique": "Des PHRASES entières, jamais des mots : « le rendez-vous » devient « la réservation », le genre change, et « confirmé » devient « confirmée ». Substituer « rendez-vous » par « réservation » produirait des fautes d'accord."
 }

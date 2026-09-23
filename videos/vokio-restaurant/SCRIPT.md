@@ -38,7 +38,7 @@ est 75 mots ; la marge est volontaire, les silences font le rythme.
 **Time:** 14,0 – 20,0 s
 **Delivery:** Trois gestes, trois appuis. Marquer la virgule, le visuel suit chaque cue.
 
-    Elle comprend la demande, regarde votre agenda, pose le rendez-vous.
+    Elle comprend la demande, regarde votre service, pose la réservation.
 
 ## Ligne 5 — La preuve (Frame 5)
 
