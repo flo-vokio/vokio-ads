@@ -244,6 +244,28 @@ def recoller_agenda(im):
     return out, n, tranches
 
 
+# Restaurant (retour Florian 24/09) : seules les deux premières colonnes de réservations,
+# agrandies ; la troisième est hors cadre. Recadrage de la vraie capture, rien d'ajouté.
+DEUX_COLONNES = {"restaurant"}
+
+
+def fin_deuxieme_colonne(im):
+    """Bord droit de la 2e colonne de créneaux, plus sa bordure (3 px)."""
+    px = im.load()
+    W, H = im.size
+    creneau = lambda p: 236 <= p[0] <= 246 and 214 <= p[1] <= 228 and 175 <= p[2] <= 192   # noqa: E731
+    xs = [x for x in range(W) if sum(creneau(px[x, y]) for y in range(0, H, 3)) > 10]
+    cols, s0, p0 = [], None, None
+    for x in xs:
+        if s0 is None or x > p0 + 3:
+            if s0 is not None:
+                cols.append((s0, p0))
+            s0 = x
+        p0 = x
+    cols.append((s0, p0))
+    return cols[1][1] + 7
+
+
 def preparer(metier):
     src = SOURCE.format(metier)
     dest = os.path.join(ICI, "assets", metier)
@@ -263,6 +285,10 @@ def preparer(metier):
             y0, y1 = cadrer_agenda(im)
             im = im.crop((0, y0, im.width, y1))
             print(f"  {metier}: agenda recadré {y0}–{y1} ({y1 - y0} px)")
+            if metier in DEUX_COLONNES:
+                x1 = fin_deuxieme_colonne(im)
+                im = im.crop((0, 0, x1, im.height))
+                print(f"  {metier}: deux premières colonnes, largeur {x1} px")
         if nom == "appel-3":
             im, bande = retirer_numero(im)
             print(f"  {metier}: numéro retiré, rangées {bande}")

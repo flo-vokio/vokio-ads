@@ -44,8 +44,10 @@ Une seule composition (`index.html`) pour les quatre métiers ; un fichier de do
   - plombier : sans respiration, sinon la journée ne tient pas ;
   - institut : sans respiration, et les demi-heures vides au-dessus et au-dessous des rendez-vous sont
     retirées aussi. Ses étiquettes 11:00, 12:00 puis 14:00 sont donc plus serrées que l'heure pleine.
-  Restaurant : inchangé, recadré sur 19 h à 23 h, à l'échelle 0,952 (texte des rendez-vous ≈ 31 px, et
-  non 37 comme annoncé à la passe précédente, erreur de mesure corrigée : le texte fait 11 px dans l'app).
+  Restaurant (dernière retouche, 24/09) : recadré sur 19 h à 23 h et sur les DEUX premières colonnes
+  de réservations (M. Aubert, Mme Dumas, Mme Perrot), la troisième est hors cadre. Rien d'ajouté.
+  Échelle 1,28 : texte des rendez-vous à 42,3 px (il était à ≈ 31 px, et non 37 comme annoncé à la
+  deuxième passe, erreur de mesure : le texte fait 11 px dans l'application).
 - **Arguments de fin : retour au principe de l'original.** Ils s'ajoutent un par un en liste, chacun
   avec son point solaire, puis la liste s'efface et laisse place au prix et à l'appel à l'action.
 - **Résumé de l'appel en calque texte**, méthode de `monter_appel_reel.py` : la capture dépliée est
@@ -76,7 +78,8 @@ Une seule composition (`index.html`) pour les quatre métiers ; un fichier de do
 ## Écarts connus
 - 30 i/s comme le demande le brief, alors que les originaux sont à 60 i/s.
 - La mention reste à y = 1428 (une ligne, au-dessus de 1500 mais sous 1380) : plus haut, elle chevaucherait la carte dépliée.
-- Agenda du restaurant à ≈ 31 px (laissé inchangé à la demande) ; les trois autres à 36,3 px.
+- Agenda : restaurant à 42,3 px, les trois autres à 36,3 px. Le titre 4 du restaurant (« Au service suivant, vos tables
+  sont déjà réservées. ») accompagne les cartes d'impact, pas l'agenda : il reste vrai (9 rendez-vous pris ce mois-ci).
 - Restaurant : la rangée « Mme Perrot · Table pour 2 ce soir 21… » est une capture, non retouchée ; l'agenda
   montre Mme Perrot à 20:00. La source est corrigée (« demain 20 h »), l'image le sera à la prochaine capture.
 - Restaurant : la table de M. Chevalier est le mercredi, l'agenda filmé est celui du lundi soir : le titre
