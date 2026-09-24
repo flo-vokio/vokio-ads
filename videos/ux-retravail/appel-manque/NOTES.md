@@ -1,0 +1,8 @@
+# appel-manque · ce qui change par rapport à l'original
+
+- **Une composition, huit fiches** : `index.html` déclare six variables, `metiers/<code>.json` porte les faits de chaque métier (vérifiés identiques à `monter_manque.py`), `rendre.sh` rend et sort la couverture à 6,5 s comme l'original.
+- **Plein Jour au lieu du fond noir** : parchemin assombri d'un cran pour l'appel raté, papier du jour qui monte par le bas (filet d'encre sur sa crête) pour la réponse. Le solaire ne sert plus qu'au point du i, « l'agent agit » ; montant et deux-points passent à l'encre, car une perte en solaire disait l'inverse.
+- **Mouvement** : heure qui sort de sa fente chiffre par chiffre, deux-points qui s'efface deux fois (l'heure qui passe), compteur dont l'échelle croît avec la valeur et un filet qui se trace sur la même courbe, unité posée après le compte, chute en italique, Vokio qui s'écrit segment par segment. power3 partout, aucun rebond ; dernière seconde et demie immobile.
+- **Recommandations design-critique / accessibility-review / ux-copy appliquées** (voir CRITIQUE.md) : « Un appel manqué » devient l'en-tête des plans 1 et 2 dès 0,1 s (avant : 3,8 s) ; tout texte à 36 px minimum (mention 21 → 36, étiquette 28 → 40, adresse 30 → 40) ; contraste AA partout (encre, 7,7:1 minimum pour la mention).
+- **Texte changé, un seul** : « Montant illustratif · établissement fictif de démonstration » → « Montant illustratif · exemple fictif ». Raison : illisible sous 36 px sur deux lignes, et aucun établissement n'est montré dans ce film ; « fictif » reste. Tous les autres textes sont mot pour mot ceux de l'original.
+- **Placement** : mention remontée de y = 1806 (sous l'interface Reels) à y = 1440 ; aucun texte de récit sous y = 1260.

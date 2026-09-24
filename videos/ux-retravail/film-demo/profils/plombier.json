@@ -1,0 +1,21 @@
+{
+  "metier": "plombier",
+  "heure": "23<em>:</em>07",
+  "accroche": "Un client appelle. <em>Vous dormez.</em>",
+  "etat": "Camille répond à votre place",
+  "t1": "Pendant ce temps, <em>votre espace se remplit.</em>",
+  "t2": "Le résumé de l'appel <em>s'écrit tout seul.</em>",
+  "t3": "Et le rendez-vous <em>est déjà posé.</em>",
+  "t4": "Au matin, <em>vous n'avez rien raté.</em>",
+  "arg1": "Répond à chaque appel, jour et nuit",
+  "arg2": "Prend les rendez-vous dans votre agenda",
+  "arg3": "Note tout à votre place",
+  "pan0": -360,
+  "pan1": -700,
+  "agendaH": 1160,
+  "hRang": 246,
+  "hAppel": 243,
+  "hOuvert": 926,
+  "hImpact": 471,
+  "hNuit": 460
+}

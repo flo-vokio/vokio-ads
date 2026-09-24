@@ -1,0 +1,21 @@
+{
+  "metier": "veterinaire",
+  "heure": "22<em>:</em>14",
+  "accroche": "Un chat ne mange plus. <em>La clinique est fermée.</em>",
+  "etat": "Camille répond pour la clinique",
+  "t1": "Personne ne raccroche, <em>même après 20 heures.</em>",
+  "t2": "La demande arrive écrite, <em>déjà triée.</em>",
+  "t3": "La consultation <em>est calée pour demain.</em>",
+  "t4": "À l'ouverture, <em>la journée est déjà remplie.</em>",
+  "arg1": "Répond quand la clinique est fermée",
+  "arg2": "Distingue l'urgence du rendez-vous de routine",
+  "arg3": "Remplit l'agenda sans mobiliser l'accueil",
+  "pan0": -360,
+  "pan1": -700,
+  "agendaH": 1080,
+  "hRang": 246,
+  "hAppel": 243,
+  "hOuvert": 926,
+  "hImpact": 471,
+  "hNuit": 460
+}

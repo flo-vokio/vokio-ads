@@ -1,0 +1,21 @@
+{
+  "metier": "restaurant",
+  "heure": "20<em>:</em>36",
+  "accroche": "Le téléphone sonne. <em>Vous êtes en plein service.</em>",
+  "etat": "Camille prend les réservations",
+  "t1": "Personne ne court plus <em>jusqu'au téléphone.</em>",
+  "t2": "La table est notée, <em>avec le nombre de couverts.</em>",
+  "t3": "Et elle apparaît <em>dans le cahier du soir.</em>",
+  "t4": "Au coup de feu suivant, <em>la salle est déjà pleine.</em>",
+  "arg1": "Répond pendant le service",
+  "arg2": "Note la table, l'heure et les couverts",
+  "arg3": "Prévient quand une réservation saute",
+  "pan0": -1227,
+  "pan1": -1310,
+  "agendaH": 690,
+  "hRang": 246,
+  "hAppel": 243,
+  "hOuvert": 807,
+  "hImpact": 471,
+  "hNuit": 460
+}

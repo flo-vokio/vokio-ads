@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="fr" data-composition-variables='[
+  {"id":"metier","type":"string","label":"Métier (code produit)","default":"plombier"},
+  {"id":"heure_h","type":"string","label":"Heure de l appel (heures)","default":"23"},
+  {"id":"heure_m","type":"string","label":"Heure de l appel (minutes)","default":"07"},
+  {"id":"situation","type":"string","label":"La situation, une phrase","default":"Un chauffe-eau qui lâche."},
+  {"id":"montant","type":"number","label":"Montant perdu (euros)","default":1200,"min":1,"step":1},
+  {"id":"quoi","type":"string","label":"Ce que valait l appel, deux phrases","default":"Le chauffe-eau remplacé. Par un autre plombier."}
+]'>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Ce que coûte un appel manqué · 1080 × 1920</title>
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  @font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/GeistMono-Regular.woff2") format("woff2");}
+  @font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2");}
+  @font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");}
+  @font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");}
+
+  html,body{margin:0;background:#F4F1E8}
+  #root{position:relative;width:100%;height:100%;overflow:hidden;color:#262019;
+        font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-kerning:normal}
+
+  /* ——— sols ———
+     Plans 1 et 2 : le parchemin assombri d'un cran, l'encre qui gagne les bords.
+     Plan 3 : le papier du jour et un seul halo solaire, derrière le mot. */
+  #sol-nuit{position:absolute;inset:0;
+    background:
+      radial-gradient(120% 70% at 30% 38%, rgba(236,230,214,0) 0%, rgba(38,32,25,0.07) 100%),
+      #ECE6D6}
+
+  .plan{position:absolute;inset:0}
+  .w{display:inline-block}
+  .masque{display:block;overflow:hidden;padding:0 0.04em 0.06em}
+  .masque > span{display:block}
+
+  /* ——— plan 1 · l'heure et la situation ——— */
+  #p1-bloc{position:absolute;left:90px;right:90px;top:560px}
+  #heure{margin:0;font-family:"Instrument Serif",serif;font-size:300px;line-height:.9;
+         letter-spacing:-.03em;display:flex;align-items:baseline}
+  #heure .g{display:block;overflow:hidden;padding-bottom:.04em}
+  #heure .g > span{display:block}
+  #deux-points{padding:0 .01em}
+  #situation{margin:64px 0 0;font-family:"Instrument Serif",serif;font-size:88px;line-height:1.08;
+             letter-spacing:-.015em;text-wrap:balance}
+
+  /* ——— plan 2 · ce que valait l'appel ——— */
+  #p2-bloc{position:absolute;left:90px;right:90px;top:500px}
+  /* l'en-tête des plans 1 et 2 : dit dès la première image de quoi il s'agit */
+  #perdu{position:absolute;left:90px;top:470px;margin:0;font-family:"Geist Mono",monospace;
+         font-size:40px;line-height:1;letter-spacing:.16em;text-transform:uppercase}
+  #chiffre{margin:10px 0 -.16em;font-family:"Instrument Serif",serif;line-height:1.3;
+           letter-spacing:-.04em;white-space:nowrap;font-variant-numeric:tabular-nums;
+           display:flex;align-items:baseline;transform-origin:0 100%}
+  #chiffre #euro{display:inline-block;font-size:.5em;letter-spacing:-.02em;margin-left:.08em}
+  #filet{height:1px;background:#262019;margin-top:26px;transform-origin:0 50%}
+  #quoi{margin:52px 0 0;font-family:"Instrument Serif",serif;font-size:72px;line-height:1.12;
+        letter-spacing:-.012em;text-wrap:balance}
+  #quoi .s2{font-style:italic}
+
+  /* ——— plan 3 · la réponse, au jour ——— */
+  #p3-feuille{position:absolute;inset:0;
+    background:
+      radial-gradient(58% 30% at 50% 36%,
+        rgba(239,164,36,0.20) 0%, rgba(248,214,155,0.15) 38%,
+        rgba(245,198,119,0.07) 64%, rgba(244,241,232,0) 100%),
+      #F4F1E8}
+  #rideau{position:absolute;left:0;right:0;top:0;height:1px;background:#262019}
+  #p3-bloc{position:absolute;left:90px;right:90px;top:560px;text-align:center}
+  #mot{margin:0;font-family:"Instrument Serif",serif;font-size:220px;letter-spacing:-.045em;
+       line-height:.9;display:inline-flex;align-items:baseline}
+  #mot .seg{display:inline-block;clip-path:inset(-28% -14% -28% -14%)}
+  #mot .glyphe-i{position:relative}
+  /* le point solaire : left 63,5 % de la boîte du i, jamais 60,6 % */
+  #point{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;
+         border-radius:50%;background:#EFA424}
+  #reponse{margin:70px 0 0;font-family:"Instrument Serif",serif;font-size:92px;line-height:1.1;
+           letter-spacing:-.015em}
+  #reponse .l{display:block}
+  #reponse .l2{font-style:italic}
+  #site{margin:56px 0 0;font-family:"Geist Mono",monospace;font-size:40px;letter-spacing:.14em;
+        text-transform:uppercase}
+
+  /* la mention reste de bout en bout, remontée au-dessus de l'interface Reels */
+  #mention{position:absolute;left:0;right:0;top:1440px;margin:0;text-align:center;
+           font-size:36px;line-height:1;color:rgba(38,32,25,.8);z-index:5}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="appel-manque" data-start="0"
+     data-width="1080" data-height="1920" data-duration="11.75">
+
+  <div id="sol-nuit" class="clip" data-start="0" data-duration="8.6" data-track-index="0"></div>
+
+  <p id="perdu" class="clip" data-start="0" data-duration="8.6" data-track-index="5">Un appel manqué</p>
+
+  <section id="p1" class="plan clip" data-start="0" data-duration="4.0" data-track-index="1">
+    <div id="p1-bloc">
+      <p id="heure"><span class="g"><span id="hh">23</span></span><span class="g"><span id="deux-points">:</span></span><span class="g"><span id="mm">07</span></span></p>
+      <p id="situation"></p>
+    </div>
+  </section>
+
+  <section id="p2" class="plan clip" data-start="3.7" data-duration="4.9" data-track-index="2">
+    <div id="p2-bloc">
+      <div id="chiffre-voile"><p id="chiffre"><span id="nombre">0</span><span id="euro">€</span></p></div>
+      <div id="filet"></div>
+      <p id="quoi"><span class="masque"><span class="s1"></span></span><span class="masque"><span class="s2"></span></span></p>
+    </div>
+  </section>
+
+  <section id="p3" class="plan clip" data-start="8.0" data-duration="3.75" data-track-index="3">
+    <div id="p3-feuille">
+      <div id="p3-bloc">
+        <p id="mot"><span class="seg" id="seg-a">Vok</span><span class="glyphe-i"><span class="seg" id="seg-b">&#x131;</span><span id="point"></span></span><span class="seg" id="seg-c">o</span></p>
+        <p id="reponse"><span class="l l1">Vokio décroche.</span><span class="l l2">59 € par mois.</span></p>
+        <p id="site">vokio.fr</p>
+      </div>
+    </div>
+    <div id="rideau"></div>
+  </section>
+
+  <p id="mention" class="clip" data-start="0" data-duration="11.75" data-track-index="4">Montant illustratif · exemple fictif</p>
+</div>
+
+<script>
+(function () {
+  var V = (window.__hyperframes && window.__hyperframes.getVariables) ? window.__hyperframes.getVariables() : {};
+  var d = {
+    heure_h: V.heure_h || "23", heure_m: V.heure_m || "07",
+    situation: V.situation || "Un chauffe-eau qui lâche.",
+    montant: Number(V.montant || 1200),
+    quoi: V.quoi || "Le chauffe-eau remplacé. Par un autre plombier."
+  };
+  var $ = function (s) { return document.querySelector(s); };
+
+  /* ——— texte, posé une fois ——— */
+  $("#hh").textContent = d.heure_h;
+  $("#mm").textContent = d.heure_m;
+  $("#situation").innerHTML = d.situation.split(" ")
+    .map(function (w) { return '<span class="w">' + w + "</span>"; }).join(" ");
+  var phrases = d.quoi.split(/(?<=\.)\s+/);
+  $("#quoi .s1").textContent = phrases[0];
+  $("#quoi .s2").textContent = phrases.slice(1).join(" ");
+
+  // Le chiffre remplit la largeur : mêmes tailles que le montage d'origine.
+  var n = String(d.montant).length;
+  var taille = ({1: 460, 2: 460, 3: 430, 4: 360})[n] || 300;
+  $("#chiffre").style.fontSize = taille + "px";
+  var fmt = function (v) { return String(v).replace(/\B(?=(\d{3})+(?!\d))/g, " "); };
+  var nombre = $("#nombre");
+
+  var tl = gsap.timeline({ paused: true });
+
+  /* ——— plan 1 (0,00 → 3,63) : l'heure tombe de sa fente, puis la situation ——— */
+  tl.fromTo("#perdu", { opacity: 0, x: -28 },
+    { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0.1);
+  tl.fromTo("#heure .g > span", { yPercent: 104 },
+    { yPercent: 0, duration: 0.8, ease: "power3.out", stagger: 0.07 }, 0.28);
+  tl.fromTo("#situation .w", { opacity: 0, y: 26 },
+    { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", stagger: 0.045 }, 0.875);
+  // l'heure qui passe : le deux-points s'efface deux fois, rien d'autre ne bouge
+  [1.85, 2.85].forEach(function (t) {
+    tl.to("#deux-points", { opacity: 0.18, duration: 0.14, ease: "power1.in" }, t);
+    tl.to("#deux-points", { opacity: 1, duration: 0.22, ease: "power2.out" }, t + 0.5);
+  });
+  // sortie, plus rapide que l'entrée
+  tl.to("#p1-bloc", { y: -48, opacity: 0, duration: 0.28, ease: "power3.in" }, 3.6);
+
+  /* ——— plan 2 (3,81 → 8,10) : le prix de l'appel ——— */
+  var compteur = { v: 0 };
+  tl.fromTo("#chiffre-voile", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, 4.06);
+  tl.fromTo(compteur, { v: 0 }, {
+    v: d.montant, duration: 1.375, ease: "power3.out",
+    onUpdate: function () { nombre.textContent = fmt(Math.round(compteur.v)); }
+  }, 4.06);
+  // le chiffre prend du poids en montant, même durée, même courbe
+  tl.fromTo("#chiffre", { scale: 0.62 }, { scale: 1, duration: 1.375, ease: "power3.out" }, 4.06);
+  tl.fromTo("#filet", { scaleX: 0 }, { scaleX: 1, duration: 1.375, ease: "power3.out" }, 4.06);
+  // l'unité se pose une fois le compte arrêté
+  tl.fromTo("#euro", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 5.3);
+  // ce que ce montant représente, phrase par phrase, sortie de sa fente
+  tl.fromTo("#quoi .s1", { yPercent: 105 }, { yPercent: 0, duration: 0.6, ease: "power3.out" }, 5.875);
+  tl.fromTo("#quoi .s2", { yPercent: 105 }, { yPercent: 0, duration: 0.5, ease: "power3.out" }, 6.0);
+
+  /* ——— bascule (8,05 → 8,50) : le jour monte par le bas, un filet sur sa crête ——— */
+  tl.to(["#p2-bloc", "#perdu"], { y: -90, opacity: 0, duration: 0.42, ease: "power3.in" }, 8.02);
+  tl.fromTo("#p3-feuille", { clipPath: "inset(100% 0% 0% 0%)" },
+    { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "power3.inOut" }, 8.05);
+  tl.fromTo("#rideau", { y: 1920, opacity: 1 },
+    { y: 0, duration: 0.45, ease: "power3.inOut" }, 8.05);
+  tl.to("#rideau", { opacity: 0, duration: 0.12, ease: "power1.out" }, 8.44);
+
+  /* ——— plan 3 (8,31 → 11,75) : Vokio s'écrit, le point se pose, la réponse ——— */
+  var FERME = "inset(-28% 114% -28% -14%)", OUVERT = "inset(-28% -14% -28% -14%)";
+  tl.fromTo("#seg-a", { clipPath: FERME }, { clipPath: OUVERT, duration: 0.28, ease: "none" }, 8.31);
+  tl.fromTo("#seg-b", { clipPath: FERME }, { clipPath: OUVERT, duration: 0.08, ease: "none" }, 8.59);
+  tl.fromTo("#seg-c", { clipPath: FERME }, { clipPath: OUVERT, duration: 0.12, ease: "none" }, 8.67);
+  // le seul solaire du plan : l'agent agit
+  tl.fromTo("#point", { scale: 0, y: -40 }, { scale: 1, y: 0, duration: 0.5, ease: "power3.out" }, 8.72);
+  tl.fromTo("#reponse .l1", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 8.84);
+  tl.fromTo("#reponse .l2", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 9.02);
+  tl.fromTo("#site", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 9.36);
+  // de 9,8 s à la fin, plus rien ne bouge
+
+  window.__timelines["appel-manque"] = tl;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "metier": "institut_beaute",
+  "heure": "18<em>:</em>42",
+  "accroche": "Une cliente appelle. <em>Vous avez les mains prises.</em>",
+  "etat": "Camille répond pour l'institut",
+  "t1": "Vous finissez le soin. <em>L'appel est pris.</em>",
+  "t2": "La demande est notée, <em>avec la bonne praticienne.</em>",
+  "t3": "Dans l'agenda, <em>tout est déjà posé.</em>",
+  "t4": "À la fermeture, <em>la semaine est pleine.</em>",
+  "arg1": "Répond pendant vos soins",
+  "arg2": "Place chaque cliente au bon créneau",
+  "arg3": "Envoie le rappel la veille",
+  "pan0": -330,
+  "pan1": -500,
+  "agendaH": 1080,
+  "hRang": 246,
+  "hAppel": 243,
+  "hOuvert": 807,
+  "hImpact": 471,
+  "hNuit": 460
+}

@@ -1,0 +1,8 @@
+{
+  "metier": "garage",
+  "heure_h": "08",
+  "heure_m": "12",
+  "situation": "Une voiture qui ne démarre pas.",
+  "montant": 420,
+  "quoi": "La réparation. Faite dans un autre garage."
+}
