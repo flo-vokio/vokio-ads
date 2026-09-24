@@ -110,7 +110,7 @@ dont un bouton qu'on ne peut pas toucher.
 
 ### Recommended Copy
 **Ligne d'action (fin)** : Entendez-le vous-même sur vokio.fr
-**Titre du lendemain** : Le lendemain, l'intervention est dans votre agenda.
+**Titre du lendemain** : inchangé (« votre agenda » proposé puis retiré : trois lignes, l'agenda ne tenait plus en entier)
 **Mention** : Établissement fictif de démonstration. / Appel réel, captures réelles de app.vokio.fr
 
 ### Alternatives

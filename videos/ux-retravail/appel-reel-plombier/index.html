@@ -56,7 +56,7 @@
   #curseur{position:absolute;left:0;top:0;width:4px;height:61px;background:#EFA424;border-radius:2px}
 
   /* ── l'agenda du lendemain ── */
-  #agenda{position:absolute;left:60px;top:500px;width:960px;height:840px}
+  #agenda{position:absolute;left:60px;top:440px;width:960px;height:934px}
   #agenda-in{position:absolute;inset:0;border-radius:32px;overflow:hidden;box-shadow:0 0 0 1px rgba(38,32,25,.16)}
   #agenda-in img{position:absolute;left:0;top:0;width:960px;height:auto;display:block;
                  transform-origin:538px 581px}
@@ -115,7 +115,7 @@
   </div>
 
   <div id="agenda-clip" class="clip" data-start="65.3" data-duration="3.3" data-track-index="4">
-    <div id="agenda"><div id="agenda-in"><img id="agenda-img" src="assets/plans/agenda-jour.png" alt=""></div></div>
+    <div id="agenda"><div id="agenda-in"><img id="agenda-img" src="assets/plans/agenda-jour-entier.png" alt=""></div></div>
   </div>
 
   <div id="impact-clip" class="clip" data-start="68.5" data-duration="3.4" data-track-index="5">
@@ -129,7 +129,7 @@
     <div class="titre" data-layout-allow-overlap data-layout-allow-overflow id="t3"><span class="l"><span>Elle note l'adresse.</span></span><span class="l em"><span>Vous n'êtes pas là.</span></span></div>
     <div class="titre" data-layout-allow-overlap data-layout-allow-overflow id="t4"><span class="l"><span>SMS envoyé.</span></span><span class="l em"><span>Le plombier de garde rappelle.</span></span></div>
     <div class="titre" data-layout-allow-overlap data-layout-allow-overflow id="t5"><span class="l"><span>Une minute.</span></span><span class="l em"><span>Vous n'avez rien eu à faire.</span></span></div>
-    <div class="titre" data-layout-allow-overlap data-layout-allow-overflow id="t6"><span class="l"><span>Le lendemain,</span></span><span class="l em"><span>l'intervention est dans votre agenda.</span></span></div>
+    <div class="titre" data-layout-allow-overlap data-layout-allow-overflow id="t6"><span class="l"><span>Le lendemain,</span></span><span class="l em"><span>l'intervention est dans l'agenda.</span></span></div>
     <div class="titre" data-layout-allow-overlap data-layout-allow-overflow id="t7"><span class="l"><span>Et ce mois-ci,</span></span><span class="l em"><span>vous n'avez rien raté.</span></span></div>
   </div>
 
@@ -238,9 +238,8 @@
     tl.fromTo(id, { opacity: 1, y: 0 }, { opacity: 0, y: -22, duration: .35, ease: "power2.in", immediateRender: false }, S(b - 350));
   }
 
-  // ── l'agenda du lendemain : on s'approche de l'intervention posée ──
+  // ── l'agenda du lendemain, en entier et immobile : tous les rendez-vous restent lisibles ──
   tl.fromTo('#agenda', { opacity: 0, y: 90 }, { opacity: 1, y: 0, duration: .9, ease: E }, S(T.agendaIn));
-  tl.fromTo('#agenda-img', { scale: 1 }, { scale: 1.1, duration: S(T.impactIn - T.agendaIn - 400), ease: "sine.inOut" }, S(T.agendaIn + 400));
   tl.fromTo('#agenda', { opacity: 1, y: 0 }, { opacity: 0, y: -40, duration: .5, ease: "power2.in", immediateRender: false }, S(T.impactIn - 600));
 
   // ── l'impact du mois ──

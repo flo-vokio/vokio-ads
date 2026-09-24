@@ -50,7 +50,10 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 #v2-trait{position:absolute;left:4px;right:10px;bottom:-2px;height:6px;border-radius:3px;background:#EFA424;transform-origin:0 50%}
 #fiche{position:absolute;left:40px;top:532px;width:1000px}
 #fiche-masque{width:1000px;height:874px;border-radius:30px;overflow:hidden;border:1px solid rgba(38,32,25,.16)}
-#fiche-masque img{display:block;width:1000px;height:874px;transform-origin:50% 30%}
+#fiche-img{position:relative;width:1000px;height:874px;transform-origin:50% 30%}
+#fiche-img img{display:block;width:1000px;height:874px}
+/* le résumé réécrit en calque sur la carte vide : Geist, corps et couleur relevés sur la capture (42,35 px à l'échelle de la capture) */
+#fiche-resume{position:absolute;left:85.4px;top:332.3px;width:828.3px;margin:0;font-family:"Geist",sans-serif;font-size:43.04px;line-height:69.51px;color:rgb(78,73,66)}
 
 /* 4 · la fin */
 #fin{position:absolute;left:0;right:0;top:380px;text-align:center}
@@ -60,25 +63,25 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 #mot-pt{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;border-radius:50%;background:#EFA424}
 #prix{margin:70px auto 0;width:900px;font-size:76px;line-height:1.1;letter-spacing:-.012em}
 #prix em{font-style:italic}
-#cta{margin-top:62px;display:inline-block;padding:30px 60px;border-radius:0;background:#262019;color:#F4F1E8;font-size:40px}
+#cta{margin-top:62px;display:inline-block;padding:30px 60px;border-radius:999px;background:#262019;color:#F4F1E8;font-size:40px}
 #site{margin-top:36px;font-family:"Geist Mono",monospace;font-size:36px;letter-spacing:.14em;text-transform:uppercase;color:#6F695F}
 
 #mention{position:absolute;left:0;right:0;top:1456px;text-align:center;font-size:36px;line-height:1;color:#6F695F}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="20.8" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="27.4" data-width="1080" data-height="1920">
 
   <section id="s-ouverture" class="scene clip" data-start="0" data-duration="3" data-track-index="0">
     <p id="heure" class="serif"><span class="m" data-layout-allow-overflow><span class="w" id="h-hh">23</span></span><span class="m" data-layout-allow-overflow><span class="w" id="h-dp">:</span></span><span class="m" data-layout-allow-overflow><span class="w" id="h-mm">07</span></span></p>
     <p id="appel" class="serif"><span class="m" data-layout-allow-overflow><span class="w">Un</span></span> <span class="m" data-layout-allow-overflow><span class="w">client</span></span> <span class="m" data-layout-allow-overflow><span class="w">appelle.</span></span></p>
   </section>
 
-  <section id="s-camp" class="scene clip" data-start="2.9" data-duration="12.5" data-track-index="1">
+  <section id="s-camp" class="scene clip" data-start="2.9" data-duration="19.1" data-track-index="1">
     <div id="camp"><b id="camp-pt"></b><div id="camp-txt"><span id="camp-a" data-layout-allow-overflow>Avec un répondeur</span><span id="camp-b" data-layout-allow-overflow>Avec Vokio</span></div></div>
   </section>
 
-  <section id="s-repondeur" class="scene clip" data-start="3.3" data-duration="4.9" data-track-index="2">
+  <section id="s-repondeur" class="scene clip" data-start="3.3" data-duration="11.4" data-track-index="2">
     <div id="boite">
       <div id="boite-regle"></div>
       <p id="boite-lab">Message d'accueil</p>
@@ -88,16 +91,16 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
     <p id="v1" class="serif" data-layout-allow-overlap><span class="m" data-layout-allow-overflow><span class="w">Il</span></span> <span class="m" data-layout-allow-overflow><span class="w">a</span></span> <span class="m" data-layout-allow-overflow><span class="w">raccroché.</span></span> <em><span class="m" data-layout-allow-overflow><span class="w e">Il</span></span> <span class="m" data-layout-allow-overflow><span class="w e">appelle</span></span> <span class="m" data-layout-allow-overflow><span class="w e">le</span></span> <span class="m" data-layout-allow-overflow><span class="w e">suivant.</span></span></em></p>
   </section>
 
-  <section id="s-halo" class="scene clip" data-start="8.2" data-duration="12.6" data-track-index="3">
+  <section id="s-halo" class="scene clip" data-start="14.8" data-duration="12.6" data-track-index="3">
     <div id="halo"></div>
   </section>
 
-  <section id="s-vokio" class="scene clip" data-start="8.4" data-duration="7" data-track-index="4">
-    <div id="fiche"><div id="fiche-masque"><img id="fiche-img" src="assets/captures/appel-1-cadre.png" alt=""></div></div>
+  <section id="s-vokio" class="scene clip" data-start="15.0" data-duration="7" data-track-index="4">
+    <div id="fiche"><div id="fiche-masque"><div id="fiche-img"><img src="assets/captures/carte-vide.png" alt=""><p id="fiche-resume">M. Lefèvre a une fuite sous l'évier, l'arrivée d'eau est coupée. Le geste d'urgence lui a été donné au téléphone. Intervention calée demain matin 8&nbsp;h&nbsp;30, adresse notée&nbsp;: 14 rue Sainte, Marseille 8e. SMS&nbsp;de confirmation envoyé.</p></div></div></div>
     <p id="v2" class="serif"><span class="l1"><span class="m" data-layout-allow-overflow><span class="w">Le</span></span> <span class="m" data-layout-allow-overflow><span class="w">même</span></span> <span class="m" data-layout-allow-overflow><span class="w">appel,</span></span></span> <em id="v2-em"><span class="m" data-layout-allow-overflow><span class="w e2">intervention</span></span> <span class="m" data-layout-allow-overflow><span class="w e2">déjà</span></span> <span class="m" data-layout-allow-overflow><span class="w e2">calée.</span></span><span id="v2-trait"></span></em></p>
   </section>
 
-  <section id="s-fin" class="scene clip" data-start="15.3" data-duration="5.5" data-track-index="5">
+  <section id="s-fin" class="scene clip" data-start="21.9" data-duration="5.5" data-track-index="5">
     <div id="fin">
       <p id="mot" class="serif"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p>
       <p id="prix" class="serif"><span class="m" data-layout-allow-overflow><span class="w p">Votre</span></span> <span class="m" data-layout-allow-overflow><span class="w p">ligne</span></span> <span class="m" data-layout-allow-overflow><span class="w p">répond</span></span> <em><span class="m" data-layout-allow-overflow><span class="w p">même</span></span> <span class="m" data-layout-allow-overflow><span class="w p">quand</span></span> <span class="m" data-layout-allow-overflow><span class="w p">vous</span></span> <span class="m" data-layout-allow-overflow><span class="w p">ne</span></span> <span class="m" data-layout-allow-overflow><span class="w p">pouvez</span></span> <span class="m" data-layout-allow-overflow><span class="w p">pas.</span></span></em></p>
@@ -106,7 +109,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
     </div>
   </section>
 
-  <section id="s-mention" class="scene clip" data-start="0" data-duration="20.8" data-track-index="6">
+  <section id="s-mention" class="scene clip" data-start="0" data-duration="27.4" data-track-index="6">
     <p id="mention">Établissement fictif · captures réelles de app.vokio.fr</p>
   </section>
 </div>
@@ -137,40 +140,43 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   tl.fromTo("#camp-b", { yPercent: 110 }, { yPercent: 110, duration: 0.01 }, 3.0);
   tl.fromTo("#boite-regle", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 3.4);
   tl.fromTo("#boite-lab", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 3.62);
-  tl.fromTo("#boite-dit .d", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.28, ease: "power2.out", stagger: 0.088 }, 3.8);
-  tl.fromTo("#bip-l", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, 5.12);
-  tl.fromTo("#bip-ton", { scaleX: 0 }, { scaleX: 1, duration: 0.34, ease: "none" }, 5.14);
-  tl.to("#bip-ton", { opacity: 0, duration: 0.08, ease: "none" }, 5.48);
-  tl.to("#boite", { y: -50, opacity: 0, duration: 0.38, ease: P3i }, 5.36);
-  tl.set("#boite", { visibility: "hidden" }, 5.75);
-  tl.fromTo("#v1 .w:not(.e)", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, 5.8);
-  tl.fromTo("#v1 .e", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, 6.3);
-  tl.to("#v1", { y: -60, opacity: 0, duration: 0.42, ease: P3i }, 7.62);
+  // 0,3 s par mot : le message se lit à voix haute, puis tient avant le bip
+  tl.fromTo("#boite-dit .d", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.28, ease: "power2.out", stagger: 0.3 }, 3.8);
+  tl.fromTo("#bip-l", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, 8.8);
+  tl.fromTo("#bip-ton", { scaleX: 0 }, { scaleX: 1, duration: 0.34, ease: "none" }, 8.82);
+  tl.to("#bip-ton", { opacity: 0, duration: 0.08, ease: "none" }, 9.16);
+  tl.to("#boite", { y: -50, opacity: 0, duration: 0.38, ease: P3i }, 10.1);
+  tl.set("#boite", { visibility: "hidden" }, 10.5);
+  tl.set("#v1", { autoAlpha: 0 }, 0);
+  tl.set("#v1", { autoAlpha: 1 }, 10.5);
+  tl.fromTo("#v1 .w:not(.e)", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, 10.55);
+  tl.fromTo("#v1 .e", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, 11.05);
+  tl.to("#v1", { y: -60, opacity: 0, duration: 0.42, ease: P3i }, 14.2);
 
   // la bascule : même étiquette, autre issue
-  tl.to("#camp-a", { yPercent: -110, duration: 0.36, ease: P3i }, 7.9);
-  tl.to("#camp-pt", { backgroundColor: "#6E9C74", duration: 0.4, ease: "power2.inOut" }, 8.05);
-  tl.fromTo("#camp-b", { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: P3o, immediateRender: false }, 8.2);
+  tl.to("#camp-a", { yPercent: -110, duration: 0.36, ease: P3i }, 14.5);
+  tl.to("#camp-pt", { backgroundColor: "#6E9C74", duration: 0.4, ease: "power2.inOut" }, 14.65);
+  tl.fromTo("#camp-b", { yPercent: 110 }, { yPercent: 0, duration: 0.6, ease: P3o, immediateRender: false }, 14.8);
 
   // 3 · avec Vokio : la fiche réelle se déplie, puis le verdict
-  tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.6, ease: "sine.out" }, 8.3);
-  tl.fromTo("#fiche", { y: 90, opacity: 0 }, { y: 0, opacity: 1, duration: 1.0, ease: P3o }, 8.6);
-  tl.fromTo("#fiche-masque", { clipPath: "inset(0% 0% 78% 0% round 30px)" }, { clipPath: "inset(0% 0% 0% 0% round 30px)", duration: 1.25, ease: "power3.inOut" }, 8.7);
-  tl.fromTo("#fiche-img", { scale: 1 }, { scale: 1.035, duration: 6.1, ease: "sine.inOut" }, 8.9);
-  tl.fromTo("#v2 .w:not(.e2)", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, 10.6);
-  tl.fromTo("#v2 .e2", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.08 }, 10.95);
-  tl.fromTo("#v2-trait", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: P3o }, 11.55);
-  tl.to(["#camp", "#v2", "#fiche"], { y: -50, opacity: 0, duration: 0.45, ease: P3i, stagger: 0.05 }, 14.8);
+  tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.6, ease: "sine.out" }, 14.9);
+  tl.fromTo("#fiche", { y: 90, opacity: 0 }, { y: 0, opacity: 1, duration: 1.0, ease: P3o }, 15.2);
+  tl.fromTo("#fiche-masque", { clipPath: "inset(0% 0% 78% 0% round 30px)" }, { clipPath: "inset(0% 0% 0% 0% round 30px)", duration: 1.25, ease: "power3.inOut" }, 15.3);
+  tl.fromTo("#fiche-img", { scale: 1 }, { scale: 1.035, duration: 6.1, ease: "sine.inOut" }, 15.5);
+  tl.fromTo("#v2 .w:not(.e2)", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, 17.2);
+  tl.fromTo("#v2 .e2", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.08 }, 17.55);
+  tl.fromTo("#v2-trait", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: P3o }, 18.15);
+  tl.to(["#camp", "#v2", "#fiche"], { y: -50, opacity: 0, duration: 0.45, ease: P3i, stagger: 0.05 }, 21.4);
 
   // 4 · la fin : le halo remonte derrière le mot
-  tl.to("#halo", { y: -470, scale: 0.72, duration: 1.4, ease: "power3.inOut" }, 14.9);
-  tl.fromTo("#mot-a", { clipPath: "inset(-30% 100% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 15.9);
-  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 100% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 16.35);
-  tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 16.85);
-  tl.fromTo("#prix .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 16.55);
-  tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 17.35);
-  tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 17.8);
-  tl.to({}, { duration: 0.01 }, 20.79);
+  tl.to("#halo", { y: -470, scale: 0.72, duration: 1.4, ease: "power3.inOut" }, 21.5);
+  tl.fromTo("#mot-a", { clipPath: "inset(-30% 100% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 22.5);
+  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 100% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 22.95);
+  tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 23.45);
+  tl.fromTo("#prix .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 23.15);
+  tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 23.95);
+  tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 24.4);
+  tl.to({}, { duration: 0.01 }, 27.39);
 
   window.__timelines["main"] = tl;
 })();

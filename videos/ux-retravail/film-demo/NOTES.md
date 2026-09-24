@@ -32,8 +32,57 @@ Une seule composition (`index.html`) pour les quatre métiers ; un fichier de do
     sur vokio.fr » (un seul). Raison ux-copy : le verbe d'origine, plus la destination ; une place libérée.
   - minutage : l'accroche arrive à 1,0 s au lieu de 1,5 s, pour être lue avant la fin de la 2e seconde.
 
+## Retours de Florian du 24/09 (deuxième passe)
+- **Agenda montré en entier, sans défilement, texte à 36 px** (méthode appel-reel-plombier, troisième
+  passe). Plombier, vétérinaire, institut : la vraie capture est recollée sans les tranches horaires
+  vides (`preparer.py`, `recoller_agenda`). Chaque rendez-vous garde son étiquette d'heure, les heures
+  vides sont retirées et les étiquettes restantes montrent le saut (plombier : 12:00 puis 18:00). La
+  marge droite vide, les onglets Jour/Semaine et l'aide du bas sont retirés, rien n'est ajouté. L'image
+  est affichée à 1,1 fois la capture : le texte des rendez-vous (11 px dans l'application) fait 36,3 px.
+  Pour tenir entre le titre et 1400 px, on descend un palier à la fois :
+  - vétérinaire : une rangée vide gardée comme respiration entre 11 h 30 et 16 h ;
+  - plombier : sans respiration, sinon la journée ne tient pas ;
+  - institut : sans respiration, et les demi-heures vides au-dessus et au-dessous des rendez-vous sont
+    retirées aussi. Ses étiquettes 11:00, 12:00 puis 14:00 sont donc plus serrées que l'heure pleine.
+  Restaurant : inchangé, recadré sur 19 h à 23 h, à l'échelle 0,952 (texte des rendez-vous ≈ 31 px, et
+  non 37 comme annoncé à la passe précédente, erreur de mesure corrigée : le texte fait 11 px dans l'app).
+- **Arguments de fin : retour au principe de l'original.** Ils s'ajoutent un par un en liste, chacun
+  avec son point solaire, puis la liste s'efface et laisse place au prix et à l'appel à l'action.
+- **Résumé de l'appel en calque texte**, méthode de `monter_appel_reel.py` : la capture dépliée est
+  coupée autour du paragraphe (haut, une rangée de fond, bas), le texte est réécrit en Geist 14 px ×
+  2,586 (36,2 px), interligne 1,625, encre `#262019` à 80 %, largeur 274 pt comme dans l'application.
+  Rien d'autre n'est retouché.
+- **Résumés changés dans le film** (heure de l'appel contre jour du rendez-vous) :
+  - plombier : « Intervention calée ce matin 8 h 30 » → « Intervention calée demain matin 8 h 30 ».
+    L'appel est le dimanche 20 à 23:07, le rendez-vous le lundi 21 à 8 h 30 (visible dans l'agenda).
+  - restaurant : « une table pour 4 samedi 20 h 30 » → « une table pour 4 mercredi 20 h 30 ».
+    La réservation posée dans les données de démonstration est le mercredi.
+  - vétérinaire et institut : inchangés, déjà cohérents (« demain 9 h » pour un appel à 22:14 la veille ;
+    « jeudi 17 h » pour un appel du lundi).
+- **Titres remplacés** (texte de Florian, source `profils.py` et `profils_institut.py`) :
+  - vétérinaire t1 : « Personne ne raccroche, même après 20 heures. » → « Après 20 heures, la clinique répond encore. »
+  - institut t1 : « Vous finissez le soin. L'appel est pris. » → « Pendant le soin, l'appel est pris. »
+  - institut t4 : « À la fermeture, la semaine est pleine. » → « Vous fermez, et votre semaine est déjà réservée. »
+  - restaurant t4 : « Au coup de feu suivant, la salle est déjà pleine. » → « Au service suivant, vos tables sont déjà réservées. »
+  Un titre qui prendrait trois lignes voit son corps baisser jusqu'à tenir en deux (jamais sous 64 px) :
+  c'est le cas de l'institut t4, autour de 74 px.
+- **Source corrigée** (`/opt/vokio-site-repo/design/videos/ux-vertical/profils.py`, non committé) :
+  chaque résumé nomme désormais le jour du rendez-vous réellement posé dans `rdv`. Plombier : Mme Bonnet
+  (mardi 8 h), Mme Dumas (mercredi 15 h). Vétérinaire : M. Aubert (lundi 11 h 30), Mme Ferrer (lundi 10 h),
+  M. Osman (mardi 14 h), Mme Teil (lundi 16 h), Mme Dumas (mardi 9 h 30). Restaurant : M. Chevalier
+  (mercredi 20 h 30), Mme Perrot (demain 20 h), M. Marchal (mardi 20 h), M. Teil (mardi midi),
+  Mme Fontaine (jeudi 20 h 30), M. Lambert (vendredi 19 h 30). Institut : rien à corriger.
+
 ## Écarts connus
 - 30 i/s comme le demande le brief, alors que les originaux sont à 60 i/s.
 - La mention reste à y = 1428 (une ligne, au-dessus de 1500 mais sous 1380) : plus haut, elle chevaucherait la carte dépliée.
-- Restaurant : l'agenda agrandi coupe la troisième colonne de réservations au bord droit (« M. F… 20:3… »). C'est le prix de la lisibilité, aucun autre métier n'est concerné.
+- Agenda du restaurant à ≈ 31 px (laissé inchangé à la demande) ; les trois autres à 36,3 px.
+- Restaurant : la rangée « Mme Perrot · Table pour 2 ce soir 21… » est une capture, non retouchée ; l'agenda
+  montre Mme Perrot à 20:00. La source est corrigée (« demain 20 h »), l'image le sera à la prochaine capture.
+- Restaurant : la table de M. Chevalier est le mercredi, l'agenda filmé est celui du lundi soir : le titre
+  « Et elle apparaît dans le cahier du soir » n'y montre pas sa table.
+- Plombier : la capture du film raconte M. Lefèvre à 23:07, mais l'appel n° 1 de `profils.py` est
+  désormais celui de l'appel réel (M. Estève, 19:52). Une nouvelle capture du film plombier montrerait 19:52
+  sous un film qui dit 23:07.
+- Le glyphe de l'apostrophe du Geist embarqué est courbe (’), celui de la capture est droit (').
 - Le linter signale 5 avertissements « nested_structure_needs_subcomposition » (présentation dans Studio) : la composition reste monolithique pour qu'un seul fichier de variables pilote tout le film.
