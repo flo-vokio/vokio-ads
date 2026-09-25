@@ -112,6 +112,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   <section id="s-mention" class="scene clip" data-start="0" data-duration="27.4" data-track-index="6">
     <p id="mention">Établissement fictif · captures réelles de app.vokio.fr</p>
   </section>
+  <!-- le message d'accueil doublé + le bip, une seule piste (sonoriser.py) -->
+  <audio id="repondeur" src="assets/voix/piste.wav" data-start="0" data-duration="27.4"
+         data-track-index="10" data-volume="1"></audio>
 </div>
 <script>
 (function(){
@@ -141,7 +144,17 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   tl.fromTo("#boite-regle", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 3.4);
   tl.fromTo("#boite-lab", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 3.62);
   // 0,3 s par mot : le message se lit à voix haute, puis tient avant le bip
-  tl.fromTo("#boite-dit .d", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.28, ease: "power2.out", stagger: 0.3 }, 3.8);
+  /* MOTS-VOIX (généré par sonoriser.py, voix maxime) */
+  const MOTS_VOIX = [3.9, 4.527, 4.655, 4.724, 4.875, 5.003, 5.549, 5.676, 5.769, 6.303, 6.431, 6.559, 7.209, 7.395, 7.522];
+  // « et » ne se disent pas : le guillemet ouvrant sort avec le premier mot, le fermant avec le dernier
+  let iv = 0;
+  document.querySelectorAll("#boite-dit .d").forEach(el => {
+    const dit = /[\p{L}]/u.test(el.textContent);
+    const t = MOTS_VOIX[Math.min(iv, MOTS_VOIX.length - 1)];
+    if (dit) iv++;
+    tl.fromTo(el, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, t);
+  });
+  /* fin MOTS-VOIX */
   tl.fromTo("#bip-l", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, 8.8);
   tl.fromTo("#bip-ton", { scaleX: 0 }, { scaleX: 1, duration: 0.34, ease: "none" }, 8.82);
   tl.to("#bip-ton", { opacity: 0, duration: 0.08, ease: "none" }, 9.16);

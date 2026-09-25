@@ -1,0 +1,82 @@
+{
+ "texte": "Bonjour, je ne suis pas disponible pour le moment, je vous rappellerai dès que possible.",
+ "voix": "5Qfm4RqcAer0xoyWtoHC",
+ "graine": 7,
+ "mots": [
+  {
+   "mot": "Bonjour,",
+   "debut": 0.0,
+   "fin": 0.499
+  },
+  {
+   "mot": "je",
+   "debut": 0.627,
+   "fin": 0.72
+  },
+  {
+   "mot": "ne",
+   "debut": 0.755,
+   "fin": 0.801
+  },
+  {
+   "mot": "suis",
+   "debut": 0.824,
+   "fin": 0.952
+  },
+  {
+   "mot": "pas",
+   "debut": 0.975,
+   "fin": 1.08
+  },
+  {
+   "mot": "disponible",
+   "debut": 1.103,
+   "fin": 1.602
+  },
+  {
+   "mot": "pour",
+   "debut": 1.649,
+   "fin": 1.753
+  },
+  {
+   "mot": "le",
+   "debut": 1.776,
+   "fin": 1.834
+  },
+  {
+   "mot": "moment,",
+   "debut": 1.869,
+   "fin": 2.252
+  },
+  {
+   "mot": "je",
+   "debut": 2.403,
+   "fin": 2.485
+  },
+  {
+   "mot": "vous",
+   "debut": 2.531,
+   "fin": 2.635
+  },
+  {
+   "mot": "rappellerai",
+   "debut": 2.659,
+   "fin": 3.158
+  },
+  {
+   "mot": "dès",
+   "debut": 3.309,
+   "fin": 3.471
+  },
+  {
+   "mot": "que",
+   "debut": 3.495,
+   "fin": 3.576
+  },
+  {
+   "mot": "possible.",
+   "debut": 3.622,
+   "fin": 4.133
+  }
+ ]
+}
