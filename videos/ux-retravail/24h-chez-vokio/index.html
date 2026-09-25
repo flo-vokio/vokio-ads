@@ -31,11 +31,17 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 .situ{position:absolute;left:70px;right:60px;top:410px;font-size:80px;line-height:1.08;letter-spacing:-.014em}
 .situ em{font-style:italic;display:block}
 
-/* la carte réelle : la carte vide filmée, le résumé réécrit par-dessus (même corps que l'app) */
+/* la carte réelle, comme dans app.vokio.fr : la ligne repliée, puis le volet qui se déplie.
+   Trois images filmées (replié, en-tête ouvert, volet vide) + le chevron en SVG + le résumé en HTML. */
 .carte{position:absolute;left:70px;top:650px;width:1044px;transform:scale(.9);transform-origin:0 0}
 .carte img{display:block;width:1044px}
+.carte .replie{position:absolute;left:0;top:0}
+.carte .entete{position:absolute;left:0;top:0}
+.carte .volet{position:absolute;left:0;top:216px}
+.carte .chev{position:absolute;left:935.5px;top:59.5px;width:48px;height:48px}
 .carte .res{position:absolute;left:114px;width:822px;margin:0;font-family:"Geist",sans-serif;
             font-size:42px;line-height:68.25px;color:rgb(78,73,66)}
+.carte .res .t{opacity:0}
 /* la phrase clé : un trait solaire qui se tire sous le texte, ligne après ligne */
 .cle{background-image:linear-gradient(#EFA424,#EFA424);background-repeat:no-repeat;
      background-position:0 92%;background-size:0% 6px;padding-bottom:2px}
@@ -64,9 +70,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="24.4" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="32.4" data-width="1080" data-height="1920">
 
-  <section id="s-horloge" class="scene clip" data-start="0" data-duration="17.2" data-track-index="0">
+  <section id="s-horloge" class="scene clip" data-start="0" data-duration="25.2" data-track-index="0">
     <div id="horloge" class="serif">
       <div class="col" id="c0"><div class="bande"></div></div>
       <div class="col" id="c1"><div class="bande"></div></div>
@@ -76,11 +82,11 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
     </div>
   </section>
 
-  <section id="s-appels" class="scene clip" data-start="0" data-duration="17.2" data-track-index="1">
+  <section id="s-appels" class="scene clip" data-start="0" data-duration="25.2" data-track-index="1">
     <div id="appels"></div>
   </section>
 
-  <section id="s-bilan" class="scene clip" data-start="16.9" data-duration="3.0" data-track-index="2">
+  <section id="s-bilan" class="scene clip" data-start="24.9" data-duration="3.0" data-track-index="2">
     <p id="bilan-t" class="serif"><span class="l1"><span class="m" data-layout-allow-overflow><span class="w b">Chaque</span></span> <span class="m" data-layout-allow-overflow><span class="w b">appel</span></span> <span class="m" data-layout-allow-overflow><span class="w b">décroché.</span></span></span> <em><span class="m" data-layout-allow-overflow><span class="w b2">Chaque</span></span> <span class="m" data-layout-allow-overflow><span class="w b2">rendez-vous</span></span> <span class="m" data-layout-allow-overflow><span class="w b2">posé.</span></span></em></p>
     <div id="pile">
       <div class="ent"><img src="assets/captures/institut_beaute-entete.png" alt=""></div>
@@ -90,11 +96,11 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
     </div>
   </section>
 
-  <section id="s-halo" class="scene clip" data-start="19.3" data-duration="5.1" data-track-index="3">
+  <section id="s-halo" class="scene clip" data-start="27.3" data-duration="5.1" data-track-index="3">
     <div id="halo"></div>
   </section>
 
-  <section id="s-fin" class="scene clip" data-start="19.5" data-duration="4.9" data-track-index="4">
+  <section id="s-fin" class="scene clip" data-start="27.5" data-duration="4.9" data-track-index="4">
     <div id="fin">
       <p id="mot" class="serif"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p>
       <p id="prix" class="serif"><span class="m" data-layout-allow-overflow><span class="w p">Votre</span></span> <span class="m" data-layout-allow-overflow><span class="w p">ligne</span></span> <span class="m" data-layout-allow-overflow><span class="w p">répond</span></span> <em><span class="m" data-layout-allow-overflow><span class="w p">même</span></span> <span class="m" data-layout-allow-overflow><span class="w p">quand</span></span> <span class="m" data-layout-allow-overflow><span class="w p">vous</span></span> <span class="m" data-layout-allow-overflow><span class="w p">ne</span></span> <span class="m" data-layout-allow-overflow><span class="w p">pouvez</span></span> <span class="m" data-layout-allow-overflow><span class="w p">pas.</span></span></em></p>
@@ -103,7 +109,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
     </div>
   </section>
 
-  <section id="s-mention" class="scene clip" data-start="0" data-duration="24.4" data-track-index="5">
+  <section id="s-mention" class="scene clip" data-start="0" data-duration="32.4" data-track-index="5">
     <p id="mention">Établissements fictifs · captures réelles de app.vokio.fr</p>
   </section>
 </div>
@@ -128,12 +134,23 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   // décalage entre le haut du bloc de texte et le haut de l'encre de la 1re ligne (Geist 42 / 68,25)
   const DY = 20.5;
   const mots = (t, cls) => t.split(" ").map(w => `<span class="m" data-layout-allow-overflow><span class="w ${cls}">${w}</span></span>`).join(" ");
+  // le résumé s'écrit mot à mot : chaque mot est un <span class="t">, les <br> de la capture restent
+  // (les espaces de bord sont gardés : « téléphone. » + « Intervention » ne doivent pas se coller)
+  const taper = t => (/^ /.test(t) ? " " : "") + t.replace(/<br>/g, " <br> ").split(" ").filter(x => x !== "")
+    .map(x => x === "<br>" ? "<br>" : `<span class="t">${x}</span>`).join(" ").replace(/ <br> /g, "<br>")
+    + (/ $/.test(t) ? " " : "");
   const zone = document.getElementById("appels");
   APPELS.forEach((a, k) => {
     zone.insertAdjacentHTML("beforeend",
       `<p class="situ serif" id="situ${k}"><span class="l1">${mots(a.h1, "s1")}</span> <em>${mots(a.h2, "s2")}</em></p>` +
-      `<div class="carte" id="carte${k}"><img src="assets/captures/${a.m}-vide.png" alt="">` +
-      `<p class="res" style="top:${a.top - DY}px">${a.av}<span class="cle">${a.cle}</span>${a.ap}</p></div>`);
+      `<div class="carte" id="carte${k}">` +
+        `<img class="replie" src="assets/captures/${a.m}-replie-net.png" alt="">` +
+        `<img class="entete" src="assets/captures/${a.m}-entete-net.png" alt="">` +
+        `<div class="volet"><img src="assets/captures/${a.m}-panneau.png" alt="">` +
+        // le résumé vit DANS le volet : il n'apparaît jamais hors de la carte pendant qu'elle se déplie
+        `<p class="res" style="top:${a.top - DY - 216}px">${taper(a.av)}<span class="cle">${taper(a.cle)}</span>${taper(a.ap)}</p></div>` +
+        `<svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="rgb(108,103,95)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` +
+        `</div>`);
   });
 
   // les bandes : 0 à 9, trois fois, pour toujours rouler vers l'avant
@@ -149,43 +166,60 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   APPELS[0].h.split("").forEach((c, i) => { pos[i] = +c; tl.set(cols[i], { y: -200 * pos[i] }, 0); });
   tl.fromTo("#horloge", { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.9, ease: "power4.out" }, 0.1);
 
+  // Un appel, 6 s : la situation, la ligne repliée qui arrive et se laisse lire, puis elle
+  // s'ouvre comme dans l'app (chevron qui pivote, aperçu qui disparaît, volet qui se déplie)
+  // et le résumé s'écrit PENDANT l'ouverture ; le volet a fini avant le texte, l'œil se pose.
+  const BEAT = 6.0, MOT = 0.045;
   APPELS.forEach((a, k) => {
-    const S = 1.0 + 4 * k;
+    const S = 1.0 + BEAT * k, O = S + 1.7;
+    const c = `#carte${k}`;
     if (k > 0) {
-      // l'horloge roule jusqu'à l'appel suivant, chiffre par chiffre, en décalé
-      a.h.split("").forEach((c, i) => {
-        const n = cible(i, +c);
+      a.h.split("").forEach((ch, i) => {
+        const n = cible(i, +ch);
         if (n !== pos[i]) tl.to(cols[i], { y: -200 * n, duration: 0.85, ease: "power3.inOut" }, S - 0.35 + 0.06 * i);
         pos[i] = n;
       });
     }
+    tl.set([`#situ${k}`, c], { autoAlpha: 0 }, 0);
+    tl.set([`#situ${k}`, c], { autoAlpha: 1 }, S + 0.3);
     tl.fromTo(`#situ${k} .s1`, { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, S + 0.35);
-    tl.fromTo(`#situ${k} .s2`, { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, S + 0.75);
-    tl.fromTo(`#carte${k}`, { y: 60, opacity: 0, clipPath: "inset(0% 0% 70% 0% round 30px)" },
-              { y: 0, opacity: 1, clipPath: "inset(0% 0% 0% 0% round 30px)", duration: 1.0, ease: "power3.inOut" }, S + 1.05);
-    tl.to(`#carte${k} .cle`, { backgroundSize: "100% 6px", duration: 0.8, ease: P3o }, S + 2.25);
-    tl.to([`#situ${k}`, `#carte${k}`], { y: -50, opacity: 0, duration: 0.4, ease: P3i, stagger: 0.05 }, S + 3.5);
-    tl.set([`#situ${k}`, `#carte${k}`], { visibility: "hidden" }, S + 3.96);
-    tl.set([`#situ${k}`, `#carte${k}`], { autoAlpha: 0 }, 0);
-    tl.set([`#situ${k}`, `#carte${k}`], { autoAlpha: 1 }, S + 0.3);
+    tl.fromTo(`#situ${k} .s2`, { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, S + 0.7);
+    // la ligne repliée entre, calmement
+    tl.set(`${c} .entete, ${c} .volet`, { autoAlpha: 0 }, 0);
+    tl.fromTo([`${c} .replie`, `${c} .chev`], { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o }, S + 1.05);
+    // l'ouverture : le chevron pivote (200 ms dans l'app, un peu plus ici), la ligne passe à l'en-tête ouvert
+    tl.to(`${c} .chev`, { rotation: 180, duration: 0.3, ease: "power2.inOut", transformOrigin: "50% 50%" }, O);
+    // bascule sèche, comme l'app (l'aperçu est group-open:hidden) : un fondu superposait les deux lignes
+    tl.set(`${c} .replie`, { autoAlpha: 0 }, O);
+    tl.set(`${c} .entete`, { autoAlpha: 1 }, O);
+    tl.set(`${c} .volet`, { autoAlpha: 1 }, O);
+    tl.fromTo(`${c} .volet`, { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power3.inOut" }, O);
+    // le résumé s'écrit : il démarre avec le volet et finit après lui
+    const t0 = O + 0.25;
+    const nMots = document.getElementById("carte" + k).querySelectorAll(".res .t").length;
+    tl.to(`${c} .res .t`, { opacity: 1, duration: 0.12, ease: "none", stagger: MOT }, t0);
+    const fin = t0 + MOT * nMots;
+    tl.to(`${c} .cle`, { backgroundSize: "100% 6px", duration: 0.7, ease: P3o }, fin + 0.15);
+    tl.to([`#situ${k}`, c], { y: -50, opacity: 0, duration: 0.4, ease: P3i, stagger: 0.05 }, S + BEAT - 0.45);
+    tl.set([`#situ${k}`, c], { visibility: "hidden" }, S + BEAT);
   });
 
   // 5 · le bilan : l'horloge s'efface, les quatre en-têtes du même jour s'empilent
-  tl.to("#horloge", { y: -50, opacity: 0, duration: 0.4, ease: P3i }, 16.5);
-  tl.fromTo("#bilan-t .b", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, 17.0);
-  tl.fromTo("#bilan-t .b2", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, 17.35);
-  tl.fromTo("#pile .ent", { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o, stagger: 0.12 }, 17.3);
-  tl.to(["#bilan-t", "#pile"], { y: -50, opacity: 0, duration: 0.42, ease: P3i, stagger: 0.05 }, 19.3);
+  tl.to("#horloge", { y: -50, opacity: 0, duration: 0.4, ease: P3i }, 24.5);
+  tl.fromTo("#bilan-t .b", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, 25.0);
+  tl.fromTo("#bilan-t .b2", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, 25.35);
+  tl.fromTo("#pile .ent", { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o, stagger: 0.12 }, 25.3);
+  tl.to(["#bilan-t", "#pile"], { y: -50, opacity: 0, duration: 0.42, ease: P3i, stagger: 0.05 }, 27.3);
 
   // 6 · la fin
-  tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.4, ease: "sine.out" }, 19.35);
-  tl.fromTo("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 19.8);
-  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 20.25);
-  tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 20.75);
-  tl.fromTo("#prix .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 20.45);
-  tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 21.25);
-  tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 21.7);
-  tl.to({}, { duration: 0.01 }, 24.39);
+  tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.4, ease: "sine.out" }, 27.35);
+  tl.fromTo("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 27.8);
+  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 28.25);
+  tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 28.75);
+  tl.fromTo("#prix .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 28.45);
+  tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 29.25);
+  tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 29.7);
+  tl.to({}, { duration: 0.01 }, 32.39);
 
   window.__timelines = window.__timelines || {};
   window.__timelines["main"] = tl;

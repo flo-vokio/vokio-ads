@@ -16,3 +16,17 @@ l'app), horloge qui tourne, une capture par appel, fin logo + promesse + « Essa
   le plombier a les siens forcés (l'app coupe « Intervention | calée »).
 - **Aucun zoom sur les cartes** (leçon du répondeur : le texte remis en page sautille).
 - **Horloge** : quatre bandes 0-9 ×3, chaque chiffre roule toujours vers l'avant.
+
+## Passe 2 (26/09) : retours de Florian
+
+« L'animation des rendez-vous n'est pas la plus réussie, trop de mouvement, on ne remarque pas
+les détails. » Reprise fidèle à app.vokio.fr :
+- **la ligne d'appel repliée d'abord** (vraie capture `appel-1`, avec son aperçu tronqué),
+  qui entre calmement et se laisse lire ;
+- **puis elle s'ouvre comme dans l'app** : chevron redessiné en SVG qui pivote de 180°,
+  aperçu qui disparaît d'un coup (group-open:hidden, un fondu superposait les deux lignes),
+  volet qui se déplie vers le bas en 0,8 s ;
+- **le résumé s'écrit pendant l'ouverture**, mot à mot (0,045 s par mot), à l'intérieur du volet :
+  le volet a fini avant le texte, l'œil se pose sur la fin de l'écriture ; puis le trait solaire.
+- **Rythme** : 6 s par appel au lieu de 4 (1 à 2 s de lecture après le trait), film de 32,4 s.
+- Captures `replie` refilmées le 26/09 avec le même regarnissage (garnir_24h.py), espaces remis.

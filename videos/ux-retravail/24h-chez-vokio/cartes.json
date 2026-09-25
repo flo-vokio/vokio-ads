@@ -4,27 +4,35 @@
   "hauteur": 725,
   "y_premiere_ligne": 345,
   "x_texte": 116,
-  "lignes": 4
+  "lignes": 4,
+  "hauteur_replie": 282,
+  "hauteur_panneau": 509
  },
  "restaurant": {
   "largeur": 1044,
   "hauteur": 725,
   "y_premiere_ligne": 344,
   "x_texte": 116,
-  "lignes": 4
+  "lignes": 4,
+  "hauteur_replie": 282,
+  "hauteur_panneau": 509
  },
  "veterinaire": {
   "largeur": 1044,
   "hauteur": 863,
   "y_premiere_ligne": 345,
   "x_texte": 116,
-  "lignes": 6
+  "lignes": 6,
+  "hauteur_replie": 282,
+  "hauteur_panneau": 647
  },
  "plombier": {
   "largeur": 1044,
   "hauteur": 863,
   "y_premiere_ligne": 344,
   "x_texte": 116,
-  "lignes": 6
+  "lignes": 6,
+  "hauteur_replie": 282,
+  "hauteur_panneau": 647
  }
 }

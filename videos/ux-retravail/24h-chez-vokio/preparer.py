@@ -67,3 +67,33 @@ for m in ["institut_beaute", "restaurant", "veterinaire", "plombier"]:
                   x_texte=min(c[2] for c in lignes), lignes=len(lignes))
     print(m, res[m])
 (ICI / "cartes.json").write_text(json.dumps(res, indent=1) + "\n")
+
+
+# ── 26/09 · l'ouverture comme dans app.vokio.fr ─────────────────────────────
+# La ligne repliée (plans.py, appel-1) puis le volet qui se déplie. Le chevron est
+# retiré des deux images et redessiné en SVG, pour pivoter comme dans l'app
+# (group-open:rotate-180) au lieu de fondre d'une image à l'autre.
+# Chevron relevé sur les pixels : boîte (946, 76)-(973, 91), identique partout.
+CHEVRON = (940, 70, 980, 98)
+ENTETE_H = 216   # la bande d'en-tête de l'appel ouvert, avant le volet
+
+
+def sans_chevron(im):
+    im = im.copy()
+    fond = im.getpixel((CHEVRON[0] - 6, CHEVRON[1]))
+    for y in range(CHEVRON[1], CHEVRON[3]):
+        for x in range(CHEVRON[0], CHEVRON[2]):
+            im.putpixel((x, y), fond)
+    return im
+
+
+for m in res:
+    rep = Image.open(CAP / f"{m}-replie.png").convert("RGB")
+    sans_chevron(rep).save(CAP / f"{m}-replie-net.png")
+    vide = Image.open(CAP / f"{m}-vide.png").convert("RGB")
+    sans_chevron(vide.crop((0, 0, vide.width, ENTETE_H))).save(CAP / f"{m}-entete-net.png")
+    vide.crop((0, ENTETE_H, vide.width, vide.height)).save(CAP / f"{m}-panneau.png")
+    res[m]["hauteur_replie"] = rep.height
+    res[m]["hauteur_panneau"] = vide.height - ENTETE_H
+(ICI / "cartes.json").write_text(json.dumps(res, indent=1) + "\n")
+print("replié / en-tête / volet prêts")
