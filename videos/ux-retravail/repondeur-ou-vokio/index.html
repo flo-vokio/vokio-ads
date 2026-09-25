@@ -104,7 +104,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
     <div id="fin">
       <p id="mot" class="serif"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p>
       <p id="prix" class="serif"><span class="m" data-layout-allow-overflow><span class="w p">Votre</span></span> <span class="m" data-layout-allow-overflow><span class="w p">ligne</span></span> <span class="m" data-layout-allow-overflow><span class="w p">répond</span></span> <em><span class="m" data-layout-allow-overflow><span class="w p">même</span></span> <span class="m" data-layout-allow-overflow><span class="w p">quand</span></span> <span class="m" data-layout-allow-overflow><span class="w p">vous</span></span> <span class="m" data-layout-allow-overflow><span class="w p">ne</span></span> <span class="m" data-layout-allow-overflow><span class="w p">pouvez</span></span> <span class="m" data-layout-allow-overflow><span class="w p">pas.</span></span></em></p>
-      <p><span id="cta">Appelez notre plombier fictif</span></p>
+      <p><span id="cta">Essayez-le vous-même</span></p>
       <p id="site">vokio.fr</p>
     </div>
   </section>
@@ -175,7 +175,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.6, ease: "sine.out" }, 14.9);
   tl.fromTo("#fiche", { y: 90, opacity: 0 }, { y: 0, opacity: 1, duration: 1.0, ease: P3o }, 15.2);
   tl.fromTo("#fiche-masque", { clipPath: "inset(0% 0% 78% 0% round 30px)" }, { clipPath: "inset(0% 0% 0% 0% round 30px)", duration: 1.25, ease: "power3.inOut" }, 15.3);
-  tl.fromTo("#fiche-img", { scale: 1 }, { scale: 1.035, duration: 6.1, ease: "sine.inOut" }, 15.5);
+  // (25/09) plus de poussée 1 → 1,035 sur la carte : le texte du résumé, remis en page à chaque
+  // image du zoom, sautillait de ±0,2 px (mesuré). La carte se déplie puis reste immobile.
   tl.fromTo("#v2 .w:not(.e2)", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, 17.2);
   tl.fromTo("#v2 .e2", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.08 }, 17.55);
   tl.fromTo("#v2-trait", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: P3o }, 18.15);
@@ -183,8 +184,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 
   // 4 · la fin : le halo remonte derrière le mot
   tl.to("#halo", { y: -470, scale: 0.72, duration: 1.4, ease: "power3.inOut" }, 21.5);
-  tl.fromTo("#mot-a", { clipPath: "inset(-30% 100% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 22.5);
-  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 100% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 22.95);
+  tl.fromTo("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 22.5);
+  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 22.95);
   tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 23.45);
   tl.fromTo("#prix .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 23.15);
   tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 23.95);
