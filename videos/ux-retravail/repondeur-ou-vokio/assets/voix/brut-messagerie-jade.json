@@ -1,0 +1,87 @@
+{
+ "texte": "Votre correspondant n'est pas disponible pour le moment. Veuillez laisser un message après le bip sonore.",
+ "voix": "3C1zYzXNXNzrB66ON8rj",
+ "graine": 11,
+ "mots": [
+  {
+   "mot": "Votre",
+   "debut": 0.0,
+   "fin": 0.244
+  },
+  {
+   "mot": "correspondant",
+   "debut": 0.267,
+   "fin": 0.697
+  },
+  {
+   "mot": "n'est",
+   "debut": 0.72,
+   "fin": 0.836
+  },
+  {
+   "mot": "pas",
+   "debut": 0.871,
+   "fin": 0.987
+  },
+  {
+   "mot": "disponible",
+   "debut": 1.01,
+   "fin": 1.405
+  },
+  {
+   "mot": "pour",
+   "debut": 1.428,
+   "fin": 1.533
+  },
+  {
+   "mot": "le",
+   "debut": 1.567,
+   "fin": 1.614
+  },
+  {
+   "mot": "moment.",
+   "debut": 1.66,
+   "fin": 1.985
+  },
+  {
+   "mot": "Veuillez",
+   "debut": 2.148,
+   "fin": 2.426
+  },
+  {
+   "mot": "laisser",
+   "debut": 2.473,
+   "fin": 2.682
+  },
+  {
+   "mot": "un",
+   "debut": 2.705,
+   "fin": 2.752
+  },
+  {
+   "mot": "message",
+   "debut": 2.786,
+   "fin": 3.204
+  },
+  {
+   "mot": "après",
+   "debut": 3.251,
+   "fin": 3.518
+  },
+  {
+   "mot": "le",
+   "debut": 3.541,
+   "fin": 3.599
+  },
+  {
+   "mot": "bip",
+   "debut": 3.634,
+   "fin": 3.762
+  },
+  {
+   "mot": "sonore.",
+   "debut": 3.808,
+   "fin": 4.458
+  }
+ ]
+}

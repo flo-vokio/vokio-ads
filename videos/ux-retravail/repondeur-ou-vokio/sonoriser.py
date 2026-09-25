@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Doublage du message d'accueil du répondeur (25/09, demande de Florian).
 
-    python3 sonoriser.py <voix>     voix = yariq | maxime | sebastien (prises dans assets/voix/)
+    python3 sonoriser.py <voix>     voix = messagerie-marine (RETENUE le 25/09) | messagerie-jade | yariq-v2 | yariq | maxime | sebastien (prises dans assets/voix/)
 
 Une seule piste, assets/voix/piste.wav, de la durée du film : le message
-filtré « ligne téléphonique » (300-3300 Hz) qui commence à DEBUT, puis le bip
+tel que synthétisé, sans effet (le filtre « ligne téléphonique » sonnait faux,
+retiré le 25/09 à la demande de Florian), qui commence à DEBUT, puis le bip
 (1 kHz) calé sur le trait #bip-ton. Les mots du message s'affichent à
 l'instant où la voix les dit : les horodatages ElevenLabs sont recopiés dans
 index.html entre les marqueurs MOTS-VOIX, jamais saisis à la main.
@@ -14,13 +15,15 @@ import json, re, subprocess, sys
 from pathlib import Path
 ICI = Path(__file__).parent
 V = ICI / "assets" / "voix"
-DUREE, DEBUT, BIP, BIP_D = 27.4, 3.9, 8.82, 0.34
+# 25/09 : voix « Marine » retenue (5,25 s) ⇒ voix avancée à 3,75 s et bip décalé à 9,3 s
+# (#bip-l, #bip-ton dans index.html suivent) ; la boîte sort toujours à 10,1 s.
+DUREE, DEBUT, BIP, BIP_D = 27.4, 3.75, 9.3, 0.34
 voix = sys.argv[1]
 mots = json.loads((V / f"brut-{voix}.json").read_text())["mots"]
 fin = DEBUT + mots[-1]["fin"]
 assert fin + 0.3 < BIP, f"la voix ({fin:.2f} s) déborde sur le bip ({BIP} s)"
 subprocess.run(["ffmpeg", "-y", "-loglevel", "error",
-    "-i", str(V / f"tel-{voix}.wav"),
+    "-i", str(V / f"brut-{voix}.mp3"),
     "-f", "lavfi", "-i", f"sine=frequency=1000:duration={BIP_D}:sample_rate=44100",
     "-filter_complex",
     f"[0:a]adelay={int(DEBUT*1000)}:all=1,apad[v];"

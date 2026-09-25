@@ -84,7 +84,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   <section id="s-repondeur" class="scene clip" data-start="3.3" data-duration="11.4" data-track-index="2">
     <div id="boite">
       <div id="boite-regle"></div>
-      <p id="boite-lab">Message d'accueil</p>
+      <p id="boite-lab">Messagerie vocale</p>
       <p id="boite-dit"></p>
       <p id="boite-bip"><span id="bip-l">B I P</span><span id="bip-ton"></span></p>
     </div>
@@ -119,7 +119,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 <script>
 (function(){
   // Le message d'accueil, mot à mot : le répondeur le « joue ».
-  const DIT = "« Bonjour, je ne suis pas disponible pour le moment, je vous rappellerai dès que possible. »";
+  const DIT = "« Votre correspondant n'est pas disponible pour le moment. Veuillez laisser un message après le bip sonore. »";
   const dit = document.getElementById("boite-dit");
   DIT.split(" ").forEach((mot, i, tout) => {
     const s = document.createElement("span");
@@ -144,8 +144,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   tl.fromTo("#boite-regle", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 3.4);
   tl.fromTo("#boite-lab", { opacity: 0, x: -18 }, { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }, 3.62);
   // 0,3 s par mot : le message se lit à voix haute, puis tient avant le bip
-  /* MOTS-VOIX (généré par sonoriser.py, voix maxime) */
-  const MOTS_VOIX = [3.9, 4.527, 4.655, 4.724, 4.875, 5.003, 5.549, 5.676, 5.769, 6.303, 6.431, 6.559, 7.209, 7.395, 7.522];
+  /* MOTS-VOIX (généré par sonoriser.py, voix messagerie-marine) */
+  const MOTS_VOIX = [3.75, 4.122, 4.702, 4.876, 5.05, 5.642, 5.793, 5.898, 6.536, 6.908, 7.187, 7.268, 7.755, 8.046, 8.15, 8.336];
   // « et » ne se disent pas : le guillemet ouvrant sort avec le premier mot, le fermant avec le dernier
   let iv = 0;
   document.querySelectorAll("#boite-dit .d").forEach(el => {
@@ -155,9 +155,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
     tl.fromTo(el, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, t);
   });
   /* fin MOTS-VOIX */
-  tl.fromTo("#bip-l", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, 8.8);
-  tl.fromTo("#bip-ton", { scaleX: 0 }, { scaleX: 1, duration: 0.34, ease: "none" }, 8.82);
-  tl.to("#bip-ton", { opacity: 0, duration: 0.08, ease: "none" }, 9.16);
+  tl.fromTo("#bip-l", { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, 9.28);
+  tl.fromTo("#bip-ton", { scaleX: 0 }, { scaleX: 1, duration: 0.34, ease: "none" }, 9.3);
+  tl.to("#bip-ton", { opacity: 0, duration: 0.08, ease: "none" }, 9.64);
   tl.to("#boite", { y: -50, opacity: 0, duration: 0.38, ease: P3i }, 10.1);
   tl.set("#boite", { visibility: "hidden" }, 10.5);
   tl.set("#v1", { autoAlpha: 0 }, 0);
