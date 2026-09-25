@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>24 h chez Vokio</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/GeistMono-Regular.woff2") format("woff2");}
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2");}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
+#root{position:relative;width:100%;height:100%;overflow:hidden;background:#F4F1E8;color:#262019;
+      font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-kerning:normal}
+.scene{position:absolute;inset:0}
+.m{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .06em .14em;margin:0 -.06em -.14em}
+.w{display:inline-block}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+
+/* l'horloge : quatre bandes de chiffres qui roulent, toujours vers l'avant */
+#horloge{position:absolute;left:70px;top:150px;height:200px;display:flex;align-items:flex-start;
+         font-size:200px;line-height:200px;letter-spacing:-.03em}
+.col{height:200px;overflow:hidden;clip-path:inset(0 -10% 0 -10%)}
+.bande{display:flex;flex-direction:column}
+.bande span{display:block;height:200px;text-align:center}
+#dp{padding:0 .02em;height:200px}
+
+/* la situation, deux lignes, la chute en italique */
+.situ{position:absolute;left:70px;right:60px;top:410px;font-size:80px;line-height:1.08;letter-spacing:-.014em}
+.situ em{font-style:italic;display:block}
+
+/* la carte réelle : la carte vide filmée, le résumé réécrit par-dessus (même corps que l'app) */
+.carte{position:absolute;left:70px;top:650px;width:1044px;transform:scale(.9);transform-origin:0 0}
+.carte img{display:block;width:1044px}
+.carte .res{position:absolute;left:114px;width:822px;margin:0;font-family:"Geist",sans-serif;
+            font-size:42px;line-height:68.25px;color:rgb(78,73,66)}
+/* la phrase clé : un trait solaire qui se tire sous le texte, ligne après ligne */
+.cle{background-image:linear-gradient(#EFA424,#EFA424);background-repeat:no-repeat;
+     background-position:0 92%;background-size:0% 6px;padding-bottom:2px}
+
+/* le bilan : les quatre en-têtes du même jour, empilés */
+#bilan-t{position:absolute;left:70px;right:60px;top:200px;font-size:80px;line-height:1.08;letter-spacing:-.014em}
+#bilan-t em{font-style:italic;display:block}
+#pile{position:absolute;left:70px;top:470px;width:940px}
+.ent{width:940px;height:195px;margin-bottom:22px;border-radius:26px;overflow:hidden;border:1px solid rgba(38,32,25,.14)}
+.ent img{display:block;width:940px}
+
+/* la fin, reprise du répondeur (masque de départ corrigé le 25/09) */
+#halo{position:absolute;left:-160px;top:-40px;width:1400px;height:1100px;
+      background:radial-gradient(50% 50% at 50% 50%,rgba(239,164,36,.30) 0%,rgba(248,214,155,.26) 34%,rgba(245,198,119,.12) 62%,rgba(244,241,232,0) 100%)}
+#fin{position:absolute;left:0;right:0;top:380px;text-align:center}
+#mot{font-size:220px;letter-spacing:-.045em;line-height:.9;display:inline-flex;align-items:baseline}
+#mot .seg{display:inline-block;clip-path:inset(-30% -14% -30% -14%)}
+#mot .i{position:relative;font-style:normal}
+#mot-pt{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;border-radius:50%;background:#EFA424}
+#prix{margin:70px auto 0;width:900px;font-size:76px;line-height:1.1;letter-spacing:-.012em}
+#prix em{font-style:italic}
+#cta{margin-top:62px;display:inline-block;padding:30px 60px;border-radius:999px;background:#262019;color:#F4F1E8;font-size:40px}
+#site{margin-top:36px;font-family:"Geist Mono",monospace;font-size:36px;letter-spacing:.14em;text-transform:uppercase;color:#6F695F}
+
+#mention{position:absolute;left:0;right:0;top:1456px;text-align:center;font-size:36px;line-height:1;color:#6F695F}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="24.4" data-width="1080" data-height="1920">
+
+  <section id="s-horloge" class="scene clip" data-start="0" data-duration="17.2" data-track-index="0">
+    <div id="horloge" class="serif">
+      <div class="col" id="c0"><div class="bande"></div></div>
+      <div class="col" id="c1"><div class="bande"></div></div>
+      <div class="col" id="dp">:</div>
+      <div class="col" id="c2"><div class="bande"></div></div>
+      <div class="col" id="c3"><div class="bande"></div></div>
+    </div>
+  </section>
+
+  <section id="s-appels" class="scene clip" data-start="0" data-duration="17.2" data-track-index="1">
+    <div id="appels"></div>
+  </section>
+
+  <section id="s-bilan" class="scene clip" data-start="16.9" data-duration="3.0" data-track-index="2">
+    <p id="bilan-t" class="serif"><span class="l1"><span class="m" data-layout-allow-overflow><span class="w b">Chaque</span></span> <span class="m" data-layout-allow-overflow><span class="w b">appel</span></span> <span class="m" data-layout-allow-overflow><span class="w b">décroché.</span></span></span> <em><span class="m" data-layout-allow-overflow><span class="w b2">Chaque</span></span> <span class="m" data-layout-allow-overflow><span class="w b2">rendez-vous</span></span> <span class="m" data-layout-allow-overflow><span class="w b2">posé.</span></span></em></p>
+    <div id="pile">
+      <div class="ent"><img src="assets/captures/institut_beaute-entete.png" alt=""></div>
+      <div class="ent"><img src="assets/captures/restaurant-entete.png" alt=""></div>
+      <div class="ent"><img src="assets/captures/veterinaire-entete.png" alt=""></div>
+      <div class="ent"><img src="assets/captures/plombier-entete.png" alt=""></div>
+    </div>
+  </section>
+
+  <section id="s-halo" class="scene clip" data-start="19.3" data-duration="5.1" data-track-index="3">
+    <div id="halo"></div>
+  </section>
+
+  <section id="s-fin" class="scene clip" data-start="19.5" data-duration="4.9" data-track-index="4">
+    <div id="fin">
+      <p id="mot" class="serif"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p>
+      <p id="prix" class="serif"><span class="m" data-layout-allow-overflow><span class="w p">Votre</span></span> <span class="m" data-layout-allow-overflow><span class="w p">ligne</span></span> <span class="m" data-layout-allow-overflow><span class="w p">répond</span></span> <em><span class="m" data-layout-allow-overflow><span class="w p">même</span></span> <span class="m" data-layout-allow-overflow><span class="w p">quand</span></span> <span class="m" data-layout-allow-overflow><span class="w p">vous</span></span> <span class="m" data-layout-allow-overflow><span class="w p">ne</span></span> <span class="m" data-layout-allow-overflow><span class="w p">pouvez</span></span> <span class="m" data-layout-allow-overflow><span class="w p">pas.</span></span></em></p>
+      <p><span id="cta">Essayez-le vous-même</span></p>
+      <p id="site">vokio.fr</p>
+    </div>
+  </section>
+
+  <section id="s-mention" class="scene clip" data-start="0" data-duration="24.4" data-track-index="5">
+    <p id="mention">Établissements fictifs · captures réelles de app.vokio.fr</p>
+  </section>
+</div>
+<script>
+(function(){
+  // Un appel = une heure, une situation, la vraie carte et sa phrase clé.
+  // Les quatre cartes datent du même jour (jeu. 24 sept.) : garnir_24h.py.
+  const APPELS = [
+    { m: "institut_beaute", h: "1042", h1: "Une cliente appelle.", h2: "Vous avez les mains prises.", top: 345, haut: 725,
+      av: "Mme Delorme souhaite une pose de gel avec Julie, jeudi en fin d'après-midi. ",
+      cle: "Rendez-vous pris jeudi 17 h", ap: ", une heure. Rappel la veille par SMS." },
+    { m: "restaurant", h: "1248", h1: "Le téléphone sonne.", h2: "En plein coup de feu.", top: 344, haut: 725,
+      av: "M. Chevalier ", cle: "réserve une table pour 4 mercredi 20 h 30", ap: ". Pas d'allergie signalée, une chaise haute demandée pour un enfant. Confirmation envoyée par SMS." },
+    { m: "veterinaire", h: "2214", h1: "Un chat ne mange plus.", h2: "La clinique est fermée.", top: 345, haut: 863,
+      av: "Le chat de Mme Vidal ne mange plus depuis deux jours et reste prostré. Signes d'alerte passés en revue au téléphone : pas de vomissement, pas de difficulté à uriner. ",
+      cle: "Consultation calée demain 9 h", ap: ", dossier ouvert au nom de Pacha, 7 ans." },
+    { m: "plombier", h: "2307", h1: "Une fuite sous l'évier.", h2: "Vous dormez.", top: 344, haut: 863,
+      // retours à la ligne forcés : ceux de la capture (l'app coupe « Intervention | calée »)
+      av: "M. Lefèvre a une fuite sous l'évier, l'arrivée<br>d'eau est coupée. Le geste d'urgence lui a<br>été donné au téléphone. ",
+      cle: "Intervention<br>calée demain matin 8 h 30", ap: ", adresse notée<br>: 14 rue Sainte, Marseille 8e. SMS de<br>confirmation envoyé." },
+  ];
+  // décalage entre le haut du bloc de texte et le haut de l'encre de la 1re ligne (Geist 42 / 68,25)
+  const DY = 20.5;
+  const mots = (t, cls) => t.split(" ").map(w => `<span class="m" data-layout-allow-overflow><span class="w ${cls}">${w}</span></span>`).join(" ");
+  const zone = document.getElementById("appels");
+  APPELS.forEach((a, k) => {
+    zone.insertAdjacentHTML("beforeend",
+      `<p class="situ serif" id="situ${k}"><span class="l1">${mots(a.h1, "s1")}</span> <em>${mots(a.h2, "s2")}</em></p>` +
+      `<div class="carte" id="carte${k}"><img src="assets/captures/${a.m}-vide.png" alt="">` +
+      `<p class="res" style="top:${a.top - DY}px">${a.av}<span class="cle">${a.cle}</span>${a.ap}</p></div>`);
+  });
+
+  // les bandes : 0 à 9, trois fois, pour toujours rouler vers l'avant
+  const cols = ["#c0", "#c1", "#c2", "#c3"].map(s => document.querySelector(s + " .bande"));
+  cols.forEach(b => { for (let r = 0; r < 3; r++) for (let d = 0; d < 10; d++) b.insertAdjacentHTML("beforeend", `<span>${d}</span>`); });
+  const pos = [0, 0, 0, 0];
+  const cible = (i, d) => { let n = pos[i]; if (n % 10 !== d || n === 0 && d !== 0) { n = pos[i] + 1; while (n % 10 !== d) n++; } return n; };
+
+  const tl = gsap.timeline({ paused: true });
+  const P3o = "power3.out", P3i = "power3.in";
+
+  // 0 · l'heure se lève
+  APPELS[0].h.split("").forEach((c, i) => { pos[i] = +c; tl.set(cols[i], { y: -200 * pos[i] }, 0); });
+  tl.fromTo("#horloge", { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.9, ease: "power4.out" }, 0.1);
+
+  APPELS.forEach((a, k) => {
+    const S = 1.0 + 4 * k;
+    if (k > 0) {
+      // l'horloge roule jusqu'à l'appel suivant, chiffre par chiffre, en décalé
+      a.h.split("").forEach((c, i) => {
+        const n = cible(i, +c);
+        if (n !== pos[i]) tl.to(cols[i], { y: -200 * n, duration: 0.85, ease: "power3.inOut" }, S - 0.35 + 0.06 * i);
+        pos[i] = n;
+      });
+    }
+    tl.fromTo(`#situ${k} .s1`, { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, S + 0.35);
+    tl.fromTo(`#situ${k} .s2`, { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, S + 0.75);
+    tl.fromTo(`#carte${k}`, { y: 60, opacity: 0, clipPath: "inset(0% 0% 70% 0% round 30px)" },
+              { y: 0, opacity: 1, clipPath: "inset(0% 0% 0% 0% round 30px)", duration: 1.0, ease: "power3.inOut" }, S + 1.05);
+    tl.to(`#carte${k} .cle`, { backgroundSize: "100% 6px", duration: 0.8, ease: P3o }, S + 2.25);
+    tl.to([`#situ${k}`, `#carte${k}`], { y: -50, opacity: 0, duration: 0.4, ease: P3i, stagger: 0.05 }, S + 3.5);
+    tl.set([`#situ${k}`, `#carte${k}`], { visibility: "hidden" }, S + 3.96);
+    tl.set([`#situ${k}`, `#carte${k}`], { autoAlpha: 0 }, 0);
+    tl.set([`#situ${k}`, `#carte${k}`], { autoAlpha: 1 }, S + 0.3);
+  });
+
+  // 5 · le bilan : l'horloge s'efface, les quatre en-têtes du même jour s'empilent
+  tl.to("#horloge", { y: -50, opacity: 0, duration: 0.4, ease: P3i }, 16.5);
+  tl.fromTo("#bilan-t .b", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, 17.0);
+  tl.fromTo("#bilan-t .b2", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, 17.35);
+  tl.fromTo("#pile .ent", { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o, stagger: 0.12 }, 17.3);
+  tl.to(["#bilan-t", "#pile"], { y: -50, opacity: 0, duration: 0.42, ease: P3i, stagger: 0.05 }, 19.3);
+
+  // 6 · la fin
+  tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.4, ease: "sine.out" }, 19.35);
+  tl.fromTo("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 19.8);
+  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 20.25);
+  tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 20.75);
+  tl.fromTo("#prix .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 20.45);
+  tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 21.25);
+  tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 21.7);
+  tl.to({}, { duration: 0.01 }, 24.39);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+})();
+</script>
+</body>
+</html>
