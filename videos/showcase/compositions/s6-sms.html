@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>s6-sms</title></head>
+<body>
+<!--
+  Sous-composition s6-sms · film 31.35 → 36.90 s (durée 5.55 s, images 941 à 1106), hôte #h-s6-sms.
+  Bible, scène « s6-sms » : Élise annonce le SMS, le téléphone monte jusqu'au point, et la bulle du VRAI
+  SMS parti le 18/09 à 16:55 s'ouvre depuis le point dans le blanc réel qui suit « confirmation. ».
+  Trois éléments, jamais plus :
+    1. le sous-titre, en haut : Geist 400 54/68 encre, x 90, lignes de base 400 / 468 (mêmes boîte,
+       police et lignes de base que l'agente en s4 et s5) : « Vous recevrez un SMS / de confirmation. »
+       (DONNEES.pages de la scène, depuis le rang 18 de A4), chaque mot monte de sa ligne de base à son
+       attaque mesurée (16 px, 0,26 s power3.out) ;
+    2. le téléphone : UN contour d'iPhone, rien d'autre (ni bouton, ni encoche, ni barre d'état), encre
+       #262019 de 6 px, x 150 → 930, haut 700, rayon 110, coupé par le bas du cadre. Dedans, la bulle reçue
+       #E9E3D6 (x 200 → 880, y 790 → 1106, rayon 34, coin bas gauche 10), texte Geist 38/52 encre sur
+       620 px, les cinq lignes que donne cette largeur. La bulle fait partie de l'objet téléphone :
+       elle monte, tremble et sort avec lui (data-element="telephone") ;
+    3. le point : #point de la RACINE (jamais dessiné ni animé ici). Il est au coin haut gauche de la
+       bulle, (200 ; 790), depuis 31,45, y tremble avec le téléphone (même donnée) et part vers le ı de
+       s7 au raccroché (DONNEES.point).
+  LE DÉROULÉ (temps film ; la timeline est LOCALE, 0 = 31,35) :
+    · 31,35 → 31,85 : le téléphone monte de +1 300 px à 0 (power3.out, échelle constante) : le coin de la
+      bulle, encore fermée, arrive sous le point, qui l'attend ;
+    · les mots aux attaques de DONNEES.mots (A4, rangs 18 à 23) ;
+    · DONNEES.evenements.bulle_et_vibreur (33,2667, image 998), dans le blanc réel qui suit la phrase :
+      la bulle s'ouvre depuis le centre du point, clip-path circle(r at coin), 0,45 s power3.out, et le
+      téléphone tremble en x de POINT.secousse("s6", t), la même valeur que le point, image par image
+      (vibreur : +1,64, 0, −2, 0, +1,84 …, 0 à l'image 1012). L'image 998 est la première où la bulle se
+      voit et où le téléphone tremble : l'attaque du vibreur (contrôle 7) ;
+    · 33,60 → 33,78 : le sous-titre sort par ses masques (le SMS se lit seul) ;
+    · 33,78 → 36,60 : rien ne bouge, on lit. « Super, merci beaucoup. Au revoir. » sans sous-titre ;
+    · DONNEES.evenements.raccroche (36,60, image 1098) : le téléphone et la bulle sortent par le bas,
+      0 → +1 300 px, 0,30 s power3.in. La trajectoire finit à 36,90, fin de la scène : à la dernière image
+      (1106) il est à +913 px, et à l'image suivante il serait hors cadre (haut à 2 000) : rien ne
+      disparaît d'un coup au passage à s7.
+  Rayon final de l'ouverture : la bible dit 1 000 px, soit une bulle entière dès 0,17 s (5 images), le
+  reste de la course ne montrant rien. On prend le rayon qui couvre exactement le dernier pixel de la
+  bulle (coin bas droit arrondi : hypot(680 − 34, 316 − 34) + 34 = 738,9, plus 1 px d'anticrénelage) :
+  même forme, même durée et même ease, et l'ouverture remplit ses 0,45 s.
+  Aucun temps de voix en dur : attaques = DONNEES.mots via TEXTE, instants = DONNEES.evenements, point et
+  secousse = DONNEES.point / DONNEES.secousses via POINT.
+  RACCORD s5 : à sa dernière image (940), l'agenda est sorti par le bas et le sous-titre aussi : il ne
+  reste que le point, en route vers (200 ; 790). À la première image de s6 (941), le haut du téléphone
+  entre par le bas du cadre (à y ≈ 1 874).
+  RACCORD s7 : à 36,90, la sous-composition est vide ; #point est en route vers (652,57 ; 560,789).
+-->
+<template id="s6-sms-template">
+<style>
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
+#root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
+/* ── 1. Le sous-titre ── copie de .s5-agente : Geist 400 54 px, interlignage 68 px, ligne de base 53 px
+   sous le haut de la ligne (mesuré dans le chrome-headless-shell de HyperFrames) : top 347 → 400 / 468. */
+#s6-texte{position:absolute;left:90px;top:347px;width:920px;height:136px}
+#s6-recevrez{position:absolute;left:0;top:0;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+             font-size:54px;line-height:68px;letter-spacing:0;color:#262019;white-space:nowrap}
+/* ── 2. Le téléphone ── un calque plein cadre (les coordonnées de ses enfants sont celles du film) que
+   GSAP translate seul (y : montée et sortie, x : vibreur). Aucune transformation CSS. */
+#s6-telephone{position:absolute;left:0;top:0;width:1080px;height:1920px}
+/* Le contour : trait de 6 px centré sur le rectangle x 150 → 930, haut 700 (bords d'encre à des pixels
+   entiers : 147-153, 697-703), rayon 110. Il descend à y 2 200 : ses coins bas ne sont jamais dans le cadre. */
+#s6-contour{position:absolute;left:0;top:0;width:1080px;height:2200px;overflow:visible}
+/* La bulle reçue : 680 × 316 = 30 + 620 + 30 sur 28 + 5 × 52 + 28. Fermée au départ (clip-path de rayon 0
+   au coin haut gauche, le centre du point) ; le script l'ouvre image par image. */
+#s6-bulle{position:absolute;left:200px;top:790px;width:680px;height:316px;box-sizing:border-box;margin:0;padding:28px 30px;
+          background:#E9E3D6;border-radius:34px 34px 34px 10px;clip-path:circle(0px at 0px 0px);
+          font-family:"Geist",sans-serif;font-weight:400;font-style:normal;font-size:38px;line-height:52px;
+          letter-spacing:0;color:#262019;text-align:left}
+.s6-l{display:block;white-space:nowrap}
+</style>
+<div id="root" data-composition-id="s6-sms" data-width="1080" data-height="1920">
+  <!-- L'objet téléphone d'abord (dessous), le sous-titre ensuite (au-dessus : la couche de lecture).
+       data-layout-allow-overflow : le contour est coupé par le bas du cadre et le téléphone entre et sort
+       par le bas, c'est voulu. -->
+  <div id="s6-telephone" data-element="telephone" data-layout-allow-overflow>
+    <svg id="s6-contour" width="1080" height="2200" viewBox="0 0 1080 2200" aria-hidden="true" data-layout-allow-overflow>
+      <rect x="150" y="700" width="780" height="1500" rx="110" ry="110" fill="none" stroke="#262019" stroke-width="6"/>
+    </svg>
+    <!-- Le texte exact du SMS parti le 18/09 à 16:55 (gabarit de sub-booking-process au commit 9bbd094,
+         branche is_demo), en cinq lignes : celles que donne la largeur de 620 px en Geist 38. -->
+    <p id="s6-bulle"><span class="s6-l">Bonjour Florian, votre rendez-vous</span><span class="s6-l">est confirmé : Consultation</span><span class="s6-l">vétérinaire, le samedi 19 septembre</span><span class="s6-l">à 09:00 chez Clinique vétérinaire</span><span class="s6-l">du Port. Démo Vokio, RDV fictif.</span></p>
+  </div>
+  <div id="s6-texte" data-element="sous-titre">
+    <p id="s6-recevrez"></p>
+  </div>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES;
+  const FPS = D.fps;
+  const UNE = 1 / FPS;
+  const EPS = 1e-5;
+  const sc = TEXTE.scene("s6-sms");
+  const tl = gsap.timeline({ paused: true });
+  const r6 = function (v) { return +v.toFixed(6); };
+  function exiger(ok, msg) { if (!ok) throw new Error("s6-sms : " + msg); }
+  exiger(window.POINT && typeof POINT.etat === "function" && typeof POINT.secousse === "function",
+         "window.POINT absent (lib/point.js est chargé par la racine)");
+  const H = D.taille[1];
+  const EV = D.evenements;
+  // Dernière image montrée par la scène : 36,90 × 30 = 1 107 tombe sur le début de s7, donc 1 106 (36,8667).
+  const derniereImage = r6((Math.ceil(sc.fin * FPS - 1e-6) - 1) / FPS);
+
+  // ── 0. Géométrie de la bible (le CSS ci-dessus en est la copie lisible), contrôlée contre les données ──
+  const G6 = D.geometrie.s6_bulle_coin;                                       // (200 ; 790)
+  const TEL = { haut: 700, trait: 6 };
+  const BULLE = { x0: 200, y0: 790, largeur: 680, hauteur: 316, rayon_bd: 34,
+                  marge_h: 30, marge_v: 28, texte: 620, interligne: 52 };
+  const SMS = "Bonjour Florian, votre rendez-vous est confirmé : Consultation vétérinaire, le samedi 19 septembre " +
+              "à 09:00 chez Clinique vétérinaire du Port. Démo Vokio, RDV fictif.";
+  const bulle = document.getElementById("s6-bulle");
+  const telephone = document.getElementById("s6-telephone");
+  const lignesSms = Array.from(bulle.querySelectorAll(".s6-l")).map(function (l) { return l.textContent; });
+  exiger(lignesSms.join(" ") === SMS, "le texte de la bulle n'est pas le SMS envoyé");
+  exiger(Math.abs(BULLE.x0 - G6.x) < 1e-6 && Math.abs(BULLE.y0 - G6.y) < 1e-6,
+         "le coin de la bulle n'est pas DONNEES.geometrie.s6_bulle_coin");
+  exiger(BULLE.largeur === 2 * BULLE.marge_h + BULLE.texte, "largeur de bulle ≠ marges + 620");
+  exiger(BULLE.hauteur === 2 * BULLE.marge_v + lignesSms.length * BULLE.interligne, "hauteur de bulle ≠ marges + 5 lignes");
+  exiger(BULLE.y0 + BULLE.hauteur < 1500, "la bulle descend sous y = 1 500");
+
+  // ── 1. Le point attend au coin de la bulle (DONNEES.point) : il y arrive avant la bulle et y reste
+  //       jusqu'au raccroché ; la bulle s'ouvre donc depuis son centre exact.
+  const T_BULLE = EV.bulle_et_vibreur.t;                                      // 33,2667 (image 998)
+  const T_RACCROCHE = EV.raccroche.t;                                         // 36,60 (image 1098)
+  [T_BULLE, T_RACCROCHE, sc.film(0.5)].forEach(function (t) {
+    const e = POINT.etat(t);
+    exiger(Math.abs(e.x_sans - G6.x) < 0.01 && Math.abs(e.y - G6.y) < 0.01,
+           "le point n'est pas au coin de la bulle à " + t + " s (" + e.x_sans + " ; " + e.y + ")");
+  });
+  exiger(Math.abs(POINT.etat(T_RACCROCHE + 0.1).y - G6.y) > 1, "le point ne quitte pas la bulle au raccroché");
+  // Le vibreur : la secousse du téléphone commence à l'image de la bulle, comme celle du point.
+  const S6 = D.secousses.s6;
+  exiger(S6.image0 === EV.bulle_et_vibreur.image, "secousses.s6 ne commence pas à l'image de la bulle");
+  exiger(Math.abs(POINT.secousse("s6", T_BULLE)) > 0.5, "le vibreur ne bouge pas à l'image de la bulle");
+  exiger(Math.abs(POINT.etat(T_BULLE).dx - POINT.secousse("s6", T_BULLE)) < 1e-9, "le point et le téléphone ne tremblent pas pareil");
+
+  // ── 2. Le sous-titre : la page de la bible pour cette scène, telle que DONNEES.pages la donne ──
+  const pages = D.pages.filter(function (p) { return p.scene === sc.id; });
+  exiger(pages.length === 1, "1 page attendue dans DONNEES.pages, " + pages.length + " trouvée(s)");
+  const page = pages[0];
+  exiger(page.extrait === "A4" && page.depuis === 18, "page A4 depuis le rang 18 attendue (sinon « Vous » s'apparie à « je vous note »)");
+  // interlignage 68/54 = 1,26 em < 1,3 : les boîtes de police se chevauchent d'une ligne à l'autre (pas l'encre)
+  const recevrez = TEXTE.poser("#s6-recevrez", page.lignes, { extrait: page.extrait, depuis: page.depuis, chevauchement: true });
+  const ENTREE = 0.26;
+  TEXTE.reveler(tl, recevrez, { scene: sc.id });                              // 16 px, 0,26 s, power3.out
+  const derniere = recevrez.mots[recevrez.mots.length - 1];
+  const finVoix = derniere.mots[derniere.mots.length - 1].fin;                // 33,05 : fin de « confirmation. »
+  exiger(T_BULLE > finVoix, "la bulle s'ouvre avant la fin de la phrase (elle doit tomber dans le blanc réel)");
+  // Sortie par les masques, vers le bas, power3.in, 0,18 s, dix images après l'ouverture de la bulle
+  // (33,60 → 33,78) : on a vu la bulle arriver sous la phrase qui l'annonce, puis le SMS se lit seul.
+  const T_SORTIE = r6(T_BULLE + 10 * UNE);                                    // 33,60 (image 1008)
+  const SORTIE = 0.18;
+  exiger(T_SORTIE >= TEXTE.aImage(derniere.t) + ENTREE - 1e-6, "« confirmation. » sort avant d'être posé");
+  TEXTE.sortir(tl, recevrez, sc.local(T_SORTIE), { duree: SORTIE, ease: "power3.in" });
+  // Sorti, invisible : aucun texte fantôme, et le calque du sous-titre ne compte plus parmi les éléments
+  // visibles pendant la lecture du SMS (il reste le téléphone et le point).
+  tl.set(recevrez.mots.map(function (u) { return u.el; }), { opacity: 0 }, sc.local(r6(T_SORTIE + SORTIE)));
+  tl.set("#s6-texte", { opacity: 0 }, sc.local(r6(T_SORTIE + SORTIE)));
+
+  // ── 3. Le téléphone monte jusqu'au point (échelle constante) ──
+  const Y_BAS = 1300;                                                         // bible : translateY +1 300
+  const MONTEE = 0.50;
+  exiger(TEL.haut - TEL.trait / 2 + Y_BAS >= H, "le téléphone n'est pas hors cadre au départ");
+  exiger(sc.film(MONTEE) < T_BULLE, "le téléphone n'est pas arrivé quand la bulle s'ouvre");
+  tl.fromTo(telephone, { y: Y_BAS }, { y: 0, duration: MONTEE, ease: "power3.out", immediateRender: true }, 0);
+
+  // ── 4. Sortie au raccroché : par le bas, plus courte que l'entrée, jusqu'à la fin de la scène ──
+  const SORTIE_TEL = r6(sc.fin - T_RACCROCHE);                                // 0,30 s
+  exiger(SORTIE_TEL > 0.2 && SORTIE_TEL < MONTEE, "sortie du téléphone hors bornes (" + SORTIE_TEL + " s)");
+  exiger(TEL.haut - TEL.trait / 2 + Y_BAS >= H, "le téléphone n'est pas hors cadre à la fin");
+  tl.fromTo(telephone, { y: 0 }, { y: Y_BAS, duration: SORTIE_TEL, ease: "power3.in", immediateRender: false },
+            sc.local(T_RACCROCHE));
+  exiger(derniereImage < sc.fin, "dernière image hors scène");
+
+  // ── 5. L'ouverture de la bulle et le vibreur : fonctions pures du temps film ──
+  // Rayon qui couvre exactement le dernier pixel de la bulle depuis son coin haut gauche (le centre du
+  // point) : le coin bas droit arrondi, plus 1 px d'anticrénelage.
+  const R_FIN = Math.ceil(Math.hypot(BULLE.largeur - BULLE.rayon_bd, BULLE.hauteur - BULLE.rayon_bd) + BULLE.rayon_bd + 1);   // 740
+  const OUVERTURE = 0.45;
+  const easeOuverture = POINT.ease("power3.out");
+  // L'image 998 est la première où la bulle se voit (rayon 0 à l'image 997) : même image que l'attaque du
+  // vibreur et que la première secousse.
+  const T0_OUVERTURE = r6(T_BULLE - UNE);
+  function rayon(tF) {
+    if (tF <= T0_OUVERTURE + EPS) return 0;
+    const u = Math.min(1, (tF - T0_OUVERTURE) / OUVERTURE);
+    return R_FIN * easeOuverture(u);
+  }
+  exiger(rayon(T_BULLE - UNE) === 0 && rayon(T_BULLE) > 0, "la bulle ne s'ouvre pas à l'image 998");
+  function rendre(tF) {
+    gsap.set(telephone, { x: POINT.secousse("s6", tF) });
+    const r = rayon(tF);
+    bulle.style.clipPath = "circle(" + (+r.toFixed(3)) + "px at 0px 0px)";
+  }
+  // Tween proxy sur toute la scène, ease none ; jamais tl.call (il casse la déduplication des images).
+  const proxy = { t: 0 };
+  rendre(sc.film(0));
+  tl.to(proxy, { t: sc.duree, duration: sc.duree, ease: "none",
+                 onUpdate: function () { rendre(sc.film(proxy.t)); } }, 0);
+
+  window.__timelines["s6-sms"] = tl;
+})();
+</script>
+</template>
+</body>
+</html>

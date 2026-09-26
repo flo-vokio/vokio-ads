@@ -1,0 +1,89 @@
+{
+ "decroche": {
+  "t": 4.2,
+  "image": 126
+ },
+ "saut_neuf_debut": {
+  "t": 20.466667,
+  "image": 614
+ },
+ "contact_neuf": {
+  "t": 20.666667,
+  "image": 620
+ },
+ "saut_dix_debut": {
+  "t": 21.233333,
+  "image": 637
+ },
+ "contact_dix": {
+  "t": 21.433333,
+  "image": 643
+ },
+ "saut_onze_debut": {
+  "t": 22.0,
+  "image": 660
+ },
+ "contact_onze": {
+  "t": 22.2,
+  "image": 666
+ },
+ "retour_debut": {
+  "t": 23.966667,
+  "image": 719
+ },
+ "contact_retour_neuf": {
+  "t": 24.366667,
+  "image": 731
+ },
+ "ecriture_pose": {
+  "t": 25.4,
+  "image": 762
+ },
+ "ecriture_debut": {
+  "t": 25.4,
+  "image": 762
+ },
+ "ecriture_fin": {
+  "t": 26.1,
+  "image": 783
+ },
+ "resolution_confirmation": {
+  "t": 32.966667,
+  "image": 989
+ },
+ "bulle_et_vibreur": {
+  "t": 33.266667,
+  "image": 998
+ },
+ "raccroche": {
+  "t": 36.6,
+  "image": 1098
+ },
+ "silence_numerique": {
+  "t": [
+   36.68,
+   37.4
+  ],
+  "images": [
+   1100,
+   1122
+  ]
+ },
+ "signature_la": {
+  "t": 37.4,
+  "image": 1122
+ },
+ "signature_sol": {
+  "t": 37.64,
+  "image": 1129
+ },
+ "signature_re_contact": {
+  "t": 38.0,
+  "image": 1140
+ },
+ "fin": {
+  "t": 43.5,
+  "image": 1305
+ },
+ "_note": "Temps film. Les contacts du point (sauts) sont aux attaques de voyelle mesurées ; un bruitage de contact se pose à l'échantillon round(t × 48000). ecriture_debut = le point quitte le bord gauche du bloc (le « la » de cloche-la-rdv de la bible est à 25,40)."
+}

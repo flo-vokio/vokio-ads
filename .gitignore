@@ -15,3 +15,9 @@ essais/
 
 # Prises d’essai par graine de la pub sonnerie : le choix est inscrit dans variantes.json
 videos/vokio-sonnerie/assets/voix/graines/
+
+# showcase : sons reconstruits par outils/ et son/mix.py (12 Mo chacun)
+videos/showcase/son/*.wav
+videos/showcase/son/stems/
+videos/showcase/assets/son/*.wav
+videos/showcase/son/cache/

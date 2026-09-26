@@ -1,0 +1,446 @@
+[
+  {
+    "text": "Bonjour,",
+    "start": 0,
+    "end": 5.41,
+    "id": "w0"
+  },
+  {
+    "text": "je",
+    "start": 5.41,
+    "end": 5.7,
+    "id": "w1"
+  },
+  {
+    "text": "suis",
+    "start": 5.7,
+    "end": 5.81,
+    "id": "w2"
+  },
+  {
+    "text": "Alice,",
+    "start": 5.85,
+    "end": 6.2,
+    "id": "w3"
+  },
+  {
+    "text": "assistante",
+    "start": 6.2,
+    "end": 6.57,
+    "id": "w4"
+  },
+  {
+    "text": "vocale",
+    "start": 6.63,
+    "end": 6.78,
+    "id": "w5"
+  },
+  {
+    "text": "telle",
+    "start": 6.79,
+    "end": 7,
+    "id": "w6"
+  },
+  {
+    "text": "à",
+    "start": 7,
+    "end": 7.19,
+    "id": "w7"
+  },
+  {
+    "text": "la",
+    "start": 7.22,
+    "end": 7.56,
+    "id": "w8"
+  },
+  {
+    "text": "clinique",
+    "start": 7.69,
+    "end": 7.98,
+    "id": "w9"
+  },
+  {
+    "text": "vétérinière",
+    "start": 8.05,
+    "end": 8.42,
+    "id": "w10"
+  },
+  {
+    "text": "du",
+    "start": 8.52,
+    "end": 8.61,
+    "id": "w11"
+  },
+  {
+    "text": "port.",
+    "start": 8.61,
+    "end": 8.98,
+    "id": "w12"
+  },
+  {
+    "text": "Comment",
+    "start": 8.98,
+    "end": 9.34,
+    "id": "w13"
+  },
+  {
+    "text": "puis-je",
+    "start": 9.34,
+    "end": 9.69,
+    "id": "w14"
+  },
+  {
+    "text": "vous",
+    "start": 9.69,
+    "end": 9.89,
+    "id": "w15"
+  },
+  {
+    "text": "aider?",
+    "start": 9.89,
+    "end": 10.34,
+    "id": "w16"
+  },
+  {
+    "text": "Moca,",
+    "start": 10.34,
+    "end": 11.15,
+    "id": "w17"
+  },
+  {
+    "text": "mange",
+    "start": 11.15,
+    "end": 11.82,
+    "id": "w18"
+  },
+  {
+    "text": "plus",
+    "start": 11.82,
+    "end": 12.36,
+    "id": "w19"
+  },
+  {
+    "text": "depuis",
+    "start": 12.36,
+    "end": 13.17,
+    "id": "w20"
+  },
+  {
+    "text": "hier.",
+    "start": 13.17,
+    "end": 14.14,
+    "id": "w21"
+  },
+  {
+    "text": "Demain,",
+    "start": 14.14,
+    "end": 14.86,
+    "id": "w22"
+  },
+  {
+    "text": "vous",
+    "start": 14.86,
+    "end": 15.23,
+    "id": "w23"
+  },
+  {
+    "text": "avez",
+    "start": 15.23,
+    "end": 15.6,
+    "id": "w24"
+  },
+  {
+    "text": "des",
+    "start": 15.6,
+    "end": 15.87,
+    "id": "w25"
+  },
+  {
+    "text": "disponibilités?",
+    "start": 15.87,
+    "end": 17.48,
+    "id": "w26"
+  },
+  {
+    "text": "Laissez-moi",
+    "start": 17.48,
+    "end": 18.37,
+    "id": "w27"
+  },
+  {
+    "text": "voir.",
+    "start": 18.37,
+    "end": 18.98,
+    "id": "w28"
+  },
+  {
+    "text": "Je",
+    "start": 18.98,
+    "end": 19.11,
+    "id": "w29"
+  },
+  {
+    "text": "peux",
+    "start": 19.11,
+    "end": 19.38,
+    "id": "w30"
+  },
+  {
+    "text": "vous",
+    "start": 19.38,
+    "end": 19.65,
+    "id": "w31"
+  },
+  {
+    "text": "proposer",
+    "start": 19.65,
+    "end": 20.19,
+    "id": "w32"
+  },
+  {
+    "text": "neuf",
+    "start": 20.19,
+    "end": 20.45,
+    "id": "w33"
+  },
+  {
+    "text": "heures,",
+    "start": 20.45,
+    "end": 20.99,
+    "id": "w34"
+  },
+  {
+    "text": "dix",
+    "start": 20.99,
+    "end": 21.19,
+    "id": "w35"
+  },
+  {
+    "text": "heures",
+    "start": 21.19,
+    "end": 21.6,
+    "id": "w36"
+  },
+  {
+    "text": "ou",
+    "start": 21.6,
+    "end": 21.73,
+    "id": "w37"
+  },
+  {
+    "text": "onze",
+    "start": 21.73,
+    "end": 22,
+    "id": "w38"
+  },
+  {
+    "text": "heures?",
+    "start": 22,
+    "end": 22.74,
+    "id": "w39"
+  },
+  {
+    "text": "Ben,",
+    "start": 22.74,
+    "end": 23.1,
+    "id": "w40"
+  },
+  {
+    "text": "neuf",
+    "start": 23.1,
+    "end": 23.38,
+    "id": "w41"
+  },
+  {
+    "text": "heures",
+    "start": 23.38,
+    "end": 23.82,
+    "id": "w42"
+  },
+  {
+    "text": "c'est",
+    "start": 23.82,
+    "end": 24.17,
+    "id": "w43"
+  },
+  {
+    "text": "parfait.",
+    "start": 24.17,
+    "end": 24.94,
+    "id": "w44"
+  },
+  {
+    "text": "Parfait,",
+    "start": 24.94,
+    "end": 25.66,
+    "id": "w45"
+  },
+  {
+    "text": "je",
+    "start": 25.66,
+    "end": 25.82,
+    "id": "w46"
+  },
+  {
+    "text": "vous",
+    "start": 25.82,
+    "end": 26.14,
+    "id": "w47"
+  },
+  {
+    "text": "note",
+    "start": 26.14,
+    "end": 26.46,
+    "id": "w48"
+  },
+  {
+    "text": "ça",
+    "start": 26.46,
+    "end": 26.62,
+    "id": "w49"
+  },
+  {
+    "text": "pour",
+    "start": 26.62,
+    "end": 26.94,
+    "id": "w50"
+  },
+  {
+    "text": "Florian.",
+    "start": 26.94,
+    "end": 27.78,
+    "id": "w51"
+  },
+  {
+    "text": "Pour",
+    "start": 27.78,
+    "end": 27.99,
+    "id": "w52"
+  },
+  {
+    "text": "une",
+    "start": 27.99,
+    "end": 28.15,
+    "id": "w53"
+  },
+  {
+    "text": "consultation",
+    "start": 28.15,
+    "end": 28.79,
+    "id": "w54"
+  },
+  {
+    "text": "réterinaire,",
+    "start": 28.79,
+    "end": 29.47,
+    "id": "w55"
+  },
+  {
+    "text": "le",
+    "start": 29.47,
+    "end": 29.57,
+    "id": "w56"
+  },
+  {
+    "text": "samedi",
+    "start": 29.57,
+    "end": 29.89,
+    "id": "w57"
+  },
+  {
+    "text": "19",
+    "start": 29.89,
+    "end": 30.21,
+    "id": "w58"
+  },
+  {
+    "text": "septembre",
+    "start": 30.21,
+    "end": 30.68,
+    "id": "w59"
+  },
+  {
+    "text": "à",
+    "start": 30.68,
+    "end": 30.73,
+    "id": "w60"
+  },
+  {
+    "text": "neuf",
+    "start": 30.73,
+    "end": 30.93,
+    "id": "w61"
+  },
+  {
+    "text": "heures.",
+    "start": 30.93,
+    "end": 31.34,
+    "id": "w62"
+  },
+  {
+    "text": "Vous",
+    "start": 31.34,
+    "end": 31.69,
+    "id": "w63"
+  },
+  {
+    "text": "recevrez",
+    "start": 31.69,
+    "end": 32.38,
+    "id": "w64"
+  },
+  {
+    "text": "un",
+    "start": 32.38,
+    "end": 32.55,
+    "id": "w65"
+  },
+  {
+    "text": "SMS",
+    "start": 32.55,
+    "end": 32.81,
+    "id": "w66"
+  },
+  {
+    "text": "de",
+    "start": 32.81,
+    "end": 32.98,
+    "id": "w67"
+  },
+  {
+    "text": "confirmation.",
+    "start": 32.98,
+    "end": 34.34,
+    "id": "w68"
+  },
+  {
+    "text": "Super,",
+    "start": 34.34,
+    "end": 35.03,
+    "id": "w69"
+  },
+  {
+    "text": "merci",
+    "start": 35.03,
+    "end": 35.53,
+    "id": "w70"
+  },
+  {
+    "text": "beaucoup,",
+    "start": 35.53,
+    "end": 36.51,
+    "id": "w71"
+  },
+  {
+    "text": "au",
+    "start": 36.51,
+    "end": 36.71,
+    "id": "w72"
+  },
+  {
+    "text": "revoir.",
+    "start": 36.71,
+    "end": 37.34,
+    "id": "w73"
+  }
+]

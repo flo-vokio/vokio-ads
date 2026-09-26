@@ -1,0 +1,95 @@
+{
+ "unite": "px film ; mesuré dans le chrome-headless-shell de HyperFrames",
+ "moteur": "chrome-headless-shell HyperFrames 152.0.7977.30",
+ "date": "2026-09-26T21:48:03",
+ "s1": {
+  "centre": {
+   "x": 957.331,
+   "y": 865.3
+  },
+  "diametre": 21.0,
+  "ligne_de_base": 874,
+  "lignes": [
+   {
+    "ligne_de_base": 690,
+    "x0": 90,
+    "x1": 941.671875,
+    "largeur": 851.671875
+   },
+   {
+    "ligne_de_base": 874,
+    "x0": 90,
+    "x1": 978.625,
+    "largeur": 888.625
+   }
+  ],
+  "espaceur": {
+   "x0": 936.03125,
+   "y0": 874,
+   "x1": 978.625,
+   "y1": 874,
+   "cx": 957.328125,
+   "cy": 874,
+   "l": 42.59375,
+   "h": 0
+  },
+  "glyphe_point": {
+   "unites": [
+    54,
+    -9,
+    159,
+    96
+   ],
+   "upm": 1000,
+   "avance": 213,
+   "corps_px": 200
+  },
+  "methode": "origine DOM du « . » réel (Range, crénage compris) + centre de la boîte d'encre du glyphe (fontTools), ligne de base DOM",
+  "source": "compositions/s1-sonnerie.html #s1-espaceur"
+ },
+ "s7": {
+  "centre": {
+   "x": 652.57,
+   "y": 650.789
+  },
+  "diametre": 30.797,
+  "mot_pt": {
+   "x0": 637.171875,
+   "y0": 635.390625,
+   "x1": 667.96875,
+   "y1": 666.1875,
+   "cx": 652.5703125,
+   "cy": 650.7890625,
+   "l": 30.796875,
+   "h": 30.796875
+  },
+  "mot": {
+   "x0": 307.59375,
+   "y0": 599,
+   "x1": 772.40625,
+   "y1": 851,
+   "cx": 540,
+   "cy": 725,
+   "l": 464.8125,
+   "h": 252
+  },
+  "ligne_de_base": 820,
+  "glyphe_i": {
+   "origine": 620.921875,
+   "avance": 49.84375,
+   "encre": {
+    "gauche": 0,
+    "droite": 61.25,
+    "haut": 144.375,
+    "bas": 0,
+    "avance": 62.43988037109375,
+    "police": "280px \"Instrument Serif\", serif"
+   },
+   "fut_x0": 620.921875,
+   "fut_x1": 682.171875,
+   "haut_encre": 675.625
+  },
+  "methode": "centre de getBoundingClientRect() de #mot-pt (boîte CSS du point de la DA)",
+  "source": "compositions/s7-signature.html #mot-pt"
+ }
+}

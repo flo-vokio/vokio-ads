@@ -1,0 +1,477 @@
+{
+ "A_master": {
+  "loudnorm": {
+   "lufs": -14.02,
+   "crete_dbtp": -1.5,
+   "lra": 11.1
+  },
+  "ebur128": {
+   "I": -13.9,
+   "LRA": 7.5,
+   "TP": -1.5
+  },
+  "duree_s": 43.5,
+  "crete_vraie_numpy_dbtp": -1.5,
+  "apres_aac_256k": {
+   "loudnorm": {
+    "lufs": -14.03,
+    "crete_dbtp": -1.5,
+    "lra": 11.0
+   },
+   "ebur128": {
+    "I": -13.9,
+    "LRA": 7.5,
+    "TP": -1.5
+   }
+  }
+ },
+ "B_silences": {
+  "36.70-37.38": -Infinity,
+  "43.22-43.50": -Infinity,
+  "zeros_exacts_36.68-37.40": true,
+  "zeros_exacts_43.20-43.50": true,
+  "seule_la_signature_37.40-38.00": {
+   "dialogue": true,
+   "nappe": true,
+   "sfx": true
+  },
+  "rien_apres_le_raccroche_hors_signature_et_nappe_de_fin": {
+   "dialogue": true,
+   "sfx": true
+  },
+  "tonalite_20_premieres_ms_rms_dbfs": -19.5
+ },
+ "C_somme_stems_moins_mix_max": 1.1920928955078125e-07,
+ "D_synchro": [
+  {
+   "id": "ton-1",
+   "t": 0.0,
+   "image": 0,
+   "attaque_mesuree": 0.001,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 96.2,
+   "ok": 1.0
+  },
+  {
+   "id": "ton-2-la",
+   "t": 3.6,
+   "image": 108,
+   "attaque_mesuree": 3.601,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 95.9,
+   "ok": 1.0
+  },
+  {
+   "id": "clic-decroche",
+   "t": 4.2,
+   "image": 126,
+   "attaque_mesuree": 4.201,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 20.6,
+   "ok": 1.0
+  },
+  {
+   "id": "cloche-sol-1",
+   "t": 4.44,
+   "image": 133,
+   "attaque_mesuree": 4.4455,
+   "ecart_ms": 5.5,
+   "ecart_images": 0.16,
+   "montee_db": 7.6,
+   "ok": 1.0
+  },
+  {
+   "id": "tap-9h",
+   "t": 20.666667,
+   "image": 620,
+   "attaque_mesuree": 20.6677,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 110.5,
+   "ok": 1.0
+  },
+  {
+   "id": "tap-10h",
+   "t": 21.433333,
+   "image": 643,
+   "attaque_mesuree": 21.4343,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 83.5,
+   "ok": 1.0
+  },
+  {
+   "id": "tap-11h",
+   "t": 22.2,
+   "image": 666,
+   "attaque_mesuree": 22.201,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 83.5,
+   "ok": 1.0
+  },
+  {
+   "id": "tap-retour-9h",
+   "t": 24.366667,
+   "image": 731,
+   "attaque_mesuree": 24.3677,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 106.5,
+   "ok": 1.0
+  },
+  {
+   "id": "cloche-la-rdv",
+   "t": 25.4,
+   "image": 762,
+   "attaque_mesuree": 25.401,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 96.4,
+   "ok": 1.0
+  },
+  {
+   "id": "cloche-sol-rdv",
+   "t": 25.64,
+   "image": 769,
+   "attaque_mesuree": 25.6455,
+   "ecart_ms": 5.5,
+   "ecart_images": 0.16,
+   "montee_db": 8.5,
+   "ok": 1.0
+  },
+  {
+   "id": "vibreur",
+   "t": 33.266667,
+   "image": 998,
+   "attaque_mesuree": 33.2677,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 98.6,
+   "ok": 1.0
+  },
+  {
+   "id": "raccroche",
+   "t": 36.6,
+   "image": 1098,
+   "attaque_mesuree": 36.601,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 111.5,
+   "ok": 1.0
+  },
+  {
+   "id": "signature-la",
+   "t": 37.4,
+   "image": 1122,
+   "attaque_mesuree": 37.401,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 105.3,
+   "ok": 1.0
+  },
+  {
+   "id": "signature-sol",
+   "t": 37.64,
+   "image": 1129,
+   "attaque_mesuree": 37.6455,
+   "ecart_ms": 5.5,
+   "ecart_images": 0.16,
+   "montee_db": 8.9,
+   "ok": 1.0
+  },
+  {
+   "id": "signature-re",
+   "t": 38.0,
+   "image": 1140,
+   "attaque_mesuree": 38.001,
+   "ecart_ms": 1.0,
+   "ecart_images": 0.03,
+   "montee_db": 8.0,
+   "ok": 1.0
+  }
+ ],
+ "D_resolution": {
+  "t_voyelle": 32.955,
+  "image": 989,
+  "chroma_avant": [
+   "do",
+   "la",
+   "fa#",
+   "ré"
+  ],
+  "chroma_apres": [
+   "sol",
+   "si",
+   "ré",
+   "fa#"
+  ]
+ },
+ "E_dialogue_decalage": [
+  {
+   "id": "A1",
+   "decalage_echantillons": -3
+  },
+  {
+   "id": "C1",
+   "decalage_echantillons": -12
+  },
+  {
+   "id": "C2",
+   "decalage_echantillons": -12
+  },
+  {
+   "id": "A2A3",
+   "decalage_echantillons": -9
+  },
+  {
+   "id": "C3",
+   "decalage_echantillons": -6
+  },
+  {
+   "id": "A4",
+   "decalage_echantillons": -3
+  },
+  {
+   "id": "C4",
+   "decalage_echantillons": -8
+  }
+ ],
+ "F_voix_sur_reste_LU": {
+  "min": 11.2,
+  "mediane": 18.1,
+  "pires": [
+   [
+    11.2,
+    "des",
+    16.058
+   ],
+   [
+    11.6,
+    "pour",
+    27.115
+   ],
+   [
+    11.8,
+    "c'est",
+    24.405
+   ],
+   [
+    12.4,
+    "parfait.",
+    24.565
+   ],
+   [
+    13.2,
+    "voir.",
+    18.005
+   ],
+   [
+    13.8,
+    "confirmation.",
+    32.435
+   ]
+  ]
+ },
+ "F_sonies_LUFS": {
+  "voix_integree_approx (toutes voix, 4,91 → 35,95)": -13.8,
+  "tonalite_1 (0,1 → 1,4)": -15.5,
+  "tonalite_2 (3,7 → 4,2)": -15.5,
+  "decroche la+sol (4,2 → 4,9)": -20.1,
+  "nappe seule, silence de l'outil (18,5 → 19,7)": -24.2,
+  "nappe sous la voix (20,0 → 22,6)": -31.4,
+  "voix (20,0 → 22,6)": -12.1,
+  "la·sol de l'écriture (25,4 → 26,1)": -22.9,
+  "nappe, silence de réservation (25,0 → 26,2)": -28.8,
+  "vibreur (33,27 → 33,72)": -19.8,
+  "signature, 400 ms après le la (37,40 → 37,80)": -14.7,
+  "signature, 400 ms après le ré (38,00 → 38,40)": -13.4,
+  "nappe de fin (39 → 41,8)": -24.8,
+  "mix, voix A4 (26,2 → 33,0)": -12.6
+ },
+ "G_mono": {
+  "ecart_sonie_mono_moins_stereo_film_LU": -0.04,
+  "ecart_signature 37,4 → 40,3_LU": -0.17,
+  "ecart_nappe 6 → 17,5_LU": -0.02,
+  "ecart_decroche 4,2 → 5,0_LU": -0.52,
+  "ecart_ecriture 25,4 → 26,2_LU": -0.45,
+  "ecart_nappe de fin 39 → 43_LU": -0.68,
+  "correlation_LR_min_100ms": -0.0,
+  "correlation_LR_mediane": 0.987,
+  "fenetres_correlation_negative": 1
+ },
+ "H_telephone_ecart_crete_db": {
+  "la": 1.29,
+  "sol": 0.99,
+  "re": 0.65
+ },
+ "I_chroma_nappe": {
+  "6.7-17.5": [
+   "sol",
+   "si",
+   "ré",
+   "fa#"
+  ],
+  "20.7-32.8": [
+   "la",
+   "fa#",
+   "do",
+   "ré"
+  ],
+  "33.1-36.5": [
+   "sol",
+   "si",
+   "ré",
+   "fa#"
+  ],
+  "39.0-41.8": [
+   "sol",
+   "ré",
+   "si",
+   "la"
+  ]
+ },
+ "J_tonalite_contre_secousses_s1": {
+  "ecart_max": 0.03,
+  "image_pire": 84,
+  "exemples": {
+   "0": [
+    0.846,
+    0.8497
+   ],
+   "1": [
+    1.005,
+    1.0
+   ],
+   "44": [
+    0.847,
+    0.8503
+   ],
+   "45": [
+    0.024,
+    0.0
+   ],
+   "107": [
+    0.0,
+    0.0
+   ],
+   "108": [
+    0.848,
+    0.8497
+   ],
+   "109": [
+    1.004,
+    1.0
+   ],
+   "125": [
+    0.999,
+    1.0
+   ]
+  }
+ },
+ "J_vibreur_contre_secousses_s6": {
+  "ecart_max": 0.0
+ },
+ "J_vibreur_rms_par_image": [
+  0.91,
+  0.97,
+  0.97,
+  0.97,
+  0.93,
+  0.18,
+  0.0,
+  0.0,
+  0.73,
+  1.0,
+  1.0,
+  1.0,
+  0.94,
+  0.24,
+  0.0
+ ],
+ "K_clics_hf": {
+  "nappe": {
+   "bouffees_hors_attaques": 0,
+   "instants": []
+  },
+  "signature": {
+   "bouffees_hors_attaques": 0,
+   "instants": []
+  },
+  "sfx": {
+   "bouffees_hors_attaques": 0,
+   "instants": []
+  }
+ },
+ "L_pan_suit_le_point": [
+  {
+   "cue": "tap-9h",
+   "fenetre": [
+    20.667,
+    20.72
+   ],
+   "x_point": 234.4,
+   "D_moins_G_mesure_db": -4.47,
+   "D_moins_G_attendu_db": -4.87
+  },
+  {
+   "cue": "tap-11h",
+   "fenetre": [
+    22.2,
+    22.25
+   ],
+   "x_point": 234.4,
+   "D_moins_G_mesure_db": -4.49,
+   "D_moins_G_attendu_db": -4.87
+  },
+  {
+   "cue": "clic+la au décroché",
+   "fenetre": [
+    4.27,
+    4.4
+   ],
+   "x_point": 957.3,
+   "D_moins_G_mesure_db": 8.36,
+   "D_moins_G_attendu_db": 6.97
+  },
+  {
+   "cue": "la·sol, début de l'écriture",
+   "fenetre": [
+    25.42,
+    25.46
+   ],
+   "x_point": 276.9,
+   "D_moins_G_mesure_db": -4.33,
+   "D_moins_G_attendu_db": -4.14
+  },
+  {
+   "cue": "la·sol, fin de l'écriture",
+   "fenetre": [
+    26.06,
+    26.1
+   ],
+   "x_point": 990.4,
+   "D_moins_G_mesure_db": 9.34,
+   "D_moins_G_attendu_db": 7.66
+  },
+  {
+   "cue": "signature (ré)",
+   "fenetre": [
+    38.0,
+    38.1
+   ],
+   "x_point": 652.6,
+   "D_moins_G_mesure_db": 1.47,
+   "D_moins_G_attendu_db": 1.72
+  }
+ ],
+ "stems_crete_dbtp": {
+  "dialogue": -1.32,
+  "nappe": -13.43,
+  "sfx": -11.66,
+  "signature": -6.15
+ }
+}

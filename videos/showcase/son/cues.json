@@ -1,0 +1,478 @@
+{
+ "gain_master_db": 7.31,
+ "reduction_limiteur_max_db": -2.79,
+ "plafond_dbtp": -1.5,
+ "limiteur_activite": {
+  "part_du_temps_reduction_sup_0.5_db": 0.004,
+  "part_du_temps_reduction_sup_1_db": 0.0022,
+  "part_du_temps_reduction_sup_2_db": 0.00048
+ },
+ "voix": [
+  {
+   "id": "A1",
+   "lufs_origine": -20.82,
+   "lufs_final": -20.0
+  },
+  {
+   "id": "C1",
+   "lufs_origine": -25.99,
+   "lufs_final": -20.02
+  },
+  {
+   "id": "C2",
+   "lufs_origine": -26.06,
+   "lufs_final": -20.0
+  },
+  {
+   "id": "A2A3",
+   "lufs_origine": -19.13,
+   "lufs_final": -20.0
+  },
+  {
+   "id": "C3",
+   "lufs_origine": -26.43,
+   "lufs_final": -19.98
+  },
+  {
+   "id": "A4",
+   "lufs_origine": -19.42,
+   "lufs_final": -20.01
+  },
+  {
+   "id": "C4",
+   "lufs_origine": -26.1,
+   "lufs_final": -19.99
+  }
+ ],
+ "nappe": {
+  "t_entree": 5.1,
+  "t_sus4": 17.59,
+  "t_d7": 19.8,
+  "t_res": 32.955,
+  "rms_accueil": -32.0
+ },
+ "niveaux_avant_master": {
+  "ton": -23.0,
+  "ligne_rms": -56.0,
+  "clic": -32.0,
+  "sol_decroche": -25.0,
+  "tap": -30.0,
+  "tap_retour": -34.0,
+  "la_rdv": -26.0,
+  "sol_rdv": -26.0,
+  "vibreur": -19.0,
+  "raccroche": -24.0,
+  "nappe_rms": -32.0,
+  "nappe_fin_rms": -34.0,
+  "voix_lufs": -20.0,
+  "signature_decalage_db": -1.5
+ },
+ "cues": [
+  {
+   "id": "ton-1",
+   "stem": "sfx",
+   "t": 0.0,
+   "echantillon": 0,
+   "image": 0,
+   "source_instant": "secousses.s1.segments_s[0]",
+   "fabrication": "440 Hz, tanh(1,3x)/tanh(1,3), fondus 10 ms en cosinus (même moyenne par image que secousses.s1)",
+   "niveau_avant_master": "-23.0 dBFS crête",
+   "pan": 0.0,
+   "fin": 1.5,
+   "crete_propre_finale_dbfs": -15.7,
+   "crete_stem_100ms_dbfs": -15.1
+  },
+  {
+   "id": "souffle-ligne",
+   "stem": "sfx",
+   "t": 0.0,
+   "echantillon": 0,
+   "image": 0,
+   "source_instant": "0 → evenements.decroche",
+   "fabrication": "bruit rose graine 3, passe-bande 300-3 400 Hz, coupe 2 ms",
+   "niveau_avant_master": "RMS -56.0 dBFS",
+   "pan": 0.0,
+   "fin": 4.2
+  },
+  {
+   "id": "ton-2-la",
+   "stem": "signature",
+   "t": 3.6,
+   "echantillon": 172800,
+   "image": 108,
+   "source_instant": "secousses.s1.segments_s[1] ; ouverture = evenements.decroche",
+   "fabrication": "même oscillateur 440 Hz ; dès le décroché y = sin(φ + I(τ)·sin φ), I = 1,4·min(τ/0,06 ; 1)·exp(−max(τ−0,06 ; 0)/0,5), amplitude exp(−τ/0,45), la couleur tanh s'efface en 60 ms ; réverbe 1,2 s à 12 % sur la queue",
+   "niveau_avant_master": "-23.0 dBFS crête",
+   "pan": "0 puis point (+0.464 au décroché, suit le retour chariot)",
+   "ouverture": 4.2,
+   "crete_propre_finale_dbfs": -13.5,
+   "crete_stem_100ms_dbfs": -15.7
+  },
+  {
+   "id": "clic-decroche",
+   "stem": "sfx",
+   "t": 4.2,
+   "echantillon": 201600,
+   "image": 126,
+   "source_instant": "evenements.decroche",
+   "fabrication": "bruit 2 ms Hann → passe-bas 3 kHz + 180 Hz / 25 ms",
+   "niveau_avant_master": "-32.0 dBFS crête",
+   "pan": 0.464,
+   "crete_propre_finale_dbfs": -22.5,
+   "crete_stem_100ms_dbfs": -22.5
+  },
+  {
+   "id": "cloche-sol-1",
+   "stem": "signature",
+   "t": 4.44,
+   "echantillon": 213120,
+   "image": 133,
+   "source_instant": "evenements.decroche + (signature_sol − signature_la)",
+   "fabrication": "sol4 392 Hz FM 1:1, indice 1,2·exp(−τ/0,25), amplitude exp(−τ/0,5), attaque 5 ms, réverbe 1,2 s à 15 %",
+   "niveau_avant_master": "-25.0 dBFS crête",
+   "pan": "suit le point (+0.464 puis retour chariot vers -0.482)",
+   "crete_propre_finale_dbfs": -15.5,
+   "crete_stem_100ms_dbfs": -10.6
+  },
+  {
+   "id": "voix-A1",
+   "stem": "dialogue",
+   "t": 4.91,
+   "echantillon": 235680,
+   "image": 147,
+   "source_instant": "son/dialogue.json extraits.A1.film_in",
+   "fabrication": "vrai appel, montes 0.7 → 5.8 s ; highpass=f=100,equalizer=f=2800:t=q:w=1.2:g=2,acompressor=threshold=-24dB:ratio=2.5:attack=5:release=90 ; gain vers -20.0 LUFS",
+   "niveau_avant_master": "-20.00 LUFS intégrés",
+   "pan": 0.0,
+   "fin": 10.01,
+   "texte": "Bonjour, je suis Élise, l'assistante vocale de la Clinique vétérinaire du Port ! Comment puis-je vous aider ?",
+   "crete_finale_dbfs": -1.4,
+   "lufs_final": -12.69
+  },
+  {
+   "id": "nappe-accueil-sol",
+   "stem": "nappe",
+   "t": 5.1,
+   "echantillon": 244800,
+   "image": 153,
+   "source_instant": "mots A1[0].debut + 0,10",
+   "fabrication": "accord G2·D3·G3·B3 ; fondu 1.5 s",
+   "niveau_avant_master": "RMS -32.0 dBFS seule, −6 dB sous la voix"
+  },
+  {
+   "id": "voix-C1",
+   "stem": "dialogue",
+   "t": 10.5,
+   "echantillon": 504000,
+   "image": 315,
+   "source_instant": "son/dialogue.json extraits.C1.film_in",
+   "fabrication": "vrai appel, montes 10.28 → 13.84 s ; highpass=f=100,equalizer=f=2800:t=q:w=1.2:g=2,acompressor=threshold=-24dB:ratio=2.5:attack=5:release=90 ; gain vers -20.0 LUFS",
+   "niveau_avant_master": "-20.02 LUFS intégrés",
+   "pan": 0.0,
+   "fin": 14.06,
+   "texte": "mon chat, euh, Moka, euh, mange plus depuis hier",
+   "crete_finale_dbfs": -2.7,
+   "lufs_final": -12.71
+  },
+  {
+   "id": "voix-C2",
+   "stem": "dialogue",
+   "t": 14.6,
+   "echantillon": 700800,
+   "image": 438,
+   "source_instant": "son/dialogue.json extraits.C2.film_in",
+   "fabrication": "vrai appel, montes 34.76 → 37.16 s ; highpass=f=100,equalizer=f=2800:t=q:w=1.2:g=2,acompressor=threshold=-24dB:ratio=2.5:attack=5:release=90 ; gain vers -20.0 LUFS",
+   "niveau_avant_master": "-20.00 LUFS intégrés",
+   "pan": 0.0,
+   "fin": 17.0,
+   "texte": "Euh, demain, vous avez des disponibilités ?",
+   "crete_finale_dbfs": -4.4,
+   "lufs_final": -12.69
+  },
+  {
+   "id": "voix-A2A3",
+   "stem": "dialogue",
+   "t": 17.54,
+   "echantillon": 841920,
+   "image": 526,
+   "source_instant": "son/dialogue.json extraits.A2A3.film_in",
+   "fabrication": "vrai appel, montes 48.66 → 53.9 s ; highpass=f=100,equalizer=f=2800:t=q:w=1.2:g=2,acompressor=threshold=-24dB:ratio=2.5:attack=5:release=90 ; gain vers -20.0 LUFS",
+   "niveau_avant_master": "-20.00 LUFS intégrés",
+   "pan": 0.0,
+   "fin": 22.78,
+   "texte": "Laissez-moi voir. Je peux vous proposer neuf heures, dix heures ou onze heures.",
+   "crete_finale_dbfs": -2.5,
+   "lufs_final": -12.69
+  },
+  {
+   "id": "nappe-ré-sus4",
+   "stem": "nappe",
+   "t": 17.59,
+   "echantillon": 844320,
+   "image": 528,
+   "source_instant": "mots A2A3[0].debut (« Laissez-moi »)",
+   "fabrication": "accord D3·G3·A3·D4 ; fondu 0.6 s",
+   "niveau_avant_master": "RMS -32.0 dBFS seule, −6 dB sous la voix"
+  },
+  {
+   "id": "nappe-ré7",
+   "stem": "nappe",
+   "t": 19.8,
+   "echantillon": 950400,
+   "image": 594,
+   "source_instant": "mots A2A3[2].debut (« Je »)",
+   "fabrication": "accord D3·F#3·A3·C4 ; fondu 0.8 s",
+   "niveau_avant_master": "RMS -32.0 dBFS seule, −6 dB sous la voix"
+  },
+  {
+   "id": "tap-9h",
+   "stem": "sfx",
+   "t": 20.666667,
+   "echantillon": 992000,
+   "image": 620,
+   "source_instant": "evenements.contact_neuf",
+   "fabrication": "ré5 587,33 Hz (τ 0,09) + ×3,99 (τ 0,03), maillet 1,5 ms 2-5 kHz à −18 dB, réverbe 0,8 s à 12 %",
+   "niveau_avant_master": "-30.0 dBFS crête",
+   "pan": -0.34,
+   "crete_propre_finale_dbfs": -20.9,
+   "crete_stem_100ms_dbfs": -20.9
+  },
+  {
+   "id": "tap-10h",
+   "stem": "sfx",
+   "t": 21.433333,
+   "echantillon": 1028800,
+   "image": 643,
+   "source_instant": "evenements.contact_dix",
+   "fabrication": "ré5 587,33 Hz (τ 0,09) + ×3,99 (τ 0,03), maillet 1,5 ms 2-5 kHz à −18 dB, réverbe 0,8 s à 12 %",
+   "niveau_avant_master": "-30.0 dBFS crête",
+   "pan": -0.34,
+   "crete_propre_finale_dbfs": -20.9,
+   "crete_stem_100ms_dbfs": -20.9
+  },
+  {
+   "id": "tap-11h",
+   "stem": "sfx",
+   "t": 22.2,
+   "echantillon": 1065600,
+   "image": 666,
+   "source_instant": "evenements.contact_onze",
+   "fabrication": "ré5 587,33 Hz (τ 0,09) + ×3,99 (τ 0,03), maillet 1,5 ms 2-5 kHz à −18 dB, réverbe 0,8 s à 12 %",
+   "niveau_avant_master": "-30.0 dBFS crête",
+   "pan": -0.34,
+   "crete_propre_finale_dbfs": -20.9,
+   "crete_stem_100ms_dbfs": -20.9
+  },
+  {
+   "id": "voix-C3",
+   "stem": "dialogue",
+   "t": 23.24,
+   "echantillon": 1115520,
+   "image": 697,
+   "source_instant": "son/dialogue.json extraits.C3.film_in",
+   "fabrication": "vrai appel, montes 58.8 → 60.54 s ; highpass=f=100,equalizer=f=2800:t=q:w=1.2:g=2,acompressor=threshold=-24dB:ratio=2.5:attack=5:release=90 ; gain vers -20.0 LUFS",
+   "niveau_avant_master": "-19.98 LUFS intégrés",
+   "pan": 0.0,
+   "fin": 24.98,
+   "texte": "Euh, bah, à neuf heures, c'est parfait.",
+   "crete_finale_dbfs": -3.2,
+   "lufs_final": -12.67
+  },
+  {
+   "id": "tap-retour-9h",
+   "stem": "sfx",
+   "t": 24.366667,
+   "echantillon": 1169600,
+   "image": 731,
+   "source_instant": "evenements.contact_retour_neuf",
+   "fabrication": "ré5 587,33 Hz (τ 0,09) + ×3,99 (τ 0,03), maillet 1,5 ms 2-5 kHz à −18 dB, réverbe 0,8 s à 12 %",
+   "niveau_avant_master": "-34.0 dBFS crête",
+   "pan": -0.34,
+   "crete_propre_finale_dbfs": -24.9,
+   "crete_stem_100ms_dbfs": -24.9
+  },
+  {
+   "id": "cloche-la-rdv",
+   "stem": "signature",
+   "t": 25.4,
+   "echantillon": 1219200,
+   "image": 762,
+   "source_instant": "evenements.ecriture_debut",
+   "fabrication": "la4 440 Hz, sinus qui s'ouvre en cloche FM 1:1 (indice 0 → 1,4 en 60 ms), τ 0,35 s, attaque 8 ms, réverbe 1,2 s à 15 %",
+   "niveau_avant_master": "-26.0 dBFS crête",
+   "pan": "suit la plume -0.293 → +0.501",
+   "crete_propre_finale_dbfs": -17.1,
+   "crete_stem_100ms_dbfs": -16.9
+  },
+  {
+   "id": "cloche-sol-rdv",
+   "stem": "signature",
+   "t": 25.64,
+   "echantillon": 1230720,
+   "image": 769,
+   "source_instant": "evenements.ecriture_debut + (signature_sol − signature_la)",
+   "fabrication": "sol4 392 Hz FM 1:1, τ 0,45 s",
+   "niveau_avant_master": "-26.0 dBFS crête",
+   "pan": "suit la plume (-0.164 à l'attaque)",
+   "crete_propre_finale_dbfs": -17.7,
+   "crete_stem_100ms_dbfs": -13.3
+  },
+  {
+   "id": "voix-A4",
+   "stem": "dialogue",
+   "t": 26.17,
+   "echantillon": 1256160,
+   "image": 785,
+   "source_instant": "son/dialogue.json extraits.A4.film_in",
+   "fabrication": "vrai appel, montes 67.24 → 74.3 s ; highpass=f=100,equalizer=f=2800:t=q:w=1.2:g=2,acompressor=threshold=-24dB:ratio=2.5:attack=5:release=90 ; gain vers -20.0 LUFS",
+   "niveau_avant_master": "-20.01 LUFS intégrés",
+   "pan": 0.0,
+   "fin": 33.23,
+   "texte": "Parfait, je vous note ça pour Florian, pour une consultation vétérinaire, le samedi dix-neuf septembre à neuf heures. Vous recevrez un SMS de confirmation.",
+   "crete_finale_dbfs": -1.7,
+   "lufs_final": -12.7
+  },
+  {
+   "id": "nappe-résolution-sol",
+   "stem": "nappe",
+   "t": 32.895,
+   "echantillon": 1578960,
+   "image": 987,
+   "source_instant": "mots.syllabes.confirmation_derniere_syllabe.voyelle − 0,06 (fondu centré sur la voyelle)",
+   "fabrication": "accord G2·G3·B3 ; fondu 0.12 s",
+   "niveau_avant_master": "RMS -32.0 dBFS seule, −6 dB sous la voix"
+  },
+  {
+   "id": "nappe-ouverture",
+   "stem": "nappe",
+   "t": 33.266667,
+   "echantillon": 1596800,
+   "image": 998,
+   "source_instant": "evenements.bulle_et_vibreur",
+   "fabrication": "passe-bas 1 800 → 2 500 Hz en 1,5 s",
+   "niveau_avant_master": ""
+  },
+  {
+   "id": "vibreur",
+   "stem": "sfx",
+   "t": 33.266667,
+   "echantillon": 1596800,
+   "image": 998,
+   "source_instant": "secousses.s6.segments_s (= evenements.bulle_et_vibreur)",
+   "fabrication": "dent de scie 165 Hz à bande limitée → passe-bas 1 kHz + 330 Hz 30 %, AM 32 Hz, grésillement 1,5-4 kHz ; enveloppe trapèze 12/25 ms identique à secousses.s6",
+   "niveau_avant_master": "-19.0 dBFS crête",
+   "pan": 0.0,
+   "segments": [
+    [
+     33.266667,
+     33.446667
+    ],
+    [
+     33.536667,
+     33.716667
+    ]
+   ],
+   "crete_propre_finale_dbfs": -11.7,
+   "crete_stem_100ms_dbfs": -11.7
+  },
+  {
+   "id": "voix-C4",
+   "stem": "dialogue",
+   "t": 34.45,
+   "echantillon": 1653600,
+   "image": 1034,
+   "source_instant": "son/dialogue.json extraits.C4.film_in",
+   "fabrication": "vrai appel, montes 75.05 → 76.55 s ; highpass=f=100,equalizer=f=2800:t=q:w=1.2:g=2,acompressor=threshold=-24dB:ratio=2.5:attack=5:release=90 ; gain vers -20.0 LUFS",
+   "niveau_avant_master": "-19.99 LUFS intégrés",
+   "pan": 0.0,
+   "fin": 35.95,
+   "texte": "Super, merci beaucoup. Au revoir.",
+   "crete_finale_dbfs": -2.9,
+   "lufs_final": -12.68
+  },
+  {
+   "id": "raccroche",
+   "stem": "sfx",
+   "t": 36.6,
+   "echantillon": 1756800,
+   "image": 1098,
+   "source_instant": "evenements.raccroche",
+   "fabrication": "numpy, même matière que le clic de décroché : transitoire 2 ms → passe-bas 3 kHz + 120 Hz / 30 ms ; nappe et queues coupées en 5 ms au même échantillon",
+   "niveau_avant_master": "-24.0 dBFS crête",
+   "pan": 0.0,
+   "crete_propre_finale_dbfs": -16.7,
+   "crete_stem_100ms_dbfs": -16.7
+  },
+  {
+   "id": "silence-numerique",
+   "stem": "tous",
+   "t": 36.68,
+   "echantillon": 1760640,
+   "image": 1100,
+   "source_instant": "evenements.silence_numerique",
+   "fabrication": "zéros numériques sur toutes les pistes",
+   "niveau_avant_master": "exactement 0",
+   "fin": 37.4
+  },
+  {
+   "id": "signature-la",
+   "stem": "signature",
+   "t": 37.4,
+   "echantillon": 1795200,
+   "image": 1122,
+   "source_instant": "evenements.signature_la",
+   "fabrication": "son/signature.py (le même rendu que le livrable seul)",
+   "niveau_avant_master": "-17.5 dBFS crête",
+   "pan": 0.1251,
+   "crete_propre_finale_dbfs": -9.4,
+   "crete_stem_100ms_dbfs": -9.4
+  },
+  {
+   "id": "signature-sol",
+   "stem": "signature",
+   "t": 37.64,
+   "echantillon": 1806720,
+   "image": 1129,
+   "source_instant": "evenements.signature_sol",
+   "fabrication": "son/signature.py (le même rendu que le livrable seul)",
+   "niveau_avant_master": "-18.5 dBFS crête",
+   "pan": 0.1251,
+   "crete_propre_finale_dbfs": -10.4,
+   "crete_stem_100ms_dbfs": -6.5
+  },
+  {
+   "id": "signature-re",
+   "stem": "signature",
+   "t": 38.0,
+   "echantillon": 1824000,
+   "image": 1140,
+   "source_instant": "evenements.signature_re_contact",
+   "fabrication": "son/signature.py (le même rendu que le livrable seul)",
+   "niveau_avant_master": "-16.5 dBFS crête",
+   "pan": 0.1251,
+   "crete_propre_finale_dbfs": -8.4,
+   "crete_stem_100ms_dbfs": -6.2
+  },
+  {
+   "id": "nappe-fin",
+   "stem": "nappe",
+   "t": 38.0,
+   "echantillon": 1824000,
+   "image": 1140,
+   "source_instant": "evenements.signature_re_contact",
+   "fabrication": "sol majeur G2·D3·G3·B3·D4, attaque 0,8 s, fondu cosinus 41.80 → 43.20",
+   "niveau_avant_master": "RMS -34.0 dBFS"
+  },
+  {
+   "id": "silence-final",
+   "stem": "tous",
+   "t": 43.2,
+   "echantillon": 2073600,
+   "image": 1296,
+   "source_instant": "fin − 0,30 s (bible silence-final)",
+   "fabrication": "zéros numériques jusqu'à la fin",
+   "niveau_avant_master": "exactement 0",
+   "fin": 43.5
+  }
+ ]
+}
