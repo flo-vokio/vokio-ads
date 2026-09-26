@@ -30,3 +30,9 @@ les détails. » Reprise fidèle à app.vokio.fr :
   le volet a fini avant le texte, l'œil se pose sur la fin de l'écriture ; puis le trait solaire.
 - **Rythme** : 6 s par appel au lieu de 4 (1 à 2 s de lecture après le trait), film de 32,4 s.
 - Captures `replie` refilmées le 26/09 avec le même regarnissage (garnir_24h.py), espaces remis.
+
+## Passe 3 (26/09) : le cadre de la carte
+
+- Coins carrés visibles : la capture d'un <details> embarque les coins arrondis de la carte parente. Le cadre est redessiné en CSS (rayon 48 px, bordure 3 px, échelle ×3 de .card-v) et la carte ENTIÈRE grandit à l'ouverture (hauteur animée), bordure comprise.
+- En-tête plus sombre que le volet : c'était la teinte de survol (clic Playwright). Refilmé souris sortie ; même défaut corrigé dans app.vokio.fr sur mobile (survol collant iOS, /root/vokio-deploy/survol-appels-260926/).
+- Captures refilmées le 26/09 : les fiches affichent ven. 25 sept. (même jour pour les quatre).

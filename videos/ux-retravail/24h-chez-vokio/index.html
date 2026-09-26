@@ -33,7 +33,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 
 /* la carte réelle, comme dans app.vokio.fr : la ligne repliée, puis le volet qui se déplie.
    Trois images filmées (replié, en-tête ouvert, volet vide) + le chevron en SVG + le résumé en HTML. */
-.carte{position:absolute;left:70px;top:650px;width:1044px;transform:scale(.9);transform-origin:0 0}
+/* le cadre est redessiné ici : la capture d'un <details> embarque les coins arrondis de la carte
+   parente (arc de bordure + fond de page), d'où un coin carré visible (retour Florian 26/09).
+   Rayon et bordure de .card-v (rounded-2xl, 1 px) à l'échelle ×3 de la capture. */
+.carte{position:absolute;left:67px;top:650px;width:1050px;transform:scale(.9);transform-origin:0 0;
+       overflow:hidden;border-radius:48px;border:3px solid rgba(38,32,25,.10);background:#F4F1E8;
+       box-shadow:0 3px 9px rgba(38,32,25,.06)}
 .carte img{display:block;width:1044px}
 .carte .replie{position:absolute;left:0;top:0}
 .carte .entete{position:absolute;left:0;top:0}
@@ -50,7 +55,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 #bilan-t{position:absolute;left:70px;right:60px;top:200px;font-size:80px;line-height:1.08;letter-spacing:-.014em}
 #bilan-t em{font-style:italic;display:block}
 #pile{position:absolute;left:70px;top:470px;width:940px}
-.ent{width:940px;height:195px;margin-bottom:22px;border-radius:26px;overflow:hidden;border:1px solid rgba(38,32,25,.14)}
+.ent{width:942px;height:196px;margin-bottom:22px;border-radius:43px;overflow:hidden;border:1px solid rgba(38,32,25,.12);box-shadow:0 3px 9px rgba(38,32,25,.05)}
 .ent img{display:block;width:940px}
 
 /* la fin, reprise du répondeur (masque de départ corrigé le 25/09) */
@@ -118,15 +123,15 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   // Un appel = une heure, une situation, la vraie carte et sa phrase clé.
   // Les quatre cartes datent du même jour (jeu. 24 sept.) : garnir_24h.py.
   const APPELS = [
-    { m: "institut_beaute", h: "1042", h1: "Une cliente appelle.", h2: "Vous avez les mains prises.", top: 345, haut: 725,
+    { m: "institut_beaute", h: "1042", h1: "Une cliente appelle.", h2: "Vous avez les mains prises.", top: 345, haut: 725, hr: 282,
       av: "Mme Delorme souhaite une pose de gel avec Julie, jeudi en fin d'après-midi. ",
       cle: "Rendez-vous pris jeudi 17 h", ap: ", une heure. Rappel la veille par SMS." },
-    { m: "restaurant", h: "1248", h1: "Le téléphone sonne.", h2: "En plein coup de feu.", top: 344, haut: 725,
+    { m: "restaurant", h: "1248", h1: "Le téléphone sonne.", h2: "En plein coup de feu.", top: 344, haut: 725, hr: 282,
       av: "M. Chevalier ", cle: "réserve une table pour 4 mercredi 20 h 30", ap: ". Pas d'allergie signalée, une chaise haute demandée pour un enfant. Confirmation envoyée par SMS." },
-    { m: "veterinaire", h: "2214", h1: "Un chat ne mange plus.", h2: "La clinique est fermée.", top: 345, haut: 863,
+    { m: "veterinaire", h: "2214", h1: "Un chat ne mange plus.", h2: "La clinique est fermée.", top: 345, haut: 863, hr: 282,
       av: "Le chat de Mme Vidal ne mange plus depuis deux jours et reste prostré. Signes d'alerte passés en revue au téléphone : pas de vomissement, pas de difficulté à uriner. ",
       cle: "Consultation calée demain 9 h", ap: ", dossier ouvert au nom de Pacha, 7 ans." },
-    { m: "plombier", h: "2307", h1: "Une fuite sous l'évier.", h2: "Vous dormez.", top: 344, haut: 863,
+    { m: "plombier", h: "2307", h1: "Une fuite sous l'évier.", h2: "Vous dormez.", top: 344, haut: 863, hr: 282,
       // retours à la ligne forcés : ceux de la capture (l'app coupe « Intervention | calée »)
       av: "M. Lefèvre a une fuite sous l'évier, l'arrivée<br>d'eau est coupée. Le geste d'urgence lui a<br>été donné au téléphone. ",
       cle: "Intervention<br>calée demain matin 8 h 30", ap: ", adresse notée<br>: 14 rue Sainte, Marseille 8e. SMS de<br>confirmation envoyé." },
@@ -143,7 +148,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   APPELS.forEach((a, k) => {
     zone.insertAdjacentHTML("beforeend",
       `<p class="situ serif" id="situ${k}"><span class="l1">${mots(a.h1, "s1")}</span> <em>${mots(a.h2, "s2")}</em></p>` +
-      `<div class="carte" id="carte${k}">` +
+      `<div class="carte" id="carte${k}" style="height:${a.hr + 6}px">` +
         `<img class="replie" src="assets/captures/${a.m}-replie-net.png" alt="">` +
         `<img class="entete" src="assets/captures/${a.m}-entete-net.png" alt="">` +
         `<div class="volet"><img src="assets/captures/${a.m}-panneau.png" alt="">` +
@@ -181,19 +186,21 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
       });
     }
     tl.set([`#situ${k}`, c], { autoAlpha: 0 }, 0);
-    tl.set([`#situ${k}`, c], { autoAlpha: 1 }, S + 0.3);
+    tl.set(`#situ${k}`, { autoAlpha: 1 }, S + 0.3);
+    tl.set(c, { visibility: "visible" }, S + 1.05);
     tl.fromTo(`#situ${k} .s1`, { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, S + 0.35);
     tl.fromTo(`#situ${k} .s2`, { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, S + 0.7);
     // la ligne repliée entre, calmement
     tl.set(`${c} .entete, ${c} .volet`, { autoAlpha: 0 }, 0);
-    tl.fromTo([`${c} .replie`, `${c} .chev`], { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o }, S + 1.05);
+    tl.fromTo(c, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o, immediateRender: false }, S + 1.05);
     // l'ouverture : le chevron pivote (200 ms dans l'app, un peu plus ici), la ligne passe à l'en-tête ouvert
     tl.to(`${c} .chev`, { rotation: 180, duration: 0.3, ease: "power2.inOut", transformOrigin: "50% 50%" }, O);
     // bascule sèche, comme l'app (l'aperçu est group-open:hidden) : un fondu superposait les deux lignes
     tl.set(`${c} .replie`, { autoAlpha: 0 }, O);
     tl.set(`${c} .entete`, { autoAlpha: 1 }, O);
     tl.set(`${c} .volet`, { autoAlpha: 1 }, O);
-    tl.fromTo(`${c} .volet`, { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "power3.inOut" }, O);
+    // la carte entière grandit, bordure comprise : l'élément ouvert garde la largeur de la ligne
+    tl.fromTo(c, { height: a.hr + 6 }, { height: a.haut + 6, duration: 0.8, ease: "power3.inOut" }, O);
     // le résumé s'écrit : il démarre avec le volet et finit après lui
     const t0 = O + 0.25;
     const nMots = document.getElementById("carte" + k).querySelectorAll(".res .t").length;
