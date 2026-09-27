@@ -81,12 +81,16 @@ async function monterFilm() {
   return { hotes: window.__hotes.map(function (h) { return [h.id, h.debut, h.duree, !!window.__timelines[h.id]]; }),
            main: !!window.__timelines.main };
 }
+// v2 (rendu final, 27/09) : comme le runtime HyperFrames, l'hôte hors de sa fenêtre est masqué par
+// visibility:hidden SUR L'HÔTE, et sa timeline reste à son temps borné [0 ; durée] (état de fin après la fenêtre,
+// état initial avant). Avant, le banc ne replaçait que les hôtes actifs et ignorait tout élément d'un hôte masqué :
+// un enfant en visibility:visible explicite (l'agenda de s4, visible de 25,20 à 45,00 sous s5, s6 et s7) passait inaperçu.
 function placer(t) {
   window.__hotes.forEach(function (h) {
     const vis = t >= h.debut - 1e-9 && t < h.debut + h.duree;
     h.el.style.visibility = vis ? "visible" : "hidden";
     const tl = window.__timelines[h.id];
-    if (vis && tl) tl.seek(t - h.debut, false);
+    if (tl) tl.seek(Math.min(Math.max(t - h.debut, 0), h.duree), false);
   });
   window.__timelines.main.seek(t, false);
 }
@@ -147,15 +151,15 @@ function feuilles(el) {
   let n = w.currentNode;
   while (n) {
     if (n.nodeType === 3) {
-      if (n.textContent.trim()) {
+      const par = n.parentElement;
+      if (n.textContent.trim() && getComputedStyle(par).visibility === "visible") {
         const rg = document.createRange(); rg.selectNodeContents(n);
-        const par = n.parentElement;
         out.push({ type: "texte", el: par, r: versRect(rg.getBoundingClientRect()), texte: n.textContent });
       }
     } else {
       const cs = getComputedStyle(n);
       const tag = n.tagName.toLowerCase();
-      if (cs.visibility === "hidden") { /* boîte de mesure (#mot-pt) : rien de dessiné */ }
+      if (cs.visibility !== "visible") { /* boîte de mesure (#mot-pt), hôte masqué : rien de dessiné */ }
       else if (tag === "img") out.push({ type: tag, el: n, r: versRect(n.getBoundingClientRect()) });
       else if (tag === "rect" || tag === "path" || tag === "circle") {
         // boîte géométrique SVG (sans le trait) élargie d'une demi-épaisseur de trait : un filet droit a une hauteur nulle
@@ -188,7 +192,7 @@ function mesurer(t) {
   const candidats = Array.from(document.querySelectorAll("[data-element]"));
   candidats.forEach(function (el) {
     const hote = el.closest("[data-composition-src]");
-    if (hote && hote.style.visibility === "hidden") return;
+    // v2 : plus de court-circuit sur l'hôte masqué ; c'est la visibilité CALCULÉE de chaque feuille qui décide.
     let vu = false;
     feuilles(el).forEach(function (f) {
       const o = opacite(f.el);
@@ -207,7 +211,37 @@ function mesurer(t) {
     });
     if (vu) elements.push(el.getAttribute("data-element") + (hote ? "@" + hote.getAttribute("data-composition-id") : ""));
   });
-  return { t: t, elements: elements, textes: textes };
+  // Pages posées par TEXTE.poser (registre window.__poses) : nombre de mots réellement visibles à cet instant.
+  const poses = window.__poses.map(function (p) {
+    let n = 0;
+    p.mots.forEach(function (u) {
+      if (!u.el.isConnected || getComputedStyle(u.el).visibility !== "visible" || opacite(u.el) <= 0.01) return;
+      const v = visible(u.el, versRect(u.el.getBoundingClientRect()));
+      if (aire(v) > 1) n++;
+    });
+    return n;
+  });
+  // Objets (finition du 27/09) : position, opacité effective et filtre de chaque [data-element] (l'agenda et le
+  // téléphone ne doivent jamais sauter de plus de 90 px d'une image à l'autre, et plus rien n'est filé).
+  const objets = candidats.map(function (el) {
+    const r = el.getBoundingClientRect();
+    const hote = el.closest("[data-composition-src]");
+    const vis = getComputedStyle(el).visibility === "visible";
+    return { nom: el.getAttribute("data-element") + (hote ? "@" + hote.getAttribute("data-composition-id") : ""),
+             x: +r.left.toFixed(2), y: +r.top.toFixed(2), opacite: vis ? +opacite(el).toFixed(4) : 0,
+             filtre: getComputedStyle(el).filter, masque: getComputedStyle(el).webkitMaskImage || getComputedStyle(el).maskImage || "none" };
+  });
+  return { t: t, elements: elements, textes: textes, poses: poses, objets: objets };
+}
+// Description des pages posées (une fois) : scène, extrait, texte, mots.
+function pagesPosees() {
+  return window.__poses.map(function (p, i) {
+    const hote = p.mots.length && p.mots[0].el.isConnected ? p.mots[0].el.closest("[data-composition-src]") : null;
+    const ex = p.mots.map(function (u) { return u.mot ? u.mot.extrait : null; }).filter(Boolean);
+    return { index: i, scene: hote ? hote.getAttribute("data-composition-id") : null, connecte: !!hote,
+             extrait: ex.length ? ex[0] : null, lignes: p.lignes.map(function (l) { return l.textContent; }),
+             mots: p.mots.length };
+  });
 }
 // Boîte de repos de chaque mot dit (transform retiré le temps de la lecture).
 function motsDits() {

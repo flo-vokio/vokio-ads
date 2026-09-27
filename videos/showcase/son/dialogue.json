@@ -3,7 +3,7 @@
  "sr": 48000,
  "canaux": 2,
  "format": "pcm_s24le",
- "duree_s": 43.5,
+ "duree_s": 47.0,
  "niveau": "niveau d'origine de montes/veterinaire.wav, aucun gain, aucun filtre",
  "appel": {
   "conversation_id": "conv_9401m2tg19wtfxn9cm727n4dtskz",
@@ -144,13 +144,13 @@
    "source_out": 76.55,
    "original_in": 79.25,
    "original_out": 80.75,
-   "film_in": 34.45,
-   "film_out": 35.95,
-   "decalage_film_moins_source": -40.6,
+   "film_in": 33.98,
+   "film_out": 35.48,
+   "decalage_film_moins_source": -41.07,
    "fondu_s": 0.015,
    "texte": "Super, merci beaucoup. Au revoir.",
    "tour_original_t": 79,
-   "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute.",
+   "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute. v2 : décalage −41,07, le même que A4 : C4 suit A4 après son VRAI blanc de 0,75 s (source 74,30 → 75,05) ; la v1 (−40,60) l'allongeait de 0,47 s pour loger le SMS pendant l'appel.",
    "bords_dbfs": [
     -50.3,
     -54.2

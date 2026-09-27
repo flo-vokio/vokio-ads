@@ -1,21 +1,25 @@
 {
  "s1-sonnerie": {
   "debut": 0.0,
-  "fin": 4.5,
-  "duree": 4.5,
+  "fin": 4.6333,
+  "duree": 4.6333,
   "image_debut": 0,
-  "image_fin": 135,
-  "fichier": "compositions/s1-sonnerie.html",
-  "hote": "h-s1-sonnerie"
+  "image_fin": 139,
+  "hote": "h-s1-sonnerie",
+  "hote_start": 0.0,
+  "hote_duration": 4.6333,
+  "fichier": "compositions/s1-sonnerie.html"
  },
  "s2-voix": {
-  "debut": 4.5,
+  "debut": 4.6333,
   "fin": 10.4,
-  "duree": 5.9,
-  "image_debut": 135,
+  "duree": 5.7667,
+  "image_debut": 139,
   "image_fin": 312,
-  "fichier": "compositions/s2-voix.html",
-  "hote": "h-s2-voix"
+  "hote": "h-s2-voix",
+  "hote_start": 4.6333,
+  "hote_duration": 5.7667,
+  "fichier": "compositions/s2-voix.html"
  },
  "s3-ecoute": {
   "debut": 10.4,
@@ -23,8 +27,10 @@
   "duree": 6.9,
   "image_debut": 312,
   "image_fin": 519,
-  "fichier": "compositions/s3-ecoute.html",
-  "hote": "h-s3-ecoute"
+  "hote": "h-s3-ecoute",
+  "hote_start": 10.4,
+  "hote_duration": 6.9,
+  "fichier": "compositions/s3-ecoute.html"
  },
  "s4-agenda": {
   "debut": 17.3,
@@ -32,34 +38,42 @@
   "duree": 7.9,
   "image_debut": 519,
   "image_fin": 756,
-  "fichier": "compositions/s4-agenda.html",
-  "hote": "h-s4-agenda"
+  "hote": "h-s4-agenda",
+  "hote_start": 17.3,
+  "hote_duration": 7.8999,
+  "fichier": "compositions/s4-agenda.html"
  },
  "s5-rendez-vous": {
   "debut": 25.2,
   "fin": 31.35,
   "duree": 6.15,
   "image_debut": 756,
-  "image_fin": 940,
-  "fichier": "compositions/s5-rendez-vous.html",
-  "hote": "h-s5-rendez-vous"
+  "image_fin": 941,
+  "hote": "h-s5-rendez-vous",
+  "hote_start": 25.2,
+  "hote_duration": 6.15,
+  "fichier": "compositions/s5-rendez-vous.html"
  },
  "s6-sms": {
   "debut": 31.35,
-  "fin": 36.9,
-  "duree": 5.55,
-  "image_debut": 940,
-  "image_fin": 1107,
-  "fichier": "compositions/s6-sms.html",
-  "hote": "h-s6-sms"
+  "fin": 41.4,
+  "duree": 10.05,
+  "image_debut": 941,
+  "image_fin": 1242,
+  "hote": "h-s6-sms",
+  "hote_start": 31.35,
+  "hote_duration": 10.0499,
+  "fichier": "compositions/s6-sms.html"
  },
  "s7-signature": {
-  "debut": 36.9,
-  "fin": 43.5,
-  "duree": 6.6,
-  "image_debut": 1107,
-  "image_fin": 1305,
-  "fichier": "compositions/s7-signature.html",
-  "hote": "h-s7-signature"
+  "debut": 41.4,
+  "fin": 47.0,
+  "duree": 5.6,
+  "image_debut": 1242,
+  "image_fin": 1410,
+  "hote": "h-s7-signature",
+  "hote_start": 41.4,
+  "hote_duration": 5.6,
+  "fichier": "compositions/s7-signature.html"
  }
 }

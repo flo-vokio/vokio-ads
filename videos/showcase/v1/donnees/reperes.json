@@ -1,0 +1,110 @@
+[
+ {
+  "nom": "Bonjour",
+  "extrait": "A1",
+  "texte": "Bonjour,",
+  "debut": 5.0,
+  "voyelle": 5.02,
+  "image": 150,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "neuf",
+  "extrait": "A2A3",
+  "texte": "neuf",
+  "debut": 20.555,
+  "voyelle": 20.672,
+  "image": 617,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "dix",
+  "extrait": "A2A3",
+  "texte": "dix",
+  "debut": 21.42,
+  "voyelle": 21.43,
+  "image": 643,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "onze",
+  "extrait": "A2A3",
+  "texte": "onze",
+  "debut": 22.2,
+  "voyelle": 22.205,
+  "image": 666,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "à neuf (appelant)",
+  "extrait": "C3",
+  "texte": "à",
+  "debut": 23.97,
+  "voyelle": 23.97,
+  "image": 719,
+  "locuteur": "appelant"
+ },
+ {
+  "nom": "Parfait",
+  "extrait": "A4",
+  "texte": "Parfait,",
+  "debut": 26.24,
+  "voyelle": 26.255,
+  "image": 787,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "Florian",
+  "extrait": "A4",
+  "texte": "Florian,",
+  "debut": 27.25,
+  "voyelle": 27.355,
+  "image": 818,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "samedi",
+  "extrait": "A4",
+  "texte": "samedi",
+  "debut": 29.45,
+  "voyelle": 29.47,
+  "image": 884,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "Vous recevrez",
+  "extrait": "A4",
+  "texte": "Vous",
+  "debut": 31.39,
+  "voyelle": 31.4,
+  "image": 942,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "SMS",
+  "extrait": "A4",
+  "texte": "SMS",
+  "debut": 32.068,
+  "voyelle": 32.115,
+  "image": 962,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "dernière syllabe de confirmation",
+  "extrait": "A4",
+  "texte": "-tion",
+  "debut": 32.815,
+  "voyelle": 32.955,
+  "image": 984,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "Super",
+  "extrait": "C4",
+  "texte": "Super,",
+  "debut": 34.5,
+  "voyelle": 34.515,
+  "image": 1035,
+  "locuteur": "appelant"
+ }
+]

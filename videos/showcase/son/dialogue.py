@@ -30,7 +30,7 @@ PROJET = ICI.parent
 MONTES = Path("/root/vokio-audios-metiers-180926/montes/veterinaire.wav")
 ORIGINAL = Path("/root/vokio-audios-metiers-180926/originaux/veterinaire.json")
 SR = 48000
-DUREE_FILM = 43.5
+DUREE_FILM = 47.0   # v2, finition du 27/09 : 47,00 s, 1 410 images (le SMS se lit, la fin tient)
 FONDU = 0.015
 
 # Décalage montes → original : 0 avant 66,70 ; +4,20 après 70,90 (montes).
@@ -58,9 +58,11 @@ EXTRAITS = [
     {"id": "A4", "locuteur": "agent", "tour_t": 71, "src_in": 67.24, "src_out": 74.30, "decalage": -41.07,
      "texte": "Parfait, je vous note ça pour Florian, pour une consultation vétérinaire, le samedi dix-neuf septembre à neuf heures. Vous recevrez un SMS de confirmation.",
      "motif": "La confirmation, en entier. Le montage du 18/09 avait déjà retiré la revérification (original 66,70 → 70,90)."},
-    {"id": "C4", "locuteur": "appelant", "tour_t": 79, "src_in": 75.05, "src_out": 76.55, "decalage": -40.60,
+    {"id": "C4", "locuteur": "appelant", "tour_t": 79, "src_in": 75.05, "src_out": 76.55, "decalage": -41.07,
      "texte": "Super, merci beaucoup. Au revoir.",
-     "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute."},
+     "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute. v2 : décalage −41,07, "
+              "le même que A4 : C4 suit A4 après son VRAI blanc de 0,75 s (source 74,30 → 75,05) ; la v1 (−40,60) "
+              "l'allongeait de 0,47 s pour loger le SMS pendant l'appel."},
 ]
 
 

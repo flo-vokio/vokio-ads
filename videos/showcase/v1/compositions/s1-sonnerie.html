@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>s1-sonnerie</title></head>
+<body>
+<!--
+  Sous-composition s1-sonnerie · film 0.00 → 4.50 s (durée 4.5 s, images 0 à 134), hôte #h-s1-sonnerie.
+  Bible, scène « s1-sonnerie » : ça sonne dans le vide, personne ne décroche.
+    · image 0 (vignette) : « Vous avez les / mains prises » est posée ; son point final est #point (racine),
+      encre, 21 px, qui tremble avec la tonalité (racine, DONNEES.secousses.s1) ;
+    · fin de la 1re tonalité + 0,10 s (1,60) : la relance « Encore une sonnerie, / et il appelle ailleurs. »
+      monte de sa ligne de base, mot par mot (16 px, 0,60 s power3.out, 0,06 s entre mots) ;
+    · décroché (DONNEES.evenements.decroche, 4,20 = image 126) : les deux phrases tombent par leur masque,
+      chacune par le bas (0,03 s entre lignes, 0,22 s power3.in) ; « mains prises » part la première,
+      sans son point, qui reste seul (solaire, il grandit : racine).
+      Tout est sorti avant la dernière image de la scène (134) : l'image 135 (s2) est du papier + le point.
+  Trois éléments au plus : phrase, relance, point. Aucun temps de voix : il n'y a pas de voix dans s1.
+  #point est dans la racine, au-dessus de tout : la scène ne le dessine pas et ne l'anime pas.
+  N'utilise pas POINT : outils/navigateur.py monte cette scène dans outils/banc.html (sans lib/point.js)
+  pour mesurer #s1-espaceur, et le script doit y tourner sans erreur.
+-->
+<template id="s1-sonnerie-template">
+<style>
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2")}
+#root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
+/* GÉOMÉTRIE MESURÉE (outils/construire.py) : le centre de #point à l'image 0 est le « . » de cette phrase.
+   Ne pas changer police, corps, interlignage, left/top ni le texte sans relancer outils/construire.py. */
+#s1-phrase{position:absolute;left:90px;top:530px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:normal;font-size:200px;line-height:184px;letter-spacing:0;color:#262019}
+#s1-espaceur{display:inline-block;width:.213em;height:0}
+/* La relance, non dite : Instrument Serif Italic 72/80, gris #6F695F (4,8:1 sur le papier), x = 90.
+   Lignes de base 1030 et 1110 (bible) : top = 1030 − 64, décalage de la ligne de base dans une ligne de
+   80 px à 72 px de corps, mesuré dans le chrome-headless-shell de HyperFrames (entier : Chromium l'arrondit).
+   Largeurs mesurées : 538,0 et 518,1 px (bord droit 628, marge droite 452). */
+#s1-relance{position:absolute;left:90px;top:966px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:italic;font-size:72px;line-height:80px;letter-spacing:0;color:#6F695F}
+</style>
+<div id="root" data-composition-id="s1-sonnerie" data-width="1080" data-height="1920">
+  <!-- Phrase 1, posée dès l'image 0. Structure de TEXTE.poser : .tx-ligne = masque, .tx-w = mot mobile.
+       data-layout-allow-overlap sur chaque .tx-w : interlignage 0,92 voulu (les boîtes de police de 1,3 em se chevauchent, pas l'encre).
+       Le point final n'est PAS un glyphe : #s1-espaceur (avance du « . », 0,213 em) ; le point visible est #point (racine). -->
+  <p id="s1-phrase" data-element="phrase"><span class="tx-ligne"><span class="tx-w" data-layout-allow-overlap>Vous</span> <span class="tx-w" data-layout-allow-overlap>avez</span> <span class="tx-w" data-layout-allow-overlap>les</span></span><span class="tx-ligne"><span class="tx-w" data-layout-allow-overlap>mains</span> <span class="tx-w" data-layout-allow-overlap>prises<span id="s1-espaceur"></span></span></span></p>
+  <!-- La relance, construite par TEXTE.poser (texte non dit : extrait null). -->
+  <p id="s1-relance" data-element="relance"></p>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES;
+  const sc = TEXTE.scene("s1-sonnerie");
+  const FPS = D.fps;
+  const tl = gsap.timeline({ paused: true });
+
+  // ── La relance, dans le vrai silence entre les deux tonalités ──
+  // 1,60 = fin de la 1re tonalité (DONNEES.secousses.s1, la même donnée que le son) + 0,10 s.
+  const finTon1 = D.secousses.s1.segments_s[0][1];
+  const tRelance = TEXTE.aImage(finTon1 + 0.10);
+  const relance = TEXTE.poser("#s1-relance", ["Encore une sonnerie,", "et il appelle ailleurs."],
+    { extrait: null, chevauchement: true });
+  TEXTE.reveler(tl, relance, { scene: sc.id, t: tRelance, pas: 0.06, duree: 0.60, dy: 16, ease: "power3.out" });
+
+  // ── Le décroché : les phrases tombent par leur masque, le point reste seul ──
+  // Les deux phrases partent ensemble, chacune par le bas : la ligne du bas d'abord, puis celle du dessus
+  // 0,03 s après (bible : 0,03 s entre lignes). « mains prises » quitte donc son point à l'image même du
+  // décroché, et la ligne du dessus ne traverse jamais une ligne encore en place (le bas de son masque
+  // déborde de 0,24 em sur la ligne suivante : de haut en bas, « Vous avez les » coupé passait sur les
+  // points des i de « mains », vu au snapshot de l'image 131).
+  // 0,22 s power3.in au lieu des 0,30 de la bible : la scène s'arrête à 4,50 ; avec 0,30 s, la dernière
+  // ligne serait encore visible à l'image 134 et disparaîtrait d'un coup à l'image 135 (s2). On vérifie ici
+  // que tout est sorti à la dernière image de la scène plutôt que de le supposer.
+  const tDecroche = sc.local(D.evenements.decroche.t);
+  const DUREE_SORTIE = 0.22, PAS_LIGNES = 0.03;
+  const parPhrase = [Array.from(document.querySelectorAll("#s1-phrase .tx-ligne")), relance.lignes];
+  const derniereImage = (Math.round(sc.fin * FPS) - 1) / FPS - sc.debut;
+  parPhrase.forEach(function (lignes) {
+    lignes.slice().reverse().forEach(function (ligne, rang) {
+      const t0 = tDecroche + rang * PAS_LIGNES;
+      if (t0 + DUREE_SORTIE > derniereImage + 1e-6) {
+        throw new Error("s1-sonnerie : une ligne sort jusqu'à " + (t0 + DUREE_SORTIE).toFixed(3) +
+          " s, après la dernière image de la scène (" + derniereImage.toFixed(3) + " s)");
+      }
+      TEXTE.sortir(tl, Array.from(ligne.querySelectorAll(".tx-w")), t0, { duree: DUREE_SORTIE, ease: "power3.in" });
+    });
+  });
+
+  window.__timelines["s1-sonnerie"] = tl;
+})();
+</script>
+</template>
+</body>
+</html>

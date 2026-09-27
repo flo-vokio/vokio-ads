@@ -916,63 +916,63 @@
   {
    "texte": "Super,",
    "cle": "super",
-   "debut": 34.5,
-   "fin": 34.795,
-   "image": 1035,
+   "debut": 34.03,
+   "fin": 34.325,
+   "image": 1021,
    "locuteur": "appelant",
    "extrait": "C4",
    "rang": 0,
    "source": "attaque",
-   "scribe": 34.46,
-   "voyelle": 34.515
+   "scribe": 33.99,
+   "voyelle": 34.045
   },
   {
    "texte": "merci",
    "cle": "merci",
-   "debut": 34.795,
-   "fin": 35.07,
-   "image": 1044,
+   "debut": 34.325,
+   "fin": 34.6,
+   "image": 1030,
    "locuteur": "appelant",
    "extrait": "C4",
    "rang": 1,
-   "source": "revue : /m/ 34,795-34,84",
-   "scribe": 34.84
+   "source": "revue : /m/ 34,795-34,84 (relevé translaté de -0.47 s avec l'extrait)",
+   "scribe": 34.37
   },
   {
    "texte": "beaucoup.",
    "cle": "beaucoup",
-   "debut": 35.07,
-   "fin": 35.55,
-   "image": 1052,
+   "debut": 34.6,
+   "fin": 35.08,
+   "image": 1038,
    "locuteur": "appelant",
    "extrait": "C4",
    "rang": 2,
-   "source": "revue : tenue voisée du /b/ 35,075-35,12",
-   "scribe": 35.12
+   "source": "revue : tenue voisée du /b/ 35,075-35,12 (relevé translaté de -0.47 s avec l'extrait)",
+   "scribe": 34.65
   },
   {
    "texte": "Au",
    "cle": "au",
-   "debut": 35.59,
-   "fin": 35.71,
-   "image": 1068,
+   "debut": 35.12,
+   "fin": 35.24,
+   "image": 1054,
    "locuteur": "appelant",
    "extrait": "C4",
    "rang": 3,
    "source": "attaque",
-   "scribe": 35.6
+   "scribe": 35.13
   },
   {
    "texte": "revoir.",
    "cle": "revoir",
-   "debut": 35.71,
-   "fin": 35.89,
-   "image": 1071,
+   "debut": 35.24,
+   "fin": 35.42,
+   "image": 1057,
    "locuteur": "appelant",
    "extrait": "C4",
    "rang": 4,
-   "source": "revue : /ʁ/ 35,715",
-   "scribe": 35.68
+   "source": "revue : /ʁ/ 35,715 (relevé translaté de -0.47 s avec l'extrait)",
+   "scribe": 35.21
   }
  ],
  "syllabes": {
@@ -981,5 +981,14 @@
    "voyelle": 32.955,
    "raison": "« -tion » : /s/ sourd 32,815-32,94, puis /jɔ̃/ 32,955-33,04 (dernière bouffée d'énergie)"
   }
+ },
+ "decalages_depuis_releves": {
+  "A1": 0.0,
+  "C1": 0.0,
+  "C2": 0.0,
+  "A2A3": 0.0,
+  "C3": 0.0,
+  "A4": 0.0,
+  "C4": -0.47
  }
 }

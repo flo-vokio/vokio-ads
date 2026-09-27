@@ -1,349 +1,464 @@
 {
  "A_master": {
   "loudnorm": {
-   "lufs": -14.02,
-   "crete_dbtp": -1.5,
-   "lra": 11.1
+   "lufs": -14.03,
+   "crete_dbtp": -1.7,
+   "lra": 6.9
   },
   "ebur128": {
    "I": -13.9,
-   "LRA": 7.5,
-   "TP": -1.5
+   "LRA": 9.2,
+   "TP": -1.7
   },
-  "duree_s": 43.5,
-  "crete_vraie_numpy_dbtp": -1.5,
+  "duree_s": 47.0,
+  "crete_vraie_numpy_dbtp": -1.7,
   "apres_aac_256k": {
    "loudnorm": {
-    "lufs": -14.03,
-    "crete_dbtp": -1.5,
-    "lra": 11.0
+    "lufs": -14.04,
+    "crete_dbtp": -1.7,
+    "lra": 6.9
    },
    "ebur128": {
     "I": -13.9,
-    "LRA": 7.5,
-    "TP": -1.5
+    "LRA": 9.2,
+    "TP": -1.7
    }
-  }
+  },
+  "ok": true
  },
  "B_silences": {
-  "36.70-37.38": -Infinity,
-  "43.22-43.50": -Infinity,
-  "zeros_exacts_36.68-37.40": true,
-  "zeros_exacts_43.20-43.50": true,
-  "seule_la_signature_37.40-38.00": {
+  "zeros_exacts_silence_numerique": true,
+  "zeros_exacts_silence_final": true,
+  "stems_zeros_silence_numerique": {
    "dialogue": true,
    "nappe": true,
-   "sfx": true
+   "sfx": true,
+   "signature": true
   },
-  "rien_apres_le_raccroche_hors_signature_et_nappe_de_fin": {
-   "dialogue": true,
-   "sfx": true
+  "resolution_seule_33.05-34.03": {
+   "sfx_zero": true,
+   "signature_zero": true,
+   "dialogue_rms_dbfs (souffle de la vraie ligne)": -47.6,
+   "dialogue_rms_33.30-33.95_dbfs (entre les extraits)": -300.0,
+   "nappe_rms_dbfs": -25.2,
+   "dialogue_max_rms_25ms_33.075-33.98_dbfs": -50.8,
+   "dialogue_zero_33.23-33.98": true
   },
-  "tonalite_20_premieres_ms_rms_dbfs": -19.5
+  "dialogue_nul_apres_raccroche": true,
+  "tonalite_20_premieres_ms_rms_dbfs": -20.9,
+  "ok": true
  },
  "C_somme_stems_moins_mix_max": 1.1920928955078125e-07,
- "D_synchro": [
-  {
-   "id": "ton-1",
-   "t": 0.0,
-   "image": 0,
-   "attaque_mesuree": 0.001,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 96.2,
-   "ok": 1.0
-  },
-  {
-   "id": "ton-2-la",
-   "t": 3.6,
-   "image": 108,
-   "attaque_mesuree": 3.601,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 95.9,
-   "ok": 1.0
-  },
-  {
-   "id": "clic-decroche",
-   "t": 4.2,
-   "image": 126,
-   "attaque_mesuree": 4.201,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 20.6,
-   "ok": 1.0
-  },
-  {
-   "id": "cloche-sol-1",
-   "t": 4.44,
-   "image": 133,
-   "attaque_mesuree": 4.4455,
-   "ecart_ms": 5.5,
-   "ecart_images": 0.16,
-   "montee_db": 7.6,
-   "ok": 1.0
-  },
-  {
-   "id": "tap-9h",
-   "t": 20.666667,
-   "image": 620,
-   "attaque_mesuree": 20.6677,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 110.5,
-   "ok": 1.0
-  },
-  {
-   "id": "tap-10h",
-   "t": 21.433333,
-   "image": 643,
-   "attaque_mesuree": 21.4343,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 83.5,
-   "ok": 1.0
-  },
-  {
-   "id": "tap-11h",
-   "t": 22.2,
-   "image": 666,
-   "attaque_mesuree": 22.201,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 83.5,
-   "ok": 1.0
-  },
-  {
-   "id": "tap-retour-9h",
-   "t": 24.366667,
-   "image": 731,
-   "attaque_mesuree": 24.3677,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 106.5,
-   "ok": 1.0
-  },
-  {
-   "id": "cloche-la-rdv",
-   "t": 25.4,
-   "image": 762,
-   "attaque_mesuree": 25.401,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 96.4,
-   "ok": 1.0
-  },
-  {
-   "id": "cloche-sol-rdv",
-   "t": 25.64,
-   "image": 769,
-   "attaque_mesuree": 25.6455,
-   "ecart_ms": 5.5,
-   "ecart_images": 0.16,
-   "montee_db": 8.5,
-   "ok": 1.0
-  },
-  {
-   "id": "vibreur",
-   "t": 33.266667,
-   "image": 998,
-   "attaque_mesuree": 33.2677,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 98.6,
-   "ok": 1.0
-  },
-  {
-   "id": "raccroche",
-   "t": 36.6,
-   "image": 1098,
-   "attaque_mesuree": 36.601,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 111.5,
-   "ok": 1.0
-  },
-  {
-   "id": "signature-la",
-   "t": 37.4,
-   "image": 1122,
-   "attaque_mesuree": 37.401,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 105.3,
-   "ok": 1.0
-  },
-  {
-   "id": "signature-sol",
-   "t": 37.64,
-   "image": 1129,
-   "attaque_mesuree": 37.6455,
-   "ecart_ms": 5.5,
-   "ecart_images": 0.16,
-   "montee_db": 8.9,
-   "ok": 1.0
-  },
-  {
-   "id": "signature-re",
-   "t": 38.0,
-   "image": 1140,
-   "attaque_mesuree": 38.001,
-   "ecart_ms": 1.0,
-   "ecart_images": 0.03,
-   "montee_db": 8.0,
-   "ok": 1.0
-  }
- ],
- "D_resolution": {
-  "t_voyelle": 32.955,
-  "image": 989,
-  "chroma_avant": [
-   "do",
-   "la",
-   "fa#",
-   "ré"
+ "D_synchro": {
+  "cues": [
+   {
+    "id": "ton-1",
+    "t": 0.0,
+    "image": 0,
+    "image_attendue": 0,
+    "attaque_mesuree": -0.0008,
+    "ecart_ms": -0.8,
+    "montee_db": 118.3,
+    "ok": true
+   },
+   {
+    "id": "ton-2-la",
+    "t": 2.7,
+    "image": 81,
+    "image_attendue": 81,
+    "attaque_mesuree": 2.6992,
+    "ecart_ms": -0.8,
+    "montee_db": 118.3,
+    "ok": true
+   },
+   {
+    "id": "clic-decroche",
+    "t": 4.2,
+    "image": 126,
+    "image_attendue": 126,
+    "attaque_mesuree": 4.2003,
+    "ecart_ms": 0.3,
+    "montee_db": 18.1,
+    "ok": true
+   },
+   {
+    "id": "cloche-sol-1",
+    "t": 4.44,
+    "image": 133,
+    "image_attendue": null,
+    "attaque_mesuree": 4.44,
+    "ecart_ms": 0.0,
+    "montee_db": 6.4,
+    "ok": true
+   },
+   {
+    "id": "tap-9h",
+    "t": 20.666667,
+    "image": 620,
+    "image_attendue": 620,
+    "attaque_mesuree": 20.6659,
+    "ecart_ms": -0.8,
+    "montee_db": 117.5,
+    "ok": true
+   },
+   {
+    "id": "tap-10h",
+    "t": 21.433333,
+    "image": 643,
+    "image_attendue": 643,
+    "attaque_mesuree": 21.4326,
+    "ecart_ms": -0.7,
+    "montee_db": 77.5,
+    "ok": true
+   },
+   {
+    "id": "tap-11h",
+    "t": 22.2,
+    "image": 666,
+    "image_attendue": 666,
+    "attaque_mesuree": 22.1993,
+    "ecart_ms": -0.7,
+    "montee_db": 77.9,
+    "ok": true
+   },
+   {
+    "id": "tap-retour-9h",
+    "t": 24.366667,
+    "image": 731,
+    "image_attendue": 731,
+    "attaque_mesuree": 24.3659,
+    "ecart_ms": -0.8,
+    "montee_db": 113.9,
+    "ok": true
+   },
+   {
+    "id": "cloche-la-rdv",
+    "t": 25.4,
+    "image": 762,
+    "image_attendue": 762,
+    "attaque_mesuree": 25.3993,
+    "ecart_ms": -0.7,
+    "montee_db": 118.8,
+    "ok": true
+   },
+   {
+    "id": "cloche-sol-rdv",
+    "t": 25.64,
+    "image": 769,
+    "image_attendue": 769,
+    "attaque_mesuree": 25.6403,
+    "ecart_ms": 0.3,
+    "montee_db": 8.1,
+    "ok": true
+   },
+   {
+    "id": "raccroche",
+    "t": 35.866667,
+    "image": 1076,
+    "image_attendue": 1076,
+    "attaque_mesuree": 35.8659,
+    "ecart_ms": -0.8,
+    "montee_db": 113.3,
+    "ok": true
+   },
+   {
+    "id": "vibreur",
+    "t": 36.666667,
+    "image": 1100,
+    "image_attendue": 1100,
+    "attaque_mesuree": 36.6659,
+    "ecart_ms": -0.8,
+    "montee_db": 113.4,
+    "ok": true
+   },
+   {
+    "id": "signature-la",
+    "t": 42.3,
+    "image": 1269,
+    "image_attendue": 1269,
+    "attaque_mesuree": 42.2993,
+    "ecart_ms": -0.7,
+    "montee_db": 130.3,
+    "ok": true
+   },
+   {
+    "id": "signature-sol",
+    "t": 42.54,
+    "image": 1276,
+    "image_attendue": null,
+    "attaque_mesuree": 42.5403,
+    "ecart_ms": 0.3,
+    "montee_db": 7.7,
+    "ok": true
+   },
+   {
+    "id": "signature-re",
+    "t": 42.9,
+    "image": 1287,
+    "image_attendue": 1287,
+    "attaque_mesuree": 42.8992,
+    "ecart_ms": -0.8,
+    "montee_db": 8.1,
+    "ok": true
+   }
   ],
-  "chroma_apres": [
-   "sol",
-   "si",
-   "ré",
-   "fa#"
-  ]
+  "ok": true
  },
- "E_dialogue_decalage": [
-  {
-   "id": "A1",
-   "decalage_echantillons": -3
-  },
-  {
-   "id": "C1",
-   "decalage_echantillons": -12
-  },
-  {
-   "id": "C2",
-   "decalage_echantillons": -12
-  },
-  {
-   "id": "A2A3",
-   "decalage_echantillons": -9
-  },
-  {
-   "id": "C3",
-   "decalage_echantillons": -6
-  },
-  {
-   "id": "A4",
-   "decalage_echantillons": -3
-  },
-  {
-   "id": "C4",
-   "decalage_echantillons": -8
-  }
- ],
+ "E_dialogue_decalage": {
+  "extraits": [
+   {
+    "id": "A1",
+    "decalage_echantillons": -3
+   },
+   {
+    "id": "C1",
+    "decalage_echantillons": -12
+   },
+   {
+    "id": "C2",
+    "decalage_echantillons": -12
+   },
+   {
+    "id": "A2A3",
+    "decalage_echantillons": -9
+   },
+   {
+    "id": "C3",
+    "decalage_echantillons": -6
+   },
+   {
+    "id": "A4",
+    "decalage_echantillons": -3
+   },
+   {
+    "id": "C4",
+    "decalage_echantillons": -8
+   }
+  ],
+  "tolerance_echantillons": 24,
+  "ok": true
+ },
  "F_voix_sur_reste_LU": {
-  "min": 11.2,
-  "mediane": 18.1,
+  "min": 10.3,
+  "mediane": 19.1,
   "pires": [
    [
-    11.2,
-    "des",
-    16.058
+    10.3,
+    "confirmation.",
+    32.435
    ],
    [
-    11.6,
+    10.4,
+    "dix",
+    21.42
+   ],
+   [
+    10.8,
     "pour",
     27.115
    ],
    [
-    11.8,
+    11.3,
+    "parfait.",
+    24.565
+   ],
+   [
+    11.9,
     "c'est",
     24.405
    ],
    [
     12.4,
-    "parfait.",
-    24.565
+    "heures.",
+    30.675
    ],
    [
-    13.2,
-    "voir.",
-    18.005
+    13.6,
+    "septembre",
+    30.09
    ],
    [
-    13.8,
-    "confirmation.",
-    32.435
+    13.9,
+    "heures,",
+    24.26
    ]
-  ]
+  ],
+  "ok": true
  },
  "F_sonies_LUFS": {
-  "voix_integree_approx (toutes voix, 4,91 → 35,95)": -13.8,
-  "tonalite_1 (0,1 → 1,4)": -15.5,
-  "tonalite_2 (3,7 → 4,2)": -15.5,
-  "decroche la+sol (4,2 → 4,9)": -20.1,
-  "nappe seule, silence de l'outil (18,5 → 19,7)": -24.2,
-  "nappe sous la voix (20,0 → 22,6)": -31.4,
-  "voix (20,0 → 22,6)": -12.1,
-  "la·sol de l'écriture (25,4 → 26,1)": -22.9,
-  "nappe, silence de réservation (25,0 → 26,2)": -28.8,
-  "vibreur (33,27 → 33,72)": -19.8,
-  "signature, 400 ms après le la (37,40 → 37,80)": -14.7,
-  "signature, 400 ms après le ré (38,00 → 38,40)": -13.4,
-  "nappe de fin (39 → 41,8)": -24.8,
-  "mix, voix A4 (26,2 → 33,0)": -12.6
+  "voix (4,91 → 35,48)": -14.2,
+  "tonalite 1 (0,1 → 1,4)": -17.0,
+  "tonalite 2 (2,8 → 4,2)": -17.0,
+  "decroche la + sol (4,2 → 4,9)": -21.2,
+  "pedale seule sous A1 (6,4 → 10,1)": -42.2,
+  "nappe, accord de sol (12,5 → 17,5)": -32.6,
+  "nappe, silence de l'outil (18,4 → 19,75)": -27.3,
+  "nappe, debut du re7 (20,0 → 22,6)": -31.1,
+  "nappe, fin du re9 (30,0 → 32,9)": -27.8,
+  "nappe, resolution seule (33,05 → 34,03)": -23.4,
+  "la·sol de l'ecriture (25,4 → 26,1)": -22.0,
+  "vibreur (36,67 → 37,12)": -19.3,
+  "air du SMS (37,60 → 42,20)": -29.8,
+  "stylo (41,50 → 42,20)": -39.3,
+  "signature (42,30 → 45,30)": -13.6,
+  "nappe de fin (43,90 → 45,00)": -15.2
  },
  "G_mono": {
-  "ecart_sonie_mono_moins_stereo_film_LU": -0.04,
-  "ecart_signature 37,4 → 40,3_LU": -0.17,
-  "ecart_nappe 6 → 17,5_LU": -0.02,
-  "ecart_decroche 4,2 → 5,0_LU": -0.52,
-  "ecart_ecriture 25,4 → 26,2_LU": -0.45,
-  "ecart_nappe de fin 39 → 43_LU": -0.68,
-  "correlation_LR_min_100ms": -0.0,
-  "correlation_LR_mediane": 0.987,
-  "fenetres_correlation_negative": 1
+  "ecart_sonie_mono_moins_stereo_film_LU": -0.08,
+  "ecart_signature 42,30 → 45,30_LU": -0.48,
+  "ecart_nappe 12,5 → 17,5_LU": -0.01,
+  "ecart_decroche 4,2 → 5,0_LU": -0.11,
+  "ecart_resolution seule 33,1 → 34,0_LU": -1.09,
+  "ecart_air du SMS 37,60 → 42,20_LU": -0.87,
+  "ecart_ecriture 25,4 → 26,2_LU": -0.28,
+  "ecart_nappe de fin 43,70 → 45,70_LU": -0.52,
+  "correlation_LR_min_100ms": 0.395,
+  "correlation_LR_mediane": 0.992,
+  "fenetres_correlation_negative": 0,
+  "signature_film": {
+   "correlation_LR": 0.824,
+   "perte_mono_db": -0.45,
+   "energie_sup_5k_db_rel": -36.0,
+   "energie_sup_8k_db_rel": -37.8
+  },
+  "nappe_correlation_12.5-17.5": 0.764,
+  "ok": true
  },
- "H_telephone_ecart_crete_db": {
-  "la": 1.29,
-  "sol": 0.99,
-  "re": 0.65
+ "H_haut_parleur": {
+  "perte_nappe_db": {
+   "pedale seule 6,4-10,1": -1.81,
+   "sol 12,5-17,5": -5.1,
+   "sus4 18,2-19,75": -4.7,
+   "re7-re9 20,6-32,85": -3.85,
+   "resolution 33,1-35,8": -6.79,
+   "air SMS 37,60 → 42,20": -1.94,
+   "nappe de fin 43,90 → 45,00": -3.57,
+   "toute la nappe 4,6-35,8": -4.46
+  },
+  "perte_voix_db (reference)": -5.63,
+  "perte_nappe_ok": true,
+  "pedale_la_sol": {
+   "sol 12,5-17,5 (G4 dans l'accord, pour memoire)": {
+    "la_moins_sol_db": -3.5
+   },
+   "re7-re9 20,6-32,85": {
+    "la_moins_sol_db": 33.3
+   },
+   "resolution 33,1-35,8": {
+    "la_moins_sol_db": -14.5
+   }
+  },
+  "pedale_ok": true,
+  "touchers": [
+   {
+    "contact": "contact_neuf",
+    "t": 20.666667,
+    "tap_moins_voix_3-8k_db": 13.2,
+    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 50.9,
+    "voix_moins_tap_500-700_db": 65.9,
+    "tap_instantanee_max_lufs": -27.3,
+    "ok": true
+   },
+   {
+    "contact": "contact_dix",
+    "t": 21.433333,
+    "tap_moins_voix_3-8k_db": 7.8,
+    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 53.1,
+    "voix_moins_tap_500-700_db": 54.6,
+    "tap_instantanee_max_lufs": -28.1,
+    "ok": true
+   },
+   {
+    "contact": "contact_onze",
+    "t": 22.2,
+    "tap_moins_voix_3-8k_db": 23.4,
+    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 57.0,
+    "voix_moins_tap_500-700_db": 69.8,
+    "tap_instantanee_max_lufs": -28.7,
+    "ok": true
+   },
+   {
+    "contact": "contact_retour_neuf",
+    "t": 24.366667,
+    "tap_moins_voix_3-8k_db": 17.7,
+    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 20.3,
+    "voix_moins_tap_500-700_db": 70.8,
+    "tap_instantanee_max_lufs": -31.4,
+    "ok": true
+   }
+  ],
+  "signature_hp_moins_pleine_bande_db": -1.44,
+  "signature_ok": true,
+  "ok": true
  },
  "I_chroma_nappe": {
-  "6.7-17.5": [
+  "6.4-10.1": [
+   "la",
+   "mi",
+   "sol#",
+   "la#",
+   "sol"
+  ],
+  "12.5-17.5": [
    "sol",
    "si",
+   "la",
    "ré",
    "fa#"
   ],
-  "20.7-32.8": [
+  "18.2-19.75": [
    "la",
+   "sol",
+   "ré",
+   "mi",
+   "si"
+  ],
+  "20.6-26.1": [
    "fa#",
+   "la",
    "do",
+   "ré",
+   "mi"
+  ],
+  "28.2-32.85": [
+   "fa#",
+   "la",
+   "do",
+   "mi",
    "ré"
   ],
-  "33.1-36.5": [
+  "33.1-35.8": [
    "sol",
    "si",
    "ré",
-   "fa#"
-  ],
-  "39.0-41.8": [
-   "sol",
-   "ré",
-   "si",
+   "fa#",
    "la"
+  ],
+  "37.6-42.2": [
+   "ré",
+   "sol",
+   "la",
+   "la#",
+   "sol#"
+  ],
+  "43.9-45.0": [
+   "la",
+   "fa#",
+   "ré",
+   "mi",
+   "do#"
   ]
  },
  "J_tonalite_contre_secousses_s1": {
-  "ecart_max": 0.03,
-  "image_pire": 84,
+  "ecart_max": 0.037,
+  "image_pire": 48,
   "exemples": {
    "0": [
     0.846,
     0.8497
    ],
    "1": [
-    1.005,
+    1.006,
     1.0
    ],
    "44": [
@@ -351,47 +466,66 @@
     0.8503
    ],
    "45": [
-    0.024,
+    0.031,
     0.0
    ],
-   "107": [
-    0.0,
+   "80": [
+    0.032,
     0.0
    ],
-   "108": [
-    0.848,
+   "81": [
+    0.854,
     0.8497
    ],
-   "109": [
-    1.004,
+   "82": [
+    0.999,
     1.0
    ],
    "125": [
-    0.999,
+    0.997,
     1.0
    ]
-  }
+  },
+  "ok": true
  },
  "J_vibreur_contre_secousses_s6": {
-  "ecart_max": 0.0
+  "ecart_max_enveloppe": 0.0,
+  "rms_par_image_relatif": [
+   0.86,
+   0.99,
+   0.98,
+   0.96,
+   0.9,
+   0.14,
+   0.0,
+   0.0,
+   0.76,
+   0.98,
+   0.98,
+   1.0,
+   0.95,
+   0.3,
+   0.0
+  ],
+  "enveloppe_s6": [
+   0.8197,
+   1.0,
+   1.0,
+   1.0,
+   0.9185,
+   0.1068,
+   0.0,
+   0.0,
+   0.7197,
+   1.0,
+   1.0,
+   1.0,
+   0.9584,
+   0.1669,
+   0.0
+  ],
+  "ok": true
  },
- "J_vibreur_rms_par_image": [
-  0.91,
-  0.97,
-  0.97,
-  0.97,
-  0.93,
-  0.18,
-  0.0,
-  0.0,
-  0.73,
-  1.0,
-  1.0,
-  1.0,
-  0.94,
-  0.24,
-  0.0
- ],
  "K_clics_hf": {
   "nappe": {
    "bouffees_hors_attaques": 0,
@@ -404,48 +538,29 @@
   "sfx": {
    "bouffees_hors_attaques": 0,
    "instants": []
-  }
+  },
+  "ok": true
  },
  "L_pan_suit_le_point": [
   {
    "cue": "tap-9h",
    "fenetre": [
     20.667,
-    20.72
+    20.7
    ],
-   "x_point": 234.4,
-   "D_moins_G_mesure_db": -4.47,
-   "D_moins_G_attendu_db": -4.87
+   "x_point": 311.7,
+   "D_moins_G_mesure_db": -3.74,
+   "D_moins_G_attendu_db": -3.56
   },
   {
    "cue": "tap-11h",
    "fenetre": [
     22.2,
-    22.25
+    22.23
    ],
-   "x_point": 234.4,
-   "D_moins_G_mesure_db": -4.49,
-   "D_moins_G_attendu_db": -4.87
-  },
-  {
-   "cue": "clic+la au décroché",
-   "fenetre": [
-    4.27,
-    4.4
-   ],
-   "x_point": 957.3,
-   "D_moins_G_mesure_db": 8.36,
-   "D_moins_G_attendu_db": 6.97
-  },
-  {
-   "cue": "la·sol, début de l'écriture",
-   "fenetre": [
-    25.42,
-    25.46
-   ],
-   "x_point": 276.9,
-   "D_moins_G_mesure_db": -4.33,
-   "D_moins_G_attendu_db": -4.14
+   "x_point": 311.7,
+   "D_moins_G_mesure_db": -3.56,
+   "D_moins_G_attendu_db": -3.56
   },
   {
    "cue": "la·sol, fin de l'écriture",
@@ -453,25 +568,226 @@
     26.06,
     26.1
    ],
-   "x_point": 990.4,
-   "D_moins_G_mesure_db": 9.34,
-   "D_moins_G_attendu_db": 7.66
+   "x_point": 739.5,
+   "D_moins_G_mesure_db": 4.79,
+   "D_moins_G_attendu_db": 3.09
   },
   {
-   "cue": "signature (ré)",
+   "cue": "stylo, milieu du mot",
    "fenetre": [
-    38.0,
-    38.1
+    41.82,
+    41.88
    ],
-   "x_point": 652.6,
-   "D_moins_G_mesure_db": 1.47,
-   "D_moins_G_attendu_db": 1.72
+   "x_point": 518.8,
+   "D_moins_G_mesure_db": -0.38,
+   "D_moins_G_attendu_db": -0.32
   }
  ],
+ "M_arc_de_sonie": {
+  "mediane_S_dialogue_5-35.4": -14.1,
+  "signature_LUFS": -11.3,
+  "fenetre_signature": [
+   42.9,
+   44.4
+  ],
+  "signature_moins_mediane_LU": 2.8,
+  "S_max_film": [
+   -12.0,
+   45.3
+  ],
+  "S_max_dialogue_5-35.4": -12.4,
+  "S_max_apres_la": [
+   -12.0,
+   45.3
+  ],
+  "M_max_film": [
+   -9.2,
+   43.3
+  ],
+  "instantanee_au_re_mix": -9.2,
+  "re_piste_signature_400ms": -9.3,
+  "vibreur_instantanee_max": -19.05,
+  "S_par_seconde": {
+   "11": -13.9,
+   "12": -13.8,
+   "13": -14.7,
+   "14": -13.6,
+   "15": -14.4,
+   "16": -13.2,
+   "17": -14.2,
+   "18": -14.3,
+   "19": -17.3,
+   "20": -19.4,
+   "21": -16.0,
+   "22": -14.0,
+   "23": -13.0,
+   "24": -13.3,
+   "25": -13.9,
+   "26": -15.2,
+   "27": -15.3,
+   "28": -15.2,
+   "29": -13.7,
+   "30": -12.8,
+   "31": -12.5,
+   "32": -12.4,
+   "33": -13.4,
+   "34": -15.0,
+   "35": -14.5,
+   "36": -15.9,
+   "37": -16.0,
+   "38": -21.9,
+   "39": -26.2,
+   "40": -28.2,
+   "41": -29.8,
+   "42": -29.7,
+   "43": -16.6,
+   "44": -13.2,
+   "45": -12.2,
+   "46": -13.2,
+   "47": -16.7
+  },
+  "M_max_dialogue_5-35.5": -10.15,
+  "M_p95_dialogue_5-35.5": -10.92,
+  "M_max_au_re": -9.2,
+  "ok": true
+ },
+ "N_signatures_seules": {
+  "point-solaire-signature-v2.wav": {
+   "duree_s": 3.25,
+   "crete_vraie_dbtp": -1.02,
+   "correlation_LR": 0.825,
+   "perte_mono_db": -0.45,
+   "energie_sup_5k_db_rel": -35.8,
+   "energie_sup_8k_db_rel": -37.5,
+   "hp_moins_pleine_bande_db": -1.44
+  },
+  "point-solaire-signature-courte-v2.wav": {
+   "duree_s": 0.9,
+   "crete_vraie_dbtp": -1.02,
+   "correlation_LR": 0.814,
+   "perte_mono_db": -0.44,
+   "energie_sup_5k_db_rel": -36.3,
+   "energie_sup_8k_db_rel": -38.0,
+   "hp_moins_pleine_bande_db": -1.53
+  }
+ },
+ "O_monde": {
+  "mesure": {
+   "lufs": -14.03,
+   "crete_dbtp": -1.7,
+   "lra": 6.9
+  },
+  "crete_vraie_dbtp": -1.7,
+  "aboiement_instantanee_max": -28.5,
+  "loquet_instantanee_max": -28.5,
+  "rien_apres_le_decroche": true,
+  "a_jour_avec_le_master": true,
+  "ecart_hors_s1_avec_le_master_max": 0.0,
+  "choix": {
+   "aboiement": {
+    "retenue": 2,
+    "prises": [
+     {
+      "prise": 1,
+      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/aboiement-prise1.wav",
+      "bouffees": 1,
+      "tronquee": true,
+      "fond_db_sous_crete": -69.0,
+      "crete_db": -8.5,
+      "attaque_s": 0.0008
+     },
+     {
+      "prise": 2,
+      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/aboiement-prise2.wav",
+      "bouffees": 1,
+      "tronquee": false,
+      "fond_db_sous_crete": -59.4,
+      "crete_db": -17.3,
+      "attaque_s": 0.0355
+     },
+     {
+      "prise": 3,
+      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/aboiement-prise3.wav",
+      "bouffees": 1,
+      "tronquee": false,
+      "fond_db_sous_crete": -53.9,
+      "crete_db": -14.3,
+      "attaque_s": 0.1616
+     },
+     {
+      "prise": 4,
+      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/aboiement-prise4.wav",
+      "bouffees": 2,
+      "tronquee": false,
+      "fond_db_sous_crete": -54.3,
+      "crete_db": -26.5,
+      "attaque_s": 0.0641
+     }
+    ]
+   },
+   "loquet": {
+    "retenue": 3,
+    "prises": [
+     {
+      "prise": 1,
+      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/loquet-prise1.wav",
+      "bouffees": 1,
+      "tronquee": true,
+      "fond_db_sous_crete": -60.2,
+      "crete_db": -25.3,
+      "attaque_s": 0.0
+     },
+     {
+      "prise": 2,
+      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/loquet-prise2.wav",
+      "bouffees": 1,
+      "tronquee": false,
+      "fond_db_sous_crete": -56.8,
+      "crete_db": -26.4,
+      "attaque_s": 0.0356
+     },
+     {
+      "prise": 3,
+      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/loquet-prise3.wav",
+      "bouffees": 1,
+      "tronquee": false,
+      "fond_db_sous_crete": -64.1,
+      "crete_db": -19.9,
+      "attaque_s": 0.0967
+     },
+     {
+      "prise": 4,
+      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/loquet-prise4.wav",
+      "bouffees": 1,
+      "tronquee": false,
+      "fond_db_sous_crete": -60.1,
+      "crete_db": -24.5,
+      "attaque_s": 0.1509
+     }
+    ]
+   }
+  },
+  "ok": true
+ },
  "stems_crete_dbtp": {
-  "dialogue": -1.32,
-  "nappe": -13.43,
-  "sfx": -11.66,
-  "signature": -6.15
+  "dialogue": -1.65,
+  "nappe": -7.51,
+  "sfx": -11.16,
+  "signature": -1.67
+ },
+ "synthese_ok": {
+  "A_master": true,
+  "B_silences": true,
+  "D_synchro": true,
+  "E_dialogue_decalage": true,
+  "F_voix_sur_reste_LU": true,
+  "G_mono": true,
+  "H_haut_parleur": true,
+  "J_tonalite_contre_secousses_s1": true,
+  "J_vibreur_contre_secousses_s6": true,
+  "K_clics_hf": true,
+  "M_arc_de_sonie": true,
+  "O_monde": true,
+  "C_somme": true
  }
 }

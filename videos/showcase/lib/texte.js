@@ -175,12 +175,28 @@
   // (Pas de padding + marge négative pour ce débord : les marges négatives de deux lignes voisines
   // fusionnent et décalent la 2e ligne, mesuré : +20 px à 200 px de corps.)
   // options : { duree (0,18), ease ("power3.in"), pas (stagger, 0), vers ("bas" | "haut"), yPercent (130) }
+  // COUPE (rendu final, 27/09, demande transverse de s4) : un mot enfoncé de plus de 70 % de sa hauteur ne montre
+  // plus que ses hauts (points des i, accents, fûts) : sur l'avant-dernière image d'une sortie de 0,15 à 0,26 s,
+  // ça faisait des POINTS ISOLÉS sur le papier (images 137, 138, 458, 1016 du rendu de 03:14), dans un film sur un
+  // point. Chaque mot passe donc à l'opacité 0 à l'instant exact où il atteint 70 % (inverse de l'ease, par
+  // dichotomie). Les instants de départ et de fin des sorties ne changent pas ; au plus une image est retirée.
+  // Estimé sur les métriques (Geist 72/84, Instrument Serif 96/104 et 200/184) : à 70 %, il reste 9 à 29 px du haut des
+  // minuscules, le mot se lit « qui s'enfonce » ; les éclats n'apparaissent qu'au-delà de 81 à 86 %. Vérifié sur le rendu du
+  // 27/09 (05:19) : plus aucun éclat aux images 137-138 (s1), 457-458 (s3) et 1015-1016 (s6). options.coupe = false la retire.
+  const COUPE_PCT = 70;
   function sortir(tl, pose, tLocal, options) {
     const o = options || {};
     const els = (pose.mots || pose).map(function (u) { return u.el || u; });
     const yp = o.yPercent != null ? o.yPercent : 130;
-    tl.to(els, { yPercent: o.vers === "haut" ? -yp : yp, duration: o.duree != null ? o.duree : 0.18,
-                 ease: o.ease || "power3.in", stagger: o.pas || 0 }, tLocal);
+    const duree = o.duree != null ? o.duree : 0.18;
+    const nomEase = o.ease || "power3.in";
+    tl.to(els, { yPercent: o.vers === "haut" ? -yp : yp, duration: duree, ease: nomEase, stagger: o.pas || 0 }, tLocal);
+    if (o.coupe !== false && yp > COUPE_PCT) {
+      const e = gsap.parseEase(nomEase);
+      let a = 0, b = 1;
+      for (let k = 0; k < 40; k++) { const m = (a + b) / 2; if (e(m) * yp >= COUPE_PCT) b = m; else a = m; }
+      els.forEach(function (el, i) { tl.set(el, { opacity: 0 }, tLocal + i * (o.pas || 0) + duree * b); });
+    }
     return tl;
   }
 

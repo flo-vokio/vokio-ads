@@ -102,9 +102,18 @@
   "nom": "Super",
   "extrait": "C4",
   "texte": "Super,",
-  "debut": 34.5,
-  "voyelle": 34.515,
-  "image": 1035,
+  "debut": 34.03,
+  "voyelle": 34.045,
+  "image": 1021,
+  "locuteur": "appelant"
+ },
+ {
+  "nom": "Au revoir",
+  "extrait": "C4",
+  "texte": "Au",
+  "debut": 35.12,
+  "voyelle": null,
+  "image": 1054,
   "locuteur": "appelant"
  }
 ]

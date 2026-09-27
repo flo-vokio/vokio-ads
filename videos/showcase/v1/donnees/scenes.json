@@ -1,0 +1,65 @@
+{
+ "s1-sonnerie": {
+  "debut": 0.0,
+  "fin": 4.5,
+  "duree": 4.5,
+  "image_debut": 0,
+  "image_fin": 135,
+  "fichier": "compositions/s1-sonnerie.html",
+  "hote": "h-s1-sonnerie"
+ },
+ "s2-voix": {
+  "debut": 4.5,
+  "fin": 10.4,
+  "duree": 5.9,
+  "image_debut": 135,
+  "image_fin": 312,
+  "fichier": "compositions/s2-voix.html",
+  "hote": "h-s2-voix"
+ },
+ "s3-ecoute": {
+  "debut": 10.4,
+  "fin": 17.3,
+  "duree": 6.9,
+  "image_debut": 312,
+  "image_fin": 519,
+  "fichier": "compositions/s3-ecoute.html",
+  "hote": "h-s3-ecoute"
+ },
+ "s4-agenda": {
+  "debut": 17.3,
+  "fin": 25.2,
+  "duree": 7.9,
+  "image_debut": 519,
+  "image_fin": 756,
+  "fichier": "compositions/s4-agenda.html",
+  "hote": "h-s4-agenda"
+ },
+ "s5-rendez-vous": {
+  "debut": 25.2,
+  "fin": 31.35,
+  "duree": 6.15,
+  "image_debut": 756,
+  "image_fin": 940,
+  "fichier": "compositions/s5-rendez-vous.html",
+  "hote": "h-s5-rendez-vous"
+ },
+ "s6-sms": {
+  "debut": 31.35,
+  "fin": 36.9,
+  "duree": 5.55,
+  "image_debut": 940,
+  "image_fin": 1107,
+  "fichier": "compositions/s6-sms.html",
+  "hote": "h-s6-sms"
+ },
+ "s7-signature": {
+  "debut": 36.9,
+  "fin": 43.5,
+  "duree": 6.6,
+  "image_debut": 1107,
+  "image_fin": 1305,
+  "fichier": "compositions/s7-signature.html",
+  "hote": "h-s7-signature"
+ }
+}

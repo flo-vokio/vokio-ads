@@ -7,7 +7,9 @@ Monte outils/banc-film.html (index.html + les sept sous-compositions, scripts re
 puis, pour chaque image n (pas 1 par défaut), place le film à n/30 et relève :
   · les [data-element] réellement visibles (opacité effective > 0,01, surface dessinée dans le cadre,
     découpes clip-path des ancêtres comprises : un mot sous son masque de ligne ne compte pas) ;
-  · chaque nœud texte visible : corps, famille, boîte visible ;
+  · chaque nœud texte visible : corps, famille, boîte visible (visibilité CALCULÉE : un enfant forcé visible
+    dans un hôte masqué compte, comme dans le rendu) ;
+  · pour chaque page posée par TEXTE.poser, le nombre de mots visibles (durée de lecture des pages) ;
 et une fois : la boîte de repos de chaque mot dit (pour comparer, sur le MP4, l'image où il apparaît à
 l'image où il est dit). Appelé par outils/controles.py.
 """
@@ -50,9 +52,10 @@ def main():
             images.append(page.evaluate("(t) => mesurer(t)", n / 30))
             images[-1]["image"] = n
         mots = page.evaluate("motsDits()")
+        pages = page.evaluate("pagesPosees()")
         nav.close()
     srv.shutdown()
-    r = {"montage": montage, "erreurs_page": erreurs, "images": images, "mots": mots}
+    r = {"montage": montage, "erreurs_page": erreurs, "images": images, "mots": mots, "pages": pages}
     txt = json.dumps(r, ensure_ascii=False)
     if sortie:
         sortie.write_text(txt)

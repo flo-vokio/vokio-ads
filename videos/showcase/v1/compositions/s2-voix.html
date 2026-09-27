@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>s2-voix</title></head>
+<body>
+<!--
+  Sous-composition s2-voix · film 4.50 → 10.40 s (durée 5.9 s), hôte #h-s2-voix dans index.html.
+  Bible, scène « s2-voix » : Élise décroche. Trois éléments, jamais plus :
+    1. le sous-titre de l'agente (Geist 54/68, encre, x 90, lignes de base 600 et 668), trois pages
+       DONNEES.pages de la scène, chaque mot monte de sa ligne de base à son attaque mesurée ;
+    2. la ligne : un filet encre de 3 px à bouts ronds, y 1000, x 90 → 990 (DONNEES.geometrie.s2_ligne).
+       Derrière le point elle est droite, devant lui elle frémit (onde à 2 ventres entre le point et
+       le bout droit, ±3 px, motif +1, 0, −1, 0 à l'image : 7,5 Hz ; l'amplitude s'amenuise quand il
+       reste moins de 300 px devant le point). Tracée de la marge gauche vers la droite de 4,70 à 5,20
+       (power3.out), rembobinée dans le point de 10,00 à 10,35 (power3.in). Encre de x 91 à 989 :
+       aux deux arrêts du point (106 et 974), les bouts arrondis sont cachés sous le disque ;
+    3. le point : #point de la RACINE (jamais dessiné ici). La ligne lit POINT.etat(t) à chaque image :
+       x du point = x de la tête de lecture, sans aucun nombre recopié.
+  Aucun temps de voix en dur : attaques = DONNEES.mots via TEXTE, fin de la voix = DONNEES.voixX.t1.
+  Temps de la timeline : LOCAUX (0 = 4,50 s film), convertis par TEXTE.scene("s2-voix").
+-->
+<template id="s2-voix-template">
+<style>
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
+#root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
+/* Sous-titre de l'agente. Geist 400 54 px, interlignage 68 px : dans Chromium, ascendante 54 px et
+   descendante 16 px (hhea 1005 / 295, arrondis au pixel), demi-interlignage −1 px, donc la ligne de
+   base tombe 53 px sous le haut de la boîte. top 547 → lignes de base 600 et 668 (mesurées dans le
+   chrome-headless-shell de HyperFrames). Les trois pages occupent la même place, une seule à la fois. */
+#s2-texte{position:absolute;left:90px;top:547px;width:920px;height:136px}
+.s2-page{position:absolute;left:0;top:0;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+         font-size:54px;line-height:68px;letter-spacing:0;color:#262019;white-space:nowrap}
+/* La ligne : un seul tracé SVG, bande de 80 px centrée sur y 1000 (repère film = repère SVG). */
+#s2-ligne{position:absolute;left:0;top:960px;width:1080px;height:80px;overflow:visible;opacity:0}
+#s2-trait{fill:none;stroke:#262019;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+</style>
+<div id="root" data-composition-id="s2-voix" data-width="1080" data-height="1920">
+  <div id="s2-texte" data-element="sous-titre">
+    <p id="s2-page-1" class="s2-page"></p>
+    <p id="s2-page-2" class="s2-page"></p>
+    <p id="s2-page-3" class="s2-page"></p>
+  </div>
+  <svg id="s2-ligne" data-element="ligne" viewBox="0 960 1080 80" width="1080" height="80" aria-hidden="true">
+    <path id="s2-trait" d="M90 1000"></path>
+  </svg>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES;
+  const FPS = D.fps;
+  const sc = TEXTE.scene("s2-voix");
+  const tl = gsap.timeline({ paused: true });
+
+  // ── 1. Sous-titres : les pages de la bible pour cette scène, telles que DONNEES.pages les donne ──
+  const pages = D.pages.filter(function (p) { return p.scene === "s2-voix"; });
+  if (pages.length !== 3) throw new Error("s2-voix : 3 pages attendues dans DONNEES.pages, " + pages.length + " trouvées");
+  const hotes = ["#s2-page-1", "#s2-page-2", "#s2-page-3"];
+  const poses = pages.map(function (p, i) {
+    // interlignage 68/54 = 1,26 em < 1,3 : les boîtes de police se chevauchent d'une ligne à l'autre (pas l'encre)
+    return TEXTE.poser(hotes[i], p.lignes, { extrait: p.extrait, depuis: p.depuis, chevauchement: true });
+  });
+  poses.forEach(function (p) { TEXTE.reveler(tl, p, { scene: sc.id }); });   // 16 px, 0,26 s, power3.out, à l'attaque
+
+  // Sorties de page par le masque, vers le bas, power3.in, plus courtes que les entrées.
+  // Pages 1 et 2 : la sortie se termine une image avant le premier mot de la page suivante.
+  // Page 3 : elle part 0,13 s après la fin de la voix, pendant que la ligne se rembobine.
+  const UNE = 1 / FPS;
+  const SORTIE = [0.15, 0.15, 0.20];
+  const finVoix = D.voixX.t1;                                  // 9,9667 s : la dernière image voisée de A1
+  poses.forEach(function (p, i) {
+    let finFilm;
+    if (i < poses.length - 1) finFilm = TEXTE.aImage(poses[i + 1].mots[0].t) - UNE;
+    else finFilm = TEXTE.aImage(finVoix + 0.13) + SORTIE[i];
+    const debut = sc.local(finFilm - SORTIE[i]);
+    TEXTE.sortir(tl, p, debut, { duree: SORTIE[i] });
+    // une fois sortis (invisibles sous le masque), les mots s'effacent : aucun texte fantôme au contrôle
+    tl.set(p.mots.map(function (u) { return u.el; }), { opacity: 0 }, +(debut + SORTIE[i]).toFixed(6));
+  });
+
+  // ── 2. La ligne, fonction pure du temps film ──
+  const G = D.geometrie.s2_ligne;                              // y 1000, x 90 → 990, 3 px
+  // Bouts ronds : l'encre déborde du tracé d'une demi-épaisseur (1,5 px). Le tracé est donc rentré
+  // de 2,5 px à chaque bout : encre de x 91 à 989. Aux deux arrêts du point (106 et 974, rayon 15,4),
+  // le bout arrondi est entièrement sous le disque (|bout − centre| + 1,5 ≤ 15,4), sans ergot d'encre.
+  const BOUT = G.epaisseur / 2 + 1;
+  const Y = G.y, X0 = G.x0 + BOUT, X1 = G.x1 - BOUT;
+  const AMP = 3;                                               // ±3 px (bible)
+  const MOTIF = [1, 0, -1, 0];                                 // image par image : 4 images = 7,5 Hz, jamais d'alternance à 2 images
+  const IMG0 = TEXTE.image(sc.debut);                          // phase : image 135 = +1
+  const L_PLEIN = 300;                                         // sous 300 px devant le point, l'onde garde sa pente et s'amenuise :
+                                                               // la voix calme la ligne jusqu'au bout, sans tortillon final
+  const PAS = 4;                                               // échantillonnage du tracé (px) : lisse à 3 px d'amplitude
+  const T_TRACE = [sc.film(0.20), sc.film(0.70)];              // 4,70 → 5,20 : la ligne se trace de x 90 à 990
+  const T_REMB0 = TEXTE.aImage(finVoix) + UNE;                 // 10,00 : une image après la dernière image voisée
+  const T_REMB = [T_REMB0, T_REMB0 + 0.35];                    // 10,00 → 10,35 : rembobinée dans le point
+  const EO = POINT.ease("power3.out"), EI = POINT.ease("power3.in");
+  const svg = document.getElementById("s2-ligne");
+  const trait = document.getElementById("s2-trait");
+  function borne(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function f2(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  // Hors de la fenêtre de la ligne : tracé canonique et invisible (l'état du DOM reste une fonction pure du temps).
+  function cacher() { trait.setAttribute("d", "M" + f2(X0) + " " + f2(Y)); svg.style.opacity = "0"; }
+  function dessiner(tF) {
+    const u = (tF - T_TRACE[0]) / (T_TRACE[1] - T_TRACE[0]);
+    const r = (tF - T_REMB[0]) / (T_REMB[1] - T_REMB[0]);
+    if (u <= 0 || r >= 1) { cacher(); return; }
+    const xp = POINT.etat(tF).x;                               // la tête de lecture = le centre du point racine
+    let xL = X0;
+    let xR = X0 + (X1 - X0) * EO(borne(u));                    // le tracé part de la marge gauche
+    if (r > 0) {                                               // les deux bouts rentrent dans le point
+      const q = EI(borne(r));
+      xL += (xp - xL) * q;
+      xR += (xp - xR) * q;
+    }
+    if (xR - xL < 0.05) { cacher(); return; }
+    // l'onde : entre le point et le bout droit, deux ventres, nœuds au point, au milieu et au bout
+    const n = Math.round(tF * FPS);
+    const m = MOTIF[((n - IMG0) % 4 + 4) % 4];
+    const L = X1 - xp;
+    const A = L > 0 ? AMP * m * Math.min(1, L / L_PLEIN) : 0;
+    function yDe(x) { return (A === 0 || x <= xp) ? Y : Y + A * Math.sin(2 * Math.PI * (x - xp) / L); }
+    let d = "M" + f2(xL) + " " + f2(yDe(xL));
+    const xs = Math.max(xL, Math.min(xp, xR));                // derrière le point : droite
+    if (xs > xL) d += "L" + f2(xs) + " " + f2(Y);
+    if (A !== 0 && xR > xs) {                                  // devant : l'onde, échantillonnée tous les PAS px
+      for (let x = xs + PAS; x < xR; x += PAS) d += "L" + f2(x) + " " + f2(yDe(x));
+      d += "L" + f2(xR) + " " + f2(yDe(xR));
+    } else if (xR > xs) {
+      d += "L" + f2(xR) + " " + f2(Y);
+    }
+    trait.setAttribute("d", d);
+    svg.style.opacity = "1";
+  }
+
+  // Tween proxy sur toute la scène, ease none : proxy.t = temps local ; jamais tl.call.
+  const proxy = { t: 0 };
+  dessiner(sc.film(0));
+  tl.to(proxy, { t: sc.duree, duration: sc.duree, ease: "none",
+                 onUpdate: function () { dessiner(sc.film(proxy.t)); } }, 0);
+
+  window.__timelines["s2-voix"] = tl;
+})();
+</script>
+</template>
+</body>
+</html>

@@ -1,0 +1,101 @@
+{
+ "unite": "px FILM (1080×1920), sauf mention ; y des filets = centre du filet de 3,6 px",
+ "echelle_px_film_par_px_css": 3.6,
+ "source": {
+  "avant": "assets/captures/agenda-avant-brut.png",
+  "apres": "assets/captures/agenda-apres-brut.png",
+  "echelle_capture": 3.0,
+  "recadrage_px_capture": [
+   24,
+   455,
+   804,
+   1135
+  ],
+  "origine": "capture réelle de app.vokio.fr, vue jour (établissement fictif des Catalans, état du vrai samedi de la clinique du Port reproduit)"
+ },
+ "image": {
+  "fichier": "assets/captures/agenda-avant.png",
+  "apres": "assets/captures/agenda-apres.png",
+  "x": 70,
+  "y": 580,
+  "largeur": 936,
+  "hauteur": 816,
+  "droite": 1006,
+  "bas": 1396,
+  "css": "position:absolute; left:70px; top:580px; width:936px; height:816px (image affichée à 1:1, jamais redimensionnée)"
+ },
+ "heures": {
+  "09:00": 615.4,
+  "10:00": 802.6,
+  "11:00": 989.8,
+  "12:00": 1177.0,
+  "13:00": 1364.2
+ },
+ "pas_heure": 187.2,
+ "etiquettes": {
+  "09:00": {
+   "x0": 103.6,
+   "y0": 601.6,
+   "x1": 208.0,
+   "y1": 626.8
+  },
+  "10:00": {
+   "x0": 103.6,
+   "y0": 788.8,
+   "x1": 208.0,
+   "y1": 814.0
+  },
+  "11:00": {
+   "x0": 103.6,
+   "y0": 976.0,
+   "x1": 208.0,
+   "y1": 1001.2
+  },
+  "12:00": {
+   "x0": 103.6,
+   "y0": 1163.2,
+   "x1": 208.0,
+   "y1": 1188.4
+  },
+  "13:00": {
+   "x0": 103.6,
+   "y0": 1350.4,
+   "x1": 208.0,
+   "y1": 1375.6
+  }
+ },
+ "colonne_x": 260.8,
+ "x_point": 234.4,
+ "bloc": {
+  "fichier": "assets/captures/bloc-florian.png",
+  "calque": "même taille et même position que l'image de l'agenda ; opaque seulement dans la boîte",
+  "boite_px_image": [
+   186,
+   29,
+   936,
+   103
+  ],
+  "x0": 260.8,
+  "y0": 613.6,
+  "x1_visible": 1006,
+  "y1": 678.4,
+  "x1_reel_hors_cadre": 1232.8,
+  "centre_y": 646.0,
+  "hauteur": 64.8,
+  "texte": "09:00 Florian",
+  "rdv": "Consultation vétérinaire, samedi 19/09/2026 09:00, 20 min, créé le 18/09 à 16:53 (vrai rendez-vous de l'appel)"
+ },
+ "mention": {
+  "lignes": [
+   "Capture réelle de app.vokio.fr",
+   "Établissement fictif de démonstration."
+  ],
+  "x": 90,
+  "lignes_de_base": [
+   1436,
+   1484
+  ],
+  "police": "Geist 400, 36 px, #6F695F",
+  "note": "accrochée sous l'image (data-element=\"agenda\"), bas de boîte < 1500"
+ }
+}

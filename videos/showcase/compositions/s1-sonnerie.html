@@ -3,20 +3,30 @@
 <head><meta charset="UTF-8"><title>s1-sonnerie</title></head>
 <body>
 <!--
-  Sous-composition s1-sonnerie · film 0.00 → 4.50 s (durée 4.5 s, images 0 à 134), hôte #h-s1-sonnerie.
-  Bible, scène « s1-sonnerie » : ça sonne dans le vide, personne ne décroche.
-    · image 0 (vignette) : « Vous avez les / mains prises » est posée ; son point final est #point (racine),
-      encre, 21 px, qui tremble avec la tonalité (racine, DONNEES.secousses.s1) ;
-    · fin de la 1re tonalité + 0,10 s (1,60) : la relance « Encore une sonnerie, / et il appelle ailleurs. »
-      monte de sa ligne de base, mot par mot (16 px, 0,60 s power3.out, 0,06 s entre mots) ;
-    · décroché (DONNEES.evenements.decroche, 4,20 = image 126) : les deux phrases tombent par leur masque,
-      chacune par le bas (0,03 s entre lignes, 0,22 s power3.in) ; « mains prises » part la première,
-      sans son point, qui reste seul (solaire, il grandit : racine).
-      Tout est sorti avant la dernière image de la scène (134) : l'image 135 (s2) est du papier + le point.
-  Trois éléments au plus : phrase, relance, point. Aucun temps de voix : il n'y a pas de voix dans s1.
+  Sous-composition s1-sonnerie · v2 (finition du 27/09) · film 0,00 → 4,6333 s (durée 4,6333 s, images 0 à 138),
+  hôte #h-s1-sonnerie. Une accroche qui bouge DÈS L'IMAGE 0, une naissance visible.
+  Ça sonne dans le vide, personne ne décroche, puis Élise décroche et le point final s'allume.
+    · 0,00 → 0,87 (DONNEES.accroche) : « Vous avez les / mains prises » monte MOT À MOT de sa ligne de base, par son
+      masque de ligne (yPercent 80 → 0 en 0,50 s power3.out, avec un fondu d'entrée sur 0,15 s, 0,10 s entre deux mots ;
+      le premier part une image avant 0 : à l'image 0, « Vous » monte déjà). Lisible en entier dès 0,90 s (vignette) ;
+    · 0,8333 → 0,9667 (DONNEES.accroche.point) : le « . » se pose en dernier : #point (racine) passe de 0 à 15,75 px
+      (0,105 em du corps de 150 px : le point final du glyphe, mesuré), puis tremble avec la tonalité (±6 px en x,
+      ±2 px en y, en quadrature, 7,5 Hz, pendant 0-1,5 et 2,7-4,2 : DONNEES.secousses.s1, la même donnée que le son) ;
+    · 2e sonnerie (DONNEES.secousses.s1.segments_s[1][0] = 2,70) − 1 image = 2,6667 (image 80) : la relance
+      « Encore une sonnerie, / et il appelle ailleurs. » monte de sa ligne de base, mot par mot, AVEC la sonnerie
+      (16 px, 0,45 s power3.out, 0,06 s entre mots ; le premier mot est visible à l'image 81, celle du son) ;
+    · décroché (DONNEES.evenements.decroche, 4,20 = image 126) : le point se contracte (126), s'allume (127) et
+      gonfle jusqu'à 44 px à 4,60 (racine). Les textes partent à décroché + 2 images (4,2667, image 128), DE BAS EN
+      HAUT, 0,03 s entre lignes, 0,26 s power3.in chacune. Tout est sorti à 4,6167, une demi-image avant la fin de
+      l'hôte (4,6333) : l'image 139 (s2) est du papier + le point.
+  Corps 150 px (finition, 27/09 : 200 avant) : l'accroche mesure 660 px de large, le wordmark final (678 px) devient
+  le plus grand objet du film ; la ligne de base de « mains prises. » reste 874, celle du sous-titre de s2 (le
+  retour chariot du point reste littéral).
+  Trois éléments au plus : la phrase, la relance, le point. Aucun temps de voix : il n'y a pas de voix dans s1.
   #point est dans la racine, au-dessus de tout : la scène ne le dessine pas et ne l'anime pas.
-  N'utilise pas POINT : outils/navigateur.py monte cette scène dans outils/banc.html (sans lib/point.js)
-  pour mesurer #s1-espaceur, et le script doit y tourner sans erreur.
+  POINT est facultatif ici : outils/navigateur.py monte cette scène dans outils/banc.html (DONNEES et TEXTE,
+  sans lib/point.js) pour mesurer #s1-espaceur, et le script doit y tourner sans erreur (DONNEES.accroche peut
+  manquer au premier passage de construire.py : la phrase est alors posée, immobile).
 -->
 <template id="s1-sonnerie-template">
 <style>
@@ -24,10 +34,14 @@
 @font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2")}
 @font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2")}
 #root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
-/* GÉOMÉTRIE MESURÉE (outils/construire.py) : le centre de #point à l'image 0 est le « . » de cette phrase.
-   Ne pas changer police, corps, interlignage, left/top ni le texte sans relancer outils/construire.py. */
-#s1-phrase{position:absolute;left:90px;top:530px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:normal;font-size:200px;line-height:184px;letter-spacing:0;color:#262019}
+/* GÉOMÉTRIE MESURÉE (outils/construire.py) : le centre de #point est le « . » de cette phrase.
+   Ne pas changer police, corps, interlignage, left/top ni le texte sans relancer outils/construire.py.
+   150/138 (0,92 em, le rapport de la v1) ; top 616 → lignes de base 736 et 874 (874 = celle de s2). */
+#s1-phrase{position:absolute;left:90px;top:616px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:normal;font-size:150px;line-height:138px;letter-spacing:0;color:#262019}
 #s1-espaceur{display:inline-block;width:.213em;height:0}
+/* .s1-r : le mot qui monte dans son masque de ligne à l'accroche (la sortie du décroché, elle, déplace le .tx-w
+   qui le contient : deux éléments, deux animations, aucun conflit). */
+#s1-phrase .s1-r{display:inline-block}
 /* La relance, non dite : Instrument Serif Italic 72/80, gris #6F695F (4,8:1 sur le papier), x = 90.
    Lignes de base 1030 et 1110 (bible) : top = 1030 − 64, décalage de la ligne de base dans une ligne de
    80 px à 72 px de corps, mesuré dans le chrome-headless-shell de HyperFrames (entier : Chromium l'arrondit).
@@ -35,51 +49,108 @@
 #s1-relance{position:absolute;left:90px;top:966px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:italic;font-size:72px;line-height:80px;letter-spacing:0;color:#6F695F}
 </style>
 <div id="root" data-composition-id="s1-sonnerie" data-width="1080" data-height="1920">
-  <!-- Phrase 1, posée dès l'image 0. Structure de TEXTE.poser : .tx-ligne = masque, .tx-w = mot mobile.
+  <!-- Phrase 1, révélée mot à mot dès l'image 0. Structure de TEXTE.poser : .tx-ligne = masque, .tx-w = mot mobile.
        data-layout-allow-overlap sur chaque .tx-w : interlignage 0,92 voulu (les boîtes de police de 1,3 em se chevauchent, pas l'encre).
        Le point final n'est PAS un glyphe : #s1-espaceur (avance du « . », 0,213 em) ; le point visible est #point (racine). -->
-  <p id="s1-phrase" data-element="phrase"><span class="tx-ligne"><span class="tx-w" data-layout-allow-overlap>Vous</span> <span class="tx-w" data-layout-allow-overlap>avez</span> <span class="tx-w" data-layout-allow-overlap>les</span></span><span class="tx-ligne"><span class="tx-w" data-layout-allow-overlap>mains</span> <span class="tx-w" data-layout-allow-overlap>prises<span id="s1-espaceur"></span></span></span></p>
+  <p id="s1-phrase" data-element="phrase"><span class="tx-ligne"><span class="tx-w" data-layout-allow-overlap><span class="s1-r" data-layout-allow-overlap>Vous</span></span> <span class="tx-w" data-layout-allow-overlap><span class="s1-r" data-layout-allow-overlap>avez</span></span> <span class="tx-w" data-layout-allow-overlap><span class="s1-r" data-layout-allow-overlap>les</span></span></span><span class="tx-ligne"><span class="tx-w" data-layout-allow-overlap><span class="s1-r" data-layout-allow-overlap>mains</span></span> <span class="tx-w" data-layout-allow-overlap><span class="s1-r" data-layout-allow-overlap>prises</span><span id="s1-espaceur"></span></span></span></p>
   <!-- La relance, construite par TEXTE.poser (texte non dit : extrait null). -->
   <p id="s1-relance" data-element="relance"></p>
 </div>
 <script>
 (function () {
   const D = window.DONNEES;
-  const sc = TEXTE.scene("s1-sonnerie");
   const FPS = D.fps;
+  const UNE = 1 / FPS;
+  const EPS = 1e-4;
+  const sc = TEXTE.scene("s1-sonnerie");
   const tl = gsap.timeline({ paused: true });
+  const r6 = function (v) { return +v.toFixed(6); };
+  function exiger(ok, msg) { if (!ok) throw new Error("s1-sonnerie : " + msg); }
 
-  // ── La relance, dans le vrai silence entre les deux tonalités ──
-  // 1,60 = fin de la 1re tonalité (DONNEES.secousses.s1, la même donnée que le son) + 0,10 s.
-  const finTon1 = D.secousses.s1.segments_s[0][1];
-  const tRelance = TEXTE.aImage(finTon1 + 0.10);
+  const S1 = D.secousses && D.secousses.s1;
+  // Banc de mesure (outils/banc.html, sans lib/point.js) : DONNEES peut être incomplet pendant une reconstruction ;
+  // la phrase suffit alors (navigateur.py y mesure le « . »). Dans le film, tout est exigé.
+  const complet = !!(S1 && S1.segments_s && D.evenements && D.evenements.decroche);
+  if (window.POINT || complet) {
+    exiger(S1 && S1.segments_s && S1.segments_s.length === 2, "DONNEES.secousses.s1.segments_s : deux sonneries attendues");
+    exiger(D.evenements && D.evenements.decroche, "DONNEES.evenements.decroche absent");
+  }
+
+  // ── L'accroche, mot à mot par le masque de ligne, dès l'image 0 (DONNEES.accroche, lu aussi par le point) ──
+  // Une fonction du temps (proxy, seek-safe) pose chaque .s1-r : le mot k part à debut + k·pas − 1 image (à l'image 0,
+  // « Vous » est déjà en mouvement) ; yPercent = depart × (1 − power3.out(u)) dans son masque de ligne, opacité =
+  // power2.out(u / 0,3). À la première image visible d'un mot, sa bande d'x est déjà au-dessus du masque : jamais un
+  // point de i seul sur le papier (vu à l'image 0 d'un premier essai en yPercent 105 sans fondu), dans un film sur un point.
+  const motsPhrase = Array.from(document.querySelectorAll("#s1-phrase .s1-r"));
+  exiger(motsPhrase.length === 5, "phrase : 5 mots attendus");
+  const AC = D.accroche;
+  if (AC) {
+    exiger(AC.debut === 0, "l'accroche doit partir de l'image 0");
+    const eMot = gsap.parseEase(AC.ease), eOp = gsap.parseEase("power2.out");
+    const t0 = function (k) { return AC.debut + k * AC.pas - (AC.avance_images || 0) / FPS; };
+    const poserAccroche = function (t) {
+      motsPhrase.forEach(function (el, k) {
+        const u = Math.max(0, Math.min(1, (t - t0(k)) / AC.duree));
+        gsap.set(el, { yPercent: AC.depart_yPercent * (1 - eMot(u)), opacity: eOp(Math.min(1, u / 0.3)) });
+      });
+    };
+    poserAccroche(0);
+    const pa = { t: 0 };
+    tl.to(pa, { t: sc.duree, duration: sc.duree, ease: "none", onUpdate: function () { poserAccroche(pa.t); } }, 0);
+    if (window.POINT) exiger(t0(0) < 0, "à l'image 0, le premier mot doit déjà monter");     // dans le film (pas au banc de mesure)
+    exiger(r6(t0(motsPhrase.length - 1) + AC.duree) <= AC.lisible + EPS, "l'accroche n'est pas entière à " + AC.lisible + " s");
+    exiger(AC.point[0] >= t0(motsPhrase.length - 1) + 0.8 * AC.duree - EPS, "le point se pose avant que « prises » soit monté");
+  }
+
+  if (!complet) { window.__timelines["s1-sonnerie"] = tl; return; }
+
+  // ── La relance, AVEC la 2e sonnerie ──
+  // Même donnée que le son (son/mix.py lit DONNEES.secousses.s1) : la 2e tonalité attaque à 2,70 (image 81).
+  // Le tween du premier mot part une image avant, à opacité 0 : sa première image visible est celle du son.
+  const tRelance = r6(TEXTE.aImage(S1.segments_s[1][0]) - UNE);                  // 2,6667 (image 80)
+  const PAS_MOTS = 0.06, DUREE_RELANCE = 0.45;
   const relance = TEXTE.poser("#s1-relance", ["Encore une sonnerie,", "et il appelle ailleurs."],
     { extrait: null, chevauchement: true });
-  TEXTE.reveler(tl, relance, { scene: sc.id, t: tRelance, pas: 0.06, duree: 0.60, dy: 16, ease: "power3.out" });
+  exiger(relance.lignes.length === 2 && relance.mots.length === 7, "relance : 2 lignes et 7 mots attendus");
+  exiger(tRelance > S1.segments_s[0][1] + EPS, "la relance doit monter après la 1re sonnerie");
+  TEXTE.reveler(tl, relance, { scene: sc.id, t: tRelance, pas: PAS_MOTS, duree: DUREE_RELANCE, dy: 16, ease: "power3.out" });
 
-  // ── Le décroché : les phrases tombent par leur masque, le point reste seul ──
-  // Les deux phrases partent ensemble, chacune par le bas : la ligne du bas d'abord, puis celle du dessus
-  // 0,03 s après (bible : 0,03 s entre lignes). « mains prises » quitte donc son point à l'image même du
-  // décroché, et la ligne du dessus ne traverse jamais une ligne encore en place (le bas de son masque
-  // déborde de 0,24 em sur la ligne suivante : de haut en bas, « Vous avez les » coupé passait sur les
-  // points des i de « mains », vu au snapshot de l'image 131).
-  // 0,22 s power3.in au lieu des 0,30 de la bible : la scène s'arrête à 4,50 ; avec 0,30 s, la dernière
-  // ligne serait encore visible à l'image 134 et disparaîtrait d'un coup à l'image 135 (s2). On vérifie ici
-  // que tout est sorti à la dernière image de la scène plutôt que de le supposer.
-  const tDecroche = sc.local(D.evenements.decroche.t);
-  const DUREE_SORTIE = 0.22, PAS_LIGNES = 0.03;
-  const parPhrase = [Array.from(document.querySelectorAll("#s1-phrase .tx-ligne")), relance.lignes];
-  const derniereImage = (Math.round(sc.fin * FPS) - 1) / FPS - sc.debut;
-  parPhrase.forEach(function (lignes) {
-    lignes.slice().reverse().forEach(function (ligne, rang) {
-      const t0 = tDecroche + rang * PAS_LIGNES;
-      if (t0 + DUREE_SORTIE > derniereImage + 1e-6) {
-        throw new Error("s1-sonnerie : une ligne sort jusqu'à " + (t0 + DUREE_SORTIE).toFixed(3) +
-          " s, après la dernière image de la scène (" + derniereImage.toFixed(3) + " s)");
-      }
-      TEXTE.sortir(tl, Array.from(ligne.querySelectorAll(".tx-w")), t0, { duree: DUREE_SORTIE, ease: "power3.in" });
-    });
+  // ── Le décroché : le point s'allume d'abord, puis les textes partent de bas en haut ──
+  // Décroché 4,20 (126) : contraction ; 4,2333 (127) : solaire ; gonfle jusqu'à 44 px à 4,60 (racine).
+  // Départ à décroché + 2 images (4,2667, image 128) : la phrase est encore entière quand le point s'allume,
+  // et le plus gros mouvement de l'écran (la chute du titre) ne couvre plus sa naissance.
+  // De bas en haut : la ligne du dessus ne traverse jamais une ligne encore en place (le bas de chaque masque
+  // déborde de 0,24 em sur la ligne suivante ; de haut en bas, « Vous avez les » coupé passait sur les points
+  // des i de « mains », vu en v1 à l'image 131). La relance, la plus loin du point, part la première ;
+  // « Vous avez les », la plus loin du bas, part la dernière.
+  const tSortie = r6((D.evenements.decroche.image + 2) / FPS);                     // 4,2667 (image 128)
+  const PAS_LIGNES = 0.03, DUREE_SORTIE = 0.26;
+  const lignesPhrase = Array.from(document.querySelectorAll("#s1-phrase .tx-ligne"));
+  exiger(lignesPhrase.length === 2, "phrase : 2 lignes attendues");
+  const ordre = [relance.lignes[1], relance.lignes[0], lignesPhrase[1], lignesPhrase[0]];
+  const finRelance = TEXTE.aImage(tRelance + (relance.mots.length - 1) * PAS_MOTS) + DUREE_RELANCE;
+  exiger(finRelance < tSortie - EPS, "la relance n'a pas fini de monter quand elle doit sortir");
+  let finSorties = 0;
+  ordre.forEach(function (ligne, rang) {
+    const t0 = r6(tSortie + rang * PAS_LIGNES);
+    const mots = Array.from(ligne.querySelectorAll(".tx-w"));
+    TEXTE.sortir(tl, mots, sc.local(t0), { duree: DUREE_SORTIE, ease: "power3.in" });
+    finSorties = Math.max(finSorties, r6(t0 + DUREE_SORTIE));
   });
+  // Tout est sorti à 4,6167, avant la fin de l'hôte (4,6333) : une demi-image de marge, donc l'image 139
+  // (première de s2, hôte de s1 démonté) montre ce que les tweens y montreraient, papier + point.
+  exiger(finSorties <= 4.6167 + EPS, "les textes sortent jusqu'à " + finSorties.toFixed(4) + " s (4,6167 au plus)");
+  exiger(finSorties <= sc.fin - UNE / 2 + EPS, "les textes sortent jusqu'à " + finSorties.toFixed(4) +
+    " s, moins d'une demi-image avant la fin de l'hôte (" + sc.fin.toFixed(4) + " s)");
+  // Une fois sortis, les mots sont éteints : rien ne reste sous un masque, même si l'hôte était prolongé.
+  tl.set(Array.from(document.querySelectorAll("#s1-phrase .tx-w, #s1-relance .tx-w")), { opacity: 0 }, sc.local(finSorties));
+
+  // Alignement sur la racine (seulement si lib/point.js est chargé : le banc de mesure ne l'a pas) :
+  // les textes ne partent qu'une fois le point allumé.
+  if (window.POINT && typeof POINT.etat === "function") {
+    const allume = String(POINT.etat(tSortie).couleur).toLowerCase() === String(D.couleurs.solaire).toLowerCase();
+    exiger(allume, "le point n'est pas solaire à " + tSortie.toFixed(4) + " s, quand les textes partent");
+  }
 
   window.__timelines["s1-sonnerie"] = tl;
 })();

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Le point sur le i · showcase Vokio</title>
+<!-- ORDRE DE CHARGEMENT (ne pas changer) : les données d'abord, puis GSAP, puis les aides qui les lisent.
+     Les sous-compositions s'exécutent après : gsap, window.DONNEES, window.TEXTE, window.POINT existent déjà. -->
+<script src="donnees/donnees.js"></script>
+<script src="lib/vendor/gsap.min.js"></script>
+<script src="lib/texte.js"></script>
+<script src="lib/point.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
+#root{position:relative;width:100%;height:100%;overflow:hidden;background:#F4F1E8}
+/* le papier, plein cadre, sous tout */
+#fond{position:absolute;inset:0;background:#F4F1E8}
+.clip{position:absolute;inset:0}
+/* LE seul point du film. Disque de 30,8 px (diamètre du point solaire du wordmark), centré par
+   xPercent/yPercent −50 posés par GSAP (pas de marge négative : Chromium arrondit une marge de −15,4 px
+   au pixel, mesuré +0,5 px sur le rendu ; une translation reste au sous-pixel) : x / y = centre en px film.
+   La taille visible passe par scale (21 px à l'image 0, soit 0,682). Dernier enfant de #root, z-index 100. */
+#point{position:absolute;left:0;top:0;width:30.8px;height:30.8px;border-radius:50%;
+       background:#262019;z-index:100;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="43.5" data-width="1080" data-height="1920">
+  <div id="fond"></div>
+
+  <!-- Les sept scènes (bible, plan_de_fabrication) : une seule piste, bout à bout. -->
+  <div id="h-s1-sonnerie" class="clip" data-composition-id="s1-sonnerie" data-composition-src="compositions/s1-sonnerie.html"
+       data-start="0" data-duration="4.5" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <div id="h-s2-voix" class="clip" data-composition-id="s2-voix" data-composition-src="compositions/s2-voix.html"
+       data-start="4.5" data-duration="5.9" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <div id="h-s3-ecoute" class="clip" data-composition-id="s3-ecoute" data-composition-src="compositions/s3-ecoute.html"
+       data-start="10.4" data-duration="6.9" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <!-- s4 : 7.8999 et non 7.9. En flottant, 17.3 + 7.9 = 25.200000000000003 : l'hôte de s4 restait monté sous
+       s5 à l'image 756 (25,2 s). 25,1999 < 25,2 : l'image 756 appartient à s5 seule (s4 s'y efface déjà
+       d'elle-même et s5 a un fond opaque : double garde, sans effet sur les autres images). -->
+  <div id="h-s4-agenda" class="clip" data-composition-id="s4-agenda" data-composition-src="compositions/s4-agenda.html"
+       data-start="17.3" data-duration="7.8999" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <div id="h-s5-rendez-vous" class="clip" data-composition-id="s5-rendez-vous" data-composition-src="compositions/s5-rendez-vous.html"
+       data-start="25.2" data-duration="6.15" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <div id="h-s6-sms" class="clip" data-composition-id="s6-sms" data-composition-src="compositions/s6-sms.html"
+       data-start="31.35" data-duration="5.55" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <div id="h-s7-signature" class="clip" data-composition-id="s7-signature" data-composition-src="compositions/s7-signature.html"
+       data-start="36.9" data-duration="6.6" data-track-index="1" data-width="1080" data-height="1920"></div>
+
+  <!-- Le point racine : animé UNIQUEMENT par la timeline ci-dessous, d'après DONNEES.point (lib/point.js). -->
+  <div id="point" data-element="point" aria-hidden="true"></div>
+
+  <!-- Bande son unique : assets/son/mix.wav = le master de son/mix.py (copie octet pour octet de son/mix.wav :
+       vrai appel + nappe + bruitages + signature, −14 LUFS, −1,5 dBTP, 48 kHz 24 bits stéréo). Aucun autre média. -->
+  <audio id="bande-son" src="assets/son/mix.wav" data-start="0" data-duration="43.5" data-track-index="10" data-volume="1"></audio>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES;
+  const el = document.getElementById("point");
+  const D0 = POINT.diametre_disque;
+  // Fonction pure du temps : le point est au même endroit quel que soit l'ordre des recherches (seek).
+  function rendre(t) {
+    const s = POINT.etat(t);
+    gsap.set(el, { xPercent: -50, yPercent: -50, x: s.x, y: s.y, scale: s.d / D0, backgroundColor: s.couleur });
+  }
+  rendre(0);
+  const tl = gsap.timeline({ paused: true });
+  const proxy = { t: 0 };
+  tl.to(proxy, { t: D.duree, duration: D.duree, ease: "none", onUpdate: function () { rendre(proxy.t); } }, 0);
+  window.__timelines["main"] = tl;
+})();
+</script>
+</body>
+</html>

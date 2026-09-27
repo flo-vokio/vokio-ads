@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>s4-agenda</title></head>
+<body>
+<!--
+  Sous-composition s4-agenda · film 17.30 → 25.20 s (durée 7.9 s, images 519 à 755), hôte #h-s4-agenda.
+  Bible, scène « s4-agenda » : elle consulte, l'agenda vient au point, le point se pose sur chaque heure
+  à la syllabe où Élise la lit. Trois éléments, jamais plus :
+    1. le sous-titre, en haut, une page à la fois (DONNEES.pages de la scène) :
+       · l'agente, Geist 400 54/68 encre, x 90, lignes de base 400 / 468 / 536 :
+         « Laissez-moi voir. » puis « Je peux vous proposer / neuf heures, dix heures / ou onze heures. »,
+         chaque mot monte de sa ligne de base à son attaque mesurée (16 px, 0,26 s power3.out) ;
+       · l'appelant, Instrument Serif Italic 400 88/97 encre, x 90, lignes de base 430 / 527 :
+         « À neuf heures, / c’est parfait. », ligne par ligne, d'un bloc (comme C2 en s3) ;
+    2. l'agenda : la vraie colonne jour de app.vokio.fr (assets/captures/agenda-avant.png, 936 × 816, affichée
+       à 1:1, jamais redimensionnée, en (70 ; 580) au repos) avec sa mention accrochée dessous et solidaire
+       (Geist 36/48 #6F695F, x 90, lignes de base 1436 / 1484). Il monte d'un seul bloc, sans changer
+       d'échelle, pendant le VRAI silence de next_available_slots : sa ligne 09:00 se pose sous le point ;
+    3. le point : #point de la RACINE (jamais dessiné ici). Il attend sur 09:00 dès 17,80, saute sur 09:00,
+       10:00 et 11:00 aux voyelles de « neuf », « dix », « onze », et revient à 09:00 sur le « à » de
+       l'appelant (DONNEES.point). La scène n'a pas à le suivre : l'agenda est immobile quand il saute.
+  Aucun temps de voix en dur : attaques = DONNEES.mots via TEXTE (pages DONNEES.pages de la scène),
+  géométrie = DONNEES.agenda, coupes = DONNEES.dialogue.extraits.
+  Temps de la timeline : LOCAUX (0 = 17,30 s film), convertis par TEXTE.scene("s4-agenda").
+  N'utilise pas POINT : la scène se monte aussi dans outils/banc.html, qui ne charge pas lib/point.js.
+  RACCORD s5 : à la dernière image (755), agenda au repos, mention en place, aucun sous-titre ; s5 reprend
+  exactement ces pixels (même image, même position, même mention : voir #s4-agenda et #s4-mention).
+  L'hôte de s4 reste affiché à l'image 756 (17,3 + 7,9 = 25,200000000000003 en flottant) : la scène s'y
+  efface d'elle-même (§ 8), l'image 756 est dessinée par s5 seule, qui doit donc poser l'agenda dès son image 0.
+-->
+<template id="s4-agenda-template">
+<style>
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2")}
+#root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
+/* ── 1. Le sous-titre ── une boîte en haut, trois pages superposées, une seule visible à la fois.
+   Agente : Geist 400 54 px, interlignage 68 px ; dans Chromium, ascendante 54 et descendante 16 px (hhea
+   1005 / 295 arrondis au pixel), demi-interlignage −1 px : la ligne de base tombe 53 px sous le haut de
+   la ligne (mesuré dans le chrome-headless-shell de HyperFrames, comme en s2). top 347 → 400 / 468 / 536.
+   Appelant : Instrument Serif Italic 400 88 px, interlignage 97 px ; ligne de base 78 px sous le haut de
+   la ligne (mesuré, comme en s3). top 352 (= 347 + 5) → 430 / 527. */
+#s4-texte{position:absolute;left:90px;top:347px;width:920px;height:204px}
+.s4-agente{position:absolute;left:0;top:0;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+           font-size:54px;line-height:68px;letter-spacing:0;color:#262019;white-space:nowrap}
+.s4-appelant{position:absolute;left:0;top:5px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:italic;
+             font-size:88px;line-height:97px;letter-spacing:0;color:#262019;white-space:nowrap}
+/* ── 2. L'agenda et sa mention, un seul objet ──
+   Boîte = l'image (70 ; 580, 936 × 816, DONNEES.agenda.image) prolongée jusqu'au bas de la mention.
+   La position au repos est réappliquée depuis DONNEES.agenda par le script (source unique) ; ces valeurs
+   en sont la copie lisible. Aucune transformation CSS : GSAP porte seul la translation y. */
+#s4-agenda{position:absolute;left:70px;top:580px;width:936px;height:916px;opacity:0}
+#s4-capture{position:absolute;left:0;top:0;width:936px;height:816px;display:block}
+/* La mention : Geist 400 36 px, interlignage 48 px, gris texte #6F695F (4,8:1 sur le papier : AA).
+   Ligne de base 36 px sous le haut de la ligne (mesuré, comme en s3) : top 1400 → 1436 / 1484 ;
+   bas de boîte 1496 < 1500. En coordonnées de #s4-agenda : left 90 − 70 = 20, top 1400 − 580 = 820. */
+#s4-mention{position:absolute;left:20px;top:820px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+            font-size:36px;line-height:48px;letter-spacing:0;color:#6F695F;white-space:nowrap}
+</style>
+<div id="root" data-composition-id="s4-agenda" data-width="1080" data-height="1920">
+  <!-- L'objet agenda d'abord (dessous), le sous-titre ensuite (au-dessus : la couche de lecture).
+       data-layout-allow-overflow : l'agenda entre par le bas du cadre (montée), c'est voulu. -->
+  <div id="s4-agenda" data-element="agenda" data-layout-allow-overflow>
+    <img id="s4-capture" src="assets/captures/agenda-avant.png" width="936" height="816"
+         alt="Colonne jour de app.vokio.fr, samedi, matinée vide de 09:00 à 13:00">
+    <p id="s4-mention"></p>
+  </div>
+  <div id="s4-texte" data-element="sous-titre">
+    <p id="s4-voir" class="s4-agente"></p>
+    <p id="s4-creneaux" class="s4-agente"></p>
+    <p id="s4-choix" class="s4-appelant"></p>
+  </div>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES;
+  const FPS = D.fps;
+  const UNE = 1 / FPS;
+  const sc = TEXTE.scene("s4-agenda");
+  const tl = gsap.timeline({ paused: true });
+  const r6 = function (v) { return +v.toFixed(6); };
+  const derniereImage = r6((Math.round(sc.fin * FPS) - 1) / FPS);          // 25,1667 s : image 755
+  function exiger(ok, msg) { if (!ok) throw new Error("s4-agenda : " + msg); }
+  function extrait(id) {
+    const e = D.dialogue.extraits.find(function (x) { return x.id === id; });
+    exiger(e, "extrait " + id + " absent de DONNEES.dialogue");
+    return e;
+  }
+  function els(pose) { return pose.mots.map(function (u) { return u.el; }); }
+
+  // ── 0. L'agenda à sa place de repos, depuis DONNEES.agenda (source unique de la géométrie) ──
+  const A = D.agenda;
+  const I = A.image;
+  exiger(/agenda-avant\.png$/.test(I.fichier), "image de l'agenda inattendue : " + I.fichier);
+  const BASE_GEIST_36 = 36;                 // ligne de base sous le haut d'une ligne Geist 36/48 (mesuré)
+  const LIGNE_MENTION = 48;
+  const LB = A.mention.lignes_de_base;
+  exiger(LB.length === 2 && Math.abs(LB[1] - LB[0] - LIGNE_MENTION) < 1e-6,
+         "la mention doit tenir sur 2 lignes de " + LIGNE_MENTION + " px (lignes de base " + LB + ")");
+  const hautMention = LB[0] - BASE_GEIST_36;                                 // 1400
+  const basObjet = hautMention + LB.length * LIGNE_MENTION;                  // 1496
+  exiger(basObjet < 1500, "la mention descend sous y = 1500 (" + basObjet + ")");
+  const agenda = document.getElementById("s4-agenda");
+  const capture = document.getElementById("s4-capture");
+  const elMention = document.getElementById("s4-mention");
+  agenda.style.left = I.x + "px"; agenda.style.top = I.y + "px";
+  agenda.style.width = I.largeur + "px"; agenda.style.height = (basObjet - I.y) + "px";
+  capture.style.width = I.largeur + "px"; capture.style.height = I.hauteur + "px";
+  elMention.style.left = (A.mention.x - I.x) + "px"; elMention.style.top = (hautMention - I.y) + "px";
+  TEXTE.poser(elMention, A.mention.lignes, { extrait: null });
+
+  // ── 1. Les pages de la bible pour cette scène, telles que DONNEES.pages les donne ──
+  const pages = D.pages.filter(function (p) { return p.scene === sc.id; });
+  exiger(pages.length === 3, "3 pages attendues dans DONNEES.pages, " + pages.length + " trouvées");
+  const pVoir = pages[0], pCreneaux = pages[1], pChoix = pages[2];
+  exiger(pVoir.extrait === "A2A3" && pCreneaux.extrait === "A2A3" && pChoix.extrait === "C3",
+         "pages A2A3, A2A3 puis C3 attendues");
+  // interlignages 68/54 = 1,26 em et 97/88 = 1,10 em < 1,3 : les boîtes de police se chevauchent d'une
+  // ligne à l'autre (pas l'encre)
+  const voir = TEXTE.poser("#s4-voir", pVoir.lignes, { extrait: pVoir.extrait, depuis: pVoir.depuis, chevauchement: true });
+  const creneaux = TEXTE.poser("#s4-creneaux", pCreneaux.lignes, { extrait: pCreneaux.extrait, depuis: pCreneaux.depuis, chevauchement: true });
+  const choix = TEXTE.poser("#s4-choix", pChoix.lignes, { extrait: pChoix.extrait, depuis: pChoix.depuis, chevauchement: true });
+  const eA = extrait("A2A3"), eC3 = extrait("C3");
+  // En sortie, chaque mot descend sous le masque de sa ligne (clip-path) : le test de recouvrement de
+  // hf check ne le touche plus et trouve la capture dessous (« text_occluded »). C'est voulu : le mot est
+  // alors invisible, coupé par son masque. On le dit mot par mot, pas sur un conteneur.
+  [voir, creneaux, choix].forEach(function (p) {
+    p.mots.forEach(function (u) { u.el.setAttribute("data-layout-allow-occlusion", ""); });
+  });
+
+  // ── 2. « Laissez-moi voir. » : chaque mot à son attaque ──
+  TEXTE.reveler(tl, voir, { scene: sc.id });                                 // 16 px, 0,26 s, power3.out
+  const tVoirPose = TEXTE.aImage(voir.mots[voir.mots.length - 1].t) + 0.26;  // la page est entière
+
+  // ── 3. L'agenda monte pendant le vrai silence de next_available_slots ──
+  // Il part à l'image où « voir. » se tait (fin mesurée du dernier mot de la page) et monte d'un seul
+  // bloc, 0,70 s power3.out, sans changer d'échelle : sa ligne 09:00 vient se poser sous le point, qui
+  // attend depuis 17,80 entre l'étiquette et la colonne (DONNEES.agenda.x_point).
+  // Départ : entièrement sous le cadre. La bible disait +1 250 pour une image posée à y 698 (haut à
+  // 1 948, soit 28 px sous le cadre). L'image est à 580 : +1 250 laisserait l'étiquette 09:00 visible
+  // en bas du cadre à la première image. On garde l'intention (28 px sous le cadre) : 1 920 + 28 − 580.
+  const H = D.taille[1];
+  const Y_DEPART = H + 28 - I.y;                                              // 1 368
+  const MONTEE = 0.70;
+  const mVoir = voir.mots[voir.mots.length - 1].mot;
+  const tMonte = TEXTE.aImage(mVoir.fin);                                     // 18,3667 (image 551)
+  const tMontee = r6(tMonte + MONTEE);                                        // 19,0667 : au repos
+  const tJe = TEXTE.aImage(creneaux.mots[0].t);                               // 19,80 (image 594)
+  exiger(tMonte >= tVoirPose - 1e-6, "l'agenda monte avant que « Laissez-moi voir. » soit posé");
+  exiger(tMontee <= tJe - 0.5, "l'agenda n'est pas au repos 0,5 s avant « Je » (" + tMontee + ")");
+  tl.set(agenda, { opacity: 1 }, sc.local(tMonte));
+  tl.fromTo(agenda, { y: Y_DEPART }, { y: 0, duration: MONTEE, ease: "power3.out", immediateRender: true },
+            sc.local(tMonte));
+
+  // ── 4. « Laissez-moi voir. » sort, les créneaux entrent ──
+  // Sortie par les masques, vers le bas, 0,18 s power3.in : elle finit une image avant « Je ».
+  const SORTIE = 0.18;
+  const finVoir = r6(tJe - UNE);
+  const debutVoir = r6(finVoir - SORTIE);
+  exiger(debutVoir >= tMontee - 1e-6, "« Laissez-moi voir. » sort pendant que l'agenda monte");
+  TEXTE.sortir(tl, voir, sc.local(debutVoir), { duree: SORTIE, ease: "power3.in" });
+  tl.set(els(voir), { opacity: 0 }, sc.local(finVoir));      // sorti, invisible : aucun texte fantôme
+
+  // Les créneaux : chaque mot à son attaque mesurée ; « neuf », « dix », « onze » montent à l'image où
+  // Élise les attaque, le point touche la ligne à leur voyelle (racine, DONNEES.evenements).
+  TEXTE.reveler(tl, creneaux, { scene: sc.id });
+
+  // ── 5. Les créneaux sortent quand l'appelant reprend la parole ──
+  // Le « Euh, bah, » qui ouvre C3 n'est pas écrit (la page part du rang 2) : la proposition sort par ses
+  // masques et finit à l'image où l'appelant se fait entendre ; il hésite sur l'agenda seul, point sur 11:00.
+  const tAppelant = TEXTE.aImage(TEXTE.mots("C3")[0].debut);                 // 23,2667 (image 698)
+  const tCreneauxPose = TEXTE.aImage(creneaux.mots[creneaux.mots.length - 1].t) + 0.26;
+  const debutCreneaux = r6(tAppelant - SORTIE);
+  exiger(debutCreneaux >= TEXTE.aImage(eA.film_out) - 1e-6, "les créneaux sortent avant que l'agente se taise");
+  exiger(debutCreneaux >= tCreneauxPose + 0.3 - 1e-6, "les créneaux sortent moins de 0,3 s après être posés");
+  TEXTE.sortir(tl, creneaux, sc.local(debutCreneaux), { duree: SORTIE, ease: "power3.in" });
+  tl.set(els(creneaux), { opacity: 0 }, sc.local(tAppelant));
+
+  // ── 6. Le choix de l'appelant : ligne par ligne, d'un bloc (16 px, 0,35 s power3.out, comme C2 en s3) ──
+  // « À neuf heures, » monte au « à » (première image visible 719), à l'instant où le point quitte 11:00
+  // pour revenir à 09:00 ; « c’est parfait. » monte à « c’est ». Calage commun (lib/texte.js, comme C2
+  // en s3) : le tween part une image avant l'attaque, la première image visible contient l'attaque.
+  const ENTREE_LIGNE = 0.35;
+  const lignesChoix = choix.lignes.map(function (ligne, il) {
+    const unites = choix.mots.filter(function (u) { return u.ligne === il; });
+    return { els: unites.map(function (u) { return u.el; }), t: TEXTE.aImage(unites[0].t - UNE) };
+  });
+  exiger(lignesChoix[0].t >= tAppelant + UNE - 1e-6, "« À neuf heures, » monte avant que les créneaux soient sortis");
+  lignesChoix.forEach(function (L) {
+    tl.fromTo(L.els, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: ENTREE_LIGNE, ease: "power3.out", immediateRender: true },
+              sc.local(L.t));
+  });
+
+  // ── 7. Sortie : la page est vide à la dernière image de la scène, l'agenda reste au repos ──
+  // L'appelant se tait (fin de C3) : « À neuf heures, / c’est parfait. » sort par ses masques, 0,18 s.
+  // La dernière image (755) = agenda au repos, mention, aucun sous-titre, point sur 09:00 : l'état
+  // d'entrée de s5.
+  const debutChoix = TEXTE.aImage(eC3.film_out);                              // 24,9667 (image 749)
+  const finChoix = r6(debutChoix + SORTIE);
+  exiger(debutChoix >= lignesChoix[lignesChoix.length - 1].t + ENTREE_LIGNE - 1e-6,
+         "« c’est parfait. » sort avant d'être posé");
+  exiger(finChoix <= derniereImage + 1e-6, "le choix sort encore à la dernière image (" + finChoix + ")");
+  TEXTE.sortir(tl, choix, sc.local(debutChoix), { duree: SORTIE, ease: "power3.in" });
+  tl.set(els(choix), { opacity: 0 }, sc.local(finChoix));
+
+  // ── 8. L'image 756 appartient à s5 ──
+  // En flottant, 17,3 + 7,9 = 25,200000000000003 : à l'image 756 (25,2 s), l'hôte de s4 est encore affiché,
+  // SOUS celui de s5 qui commence (vérifié au snapshot : l'agenda de s4 est visible à 25,202 s, plus à 25,235).
+  // Deux mentions superposées au même pixel épaissiraient l'anticrénelage du texte pendant une image, et un
+  // écart entre les deux scènes y clignoterait. On efface donc l'objet et le sous-titre de s4 entre sa
+  // dernière image (755, local 7,8667) et l'image 756 (local 7,9 − ε) : l'image 756 est celle de s5 seule.
+  const tRelai = r6(derniereImage + UNE / 2 - sc.debut);                     // local 7,8833
+  exiger(tRelai > derniereImage - sc.debut && tRelai < sc.duree - 1e-3, "instant de relais hors de l'intervalle");
+  tl.set([agenda, document.getElementById("s4-texte")], { opacity: 0 }, tRelai);
+
+  window.__timelines["s4-agenda"] = tl;
+})();
+</script>
+</template>
+</body>
+</html>

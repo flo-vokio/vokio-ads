@@ -21,3 +21,5 @@ videos/showcase/son/*.wav
 videos/showcase/son/stems/
 videos/showcase/assets/son/*.wav
 videos/showcase/son/cache/
+videos/showcase/**/__pycache__/
+videos/showcase/son/monde/*.wav

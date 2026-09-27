@@ -1,6 +1,6 @@
 {
- "unite": "t = attaque du 1er mot dit de l'unité (s film) ; local = t arrondi à l'image − début de la scène ; fin_voix = fin du dernier mot dit (s film)",
- "note": "DÉRIVÉ de mots.json par TEXTE.poser (lib/texte.js) : lecture seule. Une scène pose ses lignes avec TEXTE.poser(el, lignes, {extrait, depuis}).",
+ "unite": "t = attaque du 1er mot dit de l'unité (s film) ; revele = t arrondi à l'image − 1 image (instant du tween de révélation) ; local = t arrondi à l'image − début de la scène ; fin_voix = fin du dernier mot dit (s film) ; x0/x1 = boîte de l'unité (avance), encre_x0/encre_x1 = bords d'encre, ligne_de_base (px film)",
+ "note": "DÉRIVÉ de mots.json par TEXTE.poser (lib/texte.js), avec le CSS de DONNEES.geometrie : lecture seule.",
  "pages": [
   {
    "scene": "s2-voix",
@@ -9,157 +9,387 @@
    "lignes": [
     "Bonjour, je suis Élise,"
    ],
+   "style": "s2_texte",
+   "top": 807,
+   "lignes_de_base": [
+    874
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 770.641,
+     "encre_x0": 96,
+     "encre_x1": 768.165,
+     "largeur": 680.641
+    }
+   ],
    "mots": [
     {
      "texte": "Bonjour,",
+     "ligne": 0,
      "rang": 0,
      "t": 5,
      "image": 150,
-     "local": 0.5,
-     "fin_voix": 5.43
+     "local": 0.3667,
+     "revele": 4.966667,
+     "fin_voix": 5.43,
+     "x0": 90,
+     "x1": 356.406,
+     "encre_x0": 96,
+     "encre_x1": 353.928,
+     "ligne_de_base": 874,
+     "encre_haut": 52,
+     "encre_bas": 12
     },
     {
      "texte": "je",
+     "ligne": 0,
      "rang": 1,
      "t": 5.68,
      "image": 170,
-     "local": 1.166667,
-     "fin_voix": 5.81
+     "local": 1.033367,
+     "revele": 5.633333,
+     "fin_voix": 5.81,
+     "x0": 374.406,
+     "x1": 432.812,
+     "encre_x0": 373.406,
+     "encre_x1": 430.406,
+     "ligne_de_base": 874,
+     "encre_haut": 52,
+     "encre_bas": 11
     },
     {
      "texte": "suis",
+     "ligne": 0,
      "rang": 2,
      "t": 5.81,
      "image": 174,
-     "local": 1.3,
-     "fin_voix": 6.055
+     "local": 1.1667,
+     "revele": 5.766667,
+     "fin_voix": 6.055,
+     "x0": 450.812,
+     "x1": 582.141,
+     "encre_x0": 453.812,
+     "encre_x1": 579.701,
+     "ligne_de_base": 874,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "Élise,",
+     "ligne": 0,
      "rang": 3,
      "t": 6.055,
      "image": 182,
-     "local": 1.566667,
-     "fin_voix": 6.29
+     "local": 1.433367,
+     "revele": 6.033333,
+     "fin_voix": 6.29,
+     "x0": 600.141,
+     "x1": 770.641,
+     "encre_x0": 606.141,
+     "encre_x1": 768.165,
+     "ligne_de_base": 874,
+     "encre_haut": 66,
+     "encre_bas": 12
     }
-   ]
+   ],
+   "cle": "s2-voix#0",
+   "sortie": {
+    "t": 6.3,
+    "duree": 0.15,
+    "note": "début de la sortie par les masques (s film) et durée ; lu par la scène"
+   }
   },
   {
    "scene": "s2-voix",
    "extrait": "A1",
    "depuis": 4,
    "lignes": [
-    "l’assistante vocale de la",
-    "Clinique vétérinaire du Port."
+    "l’assistante vocale",
+    "de la Clinique vétérinaire",
+    "du Port."
+   ],
+   "style": "s2_texte",
+   "top": 807,
+   "lignes_de_base": [
+    874,
+    958,
+    1042
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 694.953,
+     "encre_x0": 95,
+     "encre_x1": 692.553,
+     "largeur": 604.953
+    },
+    {
+     "x0": 90,
+     "x1": 901.984,
+     "encre_x0": 93,
+     "encre_x1": 899.581,
+     "largeur": 811.984
+    },
+    {
+     "x0": 90,
+     "x1": 344.328,
+     "encre_x0": 93,
+     "encre_x1": 341.845,
+     "largeur": 254.328
+    }
    ],
    "mots": [
     {
      "texte": "l’assistante",
+     "ligne": 0,
      "rang": 4,
      "t": 6.63,
      "image": 199,
-     "local": 2.133333,
-     "fin_voix": 7.048
+     "local": 2.000033,
+     "revele": 6.6,
+     "fin_voix": 7.048,
+     "x0": 90,
+     "x1": 461.953,
+     "encre_x0": 95,
+     "encre_x1": 459.56,
+     "ligne_de_base": 874,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "vocale",
+     "ligne": 0,
      "rang": 5,
      "t": 7.048,
      "image": 211,
-     "local": 2.533333,
-     "fin_voix": 7.388
+     "local": 2.400033,
+     "revele": 7,
+     "fin_voix": 7.388,
+     "x0": 479.953,
+     "x1": 694.953,
+     "encre_x0": 480.953,
+     "encre_x1": 692.553,
+     "ligne_de_base": 874,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "de",
+     "ligne": 1,
      "rang": 6,
      "t": 7.388,
      "image": 222,
-     "local": 2.9,
-     "fin_voix": 7.475
+     "local": 2.7667,
+     "revele": 7.366667,
+     "fin_voix": 7.475,
+     "x0": 90,
+     "x1": 172.516,
+     "encre_x0": 93,
+     "encre_x1": 170.12,
+     "ligne_de_base": 958,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "la",
+     "ligne": 1,
      "rang": 7,
      "t": 7.475,
      "image": 224,
-     "local": 2.966667,
-     "fin_voix": 7.59
+     "local": 2.833367,
+     "revele": 7.433333,
+     "fin_voix": 7.59,
+     "x0": 190.516,
+     "x1": 249.422,
+     "encre_x0": 195.516,
+     "encre_x1": 248.74,
+     "ligne_de_base": 958,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "Clinique",
+     "ligne": 1,
      "rang": 8,
      "t": 7.59,
      "image": 228,
-     "local": 3.1,
-     "fin_voix": 8.04
+     "local": 2.9667,
+     "revele": 7.566667,
+     "fin_voix": 8.04,
+     "x0": 267.422,
+     "x1": 536.141,
+     "encre_x0": 270.422,
+     "encre_x1": 533.734,
+     "ligne_de_base": 958,
+     "encre_haut": 53,
+     "encre_bas": 11
     },
     {
      "texte": "vétérinaire",
+     "ligne": 1,
      "rang": 9,
      "t": 8.04,
      "image": 241,
-     "local": 3.533333,
-     "fin_voix": 8.372
+     "local": 3.400033,
+     "revele": 8,
+     "fin_voix": 8.372,
+     "x0": 554.141,
+     "x1": 901.984,
+     "encre_x0": 555.141,
+     "encre_x1": 899.581,
+     "ligne_de_base": 958,
+     "encre_haut": 53,
+     "encre_bas": 1
     },
     {
      "texte": "du",
+     "ligne": 2,
      "rang": 10,
      "t": 8.372,
      "image": 251,
-     "local": 3.866667,
-     "fin_voix": 8.45
+     "local": 3.733367,
+     "revele": 8.333333,
+     "fin_voix": 8.45,
+     "x0": 90,
+     "x1": 172.812,
+     "encre_x0": 93,
+     "encre_x1": 167.4,
+     "ligne_de_base": 1042,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "Port.",
+     "ligne": 2,
      "rang": 11,
      "t": 8.5,
      "image": 255,
-     "local": 4,
-     "fin_voix": 8.7
+     "local": 3.8667,
+     "revele": 8.466667,
+     "fin_voix": 8.7,
+     "x0": 190.812,
+     "x1": 344.328,
+     "encre_x0": 196.812,
+     "encre_x1": 341.845,
+     "ligne_de_base": 1042,
+     "encre_haut": 52,
+     "encre_bas": 1
     }
-   ]
+   ],
+   "cle": "s2-voix#1",
+   "sortie": {
+    "t": 8.7,
+    "duree": 0.15,
+    "note": "début de la sortie par les masques (s film) et durée ; lu par la scène"
+   }
   },
   {
    "scene": "s2-voix",
    "extrait": "A1",
    "depuis": 12,
    "lignes": [
-    "Comment puis-je vous aider ?"
+    "Comment puis-je",
+    "vous aider ?"
+   ],
+   "style": "s2_texte",
+   "top": 807,
+   "lignes_de_base": [
+    874,
+    958
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 654.719,
+     "encre_x0": 93,
+     "encre_x1": 652.318,
+     "largeur": 564.719
+    },
+    {
+     "x0": 90,
+     "x1": 480.188,
+     "encre_x0": 91,
+     "encre_x1": 477.938,
+     "largeur": 390.188
+    }
    ],
    "mots": [
     {
      "texte": "Comment",
+     "ligne": 0,
      "rang": 12,
      "t": 9.1,
      "image": 273,
-     "local": 4.6,
-     "fin_voix": 9.342
+     "local": 4.4667,
+     "revele": 9.066667,
+     "fin_voix": 9.342,
+     "x0": 90,
+     "x1": 411.422,
+     "encre_x0": 93,
+     "encre_x1": 409.184,
+     "ligne_de_base": 874,
+     "encre_haut": 53,
+     "encre_bas": 2
     },
     {
      "texte": "puis-je",
+     "ligne": 0,
      "rang": 13,
      "t": 9.342,
      "image": 280,
-     "local": 4.833333,
-     "fin_voix": 9.562
+     "local": 4.700033,
+     "revele": 9.3,
+     "fin_voix": 9.562,
+     "x0": 429.422,
+     "x1": 654.719,
+     "encre_x0": 434.422,
+     "encre_x1": 652.318,
+     "ligne_de_base": 874,
+     "encre_haut": 52,
+     "encre_bas": 11
     },
     {
      "texte": "vous",
+     "ligne": 1,
      "rang": 14,
      "t": 9.562,
      "image": 287,
-     "local": 5.066667,
-     "fin_voix": 9.678
+     "local": 4.933367,
+     "revele": 9.533333,
+     "fin_voix": 9.678,
+     "x0": 90,
+     "x1": 245.391,
+     "encre_x0": 91,
+     "encre_x1": 242.936,
+     "ligne_de_base": 958,
+     "encre_haut": 40,
+     "encre_bas": 1
     },
     {
      "texte": "aider ?",
+     "ligne": 1,
      "rang": 15,
      "t": 9.678,
      "image": 290,
-     "local": 5.166667,
-     "fin_voix": 9.97
+     "local": 5.033367,
+     "revele": 9.633333,
+     "fin_voix": 9.97,
+     "x0": 263.391,
+     "x1": 480.188,
+     "encre_x0": 266.391,
+     "encre_x1": 477.938,
+     "ligne_de_base": 958,
+     "encre_haut": 53,
+     "encre_bas": 1
     }
-   ]
+   ],
+   "cle": "s2-voix#2",
+   "sortie": {
+    "t": 10.1,
+    "duree": 0.2,
+    "note": "début de la sortie par les masques (s film) et durée ; lu par la scène"
+   }
   },
   {
    "scene": "s3-ecoute",
@@ -170,72 +400,175 @@
     "euh, mange plus",
     "depuis hier."
    ],
+   "style": "s3_texte",
+   "top": 817,
+   "lignes_de_base": [
+    874,
+    946,
+    1018
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 585.406,
+     "encre_x0": 90,
+     "encre_x1": 579.375,
+     "largeur": 495.406
+    },
+    {
+     "x0": 90,
+     "x1": 464.688,
+     "encre_x0": 90,
+     "encre_x1": 465.359,
+     "largeur": 374.688
+    },
+    {
+     "x0": 90,
+     "x1": 358.25,
+     "encre_x0": 90,
+     "encre_x1": 352.226,
+     "largeur": 268.25
+    }
+   ],
    "mots": [
     {
      "texte": "mon chat,",
+     "ligne": 0,
      "rang": 0,
      "t": 10.56,
      "image": 317,
      "local": 0.166667,
-     "fin_voix": 10.915
+     "revele": 10.533333,
+     "fin_voix": 10.915,
+     "x0": 90,
+     "x1": 322.328,
+     "encre_x0": 90,
+     "encre_x1": 316.304,
+     "ligne_de_base": 874,
+     "encre_haut": 48,
+     "encre_bas": 10
     },
     {
      "texte": "euh,",
+     "ligne": 0,
      "rang": 2,
      "t": 10.915,
      "image": 327,
      "local": 0.5,
-     "fin_voix": 11.395
+     "revele": 10.866667,
+     "fin_voix": 11.395,
+     "x0": 333.219,
+     "x1": 432.484,
+     "encre_x0": 333.219,
+     "encre_x1": 426.467,
+     "ligne_de_base": 874,
+     "encre_haut": 48,
+     "encre_bas": 10
     },
     {
      "texte": "Moka,",
+     "ligne": 0,
      "rang": 3,
      "t": 11.395,
      "image": 342,
      "local": 1,
-     "fin_voix": 11.95
+     "revele": 11.366667,
+     "fin_voix": 11.95,
+     "x0": 443.375,
+     "x1": 585.406,
+     "encre_x0": 440.375,
+     "encre_x1": 579.375,
+     "ligne_de_base": 874,
+     "encre_haut": 48,
+     "encre_bas": 10
     },
     {
      "texte": "euh,",
+     "ligne": 1,
      "rang": 4,
      "t": 12.52,
      "image": 376,
      "local": 2.133333,
-     "fin_voix": 12.73
+     "revele": 12.5,
+     "fin_voix": 12.73,
+     "x0": 90,
+     "x1": 189.266,
+     "encre_x0": 90,
+     "encre_x1": 183.248,
+     "ligne_de_base": 946,
+     "encre_haut": 48,
+     "encre_bas": 10
     },
     {
      "texte": "mange",
+     "ligne": 1,
      "rang": 5,
      "t": 12.73,
      "image": 382,
      "local": 2.333333,
-     "fin_voix": 12.96
+     "revele": 12.7,
+     "fin_voix": 12.96,
+     "x0": 200.156,
+     "x1": 357.797,
+     "encre_x0": 200.156,
+     "encre_x1": 358.516,
+     "ligne_de_base": 946,
+     "encre_haut": 39,
+     "encre_bas": 14
     },
     {
      "texte": "plus",
+     "ligne": 1,
      "rang": 6,
      "t": 13.055,
      "image": 392,
      "local": 2.666667,
-     "fin_voix": 13.272
+     "revele": 13.033333,
+     "fin_voix": 13.272,
+     "x0": 368.688,
+     "x1": 464.688,
+     "encre_x0": 362.688,
+     "encre_x1": 465.359,
+     "ligne_de_base": 946,
+     "encre_haut": 48,
+     "encre_bas": 14
     },
     {
      "texte": "depuis",
+     "ligne": 2,
      "rang": 7,
      "t": 13.272,
      "image": 398,
      "local": 2.866667,
-     "fin_voix": 13.72
+     "revele": 13.233333,
+     "fin_voix": 13.72,
+     "x0": 90,
+     "x1": 241.688,
+     "encre_x0": 90,
+     "encre_x1": 242.352,
+     "ligne_de_base": 1018,
+     "encre_haut": 48,
+     "encre_bas": 14
     },
     {
      "texte": "hier.",
+     "ligne": 2,
      "rang": 8,
      "t": 13.72,
      "image": 412,
      "local": 3.333333,
-     "fin_voix": 13.9
+     "revele": 13.7,
+     "fin_voix": 13.9,
+     "x0": 252.578,
+     "x1": 358.25,
+     "encre_x0": 252.578,
+     "encre_x1": 352.226,
+     "ligne_de_base": 1018,
+     "encre_haut": 48,
+     "encre_bas": 1
     }
-   ]
+   ],
+   "cle": "s3-ecoute#0"
   },
   {
    "scene": "s3-ecoute",
@@ -245,48 +578,116 @@
     "Demain, vous avez",
     "des disponibilités ?"
    ],
+   "style": "s3_texte",
+   "top": 817,
+   "lignes_de_base": [
+    874,
+    946
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 519.734,
+     "encre_x0": 87,
+     "encre_x1": 521.085,
+     "largeur": 429.734
+    },
+    {
+     "x0": 90,
+     "x1": 519.594,
+     "encre_x0": 90,
+     "encre_x1": 521.672,
+     "largeur": 429.594
+    }
+   ],
    "mots": [
     {
      "texte": "Demain,",
+     "ligne": 0,
      "rang": 1,
      "t": 15.372,
      "image": 461,
      "local": 4.966667,
-     "fin_voix": 15.752
+     "revele": 15.333333,
+     "fin_voix": 15.752,
+     "x0": 90,
+     "x1": 290.391,
+     "encre_x0": 87,
+     "encre_x1": 284.368,
+     "ligne_de_base": 874,
+     "encre_haut": 47,
+     "encre_bas": 10
     },
     {
      "texte": "vous",
+     "ligne": 0,
      "rang": 2,
      "t": 15.752,
      "image": 473,
      "local": 5.366667,
-     "fin_voix": 15.838
+     "revele": 15.733333,
+     "fin_voix": 15.838,
+     "x0": 301.281,
+     "x1": 405.219,
+     "encre_x0": 302.281,
+     "encre_x1": 405.889,
+     "ligne_de_base": 874,
+     "encre_haut": 34,
+     "encre_bas": 1
     },
     {
      "texte": "avez",
+     "ligne": 0,
      "rang": 3,
      "t": 15.838,
      "image": 475,
      "local": 5.433333,
-     "fin_voix": 16.058
+     "revele": 15.8,
+     "fin_voix": 16.058,
+     "x0": 416.109,
+     "x1": 519.734,
+     "encre_x0": 416.109,
+     "encre_x1": 521.085,
+     "ligne_de_base": 874,
+     "encre_haut": 34,
+     "encre_bas": 1
     },
     {
      "texte": "des",
+     "ligne": 1,
      "rang": 4,
      "t": 16.058,
      "image": 482,
      "local": 5.666667,
-     "fin_voix": 16.188
+     "revele": 16.033333,
+     "fin_voix": 16.188,
+     "x0": 90,
+     "x1": 161.938,
+     "encre_x0": 90,
+     "encre_x1": 162.608,
+     "ligne_de_base": 946,
+     "encre_haut": 48,
+     "encre_bas": 1
     },
     {
      "texte": "disponibilités ?",
+     "ligne": 1,
      "rang": 5,
      "t": 16.188,
      "image": 486,
      "local": 5.8,
-     "fin_voix": 16.94
+     "revele": 16.166667,
+     "fin_voix": 16.94,
+     "x0": 172.828,
+     "x1": 519.594,
+     "encre_x0": 172.828,
+     "encre_x1": 521.672,
+     "ligne_de_base": 946,
+     "encre_haut": 49,
+     "encre_bas": 14
     }
-   ]
+   ],
+   "cle": "s3-ecoute#1"
   },
   {
    "scene": "s4-agenda",
@@ -295,24 +696,57 @@
    "lignes": [
     "Laissez-moi voir."
    ],
+   "style": "haut_agente",
+   "top": 263,
+   "lignes_de_base": [
+    330
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 639.734,
+     "encre_x0": 96,
+     "encre_x1": 637.255,
+     "largeur": 549.734
+    }
+   ],
    "mots": [
     {
      "texte": "Laissez-moi",
+     "ligne": 0,
      "rang": 0,
      "t": 17.59,
      "image": 528,
      "local": 0.3,
-     "fin_voix": 18.005
+     "revele": 17.566667,
+     "fin_voix": 18.005,
+     "x0": 90,
+     "x1": 489.031,
+     "encre_x0": 96,
+     "encre_x1": 483.456,
+     "ligne_de_base": 330,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "voir.",
+     "ligne": 0,
      "rang": 1,
      "t": 18.005,
      "image": 540,
      "local": 0.7,
-     "fin_voix": 18.37
+     "revele": 17.966667,
+     "fin_voix": 18.37,
+     "x0": 507.031,
+     "x1": 639.734,
+     "encre_x0": 508.031,
+     "encre_x1": 637.255,
+     "ligne_de_base": 330,
+     "encre_haut": 52,
+     "encre_bas": 1
     }
-   ]
+   ],
+   "cle": "s4-agenda#0"
   },
   {
    "scene": "s4-agenda",
@@ -323,96 +757,226 @@
     "neuf heures, dix heures",
     "ou onze heures."
    ],
+   "style": "haut_agente",
+   "top": 263,
+   "lignes_de_base": [
+    330,
+    414,
+    498
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 839.984,
+     "encre_x0": 94,
+     "encre_x1": 837.69,
+     "largeur": 749.984
+    },
+    {
+     "x0": 90,
+     "x1": 851.938,
+     "encre_x0": 95,
+     "encre_x1": 849.495,
+     "largeur": 761.938
+    },
+    {
+     "x0": 90,
+     "x1": 603.812,
+     "encre_x0": 93,
+     "encre_x1": 601.326,
+     "largeur": 513.812
+    }
+   ],
    "mots": [
     {
      "texte": "Je",
+     "ligne": 0,
      "rang": 2,
      "t": 19.8,
      "image": 594,
      "local": 2.5,
-     "fin_voix": 19.83
+     "revele": 19.766667,
+     "fin_voix": 19.83,
+     "x0": 90,
+     "x1": 172.953,
+     "encre_x0": 94,
+     "encre_x1": 170.552,
+     "ligne_de_base": 330,
+     "encre_haut": 52,
+     "encre_bas": 2
     },
     {
      "texte": "peux",
+     "ligne": 0,
      "rang": 3,
      "t": 19.83,
      "image": 595,
      "local": 2.533333,
-     "fin_voix": 19.925
+     "revele": 19.8,
+     "fin_voix": 19.925,
+     "x0": 190.953,
+     "x1": 355.188,
+     "encre_x0": 195.953,
+     "encre_x1": 352.065,
+     "ligne_de_base": 330,
+     "encre_haut": 40,
+     "encre_bas": 11
     },
     {
      "texte": "vous",
+     "ligne": 0,
      "rang": 4,
      "t": 19.925,
      "image": 598,
      "local": 2.633333,
-     "fin_voix": 20.02
+     "revele": 19.9,
+     "fin_voix": 20.02,
+     "x0": 373.188,
+     "x1": 528.578,
+     "encre_x0": 374.188,
+     "encre_x1": 526.124,
+     "ligne_de_base": 330,
+     "encre_haut": 40,
+     "encre_bas": 1
     },
     {
      "texte": "proposer",
+     "ligne": 0,
      "rang": 5,
      "t": 20.02,
      "image": 601,
      "local": 2.733333,
-     "fin_voix": 20.555
+     "revele": 20,
+     "fin_voix": 20.555,
+     "x0": 546.578,
+     "x1": 839.984,
+     "encre_x0": 551.578,
+     "encre_x1": 837.69,
+     "ligne_de_base": 330,
+     "encre_haut": 40,
+     "encre_bas": 11
     },
     {
      "texte": "neuf",
+     "ligne": 1,
      "rang": 6,
      "t": 20.555,
      "image": 617,
      "local": 3.266667,
-     "fin_voix": 20.785
+     "revele": 20.533333,
+     "fin_voix": 20.785,
+     "x0": 90,
+     "x1": 238.828,
+     "encre_x0": 95,
+     "encre_x1": 236.384,
+     "ligne_de_base": 414,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "heures,",
+     "ligne": 1,
      "rang": 7,
      "t": 20.785,
      "image": 624,
      "local": 3.5,
-     "fin_voix": 21.27
+     "revele": 20.766667,
+     "fin_voix": 21.27,
+     "x0": 256.828,
+     "x1": 494.875,
+     "encre_x0": 261.828,
+     "encre_x1": 492.388,
+     "ligne_de_base": 414,
+     "encre_haut": 52,
+     "encre_bas": 12
     },
     {
      "texte": "dix",
+     "ligne": 1,
      "rang": 8,
      "t": 21.42,
      "image": 643,
      "local": 4.133333,
-     "fin_voix": 21.57
+     "revele": 21.4,
+     "fin_voix": 21.57,
+     "x0": 512.875,
+     "x1": 610.375,
+     "encre_x0": 515.875,
+     "encre_x1": 607.243,
+     "ligne_de_base": 414,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "heures",
+     "ligne": 1,
      "rang": 9,
      "t": 21.57,
      "image": 647,
      "local": 4.266667,
-     "fin_voix": 22.02
+     "revele": 21.533333,
+     "fin_voix": 22.02,
+     "x0": 628.375,
+     "x1": 851.938,
+     "encre_x0": 633.375,
+     "encre_x1": 849.495,
+     "ligne_de_base": 414,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "ou",
+     "ligne": 2,
      "rang": 10,
      "t": 22.12,
      "image": 664,
      "local": 4.833333,
-     "fin_voix": 22.2
+     "revele": 22.1,
+     "fin_voix": 22.2,
+     "x0": 90,
+     "x1": 171.938,
+     "encre_x0": 93,
+     "encre_x1": 166.536,
+     "ligne_de_base": 498,
+     "encre_haut": 40,
+     "encre_bas": 1
     },
     {
      "texte": "onze",
+     "ligne": 2,
      "rang": 11,
      "t": 22.2,
      "image": 666,
      "local": 4.9,
-     "fin_voix": 22.37
+     "revele": 22.166667,
+     "fin_voix": 22.37,
+     "x0": 189.938,
+     "x1": 347.766,
+     "encre_x0": 192.938,
+     "encre_x1": 345.37,
+     "ligne_de_base": 498,
+     "encre_haut": 40,
+     "encre_bas": 1
     },
     {
      "texte": "heures.",
+     "ligne": 2,
      "rang": 12,
      "t": 22.37,
      "image": 671,
      "local": 5.066667,
-     "fin_voix": 22.69
+     "revele": 22.333333,
+     "fin_voix": 22.69,
+     "x0": 365.766,
+     "x1": 603.812,
+     "encre_x0": 370.766,
+     "encre_x1": 601.326,
+     "ligne_de_base": 498,
+     "encre_haut": 52,
+     "encre_bas": 1
     }
-   ]
+   ],
+   "cle": "s4-agenda#1"
   },
   {
    "scene": "s4-agenda",
@@ -422,48 +986,116 @@
     "À neuf heures,",
     "c’est parfait."
    ],
+   "style": "haut_appelant",
+   "top": 293,
+   "lignes_de_base": [
+    350,
+    422
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 409.906,
+     "encre_x0": 85,
+     "encre_x1": 403.888,
+     "largeur": 319.906
+    },
+    {
+     "x0": 90,
+     "x1": 369,
+     "encre_x0": 90,
+     "encre_x1": 362.981,
+     "largeur": 279
+    }
+   ],
    "mots": [
     {
      "texte": "À",
+     "ligne": 0,
      "rang": 2,
      "t": 23.97,
      "image": 719,
      "local": 6.666667,
-     "fin_voix": 24.085
+     "revele": 23.933333,
+     "fin_voix": 24.085,
+     "x0": 90,
+     "x1": 119.25,
+     "encre_x0": 85,
+     "encre_x1": 120,
+     "ligne_de_base": 350,
+     "encre_haut": 61,
+     "encre_bas": 0
     },
     {
      "texte": "neuf",
+     "ligne": 0,
      "rang": 3,
      "t": 24.085,
      "image": 723,
      "local": 6.8,
-     "fin_voix": 24.26
+     "revele": 24.066667,
+     "fin_voix": 24.26,
+     "x0": 130.141,
+     "x1": 235.75,
+     "encre_x0": 130.141,
+     "encre_x1": 244.268,
+     "ligne_de_base": 350,
+     "encre_haut": 48,
+     "encre_bas": 1
     },
     {
      "texte": "heures,",
+     "ligne": 0,
      "rang": 4,
      "t": 24.26,
      "image": 728,
      "local": 6.966667,
-     "fin_voix": 24.405
+     "revele": 24.233333,
+     "fin_voix": 24.405,
+     "x0": 246.641,
+     "x1": 409.906,
+     "encre_x0": 246.641,
+     "encre_x1": 403.888,
+     "ligne_de_base": 350,
+     "encre_haut": 48,
+     "encre_bas": 10
     },
     {
      "texte": "c’est",
+     "ligne": 1,
      "rang": 5,
      "t": 24.405,
      "image": 732,
      "local": 7.1,
-     "fin_voix": 24.565
+     "revele": 24.366667,
+     "fin_voix": 24.565,
+     "x0": 90,
+     "x1": 179.547,
+     "encre_x0": 90,
+     "encre_x1": 181.128,
+     "ligne_de_base": 422,
+     "encre_haut": 47,
+     "encre_bas": 1
     },
     {
      "texte": "parfait.",
+     "ligne": 1,
      "rang": 6,
      "t": 24.565,
      "image": 737,
      "local": 7.266667,
-     "fin_voix": 24.95
+     "revele": 24.533333,
+     "fin_voix": 24.95,
+     "x0": 190.438,
+     "x1": 369,
+     "encre_x0": 184.438,
+     "encre_x1": 362.981,
+     "ligne_de_base": 422,
+     "encre_haut": 48,
+     "encre_bas": 14
     }
-   ]
+   ],
+   "cle": "s4-agenda#2"
   },
   {
    "scene": "s5-rendez-vous",
@@ -473,164 +1105,405 @@
     "Parfait, je vous note ça",
     "pour Florian,"
    ],
+   "style": "haut_agente",
+   "top": 263,
+   "lignes_de_base": [
+    330,
+    414
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 834.75,
+     "encre_x0": 96,
+     "encre_x1": 834.069,
+     "largeur": 744.75
+    },
+    {
+     "x0": 90,
+     "x1": 497.406,
+     "encre_x0": 95,
+     "encre_x1": 494.919,
+     "largeur": 407.406
+    }
+   ],
    "mots": [
     {
      "texte": "Parfait,",
+     "ligne": 0,
      "rang": 0,
      "t": 26.24,
      "image": 787,
      "local": 1.033333,
-     "fin_voix": 26.59
+     "revele": 26.2,
+     "fin_voix": 26.59,
+     "x0": 90,
+     "x1": 322.141,
+     "encre_x0": 96,
+     "encre_x1": 319.656,
+     "ligne_de_base": 330,
+     "encre_haut": 52,
+     "encre_bas": 12
     },
     {
      "texte": "je",
+     "ligne": 0,
      "rang": 1,
      "t": 26.59,
      "image": 798,
      "local": 1.4,
-     "fin_voix": 26.695
+     "revele": 26.566667,
+     "fin_voix": 26.695,
+     "x0": 340.141,
+     "x1": 398.547,
+     "encre_x0": 339.141,
+     "encre_x1": 396.141,
+     "ligne_de_base": 330,
+     "encre_haut": 52,
+     "encre_bas": 11
     },
     {
      "texte": "vous",
+     "ligne": 0,
      "rang": 2,
      "t": 26.695,
      "image": 801,
      "local": 1.5,
-     "fin_voix": 26.785
+     "revele": 26.666667,
+     "fin_voix": 26.785,
+     "x0": 416.547,
+     "x1": 571.938,
+     "encre_x0": 417.547,
+     "encre_x1": 569.483,
+     "ligne_de_base": 330,
+     "encre_haut": 40,
+     "encre_bas": 1
     },
     {
      "texte": "note",
+     "ligne": 0,
      "rang": 3,
      "t": 26.785,
      "image": 804,
      "local": 1.6,
-     "fin_voix": 26.955
+     "revele": 26.766667,
+     "fin_voix": 26.955,
+     "x0": 589.938,
+     "x1": 737.469,
+     "encre_x0": 594.938,
+     "encre_x1": 735.074,
+     "ligne_de_base": 330,
+     "encre_haut": 48,
+     "encre_bas": 1
     },
     {
      "texte": "ça",
+     "ligne": 0,
      "rang": 4,
      "t": 26.955,
      "image": 809,
      "local": 1.766667,
-     "fin_voix": 27.115
+     "revele": 26.933333,
+     "fin_voix": 27.115,
+     "x0": 755.469,
+     "x1": 834.75,
+     "encre_x0": 758.469,
+     "encre_x1": 834.069,
+     "ligne_de_base": 330,
+     "encre_haut": 40,
+     "encre_bas": 16
     },
     {
      "texte": "pour",
+     "ligne": 1,
      "rang": 5,
      "t": 27.115,
      "image": 813,
      "local": 1.9,
-     "fin_voix": 27.25
+     "revele": 27.066667,
+     "fin_voix": 27.25,
+     "x0": 90,
+     "x1": 241.359,
+     "encre_x0": 95,
+     "encre_x1": 239.056,
+     "ligne_de_base": 414,
+     "encre_haut": 40,
+     "encre_bas": 11
     },
     {
      "texte": "Florian,",
+     "ligne": 1,
      "rang": 6,
      "t": 27.25,
      "image": 818,
      "local": 2.066667,
-     "fin_voix": 27.64
+     "revele": 27.233333,
+     "fin_voix": 27.64,
+     "x0": 259.359,
+     "x1": 497.406,
+     "encre_x0": 265.359,
+     "encre_x1": 494.919,
+     "ligne_de_base": 414,
+     "encre_haut": 52,
+     "encre_bas": 12
     }
-   ]
+   ],
+   "cle": "s5-rendez-vous#0"
   },
   {
    "scene": "s5-rendez-vous",
    "extrait": "A4",
    "depuis": 7,
    "lignes": [
-    "pour une consultation vétérinaire,",
-    "le samedi dix-neuf septembre",
-    "à neuf heures."
+    "pour une consultation",
+    "vétérinaire,"
+   ],
+   "style": "haut_agente",
+   "top": 263,
+   "lignes_de_base": [
+    330,
+    414
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 803.844,
+     "encre_x0": 95,
+     "encre_x1": 798.997,
+     "largeur": 713.844
+    },
+    {
+     "x0": 90,
+     "x1": 452.312,
+     "encre_x0": 91,
+     "encre_x1": 449.832,
+     "largeur": 362.312
+    }
    ],
    "mots": [
     {
      "texte": "pour",
+     "ligne": 0,
      "rang": 7,
      "t": 27.82,
      "image": 835,
      "local": 2.633333,
-     "fin_voix": 27.94
+     "revele": 27.8,
+     "fin_voix": 27.94,
+     "x0": 90,
+     "x1": 241.359,
+     "encre_x0": 95,
+     "encre_x1": 239.056,
+     "ligne_de_base": 330,
+     "encre_haut": 40,
+     "encre_bas": 11
     },
     {
      "texte": "une",
+     "ligne": 0,
      "rang": 8,
      "t": 27.94,
      "image": 838,
      "local": 2.733333,
-     "fin_voix": 28.038
+     "revele": 27.9,
+     "fin_voix": 28.038,
+     "x0": 259.359,
+     "x1": 382.125,
+     "encre_x0": 264.359,
+     "encre_x1": 379.727,
+     "ligne_de_base": 330,
+     "encre_haut": 40,
+     "encre_bas": 1
     },
     {
      "texte": "consultation",
+     "ligne": 0,
      "rang": 9,
      "t": 28.038,
      "image": 841,
      "local": 2.833333,
-     "fin_voix": 28.695
+     "revele": 28,
+     "fin_voix": 28.695,
+     "x0": 400.125,
+     "x1": 803.844,
+     "encre_x0": 403.125,
+     "encre_x1": 798.997,
+     "ligne_de_base": 330,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "vétérinaire,",
+     "ligne": 1,
      "rang": 10,
      "t": 28.695,
      "image": 861,
      "local": 3.5,
-     "fin_voix": 29.3
+     "revele": 28.666667,
+     "fin_voix": 29.3,
+     "x0": 90,
+     "x1": 452.312,
+     "encre_x0": 91,
+     "encre_x1": 449.832,
+     "ligne_de_base": 414,
+     "encre_haut": 53,
+     "encre_bas": 12
+    }
+   ],
+   "cle": "s5-rendez-vous#1"
+  },
+  {
+   "scene": "s5-rendez-vous",
+   "extrait": "A4",
+   "depuis": 11,
+   "lignes": [
+    "le samedi dix-neuf",
+    "septembre à neuf heures."
+   ],
+   "style": "haut_agente",
+   "top": 263,
+   "lignes_de_base": [
+    330,
+    414
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 694.688,
+     "encre_x0": 95,
+     "encre_x1": 692.234,
+     "largeur": 604.688
     },
     {
+     "x0": 90,
+     "x1": 924.016,
+     "encre_x0": 93,
+     "encre_x1": 921.529,
+     "largeur": 834.016
+    }
+   ],
+   "mots": [
+    {
      "texte": "le",
+     "ligne": 0,
      "rang": 11,
      "t": 29.38,
      "image": 881,
      "local": 4.166667,
-     "fin_voix": 29.45
+     "revele": 29.333333,
+     "fin_voix": 29.45,
+     "x0": 90,
+     "x1": 149.188,
+     "encre_x0": 95,
+     "encre_x1": 146.792,
+     "ligne_de_base": 330,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "samedi",
+     "ligne": 0,
      "rang": 12,
      "t": 29.45,
      "image": 884,
      "local": 4.266667,
-     "fin_voix": 29.823
+     "revele": 29.433333,
+     "fin_voix": 29.823,
+     "x0": 167.188,
+     "x1": 405.234,
+     "encre_x0": 170.188,
+     "encre_x1": 399.652,
+     "ligne_de_base": 330,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "dix-neuf",
+     "ligne": 0,
      "rang": 13,
      "t": 29.823,
      "image": 895,
      "local": 4.633333,
-     "fin_voix": 29.99
+     "revele": 29.8,
+     "fin_voix": 29.99,
+     "x0": 423.234,
+     "x1": 694.688,
+     "encre_x0": 426.234,
+     "encre_x1": 692.234,
+     "ligne_de_base": 330,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "septembre",
+     "ligne": 1,
      "rang": 14,
      "t": 30.09,
      "image": 903,
      "local": 4.9,
-     "fin_voix": 30.468
+     "revele": 30.066667,
+     "fin_voix": 30.468,
+     "x0": 90,
+     "x1": 443.453,
+     "encre_x0": 93,
+     "encre_x1": 441.056,
+     "ligne_de_base": 414,
+     "encre_haut": 52,
+     "encre_bas": 11
     },
     {
      "texte": "à",
+     "ligne": 1,
      "rang": 15,
      "t": 30.468,
      "image": 914,
      "local": 5.266667,
-     "fin_voix": 30.555
+     "revele": 30.433333,
+     "fin_voix": 30.555,
+     "x0": 461.453,
+     "x1": 501.141,
+     "encre_x0": 464.453,
+     "encre_x1": 500.453,
+     "ligne_de_base": 414,
+     "encre_haut": 53,
+     "encre_bas": 1
     },
     {
      "texte": "neuf",
+     "ligne": 1,
      "rang": 16,
      "t": 30.555,
      "image": 917,
      "local": 5.366667,
-     "fin_voix": 30.675
+     "revele": 30.533333,
+     "fin_voix": 30.675,
+     "x0": 519.141,
+     "x1": 667.969,
+     "encre_x0": 524.141,
+     "encre_x1": 665.525,
+     "ligne_de_base": 414,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "heures.",
+     "ligne": 1,
      "rang": 17,
      "t": 30.675,
      "image": 920,
      "local": 5.466667,
-     "fin_voix": 30.9
+     "revele": 30.633333,
+     "fin_voix": 30.9,
+     "x0": 685.969,
+     "x1": 924.016,
+     "encre_x0": 690.969,
+     "encre_x1": 921.529,
+     "ligne_de_base": 414,
+     "encre_haut": 52,
+     "encre_bas": 1
     }
-   ]
+   ],
+   "cle": "s5-rendez-vous#2"
   },
   {
    "scene": "s6-sms",
@@ -640,56 +1513,262 @@
     "Vous recevrez un SMS",
     "de confirmation."
    ],
+   "style": "haut_agente",
+   "top": 263,
+   "lignes_de_base": [
+    330,
+    414
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 826.094,
+     "encre_x0": 91,
+     "encre_x1": 823.002,
+     "largeur": 736.094
+    },
+    {
+     "x0": 90,
+     "x1": 616.266,
+     "encre_x0": 93,
+     "encre_x1": 613.78,
+     "largeur": 526.266
+    }
+   ],
    "mots": [
     {
      "texte": "Vous",
+     "ligne": 0,
      "rang": 18,
      "t": 31.39,
      "image": 942,
      "local": 0.05,
-     "fin_voix": 31.492
+     "revele": 31.366667,
+     "fin_voix": 31.492,
+     "x0": 90,
+     "x1": 253.812,
+     "encre_x0": 91,
+     "encre_x1": 251.36,
+     "ligne_de_base": 330,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "recevrez",
+     "ligne": 0,
      "rang": 19,
      "t": 31.492,
      "image": 945,
      "local": 0.15,
-     "fin_voix": 31.92
+     "revele": 31.466667,
+     "fin_voix": 31.92,
+     "x0": 271.812,
+     "x1": 551.688,
+     "encre_x0": 276.812,
+     "encre_x1": 548.013,
+     "ligne_de_base": 330,
+     "encre_haut": 40,
+     "encre_bas": 1
     },
     {
      "texte": "un",
+     "ligne": 0,
      "rang": 20,
      "t": 31.92,
      "image": 958,
      "local": 0.583333,
-     "fin_voix": 32.068
+     "revele": 31.9,
+     "fin_voix": 32.068,
+     "x0": 569.688,
+     "x1": 652.922,
+     "encre_x0": 574.688,
+     "encre_x1": 648.088,
+     "ligne_de_base": 330,
+     "encre_haut": 40,
+     "encre_bas": 1
     },
     {
      "texte": "SMS",
+     "ligne": 0,
      "rang": 21,
      "t": 32.068,
      "image": 962,
      "local": 0.716667,
-     "fin_voix": 32.315
+     "revele": 32.033333,
+     "fin_voix": 32.315,
+     "x0": 670.922,
+     "x1": 826.094,
+     "encre_x0": 673.922,
+     "encre_x1": 823.002,
+     "ligne_de_base": 330,
+     "encre_haut": 53,
+     "encre_bas": 2
     },
     {
      "texte": "de",
+     "ligne": 1,
      "rang": 22,
      "t": 32.315,
      "image": 969,
      "local": 0.95,
-     "fin_voix": 32.435
+     "revele": 32.266667,
+     "fin_voix": 32.435,
+     "x0": 90,
+     "x1": 172.516,
+     "encre_x0": 93,
+     "encre_x1": 170.12,
+     "ligne_de_base": 414,
+     "encre_haut": 52,
+     "encre_bas": 1
     },
     {
      "texte": "confirmation.",
+     "ligne": 1,
      "rang": 23,
      "t": 32.435,
      "image": 973,
      "local": 1.083333,
-     "fin_voix": 33.05
+     "revele": 32.4,
+     "fin_voix": 33.05,
+     "x0": 190.516,
+     "x1": 616.266,
+     "encre_x0": 193.516,
+     "encre_x1": 613.78,
+     "ligne_de_base": 414,
+     "encre_haut": 52,
+     "encre_bas": 1
     }
-   ]
+   ],
+   "cle": "s6-sms#0",
+   "sortie": {
+    "t": 33.7,
+    "duree": 0.18,
+    "note": "début de la sortie par les masques (s film) et durée ; lu par la scène"
+   }
+  },
+  {
+   "scene": "s6-sms",
+   "extrait": "C4",
+   "depuis": 0,
+   "lignes": [
+    "Super, merci beaucoup.",
+    "Au revoir."
+   ],
+   "style": "haut_appelant",
+   "top": 293,
+   "lignes_de_base": [
+    350,
+    422
+   ],
+   "largeurs": [
+    {
+     "x0": 90,
+     "x1": 625.328,
+     "encre_x0": 90,
+     "encre_x1": 619.306,
+     "largeur": 535.328
+    },
+    {
+     "x0": 90,
+     "x1": 311.078,
+     "encre_x0": 85,
+     "encre_x1": 305.055,
+     "largeur": 221.078
+    }
+   ],
+   "mots": [
+    {
+     "texte": "Super,",
+     "ligne": 0,
+     "rang": 0,
+     "t": 34.03,
+     "image": 1021,
+     "local": 2.683333,
+     "revele": 34,
+     "fin_voix": 34.325,
+     "x0": 90,
+     "x1": 235.219,
+     "encre_x0": 90,
+     "encre_x1": 229.2,
+     "ligne_de_base": 350,
+     "encre_haut": 47,
+     "encre_bas": 14
+    },
+    {
+     "texte": "merci",
+     "ligne": 0,
+     "rang": 1,
+     "t": 34.325,
+     "image": 1030,
+     "local": 2.983333,
+     "revele": 34.3,
+     "fin_voix": 34.6,
+     "x0": 246.109,
+     "x1": 379.359,
+     "encre_x0": 246.109,
+     "encre_x1": 378.925,
+     "ligne_de_base": 350,
+     "encre_haut": 46,
+     "encre_bas": 1
+    },
+    {
+     "texte": "beaucoup.",
+     "ligne": 0,
+     "rang": 2,
+     "t": 34.6,
+     "image": 1038,
+     "local": 3.25,
+     "revele": 34.566667,
+     "fin_voix": 35.08,
+     "x0": 390.25,
+     "x1": 625.328,
+     "encre_x0": 391.25,
+     "encre_x1": 619.306,
+     "ligne_de_base": 350,
+     "encre_haut": 48,
+     "encre_bas": 14
+    },
+    {
+     "texte": "Au",
+     "ligne": 1,
+     "rang": 3,
+     "t": 35.12,
+     "image": 1054,
+     "local": 3.783333,
+     "revele": 35.1,
+     "fin_voix": 35.24,
+     "x0": 90,
+     "x1": 150.484,
+     "encre_x0": 85,
+     "encre_x1": 149.968,
+     "ligne_de_base": 422,
+     "encre_haut": 47,
+     "encre_bas": 1
+    },
+    {
+     "texte": "revoir.",
+     "ligne": 1,
+     "rang": 4,
+     "t": 35.24,
+     "image": 1057,
+     "local": 3.883333,
+     "revele": 35.2,
+     "fin_voix": 35.42,
+     "x0": 161.375,
+     "x1": 311.078,
+     "encre_x0": 161.375,
+     "encre_x1": 305.055,
+     "ligne_de_base": 422,
+     "encre_haut": 46,
+     "encre_bas": 1
+    }
+   ],
+   "cle": "s6-sms#1",
+   "sortie": {
+    "t": 35.85,
+    "duree": 0.0,
+    "note": "début de la sortie par les masques (s film) et durée ; lu par la scène"
+   }
   }
  ]
 }

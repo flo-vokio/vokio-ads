@@ -1,5 +1,5 @@
 {
- "note": "vue de son/dialogue.json + pages ; texte_dit = transcription d'origine, texte_montre = pages de la bible posées par TEXTE.poser (sous-suites prouvées)",
+ "note": "vue de son/dialogue.json + pages ; texte_dit = transcription d'origine, texte_montre = pages v2 posées par TEXTE.poser (sous-suites prouvées)",
  "extraits": [
   {
    "id": "A1",
@@ -15,8 +15,8 @@
    "texte_dit": "Bonjour, je suis Élise, l'assistante vocale de la Clinique vétérinaire du Port ! Comment puis-je vous aider ?",
    "texte_montre": [
     "Bonjour, je suis Élise,",
-    "l’assistante vocale de la / Clinique vétérinaire du Port.",
-    "Comment puis-je vous aider ?"
+    "l’assistante vocale / de la Clinique vétérinaire / du Port.",
+    "Comment puis-je / vous aider ?"
    ]
   },
   {
@@ -98,7 +98,8 @@
    "texte_dit": "Parfait, je vous note ça pour Florian, pour une consultation vétérinaire, le samedi dix-neuf septembre à neuf heures. Vous recevrez un SMS de confirmation.",
    "texte_montre": [
     "Parfait, je vous note ça / pour Florian,",
-    "pour une consultation vétérinaire, / le samedi dix-neuf septembre / à neuf heures.",
+    "pour une consultation / vétérinaire,",
+    "le samedi dix-neuf / septembre à neuf heures.",
     "Vous recevrez un SMS / de confirmation."
    ]
   },
@@ -110,11 +111,13 @@
    "source_out": 76.55,
    "original_in": 79.25,
    "original_out": 80.75,
-   "film_in": 34.45,
-   "film_out": 35.95,
-   "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute.",
+   "film_in": 33.98,
+   "film_out": 35.48,
+   "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute. v2 : décalage −41,07, le même que A4 : C4 suit A4 après son VRAI blanc de 0,75 s (source 74,30 → 75,05) ; la v1 (−40,60) l'allongeait de 0,47 s pour loger le SMS pendant l'appel.",
    "texte_dit": "Super, merci beaucoup. Au revoir.",
-   "texte_montre": []
+   "texte_montre": [
+    "Super, merci beaucoup. / Au revoir."
+   ]
   }
  ]
 }

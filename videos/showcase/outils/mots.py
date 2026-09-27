@@ -40,6 +40,12 @@ HF = "/opt/vokio-ads/bin/hf"
 SR = 16000
 FPS = 30
 
+# Décalages film − source de chaque extrait AU MOMENT des relevés (transcriptions en cache, REVUES, VOYELLES,
+# syllabes : faits le 26/09 sur le dialogue v1). Si son/dialogue.py déplace un extrait (v2 : C4 passe de −40,60
+# à −41,07), les mêmes échantillons audio sont ailleurs dans le film : chaque temps relevé est translaté de
+# (décalage actuel − décalage du relevé) de son extrait. Les bords restent recalés sur l'énergie du wav actuel.
+DECALAGES_RELEVES = {"A1": 4.21, "C1": 0.22, "C2": -20.16, "A2A3": -31.12, "C3": -35.56, "A4": -41.07, "C4": -40.60}
+
 # Corrections à la main (extrait, rang) → (debut film, raison). Relevées le 26/09 sur le spectre par bandes
 # (outils/spectre.py : 0-400 / 400-2500 / 2500-4000 Hz + périodicité, fenêtres 25 ms au pas de 10 ms).
 # Rappel : la ligne téléphonique coupe au-dessus de 4 kHz, les /s/ /ʃ/ y sont presque invisibles.
@@ -107,7 +113,7 @@ VOYELLES = {
 }
 # Repères hors mots (secondes film).
 REPERES_SYLLABES = {
-    "confirmation_derniere_syllabe": {"debut": 32.815, "voyelle": 32.955,
+    "confirmation_derniere_syllabe": {"extrait": "A4", "debut": 32.815, "voyelle": 32.955,
                                       "raison": "« -tion » : /s/ sourd 32,815-32,94, puis /jɔ̃/ 32,955-33,04 (dernière bouffée d'énergie)"},
 }
 
@@ -186,6 +192,9 @@ def transcrire_scribe():
 
 def main():
     dia = json.loads(DIALOGUE.read_text())
+    delta = {e["id"]: round(e["decalage_film_moins_source"] - DECALAGES_RELEVES[e["id"]], 6) for e in dia["extraits"]}
+    if any(delta.values()):
+        print("extraits déplacés depuis les relevés :", {k: v for k, v in delta.items() if v})
     sig = lire(WAV)
     db10 = rms_db(sig)
     voix = db10 > -40
@@ -206,6 +215,10 @@ def main():
         if op == "equal" or (op == "replace" and i2 - i1 == j2 - j1):
             for k in range(j2 - j1):
                 est[j1 + k] = sc[i1 + k]["start"]
+    # temps relevés (dialogue du relevé) → temps du dialogue actuel
+    for j, w in enumerate(ecrits_tous):
+        if est[j] is not None:
+            est[j] = round(est[j] + delta[w["extrait"]], 3)
     # mots que Scribe n'a pas rendus : interpolés dans leur extrait
     for j, w in enumerate(ecrits_tous):
         if est[j] is None:
@@ -238,12 +251,13 @@ def main():
                 t, source = round(mn * 0.005 + 0.0125, 3), "creux"
         if (w["extrait"], w["rang"]) in REVUES:
             t, raison = REVUES[(w["extrait"], w["rang"])]
-            source = "revue : " + raison
+            t = round(t + delta[w["extrait"]], 3)
+            source = "revue : " + raison + (f" (relevé translaté de {delta[w['extrait']]:+.2f} s avec l'extrait)" if delta[w["extrait"]] else "")
         w["debut"] = round(t, 3)
         w["source"] = source
         w["scribe"] = round(est[j], 3)
         if (w["extrait"], w["rang"]) in VOYELLES:
-            w["voyelle"] = VOYELLES[(w["extrait"], w["rang"])]
+            w["voyelle"] = round(VOYELLES[(w["extrait"], w["rang"])] + delta[w["extrait"]], 3)
 
     # ordre strict dans chaque extrait
     for x, y in zip(ecrits_tous, ecrits_tous[1:]):
@@ -278,7 +292,7 @@ def main():
             erreurs.append(f"(info) sans repère d'énergie, Scribe gardé : {w['texte']} ({w['extrait']} #{w['rang']})")
 
     sm = difflib.SequenceMatcher(None, [EQUIV.get(cle(x["text"]), cle(x["text"])) for x in hf], b, autojunk=False)
-    ecarts = [hf[i]["start"] - ecrits_tous[j]["debut"] for a_, b_, n in sm.get_matching_blocks()
+    ecarts = [hf[i]["start"] + delta[ecrits_tous[j]["extrait"]] - ecrits_tous[j]["debut"] for a_, b_, n in sm.get_matching_blocks()
               for i, j in zip(range(a_, a_ + n), range(b_, b_ + n))]
 
     for w in ecrits_tous:
@@ -294,7 +308,9 @@ def main():
                    "bords par l'énergie de son/dialogue.wav ; corrections à la main sur le spectre (champ source).",
         "mots": [{k: w[k] for k in ("texte", "cle", "debut", "fin", "image", "locuteur", "extrait", "rang", "source", "scribe")
                   if k in w} | ({"voyelle": w["voyelle"]} if "voyelle" in w else {}) for w in ecrits_tous],
-        "syllabes": REPERES_SYLLABES,
+        "syllabes": {k: {"debut": round(v["debut"] + delta[v["extrait"]], 3), "voyelle": round(v["voyelle"] + delta[v["extrait"]], 3),
+                         "raison": v["raison"]} for k, v in REPERES_SYLLABES.items()},
+        "decalages_depuis_releves": delta,
     }, ensure_ascii=False, indent=1))
     print(f"→ {SORTIE} ({len(ecrits_tous)} mots)")
     return 1 if [x for x in erreurs if not x.startswith("(info)")] else 0

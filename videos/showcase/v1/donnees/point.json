@@ -1,0 +1,264 @@
+{
+ "unite": "t en s film ; x, y = CENTRE du point en px film ; d = diamètre visible en px",
+ "lecture": "entre deux clés : de la clé i à la clé i+1 avec l'ease de la clé i+1 (gsap.parseEase) ; arc.dx ajouté × 4p(1−p) ; avant la 1re / après la dernière : tenue. Évaluer avec POINT.etat(t) (lib/point.js), jamais à la main.",
+ "diametre_disque": 30.797,
+ "position": [
+  {
+   "t": 0.0,
+   "image": 0,
+   "x": 957.331,
+   "y": 865.3,
+   "note": "s1 : point final de « mains prises. » (mesuré), encre ; tremble avec la tonalité"
+  },
+  {
+   "t": 4.5,
+   "image": 135,
+   "x": 957.331,
+   "y": 865.3
+  },
+  {
+   "t": 4.95,
+   "image": 148,
+   "x": 106,
+   "y": 1000,
+   "ease": "power3.inOut",
+   "note": "s2 : retour chariot vers le début de la ligne"
+  },
+  {
+   "t": 5.0,
+   "image": 150,
+   "x": 106,
+   "y": 1000,
+   "note": "s2 : pendant [t0 ; t1] de pistes.voix, x = DONNEES.voixX (avance quand Élise parle)"
+  },
+  {
+   "t": 9.966667,
+   "image": 299,
+   "x": 974,
+   "y": 1000,
+   "ease": "none"
+  },
+  {
+   "t": 17.2,
+   "image": 516,
+   "x": 974,
+   "y": 1000,
+   "note": "s3 : écoute, immobile"
+  },
+  {
+   "t": 17.8,
+   "image": 534,
+   "x": 234.4,
+   "y": 615.4,
+   "ease": "power3.inOut",
+   "note": "s4 : attend sur la ligne 09:00 (l'agenda arrive dessous)"
+  },
+  {
+   "t": 20.466667,
+   "image": 614,
+   "x": 234.4,
+   "y": 615.4,
+   "note": "saut sur place sur « neuf »"
+  },
+  {
+   "t": 20.546667,
+   "image": 616,
+   "x": 234.4,
+   "y": 587.4,
+   "ease": "power2.out"
+  },
+  {
+   "t": 20.666667,
+   "image": 620,
+   "x": 234.4,
+   "y": 615.4,
+   "ease": "power2.in",
+   "note": "contact 09:00 = attaque de la voyelle de « neuf »"
+  },
+  {
+   "t": 21.233333,
+   "image": 637,
+   "x": 234.4,
+   "y": 615.4
+  },
+  {
+   "t": 21.433333,
+   "image": 643,
+   "x": 234.4,
+   "y": 802.6,
+   "ease": "power3.out",
+   "arc": {
+    "dx": -18
+   },
+   "note": "saut en arc vers 10:00, contact = voyelle de « dix »"
+  },
+  {
+   "t": 22.0,
+   "image": 660,
+   "x": 234.4,
+   "y": 802.6
+  },
+  {
+   "t": 22.2,
+   "image": 666,
+   "x": 234.4,
+   "y": 989.8,
+   "ease": "power3.out",
+   "arc": {
+    "dx": -18
+   },
+   "note": "saut en arc vers 11:00, contact = voyelle de « onze »"
+  },
+  {
+   "t": 23.966667,
+   "image": 719,
+   "x": 234.4,
+   "y": 989.8,
+   "note": "retour lent vers 09:00 au « à (neuf heures) » de l'appelant"
+  },
+  {
+   "t": 24.366667,
+   "image": 731,
+   "x": 234.4,
+   "y": 615.4,
+   "ease": "power2.inOut"
+  },
+  {
+   "t": 25.2,
+   "image": 756,
+   "x": 234.4,
+   "y": 615.4,
+   "note": "s5"
+  },
+  {
+   "t": 25.4,
+   "image": 762,
+   "x": 276.2,
+   "y": 646.0,
+   "ease": "power3.out",
+   "note": "se pose au bord gauche du bloc"
+  },
+  {
+   "t": 26.1,
+   "image": 783,
+   "x": 990.6,
+   "y": 646.0,
+   "ease": "power2.inOut",
+   "note": "la plume : le bloc se déroule derrière lui (bord révélé = x + D/2)"
+  },
+  {
+   "t": 30.95,
+   "image": 928,
+   "x": 990.6,
+   "y": 646.0
+  },
+  {
+   "t": 31.45,
+   "image": 944,
+   "x": 200,
+   "y": 790,
+   "ease": "power3.inOut",
+   "note": "s6 : coin haut gauche de la bulle"
+  },
+  {
+   "t": 36.6,
+   "image": 1098,
+   "x": 200,
+   "y": 790,
+   "note": "secousse du vibreur 998 → 1012 (pistes.secousses)"
+  },
+  {
+   "t": 37.1,
+   "image": 1113,
+   "x": 652.57,
+   "y": 560.789,
+   "ease": "power3.inOut",
+   "note": "s7 : 90 px au-dessus du futur ı"
+  },
+  {
+   "t": 37.7,
+   "image": 1131,
+   "x": 652.57,
+   "y": 560.789,
+   "note": "immobilité, silence numérique"
+  },
+  {
+   "t": 38.0,
+   "image": 1140,
+   "x": 652.57,
+   "y": 650.789,
+   "ease": "power3.out",
+   "note": "contact sur le ı : image 1140"
+  }
+ ],
+ "taille": [
+  {
+   "t": 0.0,
+   "d": 21.0
+  },
+  {
+   "t": 4.2,
+   "d": 21.0
+  },
+  {
+   "t": 4.7,
+   "d": 30.797,
+   "ease": "power3.out"
+  }
+ ],
+ "couleur": [
+  {
+   "t": 0.0,
+   "c": "#262019"
+  },
+  {
+   "t": 4.2,
+   "c": "#262019"
+  },
+  {
+   "t": 4.4,
+   "c": "#EFA424",
+   "ease": "none"
+  }
+ ],
+ "pistes": {
+  "voix": {
+   "t0": 5.0,
+   "t1": 9.966667,
+   "source": "DONNEES.voixX"
+  },
+  "secousses": [
+   {
+    "piste": "s1",
+    "t0": 0.0,
+    "t1": 4.466667
+   },
+   {
+    "piste": "s6",
+    "t0": 33.266667,
+    "t1": 33.733333
+   }
+  ]
+ },
+ "reperes": {
+  "x_agenda": 234.4,
+  "y_09": 615.4,
+  "y_10": 802.6,
+  "y_11": 989.8,
+  "bloc_y": 646.0,
+  "bloc_x_debut": 276.2,
+  "bloc_x_fin": 990.6,
+  "s1": {
+   "x": 957.331,
+   "y": 865.3
+  },
+  "s7": {
+   "x": 652.57,
+   "y": 650.789
+  },
+  "s7_au_dessus": {
+   "x": 652.57,
+   "y": 560.789
+  }
+ }
+}
