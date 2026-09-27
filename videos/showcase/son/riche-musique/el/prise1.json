@@ -1,0 +1,149 @@
+{
+ "composition_plan": {
+  "positive_global_styles": [
+   "intimate cinematic pop score",
+   "D major",
+   "78 BPM, steady tempo, no tempo changes",
+   "felt piano, celesta, soft pizzicato strings, warm string pad, light modern percussion",
+   "clean airy mix that leaves room for a spoken dialogue",
+   "hopeful, human, precise",
+   "instrumental"
+  ],
+  "negative_global_styles": [
+   "vocals",
+   "choir",
+   "humming",
+   "spoken word",
+   "EDM drop",
+   "heavy drums",
+   "distorted guitar",
+   "minor key",
+   "trailer braams",
+   "risers with white noise",
+   "tempo change"
+  ],
+  "sections": [
+   {
+    "section_name": "Phone ringing, held breath",
+    "positive_local_styles": [
+     "almost silent",
+     "low sustained A note drone",
+     "very soft heartbeat pulse",
+     "restrained suspense"
+    ],
+    "negative_local_styles": [
+     "melody",
+     "piano chords",
+     "drums"
+    ],
+    "duration_ms": 4200,
+    "lines": []
+   },
+   {
+    "section_name": "Call answered, delicate entry",
+    "positive_local_styles": [
+     "delicate entry",
+     "a few single felt piano notes",
+     "soft warm string pad",
+     "very quiet"
+    ],
+    "negative_local_styles": [
+     "drums",
+     "bass",
+     "fast notes"
+    ],
+    "duration_ms": 6000,
+    "lines": []
+   },
+   {
+    "section_name": "Listening",
+    "positive_local_styles": [
+     "gentle empathetic pad",
+     "sparse felt piano",
+     "soft pizzicato starting quietly at the very end"
+    ],
+    "negative_local_styles": [
+     "drums",
+     "loud dynamics"
+    ],
+    "duration_ms": 8167,
+    "lines": []
+   },
+   {
+    "section_name": "Checking the agenda, the pulse rises",
+    "positive_local_styles": [
+     "steady eighth-note marimba pulse enters",
+     "pizzicato arpeggios",
+     "soft kick and shaker",
+     "rising energy"
+    ],
+    "negative_local_styles": [
+     "heavy drums",
+     "crash cymbal"
+    ],
+    "duration_ms": 7133,
+    "lines": []
+   },
+   {
+    "section_name": "Booking confirmed, building",
+    "positive_local_styles": [
+     "confident pulse",
+     "warm double bass pizzicato",
+     "legato strings join",
+     "building towards a resolution"
+    ],
+    "negative_local_styles": [
+     "drop",
+     "vocals"
+    ],
+    "duration_ms": 7433,
+    "lines": []
+   },
+   {
+    "section_name": "Thanks, soft landing",
+    "positive_local_styles": [
+     "soft landing on a G major chord",
+     "texture thins out"
+    ],
+    "negative_local_styles": [
+     "new instruments"
+    ],
+    "duration_ms": 3000,
+    "lines": []
+   },
+   {
+    "section_name": "Text message arrives, the lift",
+    "positive_local_styles": [
+     "starts quiet after a short pause",
+     "rising build-up on an A pedal",
+     "strings crescendo",
+     "anticipation",
+     "no resolution yet"
+    ],
+    "negative_local_styles": [
+     "drop",
+     "big drums"
+    ],
+    "duration_ms": 6967,
+    "lines": []
+   },
+   {
+    "section_name": "Logo, full resolution",
+    "positive_local_styles": [
+     "full warm D major chord",
+     "everything resolves",
+     "the final chord rings then fades out",
+     "clean ending"
+    ],
+    "negative_local_styles": [
+     "abrupt cut",
+     "new melody"
+    ],
+    "duration_ms": 4100,
+    "lines": []
+   }
+  ]
+ },
+ "respect_sections_durations": true,
+ "prise": 1
+}

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>s2-voix</title></head>
+<body>
+<!--
+  Sous-composition s2-voix · v2 · film 4,6333 → 10,40 s (durée 5,7667 s, images 139 à 311), hôte #h-s2-voix.
+  « L'agente parle fort, et le point la suit. » (plan v2, chantier compositions/s2-voix.html)
+
+  DEUX éléments, jamais plus : le sous-titre d'Élise et le point.
+    · Le sous-titre : Geist 400 72/84, encre, x 90, lignes de base 874 / 958 / 1042 (874 = la ligne de base de
+      « mains prises. » : le retour chariot du point est littéral). top = 874 − 67 = 807, décalage de ligne de
+      base mesuré dans le chrome-headless-shell de HyperFrames (vérifié au pixel sur les captures : dernière
+      rangée d'encre des lettres sans jambage à 873 / 957 / 1041). Trois pages, lues dans DONNEES.pages :
+      « Bonjour, je suis Élise, » · « l’assistante vocale | de la Clinique vétérinaire | du Port. » ·
+      « Comment puis-je | vous aider ? ». Chaque mot monte de sa ligne de base à son attaque mesurée
+      (TEXTE.reveler par défaut : 16 px, 0,26 s, power3.out, une image d'avance). Sorties par le masque de
+      ligne, vers le bas, power3.in, aux instants de DONNEES.pages[].sortie (finition du 27/09) : pages 1 et 2
+      dès que la voix de leur dernier mot s'est tue, en 0,15 s ; page 3 de 10,10 à 10,30 ; mots mis à opacité 0
+      une fois sortis. Rien avant 4,9667 (image 149).
+    · Le point : #point de la RACINE (jamais dessiné, jamais animé ici). Son trajet PLANIFIÉ (DONNEES.point.trajets[0],
+      outils/construire.py) ne passe JAMAIS sous une lettre (arbitrage 4) : il se tient 18 px à droite de l'encre du
+      dernier mot révélé, posé sur la ligne de base (centre à ligne de base − 22), et ANTICIPE : il glisse vers la fin du
+      mot suivant et y est déjà quand ce mot paraît ; les mots courts qu'il ne peut pas précéder calmement (« je »,
+      « suis », « de », « la », « du », « vous ») paraissent derrière lui. Il change de page quand la page lue est
+      sortie, descend d'abord à chaque changement de ligne, puis rejoint la place d'écoute de s3.
+  Le filet SVG de la v1 (ligne, onde, rembobinage) est supprimé : il se lisait comme une barre de lecture.
+
+  CE CSS DOIT RESTER IDENTIQUE AU CONTRAT DONNEES.geometrie.s2_texte : outils/navigateur.py pose les mêmes
+  pages avec lui pour calculer les cibles du suiveur (bord droit d'encre + 14 + 22 ; ligne de base − 22).
+  Le script le vérifie (style calculé) et lève une erreur au moindre écart.
+
+  EMPILEMENT : le sous-titre reste au-dessus du point (z-index 101 > 100), une garde : depuis la finition, le point ne
+  croise plus aucune encre visible (contrôlé par outils/construire.py sur les boîtes d'encre, et par outils/controles.py
+  sur le MP4). Possible parce que l'hôte et le #root de la scène ne créent pas de contexte d'empilement.
+-->
+<template id="s2-voix-template">
+<style>
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
+#root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
+#s2-texte{position:absolute;left:0;top:0;width:1080px;height:1920px;z-index:101}
+.s2-page{position:absolute;left:90px;top:807px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+         font-size:72px;line-height:84px;letter-spacing:0;color:#262019;white-space:nowrap}
+</style>
+<div id="root" data-composition-id="s2-voix" data-width="1080" data-height="1920">
+  <div id="s2-texte" data-element="sous-titre">
+    <p id="s2-page-1" class="s2-page"></p>
+    <p id="s2-page-2" class="s2-page"></p>
+    <p id="s2-page-3" class="s2-page"></p>
+  </div>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES;
+  const FPS = D.fps;
+  const UNE = 1 / FPS;
+  const EPS = 1e-5;
+  const sc = TEXTE.scene("s2-voix");
+  const tl = gsap.timeline({ paused: true });
+  const r6 = function (v) { return +v.toFixed(6); };
+  function exiger(ok, msg) { if (!ok) throw new Error("s2-voix : " + msg); }
+
+  // ── 0. Le contrat de géométrie (DONNEES.geometrie.s2_texte), celui des cibles du suiveur ──
+  const G = D.geometrie.s2_texte;
+  const RAYON = D.point.diametre_disque / 2;                   // 22 : le disque de 44 px
+  const ECART = 18;                                            // encre → bord du disque (arbitrage 4 : ≥ 18 px)
+  const X_MAX = 1010;                                          // marge droite (règle 5, colonne des boutons)
+  exiger(G.top === G.lignes_de_base[0] - G.decalage_ligne_de_base, "top " + G.top + " ≠ ligne de base − décalage");
+  document.querySelectorAll(".s2-page").forEach(function (p) {
+    p.style.top = G.top + "px"; p.style.left = G.x + "px";
+    const cs = getComputedStyle(p);
+    exiger(cs.fontSize === G.corps + "px" && cs.lineHeight === G.interligne + "px" && cs.fontWeight === String(G.graisse) &&
+           cs.fontStyle === G.style && cs.whiteSpace === "nowrap" && (cs.letterSpacing === "0px" || cs.letterSpacing === "normal") &&
+           cs.fontFamily.replace(/["'\s]/g, "").split(",")[0] === "Geist",
+           "le CSS de " + p.id + " n'est plus celui du contrat (" + cs.fontWeight + " " + cs.fontSize + "/" + cs.lineHeight + " " + cs.fontFamily + ")");
+  });
+
+  // ── 1. Les trois pages de DONNEES.pages, posées et révélées à l'attaque de chaque mot ──
+  const pages = D.pages.filter(function (p) { return p.scene === sc.id; });
+  exiger(pages.length === 3, "3 pages attendues dans DONNEES.pages, " + pages.length + " trouvées");
+  pages.forEach(function (p, i) {
+    exiger(p.style === "s2_texte" && p.top === G.top, "page " + (i + 1) + " : style ou top hors contrat");
+    p.lignes_de_base.forEach(function (b, k) { exiger(Math.abs(b - G.lignes_de_base[k]) < 0.5, "page " + (i + 1) + " : ligne de base " + b); });
+    p.largeurs.forEach(function (l) { exiger(l.largeur <= G.largeur_max + 1e-6, "ligne de " + l.largeur.toFixed(1) + " px > " + G.largeur_max); });
+    // le point, posé 14 px après l'encre du mot, doit rester dans la marge droite
+    p.mots.forEach(function (m) {
+      exiger(m.encre_x1 + ECART + 2 * RAYON <= X_MAX, "« " + m.texte + " » : le point sortirait de la marge (" + (m.encre_x1 + ECART + 2 * RAYON).toFixed(1) + " px)");
+    });
+  });
+  const poses = pages.map(function (p, i) {
+    return TEXTE.poser("#s2-page-" + (i + 1), p.lignes, { extrait: p.extrait, depuis: p.depuis, chevauchement: true });
+  });
+  poses.forEach(function (p) { TEXTE.reveler(tl, p, { scene: sc.id }); });      // 16 px, 0,26 s, power3.out, une image d'avance
+
+  // ── 2. Sorties par le masque vers le bas, power3.in, aux instants de DONNEES.pages[].sortie ──
+  // Pages 1 et 2 : dès que la voix du dernier mot s'est tue, 0,15 s (le point change de page quand elle est sortie) ;
+  // page 3 : 10,10 → 10,30. Une page ne part jamais avant la fin de la voix de son dernier mot, reste lisible au moins
+  // 0,6 s et a disparu avant que la suivante paraisse.
+  const debutPage = poses.map(function (p) { return TEXTE.aImage(p.mots[0].t); });   // première image visible
+  poses.forEach(function (p, i) {
+    exiger(pages[i].sortie && pages[i].sortie.t > 0, "page " + (i + 1) + " : DONNEES.pages[].sortie absent (relancer outils/construire.py)");
+    const debut = pages[i].sortie.t, duree = pages[i].sortie.duree;
+    const dernier = p.mots[p.mots.length - 1];
+    const finVoix = dernier.mots[dernier.mots.length - 1].fin;
+    exiger(debut >= finVoix - EPS, "la page " + (i + 1) + " sort (" + debut + ") avant la fin de son dernier mot (" + finVoix + ")");
+    exiger(debut - debutPage[i] >= 0.6 - EPS, "la page " + (i + 1) + " reste moins de 0,6 s");
+    exiger(r6(debut + duree) <= (i < poses.length - 1 ? debutPage[i + 1] - UNE : sc.fin) + EPS, "la page " + (i + 1) + " déborde sur la suivante");
+    TEXTE.sortir(tl, p, sc.local(debut), { duree: duree, ease: "power3.in" });
+    tl.set(p.mots.map(function (u) { return u.el; }), { opacity: 0 }, sc.local(r6(debut + duree)));
+  });
+  // le tween du premier mot part une image avant son attaque, à opacité 0 : la première image visible est celle de l'attaque
+  exiger(TEXTE.image(debutPage[0] - UNE) >= 149, "rien ne doit paraître avant 4,9667 (image 149)");
+
+  // ── 3. Le point de la racine reste dans le cadre utile pendant toute la scène (lecture seule) ──
+  // (absent du banc de mesure de navigateur.py, qui pose les pages sans lib/point.js)
+  if (window.POINT) {
+    for (let n = D.scenes[sc.id].image_debut; n < D.scenes[sc.id].image_fin; n++) {
+      const e = POINT.etat(n / FPS);
+      exiger(e.x + e.d / 2 * Math.max(1, e.sx) <= X_MAX + 0.5, "le point dépasse x = " + X_MAX + " à l'image " + n);
+    }
+  }
+
+  window.__timelines["s2-voix"] = tl;
+})();
+</script>
+</template>
+</body>
+</html>

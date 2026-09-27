@@ -1,0 +1,148 @@
+{
+ "composition_plan": {
+  "positive_global_styles": [
+   "intimate cinematic pop score",
+   "D major",
+   "78 BPM, steady tempo, no tempo changes",
+   "felt piano, celesta, soft pizzicato strings, warm string pad, light modern percussion",
+   "clean airy mix that leaves room for a spoken dialogue",
+   "hopeful, human, precise",
+   "instrumental"
+  ],
+  "negative_global_styles": [
+   "vocals",
+   "choir",
+   "humming",
+   "spoken word",
+   "EDM drop",
+   "heavy drums",
+   "distorted guitar",
+   "minor key",
+   "trailer braams",
+   "risers with white noise",
+   "tempo change"
+  ],
+  "sections": [
+   {
+    "section_name": "Ring",
+    "positive_local_styles": [
+     "near silence",
+     "low sustained A drone",
+     "soft heartbeat at 78 BPM"
+    ],
+    "negative_local_styles": [
+     "melody",
+     "chords"
+    ],
+    "duration_ms": 4200,
+    "lines": []
+   },
+   {
+    "section_name": "Answer",
+    "positive_local_styles": [
+     "G major chord",
+     "delicate warm strings entering softly"
+    ],
+    "negative_local_styles": [
+     "drums",
+     "D major"
+    ],
+    "duration_ms": 4967,
+    "lines": []
+   },
+   {
+    "section_name": "Listening",
+    "positive_local_styles": [
+     "B minor chord, then E minor chord",
+     "soft strings and a round bass"
+    ],
+    "negative_local_styles": [
+     "drums"
+    ],
+    "duration_ms": 6133,
+    "lines": []
+   },
+   {
+    "section_name": "Question",
+    "positive_local_styles": [
+     "A major chord, suspended fourth resolving to the third"
+    ],
+    "negative_local_styles": [
+     "drums"
+    ],
+    "duration_ms": 3067,
+    "lines": []
+   },
+   {
+    "section_name": "Agenda pulse",
+    "positive_local_styles": [
+     "G major chord, then B minor chord",
+     "marimba eighth-note pulse at 78 BPM",
+     "soft kick on 1 and 3"
+    ],
+    "negative_local_styles": [
+     "heavy drums"
+    ],
+    "duration_ms": 6133,
+    "lines": []
+   },
+   {
+    "section_name": "Booking",
+    "positive_local_styles": [
+     "G major, E minor, A major, one chord per bar",
+     "pulse builds",
+     "shaker sixteenth notes"
+    ],
+    "negative_local_styles": [
+     "drop"
+    ],
+    "duration_ms": 8433,
+    "lines": []
+   },
+   {
+    "section_name": "Thanks, soft landing then stop",
+    "positive_local_styles": [
+     "G major chord",
+     "texture thins out",
+     "ends in silence"
+    ],
+    "negative_local_styles": [
+     "new instruments"
+    ],
+    "duration_ms": 3834,
+    "lines": []
+   },
+   {
+    "section_name": "Text message, the lift",
+    "positive_local_styles": [
+     "A major chord then G major chord",
+     "big crescendo",
+     "rising harp arpeggios"
+    ],
+    "negative_local_styles": [
+     "D major",
+     "drop"
+    ],
+    "duration_ms": 6133,
+    "lines": []
+   },
+   {
+    "section_name": "Logo",
+    "positive_local_styles": [
+     "D major chord",
+     "the loudest and fullest moment of the whole piece",
+     "warm full resolution",
+     "rings out"
+    ],
+    "negative_local_styles": [
+     "fade in",
+     "quiet ending"
+    ],
+    "duration_ms": 4100,
+    "lines": []
+   }
+  ]
+ },
+ "respect_sections_durations": true,
+ "prise": 4
+}

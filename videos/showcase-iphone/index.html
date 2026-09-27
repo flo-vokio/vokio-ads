@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Le point sur le i · showcase Vokio</title>
+<!-- ORDRE DE CHARGEMENT (ne pas changer) : les données d'abord, puis GSAP, puis les aides qui les lisent.
+     Les sous-compositions s'exécutent après : gsap, window.DONNEES, window.TEXTE, window.POINT, window.IPHONE existent déjà. -->
+<script src="donnees/donnees.js"></script>
+<script src="lib/vendor/gsap.min.js"></script>
+<script src="lib/texte.js"></script>
+<script src="lib/point.js"></script>
+<!-- version iPhone (27/09) : l'objet téléphone de s6 (corps, écran, bulle), construit d'après DONNEES.geometrie.s6 -->
+<script src="lib/iphone.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
+#root{position:relative;width:100%;height:100%;overflow:hidden;background:#F4F1E8}
+/* le papier, plein cadre, sous tout */
+#fond{position:absolute;inset:0;background:#F4F1E8}
+.clip{position:absolute;inset:0}
+/* LE seul point du film (v2). Disque de 44 px = D0, diamètre MESURÉ de #mot-pt (0,11 em du wordmark à 400 px),
+   centré par xPercent/yPercent −50 posés par GSAP (pas de marge négative : Chromium arrondit une marge au
+   pixel ; une translation reste au sous-pixel) : x / y = centre en px film. La taille visible passe par
+   scaleX / scaleY = d/D0 × sx / sy (0 à l'image 0, 15,75 px posé à l'image 29 : le « . » de l'accroche à 150 px),
+   l'orientation de l'étirement par rotation (étirement plafonné à 1,25 depuis la finition).
+   Tout vient de POINT.proprietes(t) (lib/point.js). Dernier enfant de #root, z-index 100. */
+#point{position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;
+       background:#262019;z-index:100;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="47" data-width="1080" data-height="1920">
+  <div id="fond"></div>
+
+  <!-- Les sept scènes (plan v2, critique.json plan.chantiers[0] A ; finition du 27/09) : une seule piste, bout à bout, 47,00 s.
+       Finition : +1,70 s de lecture du SMS (s6 dure 10,05 s au lieu de 8,35) et +0,30 s de tenue finale (s7 : 5,60 s). -->
+  <div id="h-s1-sonnerie" class="clip" data-composition-id="s1-sonnerie" data-composition-src="compositions/s1-sonnerie.html"
+       data-start="0" data-duration="4.6333" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <div id="h-s2-voix" class="clip" data-composition-id="s2-voix" data-composition-src="compositions/s2-voix.html"
+       data-start="4.6333" data-duration="5.7667" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <div id="h-s3-ecoute" class="clip" data-composition-id="s3-ecoute" data-composition-src="compositions/s3-ecoute.html"
+       data-start="10.4" data-duration="6.9" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <!-- s3 : 10.40 / 6.90. s4 : 7.8999 et non 7.9. En flottant, 17.3 + 7.9 = 25.200000000000003 : l'hôte de s4 restait monté sous
+       s5 à l'image 756 (25,2 s). 25,1999 < 25,2 : l'image 756 appartient à s5 seule (s4 s'y efface déjà
+       d'elle-même et s5 a un fond opaque : double garde, sans effet sur les autres images). -->
+  <div id="h-s4-agenda" class="clip" data-composition-id="s4-agenda" data-composition-src="compositions/s4-agenda.html"
+       data-start="17.3" data-duration="7.8999" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <div id="h-s5-rendez-vous" class="clip" data-composition-id="s5-rendez-vous" data-composition-src="compositions/s5-rendez-vous.html"
+       data-start="25.2" data-duration="6.15" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <!-- s6 : 10.0499 et non 10.05 (31,35 + 10,05 = 41,400000000000006 en flottant : même astuce que s4). -->
+  <div id="h-s6-sms" class="clip" data-composition-id="s6-sms" data-composition-src="compositions/s6-sms.html"
+       data-start="31.35" data-duration="10.0499" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <div id="h-s7-signature" class="clip" data-composition-id="s7-signature" data-composition-src="compositions/s7-signature.html"
+       data-start="41.4" data-duration="5.6" data-track-index="1" data-width="1080" data-height="1920"></div>
+
+  <!-- Le point racine : animé UNIQUEMENT par la timeline ci-dessous, d'après DONNEES.point (lib/point.js). -->
+  <div id="point" data-element="point" aria-hidden="true"></div>
+
+  <!-- Bande son unique : assets/son/mix.wav = le master v2 de son/mix.py (vrai appel + nappe + bruitages + signature,
+       −14,0 LUFS, −1,7 dBTP, 48 kHz 24 bits stéréo, 47,000 s), identique octet pour octet à son/mix.wav (mix.py écrit les
+       deux). Relance : son/signature.py puis son/mix.py --monde puis son/controle_son.py --images. La variante « monde »
+       (son/mix-monde.wav) reste hors du film tant que Florian ne l'a pas écoutée. -->
+  <audio id="bande-son" src="assets/son/mix.wav" data-start="0" data-duration="47" data-track-index="10" data-volume="1"></audio>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES;
+  const el = document.getElementById("point");
+  // Fonction pure du temps : le point est au même endroit quel que soit l'ordre des recherches (seek).
+  // POINT.proprietes(t) = { xPercent: −50, yPercent: −50, x, y, rotation: rot, scaleX: d/D0·sx, scaleY: d/D0·sy,
+  // backgroundColor } : secousses, écrasements (table par image) et étirement de vitesse compris.
+  // Toujours dans le tween proxy ci-dessous, jamais avec tl.call.
+  function rendre(t) { gsap.set(el, POINT.proprietes(t)); }
+  rendre(0);
+  const tl = gsap.timeline({ paused: true });
+  const proxy = { t: 0 };
+  tl.to(proxy, { t: D.duree, duration: D.duree, ease: "none", onUpdate: function () { rendre(proxy.t); } }, 0);
+  window.__timelines["main"] = tl;
+})();
+</script>
+</body>
+</html>

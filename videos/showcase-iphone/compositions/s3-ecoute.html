@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>s3-ecoute</title></head>
+<body>
+<!--
+  Sous-composition s3-ecoute · v2 · film 10,40 → 17,30 s (durée 6,90 s, images 312 à 518), hôte #h-s3-ecoute.
+  « L'appelant, et un tamis qui se lit comme une idée. » (plan v2, chantier compositions/s3-ecoute.html)
+
+  TROIS éléments, jamais plus : la parole de l'appelant, le point (racine) et la mention.
+    · La parole : Instrument Serif italique 400 64/72 (finition du 27/09, 96/104 avant : l'agente, Geist 72, parle
+      désormais plus fort à l'œil, hauteur d'x 38,2 contre 33,0 px), encre, x 90, lignes de base 874 / 946 / 1018 (DONNEES.geometrie.s3_texte : top =
+      874 − décalage mesuré dans le chrome-headless-shell de HyperFrames). Deux pages lues dans DONNEES.pages :
+        C1 « mon chat, euh, Moka, | euh, mange plus | depuis hier. », groupe par groupe à l'attaque mesurée
+           moins une image (TEXTE.reveler : 16 px, 0,30 s, power3.out), les deux « euh, » en gris #6F695F ;
+        C2 « Demain, vous avez | des disponibilités ? », ligne par ligne à l'attaque du premier mot de la
+           ligne moins une image (16 px, 0,35 s, power3.out). Le « Euh, » qui ouvre C2 s'entend sur la
+           phrase propre de C1 : il n'est jamais écrit.
+    · Le point : #point de la RACINE, jamais dessiné ni animé ici. Il écoute, immobile, en (112 ; 1136), 118 px
+      sous la dernière ligne de base de la parole et aligné sur son bord gauche ; il hoche de 8 px pendant le
+      resserrage (14,15 → 14,30 → 14,50, DONNEES.point.trajets[0]), se hausse de 10 px sur « disponibilités »
+      (16,19 → 16,49) et part à 17,20 vers l'agenda.
+    · La mention, non dite : « Appel réel sur une ligne de démonstration, raccourci. », Geist 400 36/48
+      #6F695F (4,8:1 sur le papier, AA), x 90, ligne de base 330 (zone haute, sûre sur toutes les
+      plateformes). Fondu d'entrée 10,60 → 10,90 (power3.out), de sortie 17,00 → 17,20 (power3.in).
+
+  LE TAMIS (le geste de la scène : Vokio garde l'essentiel)
+    1. 13,95 → 14,20 (DONNEES.evenements.tamis_fondu) : les deux « euh, » passent d'opacité 1 à 0 sur place,
+       power2.out, 0,03 s d'écart (0,22 s chacun). La voix de C1 s'est tue à 13,90.
+    2. 14,15 → 14,50 (DONNEES.evenements.tamis_resserrage) : les unités restantes referment les trous,
+       en x SEUL, d'un seul geste pour les deux lignes (0,35 s power3.inOut), lignes de base et coupures
+       inchangées. Ligne 1 : « Moka, » vient se poser derrière « mon chat, » ; ligne 2 : « mange plus » revient
+       à x = 90. À 14,15, les « euh, » ne sont plus qu'à 0,5 % et 2,8 % d'opacité, et le départ en power3.in
+       ne les rejoint pas (0,5 px à 14,20, quand ils sont à 0) : rien ne se recouvre. Pas d'image en image :
+       0,5 · 3,7 · 12,1 · 28,3 · 52,7 · 40,1 · 19,0 · 7,1 · 1,6 · 0,1 px (images 426 à 435), le plus grand de
+       429 à 430, au creux du hochement du point (racine, 14,33). Un décalage d'une image entre les deux
+       lignes, essayé, ne se voyait pas et portait le pas à 57 px : écarté.
+       Positions finales : celles de la même page posée SANS les « euh » (TEXTE.poser, même CSS). Chaque unité
+       étant un inline-block suivi d'une espace, sa place dans la page propre est la somme des avances
+       (largeur + espace) des unités gardées qui la précèdent sur sa ligne, avances MESURÉES par
+       outils/navigateur.py dans DONNEES.pages (x0 de chaque unité). Au montage, les polices sont encore en
+       chargement : la timeline ne mesure donc rien elle-même. Une fois les polices chargées, le script pose
+       deux clones cachés de C1 (tel quel, et sans les « euh »), les mesure, les retire, et signale en
+       console_error tout écart de plus de 0,5 px (DONNEES périmé : relancer outils/construire.py).
+       Décalages mesurés au 27/09 : « Moka, » −165,235 px ; « mange » et « plus » −165,234 px.
+    3. 14,50 → 15,10 : la phrase propre « mon chat, Moka, | mange plus | depuis hier. » tient 0,60 s.
+    4. 15,10 → 15,28 : C1 sort par ses masques de ligne, vers le bas (0,18 s power3.in), puis opacité 0.
+  C2 paraît à 15,3333 (image 460) et sort de 16,98 à 17,16. À 17,20, quand le point part, la page est vide.
+
+  Aucun temps de voix en dur : attaques = DONNEES.mots via TEXTE (pages DONNEES.pages de la scène), instants
+  du tamis = DONNEES.evenements. Seuls les instants d'image décidés par le plan (15,10 ; 16,98 ; 10,60 ;
+  17,00) sont écrits ici, et le script vérifie qu'ils respectent la voix et le départ du point.
+  Temps de la timeline : LOCAUX (0 = 10,40 s film), convertis par TEXTE.scene("s3-ecoute").
+  Ce CSS doit rester identique au contrat DONNEES.geometrie.s3_texte (le script vérifie le style calculé).
+-->
+<template id="s3-ecoute-template">
+<style>
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2")}
+#root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
+#s3-parole{position:absolute;left:0;top:0;width:1080px;height:1920px}
+/* La parole de l'appelant : Instrument Serif italique 400, 64 px, interlignage 72 px (lignes de base
+   874 / 946 / 1018 ; top posé par le script depuis DONNEES.geometrie.s3_texte). Les deux pages occupent la
+   même place, une seule à la fois. */
+.s3-page{position:absolute;left:90px;top:804px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:italic;
+         font-size:64px;line-height:72px;letter-spacing:0;color:#262019;white-space:nowrap}
+/* Les hésitations : gris texte de la DA (#6F695F, 4,8:1 sur le papier : AA). */
+.s3-page .s3-euh{color:#6F695F}
+/* La mention, non dite : Geist 400 36/48, gris, ligne de base 330 (top 294). */
+#s3-mention{position:absolute;left:90px;top:294px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+            font-size:36px;line-height:48px;letter-spacing:0;color:#6F695F;white-space:nowrap;opacity:0}
+</style>
+<div id="root" data-composition-id="s3-ecoute" data-width="1080" data-height="1920">
+  <div id="s3-parole" data-element="parole">
+    <p id="s3-c1" class="s3-page"></p>
+    <p id="s3-c2" class="s3-page"></p>
+  </div>
+  <p id="s3-mention" data-element="mention"></p>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES;
+  const FPS = D.fps;
+  const UNE = 1 / FPS;
+  const EPS = 1e-5;
+  const sc = TEXTE.scene("s3-ecoute");
+  const EV = D.evenements;
+  const tl = gsap.timeline({ paused: true });
+  const r6 = function (v) { return +v.toFixed(6); };
+  function exiger(ok, msg) { if (!ok) throw new Error("s3-ecoute : " + msg); }
+  function extrait(id) {
+    const e = D.dialogue.extraits.find(function (x) { return x.id === id; });
+    exiger(e, "extrait " + id + " absent de DONNEES.dialogue");
+    return e;
+  }
+  const derniereImage = r6((D.scenes[sc.id].image_fin - 1) / FPS);        // 17,2667 s : image 518
+
+  // ── Instants du plan (s film) ──
+  const REVELE_C1 = 0.30;                     // C1 : groupe par groupe
+  const REVELE_C2 = 0.35;                     // C2 : ligne par ligne
+  const DY = 16;
+  const TF = EV.tamis_fondu.t;                // [13,95 ; 14,20] : les « euh, » s'effacent
+  const TR = EV.tamis_resserrage.t;           // [14,15 ; 14,50] : les trous se referment
+  const ECART = 0.03;                         // d'un « euh, » au suivant, dans leur fondu
+  const SORTIE = 0.18;                        // sorties de page par les masques, power3.in
+  const SORTIE_C1 = 15.10;                    // après 0,60 s de phrase propre
+  const SORTIE_C2 = 16.98;
+  const MENTION = [10.60, 10.90, 17.00, 17.20];
+  const DEPART = EV.depart_agenda.t;          // 17,20 : le point quitte sa place d'écoute (112 ; 1136)
+
+  // ── Géométrie du contrat : position posée, style vérifié ──
+  const G = D.geometrie.s3_texte;
+  document.querySelectorAll(".s3-page").forEach(function (p) { p.style.top = G.top + "px"; p.style.left = G.x + "px"; });
+  const elMention = document.getElementById("s3-mention");
+  elMention.style.top = G.mention.top + "px";
+  elMention.style.left = G.mention.x + "px";
+  (function () {
+    const cs = getComputedStyle(document.getElementById("s3-c1"));
+    exiger(cs.fontSize === G.corps + "px" && cs.lineHeight === G.interligne + "px" && cs.fontStyle === G.style &&
+           String(cs.fontWeight) === String(G.graisse), "le CSS de la parole s'écarte de DONNEES.geometrie.s3_texte");
+    const cm = getComputedStyle(elMention);
+    exiger(cm.fontSize === G.mention.corps + "px" && cm.lineHeight === G.mention.interligne + "px",
+           "le CSS de la mention s'écarte de DONNEES.geometrie.s3_texte.mention");
+  })();
+
+  // ── 1. Les pages de la scène, telles que DONNEES.pages les donne ──
+  const pages = D.pages.filter(function (p) { return p.scene === sc.id; });
+  exiger(pages.length === 2, "2 pages attendues dans DONNEES.pages, " + pages.length + " trouvées");
+  const pC1 = pages[0], pC2 = pages[1];
+  exiger(pC1.extrait === "C1" && pC2.extrait === "C2", "pages C1 puis C2 attendues");
+  exiger(Math.abs(pC1.top - G.top) < 0.01 && Math.abs(pC2.top - G.top) < 0.01, "top des pages ≠ geometrie.s3_texte.top");
+  // interlignage 72/64 = 1,125 em < 1,3 : les boîtes de police se chevauchent d'une ligne à l'autre (pas l'encre)
+  const c1 = TEXTE.poser("#s3-c1", pC1.lignes, { extrait: pC1.extrait, depuis: pC1.depuis, chevauchement: true });
+  const c2 = TEXTE.poser("#s3-c2", pC2.lignes, { extrait: pC2.extrait, depuis: pC2.depuis, chevauchement: true });
+  exiger(c1.mots.length === pC1.mots.length && c1.mots.every(function (u, i) {
+    return u.texte === pC1.mots[i].texte && u.ligne === pC1.mots[i].ligne;
+  }), "les unités posées de C1 ne correspondent plus à DONNEES.pages (relancer outils/construire.py)");
+  const estEuh = function (u) { return !!u.mot && u.mot.cle === "euh"; };
+  const euhs = c1.mots.filter(estEuh);
+  exiger(euhs.length === 2, "2 « euh, » attendus dans C1, " + euhs.length + " trouvés");
+  euhs.forEach(function (u) { u.el.classList.add("s3-euh"); });
+
+  // ── 2. Le resserrage : où chaque unité gardée se pose quand les « euh, » ne sont plus là ──
+  // Sur une ligne, l'unité k commence à x0[k] ; son avance (largeur + espace qui suit) vaut x0[k+1] − x0[k].
+  // Sans les « euh », une unité gardée commence au bord de la ligne plus la somme des avances des unités
+  // GARDÉES qui la précèdent : dx = cette place − x0. Les inline-blocks ne crénent pas entre eux, l'espace
+  // a toujours la même chasse : c'est exactement la mise en page de la page propre.
+  const resserre = [];                          // {u, dx, rangEuh} pour chaque unité qui bouge
+  c1.lignes.forEach(function (_, il) {
+    const idx = [];
+    c1.mots.forEach(function (u, k) { if (u.ligne === il) idx.push(k); });
+    let place = pC1.mots[idx[0]].x0;
+    let rangEuh = -1;                           // le « euh, » (dans l'ordre du fondu) qui ouvre le trou
+    idx.forEach(function (k, j) {
+      const m = pC1.mots[k];
+      const avance = j < idx.length - 1 ? pC1.mots[idx[j + 1]].x0 - m.x0 : m.x1 - m.x0;
+      const u = c1.mots[k];
+      if (estEuh(u)) { if (rangEuh < 0) rangEuh = euhs.indexOf(u); return; }
+      const dx = r6(place - m.x0);
+      if (Math.abs(dx) > 0.001) resserre.push({ u: u, dx: dx, rangEuh: rangEuh });
+      place += avance;
+    });
+  });
+  exiger(resserre.length === 3, "3 unités à resserrer attendues (« Moka, », « mange », « plus »), " + resserre.length);
+
+  // ── 3. C1 groupe par groupe, C2 ligne par ligne (une image d'avance sur l'attaque) ──
+  TEXTE.reveler(tl, c1, { scene: sc.id, duree: REVELE_C1, dy: DY, ease: "power3.out" });
+  const lignesC2 = c2.lignes.map(function (ligne, il) {
+    const unites = c2.mots.filter(function (u) { return u.ligne === il; });
+    return { els: unites.map(function (u) { return u.el; }), t: r6(TEXTE.aImage(unites[0].t) - UNE) };
+  });
+  lignesC2.forEach(function (L) {
+    tl.fromTo(L.els, { y: DY, opacity: 0 }, { y: 0, opacity: 1, duration: REVELE_C2, ease: "power3.out", immediateRender: true },
+              sc.local(L.t));
+  });
+
+  // ── 4. Le tamis ──
+  const eC1 = extrait("C1"), eC2 = extrait("C2");
+  const finVoixC1 = c1.mots[c1.mots.length - 1].mots.slice(-1)[0].fin;          // 13,90 (fin de « hier »)
+  exiger(TF[0] >= finVoixC1 - EPS, "les « euh, » s'effacent avant que C1 se taise");
+  exiger(TF[0] >= TEXTE.aImage(euhs[euhs.length - 1].t) - UNE + REVELE_C1 - EPS, "le tamis part avant que le dernier « euh, » soit posé");
+  const dureeFondu = r6(TF[1] - TF[0] - ECART * (euhs.length - 1));             // 0,22 s
+  euhs.forEach(function (u, i) {
+    tl.fromTo(u.el, { opacity: 1 }, { opacity: 0, duration: dureeFondu, ease: "power2.out", immediateRender: false },
+              sc.local(r6(TF[0] + ECART * i)));
+  });
+  // un seul geste : toutes les unités qui bougent partent ensemble à 14,15 et se posent ensemble à 14,50
+  resserre.forEach(function (e) {
+    exiger(e.rangEuh >= 0, "« " + e.u.texte + " » bouge sans « euh, » avant lui sur sa ligne");
+    tl.fromTo(e.u.el, { x: 0 }, { x: e.dx, duration: r6(TR[1] - TR[0]), ease: "power3.inOut", immediateRender: false }, sc.local(TR[0]));
+  });
+  // Le dernier mot de C1 doit être posé avant que la page ne bouge.
+  exiger(TR[0] >= TEXTE.aImage(c1.mots[c1.mots.length - 1].t) - UNE + REVELE_C1 - EPS, "le resserrage part avant que « hier. » soit posé");
+
+  // ── 5. Sorties : C1 après 0,60 s de phrase propre, C2 quand la question s'est tue ──
+  exiger(SORTIE_C1 - TR[1] >= 0.60 - EPS, "la phrase propre tient moins de 0,60 s");
+  exiger(SORTIE_C1 >= eC2.film_in - EPS, "C1 sort avant que l'appelant reprenne (« Euh, » de C2)");
+  exiger(lignesC2[0].t >= SORTIE_C1 + SORTIE - EPS, "C2 paraît avant la fin de la sortie de C1");
+  exiger(SORTIE_C2 >= lignesC2[lignesC2.length - 1].t + REVELE_C2 - EPS, "C2 sort avant que sa dernière ligne soit posée");
+  exiger(SORTIE_C2 - lignesC2[lignesC2.length - 1].t >= 0.60 - EPS, "la dernière ligne de C2 reste moins de 0,60 s");
+  exiger(SORTIE_C2 + SORTIE <= DEPART + EPS, "C2 sort encore quand le point part");
+  [[c1, SORTIE_C1], [c2, SORTIE_C2]].forEach(function (x) {
+    TEXTE.sortir(tl, x[0], sc.local(x[1]), { duree: SORTIE, ease: "power3.in" });
+    // une fois sortis (invisibles sous le masque), les mots s'effacent : aucun texte fantôme au contrôle
+    tl.set(x[0].mots.map(function (u) { return u.el; }), { opacity: 0 }, sc.local(r6(x[1] + SORTIE)));
+  });
+
+  // ── 6. La mention, non dite ──
+  const mention = TEXTE.poser(elMention, [G.mention.texte], { extrait: null });
+  exiger(mention.lignes.length === 1, "mention sur une ligne");
+  exiger(MENTION[0] >= TEXTE.aImage(c1.mots[0].t) - UNE - EPS, "la mention paraît avant la parole");
+  exiger(MENTION[3] <= DEPART + EPS && MENTION[3] <= derniereImage + EPS, "la mention s'éteint après le départ du point");
+  tl.fromTo(elMention, { opacity: 0 }, { opacity: 1, duration: r6(MENTION[1] - MENTION[0]), ease: "power3.out", immediateRender: true },
+            sc.local(MENTION[0]));
+  tl.to(elMention, { opacity: 0, duration: r6(MENTION[3] - MENTION[2]), ease: "power3.in" }, sc.local(MENTION[2]));
+
+  window.__timelines["s3-ecoute"] = tl;
+
+  // ── 7. Contrôle sur clones cachés, une fois les polices chargées ──
+  // Au montage dans HyperFrames, les polices sont encore en chargement (vérifié le 27/09) : une mesure ici
+  // serait celle de la police de secours. La timeline est donc construite sur DONNEES.pages (mesures de
+  // outils/navigateur.py) et SEULEMENT contrôlée plus tard, sans jamais la modifier. Deux clones cachés de C1
+  // sont posés dans la même tâche, mesurés et retirés (jamais peints) : la page telle quelle (A) et la page
+  // propre, sans les « euh, » ni l'espace qui les suit (B). On exige, à 0,5 px près : A = DONNEES.pages
+  // (x0 de chaque unité) et B = A + dx (le resserrage mène chaque unité à sa place dans la page propre).
+  // Et la mention mesure au plus geometrie.s3_texte.mention.largeur_max (920). Un écart s'affiche en
+  // console_error dans hf check (DONNEES périmé : relancer outils/construire.py).
+  function controler() {
+    const erreurs = [];
+    const hote = c1.conteneur.parentNode;
+    // hôte non mis en page (display:none) à cet instant : rien à mesurer, on ne conclut pas
+    if (!c1.conteneur.offsetWidth || !elMention.offsetWidth) { window.__s3Controle = { mesure: false }; return; }
+    const echelle = c1.conteneur.getBoundingClientRect().width / c1.conteneur.offsetWidth;
+    function cloner(sansEuh) {
+      const k = c1.conteneur.cloneNode(true);
+      k.removeAttribute("id");
+      k.setAttribute("aria-hidden", "true");
+      k.style.visibility = "hidden";
+      const us = Array.from(k.querySelectorAll(".tx-w"));
+      us.forEach(function (w) { w.removeAttribute("style"); });           // ni translation ni opacité GSAP
+      if (sansEuh) c1.mots.forEach(function (u, i) {
+        if (!estEuh(u)) return;
+        const w = us[i];
+        const esp = w.nextSibling && w.nextSibling.nodeType === 3 ? w.nextSibling : w.previousSibling;
+        if (esp && esp.nodeType === 3) esp.remove();
+        w.remove();
+      });
+      hote.appendChild(k);
+      return { el: k, unites: us };
+    }
+    const A = cloner(false), B = cloner(true);
+    const gauche = A.el.getBoundingClientRect().left;
+    let ecartA = 0, ecartB = 0;
+    c1.mots.forEach(function (u, i) {
+      const xa = (A.unites[i].getBoundingClientRect().left - gauche) / echelle + G.x;
+      ecartA = Math.max(ecartA, Math.abs(xa - pC1.mots[i].x0));
+      if (estEuh(u)) return;
+      const r = resserre.find(function (e) { return e.u === u; });
+      const xb = (B.unites[i].getBoundingClientRect().left - gauche) / echelle + G.x;
+      ecartB = Math.max(ecartB, Math.abs(xb - (xa + (r ? r.dx : 0))));
+    });
+    A.el.remove(); B.el.remove();
+    if (ecartA > 0.5) erreurs.push("C1 posée à " + ecartA.toFixed(3) + " px de DONNEES.pages");
+    if (ecartB > 0.5) erreurs.push("resserrage à " + ecartB.toFixed(3) + " px de la page propre mesurée");
+    const em = elMention.getBoundingClientRect().width / elMention.offsetWidth;
+    const lm = (mention.mots[mention.mots.length - 1].el.getBoundingClientRect().right -
+                mention.mots[0].el.getBoundingClientRect().left) / em;
+    if (lm > G.mention.largeur_max + 0.5) erreurs.push("mention de " + lm.toFixed(1) + " px > " + G.mention.largeur_max);
+    if (erreurs.length) console.error("s3-ecoute : " + erreurs.join(" ; "));
+    window.__s3Controle = { mesure: true, ecart_page: +ecartA.toFixed(4), ecart_resserrage: +ecartB.toFixed(4), largeur_mention: +lm.toFixed(3),
+                            dx: resserre.map(function (e) { return [e.u.texte, e.dx]; }) };
+  }
+  if (document.fonts && document.fonts.load) {
+    Promise.all([document.fonts.load(G.style + " " + G.graisse + " " + G.corps + 'px "Instrument Serif"'),
+                 document.fonts.load(G.mention.graisse + " " + G.mention.corps + 'px "Geist"')])
+      .then(function () { return document.fonts.ready; })
+      .then(controler)
+      .catch(function (e) { console.error("s3-ecoute : contrôle impossible, " + e); });
+  }
+})();
+</script>
+</template>
+</body>
+</html>

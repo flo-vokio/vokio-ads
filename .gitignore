@@ -23,3 +23,14 @@ videos/showcase/assets/son/*.wav
 videos/showcase/son/cache/
 videos/showcase/**/__pycache__/
 videos/showcase/son/monde/*.wav
+
+# showcase-iphone : même règles que showcase
+videos/showcase-iphone/son/*.wav
+videos/showcase-iphone/son/stems/
+videos/showcase-iphone/assets/son/*.wav
+videos/showcase-iphone/son/cache/
+videos/showcase-iphone/son/riche-*/
+videos/showcase-iphone/son/monde/*.wav
+videos/showcase-iphone/**/__pycache__/
+videos/showcase-iphone/snapshots/
+videos/showcase-iphone/v1/

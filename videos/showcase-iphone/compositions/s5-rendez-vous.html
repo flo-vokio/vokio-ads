@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>s5-rendez-vous</title></head>
+<body>
+<!--
+  Sous-composition s5-rendez-vous · v2 · film 25,20 → 31,35 s (hôte 6,15 s, images 756 à 940), hôte #h-s5-rendez-vous.
+  Chantier « compositions/s5-rendez-vous.html » du plan v2 (critique.json, plan.chantiers) : LE POINT ÉCRIT LE VRAI
+  RENDEZ-VOUS. Repris de la v1 (commit 6d4dbdb) et du socle de la racine. Finition du 27/09 (arbitrage 5) : sitôt
+  l'écriture finie, le point QUITTE le bloc (collé à « Florian », il se lisait comme une pastille de l'app) ; il attend
+  dans la gouttière des heures, sur la ligne 09:00, là où il frappait les heures.
+  Trois éléments, jamais plus :
+    1. le sous-titre (DONNEES.pages, geometrie.sous_titres_haut) : l'agente, Geist 400 72/84, x 90, lignes de base
+       330 / 414, chaque mot monte une image avant son attaque (TEXTE.reveler) ; sorties par les masques, power3.in :
+       « Parfait, je vous note ça | pour Florian, » 27,64 → 27,80 · « pour une consultation | vétérinaire, » 29,20 →
+       29,35 · « le samedi dix-neuf | septembre à neuf heures. » 30,92 → 31,10 ;
+    2. l'agenda : les pixels exacts de la fin de s4 (agenda-avant.png v2, 1575 × 675 à 1:1 en (70 ; 590), déborde à
+       droite ; mention « Capture réelle de app.vokio.fr » / « Établissement fictif de démonstration. », Geist 36/48
+       #6F695F, lignes de base 1313 / 1361), plus le calque bloc-florian.png découpé dans la vraie capture « après »
+       (avant + calque = après au pixel). Échelle constante, jamais de zoom ;
+    3. le point : #point de la RACINE, jamais dessiné ni animé ici ; la scène LIT POINT.etat(t) et vérifie ses clés
+       (09:00 → bord du bloc 761, écriture 762 → 783 en power1.out, plume levée 787, gouttière 801, hochement 821 dans la
+       gouttière, départ à 933 quand le dernier sous-titre est sorti).
+  DÉROULÉ DU BLOC (bord révélé b, px film ; clip-path inset(0 R 0 0), R = 1645 − b, posé à chaque image, jamais scale) :
+  rien avant 762 ; de 762 à 783, b = POINT.etat(t).x_sans + 22, monotone, bord NET (le contrat au pixel) ; de 783 à 789
+  (suivi_bloc), la suite du geste, quand la plume se lève : b va de 762 au-delà du cadre (1122) en sine.out, ≤ 93 px par
+  image, avec un bord d'encre doux de 40 px (mask-image en dégradé) ; ensuite entier, jamais replié.
+  AUCUN FILÉ (finition du 27/09, arbitrage 2) : l'obturateur de la v2 faisait de l'agenda une traînée grise en sortant.
+  SORTIE DE L'AGENDA : 31,00 → 31,35 (evenements.agenda_sort), translation 0 → −270 px en power3.in (quartique GSAP :
+  ≤ 90 px par image) et opacité 1 → 0 (linéaire), avec son bloc et sa mention : le papier monte et s'efface.
+  Aucun temps de voix en dur (DONNEES.mots via TEXTE, DONNEES.agenda, DONNEES.evenements, POINT) ; timeline en temps
+  LOCAUX (0 = 25,20). Aucun élément ne force visibility:visible : hors fenêtre, l'hôte masqué masque tout.
+  RACCORD s4 → s5 (755 → 756) : même objet que #s4-agenda (boîte 1575 × 790 sur fond papier opaque) : mêmes pixels.
+  RACCORD s5 → s6 (940 → 941) : sous-titre sorti depuis 31,10, agenda presque effacé (opacité 0,05) ; le point est en
+  route de la gouttière vers la fin de « recevrez » (DONNEES.point.trajets[1]).
+-->
+<template id="s5-rendez-vous-template">
+<style>
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
+#root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
+/* ── L'objet agenda : image + calque du bloc + mention, un seul bloc ──
+   Mêmes valeurs que #s4-agenda (ne pas les changer seules) : fond papier opaque (#F4F1E8 = #fond de la racine,
+   invisible), même rendu d'anticrénelage de la mention qu'à la dernière image de s4. Aucune transformation CSS ici :
+   la translation et le filé de la sortie sont écrits par la fonction du temps. */
+#s5-agenda{position:absolute;left:70px;top:590px;width:1575px;height:790px;background:#F4F1E8}
+#s5-capture{position:absolute;left:0;top:0;width:1575px;height:675px;display:block}
+/* Le calque du bloc, posé exactement sur la capture. Au départ entièrement rogné par la droite : la fonction du
+   temps le déroule image par image (clip-path, et une rampe mask-image seulement pendant le jet). */
+#s5-bloc{position:absolute;left:0;top:0;width:1575px;height:675px;display:block;clip-path:inset(0 100% 0 0)}
+/* La mention : Geist 400 36/48, gris texte #6F695F (4,9:1 sur le papier : AA). Ligne de base 36 px sous le haut de la
+   ligne (mesuré) : top 1277 → 1313 / 1361, bas 1373 < 1500. Dans l'objet : left 90 − 70 = 20, top 687. */
+#s5-mention{position:absolute;left:20px;top:687px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+            font-size:36px;line-height:48px;letter-spacing:0;color:#6F695F;white-space:nowrap}
+/* ── Le sous-titre : trois pages superposées, une seule visible à la fois ──
+   Agente Geist 72/84 (ligne de base 67 px sous le haut, mesuré) : top 263 → 330 / 414. */
+#s5-texte{position:absolute;left:0;top:0;width:1080px;height:600px}
+.s5-agente{position:absolute;left:90px;top:263px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+           font-size:72px;line-height:84px;letter-spacing:0;color:#262019;white-space:nowrap}
+</style>
+<div id="root" data-composition-id="s5-rendez-vous" data-width="1080" data-height="1920">
+  <!-- L'agenda dessous, le sous-titre dessus ; data-layout-allow-overflow : il déborde à droite et sort par le haut. -->
+  <div id="s5-agenda" data-element="agenda" data-layout-allow-overflow>
+    <img id="s5-capture" src="assets/captures/agenda-avant.png" width="1575" height="675" data-layout-allow-overflow
+         alt="Colonne jour de app.vokio.fr, samedi, matinée de 09:00 à 11:00">
+    <img id="s5-bloc" src="assets/captures/bloc-florian.png" width="1575" height="675" data-layout-allow-overflow
+         alt="Rendez-vous 09:00 Florian, tel qu'il apparaît dans app.vokio.fr">
+    <p id="s5-mention"></p>
+  </div>
+  <div id="s5-texte" data-element="sous-titre">
+    <p id="s5-p1" class="s5-agente"></p>
+    <p id="s5-p2" class="s5-agente"></p>
+    <p id="s5-p3" class="s5-agente"></p>
+  </div>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES;
+  const FPS = D.fps;
+  const UNE = 1 / FPS;
+  const DEMI = UNE / 2;
+  const EPS = 1e-5;
+  const sc = TEXTE.scene("s5-rendez-vous");
+  const S = D.scenes[sc.id];
+  const EV = D.evenements;
+  const tl = gsap.timeline({ paused: true });
+  const r6 = function (v) { return +v.toFixed(6); };
+  const px = function (v) { return Math.round(v * 1000) / 1000 + "px"; };
+  function exiger(ok, msg) { if (!ok) throw new Error("s5-rendez-vous : " + msg); }
+  function els(pose) { return pose.mots.map(function (u) { return u.el; }); }
+  exiger(window.POINT && typeof POINT.etat === "function", "window.POINT absent (lib/point.js est chargé par la racine)");
+  exiger(S.image_debut === 756 && S.image_fin === 941, "scène attendue sur les images 756 à 940 (" + S.image_debut + " → " + S.image_fin + ")");
+
+  // ── Réglages de la scène (plan v2) ──
+  const SORTIES = [[27.64, 0.16], [29.20, 0.15], [30.92, 0.18]];   // [début s film, durée s] des trois pages
+  const Y_SORTIE = 270;                         // montée de sortie de l'agenda (finition : 0 → −270, ≤ 90 px par image)
+  const HAUT_MIN = 520;                         // le haut de l'agenda reste sous cette ligne tant qu'un sous-titre vit
+  const T_HAUT_MIN = 31.11;                     // … jusqu'à cet instant (plan)
+  const L_RAMPE = 40;                           // px : bord d'encre doux du jet du bloc (783 → 789)
+  const PAS_MAX = 95;                           // px par image, pour tout ce qui bouge dans la scène
+
+  // ── 0. L'agenda à sa place, depuis DONNEES.agenda (agenda-geo.json v2, source unique ; mêmes calculs que s4) ──
+  const A = D.agenda, IM = A.image, B = A.bloc, GA = D.geometrie.agenda, GM = GA.mention;
+  exiger(A.version === 2 && A.echelle === 4.5, "agenda-geo v2 à 4,5 px par px CSS attendu");
+  exiger(/agenda-avant\.png$/.test(IM.fichier) && IM.largeur === 1575 && IM.hauteur === 675,
+         "image de l'agenda inattendue : " + IM.fichier + " " + IM.largeur + " × " + IM.hauteur);
+  exiger(/bloc-florian\.png$/.test(B.fichier), "calque du bloc inattendu : " + B.fichier);
+  exiger(IM.x === GA.image.x && IM.y === GA.image.y, "DONNEES.agenda et DONNEES.geometrie.agenda divergent");
+  const boite = document.getElementById("s5-agenda"), capture = document.getElementById("s5-capture");
+  const bloc = document.getElementById("s5-bloc"), elMention = document.getElementById("s5-mention");
+  boite.style.left = IM.x + "px"; boite.style.top = IM.y + "px";
+  [capture, bloc].forEach(function (im) {                                    // 1:1, jamais redimensionnées
+    im.style.width = IM.largeur + "px"; im.style.height = IM.hauteur + "px";
+    exiger(im.getAttribute("width") === String(IM.largeur) && im.getAttribute("height") === String(IM.hauteur),
+           "attributs width / height de #" + im.id + " ≠ DONNEES.agenda.image");
+  });
+  elMention.style.left = GM.left_dans_l_objet + "px"; elMention.style.top = GM.top_dans_l_objet + "px";
+  exiger(Math.abs(IM.x + GM.left_dans_l_objet - A.mention.x) < 0.01 &&
+         Math.abs(IM.y + GM.top_dans_l_objet + GM.decalage_ligne_de_base - A.mention.lignes_de_base[0]) < 0.01,
+         "la mention n'est pas en (x 90 ; ligne de base " + A.mention.lignes_de_base[0] + ")");
+  const mention = TEXTE.poser(elMention, A.mention.lignes, { extrait: null });
+  exiger(mention.lignes.length === 2 && A.mention.lignes_de_base[1] - A.mention.lignes_de_base[0] === 48,
+         "la mention doit tenir sur 2 lignes de 48 px");
+  exiger(A.mention.lignes[0] === "Capture réelle de app.vokio.fr" && A.mention.lignes[1] === "Établissement fictif de démonstration.",
+         "mention inattendue (option A : « Capture réelle de app.vokio.fr » / « Établissement fictif de démonstration. »)");
+  const HAUTEUR_BOITE = parseFloat(getComputedStyle(boite).height);          // 790
+  const basMention = IM.y + GM.top_dans_l_objet + 2 * 48;                    // 1373
+  exiger(basMention < 1500, "la mention descend sous y = 1500 (" + basMention + ")");
+  exiger(basMention <= IM.y + HAUTEUR_BOITE, "la mention sort de l'objet agenda");
+  const cm = getComputedStyle(elMention);
+  exiger(cm.fontSize === "36px" && cm.lineHeight === "48px" && cm.color === "rgb(111, 105, 95)",
+         "le CSS de la mention s'écarte de DONNEES.agenda.mention (Geist 36/48 #6F695F)");
+
+  // ── 1. Le bord révélé du bloc : fonction pure du temps film, lue sur le point ──
+  const DROITE = IM.x + IM.largeur;                                           // 1637 : bord droit de l'image (hors cadre)
+  const RAYON = POINT.diametre_disque / 2;                                    // 22
+  const T0 = EV.ecriture_debut.t, T1 = EV.ecriture_fin.t, SV = EV.suivi_bloc.t;
+  exiger(EV.ecriture_debut.image === 762 && EV.ecriture_fin.image === 783 &&
+         EV.suivi_bloc.images[0] === 783 && EV.suivi_bloc.images[1] === 789, "instants du déroulé inattendus (762 / 783 / 789)");
+  exiger(Math.abs(SV[0] - T1) < EPS, "la suite du geste ne part pas de la fin de l'écriture");
+  const eSuivi = POINT.ease("sine.out");
+  const bord1 = POINT.etat(T1).x_sans + RAYON;                               // 762
+  const HORS = IM.droite_visible + L_RAMPE + 2;                              // 1122 : le dégradé a quitté le cadre
+  function bord(tF) {                                                         // px film ; null = rien de révélé
+    if (tF < T0 - EPS) return null;
+    if (tF <= T1 + EPS) return POINT.etat(tF).x_sans + RAYON;
+    if (tF >= SV[1] - EPS) return DROITE;
+    const u = Math.min(1, (tF - SV[0]) / (SV[1] - SV[0]));
+    return bord1 + (HORS - bord1) * eSuivi(u);
+  }
+  // Le bord : [plein, nul] en px film ; plein === nul : bord net (écriture) ; pendant le jet, dégradé de L_RAMPE px.
+  function bordFile(tF) {
+    const b = bord(tF);
+    if (b == null) return null;
+    if (tF <= T1 + EPS || tF >= SV[1] - EPS) return [b, b];
+    return [Math.max(bord1, b - L_RAMPE), b];
+  }
+  function rendreBloc(tF) {
+    const f = bordFile(tF);
+    if (f == null) {
+      bloc.style.clipPath = "inset(0 100% 0 0)";
+      bloc.style.webkitMaskImage = bloc.style.maskImage = "none";
+      return;
+    }
+    const plein = f[0], nul = Math.min(DROITE, f[1]);
+    bloc.style.clipPath = "inset(0 " + px(Math.max(0, DROITE - nul)) + " 0 0)";
+    if (nul - plein >= 1) {
+      const g = "linear-gradient(to right, #000 " + px(plein - IM.x) + ", rgba(0,0,0,0) " + px(nul - IM.x) + ")";
+      bloc.style.webkitMaskImage = bloc.style.maskImage = g;
+    } else {
+      bloc.style.webkitMaskImage = bloc.style.maskImage = "none";
+    }
+  }
+  // Le contrat, relu dans les données (bloc de la vraie capture, point de la racine) :
+  exiger(Math.abs(POINT.etat(T0).y_sans - B.centre_y) < 0.01, "le point n'est pas sur la ligne du bloc à ecriture_debut");
+  exiger(Math.abs(POINT.etat(T1).x_sans - B.x_fin) < 0.01, "le point n'est pas au bout de l'écriture (x_fin) à ecriture_fin");
+  exiger(Math.abs(B.x_fin - RAYON - B.texte_x1 - 14) < 0.01, "le point ne s'arrête pas 14 px après l'encre de « Florian »");
+  exiger(Math.abs(POINT.etat(EV.plume_pose.t).x_sans - RAYON - B.x0) < 0.01, "la plume ne se pose pas bord contre bord au début du bloc");
+  exiger(POINT.etat(T0).x_sans - RAYON >= B.x0 - EPS, "à l'image 762, le bord arrière du point sort du bloc par la gauche");
+  exiger(B.florian_encre.x1 <= bord(T1) - RAYON + EPS, "« Florian » n'est pas entièrement écrit quand la plume s'arrête");
+  // Image par image : rien avant 762, monotone de 762 à 787 (bord ET partie pleine), jamais au-delà de l'image, entier dès 787.
+  (function () {
+    let bPrec = -Infinity, pPrec = -Infinity;
+    for (let n = S.image_debut; n < S.image_fin; n++) {
+      const t = r6(n / FPS), f = bordFile(t), b = bord(t);
+      if (n < EV.ecriture_debut.image) { exiger(f == null, "le bloc est révélé avant l'image 762 (image " + n + ")"); continue; }
+      exiger(f != null && b >= bPrec - 1e-6 && f[0] >= pPrec - 1e-6, "le bloc se replie à l'image " + n);
+      exiger(f[0] <= b + 1e-6 && f[1] >= b - 1e-6, "la rampe du bord ne contient pas le bord à l'image " + n);
+      if (n <= EV.ecriture_fin.image) exiger(Math.abs(b - (POINT.etat(t).x_sans + RAYON)) < 1e-6, "bord ≠ x_sans + 22 à l'image " + n);
+      if (n < EV.ecriture_fin.image) exiger(f[1] === f[0], "le bord est filé pendant l'écriture (image " + n + ")");
+      if (n >= EV.suivi_bloc.images[1]) exiger(f[0] >= DROITE - 1e-6, "le bloc n'est pas entier à l'image " + n);
+      bPrec = b; pPrec = f[0];
+    }
+  })();
+
+  // ── 2. Les sous-titres : géométrie du contrat, pages de DONNEES.pages ──
+  const H = D.geometrie.sous_titres_haut;
+  document.querySelectorAll(".s5-agente").forEach(function (p) { p.style.top = H.agente.top + "px"; p.style.left = H.agente.x + "px"; });
+  (function () {
+    const cs = getComputedStyle(document.getElementById("s5-p1"));
+    exiger(cs.fontSize === H.agente.corps + "px" && cs.lineHeight === H.agente.interligne + "px" &&
+           cs.fontStyle === H.agente.style && String(cs.fontWeight) === String(H.agente.graisse),
+           "le CSS du sous-titre s'écarte de DONNEES.geometrie.sous_titres_haut.agente");
+  })();
+  const pages = D.pages.filter(function (p) { return p.scene === sc.id; });
+  exiger(pages.length === 3, "3 pages attendues dans DONNEES.pages, " + pages.length + " trouvées");
+  exiger(pages.every(function (p) { return p.extrait === "A4" && p.style === "haut_agente" && p.lignes.length <= 2; }),
+         "pages A4, style haut_agente, deux lignes au plus, attendues");
+  // interlignage 84/72 = 1,17 em < 1,3 : les boîtes de police se chevauchent d'une ligne à l'autre (pas l'encre)
+  const poses = pages.map(function (p, i) {
+    const pose = TEXTE.poser("#s5-p" + (i + 1), p.lignes, { extrait: p.extrait, depuis: p.depuis, chevauchement: true });
+    exiger(pose.mots.length === p.mots.length && pose.mots.every(function (u, k) {
+      return u.texte === p.mots[k].texte && u.ligne === p.mots[k].ligne && u.mot && u.mot.rang === p.mots[k].rang;
+    }), "les unités posées de la page " + (i + 1) + " ne correspondent plus à DONNEES.pages (relancer outils/construire.py)");
+    return pose;
+  });
+  const REVELE = 0.26;
+  function premiereVisible(pose) { return r6(TEXTE.aImage(pose.mots[0].t)); }            // 1re image où la page se voit
+  function posee(pose) { return r6(TEXTE.aImage(pose.mots[pose.mots.length - 1].t) - UNE + REVELE); }   // page entière
+  function finDite(pose) { const u = pose.mots[pose.mots.length - 1]; return u.mots[u.mots.length - 1].fin; }
+  // Le bloc s'écrit dans le vrai silence de la réservation : fini (dans le cadre) avant que « Parfait, » soit posé.
+  exiger(bordFile(posee(poses[0]))[0] >= IM.droite_visible, "le bloc s'écrit encore (dans le cadre) quand « Parfait, » est posé");
+  (function () {                                    // le jet du bloc ne saute pas : ≤ PAS_MAX px par image
+    for (let n = EV.suivi_bloc.images[0] + 1; n <= EV.suivi_bloc.images[1]; n++) {
+      const a = bordFile(r6((n - 1) / FPS)), b = bordFile(r6(n / FPS));
+      const d = Math.min(b[1], IM.droite_visible + L_RAMPE) - Math.min(a[1], IM.droite_visible + L_RAMPE);
+      exiger(d <= PAS_MAX, "le bord du bloc saute de " + d.toFixed(1) + " px à l'image " + n);
+    }
+  })();
+  // La page suivante de la voix, après la scène : le premier mot de s6 (« Vous »).
+  const pS6 = D.pages.find(function (p) { return p.scene === "s6-sms"; });
+  exiger(pS6 && pS6.mots[0].texte === "Vous", "première page de s6 introuvable");
+  const tVoirS6 = r6(TEXTE.aImage(pS6.mots[0].t));
+  poses.forEach(function (pose, i) {
+    TEXTE.reveler(tl, pose, { scene: sc.id });
+    const t0 = SORTIES[i][0], d = SORTIES[i][1], t1 = r6(t0 + d);
+    exiger(d < REVELE, "la sortie de la page " + (i + 1) + " n'est pas plus courte que l'entrée des mots");
+    exiger(t0 >= posee(pose) - EPS, "la page " + (i + 1) + " sort avant d'être entière");
+    exiger(t1 - premiereVisible(pose) >= 0.6 - EPS, "la page " + (i + 1) + " reste moins de 0,6 s");
+    const suivante = i + 1 < poses.length ? premiereVisible(poses[i + 1]) : tVoirS6;
+    exiger(t1 <= suivante + EPS, "la page " + (i + 1) + " est encore là quand la suivante paraît");
+    exiger(finDite(pose) <= t1 + 0.2, "la page " + (i + 1) + " a disparu plus de 0,2 s avant la fin de son dernier mot");
+    TEXTE.sortir(tl, pose, sc.local(t0), { duree: d, ease: "power3.in" });
+    tl.set(els(pose), { opacity: 0 }, sc.local(t1));
+  });
+  const FIN_SOUS_TITRE = r6(SORTIES[2][0] + SORTIES[2][1]);                   // 31,10
+
+  // ── 3. L'agenda sort par le haut, avec son bloc et sa mention : translation nette et fondu, sans filé ──
+  // y(t) = −Y × power3.in(p), opacité = 1 − p, p = (t − 31,00) / 0,35.
+  const AS = EV.agenda_sort.t;
+  const DUREE_SORTIE = r6(AS[1] - AS[0]);
+  const eSortie = POINT.ease("power3.in");
+  exiger(Math.abs(DUREE_SORTIE - 0.35) < EPS && Math.abs(AS[1] - sc.fin) < EPS, "sortie de l'agenda attendue de 31,00 à 31,35 (fin de scène)");
+  function pSortie(tF) { return Math.max(0, Math.min(1, (tF - AS[0]) / DUREE_SORTIE)); }
+  function yAgenda(tF) { return -Y_SORTIE * eSortie(pSortie(tF)); }
+  function opAgenda(tF) { return 1 - pSortie(tF); }
+  exiger(IM.y + yAgenda(T_HAUT_MIN) >= HAUT_MIN, "l'agenda croiserait le sous-titre avant " + T_HAUT_MIN);
+  exiger(IM.y + yAgenda(FIN_SOUS_TITRE) >= HAUT_MIN, "l'agenda a déjà quitté sa place quand le sous-titre finit de sortir");
+  exiger(opAgenda(AS[1]) === 0, "l'agenda n'est pas effacé à 31,35");
+  for (let n = Math.round(AS[0] * FPS); n < S.image_fin; n++) {
+    const d = Math.abs(yAgenda(r6(n / FPS)) - yAgenda(r6((n - 1) / FPS)));
+    exiger(d <= 90 + 1e-6, "l'agenda saute de " + d.toFixed(1) + " px à l'image " + n + " en sortant (> 90)");
+  }
+  function rendreAgenda(tF) {
+    const y = yAgenda(tF), o = opAgenda(tF);
+    // Au repos : aucune transformation, opacité 1 (les pixels de s4 à l'image 756).
+    boite.style.transform = Math.abs(y) < 1e-4 ? "none" : "translate(0px, " + px(y) + ")";
+    boite.style.opacity = o >= 1 - 1e-6 ? "" : String(+o.toFixed(4));
+  }
+
+  // ── 4. Une seule fonction du temps (proxy de toute la scène, ease none, jamais tl.call) : seek dans tout ordre ──
+  function rendre(tF) { rendreBloc(tF); rendreAgenda(tF); }
+  const proxy = { t: 0 };
+  rendre(sc.film(0));
+  tl.to(proxy, { t: sc.duree, duration: sc.duree, ease: "none", onUpdate: function () { rendre(sc.film(proxy.t)); } }, 0);
+
+  // ── 5. Le point de la racine, relu (la scène ne l'anime pas ; elle vérifie qu'il fait ce qu'elle attend) ──
+  (function () {
+    const x9 = A.x_point, y9 = A.heures["09:00"];
+    const e0 = POINT.etat(sc.debut);
+    exiger(Math.abs(e0.x_sans - x9) <= 0.5 && Math.abs(e0.y_sans - y9) <= 0.5, "le point n'est pas sur 09:00 à la première image");
+    const G = EV.vers_gouttiere.images;                                        // [783 ; 801]
+    // en quittant le bloc, le disque passe AU-DESSUS de l'encre du bloc (« 09:00 Florian » : haut d'encre 692)
+    for (let n = G[0] + 1; n <= G[1]; n++) {
+      const e = POINT.etat(r6(n / FPS));
+      if (e.x_sans + RAYON > B.florian_encre.x0 - 60 && e.x_sans - RAYON < B.florian_encre.x1 + 2)
+        exiger(e.y_sans + RAYON * Math.max(1, e.sx) <= B.florian_encre.y0 - 2, "le point passe sur l'encre du bloc à l'image " + n);
+    }
+    for (let n = G[1]; n <= EV.depart_gouttiere.image; n++) {
+      const e = POINT.etat(r6(n / FPS));
+      exiger(Math.abs(e.x_sans - x9) < 0.01 && Math.abs(e.y_sans - y9) <= 6.01, "le point quitte la gouttière avant l'image " +
+             EV.depart_gouttiere.image + " (" + n + ")");
+    }
+    const eH = POINT.etat(r6(EV.signe_florian.image / FPS));                // image forcée 821 (voyelle 27,355)
+    exiger(Math.abs(eH.x_sans - x9) < 0.01 && Math.abs(eH.y_sans - (y9 + 6)) < 0.01, "le hochement de 6 px n'est pas à l'image 821");
+    exiger(EV.depart_gouttiere.t >= FIN_SOUS_TITRE - EPS, "le point quitte la gouttière avant que le dernier sous-titre soit sorti");
+  })();
+
+  window.__timelines["s5-rendez-vous"] = tl;
+})();
+</script>
+</template>
+</body>
+</html>

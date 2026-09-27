@@ -1,0 +1,28 @@
+{
+ "point-solaire-signature-v2.wav": {
+  "duree_s": 3.25,
+  "crete_vraie_dbtp_numpy": -1.02,
+  "mesure_ffmpeg": {
+   "lufs": -14.17,
+   "crete_dbtp": -1.02,
+   "lra": 1.1
+  },
+  "correlation_LR": 0.825,
+  "perte_mono_db": -0.45,
+  "energie_sup_5k_db_rel": -35.8,
+  "energie_sup_8k_db_rel": -37.5
+ },
+ "point-solaire-signature-courte-v2.wav": {
+  "duree_s": 0.9,
+  "crete_vraie_dbtp_numpy": -1.02,
+  "mesure_ffmpeg": {
+   "lufs": -12.18,
+   "crete_dbtp": -1.02,
+   "lra": 0.0
+  },
+  "correlation_LR": 0.814,
+  "perte_mono_db": -0.44,
+  "energie_sup_5k_db_rel": -36.3,
+  "energie_sup_8k_db_rel": -38.0
+ }
+}

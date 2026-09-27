@@ -1,0 +1,10 @@
+# variante « musique » : sons reconstruits par mix_riche_musique.py (12 Mo chacun) ; les prises ElevenLabs sont
+# des copies de son/cache/ (déjà ignoré) ; on garde les plans (el/*.json) et les mesures
+*.wav
+couches/
+stems/
+__pycache__/
+# relecture 27/09 : stems du master validé avant son limiteur (refaits par stems_avant_limiteur.py, 18 Mo chacun) et
+# courbes de gain (écrites par mix_riche_musique.py, lues par controle_musique.py)
+stems-avant-limiteur/
+gains-musique.npz

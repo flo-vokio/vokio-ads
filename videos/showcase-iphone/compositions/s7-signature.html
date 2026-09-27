@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>s7-signature</title></head>
+<body>
+<!--
+  Sous-composition s7-signature · v2 (finition du 27/09) · film 41,40 → 47,00 s (durée 5,60 s, images 1242 à 1409),
+  hôte #h-s7-signature. Tout est décalé de 1,70 s (le SMS se lit) ; la tenue finale gagne 0,30 s.
+  Plan v2 (critique.json, chantier « compositions/s7-signature.html ») : LE PLAN DU FILM. Le point écrit « Vokıo »
+  sous la ligne de base, bondit sur le la, plane sur le sol et tombe sur le ré : il met le point sur le ı.
+
+  TROIS ÉLÉMENTS AU PLUS :
+    avant l'image 1236 : le mot et le point (2) ;
+    à partir de 1236 : le logo (le mot ET le point, qui est #point de la RACINE posé au centre de #mot-pt : un seul
+    objet), la promesse, l'offre (3). #mot-pt reste caché : c'est la boîte de mesure du point de la DA.
+
+  LE DÉROULÉ (temps FILM ; la timeline est LOCALE, 0 = 41,40 ; tous les instants viennent de DONNEES.evenements) :
+    · 1242 → 1244 : papier nu, le point (racine) finit sa descente de la bulle vers le départ du stylo ;
+    · plume_mot [41,50 ; 42,20] = images 1245 → 1266 : le point court sous la ligne de base (ligne de base + 32), ROND
+      (DONNEES.point.etirement.sans), et le mot s'écrit derrière lui COMME DE L'ENCRE (arbitrage 7 de la finition) :
+      pendant l'écriture, les segments sont ouverts et #s7-fin porte un masque en dégradé, opaque jusqu'à xp − 40 px,
+      transparent dès xp, xp = maximum de POINT.etat(t).x_sans atteint depuis le départ du stylo (le masque ne recule
+      jamais). En v2, un volet à bord franc tranchait les lettres en pseudo-mots (« Vol », « Vokıc ») ;
+    · avant 41,50 : masques de départ de la DA, inset(-30% 114% -30% -14%) ; après 42,20 : ouverts, sans masque ;
+      sans window.POINT (banc de mesure outils/banc.html, monté par outils/navigateur.py pour mesurer #mot-pt) :
+      état de départ ;
+    · 42,20 → 42,90 (1266 → 1286) : le ı est lu SANS point pendant 0,7 s ; le point s'envole dès 1269 (le la),
+      atteint son sommet à 1276 (le sol) au-dessus du ı, flotte jusqu'à 1281 et tombe en power2.in ;
+    · signature_re_contact 42,90 (1287, le ré) : le point est le point du ı (écrasement 1287-1289, rond à 1290) ;
+    · promesse [43,50 ; 43,70] : les deux lignes de la promesse montent de leur ligne de base (masque de ligne de
+      TEXTE, yPercent 130 → 0, 0,60 s power3.out) ;
+    · offre [44,40 ; 44,50] : les deux lignes de l'offre, même geste, 0,45 s power3.out ; fin du dernier mouvement
+      44,95 ; tenue immobile 2,05 s jusqu'à 47,00 (le son finit en silence numérique, 46,70 → 47,00).
+
+  Le point n'est ni dessiné ni animé ici : la scène LIT POINT.etat(t) (masques) et DONNEES (instants, géométrie).
+  Contrat relu sur les données au montage (exiger) : images des événements, ordre plume · la · sol · ré · promesse ·
+  offre, clés du point au départ et à l'arrivée du stylo, clé du contact = centre MESURÉ de #mot-pt, diamètre,
+  continuité des masques aux deux bouts de l'écriture, tenue finale ≥ 1,6 s, rien sous y = 1500.
+  RACCORDS : à l'image 1241, s6 est sortie (téléphone effacé à 41,40) ; à 1242, s7 est vide (masques fermés,
+  textes sous leur masque) : papier + point, au pixel près des deux côtés. Fin du film à 47,00 (image 1410).
+-->
+<template id="s7-signature-template">
+<style>
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2")}
+#root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
+/* ── 1. Le wordmark ── GÉOMÉTRIE MESURÉE (outils/construire.py, livraison 1 du chantier) : Instrument Serif 400 px,
+   top 544 → ligne de base 860,0 exacte ; #mot de x 207,984 à 872,0 ; #mot-pt centre (700,797 ; 618,0), 44,0 px,
+   où #point (racine) se pose à l'image 1236. Balisage et CSS de ux-retravail/repondeur-ou-vokio/index.html
+   (ı sans point + point solaire rond, left 63,5 %, margin-left −.055em, top .13em, .11em).
+   Ne pas changer police, corps, top ni texte sans relancer outils/construire.py. */
+#s7-fin{position:absolute;left:0;right:0;top:544px;margin:0;text-align:center;font-family:"Instrument Serif",serif;font-weight:400;font-size:400px;line-height:.9}
+#mot{display:inline-flex;align-items:baseline;font-family:"Instrument Serif",serif;font-weight:400;font-size:400px;letter-spacing:-.045em;line-height:.9;color:#262019}
+#mot .seg{display:inline-block;clip-path:inset(-30% 114% -30% -14%)}
+/* L'encre qui coule derrière la plume (finition) : un masque en dégradé sur #s7-fin (x local = x film : left 0),
+   posé par la fonction du temps pendant plume_mot seulement. */
+#s7-fin{-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+#mot .i{position:relative;font-style:normal}
+#mot-pt{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;border-radius:50%;background:#EFA424;visibility:hidden}
+/* ── 2. La promesse ── Instrument Serif 400 72 px, interlignage 86 px, encre (14,3:1 sur le papier).
+   Ligne de base 67 px sous le haut de la ligne (hhea 990 / −310 au pixel, demi-interlignage négatif ;
+   mesuré dans le chrome-headless-shell de HyperFrames) : top 1020 − 67 = 953 → lignes de base 1020 / 1106 (plan v2).
+   Boîte de 70 à 1010 : marges latérales de 70 px, le centrage reste sur x = 540. Interlignage < 1,3 em :
+   chevauchement des boîtes de police voulu (TEXTE.poser, chevauchement: true), pas de l'encre. */
+#s7-promesse{position:absolute;left:70px;right:70px;top:953px;margin:0;text-align:center;font-family:"Instrument Serif",serif;
+             font-weight:400;font-style:normal;font-size:72px;line-height:86px;letter-spacing:0;color:#262019}
+#s7-promesse .s7-chute{font-style:italic}
+/* ── 3. L'offre ── Geist 400 44 px, interlignage 64 px, encre. Ligne de base 47 px sous le haut de la ligne
+   (mesuré) : top 1236 − 47 = 1189 → lignes de base 1236 / 1300 ; bas de boîte 1317 < 1500. */
+#s7-offre{position:absolute;left:70px;right:70px;top:1189px;margin:0;text-align:center;font-family:"Geist",sans-serif;
+          font-weight:400;font-style:normal;font-size:44px;line-height:64px;letter-spacing:0;color:#262019}
+/* Anticrénelage constant. À 44 px, Chromium dessine le Geist au repos en sous-pixel (franges colorées) mais
+   en niveaux de gris dès qu'il est translaté d'une fraction de pixel : sans précaution, chaque ligne de
+   l'offre « claque » à l'image où sa montée finit (mesuré en v1 : jusqu'à 60 niveaux de luminance d'écart sur
+   ~800 px). Une couche composée pour chaque ligne la garde en niveaux de gris du début à la fin, comme le
+   wordmark et la promesse (400 et 72 px, toujours en niveaux de gris). */
+#s7-offre .tx-ligne{will-change:transform}
+</style>
+<div id="root" data-composition-id="s7-signature" data-width="1080" data-height="1920">
+  <!-- 1. Wordmark « Vokıo » (ı U+0131 sans point). Segments masqués au départ (clip-path de départ de la DA),
+       ouverts par le stylo (le point). data-layout-allow-occlusion sur #mot-i : en descendant (41,00 → 41,20),
+       #point passe dans la boîte de police du ı, au-dessus de son encre (haut du fût à 653,75) ; hf check le lit
+       comme un ı caché, c'est le point du ı qui se pose. -->
+  <p id="s7-fin" data-element="mot"><span id="mot"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i" data-layout-allow-occlusion>ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></span></p>
+  <!-- 2. La promesse et 3. l'offre : construites par TEXTE.poser (textes non dits : extrait null). -->
+  <p id="s7-promesse" data-element="promesse"></p>
+  <p id="s7-offre" data-element="offre"></p>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES;
+  const FPS = D.fps;
+  const EPS = 1e-5;
+  const sc = TEXTE.scene("s7-signature");
+  const EV = D.evenements || {};
+  const tl = gsap.timeline({ paused: true });
+  function exiger(ok, msg) { if (!ok) throw new Error("s7-signature : " + msg); }
+  const proche = function (a, b, tol) { return Math.abs(a - b) <= (tol != null ? tol : 0.01); };
+
+  // ── 0. Le contrat, relu sur les données (sans POINT : la scène se monte aussi dans le banc de mesure) ──
+  const G7 = D.geometrie && D.geometrie.s7;
+  const G = G7 && G7.segments;
+  const PLUME = EV.plume_mot && EV.plume_mot.t;
+  const IDS = ["mot-a", "mot-i", "mot-o"];
+  const complet = !!(G && PLUME && EV.signature_la && EV.signature_sol && EV.signature_re_contact && EV.promesse && EV.offre);
+  if (complet) {
+    // images des événements = round(t × 30)
+    [["plume_mot", 0], ["plume_mot", 1], ["promesse", 0], ["promesse", 1], ["offre", 0], ["offre", 1]].forEach(function (c) {
+      exiger(TEXTE.image(EV[c[0]].t[c[1]]) === EV[c[0]].images[c[1]], "image de " + c[0] + "[" + c[1] + "] incohérente");
+    });
+    ["signature_la", "signature_sol", "signature_re_contact"].forEach(function (k) {
+      exiger(TEXTE.image(EV[k].t) === EV[k].image, "image de " + k + " incohérente");
+    });
+    // ordre : plume · la · sol · ré · promesse · offre, tout dans la scène
+    const ordre = [sc.debut, PLUME[0], PLUME[1], EV.signature_la.t, EV.signature_sol.t, EV.signature_re_contact.t,
+                   EV.promesse.t[0], EV.promesse.t[1], EV.offre.t[0], EV.offre.t[1], sc.fin];
+    for (let k = 1; k < ordre.length; k++) exiger(ordre[k] > ordre[k - 1] + EPS, "ordre des instants rompu (" + ordre.join(" · ") + ")");
+    // clés du point : départ et arrivée du stylo, contact au centre MESURÉ de #mot-pt
+    const P = D.point && D.point.position, M = D.mesures && D.mesures.s7;
+    exiger(P && M, "DONNEES.point.position ou DONNEES.mesures.s7 absent");
+    const cle = function (t) { return P.find(function (k) { return Math.abs(k.t - t) < EPS; }); };
+    const k0 = cle(PLUME[0]), k1 = cle(PLUME[1]), kc = cle(EV.signature_re_contact.t);
+    exiger(k0 && proche(k0.x, G7.stylo_x0) && proche(k0.y, G7.stylo_y), "clé du point ≠ départ du stylo à " + PLUME[0]);
+    exiger(k1 && proche(k1.x, G7.stylo_x1) && proche(k1.y, G7.stylo_y), "clé du point ≠ arrivée du stylo à " + PLUME[1]);
+    // le disque (44 px, 870 → 914) passe tout entier sous la ligne de base (860) : il écrit sans toucher l'encre
+    exiger(G7.stylo_y - D.point.diametre_disque / 2 >= G7.ligne_de_base, "le stylo ne passe plus sous la ligne de base");
+    exiger(kc && proche(kc.x, M.centre.x) && proche(kc.y, M.centre.y), "le point ne se pose pas au centre mesuré de #mot-pt");
+    exiger(proche(D.point.diametre_disque, M.diametre), "diamètre du point ≠ diamètre de #mot-pt");
+    const kDessus = P.filter(function (k) { return k.t < EV.signature_re_contact.t - EPS; }).pop();
+    exiger(kDessus && proche(kDessus.x, M.centre.x) && kDessus.y < M.centre.y, "avant le contact, le point doit tomber à la verticale du ı");
+  }
+
+  // ── 1. Le mot, écrit par le point (masques de la DA pilotés par le stylo) ──
+  const CACHE = "inset(-30% 114% -30% -14%)";
+  const segs = IDS.map(function (id) {
+    const el = document.getElementById(id);
+    const g = G && G[id];
+    if (!g) return { el: el, g: null };
+    // ouverture à droite : celle de la DA (14 % de la boîte), élargie pour couvrir toute l'encre du segment
+    const ouv = Math.max(0.14 * g.largeur, (g.encre_x1 != null ? g.encre_x1 - g.x1 + 4 : 0));
+    return { el: el, g: g, ouv: ouv, ferme: 1.14 * g.largeur, ouvert: "inset(-30% " + (+(-ouv).toFixed(3)) + "px -30% -14%)" };
+  });
+  if (complet) {
+    // continuité aux deux bouts de l'écriture : fermé quand le stylo part, ouvert quand il arrive (aucun saut à 1194 ni à 1215)
+    segs.forEach(function (s) {
+      exiger(s.g.x1 - G7.stylo_x0 >= s.ferme - EPS, s.el.id + " ne serait pas fermé au départ du stylo");
+      exiger(s.g.x1 - G7.stylo_x1 <= -s.ouv + EPS, s.el.id + " ne serait pas ouvert à l'arrivée du stylo");
+    });
+  }
+  // x du stylo : maximum de x_sans atteint depuis le départ (images pleines + instant courant) ; fonction pure du temps
+  const N0 = PLUME ? Math.round(PLUME[0] * FPS) : 0;
+  function stylo(tF) {
+    let m = POINT.etat(tF).x_sans;
+    const n = Math.floor(tF * FPS + 1e-6);
+    for (let k = N0; k <= n; k++) m = Math.max(m, POINT.position(k / FPS)[0]);
+    return m;
+  }
+  const L_ENCRE = 40;                                              // px : largeur du bord d'encre, derrière la plume
+  const fin7 = document.getElementById("s7-fin");
+  let masqueCourant = null;
+  function masques(tF) {
+    let xp = null;
+    if (window.POINT && complet && tF >= PLUME[0] - EPS && tF < PLUME[1] - EPS) xp = stylo(tF);
+    let m = "none";
+    segs.forEach(function (s) {
+      let css = CACHE;
+      if (window.POINT && complet && (tF >= PLUME[1] - EPS || xp != null)) css = s.ouvert;
+      if (s.el.style.clipPath !== css) s.el.style.clipPath = css;
+    });
+    if (xp != null) {
+      m = "linear-gradient(to right, #000 0px, #000 " + (+(xp - L_ENCRE).toFixed(3)) + "px, rgba(0,0,0,0) " + (+xp.toFixed(3)) + "px)";
+    }
+    if (m !== masqueCourant) { fin7.style.webkitMaskImage = fin7.style.maskImage = m; masqueCourant = m; }
+  }
+  if (complet && window.POINT) {
+    // continuité : au départ du stylo, rien n'est encore écrit (le dégradé finit avant l'encre du V) ; à l'arrivée,
+    // tout est écrit à 5 px près (la dernière image avant l'ouverture)
+    exiger(G7.stylo_x0 <= G["mot-a"].encre_x0 - 1, "au départ du stylo, le dégradé laisserait paraître le V");
+    exiger(G7.stylo_x1 - L_ENCRE >= G["mot-o"].encre_x1 - 6, "à l'arrivée du stylo, le « o » ne serait pas écrit");
+  }
+  const proxy = { t: 0 };
+  masques(sc.film(0));
+  tl.to(proxy, { t: sc.duree, duration: sc.duree, ease: "none", onUpdate: function () { masques(sc.film(proxy.t)); } }, 0);
+
+  // ── 2 et 3. La promesse, puis l'offre, montent de leur ligne de base (textes non dits) ──
+  const promesse = TEXTE.poser("#s7-promesse", ["Votre ligne répond", "même quand vous ne pouvez pas."],
+    { extrait: null, chevauchement: true });
+  promesse.lignes[1].classList.add("s7-chute");                    // la chute, en italique
+  // « 59 € » : espace fine insécable U+202F, rendue par TEXTE (.tx-fine, 0,16 em)
+  const offre = TEXTE.poser("#s7-offre", ["59 € par mois, sans engagement.", "Entendez-le vous-même sur vokio.fr"],
+    { extrait: null });
+  exiger(promesse.lignes.length === 2 && offre.lignes.length === 2, "la promesse et l'offre tiennent chacune sur deux lignes");
+  const cs = getComputedStyle(document.getElementById("s7-offre"));
+  const basOffre = parseFloat(cs.top) + 2 * parseFloat(cs.lineHeight);
+  exiger(!(basOffre > 1500), "l'offre descend sous y = 1500 (" + basOffre + ")");
+
+  // Chaque ligne monte d'un bloc (tous ses mots ensemble) depuis sous son masque de ligne (.tx-ligne).
+  // 130 % de la hauteur de ligne, la valeur de TEXTE.sortir : en dessous, le haut des accents
+  // (é de « répond », ê de « même ») resterait visible sous la ligne avant la montée.
+  const DEPART = 130;
+  function monter(ligne, tFilm, duree) {
+    const t0 = sc.local(TEXTE.aImage(tFilm));
+    exiger(t0 >= 0 && t0 + duree <= sc.duree + EPS, "une ligne monterait hors de la scène");
+    tl.fromTo(Array.from(ligne.querySelectorAll(".tx-w")), { yPercent: DEPART },
+      { yPercent: 0, duration: duree, ease: "power3.out", immediateRender: true }, t0);
+    return sc.film(t0 + duree);
+  }
+  if (EV.promesse && EV.offre) {
+    monter(promesse.lignes[0], EV.promesse.t[0], 0.60);
+    monter(promesse.lignes[1], EV.promesse.t[1], 0.60);
+    monter(offre.lignes[0], EV.offre.t[0], 0.45);
+    const fin = monter(offre.lignes[1], EV.offre.t[1], 0.45);
+    exiger(D.duree - fin >= 1.6 - EPS, "tenue finale trop courte (" + (D.duree - fin).toFixed(2) + " s)");
+  } else {
+    // banc de mesure avant la première construction complète : textes cachés sous leur masque
+    [promesse, offre].forEach(function (p) { gsap.set(p.mots.map(function (u) { return u.el; }), { yPercent: DEPART }); });
+  }
+
+  window.__timelines["s7-signature"] = tl;
+})();
+</script>
+</template>
+</body>
+</html>

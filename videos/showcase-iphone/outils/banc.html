@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<base href="/">
+<title>Banc de mesure</title>
+<!-- Banc de mesure des fondations (outils/navigateur.py) : monte UNE sous-composition comme le fait
+     HyperFrames (contenu du <template> seulement, scripts rejoués dans l'ordre), attend les polices,
+     place sa timeline au temps local demandé, et mesure le DOM. Servi par http.server depuis la racine
+     du projet (d'où <base href="/"> : les url("assets/…") des scènes se résolvent comme au rendu). -->
+<style>
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
+#banc{position:relative;width:1080px;height:1920px;overflow:hidden}
+</style>
+<script>window.__timelines = {};</script>
+<script src="lib/vendor/gsap.min.js"></script>
+<script src="donnees/donnees.js" onerror="window.__sansDonnees = true"></script>
+<script>
+  if (!window.DONNEES) window.DONNEES = { fps: 30, mots: [], scenes: {}, point: null };
+</script>
+<script src="lib/texte.js"></script>
+</head>
+<body>
+<div id="banc"></div>
+<script>
+async function charger(src) {
+  await new Promise(function (ok, ko) {
+    const s = document.createElement("script");
+    s.src = src; s.onload = ok; s.onerror = function () { ko(new Error("script " + src)); };
+    document.head.appendChild(s);
+  });
+}
+async function monter(id, tLocal) {
+  const html = await (await fetch("compositions/" + id + ".html")).text();
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  const tpl = doc.querySelector("template");
+  const banc = document.getElementById("banc");
+  banc.innerHTML = "";
+  const frag = document.importNode(tpl.content, true);
+  const scripts = Array.from(frag.querySelectorAll("script"));
+  scripts.forEach(function (s) { s.remove(); });
+  banc.appendChild(frag);
+  for (const s of scripts) {
+    if (s.src) { if (!/lib\/(texte|point)\.js$/.test(s.getAttribute("src"))) await charger(s.getAttribute("src")); }
+    else { const n = document.createElement("script"); n.textContent = s.textContent; banc.appendChild(n); }
+  }
+  await document.fonts.ready;
+  const tl = window.__timelines[id];
+  if (tl && tLocal != null) tl.seek(tLocal, false);
+  return { timeline: !!tl, polices: Array.from(document.fonts).filter(function (f) { return f.status === "loaded"; }).map(function (f) { return f.family + " " + f.style + " " + f.weight; }) };
+}
+function boite(el) {
+  const r = el.getBoundingClientRect();
+  return { x0: r.left, y0: r.top, x1: r.right, y1: r.bottom, cx: (r.left + r.right) / 2, cy: (r.top + r.bottom) / 2, l: r.width, h: r.height };
+}
+function encreGlyphe(el, glyphe) {
+  const cs = getComputedStyle(el);
+  const c = document.createElement("canvas").getContext("2d");
+  c.font = cs.fontStyle + " " + cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+  const m = c.measureText(glyphe);
+  return { gauche: m.actualBoundingBoxLeft, droite: m.actualBoundingBoxRight, haut: m.actualBoundingBoxAscent,
+           bas: m.actualBoundingBoxDescent, avance: m.width, police: c.font };
+}
+</script>
+</body>
+</html>

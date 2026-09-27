@@ -1,0 +1,955 @@
+{
+ "prise0": {
+  "tempo_global_bpm": 117.6,
+  "tempo_par_tiers": [
+   171.4,
+   117.6,
+   74.1
+  ],
+  "grille": {
+   "part_attaques_sur_les_temps": 0.123,
+   "hasard": 0.104,
+   "meilleur_decalage_s": -0.365
+  },
+  "mesures": [
+   {
+    "mesure": 1,
+    "accord_prevu": "Gadd9",
+    "part_chroma_dans_l_accord": 0.99,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "ré#",
+     "do#"
+    ]
+   },
+   {
+    "mesure": 2,
+    "accord_prevu": "Gmaj9",
+    "part_chroma_dans_l_accord": 0.99,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "do#",
+     "ré#"
+    ]
+   },
+   {
+    "mesure": 3,
+    "accord_prevu": "Bm7",
+    "part_chroma_dans_l_accord": 0.99,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "do#",
+     "ré#"
+    ]
+   },
+   {
+    "mesure": 4,
+    "accord_prevu": "Em9",
+    "part_chroma_dans_l_accord": 0.63,
+    "basse_entendue": "fa#",
+    "classes": [
+     "la",
+     "fa#",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 5,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.25,
+    "basse_entendue": "fa#",
+    "classes": [
+     "fa#",
+     "la",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 6,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.18,
+    "basse_entendue": "fa#",
+    "classes": [
+     "fa#",
+     "la",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 7,
+    "accord_prevu": "Bm7",
+    "part_chroma_dans_l_accord": 0.98,
+    "basse_entendue": "fa#",
+    "classes": [
+     "la",
+     "fa#",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 8,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.62,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "sol"
+    ]
+   },
+   {
+    "mesure": 9,
+    "accord_prevu": "Em9",
+    "part_chroma_dans_l_accord": 0.46,
+    "basse_entendue": "ré",
+    "classes": [
+     "la",
+     "ré",
+     "ré#"
+    ]
+   },
+   {
+    "mesure": 10,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.52,
+    "basse_entendue": "ré",
+    "classes": [
+     "la",
+     "ré",
+     "ré#"
+    ]
+   },
+   {
+    "mesure": 11,
+    "accord_prevu": "Gadd9",
+    "part_chroma_dans_l_accord": 1.0,
+    "basse_entendue": "ré",
+    "classes": [
+     "la",
+     "ré",
+     "ré#"
+    ]
+   },
+   {
+    "mesure": 12,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.59,
+    "basse_entendue": "sol",
+    "classes": [
+     "la",
+     "ré",
+     "sol"
+    ]
+   },
+   {
+    "mesure": 13,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.51,
+    "basse_entendue": "sol",
+    "classes": [
+     "la",
+     "sol",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 14,
+    "accord_prevu": "D",
+    "part_chroma_dans_l_accord": 0.83,
+    "basse_entendue": "sol",
+    "classes": [
+     "ré",
+     "la",
+     "sol"
+    ]
+   }
+  ],
+  "accord_moyen": 0.68,
+  "arc": {
+   "S_max": {
+    "t": 31.7,
+    "S": -12.9
+   },
+   "S_logo_max": -13.8,
+   "logo_moins_max_LU": -0.9,
+   "M_sonnerie_max": -20.1
+  },
+  "tonalite_globale": [
+   [
+    "ré majeur",
+    0.8774937003137839
+   ],
+   [
+    "ré mineur",
+    0.6518953116869007
+   ]
+  ]
+ },
+ "prise1": {
+  "tempo_global_bpm": 157.9,
+  "tempo_par_tiers": [
+   160.0,
+   90.2,
+   157.9
+  ],
+  "grille": {
+   "part_attaques_sur_les_temps": 0.145,
+   "hasard": 0.104,
+   "meilleur_decalage_s": 0.275
+  },
+  "mesures": [
+   {
+    "mesure": 1,
+    "accord_prevu": "Gadd9",
+    "part_chroma_dans_l_accord": 0.98,
+    "basse_entendue": "la",
+    "classes": [
+     "ré",
+     "la",
+     "ré#"
+    ]
+   },
+   {
+    "mesure": 2,
+    "accord_prevu": "Gmaj9",
+    "part_chroma_dans_l_accord": 0.98,
+    "basse_entendue": "la",
+    "classes": [
+     "ré",
+     "la",
+     "la#"
+    ]
+   },
+   {
+    "mesure": 3,
+    "accord_prevu": "Bm7",
+    "part_chroma_dans_l_accord": 0.98,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "sol#"
+    ]
+   },
+   {
+    "mesure": 4,
+    "accord_prevu": "Em9",
+    "part_chroma_dans_l_accord": 0.62,
+    "basse_entendue": "si",
+    "classes": [
+     "si",
+     "ré",
+     "do"
+    ]
+   },
+   {
+    "mesure": 5,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.18,
+    "basse_entendue": "sol",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 6,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.45,
+    "basse_entendue": "si",
+    "classes": [
+     "ré",
+     "la",
+     "si"
+    ]
+   },
+   {
+    "mesure": 7,
+    "accord_prevu": "Bm7",
+    "part_chroma_dans_l_accord": 0.81,
+    "basse_entendue": "si",
+    "classes": [
+     "ré",
+     "la",
+     "si"
+    ]
+   },
+   {
+    "mesure": 8,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.57,
+    "basse_entendue": "si",
+    "classes": [
+     "ré",
+     "la",
+     "si"
+    ]
+   },
+   {
+    "mesure": 9,
+    "accord_prevu": "Em9",
+    "part_chroma_dans_l_accord": 0.76,
+    "basse_entendue": "si",
+    "classes": [
+     "ré",
+     "la",
+     "si"
+    ]
+   },
+   {
+    "mesure": 10,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.36,
+    "basse_entendue": "si",
+    "classes": [
+     "ré",
+     "la",
+     "si"
+    ]
+   },
+   {
+    "mesure": 11,
+    "accord_prevu": "Gadd9",
+    "part_chroma_dans_l_accord": 0.85,
+    "basse_entendue": "si",
+    "classes": [
+     "la",
+     "ré",
+     "si"
+    ]
+   },
+   {
+    "mesure": 12,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.39,
+    "basse_entendue": "si",
+    "classes": [
+     "ré",
+     "la",
+     "si"
+    ]
+   },
+   {
+    "mesure": 13,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.67,
+    "basse_entendue": "si",
+    "classes": [
+     "ré",
+     "la",
+     "si"
+    ]
+   },
+   {
+    "mesure": 14,
+    "accord_prevu": "D",
+    "part_chroma_dans_l_accord": 0.99,
+    "basse_entendue": "ré",
+    "classes": [
+     "la",
+     "ré",
+     "sol#"
+    ]
+   }
+  ],
+  "accord_moyen": 0.68,
+  "arc": {
+   "S_max": {
+    "t": 35.6,
+    "S": -14.0
+   },
+   "S_logo_max": -16.1,
+   "logo_moins_max_LU": -2.1,
+   "M_sonnerie_max": -47.9
+  },
+  "tonalite_globale": [
+   [
+    "ré majeur",
+    0.8411699898197061
+   ],
+   [
+    "ré mineur",
+    0.7392345741709573
+   ]
+  ]
+ },
+ "prise2": {
+  "tempo_global_bpm": 77.9,
+  "tempo_par_tiers": [
+   77.9,
+   77.9,
+   77.9
+  ],
+  "grille": {
+   "part_attaques_sur_les_temps": 0.283,
+   "hasard": 0.104,
+   "meilleur_decalage_s": 0.095
+  },
+  "mesures": [
+   {
+    "mesure": 1,
+    "accord_prevu": "Gadd9",
+    "part_chroma_dans_l_accord": 0.37,
+    "basse_entendue": "sol",
+    "classes": [
+     "sol",
+     "fa#",
+     "la"
+    ]
+   },
+   {
+    "mesure": 2,
+    "accord_prevu": "Gmaj9",
+    "part_chroma_dans_l_accord": 0.77,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 3,
+    "accord_prevu": "Bm7",
+    "part_chroma_dans_l_accord": 0.44,
+    "basse_entendue": "ré#",
+    "classes": [
+     "ré",
+     "sol",
+     "fa"
+    ]
+   },
+   {
+    "mesure": 4,
+    "accord_prevu": "Em9",
+    "part_chroma_dans_l_accord": 0.78,
+    "basse_entendue": "ré",
+    "classes": [
+     "si",
+     "fa#",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 5,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.2,
+    "basse_entendue": "ré#",
+    "classes": [
+     "sol",
+     "ré",
+     "la"
+    ]
+   },
+   {
+    "mesure": 6,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.48,
+    "basse_entendue": "do#",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 7,
+    "accord_prevu": "Bm7",
+    "part_chroma_dans_l_accord": 0.52,
+    "basse_entendue": "do#",
+    "classes": [
+     "sol",
+     "la",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 8,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.55,
+    "basse_entendue": "ré#",
+    "classes": [
+     "si",
+     "fa#",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 9,
+    "accord_prevu": "Em9",
+    "part_chroma_dans_l_accord": 0.79,
+    "basse_entendue": "ré#",
+    "classes": [
+     "sol",
+     "ré",
+     "la"
+    ]
+   },
+   {
+    "mesure": 10,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.06,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "fa#",
+     "la"
+    ]
+   },
+   {
+    "mesure": 11,
+    "accord_prevu": "Gadd9",
+    "part_chroma_dans_l_accord": 0.87,
+    "basse_entendue": "ré",
+    "classes": [
+     "la",
+     "ré",
+     "sol"
+    ]
+   },
+   {
+    "mesure": 12,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.07,
+    "basse_entendue": "ré",
+    "classes": [
+     "fa#",
+     "si",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 13,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.69,
+    "basse_entendue": "do#",
+    "classes": [
+     "sol",
+     "la",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 14,
+    "accord_prevu": "D",
+    "part_chroma_dans_l_accord": 0.53,
+    "basse_entendue": "ré#",
+    "classes": [
+     "sol",
+     "la",
+     "ré"
+    ]
+   }
+  ],
+  "accord_moyen": 0.51,
+  "arc": {
+   "S_max": {
+    "t": 42.8,
+    "S": -13.4
+   },
+   "S_logo_max": -13.5,
+   "logo_moins_max_LU": -0.1,
+   "M_sonnerie_max": -18.8
+  },
+  "tonalite_globale": [
+   [
+    "sol majeur",
+    0.831596598364745
+   ],
+   [
+    "ré majeur",
+    0.8290942091809265
+   ]
+  ]
+ },
+ "prise3": {
+  "tempo_global_bpm": 77.9,
+  "tempo_par_tiers": [
+   77.9,
+   77.9,
+   77.9
+  ],
+  "grille": {
+   "part_attaques_sur_les_temps": 0.263,
+   "hasard": 0.104,
+   "meilleur_decalage_s": 0.095
+  },
+  "mesures": [
+   {
+    "mesure": 1,
+    "accord_prevu": "Gadd9",
+    "part_chroma_dans_l_accord": 0.4,
+    "basse_entendue": "si",
+    "classes": [
+     "si",
+     "do",
+     "do#"
+    ]
+   },
+   {
+    "mesure": 2,
+    "accord_prevu": "Gmaj9",
+    "part_chroma_dans_l_accord": 0.49,
+    "basse_entendue": "si",
+    "classes": [
+     "si",
+     "ré",
+     "do#"
+    ]
+   },
+   {
+    "mesure": 3,
+    "accord_prevu": "Bm7",
+    "part_chroma_dans_l_accord": 0.38,
+    "basse_entendue": "si",
+    "classes": [
+     "si",
+     "mi",
+     "do"
+    ]
+   },
+   {
+    "mesure": 4,
+    "accord_prevu": "Em9",
+    "part_chroma_dans_l_accord": 0.46,
+    "basse_entendue": "si",
+    "classes": [
+     "la",
+     "ré",
+     "si"
+    ]
+   },
+   {
+    "mesure": 5,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.21,
+    "basse_entendue": "si",
+    "classes": [
+     "si",
+     "sol",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 6,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.32,
+    "basse_entendue": "si",
+    "classes": [
+     "si",
+     "ré",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 7,
+    "accord_prevu": "Bm7",
+    "part_chroma_dans_l_accord": 0.43,
+    "basse_entendue": "si",
+    "classes": [
+     "si",
+     "ré",
+     "do"
+    ]
+   },
+   {
+    "mesure": 8,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.33,
+    "basse_entendue": "si",
+    "classes": [
+     "ré",
+     "si",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 9,
+    "accord_prevu": "Em9",
+    "part_chroma_dans_l_accord": 0.42,
+    "basse_entendue": "si",
+    "classes": [
+     "la",
+     "ré",
+     "si"
+    ]
+   },
+   {
+    "mesure": 10,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.48,
+    "basse_entendue": "si",
+    "classes": [
+     "la",
+     "fa#",
+     "si"
+    ]
+   },
+   {
+    "mesure": 11,
+    "accord_prevu": "Gadd9",
+    "part_chroma_dans_l_accord": 0.57,
+    "basse_entendue": "si",
+    "classes": [
+     "la",
+     "fa#",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 12,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.18,
+    "basse_entendue": "si",
+    "classes": [
+     "si",
+     "ré",
+     "la"
+    ]
+   },
+   {
+    "mesure": 13,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.48,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "do#"
+    ]
+   },
+   {
+    "mesure": 14,
+    "accord_prevu": "D",
+    "part_chroma_dans_l_accord": 0.91,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "do#"
+    ]
+   }
+  ],
+  "accord_moyen": 0.43,
+  "arc": {
+   "S_max": {
+    "t": 42.9,
+    "S": -11.0
+   },
+   "S_logo_max": -12.5,
+   "logo_moins_max_LU": -1.5,
+   "M_sonnerie_max": -16.0
+  },
+  "tonalite_globale": [
+   [
+    "ré majeur",
+    0.8675861262323938
+   ],
+   [
+    "la majeur",
+    0.6283829871425215
+   ]
+  ]
+ },
+ "prise4": {
+  "tempo_global_bpm": 77.9,
+  "tempo_par_tiers": [
+   77.9,
+   77.9,
+   77.9
+  ],
+  "grille": {
+   "part_attaques_sur_les_temps": 0.263,
+   "hasard": 0.104,
+   "meilleur_decalage_s": 0.17
+  },
+  "mesures": [
+   {
+    "mesure": 1,
+    "accord_prevu": "Gadd9",
+    "part_chroma_dans_l_accord": 0.36,
+    "basse_entendue": "fa",
+    "classes": [
+     "do",
+     "la",
+     "fa"
+    ]
+   },
+   {
+    "mesure": 2,
+    "accord_prevu": "Gmaj9",
+    "part_chroma_dans_l_accord": 0.97,
+    "basse_entendue": "ré",
+    "classes": [
+     "la",
+     "ré",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 3,
+    "accord_prevu": "Bm7",
+    "part_chroma_dans_l_accord": 0.52,
+    "basse_entendue": "do#",
+    "classes": [
+     "la",
+     "do#",
+     "mi"
+    ]
+   },
+   {
+    "mesure": 4,
+    "accord_prevu": "Em9",
+    "part_chroma_dans_l_accord": 0.51,
+    "basse_entendue": "si",
+    "classes": [
+     "la",
+     "ré",
+     "si"
+    ]
+   },
+   {
+    "mesure": 5,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.69,
+    "basse_entendue": "la",
+    "classes": [
+     "la",
+     "ré",
+     "mi"
+    ]
+   },
+   {
+    "mesure": 6,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.49,
+    "basse_entendue": "la",
+    "classes": [
+     "la",
+     "si",
+     "ré"
+    ]
+   },
+   {
+    "mesure": 7,
+    "accord_prevu": "Bm7",
+    "part_chroma_dans_l_accord": 0.95,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 8,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.45,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 9,
+    "accord_prevu": "Em9",
+    "part_chroma_dans_l_accord": 0.68,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 10,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.37,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 11,
+    "accord_prevu": "Gadd9",
+    "part_chroma_dans_l_accord": 0.84,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 12,
+    "accord_prevu": "A",
+    "part_chroma_dans_l_accord": 0.4,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 13,
+    "accord_prevu": "G",
+    "part_chroma_dans_l_accord": 0.59,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   },
+   {
+    "mesure": 14,
+    "accord_prevu": "D",
+    "part_chroma_dans_l_accord": 0.95,
+    "basse_entendue": "ré",
+    "classes": [
+     "ré",
+     "la",
+     "fa#"
+    ]
+   }
+  ],
+  "accord_moyen": 0.63,
+  "arc": {
+   "S_max": {
+    "t": 28.2,
+    "S": -11.0
+   },
+   "S_logo_max": -11.3,
+   "logo_moins_max_LU": -0.3,
+   "M_sonnerie_max": -86.4
+  },
+  "tonalite_globale": [
+   [
+    "ré majeur",
+    0.8751134238628879
+   ],
+   [
+    "ré mineur",
+    0.6807649960656039
+   ]
+  ]
+ },
+ "reference_numpy": {
+  "accord_moyen": 0.87,
+  "grille": {
+   "part_attaques_sur_les_temps": 0.327,
+   "hasard": 0.104,
+   "meilleur_decalage_s": -0.03
+  }
+ }
+}

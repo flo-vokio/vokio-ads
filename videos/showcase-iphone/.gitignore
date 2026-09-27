@@ -1,0 +1,9 @@
+# Version iPhone du showcase (copie de videos/showcase) : mêmes exclusions que le showcase dans le .gitignore racine.
+# Sons reconstruits par son/mix.py (12 Mo chacun ; assets/son/mix.wav est identique à celui de videos/showcase),
+# prises et caches régénérables, caches Python.
+son/*.wav
+son/stems/
+son/cache/
+son/monde/*.wav
+assets/son/*.wav
+**/__pycache__/

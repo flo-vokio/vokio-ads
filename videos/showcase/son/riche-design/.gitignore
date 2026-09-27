@@ -1,0 +1,5 @@
+# variante « sound design » : sons reconstruits par mix_riche_design.py (12 Mo chacun) ; les prises ElevenLabs sont
+# des copies de son/cache/ (déjà ignoré) ; on garde le catalogue, le choix et les mesures (JSON)
+*.wav
+stems/
+__pycache__/

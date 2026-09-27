@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>s6-sms</title></head>
+<body>
+<!--
+  Sous-composition s6-sms · VERSION iPHONE (27/09) · film 31,35 → 41,40 s (hôte 10,0499 s, images 941 à 1241), hôte #h-s6-sms.
+  Demande de Florian (27/09) : « un screenshot de téléphone plus réaliste type iPhone ». Le SMS arrive dans un iPhone 16 Pro
+  (titane naturel), app Messages d'iOS 26, mode clair : un ÉCART ASSUMÉ à la règle 2 (« aucun chrome factice »), à présenter
+  comme tel à Florian ; la mention d'iOS « SMS / Aujourd'hui 16:55 » garde sa taille réelle (11 pt = 23,4 px < 36) : dérogation
+  à la règle 5 proposée, que outils/controles.py affiche « à valider » à chaque passe.
+  Tout le reste est la v2 finie : même minutage, même sous-titre, même point, même vibreur. Trois éléments au plus :
+    1. le sous-titre (IDENTIQUE à la v2) : l'agente, Geist 72/84, « Vous recevrez un SMS | de confirmation. », sortie
+       33,70 → 33,88 ; l'appelant, Instrument Serif italique 64/72, « Super, merci beaucoup. | Au revoir. », coupe franche à 1076 ;
+    2. le téléphone (UN objet, data-element="telephone"), géométrie DONNEES.geometrie.s6 (outils/construire.py, IPHONE ;
+       détail dans lib/iphone.js) : corps 916 × 1917 px (haut 470, sort du cadre par le bas), écran 402 × 874 pt à 2,1244 px
+       par point (SMS 17 pt = 36,1 px) ; expéditeur « Vokio » (le sms_from par défaut du produit, aucun numéro) ; bulle reçue
+       #E9E9EB (queue 1 248 : rien sous 1 500) ; SMS = gabarit corrigé, coupé comme iOS, date soulignée comme dans Messages ;
+    3. le point de la RACINE (jamais dessiné ici) : il ponctue « recevrez », « SMS », « confirmation. », puis attend sous la queue
+       (DONNEES.geometrie.s6.point, 169 ; 1 284) de 1037 à 1230 (vérifié).
+  DÉROULÉ : 35,10 → 35,60 le téléphone monte de +380 (power3.out) en apparaissant, vide, autour du point ; 1076 raccroché ;
+  1078 → 1099 rien ne bouge ; 1100 la FORME grise éclot depuis le point (ouverte à 1114), le téléphone tremble avec lui ; texte
+  et mention, hors de la découpe, en fondu dès que le disque couvre la boîte du texte (aucune lettre coupée) ; 41,00 → 41,40 il
+  monte de 300 px (power3.in), opaque jusqu'à 1234 puis effacé en sine.inOut ; le point part avec lui (clé 30, arc sous la bulle).
+  Une seule fonction du temps (proxy, ease none, jamais tl.call). Raccord s5 → s6 inchangé ; s6 → s7 : il ne reste que le point.
+-->
+<template id="s6-sms-template">
+<style>
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2")}
+/* Inter (SIL OFL 1.1), variable graisse 100-900 et taille optique 14-32, sous-ensemble latin de Google Fonts : la police
+   libre la plus proche de SF Pro, la police système de l'iPhone. */
+@font-face{font-family:"Inter";font-weight:100 900;font-style:normal;font-display:block;src:url("assets/fonts/Inter-Variable-latin.woff2") format("woff2")}
+#root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
+
+/* ── 2. Le téléphone ── un calque plein cadre que la fonction du temps translate (y : entrée et sortie, x : vibreur) et
+   fond (opacité). Les coordonnées de ses enfants sont celles du film. Invisible jusqu'à son entrée. */
+#s6-telephone{position:absolute;left:0;top:0;width:1080px;height:1920px;opacity:0;will-change:transform}
+/* l'ombre portée sur le papier : un seul flou, doux, sous le corps (l'objet est posé, il ne brille pas) */
+#s6-ombre{position:absolute;left:82px;top:470px;width:916px;height:1917px;border-radius:160px;
+          box-shadow:0 34px 70px -18px rgba(38,32,25,.30),0 10px 22px -8px rgba(38,32,25,.16)}
+/* le corps (titane, bord noir, boutons) : SVG en coordonnées du téléphone, chemins posés par le script (coins continus) */
+#s6-corps{position:absolute;left:0;top:0;overflow:visible}
+#s6-corps-svg{position:absolute;left:82px;top:470px;width:916px;height:1917px;overflow:visible}
+/* L'écran : 402 × 874 pt, 1 pt = 2,124378 px (854 / 402). Toutes les cotes de l'interface sont en points iOS. */
+#s6-ecran{--pt:2.124378px;position:absolute;left:113px;top:500px;width:854px;height:1856.706px;overflow:hidden;
+          background:#FFFFFF;font-family:"Inter",sans-serif;font-variation-settings:"opsz" 17;color:#000;
+          -webkit-font-smoothing:antialiased}
+#s6-ecran .pt{position:absolute}
+/* barre d'état : 16:55 (Inter 600 17 pt, centré sur 73,6 pt), réseau, wifi, batterie ; centre vertical 32,3 pt */
+#s6-heure{left:calc(43.6 * var(--pt));top:calc(21.3 * var(--pt));width:calc(60 * var(--pt));height:calc(22 * var(--pt));
+          font-weight:600;font-size:calc(17 * var(--pt));line-height:calc(22 * var(--pt));letter-spacing:-.01em;text-align:center}
+#s6-etat{left:calc(288.9 * var(--pt));top:calc(26.7 * var(--pt));width:calc(80 * var(--pt));height:calc(12 * var(--pt));overflow:visible}
+#s6-ile{left:calc(138.6 * var(--pt));top:calc(14.6 * var(--pt));width:calc(124.8 * var(--pt));height:calc(36.2 * var(--pt));
+        border-radius:calc(18.1 * var(--pt));background:#000}
+#s6-ile i{position:absolute;right:calc(12.4 * var(--pt));top:calc(12.35 * var(--pt));width:calc(11.5 * var(--pt));height:calc(11.5 * var(--pt));
+          border-radius:50%;background:radial-gradient(circle at 38% 36%,#26304a 0,#10141f 42%,#040508 75%)}
+/* en-tête iOS 26 : verre clair (fond blanc de la conversation) */
+.s6-verre{background:#F5F5F6;box-shadow:0 0 0 calc(.5 * var(--pt)) rgba(0,0,0,.045),0 calc(1 * var(--pt)) calc(2 * var(--pt)) rgba(0,0,0,.04),
+          0 calc(4 * var(--pt)) calc(14 * var(--pt)) rgba(0,0,0,.075),inset 0 calc(.8 * var(--pt)) calc(.6 * var(--pt)) rgba(255,255,255,.95)}
+#s6-retour{left:calc(16 * var(--pt));top:calc(62.8 * var(--pt));width:calc(44 * var(--pt));height:calc(44 * var(--pt));border-radius:50%}
+#s6-retour svg{position:absolute;left:0;top:0;width:100%;height:100%}
+#s6-avatar{left:calc(171 * var(--pt));top:calc(62.3 * var(--pt));width:calc(60 * var(--pt));height:calc(60 * var(--pt));border-radius:50%;
+           overflow:hidden;background:linear-gradient(180deg,#A9AEB9 0%,#858A96 100%)}
+#s6-avatar svg{position:absolute;left:0;top:0;width:100%;height:100%}
+#s6-nom{top:calc(118.25 * var(--pt));height:calc(30.3 * var(--pt));border-radius:calc(15.15 * var(--pt));
+        padding:0 calc(11 * var(--pt)) 0 calc(13 * var(--pt));display:flex;align-items:center;gap:calc(4 * var(--pt));
+        font-weight:600;font-size:calc(17 * var(--pt));letter-spacing:-.012em;white-space:nowrap;
+        left:calc(201 * var(--pt));transform:translateX(-50%)}
+#s6-nom svg{width:calc(6.5 * var(--pt));height:calc(11 * var(--pt));flex:none;margin-top:calc(.6 * var(--pt))}
+/* le SMS : la FORME grise de la bulle, dans un calque de la taille de l'écran (coordonnées de l'écran) que l'éclosion
+   découvre ; la mention et le texte sont HORS de ce calque (frères, mêmes coordonnées) et montent en fondu : le bord du
+   disque ne coupe jamais une lettre. Invisibles (opacité 0) jusqu'au fondu, posé par rendre(). */
+#s6-message{left:0;top:0;width:854px;height:1856.706px;clip-path:circle(0px at 56px 784px)}
+#s6-mention{left:0;width:calc(402 * var(--pt));top:calc(160 * var(--pt));text-align:center;color:#6C6C70;opacity:0;
+            font-size:calc(11 * var(--pt));line-height:calc(13.5 * var(--pt));font-weight:500;letter-spacing:.005em}
+#s6-mention b{font-weight:600}
+#s6-mention span{font-weight:400}
+#s6-forme{left:0;top:0;width:854px;height:1856.706px;overflow:visible}
+/* la bulle reçue : texte Inter 400 17/22 pt, approche −0,013 em ; six lignes explicites (la coupe d'iOS, vérifiée) */
+#s6-bulle{position:absolute;left:calc(31 * var(--pt));top:calc(203.5 * var(--pt));margin:0;
+          font-family:"Inter",sans-serif;font-weight:400;font-style:normal;font-size:calc(17 * var(--pt));line-height:calc(22 * var(--pt));
+          letter-spacing:-.013em;color:#000;text-align:left;white-space:nowrap;opacity:0}
+.s6-l{display:block;white-space:nowrap}
+/* la date détectée par Messages (détection de données d'iOS) : soulignée, dans la couleur du texte ; aucune largeur changée */
+.s6-date{text-decoration:underline;text-decoration-color:currentColor;text-decoration-thickness:calc(1 * var(--pt));
+         text-underline-offset:calc(2.5 * var(--pt));text-decoration-skip-ink:auto}
+/* bas de l'écran (hors cadre) : barre de saisie iOS 26 et indicateur d'accueil */
+#s6-plus{left:calc(28.7 * var(--pt));top:calc(808.2 * var(--pt));width:calc(39 * var(--pt));height:calc(39 * var(--pt));border-radius:50%}
+#s6-saisie{left:calc(80.3 * var(--pt));top:calc(808.45 * var(--pt));width:calc(294.1 * var(--pt));height:calc(38.5 * var(--pt));
+           border-radius:calc(19.25 * var(--pt));color:#8A8A8E;font-size:calc(17 * var(--pt));line-height:calc(38.5 * var(--pt));
+           padding-left:calc(14 * var(--pt));box-sizing:border-box}
+#s6-accueil{left:calc(131.5 * var(--pt));top:calc(861 * var(--pt));width:calc(139 * var(--pt));height:calc(5 * var(--pt));
+            border-radius:calc(2.5 * var(--pt));background:#000}
+
+/* ── 1. Le sous-titre ── (identique à la v2) deux pages superposées, jamais visibles ensemble. */
+#s6-texte{position:absolute;left:0;top:0;width:1080px;height:600px}
+.s6-agente{position:absolute;left:90px;top:263px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+           font-size:72px;line-height:84px;letter-spacing:0;color:#262019;white-space:nowrap}
+.s6-appelant{position:absolute;left:90px;top:279px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:italic;
+             font-size:64px;line-height:72px;letter-spacing:0;color:#262019;white-space:nowrap}
+</style>
+<div id="root" data-composition-id="s6-sms" data-width="1080" data-height="1920">
+  <!-- L'objet téléphone d'abord (dessous), le sous-titre ensuite. data-layout-allow-overflow : le téléphone déborde du
+       cadre par le bas, c'est voulu (la barre de saisie et l'indicateur d'accueil sont sous l'image). -->
+  <div id="s6-telephone" data-element="telephone" data-layout-allow-overflow>
+    <div id="s6-ombre" data-layout-allow-overflow></div>
+    <svg id="s6-corps-svg" width="916" height="1917" viewBox="0 0 916 1917" aria-hidden="true" data-layout-allow-overflow>
+      <defs>
+        <linearGradient id="s6-titane" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3EFE7"/><stop offset=".45"
+          stop-color="#D9D5CD"/><stop offset="1" stop-color="#E7E3DB"/></linearGradient>
+        <linearGradient id="s6-bouton" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9B978F"/><stop offset=".5"
+          stop-color="#D8D4CC"/><stop offset="1" stop-color="#A9A59E"/></linearGradient>
+      </defs>
+      <g id="s6-boutons"></g>
+      <g id="s6-couches"></g>
+    </svg>
+    <div id="s6-ecran" data-layout-allow-overflow>
+      <!-- barre d'état -->
+      <div id="s6-heure" class="pt">16:55</div>
+      <svg id="s6-etat" class="pt" viewBox="0 0 80 12" aria-hidden="true">
+        <!-- réseau : 4 barres de 3,2 pt, pas de 4,9 pt ; wifi (x 26,9 → 42,6) ; batterie (x 51,1 → 78,1) -->
+        <g fill="#000">
+          <rect x="0" y="7.6" width="3.2" height="4.2" rx=".9"/><rect x="4.9" y="5.4" width="3.2" height="6.4" rx=".9"/><rect x="9.8" y="3.1" width="3.2" height="8.7" rx=".9"/><rect x="14.7" y=".8" width="3.2" height="11" rx=".9"/></g>
+        <g fill="none" stroke="#000" stroke-linecap="round">
+          <path d="M27.9 4.35 A10.3 10.3 0 0 1 41.6 4.35" stroke-width="2.05"/>
+          <path d="M30.55 7.15 A6.4 6.4 0 0 1 38.95 7.15" stroke-width="2.05"/>
+        </g>
+        <path d="M34.75 11.7 L32.45 9.35 A3.3 3.3 0 0 1 37.05 9.35 Z" fill="#000" stroke="#000" stroke-width="1" stroke-linejoin="round"/>
+        <rect x="51.6" y=".75" width="23.4" height="10.9" rx="3.4" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="1"/>
+        <rect x="53.6" y="2.75" width="15.2" height="6.9" rx="1.7" fill="#000"/>
+        <path d="M76.1 4.35 v3.7 a1.95 1.95 0 0 0 0 -3.7 z" fill="#000" fill-opacity=".4"/>
+      </svg>
+      <!-- en-tête : retour, avatar d'expéditeur inconnu, nom de l'expéditeur (alphanumérique) -->
+      <div id="s6-retour" class="pt s6-verre">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M25.6 13.2 L16.6 22 L25.6 30.8" fill="none" stroke="#000" stroke-width="2.6"
+             stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div id="s6-avatar" class="pt">
+        <svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22.6" r="10.4" fill="#FFFFFF"/>
+          <path d="M9.2 52.5 C11.4 41.6 19.6 36.4 30 36.4 C40.4 36.4 48.6 41.6 50.8 52.5 C45.4 57.3 38.1 60 30 60 C21.9 60 14.6 57.3 9.2 52.5 Z" fill="#FFFFFF"/></svg>
+      </div>
+      <div id="s6-nom" class="pt s6-verre"><span>Vokio</span><svg viewBox="0 0 6.5 11" aria-hidden="true"><path d="M1.2 1.1 L5.3 5.5 L1.2 9.9"
+           fill="none" stroke="#8A8A8E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <!-- le SMS : la mention (fondu), la forme grise (découverte par l'éclosion), le texte (fondu, au-dessus de la forme) -->
+      <div id="s6-mention" class="pt">SMS<br><b>Aujourd’hui</b><span> 16:55</span></div>
+      <div id="s6-message" class="pt">
+        <svg id="s6-forme" class="pt" width="854" height="1856.706" viewBox="0 0 854 1856.706" aria-hidden="true"><path id="s6-forme-bulle" fill="#E9E9EB" d=""/></svg>
+      </div>
+      <!-- le SMS corrigé, six lignes (coupe d'iOS au plus long dans 255 pt, revérifiée après chargement d'Inter), date soulignée -->
+      <p id="s6-bulle"><span class="s6-l">Bonjour Florian, votre</span><span class="s6-l">rendez-vous est confirmé :</span><span class="s6-l">Consultation vétérinaire, le</span><span class="s6-l"><u class="s6-date">samedi 19 septembre à 09:00</u>,</span><span class="s6-l">Clinique vétérinaire du Port.</span><span class="s6-l">Démo Vokio, RDV fictif.</span></p>
+      <!-- bas de l'écran : hors cadre -->
+      <div id="s6-plus" class="pt s6-verre">
+        <svg viewBox="0 0 39 39" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%"><path d="M19.5 11.5 V27.5 M11.5 19.5 H27.5"
+             stroke="#000" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div id="s6-saisie" class="pt s6-verre">SMS</div>
+      <div id="s6-accueil" class="pt"></div>
+      <!-- la Dynamic Island, au-dessus de l'image (c'est du matériel) -->
+      <div id="s6-ile" class="pt"><i></i></div>
+    </div>
+  </div>
+  <div id="s6-texte" data-element="sous-titre">
+    <p id="s6-p1" class="s6-agente"></p>
+    <p id="s6-p2" class="s6-appelant"></p>
+  </div>
+</div>
+<script>
+(function () {
+  const D = window.DONNEES, FPS = D.fps, UNE = 1 / FPS, EPS = 1e-5;
+  const sc = TEXTE.scene("s6-sms");
+  const S = D.scenes[sc.id];
+  const EV = D.evenements;
+  const tl = gsap.timeline({ paused: true });
+  const r6 = function (v) { return +v.toFixed(6); }, px = function (v) { return Math.round(v * 1000) / 1000 + "px"; };
+  const enImage = function (n) { return r6(n / FPS); };
+  function exiger(ok, msg) { if (!ok) throw new Error("s6-sms : " + msg); }
+  function els(pose) { return pose.mots.map(function (u) { return u.el; }); }
+  exiger(window.POINT && typeof POINT.etat === "function" && typeof POINT.secousse === "function",
+         "window.POINT absent (lib/point.js est chargé par la racine)");
+  exiger(S.image_debut === 941 && S.image_fin === 1242, "scène attendue sur les images 941 à 1241 (" + S.image_debut + " → " + S.image_fin + ")");
+  const derniereImage = enImage(S.image_fin - 1);                             // 41,366667 : image 1241
+
+  // ── Réglages de la scène (finition du 27/09 ; version iPhone : FONDU_SORTIE) ──
+  const Y_ENTREE = 380;                         // entrée : translateY +380 → 0, power3.out, en apparaissant (≤ 92 px par image)
+  const APPARITION = 0.30;                      // s : opacité 0 → 1 à l'entrée (power2.out)
+  const Y_SORTIE = 300;                         // sortie : 0 → −300 (le papier monte), power3.in
+  const FONDU_SORTIE = 4;                       // images : opaque au début de la sortie (< 4 px), puis sine.inOut jusqu'au bout
+  const PAS_MAX = 95;                           // px par image à l'entrée (90 en sortie, arbitrage 2)
+  const REVELE_C4 = 0.35, DY = 16;              // l'appelant, ligne par ligne (même grammaire que C2 en s3)
+  const OUVERTURE = 0.50;                       // le SMS éclot en 0,50 s, power2.out
+
+  // ── 0. La géométrie de l'iPhone (DONNEES.geometrie.s6, outils/construire.py), posée et contrôlée ──
+  const G6 = D.geometrie.s6, TEL = G6.telephone, ECR = G6.ecran, BU = G6.bulle, PT = G6.point, K = G6.pt;   // K : px par point iOS
+  exiger(TEL.x0 === 82 && TEL.largeur === 916 && TEL.haut === 470 && TEL.hauteur === 1917 && TEL.rayon === 160,
+         "téléphone ≠ contrat (x 82, 916 × 1917, haut 470, rayon 160)");
+  exiger(ECR.x0 === TEL.x0 + TEL.bord_cote && ECR.haut === TEL.haut + TEL.bord_haut && Math.abs(ECR.largeur - 854) < 1e-6 &&
+         Math.abs(K - 854 / 402) < 1e-6, "écran ≠ contrat (x 113, haut 500, 854 px = 402 pt)");
+  const ecran = document.getElementById("s6-ecran"), cs0 = getComputedStyle(ecran);
+  exiger(Math.abs(parseFloat(cs0.getPropertyValue("--pt")) - K) < 1e-6, "--pt du CSS ≠ DONNEES.geometrie.s6.pt");
+  exiger(parseFloat(cs0.left) === ECR.x0 && parseFloat(cs0.top) === ECR.haut && parseFloat(cs0.width) === ECR.largeur,
+         "le CSS de l'écran s'écarte de DONNEES.geometrie.s6.ecran");
+
+  // Le corps, les boutons, la découpe de l'écran et la forme de la bulle (queue iOS 26) : lib/iphone.js, d'après G6.
+  exiger(window.IPHONE && typeof IPHONE.construire === "function", "window.IPHONE absent (lib/iphone.js est chargé par la racine)");
+  const GB = IPHONE.construire(G6), bx = GB.bx, by = GB.by, bw = GB.bw, bh = GB.bh;
+  exiger(Math.abs(bx - BU.gauche_pt * K) < 0.01 && Math.abs(by - BU.haut_pt * K) < 0.01, "bulle ≠ contrat (16 pt ; 194 pt)");
+  exiger(Math.abs(ECR.x0 + bx + BU.queue_pointe_pt[0] * K - BU.queue_pointe.x) < 0.01 &&
+         Math.abs(ECR.haut + by + bh + BU.queue_pointe_pt[1] * K - BU.queue_pointe.y) < 0.01, "pointe de la queue ≠ DONNEES");
+
+  // Le SMS (gabarit corrigé, six lignes = DONNEES), la date soulignée, l'expéditeur « Vokio », corps et place : lib/iphone.js.
+  const bulle = document.getElementById("s6-bulle");
+  const TXT = IPHONE.controlerContenu(G6, bulle, exiger);
+  exiger(BU.bas < 1500 && BU.queue_pointe.y < 1500 && PT.y + POINT.diametre_disque / 2 < 1500, "le SMS ou le point descend sous y = 1 500");
+  // Le centre de l'éclosion : le point, en coordonnées de l'écran ; il attend sous la queue, sur l'écran blanc.
+  const CX = PT.x - ECR.x0, CY = PT.y - ECR.haut;                             // 55,99 ; 783,99
+  exiger(PT.y - POINT.diametre_disque / 2 - BU.queue_pointe.y >= 10, "le point touche la queue de la bulle");
+  exiger(PT.x - POINT.diametre_disque / 2 - ECR.x0 >= 30, "le point est trop près du bord de l'écran");
+  // Rayon final : le coin le plus lointain de la zone du SMS (mention et bulle, queue comprise) + 1 px, comme avant. La mention,
+  // centrée sur 201 pt et large de moins de 110 pt, finit avant 256 pt, à gauche du bord droit de la bulle.
+  const mention = document.getElementById("s6-mention");
+  exiger(mention.parentNode === ecran && bulle.parentNode === ecran, "la mention et le texte doivent être hors du calque découpé");
+  const mTop = parseFloat(getComputedStyle(mention).top);
+  exiger(256 * K <= bx + bw, "la mention dépasserait la bulle à droite");
+  const coins = [[bx, mTop], [bx + bw, mTop], [bx + bw, by + bh], [bx, by + bh + 7 * K]];
+  const R_FIN = Math.ceil(Math.max.apply(null, coins.map(function (c) { return Math.hypot(c[0] - CX, c[1] - CY); }))) + 1;
+  const message = document.getElementById("s6-message");
+  exiger(message.style.clipPath === "" && getComputedStyle(message).clipPath.indexOf("0px at 56px 784px") >= 0 &&
+         Math.abs(CX - 56) < 0.02 && Math.abs(CY - 784) < 0.1, "le clip-path initial du SMS n'est pas centré sur le point");
+
+  // ── 1. Le point de la racine, relu (la scène ne l'anime pas ; elle vérifie qu'il fait ce qu'elle attend) ──
+  const T_BULLE = EV.bulle_et_vibreur.t;                                      // 36,666667 : image 1100
+  const N_BULLE = EV.bulle_et_vibreur.image;
+  const S6 = D.secousses.s6;
+  exiger(N_BULLE === 1100 && S6.image0 === N_BULLE, "le vibreur et la bulle ne partent pas ensemble de l'image 1100");
+  exiger(EV.silence_numerique.images[0] === 1078 && EV.silence_numerique.images[1] === N_BULLE, "silence numérique ≠ 1078 → 1099");
+  exiger(EV.depart_stylo.image === EV.telephone_sortie.images[0], "le point ne part pas avec le téléphone (image " + EV.depart_stylo.image + ")");
+  for (let n = EV.arrivee_bulle.image; n <= EV.depart_stylo.image; n++) {                        // 1037 → 1230
+    const e = POINT.etat(enImage(n));
+    exiger(Math.abs(e.x_sans - PT.x) < 0.01 && Math.abs(e.y_sans - PT.y) < 0.01,
+           "le point n'est pas sous la bulle à l'image " + n + " (" + e.x_sans + " ; " + e.y_sans + ")");
+    exiger(Math.abs(e.dx - POINT.secousse("s6", enImage(n))) < 1e-9 && Math.abs(e.dy) < 1e-9,
+           "le point et le téléphone ne tremblent pas pareil à l'image " + n);
+  }
+  exiger(Math.abs(POINT.secousse("s6", T_BULLE)) > 0.5, "le vibreur ne bouge pas à l'image de la bulle");
+  exiger(POINT.secousse("s6", enImage(N_BULLE - 1)) === 0 && POINT.secousse("s6", enImage(N_BULLE + S6.enveloppe.length)) === 0,
+         "le vibreur déborde de 1100 → 1114");
+
+  // ── 2. Le sous-titre : les deux pages de la scène, telles que DONNEES.pages les donne (identique à la v2) ──
+  const Hs = D.geometrie.sous_titres_haut;
+  const p1 = document.getElementById("s6-p1"), p2 = document.getElementById("s6-p2");
+  p1.style.left = Hs.agente.x + "px"; p1.style.top = Hs.agente.top + "px";
+  p2.style.left = Hs.appelant.x + "px"; p2.style.top = Hs.appelant.top + "px";
+  exiger(Hs.agente.corps === 72 && Hs.agente.interligne === 84 && Hs.appelant.corps === 64 && Hs.appelant.interligne === 72,
+         "corps des sous-titres ≠ contrat (agente 72/84, appelant 64/72)");
+  [[p1, Hs.agente], [p2, Hs.appelant]].forEach(function (x) {
+    const cs = getComputedStyle(x[0]);
+    exiger(cs.fontSize === x[1].corps + "px" && cs.lineHeight === x[1].interligne + "px", "le CSS de #" + x[0].id + " s'écarte du contrat");
+  });
+  const pages = D.pages.filter(function (p) { return p.scene === sc.id; });
+  exiger(pages.length === 2, "2 pages attendues dans DONNEES.pages, " + pages.length + " trouvées");
+  exiger(pages[0].extrait === "A4" && pages[0].depuis === 18 && pages[0].lignes.join(" | ") === "Vous recevrez un SMS | de confirmation.",
+         "page de l'agente inattendue : " + pages[0].lignes.join(" | "));
+  exiger(pages[1].extrait === "C4" && pages[1].lignes.join(" | ") === "Super, merci beaucoup. | Au revoir.",
+         "page de l'appelant inattendue : " + pages[1].lignes.join(" | "));
+  exiger(pages[0].sortie && pages[0].sortie.t > 0, "DONNEES.pages[].sortie absent (relancer outils/construire.py)");
+  const T_SORTIE_A4 = pages[0].sortie.t, SORTIE_A4 = pages[0].sortie.duree;   // 33,70 ; 0,18
+  const agente = TEXTE.poser(p1, pages[0].lignes, { extrait: pages[0].extrait, depuis: pages[0].depuis, chevauchement: true });
+  const appelant = TEXTE.poser(p2, pages[1].lignes, { extrait: pages[1].extrait, depuis: pages[1].depuis || 0, chevauchement: true });
+  // 2a. L'agente, mot à mot à ses attaques (une image d'avance), puis sortie par les masques.
+  TEXTE.reveler(tl, agente, { scene: sc.id });                                // 16 px, 0,26 s, power3.out
+  const dernier = agente.mots[agente.mots.length - 1];
+  exiger(T_SORTIE_A4 >= TEXTE.aImage(dernier.t) + 0.26 - EPS, "« confirmation. » sort avant d'être posé");
+  exiger(T_SORTIE_A4 >= dernier.mots[dernier.mots.length - 1].fin + 0.6 - EPS, "« confirmation. » ne tient pas 0,6 s après la voix");
+  TEXTE.sortir(tl, agente, sc.local(T_SORTIE_A4), { duree: SORTIE_A4, ease: "power3.in" });
+  const FIN_A4 = r6(T_SORTIE_A4 + SORTIE_A4);                                 // 33,88
+  tl.set(els(agente), { opacity: 0 }, sc.local(FIN_A4));
+  // 2b. L'appelant, ligne par ligne, une image avant l'attaque du premier mot de chaque ligne.
+  const lignesC4 = appelant.lignes.map(function (ligne, il) {
+    const unites = appelant.mots.filter(function (u) { return u.ligne === il; });
+    return { els: unites.map(function (u) { return u.el; }), t: r6(TEXTE.aImage(unites[0].t) - UNE), unites: unites };
+  });
+  exiger(lignesC4.length === 2 && lignesC4[0].t >= FIN_A4 - EPS, "l'appelant entre avant que l'agente soit sortie");
+  lignesC4.forEach(function (L) {
+    tl.fromTo(L.els, { y: DY, opacity: 0 }, { y: 0, opacity: 1, duration: REVELE_C4, ease: "power3.out", immediateRender: true },
+              sc.local(L.t));
+  });
+  // 2c. Coupe franche au raccroché : opacité 0 à l'image 1076, sans transition (posée une demi-image avant).
+  const N_RACCROCHE = EV.raccroche.image;                                     // 1076
+  const T_COUPE = r6((N_RACCROCHE - 0.5) / FPS);                              // 35,85
+  const derMot = appelant.mots[appelant.mots.length - 1];
+  exiger(derMot.mots[derMot.mots.length - 1].fin < T_COUPE, "« Au revoir » doit finir avant le raccroché");
+  exiger(lignesC4[1].t + REVELE_C4 <= T_COUPE && T_COUPE - lignesC4[1].t >= 0.6, "« Au revoir. » n'est pas posé 0,6 s avant la coupe");
+  tl.set(els(appelant), { opacity: 0 }, sc.local(T_COUPE));
+
+  // ── 3. Le téléphone : entrée (avec « Au revoir »), repos, vibreur, sortie ; nets, sans filé (inchangé) ──
+  const TM = EV.telephone_monte.t, TS = EV.telephone_sortie.t;
+  const DM = r6(TM[1] - TM[0]), DS = r6(TS[1] - TS[0]);
+  exiger(TM[0] >= lignesC4[1].t - EPS && TM[1] <= EV.raccroche.t + EPS, "le téléphone doit entrer avec « Au revoir », avant le raccroché");
+  exiger(T_BULLE - TM[1] <= 1.2 + EPS, "le téléphone reste vide plus de 1,2 s avant la bulle");
+  exiger(Math.abs(TS[1] - sc.fin) < EPS && TS[0] - EV.bulle_ouverte.t >= 3.8 - EPS, "la bulle entière ne se lit pas 3,8 s avant la sortie");
+  const eMonte = POINT.ease("power3.out"), eApp = POINT.ease("power2.out"), eSort = POINT.ease("power3.in");
+  const eFondu = POINT.ease("sine.inOut");
+  const TF0 = r6(TS[0] + FONDU_SORTIE / FPS), DF = r6(TS[1] - TF0);            // 41,133333 (image 1234) ; 0,266667 s
+  function etatTel(tF) {                                                      // {y, o}
+    if (tF <= TM[0]) return { y: Y_ENTREE, o: 0 };
+    if (tF < TM[1]) return { y: Y_ENTREE * (1 - eMonte((tF - TM[0]) / DM)), o: Math.min(1, eApp(Math.min(1, (tF - TM[0]) / APPARITION))) };
+    if (tF <= TS[0]) return { y: 0, o: 1 };
+    if (tF < TS[1]) {
+      const u = (tF - TS[0]) / DS, v = Math.max(0, (tF - TF0) / DF);
+      return { y: -Y_SORTIE * eSort(u), o: 1 - eFondu(Math.min(1, v)) };
+    }
+    return { y: -Y_SORTIE, o: 0 };
+  }
+  (function () {
+    for (let n = S.image_debut + 1; n < S.image_fin; n++) {
+      const a = etatTel(enImage(n - 1)), b = etatTel(enImage(n));
+      const lim = enImage(n) > TS[0] ? 90 : PAS_MAX;
+      if (b.o > 0 || a.o > 0) exiger(Math.abs(b.y - a.y) <= lim + 1e-6, "le téléphone saute de " + Math.abs(b.y - a.y).toFixed(1) + " px à l'image " + n);
+    }
+    // Pendant l'entrée, le point reste sur l'écran blanc : le haut de l'écran (coin arrondi compris, borné par son rayon)
+    // passe toujours au-dessus du disque, et son bord gauche à sa gauche.
+    const rr = POINT.diametre_disque / 2;
+    exiger(ECR.haut + Y_ENTREE + ECR.rayon < PT.y - rr, "le haut de l'écran passerait sur le point à l'entrée du téléphone");
+    exiger(ECR.x0 + TEL.bord_cote < PT.x - rr, "le bord de l'écran passerait sur le point");
+  })();
+  exiger(etatTel(EV.silence_numerique.t[0]).y === 0 && etatTel(T_BULLE).y === 0 && etatTel(TS[0]).y === 0, "le téléphone bouge entre son entrée et sa sortie");
+  exiger(etatTel(TS[1]).o === 0 && etatTel(derniereImage).o <= 0.1 && etatTel(enImage(S.image_debut)).o === 0,
+         "le téléphone est visible hors de sa fenêtre");
+  IPHONE.controlerSortie(etatTel, EV.telephone_sortie.images[0], S.image_fin, enImage, exiger);   // sortie sans fantôme
+  IPHONE.controlerDepart(G6, etatTel, EV.depart_stylo.image, S.image_fin, enImage, exiger);    // le point, en arc, loin de la bulle
+
+  // ── 4. L'éclosion de la forme : r = 0 à l'image 1099, puis R_FIN × power2.out sur 0,50 s (ouverte à 1114) ──
+  const T0 = enImage(N_BULLE - 1);                                            // 36,633333 : image 1099
+  const eOuv = POINT.ease("power2.out");
+  function rayon(tF) {
+    if (tF <= T0 + EPS) return 0;
+    const u = (tF - T0) / OUVERTURE;
+    return u >= 1 ? Infinity : R_FIN * eOuv(u);
+  }
+  exiger(rayon(T0) === 0 && rayon(T_BULLE) > 0, "la bulle ne s'ouvre pas à l'image 1100");
+  exiger(rayon(EV.bulle_ouverte.t) === Infinity && rayon(enImage(EV.bulle_ouverte.image - 1)) < R_FIN, "la bulle n'est pas ouverte à l'image " + EV.bulle_ouverte.image);
+  // Le texte et la mention, hors de la découpe, en fondu power1.out : de la 1re image où le disque couvre toute la boîte du
+  // texte jusqu'à l'ouverture de la forme (entier dès bulle_ouverte, ≥ 3,8 s avant la sortie) ; lib/iphone.js.
+  const FT = IPHONE.fonduTexte({ G6: G6, bx: bx, by: by, bw: bw, bh: bh, x0: TXT.x0, y0: TXT.y0, cx: CX, cy: CY },
+    { rayon: rayon, enImage: enImage, nBulle: N_BULLE, nOuverte: EV.bulle_ouverte.image, tOuverte: EV.bulle_ouverte.t,
+      ease: POINT.ease("power1.out"), eps: EPS }, exiger);
+  const opaciteTexte = FT.opacite;
+
+  // ── 5. Une seule fonction du temps FILM (proxy de toute la scène, ease none, jamais tl.call) ──
+  const telephone = document.getElementById("s6-telephone");
+  function rendre(tF) {
+    const x = POINT.secousse("s6", tF), e = etatTel(tF);
+    // Au repos : aucune transformation (l'écran au pixel).
+    telephone.style.transform = Math.abs(x) < 1e-4 && Math.abs(e.y) < 1e-4 ? "none" : "translate(" + px(x) + ", " + px(e.y) + ")";
+    telephone.style.opacity = String(+e.o.toFixed(4));
+    const r = rayon(tF);
+    message.style.clipPath = r === Infinity ? "none" : "circle(" + (+r.toFixed(3)) + "px at " + (+CX.toFixed(3)) + "px " + (+CY.toFixed(3)) + "px)";
+    const oT = String(+opaciteTexte(tF).toFixed(4));
+    bulle.style.opacity = oT;
+    mention.style.opacity = oT;
+  }
+  const proxy = { t: 0 };
+  rendre(sc.film(0));
+  tl.to(proxy, { t: sc.duree, duration: sc.duree, ease: "none", onUpdate: function () { rendre(sc.film(proxy.t)); } }, 0);
+
+  window.__timelines["s6-sms"] = tl;
+
+  // ── 6. Après le chargement d'Inter : la coupe du SMS est celle d'iOS (lib/iphone.js ; vérifie, ne change rien) ──
+  IPHONE.controlerCoupe(G6, bulle, ecran);
+})();
+</script>
+</template>
+</body>
+</html>

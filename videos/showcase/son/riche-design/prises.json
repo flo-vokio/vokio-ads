@@ -1,0 +1,752 @@
+{
+ "encre": {
+  "prompt": {
+   "texte": "a single tiny drop of ink landing on thick matte paper, extremely close microphone, one soft wet tick, dry room, no reverb, no music, no voices",
+   "duree": 0.6,
+   "influence": 0.7,
+   "prises": 4
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/encre-prise1.wav",
+    "duree_s": 0.6,
+    "crete_rms_db": -51.5,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.56,
+    "bouffees": 1,
+    "fond_db_sous_crete": -19.0,
+    "tronquee": true,
+    "centroide_hz": 57.0,
+    "stabilite_db": 2.47,
+    "part_sous_150hz": 0.989,
+    "part_sur_4k5": 0.005,
+    "part_sur_8khz": 0.002
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/encre-prise2.wav",
+    "duree_s": 0.6,
+    "crete_rms_db": -32.9,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.551,
+    "bouffees": 1,
+    "fond_db_sous_crete": -26.6,
+    "tronquee": true,
+    "centroide_hz": 460.0,
+    "stabilite_db": 3.63,
+    "part_sous_150hz": 0.936,
+    "part_sur_4k5": 0.052,
+    "part_sur_8khz": 0.021
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/encre-prise3.wav",
+    "duree_s": 0.6,
+    "crete_rms_db": -36.7,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.461,
+    "bouffees": 2,
+    "fond_db_sous_crete": -31.8,
+    "tronquee": true,
+    "centroide_hz": 8190.0,
+    "stabilite_db": 4.31,
+    "part_sous_150hz": 0.116,
+    "part_sur_4k5": 0.791,
+    "part_sur_8khz": 0.761
+   },
+   {
+    "prise": 4,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/encre-prise4.wav",
+    "duree_s": 0.6,
+    "crete_rms_db": -38.8,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.6,
+    "bouffees": 1,
+    "fond_db_sous_crete": -23.9,
+    "tronquee": true,
+    "centroide_hz": 6109.0,
+    "stabilite_db": 5.08,
+    "part_sous_150hz": 0.543,
+    "part_sur_4k5": 0.43,
+    "part_sur_8khz": 0.425
+   }
+  ]
+ },
+ "plume": {
+  "prompt": {
+   "texte": "a fountain pen nib writing quickly on thick textured cotton paper, very close microphone, fine continuous scratching strokes, quiet room, no music, no voices",
+   "duree": 2.0,
+   "influence": 0.6,
+   "prises": 4
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/plume-prise1.wav",
+    "duree_s": 2.0,
+    "crete_rms_db": -22.1,
+    "attaque_s": 0.0,
+    "duree_utile_s": 1.913,
+    "bouffees": 6,
+    "fond_db_sous_crete": -23.9,
+    "tronquee": true,
+    "centroide_hz": 8361.0,
+    "stabilite_db": 2.55,
+    "part_sous_150hz": 0.019,
+    "part_sur_4k5": 0.705,
+    "part_sur_8khz": 0.665
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/plume-prise2.wav",
+    "duree_s": 2.0,
+    "crete_rms_db": -24.5,
+    "attaque_s": 0.0,
+    "duree_utile_s": 1.93,
+    "bouffees": 6,
+    "fond_db_sous_crete": -30.7,
+    "tronquee": true,
+    "centroide_hz": 8625.0,
+    "stabilite_db": 2.54,
+    "part_sous_150hz": 0.03,
+    "part_sur_4k5": 0.735,
+    "part_sur_8khz": 0.66
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/plume-prise3.wav",
+    "duree_s": 2.0,
+    "crete_rms_db": -21.7,
+    "attaque_s": 0.0,
+    "duree_utile_s": 1.896,
+    "bouffees": 16,
+    "fond_db_sous_crete": -35.0,
+    "tronquee": false,
+    "centroide_hz": 6386.0,
+    "stabilite_db": 2.31,
+    "part_sous_150hz": 0.018,
+    "part_sur_4k5": 0.533,
+    "part_sur_8khz": 0.469
+   },
+   {
+    "prise": 4,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/plume-prise4.wav",
+    "duree_s": 2.0,
+    "crete_rms_db": -14.2,
+    "attaque_s": 0.0,
+    "duree_utile_s": 1.921,
+    "bouffees": 5,
+    "fond_db_sous_crete": -39.1,
+    "tronquee": true,
+    "centroide_hz": 7041.0,
+    "stabilite_db": 3.46,
+    "part_sous_150hz": 0.033,
+    "part_sur_4k5": 0.597,
+    "part_sur_8khz": 0.505
+   }
+  ]
+ },
+ "vibreur_bois": {
+  "prompt": {
+   "texte": "a smartphone vibrating face down on a solid wooden table, steady continuous buzz with a slight wooden rattle, close, quiet room, no ringtone, no music, no voices",
+   "duree": 2.0,
+   "influence": 0.7,
+   "prises": 4
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/vibreur_bois-prise1.wav",
+    "duree_s": 2.0,
+    "crete_rms_db": -3.8,
+    "attaque_s": 0.0,
+    "duree_utile_s": 1.835,
+    "bouffees": 1,
+    "fond_db_sous_crete": -19.6,
+    "tronquee": true,
+    "centroide_hz": 420.0,
+    "stabilite_db": 1.58,
+    "part_sous_150hz": 0.0,
+    "part_sur_4k5": 0.014,
+    "part_sur_8khz": 0.004
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/vibreur_bois-prise2.wav",
+    "duree_s": 2.0,
+    "crete_rms_db": -3.4,
+    "attaque_s": 0.0,
+    "duree_utile_s": 1.697,
+    "bouffees": 1,
+    "fond_db_sous_crete": -82.8,
+    "tronquee": true,
+    "centroide_hz": 175.0,
+    "stabilite_db": 0.95,
+    "part_sous_150hz": 0.011,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/vibreur_bois-prise3.wav",
+    "duree_s": 2.0,
+    "crete_rms_db": -3.1,
+    "attaque_s": 0.0,
+    "duree_utile_s": 1.752,
+    "bouffees": 1,
+    "fond_db_sous_crete": -62.0,
+    "tronquee": true,
+    "centroide_hz": 183.0,
+    "stabilite_db": 0.83,
+    "part_sous_150hz": 0.001,
+    "part_sur_4k5": 0.001,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 4,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/vibreur_bois-prise4.wav",
+    "duree_s": 2.0,
+    "crete_rms_db": -4.6,
+    "attaque_s": 0.0,
+    "duree_utile_s": 1.711,
+    "bouffees": 1,
+    "fond_db_sous_crete": -66.8,
+    "tronquee": true,
+    "centroide_hz": 350.0,
+    "stabilite_db": 0.87,
+    "part_sous_150hz": 0.0,
+    "part_sur_4k5": 0.014,
+    "part_sur_8khz": 0.002
+   }
+  ]
+ },
+ "ambiance": {
+  "prompt": {
+   "texte": "quiet room tone in a calm house in the late afternoon, window half open, very distant birds outside, faint distant town hum, no voices, no music, no footsteps, no clock",
+   "duree": 22.0,
+   "influence": 0.5,
+   "prises": 3
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/ambiance-prise1.wav",
+    "duree_s": 22.0,
+    "crete_rms_db": -43.5,
+    "attaque_s": 0.0,
+    "duree_utile_s": 21.938,
+    "bouffees": 18,
+    "fond_db_sous_crete": -15.8,
+    "tronquee": false,
+    "centroide_hz": 62.0,
+    "stabilite_db": 2.17,
+    "part_sous_150hz": 0.955,
+    "part_sur_4k5": 0.001,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/ambiance-prise2.wav",
+    "duree_s": 22.0,
+    "crete_rms_db": -61.3,
+    "attaque_s": 0.0035,
+    "duree_utile_s": 21.996,
+    "bouffees": 20,
+    "fond_db_sous_crete": -15.5,
+    "tronquee": false,
+    "centroide_hz": 94.0,
+    "stabilite_db": 2.19,
+    "part_sous_150hz": 0.948,
+    "part_sur_4k5": 0.003,
+    "part_sur_8khz": 0.001
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/ambiance-prise3.wav",
+    "duree_s": 22.0,
+    "crete_rms_db": -42.9,
+    "attaque_s": 0.0,
+    "duree_utile_s": 21.985,
+    "bouffees": 1,
+    "fond_db_sous_crete": -13.8,
+    "tronquee": true,
+    "centroide_hz": 55.0,
+    "stabilite_db": 2.19,
+    "part_sous_150hz": 0.958,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   }
+  ]
+ },
+ "oiseaux": {
+  "prompt": {
+   "texte": "late afternoon heard from inside a calm quiet room, window open, a few distant birds chirping far away outside, sparse gentle chirps, soft air, no voices, no music, no traffic, no wind noise",
+   "duree": 22.0,
+   "influence": 0.6,
+   "prises": 3
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/oiseaux-prise1.wav",
+    "duree_s": 22.0,
+    "crete_rms_db": -55.0,
+    "attaque_s": 0.0,
+    "duree_utile_s": 22.0,
+    "bouffees": 102,
+    "fond_db_sous_crete": -24.5,
+    "tronquee": true,
+    "centroide_hz": 57.0,
+    "stabilite_db": 2.36,
+    "part_sous_150hz": 0.976,
+    "part_sur_4k5": 0.002,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/oiseaux-prise2.wav",
+    "duree_s": 22.0,
+    "crete_rms_db": -52.8,
+    "attaque_s": 0.0,
+    "duree_utile_s": 22.0,
+    "bouffees": 103,
+    "fond_db_sous_crete": -23.2,
+    "tronquee": true,
+    "centroide_hz": 56.0,
+    "stabilite_db": 2.65,
+    "part_sous_150hz": 0.977,
+    "part_sur_4k5": 0.002,
+    "part_sur_8khz": 0.001
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/oiseaux-prise3.wav",
+    "duree_s": 22.0,
+    "crete_rms_db": -55.5,
+    "attaque_s": 0.0,
+    "duree_utile_s": 22.0,
+    "bouffees": 108,
+    "fond_db_sous_crete": -29.8,
+    "tronquee": false,
+    "centroide_hz": 68.0,
+    "stabilite_db": 2.42,
+    "part_sous_150hz": 0.965,
+    "part_sur_4k5": 0.002,
+    "part_sur_8khz": 0.001
+   }
+  ]
+ },
+ "oiseau_loin": {
+  "prompt": {
+   "texte": "a single small bird chirping a few times far away outside an open window, quiet sunny late afternoon, soft and distant, no other sounds, no voices, no music",
+   "duree": 4.0,
+   "influence": 0.7,
+   "prises": 3
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/oiseau_loin-prise1.wav",
+    "duree_s": 4.0,
+    "crete_rms_db": -25.6,
+    "attaque_s": 0.2643,
+    "duree_utile_s": 2.47,
+    "bouffees": 3,
+    "fond_db_sous_crete": -49.5,
+    "tronquee": false,
+    "centroide_hz": 3036.0,
+    "stabilite_db": 3.25,
+    "part_sous_150hz": 0.001,
+    "part_sur_4k5": 0.001,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/oiseau_loin-prise2.wav",
+    "duree_s": 4.0,
+    "crete_rms_db": -70.5,
+    "attaque_s": 0.0,
+    "duree_utile_s": 4.0,
+    "bouffees": 3,
+    "fond_db_sous_crete": -14.2,
+    "tronquee": true,
+    "centroide_hz": 262.0,
+    "stabilite_db": 2.34,
+    "part_sous_150hz": 0.833,
+    "part_sur_4k5": 0.012,
+    "part_sur_8khz": 0.005
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/oiseau_loin-prise3.wav",
+    "duree_s": 4.0,
+    "crete_rms_db": -42.8,
+    "attaque_s": 0.6854,
+    "duree_utile_s": 2.646,
+    "bouffees": 3,
+    "fond_db_sous_crete": -41.3,
+    "tronquee": false,
+    "centroide_hz": 2478.0,
+    "stabilite_db": 3.23,
+    "part_sous_150hz": 0.015,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   }
+  ]
+ },
+ "papier": {
+  "prompt": {
+   "texte": "a single sheet of heavy paper sliding softly across a wooden desk, one gentle short swish, close, dry, no music, no voices",
+   "duree": 1.0,
+   "influence": 0.7,
+   "prises": 4
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/papier-prise1.wav",
+    "duree_s": 1.0,
+    "crete_rms_db": -38.8,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.967,
+    "bouffees": 1,
+    "fond_db_sous_crete": -29.7,
+    "tronquee": false,
+    "centroide_hz": 3262.0,
+    "stabilite_db": 2.63,
+    "part_sous_150hz": 0.254,
+    "part_sur_4k5": 0.335,
+    "part_sur_8khz": 0.13
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/papier-prise2.wav",
+    "duree_s": 1.0,
+    "crete_rms_db": -38.2,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.962,
+    "bouffees": 1,
+    "fond_db_sous_crete": -27.7,
+    "tronquee": true,
+    "centroide_hz": 7808.0,
+    "stabilite_db": 3.69,
+    "part_sous_150hz": 0.019,
+    "part_sur_4k5": 0.899,
+    "part_sur_8khz": 0.455
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/papier-prise3.wav",
+    "duree_s": 1.0,
+    "crete_rms_db": -45.4,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.925,
+    "bouffees": 1,
+    "fond_db_sous_crete": -24.4,
+    "tronquee": true,
+    "centroide_hz": 7210.0,
+    "stabilite_db": 3.53,
+    "part_sous_150hz": 0.022,
+    "part_sur_4k5": 0.842,
+    "part_sur_8khz": 0.342
+   },
+   {
+    "prise": 4,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/papier-prise4.wav",
+    "duree_s": 1.0,
+    "crete_rms_db": -46.7,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.974,
+    "bouffees": 1,
+    "fond_db_sous_crete": -23.2,
+    "tronquee": true,
+    "centroide_hz": 6128.0,
+    "stabilite_db": 2.91,
+    "part_sous_150hz": 0.018,
+    "part_sur_4k5": 0.764,
+    "part_sur_8khz": 0.206
+   }
+  ]
+ },
+ "glisse_objet": {
+  "prompt": {
+   "texte": "a small smooth object gliding gently across a felt covered wooden desk, one soft short slide, close, dry, no music, no voices",
+   "duree": 0.8,
+   "influence": 0.7,
+   "prises": 4
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/glisse_objet-prise1.wav",
+    "duree_s": 0.8,
+    "crete_rms_db": -15.7,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.676,
+    "bouffees": 1,
+    "fond_db_sous_crete": -47.0,
+    "tronquee": true,
+    "centroide_hz": 594.0,
+    "stabilite_db": 2.28,
+    "part_sous_150hz": 0.0,
+    "part_sur_4k5": 0.001,
+    "part_sur_8khz": 0.001
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/glisse_objet-prise2.wav",
+    "duree_s": 0.8,
+    "crete_rms_db": -11.1,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.672,
+    "bouffees": 6,
+    "fond_db_sous_crete": -52.7,
+    "tronquee": true,
+    "centroide_hz": 466.0,
+    "stabilite_db": 3.39,
+    "part_sous_150hz": 0.002,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/glisse_objet-prise3.wav",
+    "duree_s": 0.8,
+    "crete_rms_db": -20.3,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.708,
+    "bouffees": 1,
+    "fond_db_sous_crete": -37.6,
+    "tronquee": true,
+    "centroide_hz": 444.0,
+    "stabilite_db": 2.6,
+    "part_sous_150hz": 0.0,
+    "part_sur_4k5": 0.001,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 4,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/glisse_objet-prise4.wav",
+    "duree_s": 0.8,
+    "crete_rms_db": -20.2,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.707,
+    "bouffees": 1,
+    "fond_db_sous_crete": -35.9,
+    "tronquee": true,
+    "centroide_hz": 465.0,
+    "stabilite_db": 3.06,
+    "part_sous_150hz": 0.0,
+    "part_sur_4k5": 0.003,
+    "part_sur_8khz": 0.001
+   }
+  ]
+ },
+ "glisse_telephone": {
+  "prompt": {
+   "texte": "a smartphone with a glass back sliding smoothly across a varnished wooden desk, one short soft slide with a fine glassy hiss, close microphone, dry, no music, no voices",
+   "duree": 0.8,
+   "influence": 0.7,
+   "prises": 4
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/glisse_telephone-prise1.wav",
+    "duree_s": 0.8,
+    "crete_rms_db": -3.5,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.692,
+    "bouffees": 1,
+    "fond_db_sous_crete": -50.9,
+    "tronquee": true,
+    "centroide_hz": 383.0,
+    "stabilite_db": 2.93,
+    "part_sous_150hz": 0.0,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/glisse_telephone-prise2.wav",
+    "duree_s": 0.8,
+    "crete_rms_db": -4.3,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.691,
+    "bouffees": 1,
+    "fond_db_sous_crete": -42.1,
+    "tronquee": false,
+    "centroide_hz": 412.0,
+    "stabilite_db": 3.58,
+    "part_sous_150hz": 0.0,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/glisse_telephone-prise3.wav",
+    "duree_s": 0.8,
+    "crete_rms_db": -3.7,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.686,
+    "bouffees": 2,
+    "fond_db_sous_crete": -47.3,
+    "tronquee": true,
+    "centroide_hz": 292.0,
+    "stabilite_db": 3.31,
+    "part_sous_150hz": 0.0,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 4,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/glisse_telephone-prise4.wav",
+    "duree_s": 0.8,
+    "crete_rms_db": -4.9,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.652,
+    "bouffees": 2,
+    "fond_db_sous_crete": -60.3,
+    "tronquee": true,
+    "centroide_hz": 287.0,
+    "stabilite_db": 3.26,
+    "part_sous_150hz": 0.0,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   }
+  ]
+ },
+ "toucher_corps": {
+  "prompt": {
+   "texte": "a fingertip tapping once on a hardcover notebook lying on a wooden desk, soft muted knock, close, dry, one single tap, no music",
+   "duree": 0.5,
+   "influence": 0.7,
+   "prises": 4
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/toucher_corps-prise1.wav",
+    "duree_s": 0.48,
+    "crete_rms_db": -17.9,
+    "attaque_s": 0.045,
+    "duree_utile_s": 0.27,
+    "bouffees": 2,
+    "fond_db_sous_crete": -61.4,
+    "tronquee": false,
+    "centroide_hz": 286.0,
+    "stabilite_db": 4.19,
+    "part_sous_150hz": 0.124,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/toucher_corps-prise2.wav",
+    "duree_s": 0.48,
+    "crete_rms_db": -18.0,
+    "attaque_s": 0.1043,
+    "duree_utile_s": 0.265,
+    "bouffees": 2,
+    "fond_db_sous_crete": -48.9,
+    "tronquee": false,
+    "centroide_hz": 240.0,
+    "stabilite_db": 3.74,
+    "part_sous_150hz": 0.25,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/toucher_corps-prise3.wav",
+    "duree_s": 0.48,
+    "crete_rms_db": -13.2,
+    "attaque_s": 0.1274,
+    "duree_utile_s": 0.071,
+    "bouffees": 1,
+    "fond_db_sous_crete": -58.2,
+    "tronquee": false,
+    "centroide_hz": 279.0,
+    "stabilite_db": 4.03,
+    "part_sous_150hz": 0.133,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   },
+   {
+    "prise": 4,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/toucher_corps-prise4.wav",
+    "duree_s": 0.48,
+    "crete_rms_db": -15.6,
+    "attaque_s": 0.0892,
+    "duree_utile_s": 0.086,
+    "bouffees": 1,
+    "fond_db_sous_crete": -71.1,
+    "tronquee": false,
+    "centroide_hz": 356.0,
+    "stabilite_db": 3.22,
+    "part_sous_150hz": 0.071,
+    "part_sur_4k5": 0.0,
+    "part_sur_8khz": 0.0
+   }
+  ]
+ },
+ "bulle": {
+  "prompt": {
+   "texte": "a delicate soft airy bloom, like a tiny soap bubble gently inflating then settling, subtle, no pop, no music, no voices",
+   "duree": 0.6,
+   "influence": 0.6,
+   "prises": 3
+  },
+  "prises": [
+   {
+    "prise": 1,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/bulle-prise1.wav",
+    "duree_s": 0.6,
+    "crete_rms_db": -32.8,
+    "attaque_s": 0.0,
+    "duree_utile_s": 0.518,
+    "bouffees": 2,
+    "fond_db_sous_crete": -35.3,
+    "tronquee": false,
+    "centroide_hz": 2450.0,
+    "stabilite_db": 3.35,
+    "part_sous_150hz": 0.163,
+    "part_sur_4k5": 0.018,
+    "part_sur_8khz": 0.013
+   },
+   {
+    "prise": 2,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/bulle-prise2.wav",
+    "duree_s": 0.6,
+    "crete_rms_db": -29.0,
+    "attaque_s": 0.0752,
+    "duree_utile_s": 0.427,
+    "bouffees": 4,
+    "fond_db_sous_crete": -46.5,
+    "tronquee": false,
+    "centroide_hz": 828.0,
+    "stabilite_db": 3.65,
+    "part_sous_150hz": 0.002,
+    "part_sur_4k5": 0.009,
+    "part_sur_8khz": 0.008
+   },
+   {
+    "prise": 3,
+    "fichier": "/opt/vokio-ads/videos/showcase/son/riche-design/prises/bulle-prise3.wav",
+    "duree_s": 0.6,
+    "crete_rms_db": -23.1,
+    "attaque_s": 0.0647,
+    "duree_utile_s": 0.277,
+    "bouffees": 1,
+    "fond_db_sous_crete": -38.7,
+    "tronquee": false,
+    "centroide_hz": 1316.0,
+    "stabilite_db": 3.51,
+    "part_sous_150hz": 0.02,
+    "part_sur_4k5": 0.011,
+    "part_sur_8khz": 0.006
+   }
+  ]
+ }
+}

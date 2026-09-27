@@ -1,0 +1,123 @@
+{
+ "note": "vue de son/dialogue.json + pages ; texte_dit = transcription d'origine, texte_montre = pages v2 posées par TEXTE.poser (sous-suites prouvées)",
+ "extraits": [
+  {
+   "id": "A1",
+   "locuteur": "agent",
+   "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
+   "source_in": 0.7,
+   "source_out": 5.8,
+   "original_in": 0.7,
+   "original_out": 5.8,
+   "film_in": 4.91,
+   "film_out": 10.01,
+   "motif": "Le décroché, en entier.",
+   "texte_dit": "Bonjour, je suis Élise, l'assistante vocale de la Clinique vétérinaire du Port ! Comment puis-je vous aider ?",
+   "texte_montre": [
+    "Bonjour, je suis Élise,",
+    "l’assistante vocale / de la Clinique vétérinaire / du Port.",
+    "Comment puis-je / vous aider ?"
+   ]
+  },
+  {
+   "id": "C1",
+   "locuteur": "appelant",
+   "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
+   "source_in": 10.28,
+   "source_out": 13.84,
+   "original_in": 10.28,
+   "original_out": 13.84,
+   "film_in": 10.5,
+   "film_out": 14.06,
+   "motif": "On retire « Euh, oui, bonjour, j'vous appelle parce que » (fin 9,99) et « et il dort beaucoup, je trouve. » (début 14,01).",
+   "texte_dit": "mon chat, euh, Moka, euh, mange plus depuis hier",
+   "texte_montre": [
+    "mon chat, euh, Moka, / euh, mange plus / depuis hier."
+   ]
+  },
+  {
+   "id": "C2",
+   "locuteur": "appelant",
+   "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
+   "source_in": 34.76,
+   "source_out": 37.16,
+   "original_in": 34.76,
+   "original_out": 37.16,
+   "film_in": 14.6,
+   "film_out": 17.0,
+   "motif": "Le triage saute (15,82 → 34,76) : « Je vois. Est-ce que Moka présente d'autres symptômes… », « Non, non, non, j'ai pas l'impression. », « Très bien. Dans ce cas… Quel jour vous conviendrait le mieux ? ».",
+   "texte_dit": "Euh, demain, vous avez des disponibilités ?",
+   "texte_montre": [
+    "Demain, vous avez / des disponibilités ?"
+   ]
+  },
+  {
+   "id": "A2A3",
+   "locuteur": "agent",
+   "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
+   "source_in": 48.66,
+   "source_out": 53.9,
+   "original_in": 48.66,
+   "original_out": 53.9,
+   "film_in": 17.54,
+   "film_out": 22.78,
+   "motif": "D'un seul tenant, avec le VRAI silence de l'outil next_available_slots (49,49 → 50,95, 1,46 s). Sautés en amont : « Un instant. », validate_date, « Demain, c'est samedi dix-neuf septembre. Pour quelle heure… », « Bah le matin. ». Coupé avant « Le dernier créneau possible de la journée est onze heures trente. Qu'est-ce qui vous arrangerait ? » (54,01).",
+   "texte_dit": "Laissez-moi voir. Je peux vous proposer neuf heures, dix heures ou onze heures.",
+   "texte_montre": [
+    "Laissez-moi voir.",
+    "Je peux vous proposer / neuf heures, dix heures / ou onze heures."
+   ]
+  },
+  {
+   "id": "C3",
+   "locuteur": "appelant",
+   "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
+   "source_in": 58.8,
+   "source_out": 60.54,
+   "original_in": 58.8,
+   "original_out": 60.54,
+   "film_in": 23.24,
+   "film_out": 24.98,
+   "motif": "Saute « Très bien. C'est pour quel prénom ? » et « C'est pour Florian. » (63,31 → 66,48).",
+   "texte_dit": "Euh, bah, à neuf heures, c'est parfait.",
+   "texte_montre": [
+    "À neuf heures, / c’est parfait."
+   ]
+  },
+  {
+   "id": "A4",
+   "locuteur": "agent",
+   "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
+   "source_in": 67.24,
+   "source_out": 74.3,
+   "original_in": 71.44,
+   "original_out": 78.5,
+   "film_in": 26.17,
+   "film_out": 33.23,
+   "motif": "La confirmation, en entier. Le montage du 18/09 avait déjà retiré la revérification (original 66,70 → 70,90).",
+   "texte_dit": "Parfait, je vous note ça pour Florian, pour une consultation vétérinaire, le samedi dix-neuf septembre à neuf heures. Vous recevrez un SMS de confirmation.",
+   "texte_montre": [
+    "Parfait, je vous note ça / pour Florian,",
+    "pour une consultation / vétérinaire,",
+    "le samedi dix-neuf / septembre à neuf heures.",
+    "Vous recevrez un SMS / de confirmation."
+   ]
+  },
+  {
+   "id": "C4",
+   "locuteur": "appelant",
+   "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
+   "source_in": 75.05,
+   "source_out": 76.55,
+   "original_in": 79.25,
+   "original_out": 80.75,
+   "film_in": 33.98,
+   "film_out": 35.48,
+   "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute. v2 : décalage −41,07, le même que A4 : C4 suit A4 après son VRAI blanc de 0,75 s (source 74,30 → 75,05) ; la v1 (−40,60) l'allongeait de 0,47 s pour loger le SMS pendant l'appel.",
+   "texte_dit": "Super, merci beaucoup. Au revoir.",
+   "texte_montre": [
+    "Super, merci beaucoup. / Au revoir."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1117 @@
+{
+ "A_master": {
+  "wav": {
+   "lufs": -14.02,
+   "crete_dbtp": -1.7,
+   "lra": 7.0
+  },
+  "mp4_aac": {
+   "lufs": -14.03,
+   "crete_dbtp": -1.71,
+   "lra": 7.0
+  },
+  "ok": true
+ },
+ "B_silences": {
+  "silence_raccroche_max": 0.0,
+  "silence_final_max": 0.0,
+  "ok": true
+ },
+ "C_somme_moins_mix_max": 1.1920928955078125e-07,
+ "F_intelligibilite": {
+  "voix_sur_tout_le_reste_LU": {
+   "min": 10.4,
+   "mediane": 18.65,
+   "pires": [
+    [
+     10.4,
+     "dix",
+     21.42
+    ],
+    [
+     11.0,
+     "confirmation.",
+     32.435
+    ],
+    [
+     11.1,
+     "pour",
+     27.115
+    ],
+    [
+     11.2,
+     "heures.",
+     30.675
+    ],
+    [
+     12.1,
+     "c'est",
+     24.405
+    ],
+    [
+     13.0,
+     "heures,",
+     24.26
+    ],
+    [
+     13.5,
+     "parfait.",
+     24.565
+    ],
+    [
+     13.7,
+     "une",
+     27.94
+    ]
+   ]
+  },
+  "voix_sur_musique_seule_LU": {
+   "min": 11.0,
+   "mediane": 19.0,
+   "pires": [
+    [
+     11.0,
+     "confirmation.",
+     32.435
+    ],
+    [
+     11.1,
+     "pour",
+     27.115
+    ],
+    [
+     11.2,
+     "heures.",
+     30.675
+    ],
+    [
+     13.5,
+     "parfait.",
+     24.565
+    ],
+    [
+     13.7,
+     "une",
+     27.94
+    ],
+    [
+     14.1,
+     "voir.",
+     18.005
+    ]
+   ]
+  },
+  "voix_sur_musique_1-4kHz_dB": {
+   "min": 12.1,
+   "mediane": 25.7,
+   "pires": [
+    [
+     12.1,
+     "vous",
+     19.925
+    ],
+    [
+     12.2,
+     "beaucoup.",
+     34.6
+    ],
+    [
+     12.2,
+     "des",
+     16.058
+    ],
+    [
+     12.2,
+     "ou",
+     22.12
+    ],
+    [
+     13.0,
+     "une",
+     27.94
+    ],
+    [
+     17.1,
+     "Vous",
+     31.39
+    ]
+   ]
+  },
+  "ok": true,
+  "premiers_mots_apres_les_pauses": {
+   "Je 19.80": {
+    "voix_sur_tout_LU": 18.9,
+    "voix_sur_musique_LU": 18.9,
+    "1-4kHz_dB": 19.5
+   },
+   "Parfait, 26.24": {
+    "voix_sur_tout_LU": 16.0,
+    "voix_sur_musique_LU": 17.9,
+    "1-4kHz_dB": 33.7
+   },
+   "Super, 34.03": {
+    "voix_sur_tout_LU": 19.7,
+    "voix_sur_musique_LU": 19.7,
+    "1-4kHz_dB": 24.6
+   },
+   "Bonjour, 5.00 (après le décroché)": {
+    "voix_sur_tout_LU": 19.4,
+    "voix_sur_musique_LU": 24.5,
+    "1-4kHz_dB": 35.5
+   }
+  }
+ },
+ "G_mono": {
+  "film_LU": -0.09,
+  "s1-sonnerie": -0.01,
+  "s2-voix": -0.0,
+  "s3-ecoute": -0.0,
+  "s4-agenda": -0.01,
+  "s5-rendez-vous": -0.01,
+  "s6-sms": -0.04,
+  "s7-signature": -0.46,
+  "musique_seule_film_LU": -0.39,
+  "correlation_min_100ms": 0.707,
+  "correlation_mediane": 0.997,
+  "fenetres_negatives": 0,
+  "ok": true
+ },
+ "M_arc": {
+  "S_max_film": {
+   "t": 45.3,
+   "S": -10.9
+  },
+  "S_max_par_scene": {
+   "s1-sonnerie": -18.8,
+   "s2-voix": -13.0,
+   "s3-ecoute": -13.3,
+   "s4-agenda": -13.0,
+   "s5-rendez-vous": -12.5,
+   "s6-sms": -12.6,
+   "s7-signature": -10.9
+  },
+  "S_median_par_scene": {
+   "s1-sonnerie": -120.7,
+   "s2-voix": -14.2,
+   "s3-ecoute": -14.0,
+   "s4-agenda": -14.4,
+   "s5-rendez-vous": -14.8,
+   "s6-sms": -16.2,
+   "s7-signature": -12.8
+  },
+  "mediane_S_dialogue": -14.2,
+  "S_max_dialogue": -12.5,
+  "S_max_logo_moins_S_max_dialogue_LU": 1.6,
+  "signature_LUFS_re_re+1.5": -10.36,
+  "M_max_au_re": -9.08,
+  "M_max_dialogue": -10.26,
+  "M_max_film": [
+   -9.08,
+   43.3
+  ],
+  "S_par_seconde": {
+   "11": -13.9,
+   "12": -13.9,
+   "13": -14.8,
+   "14": -13.7,
+   "15": -14.5,
+   "16": -13.4,
+   "17": -14.3,
+   "18": -14.4,
+   "19": -17.4,
+   "20": -19.6,
+   "21": -16.1,
+   "22": -14.1,
+   "23": -13.1,
+   "24": -13.5,
+   "25": -14.1,
+   "26": -15.5,
+   "27": -15.6,
+   "28": -15.5,
+   "29": -13.8,
+   "30": -12.9,
+   "31": -12.7,
+   "32": -12.6,
+   "33": -13.6,
+   "34": -15.2,
+   "35": -14.7,
+   "36": -16.1,
+   "37": -16.1,
+   "38": -22.0,
+   "39": -24.3,
+   "40": -23.5,
+   "41": -21.9,
+   "42": -20.1,
+   "43": -15.3,
+   "44": -12.6,
+   "45": -11.1,
+   "46": -11.5,
+   "47": -13.5
+  },
+  "ok_instant_le_plus_fort_au_re": true,
+  "ok": true
+ },
+ "H_harmonie": {
+  "s1 0-4,2": {
+   "fenetre": [
+    0.3,
+    4.15
+   ],
+   "classes": [
+    "la",
+    "mi",
+    "si",
+    "do#"
+   ],
+   "basse": "la",
+   "basse_dans_la_musique_entiere": "la",
+   "accord_prevu": "Gadd9",
+   "basse_prevue": "sol",
+   "energie_35_160_db": 45.3
+  },
+  "mesure 1": {
+   "fenetre": [
+    4.5,
+    6.1
+   ],
+   "classes": [
+    "si",
+    "ré",
+    "sol",
+    "la"
+   ],
+   "basse": "sol",
+   "basse_dans_la_musique_entiere": "sol",
+   "accord_prevu": "Gadd9",
+   "basse_prevue": "sol",
+   "energie_35_160_db": 27.9
+  },
+  "mesure 2": {
+   "fenetre": [
+    6.1,
+    9.167
+   ],
+   "classes": [
+    "si",
+    "ré",
+    "fa#",
+    "sol"
+   ],
+   "basse": "sol",
+   "basse_dans_la_musique_entiere": "sol",
+   "accord_prevu": "Gmaj9",
+   "basse_prevue": "sol",
+   "energie_35_160_db": 31.2
+  },
+  "mesure 3": {
+   "fenetre": [
+    9.167,
+    12.233
+   ],
+   "classes": [
+    "si",
+    "fa#",
+    "ré",
+    "la"
+   ],
+   "basse": "si",
+   "basse_dans_la_musique_entiere": "si",
+   "accord_prevu": "Bm7",
+   "basse_prevue": "si",
+   "energie_35_160_db": 30.7
+  },
+  "mesure 4": {
+   "fenetre": [
+    12.233,
+    15.3
+   ],
+   "classes": [
+    "si",
+    "ré",
+    "sol",
+    "fa#"
+   ],
+   "basse": "mi",
+   "basse_dans_la_musique_entiere": "mi",
+   "accord_prevu": "Em9",
+   "basse_prevue": "mi",
+   "energie_35_160_db": 30.7
+  },
+  "mesure 5": {
+   "fenetre": [
+    15.3,
+    18.367
+   ],
+   "classes": [
+    "la",
+    "mi",
+    "ré",
+    "do#"
+   ],
+   "basse": "la",
+   "basse_dans_la_musique_entiere": "la",
+   "accord_prevu": "A",
+   "basse_prevue": "la",
+   "energie_35_160_db": 30.8
+  },
+  "mesure 6": {
+   "fenetre": [
+    18.367,
+    21.433
+   ],
+   "classes": [
+    "sol",
+    "ré",
+    "si",
+    "la"
+   ],
+   "basse": "sol",
+   "basse_dans_la_musique_entiere": "sol",
+   "accord_prevu": "G",
+   "basse_prevue": "sol",
+   "energie_35_160_db": 31.5
+  },
+  "mesure 7": {
+   "fenetre": [
+    21.433,
+    24.5
+   ],
+   "classes": [
+    "ré",
+    "si",
+    "fa#",
+    "la"
+   ],
+   "basse": "si",
+   "basse_dans_la_musique_entiere": "si",
+   "accord_prevu": "Bm7",
+   "basse_prevue": "si",
+   "energie_35_160_db": 32.0
+  },
+  "mesure 8": {
+   "fenetre": [
+    24.5,
+    27.567
+   ],
+   "classes": [
+    "si",
+    "ré",
+    "la",
+    "sol"
+   ],
+   "basse": "sol",
+   "basse_dans_la_musique_entiere": "sol",
+   "accord_prevu": "G",
+   "basse_prevue": "sol",
+   "energie_35_160_db": 31.2
+  },
+  "mesure 9": {
+   "fenetre": [
+    27.567,
+    30.633
+   ],
+   "classes": [
+    "si",
+    "sol",
+    "ré",
+    "mi"
+   ],
+   "basse": "mi",
+   "basse_dans_la_musique_entiere": "mi",
+   "accord_prevu": "Em9",
+   "basse_prevue": "mi",
+   "energie_35_160_db": 33.7
+  },
+  "mesure 10": {
+   "fenetre": [
+    30.633,
+    33.7
+   ],
+   "classes": [
+    "la",
+    "ré",
+    "mi",
+    "do#"
+   ],
+   "basse": "la",
+   "basse_dans_la_musique_entiere": "sol",
+   "accord_prevu": "A",
+   "basse_prevue": "la",
+   "energie_35_160_db": 36.2
+  },
+  "mesure 11": {
+   "fenetre": [
+    33.7,
+    35.867
+   ],
+   "classes": [
+    "sol",
+    "si",
+    "ré",
+    "la"
+   ],
+   "basse": "sol",
+   "basse_dans_la_musique_entiere": "sol",
+   "accord_prevu": "Gadd9",
+   "basse_prevue": "sol",
+   "energie_35_160_db": 31.6
+  },
+  "mesure 12": {
+   "fenetre": [
+    36.767,
+    39.833
+   ],
+   "classes": [
+    "la",
+    "mi",
+    "sol",
+    "ré"
+   ],
+   "basse": "la",
+   "basse_dans_la_musique_entiere": "la",
+   "accord_prevu": "A",
+   "basse_prevue": "la",
+   "energie_35_160_db": 30.5
+  },
+  "mesure 13": {
+   "fenetre": [
+    39.833,
+    42.9
+   ],
+   "classes": [
+    "sol",
+    "si",
+    "ré",
+    "fa#"
+   ],
+   "basse": "sol",
+   "basse_dans_la_musique_entiere": "sol",
+   "accord_prevu": "G",
+   "basse_prevue": "sol",
+   "energie_35_160_db": 35.2
+  },
+  "mesure 14": {
+   "fenetre": [
+    42.9,
+    45.967
+   ],
+   "classes": [
+    "la",
+    "fa#",
+    "ré",
+    "mi"
+   ],
+   "basse": "ré",
+   "basse_dans_la_musique_entiere": "ré",
+   "accord_prevu": "D",
+   "basse_prevue": "ré",
+   "energie_35_160_db": 45.9
+  },
+  "ok_pas_de_basse_re_avant_logo": true,
+  "ecarts_basse_prevue": {},
+  "ok_basse_de_chaque_mesure": true,
+  "segments_musique_entiere": [
+   {
+    "mesure": "mesure 1",
+    "segment": [
+     4.5,
+     6.1
+    ],
+    "accord": "Gadd9",
+    "basse_prevue": "sol",
+    "basse_dans_la_musique_entiere": "sol",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 2",
+    "segment": [
+     6.1,
+     9.167
+    ],
+    "accord": "Gmaj9",
+    "basse_prevue": "sol",
+    "basse_dans_la_musique_entiere": "sol",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 3",
+    "segment": [
+     9.167,
+     12.233
+    ],
+    "accord": "Bm7",
+    "basse_prevue": "si",
+    "basse_dans_la_musique_entiere": "si",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 4",
+    "segment": [
+     12.233,
+     15.3
+    ],
+    "accord": "Em9",
+    "basse_prevue": "mi",
+    "basse_dans_la_musique_entiere": "mi",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 5",
+    "segment": [
+     15.3,
+     16.833
+    ],
+    "accord": "Asus4",
+    "basse_prevue": "la",
+    "basse_dans_la_musique_entiere": "la",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 5",
+    "segment": [
+     16.833,
+     18.367
+    ],
+    "accord": "A",
+    "basse_prevue": "la",
+    "basse_dans_la_musique_entiere": "la",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 6",
+    "segment": [
+     18.367,
+     21.433
+    ],
+    "accord": "G",
+    "basse_prevue": "sol",
+    "basse_dans_la_musique_entiere": "sol",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 7",
+    "segment": [
+     21.433,
+     24.5
+    ],
+    "accord": "Bm7",
+    "basse_prevue": "si",
+    "basse_dans_la_musique_entiere": "si",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 8",
+    "segment": [
+     24.5,
+     27.567
+    ],
+    "accord": "G",
+    "basse_prevue": "sol",
+    "basse_dans_la_musique_entiere": "sol",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 9",
+    "segment": [
+     27.567,
+     30.633
+    ],
+    "accord": "Em9",
+    "basse_prevue": "mi",
+    "basse_dans_la_musique_entiere": "mi",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 10",
+    "segment": [
+     30.633,
+     32.167
+    ],
+    "accord": "Asus4",
+    "basse_prevue": "la",
+    "basse_dans_la_musique_entiere": "la",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 10",
+    "segment": [
+     32.167,
+     32.933
+    ],
+    "accord": "A",
+    "basse_prevue": "la",
+    "basse_dans_la_musique_entiere": "la",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 10",
+    "segment": [
+     32.933,
+     33.7
+    ],
+    "accord": "Gadd9",
+    "basse_prevue": "sol",
+    "basse_dans_la_musique_entiere": "sol",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 11",
+    "segment": [
+     33.7,
+     35.867
+    ],
+    "accord": "Gadd9",
+    "basse_prevue": "sol",
+    "basse_dans_la_musique_entiere": "sol",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 12",
+    "segment": [
+     36.767,
+     38.3
+    ],
+    "accord": "Asus4",
+    "basse_prevue": "la",
+    "basse_dans_la_musique_entiere": "la",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 12",
+    "segment": [
+     38.3,
+     39.833
+    ],
+    "accord": "A",
+    "basse_prevue": "la",
+    "basse_dans_la_musique_entiere": "la",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 13",
+    "segment": [
+     39.833,
+     42.133
+    ],
+    "accord": "G",
+    "basse_prevue": "sol",
+    "basse_dans_la_musique_entiere": "sol",
+    "ok": true
+   },
+   {
+    "mesure": "mesure 14",
+    "segment": [
+     42.9,
+     45.967
+    ],
+    "accord": "D",
+    "basse_prevue": "ré",
+    "basse_dans_la_musique_entiere": "ré",
+    "ok": true
+   }
+  ],
+  "ok_basse_musique_entiere_par_segment": true,
+  "grosse_caisse_hauteur": [
+   {
+    "t": 21.4333,
+    "coup": "temps 28, corps sur MIDI 35",
+    "vise_hz": 61.74,
+    "pic_hz": 61.89,
+    "ecart_demi_tons": 0.04
+   },
+   {
+    "t": 22.9675,
+    "coup": "temps 30, corps sur MIDI 35",
+    "vise_hz": 61.74,
+    "pic_hz": 61.89,
+    "ecart_demi_tons": 0.04
+   },
+   {
+    "t": 26.0322,
+    "coup": "temps 34, corps sur MIDI 31",
+    "vise_hz": 49.0,
+    "pic_hz": 49.07,
+    "ecart_demi_tons": 0.03
+   },
+   {
+    "t": 27.5661,
+    "coup": "temps 36, corps sur MIDI 28",
+    "vise_hz": 41.2,
+    "pic_hz": 41.2,
+    "ecart_demi_tons": -0.0
+   },
+   {
+    "t": 29.0993,
+    "coup": "temps 38, corps sur MIDI 28",
+    "vise_hz": 41.2,
+    "pic_hz": 41.2,
+    "ecart_demi_tons": -0.0
+   },
+   {
+    "t": 30.6344,
+    "coup": "temps 40, corps sur MIDI 33",
+    "vise_hz": 55.0,
+    "pic_hz": 55.11,
+    "ecart_demi_tons": 0.04
+   },
+   {
+    "t": 32.167,
+    "coup": "temps 42, corps sur MIDI 33",
+    "vise_hz": 55.0,
+    "pic_hz": 55.11,
+    "ecart_demi_tons": 0.04
+   },
+   {
+    "t": 32.9333,
+    "coup": "temps 43 (grave), corps sur MIDI 31",
+    "vise_hz": 49.0,
+    "pic_hz": 49.07,
+    "ecart_demi_tons": 0.03
+   },
+   {
+    "t": 37.5328,
+    "coup": "temps 49, corps sur MIDI 33",
+    "vise_hz": 55.0,
+    "pic_hz": 55.11,
+    "ecart_demi_tons": 0.04
+   },
+   {
+    "t": 39.8335,
+    "coup": "temps 52, corps sur MIDI 31",
+    "vise_hz": 49.0,
+    "pic_hz": 49.07,
+    "ecart_demi_tons": 0.03
+   },
+   {
+    "t": 40.5997,
+    "coup": "temps 53, corps sur MIDI 31",
+    "vise_hz": 49.0,
+    "pic_hz": 49.07,
+    "ecart_demi_tons": 0.03
+   },
+   {
+    "t": 41.3664,
+    "coup": "temps 54, corps sur MIDI 31",
+    "vise_hz": 49.0,
+    "pic_hz": 49.07,
+    "ecart_demi_tons": 0.03
+   },
+   {
+    "t": 42.9,
+    "coup": "temps 56 (grave), corps sur MIDI 38",
+    "vise_hz": 73.42,
+    "pic_hz": 73.43,
+    "ecart_demi_tons": 0.0
+   }
+  ],
+  "ok_grosse_caisse_accordee": true,
+  "ok": true
+ },
+ "D_synchro": {
+  "attaques": [
+   {
+    "couche": "marimba",
+    "repere": "contact_neuf",
+    "t": 20.6667,
+    "attaque": 20.6667,
+    "ecart_ms": -0.0,
+    "montee_db": 109.0
+   },
+   {
+    "couche": "marimba",
+    "repere": "contact_dix",
+    "t": 21.4333,
+    "attaque": 21.4343,
+    "ecart_ms": 1.0,
+    "montee_db": 9.7
+   },
+   {
+    "couche": "marimba",
+    "repere": "contact_onze",
+    "t": 22.2,
+    "attaque": 22.199,
+    "ecart_ms": -1.0,
+    "montee_db": 9.7
+   },
+   {
+    "couche": "marimba",
+    "repere": "-tion (temps 43)",
+    "t": 32.9333,
+    "attaque": 32.9323,
+    "ecart_ms": -1.0,
+    "montee_db": 12.4
+   },
+   {
+    "couche": "grosse_caisse",
+    "repere": "contact_dix",
+    "t": 21.4333,
+    "attaque": 21.4333,
+    "ecart_ms": 0.0,
+    "montee_db": 108.4
+   },
+   {
+    "couche": "grosse_caisse",
+    "repere": "-tion (temps 43)",
+    "t": 32.9333,
+    "attaque": 32.9333,
+    "ecart_ms": 0.0,
+    "montee_db": 118.6
+   },
+   {
+    "couche": "grosse_caisse",
+    "repere": "contact du ré",
+    "t": 42.9,
+    "attaque": 42.9,
+    "ecart_ms": 0.0,
+    "montee_db": 120.9
+   },
+   {
+    "couche": "basse",
+    "repere": "decroche (sol2, attaque 0,6 s)",
+    "t": 4.2,
+    "attaque": 4.2,
+    "ecart_ms": 0.0,
+    "correlation": 1.0,
+    "methode": "corrélation avec la forme d'onde de la note"
+   },
+   {
+    "couche": "basse",
+    "repere": "contact_dix",
+    "t": 21.4333,
+    "attaque": 21.4333,
+    "ecart_ms": 0.0,
+    "correlation": 0.999,
+    "methode": "corrélation avec la forme d'onde de la note"
+   },
+   {
+    "couche": "basse",
+    "repere": "contact du ré",
+    "t": 42.9,
+    "attaque": 42.9,
+    "ecart_ms": 0.0,
+    "correlation": 0.992,
+    "methode": "corrélation avec la forme d'onde de la note"
+   }
+  ],
+  "tolerances_ms": {
+   "marimba": 5.0,
+   "grosse_caisse": 5.0,
+   "basse": 12.0
+  },
+  "ok": true
+ },
+ "R_rythme": {
+  "pouls_ducking+reponses_dB_par_50ms": 0.86,
+  "pouls_creux_1-4k_dB_par_50ms": 0.868,
+  "pouls_plateau_grave_dB_par_50ms": 0.521,
+  "lit_rattrapages_dB_par_50ms (le lit seul)": 0.552,
+  "gain_du_pouls_aux_accents_dB (hors arc composé)": {
+   "temps 28": -3.0,
+   "temps 32": -3.0,
+   "temps 43": -3.0
+  },
+  "rattrapages_appliques_au_pouls": false,
+  "lit_large_pire_baisse": {
+   "db_par_50ms": -0.62,
+   "t": 33.814
+  },
+  "lit_large+creux_1-4k_pire_baisse": {
+   "db_par_50ms": -1.42,
+   "t": 33.868
+  },
+  "lit_avant_borne_large+creux_1-4k_pire_baisse": {
+   "db_par_50ms": -13.73,
+   "t": 4.916
+  },
+  "lit_borne_jamais_au_dessus": true,
+  "ok_lit": true,
+  "ok": true
+ },
+ "L_lit": {
+  "pire_blanc_court": {
+   "blanc": [
+    30.9,
+    31.39
+   ],
+   "duree": 0.49,
+   "remontee_du_lit_db": 1.216
+  },
+  "vraies_pauses": [
+   {
+    "blanc": [
+     18.37,
+     19.8
+    ],
+    "duree": 1.43,
+    "remontee_du_lit_db": 6.868
+   },
+   {
+    "blanc": [
+     24.95,
+     26.24
+    ],
+    "duree": 1.29,
+    "remontee_du_lit_db": 4.091
+   },
+   {
+    "blanc": [
+     33.05,
+     34.03
+    ],
+    "duree": 0.98,
+    "remontee_du_lit_db": 2.29
+   }
+  ],
+  "ok": true
+ },
+ "T_telephone": {
+  "sections": {
+   "sonnerie": {
+    "musique_tel": -39.67,
+    "nappe_validee_tel": -200.69,
+    "ecart_tel_LU": 161.02,
+    "musique_pleine": -29.15,
+    "nappe_validee_pleine": -200.69
+   },
+   "voix+ecoute": {
+    "musique_tel": -36.59,
+    "nappe_validee_tel": -38.19,
+    "ecart_tel_LU": 1.6,
+    "musique_pleine": -33.38,
+    "nappe_validee_pleine": -35.65
+   },
+   "agenda": {
+    "musique_tel": -33.27,
+    "nappe_validee_tel": -30.08,
+    "ecart_tel_LU": -3.19,
+    "musique_pleine": -30.73,
+    "nappe_validee_pleine": -28.29,
+    "ecart_tel_sous_les_mots_LU": -0.63,
+    "ecart_tel_dans_les_blancs_LU": -4.7
+   },
+   "rendez-vous": {
+    "musique_tel": -31.27,
+    "nappe_validee_tel": -30.26,
+    "ecart_tel_LU": -1.01,
+    "musique_pleine": -28.93,
+    "nappe_validee_pleine": -27.81,
+    "ecart_tel_sous_les_mots_LU": -0.54,
+    "ecart_tel_dans_les_blancs_LU": -2.07
+   },
+   "sms": {
+    "musique_tel": -23.15,
+    "nappe_validee_tel": -30.94,
+    "ecart_tel_LU": 7.79,
+    "musique_pleine": -21.71,
+    "nappe_validee_pleine": -30.26
+   },
+   "logo": {
+    "musique_tel": -16.16,
+    "nappe_validee_tel": -18.52,
+    "ecart_tel_LU": 2.36,
+    "musique_pleine": -14.08,
+    "nappe_validee_pleine": -16.96
+   }
+  },
+  "sonnerie_sfx_tel": -23.06,
+  "couches_tel_20.67-35.87 (niveau de couche, sans ducking)": {
+   "voix": -17.6,
+   "marimba": -32.4,
+   "basse": -38.7,
+   "grosse_caisse": -55.0,
+   "shaker": -42.2
+  },
+  "ok_logo_2LU": true,
+  "ok_sonnerie": true,
+  "objectif_relecture_agenda_et_rdv_+3LU": {
+   "tenu": false,
+   "pourquoi": "sous les mots, chaque LU de musique en plus se prend sur la marge de la voix (contrôle F, déjà à 10,4 LU comme la nappe validée à 10,3) ; dans les blancs, la nappe validée remontait par son ducking rapide (le défaut 8) : la musique ne le fait plus, elle s'avance seulement dans les vraies pauses"
+  },
+  "ok": true
+ },
+ "S_signature": {
+  "clairiere_signature_moins_musique_LU": {
+   "temps 55 → la": -65.9,
+   "la": 33.9,
+   "sol": 19.7,
+   "ré": 11.5
+  },
+  "signature_contre_validee_dB": {
+   "la": -0.12,
+   "sol": -0.12,
+   "ré 0-0,1 s": -0.09,
+   "ré 0,1-0,4 s": -0.13
+  },
+  "limiteur_reduction_max_42.25-43.2_dB": {
+   "variante": 1.46,
+   "master_valide": 1.53
+  },
+  "ok_clairiere": true,
+  "ok_un_seul_limiteur": true,
+  "plume": {
+   "instants": [
+    25.4,
+    25.64
+   ],
+   "bande_440_sur_la_dB": 20.2,
+   "bande_392_sur_sol_dB": 24.5,
+   "sonie_K_la_LU": 9.5,
+   "sonie_K_sol_LU": 10.1,
+   "attaques_de_musique_a_120ms": [],
+   "notes_de_la_partition_a_120ms": [],
+   "notes_posees_dans_le_registre": 164,
+   "ok": true
+  },
+  "resonance_du_re": {
+   "587_sur_43.1-44.1_dB": 17.0,
+   "587_sur_44.1-44.6_dB": 7.7,
+   "1175_sur_43.1-44.1_dB": 14.2,
+   "587_sur_42.9-43.1_dB": 37.5,
+   "ok": true
+  },
+  "ok": true
+ },
+ "V_verre_moins_marimba_600-1000_dB": {
+  "38,3-39,3": 28.0,
+  "la5": 21.2,
+  "sol5": 31.0,
+  "mi5": 46.8,
+  "ok": true
+ },
+ "P_mp4": {
+  "hash_video_nouveau": "MD5=2a6886e3747b05aef57bd34b48d6fed0",
+  "hash_video_origine": "MD5=2a6886e3747b05aef57bd34b48d6fed0",
+  "video_images": "1410",
+  "video_duree": "47.000000",
+  "origine_images": "1410",
+  "audio": {
+   "codec_name": "aac",
+   "sample_rate": "48000",
+   "channels": 2,
+   "bit_rate": "238715",
+   "duration": "47.000000"
+  },
+  "decalage_audio_contre_origine_echantillons": 0,
+  "echantillons_audio": [
+   2256896,
+   2256896
+  ],
+  "ok": true
+ },
+ "synthese_ok": {
+  "A_master": true,
+  "B_silences": true,
+  "F_intelligibilite": true,
+  "G_mono": true,
+  "M_arc": true,
+  "H_harmonie": true,
+  "D_synchro": true,
+  "R_rythme": true,
+  "L_lit": true,
+  "T_telephone": true,
+  "S_signature": true,
+  "V_verre_moins_marimba_600-1000_dB": true,
+  "P_mp4": true,
+  "C_somme": true
+ }
+}

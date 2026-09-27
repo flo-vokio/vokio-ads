@@ -1,0 +1,334 @@
+{
+ "titre": "Le point sur le i",
+ "logline": "Un seul point traverse un vrai appel, celui du 18/09 à 16:51 sur la ligne de démonstration de la Clinique vétérinaire du Port. Il sonne dans le vide et décroche. Il écoute, puis se pose sur 09:00, 10:00 et 11:00 au moment où Élise lit ces heures dans le vrai agenda. Il écrit le rendez-vous qui a vraiment été créé, ouvre le SMS qui est vraiment parti, puis se pose sur le ı de Vokıo. Pendant ce temps, la tonalité d'attente à 440 Hz devient la signature sonore la · sol · ré.",
+ "duree_s": 43.5,
+ "intention": "Florian, voici ce que je ferais pour Vokio. La marque est à l'écran dès la première image, sans qu'on montre le logo : le point orange du wordmark est le seul personnage du film. Il naît noir : c'est le point final de la phrase « Vous avez les mains prises. », et il tremble au rythme de la tonalité que tout le monde connaît. Ça sonne, personne ne décroche. Quand l'agente décroche, il s'allume, et à partir de là il fait exactement ce que fait Vokio. Il écoute sans bouger. Il se pose sur 09:00, 10:00 et 11:00 à la syllabe où Élise lit ces heures. Il écrit le rendez-vous dans le vrai agenda, il ouvre le SMS, puis il va se poser sur le ı de Vokıo, au demi-pixel près.\n\nTout est vrai, et je l'ai vérifié en base en lecture seule :\n- l'appel de 85 s ;\n- le rendez-vous « Consultation vétérinaire » du samedi 19/09 à 09:00, créé à 16:53 : c'est le seul de cette matinée ;\n- le SMS marqué envoyé à 16:55. Son texte a été reconstitué mot pour mot depuis le gabarit en vigueur ce jour-là (« Démo Vokio, RDV fictif. »).\n\nLe son raconte la même histoire. La tonalité à 440 Hz devient la première note d'une signature en trois notes, la · sol · ré. On l'entend incomplète au décroché et à la réservation, et elle ne se termine que sur le logo. Sous l'appel, une nappe reste suspendue tant que le rendez-vous n'est pas pris, puis se pose à la dernière syllabe de « confirmation ». Au raccroché, silence absolu : on entend que la ligne est partie, puis la marque répond.\n\nJ'ai corrigé tout ce que le jury a relevé :\n- trois éléments au maximum à l'écran, sans légende permanente ;\n- le vrai agenda du bon jour ;\n- le vrai SMS ;\n- plus de forme d'onde ;\n- plus de balayage ;\n- un tremblement que le 30 i/s sait rendre ;\n- plus de « samedı ».\n\nUne seule décision t'attend : filmer l'agenda réel de la clinique demande de lui rattacher un accès, donc une écriture en production (option A). Sinon je le fais sans rien écrire (option B, expliquée plus bas). Tu écoutes la bande son seule avant que j'anime quoi que ce soit.",
+ "signature_sonore": "« la · sol · ré », 1,9 s de notes plus 1,0 s de queue. Entièrement fabriquée en numpy à 48 kHz stéréo : aucune banque de sons, aucune question de droits (son/signature.py).\n\n**Note 1, la4 440,00 Hz, à t = 0**\n- Elle naît en sinus pur, avec le timbre exact de la tonalité française, puis s'ouvre en cloche FM 1:1.\n- y = sin(φ + I(τ)·sin φ), avec I(τ) = 1,4·min(τ/0,060 ; 1).\n- Attaque de 8 ms, amplitude exp(−τ/0,35), crête −16 dBFS.\n\n**Note 2, sol4 392,00 Hz, à t = +0,240 s**\n- Cloche FM 1:1 chaude, indice I(τ) = 1,2·exp(−τ/0,25).\n- Attaque de 5 ms, amplitude exp(−τ/0,45), crête −17 dBFS.\n\n**Note 3, ré5 587,33 Hz, à t = +0,600 s, la note du point**\n- Barre de verre : partiels de rapports 1 · 2,76 · 5,40, d'amplitudes 1 · 0,35 · 0,12, de décroissances τ 1,10 · 0,35 · 0,12 s.\n- Doublure à l'octave 1 174,66 Hz, amplitude 0,30, τ 0,80 s.\n- Attaque de maillet : 2 ms de bruit blanc en passe-bande 2 à 6 kHz, à −26 dB sous la note.\n- Crête −15 dBFS.\n- Dans le film, elle tombe à l'image exacte du contact du point sur le ı (image 1140 = 38,000 s).\n\n**Espace**\n- Les trois notes sont placées à l'abscisse du ı : pan = 0,6 × (652,6 − 540)/540 = +0,125, loi à puissance constante de labo.placer.\n- labo.reverbe(1,6 ; 0,18) sur l'ensemble.\n- Élargissement Haas sur la seule queue du ré (à partir de 80 ms après l'attaque) : le retour de réverbe du canal droit est retardé de 18 ms.\n- Le rendu reste compatible mono (contrôlé).\n\n**Pourquoi ces notes**\n- Le la, c'est la tonalité que chaque client entend quand personne ne décroche.\n- Il descend d'un ton sur le sol, la hauteur médiane mesurée de la voix de l'agente (193 à 213 Hz sur quatre appels). L'attente se pose sur la voix.\n- Le ré, la quinte, ouvre et éclaire.\n- Le contour descend puis remonte, comme un « mm-hm » d'acquiescement.\n- Toutes les fondamentales sont à 392 Hz ou plus : elles passent sur un haut-parleur de téléphone.\n\n**Règle de trois dans le film**\n- « la-sol » au décroché : 4,20 et 4,44 s.\n- « la-sol » à la réservation : 25,40 et 25,64 s.\n- Chaque fois que le point touche une heure, un ré court et étouffé (τ 0,09 s) annonce la note du point.\n- Le motif n'est complet qu'une fois, sur le logo : 37,40 / 37,64 / 38,00 s.\n\n**Livrables**\n- /root/vokio-uploads/videos/showcase/point-solaire-signature.wav : 48 kHz, 24 bits, stéréo, 0,05 s de silence en tête, 2,9 s, crête −1 dBTP.\n- point-solaire-signature-courte.wav : 0,9 s, avec le la à 0 ms (60 ms de sinus puis la cloche), le sol à 120 ms, le ré à 300 ms et une queue de 0,6 s. Pour la fin des autres vidéos et le lecteur audio du site.",
+ "scenes": [
+  {
+   "id": "s1-sonnerie",
+   "debut_s": 0,
+   "fin_s": 4.5,
+   "image": "Fond papier #F4F1E8 plein cadre, porté par la racine.\n\n**Élément 1 : la phrase-crochet**\n- « Vous avez les » / « mains prises » en Instrument Serif Regular 200 px, encre #262019, line-height 184 px, alignée à gauche à x = 90.\n- Lignes de base à y = 690 et y = 874. Largeurs mesurées dans Chromium : 854 px et 849 px, donc la ligne 2 finit à x = 981,6 et la marge droite fait 98 px.\n- Le point final n'est PAS un glyphe. À la place du « . », un espaceur inline-block de 0,213 em (42,6 px, l'avance du point dans la fonte).\n- Le point visible est #point de la racine : centre (960 ; 864), diamètre 21 px (0,105 em, la taille du point d'Instrument Serif à 200 px), encre #262019.\n\n**Élément 2 : la relance, à 1,60 s**\n- « Encore une sonnerie, » / « et il appelle ailleurs. » en Instrument Serif Italic 72 px, gris #6F695F (contraste 4,8:1), x = 90.\n- Lignes de base à y = 1030 et 1110. Largeurs 538 et 518 px.\n\nRien d'autre. Aucune mention : il n'y a pas encore d'appel à l'écran.",
+   "mouvement": "Temps relatifs = temps absolus (la scène commence à 0).\n\n**Tremblement du point (piloté par la racine)**\n- Pendant 0,00 à 1,50 et 3,60 à 4,20, le point tremble horizontalement.\n- Décalage x(n) = 3 px × env(n) × [0, +1, 0, −1][n mod 4] : 7,5 Hz, soit 4 images par cycle, rendu net à 30 i/s. Le 14 Hz du pitch aurait scintillé : on est sous Nyquist.\n- env(n) est l'enveloppe de la tonalité lue image par image dans donnees/secousses.json (clé s1), la même donnée que le son.\n- Immobile de 1,50 à 3,60 : le vrai silence entre deux tonalités.\n\n**La relance**\n- 1,60 : les 7 mots montent de leur ligne de base derrière un masque de ligne, 16 px, 0,60 s power3.out, décalage de 0,06 s par mot (dernier mot à 1,96, fini à 2,56).\n\n**4,20 (image 126), le décroché**\n- #point passe de l'encre #262019 au solaire #EFA424 en 0,20 s (6 images, linéaire).\n- Son diamètre passe de 21 à 30,8 px en 0,50 s power3.out, par scale sur un disque de 30,8 px, transform-origin au centre.\n- Le tremblement s'arrête net, parce que l'enveloppe tombe à 0 : la tonalité est devenue une cloche.\n\n**Sortie des phrases, 4,20 à 4,50**\n- Les deux phrases sortent par leur masque vers le bas : translateY 0 → 110 % de la ligne, 0,30 s power3.in, décalage de 0,03 s entre lignes.\n- La première sort sans son point, qui reste seul.",
+   "etat_entree": "Image 0, qui sert aussi de vignette : tout est déjà posé et lisible. La phrase 1 est complète, le point encre de 21 px est en (960 ; 864), la phrase 2 est encore masquée. Le film peut boucler : la dernière image est une fin tenue sur papier, suivie de 0,3 s de silence numérique, puis cette image et la tonalité.",
+   "etat_sortie": "À 4,50 s, la sous-composition est vide (papier). #point, dans la racine, est solaire, à 30,2 px (fin de sa croissance vers 30,8 à 4,70), toujours en (960 ; 864). Il entame à 4,50 son trajet vers (106 ; 1000).",
+   "assets": "- assets/fonts/InstrumentSerif-Regular.woff2 et InstrumentSerif-Italic.woff2, copiées de /opt/vokio-ads/videos/ux-retravail/repondeur-ou-vokio/assets/fonts/.\n- donnees/secousses.json (clé s1, 135 valeurs de 0 à 1, images 0 à 134).\n- donnees/point-resolu.json.\n- Aucune image."
+  },
+  {
+   "id": "s2-voix",
+   "debut_s": 4.5,
+   "fin_s": 10.4,
+   "image": "**Élément 1 : le sous-titre de l'agente**\n- Geist Regular 54 px, encre, x = 90, lignes de base y = 600 et 668. Qui parle se lit à la typographie : l'agente parle en Geist.\n- Trois pages :\n  - « Bonjour, je suis Élise, » (510 px) ;\n  - « l’assistante vocale de la » / « Clinique vétérinaire du Port. » (585 / 680 px) ;\n  - « Comment puis-je vous aider ? » (734 px, espace fine insécable U+202F avant le ?).\n\n**Élément 2 : la ligne**\n- Un seul filet SVG encre #262019 de 3 px, à bouts ronds, à y = 1000, de x = 90 à x = 990.\n- Devant le point, la ligne frémit : une onde de 2 ventres entre le point et x = 990, amplitude ±3 px, motif image par image +1, 0, −1, 0 (7,5 Hz).\n- Derrière le point, elle est parfaitement droite. C'est la ligne lissée derrière la tête de lecture (greffe d'« Accord parfait »).\n- Épaisseur constante. Aucune forme d'onde, aucun miroir, aucune lueur.\n\n**Élément 3 : le point**\n- #point solaire #EFA424, 30,8 px, posé sur la ligne (y = 1000).",
+   "mouvement": "Temps relatifs, avec l'absolu entre parenthèses.\n\n**Mise en place**\n- 0,00 → 0,45 (4,50 → 4,95) : #point (racine) va de (960 ; 864) à (106 ; 1000) en ligne droite, power3.inOut. C'est le retour chariot de la plume.\n- 0,20 → 0,70 (4,70 → 5,20) : la ligne se trace de x = 90 à 990 par stroke-dashoffset, power3.out, déjà frémissante devant le point.\n\n**Le point avance quand Élise parle (0,50 → 5,46, soit 5,00 → 9,96)**\n- x(t) = 106 + 868 × V(t), où V est le temps voisé cumulé et normalisé de l'extrait A1 : trames de 10 ms au-dessus de −40 dBFS, lissage par moyenne glissante de 150 ms, donnée dans donnees/voix-x.json.\n- Il avance quand elle parle et s'arrête dans ses blancs. y = 1000. Il arrive en x = 974 à 9,96.\n\n**Les mots**\n- Chaque mot monte de 16 px depuis sa ligne de base, derrière un masque de ligne, en 0,26 s power3.out, à son instant d'attaque mesuré :\n  - page 1 : Bonjour, 0,50 (5,00) · je 1,21 (5,71) · suis 1,33 (5,83) · Élise, 1,49 (5,99) ; sortie de page 1,95 → 2,10 (6,45 → 6,60), masque vers le bas, power3.in ;\n  - page 2 : l’assistante 2,13 (6,63) · vocale 2,68 (7,18) · de 2,90 (7,40) · la 3,00 (7,50) · Clinique 3,19 (7,69) · vétérinaire 3,39 (7,89) · du 3,97 (8,47) · Port. 4,06 (8,56) ; sortie 4,40 → 4,55 (8,90 → 9,05) ;\n  - page 3 : Comment 4,60 (9,10) · puis-je 4,86 (9,36) · vous 5,07 (9,57) · aider ? 5,18 (9,68) ; sortie 5,60 → 5,80 (10,10 → 10,30).\n\n**Fin**\n- 5,50 → 5,85 (10,00 → 10,35) : la ligne, maintenant toute droite, se rembobine dans le point. Son extrémité gauche va de 90 à 974, power3.in. Rien ne s'accumule.\n- Le trait n'a aucun son propre.",
+   "etat_entree": "Papier vide dans la sous-composition. #point (racine) est solaire, à 30,2 px, en (960 ; 864), et entame son trajet.",
+   "etat_sortie": "À 10,40 s, la sous-composition est vide. #point est solaire, à 30,8 px, immobile en (974 ; 1000), là où la voix s'est arrêtée.",
+   "assets": "- Geist-Regular.woff2.\n- donnees/mots.json (extrait A1).\n- donnees/voix-x.json (progression voisée de A1, une valeur par image, de 5,00 à 9,96).\n- donnees/point-resolu.json.\n- Le chemin SVG est recalculé à chaque image par un tween proxy de la timeline en pause, en fonction pure du numéro d'image : déterministe et seek-safe."
+  },
+  {
+   "id": "s3-ecoute",
+   "debut_s": 10.4,
+   "fin_s": 17.3,
+   "image": "**Élément 1 : la parole de l'appelant**\n- Instrument Serif Italic 88 px, x = 90.\n- Réplique C1, lignes de base y = 600 / 697 / 794 : « mon chat, euh, Moka, » / « euh, mange plus » / « depuis hier. » (681 / 515 / 369 px). Les deux « euh, » sont en gris #6F695F, le reste en encre #262019.\n- Puis réplique C2, lignes de base 600 / 697 : « Demain, vous avez » / « des disponibilités ? » (591 / 592 px, U+202F avant le ?).\n\n**Élément 2 : le point**\n- #point solaire, 30,8 px, immobile en (974 ; 1000). Il ne bouge pas et ne respire pas : il écoute.\n\n**Élément 3 : la mention**\n- « Appel réel, raccourci. » en Geist Regular 36 px, gris #6F695F (4,8:1), x = 90, ligne de base y = 1440 (342 px de large).\n- Elle ne sert que pendant ce moment sans objet.",
+   "mouvement": "Temps relatifs, avec l'absolu entre parenthèses.\n\n**Réplique C1 (groupes de mots)**\n- Chaque groupe monte de 16 px derrière son masque, 0,30 s power3.out :\n  - « mon chat, » 0,16 (10,56) ;\n  - « euh, » 0,52 (10,92) ;\n  - « Moka, » 0,92 (11,32) ;\n  - « euh, » 1,38 (11,78), ligne 2 ;\n  - « mange » 2,12 (12,52) ;\n  - « plus » 2,37 (12,77) ;\n  - « depuis » 2,73 (13,13), ligne 3 ;\n  - « hier. » 3,15 (13,55).\n\n**La mention**\n- 0,20 → 0,50 (10,60 → 10,90) : fondu d'entrée (opacité 0 → 1), sans déplacement.\n\n**Le tamis (greffe de « Mot pour mot »), 3,55 → 4,00 (13,95 → 14,40)**\n- Les deux « euh, » s'effacent sur place : opacité 1 → 0, 0,45 s power2.out, décalage de 0,03 s.\n- Les autres mots ne bougent pas d'un pixel. Il reste un texte à trous, « mon chat, Moka, mange plus depuis hier. » : Vokio a retenu l'essentiel.\n\n**Enchaînement vers C2**\n- 4,05 → 4,25 (14,45 → 14,65) : C1 sort par ses masques vers le bas, power3.in, 0,20 s.\n- 4,46 (14,86) : « Demain, vous avez » monte d'un bloc, 0,35 s power3.out.\n- 5,30 (15,70) : « des disponibilités ? » monte de la même façon.\n- 6,58 → 6,78 (16,98 → 17,18) : C2 sort.\n- 6,60 → 6,80 (17,00 → 17,20) : la mention sort en fondu.\n\n**Le point**\n- À 17,20, dans la racine, il quitte (974 ; 1000) pour (232 ; 760), 0,60 s power3.inOut. Le trajet se termine dans s4.",
+   "etat_entree": "Sous-composition vide. #point solaire immobile en (974 ; 1000).",
+   "etat_sortie": "À 17,30 s, la sous-composition est vide (plus de texte, plus de mention). #point est en mouvement de (974 ; 1000) vers (232 ; 760) : arrivée à 17,80.",
+   "assets": "- InstrumentSerif-Italic.woff2, Geist-Regular.woff2.\n- donnees/mots.json (extraits C1 et C2)."
+  },
+  {
+   "id": "s4-agenda",
+   "debut_s": 17.3,
+   "fin_s": 25.2,
+   "image": "**Élément 1 : le sous-titre, en haut**\n- Geist 54 px encre, x = 90, lignes de base y = 400 / 468 / 536 :\n  - « Laissez-moi voir. » (412 px) ;\n  - puis « Je peux vous proposer » / « neuf heures, dix heures » / « ou onze heures. » (562 / 571 / 385 px) ;\n  - puis l'appelant en Instrument Serif Italic 88 px encre, lignes de base 430 / 527 : « À neuf heures, » / « c’est parfait. » (440 / 390 px).\n\n**Élément 2 : l'objet agenda, la vraie colonne jour de app.vokio.fr**\n- Le samedi 19 septembre de la Clinique vétérinaire du Port. La matinée est vide, ouverte de 09:00 à 12:00 : horaires réels du samedi en base, fermeture à 12:00, cohérente avec « le dernier créneau possible est onze heures trente ».\n- En-tête de l'app rogné : ni flèches, ni bouton « AUJOURD’HUI », ni bascule JOUR/SEMAINE.\n- Échelle fixe de 3,6 px par px CSS (capture ×4 réduite à 0,9) :\n  - image de 940 × 670 px, de x = 70 à 1010 et de y = 698 à 1368 ;\n  - lignes d'heure nominales : 09:00 à y = 760, 10:00 à 947,2, 11:00 à 1134,4, 12:00 à 1321,6 (HOUR_PX 52 × 3,6 = 187,2). Les valeurs exactes sont remplacées par donnees/agenda-geo.json, relevé dans le DOM à la capture ;\n  - étiquettes Geist Mono de l'app à 36 px (10 px CSS × 3,6), de x ≈ 99 à 207, centrées sur leur ligne ;\n  - colonne des rendez-vous à partir de x = 257.\n- Accrochée sous l'objet et solidaire de lui : « Capture réelle de app.vokio.fr » / « Établissement fictif de démonstration. » en Geist 36 px #6F695F, x = 90, lignes de base y = 1418 / 1466 (option B : « Capture de app.vokio.fr »).\n\n**Élément 3 : le point**\n- #point solaire, 30,8 px, posé sur l'objet, entre l'étiquette et la colonne (x = 232), centré sur la ligne d'heure.",
+   "mouvement": "Temps relatifs, avec l'absolu entre parenthèses.\n\n**Arrivée**\n- 0,00 → 0,50 (17,30 → 17,80) : #point (racine) finit son trajet et attend en (232 ; 760), sur du papier vide.\n- 0,29 (17,59) « Laissez-moi » ; 0,75 (18,05) « voir. » (montée de 16 px, 0,26 s power3.out). Sortie 2,30 → 2,48 (19,60 → 19,78).\n- 1,07 → 1,77 (18,37 → 19,07) : l'agenda, avec sa mention, monte de translateY +1 250 à 0, power3.out, sans changer d'échelle.\n  - Sa ligne 09:00 se pose sous le point : le monde vient au point.\n  - Cela se passe pendant le vrai silence de l'outil next_available_slots (18,37 → 19,83) : elle consulte, l'agenda arrive.\n\n**Les créneaux**\n- 2,53 (19,83) « Je » · 2,82 (20,12) « peux » · 2,91 (20,21) « vous » · 3,02 (20,32) « proposer » · 3,45 (20,75) « neuf » · 3,58 (20,88) « heures, » · 4,13 (21,43) « dix » · 4,32 (21,62) « heures » · 4,82 (22,12) « ou » · 5,08 (22,38) « onze » · 5,20 (22,50) « heures. ». Sortie 5,80 → 5,98 (23,10 → 23,28).\n- Sauts du point (racine), sans rebond ni dépassement. Le balayage du pitch est supprimé.\n  - Sur « neuf », 3,367 → 3,567 (20,667 → 20,867, images 620 → 626) : saut sur place. Il monte de 28 px en 0,08 s power2.out, redescend en 0,12 s power2.in et touche la ligne 09:00 à l'image 626.\n  - Sur « dix », 4,067 → 4,267 (21,367 → 21,567, images 641 → 647) : saut vers (232 ; 947,2) en arc bas (milieu du trajet décalé de −18 px en x), power3.out.\n  - Sur « onze », 5,000 → 5,200 (22,300 → 22,500, images 669 → 675) : saut vers (232 ; 1134,4), même arc.\n\n**Le choix de l'appelant**\n- 6,30 (23,60) « À neuf heures, » monte d'un bloc ; 6,80 (24,10) « c’est parfait. ». Sortie 7,68 → 7,88 (24,98 → 25,18).\n- 6,30 → 6,70 (23,60 → 24,00, images 708 → 720) : le point revient lentement de 11:00 à 09:00, en (232 ; 760), power2.inOut.",
+   "etat_entree": "Sous-composition vide. #point en fin de trajet vers (232 ; 760), où il arrive à 17,80.",
+   "etat_sortie": "À 25,20 s :\n- agenda-avant au repos (y = 698 à 1368), avec sa mention accrochée ;\n- aucun sous-titre ;\n- #point immobile en (232 ; 760).\n\ns5 doit commencer sur exactement ces pixels.",
+   "assets": "- assets/captures/agenda-avant.png (940 × 670, matinée vide).\n- donnees/agenda-geo.json (y de chaque ligne d'heure, boîtes des étiquettes et du bloc, en px film).\n- Geist-Regular.woff2, InstrumentSerif-Italic.woff2.\n- donnees/mots.json (A2A3 et C3)."
+  },
+  {
+   "id": "s5-rendez-vous",
+   "debut_s": 25.2,
+   "fin_s": 31.35,
+   "image": "**Élément 2 : l'agenda, au même endroit et pixel pour pixel (raccord invisible)**\n- Il s'y ajoute le bloc réel « 09:00 Florian » sur la ligne 09:00 : x = 257 à 1010 (rogné par le cadre de l'objet), y = 760 à 824,8. C'est un rendez-vous de 20 min, soit 18 px CSS × 3,6.\n- Rendu de l'app :\n  - fond rgba(239,164,36,.20) ;\n  - bordure de 1 px CSS en rgba(239,164,36,.55), soit 3,6 px ;\n  - rayon de 21,6 px ;\n  - texte à 39,6 px sur une seule ligne : « 09:00 » à 70 % d'opacité, puis « Florian » en Geist 500.\n- Avant la réservation, aucun bloc solaire à l'écran. Le seul solaire est le point, puis le bloc qu'il écrit.\n- La mention reste accrochée sous l'agenda.\n\n**Élément 1 : le sous-titre**\n- Geist 54 px encre, x = 90, lignes de base 400 / 468 / 536 :\n  - « Parfait, je vous note ça » / « pour Florian, » (558 / 305 px) ;\n  - puis « pour une consultation vétérinaire, » / « le samedi dix-neuf septembre » / « à neuf heures. » (821 / 732 / 347 px).\n\n**Élément 3 : le point**\n- #point posé sur le bloc.",
+   "mouvement": "Temps relatifs, avec l'absolu entre parenthèses.\n\n**La réservation, dans le silence de la réservation (24,94 → 26,24)**\n- 0,00 → 0,20 (25,20 → 25,40) : #point (racine) va de (232 ; 760) à (272 ; 792,4), power3.out.\n- 0,20 → 0,90 (25,40 → 26,10) : il file de (272 ; 792,4) à (975 ; 792,4), power2.inOut. Le point est la plume.\n  - Le bloc se déroule derrière lui par un clip-path inset(0 D 0 0) sur bloc-florian.png. Le bord droit révélé = x du point + 15,4, évalué image par image avec la même fonction gsap.parseEase(\"power2.inOut\").\n  - Échelle constante, aucun zoom.\n\n**La confirmation**\n- Page 1 : 1,04 (26,24) « Parfait, » · 1,38 (26,58) « je » · 1,53 (26,73) « vous » · 1,72 (26,92) « note » · 1,90 (27,10) « ça » · 2,02 (27,22) « pour » · 2,14 (27,34) « Florian, ». Sortie 2,43 → 2,60 (27,63 → 27,80), dans la pause réelle.\n- Page 2 : 2,64 (27,84) « pour » · 2,76 (27,96) « une » · 2,90 (28,10) « consultation » · 3,45 (28,65) « vétérinaire, » · 4,19 (29,39) « le » · 4,33 (29,53) « samedi » · 4,63 (29,83) « dix-neuf » · 4,99 (30,19) « septembre » · 5,39 (30,59) « à » · 5,47 (30,67) « neuf » · 5,59 (30,79) « heures. ». Sortie 5,75 → 5,95 (30,95 → 31,15).\n- L'agenda reste parfaitement immobile : on compare soi-même ce qu'elle dit avec ce qui est écrit.\n\n**Sortie**\n- 5,75 → 6,15 (30,95 → 31,35) : l'agenda, avec le bloc et la mention, sort par le bas. translateY 0 → +1 250, power3.in, 0,40 s.\n- 5,75 → 6,25 (30,95 → 31,45) : #point (racine) va de (975 ; 792,4) à (200 ; 790), power3.inOut, et y attend le téléphone.",
+   "etat_entree": "Identique à la sortie de s4 : agenda-avant au repos, mention accrochée, pas de sous-titre, #point en (232 ; 760).",
+   "etat_sortie": "À 31,35 s, la sous-composition est vide. #point est en route vers (200 ; 790) et y arrive à 31,45.",
+   "assets": "- agenda-avant.png et bloc-florian.png : option A, découpé dans la vraie capture. En option B, le bloc est un calque HTML dont le CSS est recopié de AgendaPro.tsx (lignes 596 à 708) ×3,6, relevé dans donnees/bloc-rdv.json, avec Geist 500 en woff2 (Google Fonts, OFL).\n- donnees/agenda-geo.json.\n- donnees/mots.json (A4)."
+  },
+  {
+   "id": "s6-sms",
+   "debut_s": 31.35,
+   "fin_s": 36.9,
+   "image": "**Élément 2 : la silhouette d'iPhone**\n- Un seul contour SVG encre #262019 de 6 px : rectangle de x = 150 à 930, haut à y = 700, rayon 110. Ni bouton, ni encoche, ni barre d'état. Coupée par le bas du cadre.\n- Dedans, une bulle reçue #E9E3D6 :\n  - x = 200 à 880, y = 790 à 1106 ;\n  - rayon de 34 px, coin bas gauche de 10 px ;\n  - marges intérieures de 28 px (haut et bas) et 30 px (côtés), largeur de texte imposée à 620 px ;\n  - texte Geist 38 px encre, interligne 52 px, aligné à gauche, contraste 12,9:1.\n- Les cinq lignes sont déterminées par la largeur :\n  - « Bonjour Florian, votre rendez-vous » ;\n  - « est confirmé : Consultation » ;\n  - « vétérinaire, le samedi 19 septembre » ;\n  - « à 09:00 chez Clinique vétérinaire » ;\n  - « du Port. Démo Vokio, RDV fictif. »\n- C'est le texte exact du SMS parti le 18/09 à 16:55 : gabarit de sub-booking-process au commit 9bbd094 (15/09), branche is_demo, champs lus en base.\n\n**Élément 1 : le sous-titre**\n- Geist 54 px, x = 90, lignes de base 400 / 468 : « Vous recevrez un SMS » / « de confirmation. » (552 / 395 px).\n\n**Élément 3 : le point**\n- #point, centré sur le coin haut gauche de la bulle, en (200 ; 790).",
+   "mouvement": "Temps relatifs, avec l'absolu entre parenthèses.\n\n**Arrivée du téléphone**\n- 0,00 → 0,50 (31,35 → 31,85) : la silhouette monte de translateY +1 300 à 0, power3.out, échelle constante. Le coin de la bulle, encore fermée, arrive sous le point.\n\n**Le sous-titre**\n- 0,04 (31,39) « Vous » · 0,34 (31,69) « recevrez » · 0,78 (32,13) « un » · 0,84 (32,19) « SMS » · 1,30 (32,65) « de » · 1,34 (32,69) « confirmation. ».\n- Sortie 2,25 → 2,43 (33,60 → 33,78).\n\n**Le SMS arrive (1,917, soit 33,267, image 998)**\n- Il arrive dans le blanc réel qui suit la phrase (fin de la voix à 33,05).\n- La bulle s'ouvre depuis le point : clip-path circle(0 px at 200px 790px) → circle(1 000 px at 200px 790px), 0,45 s power3.out.\n- Au même instant, la silhouette ET le point (racine, même donnée) tremblent de ±2 px en x, motif +1, 0, −1, 0 (7,5 Hz) multiplié par l'enveloppe du vibreur (secousses.json, clé s6), de 33,267 à 33,717. C'est le rappel du point qui tremblait en S1.\n\n**Lecture**\n- 2,37 → 5,25 (33,72 → 36,60) : rien ne bouge, on lit. On entend le « Super, merci beaucoup. Au revoir. » de l'appelant, sans sous-titre, pour ne pas détourner l'œil du SMS.\n\n**Sortie**\n- 5,25 → 5,55 (36,60 → 36,90) : la silhouette et la bulle sortent par le bas, translateY 0 → +1 300, power3.in, 0,30 s.\n- 36,60 → 37,10, dans la racine : #point monte vers (652,6 ; 560,8).",
+   "etat_entree": "Sous-composition vide. #point immobile en (200 ; 790) depuis 31,45.",
+   "etat_sortie": "À 36,90 s, la sous-composition est vide. #point est en route vers (652,6 ; 560,8) et y arrive à 37,10.",
+   "assets": "- assets/iphone.svg, écrit à la main : un contour, rien d'autre.\n- Geist-Regular.woff2.\n- donnees/secousses.json (clé s6).\n- donnees/mots.json (A4, 2e phrase)."
+  },
+  {
+   "id": "s7-signature",
+   "debut_s": 36.9,
+   "fin_s": 43.5,
+   "image": "Papier nu.\n\n**Élément 1 : le wordmark « Vokıo »**\n- ı sans point (U+0131), Instrument Serif 280 px, letter-spacing −0,045 em, line-height 0,9.\n- Centré : boîte mesurée de 464 px, de x = 308 à 772. Ligne de base à y = 820, donc haut de la boîte #mot à y = 599.\n- Balisage #mot / #mot-a / #mot-i / #mot-o recopié de /opt/vokio-ads/videos/ux-retravail/repondeur-ou-vokio/index.html.\n- #mot-pt est conservé en visibility:hidden, comme boîte de mesure seulement : left 63,5 %, margin-left −0,055 em, top 0,13 em, 0,11 em. Centre mesuré dans Chromium : (652,6 ; 650,8), diamètre 30,8 px.\n- Le seul point visible est #point de la racine.\n\n**Élément 2 : la promesse**\n- Instrument Serif 72 px encre, centrée.\n- « Votre ligne répond » en romain, ligne de base 1010, 446 px.\n- « même quand vous ne pouvez pas. » en italique pour la chute, ligne de base 1096, 856 px.\n\n**Élément 3 : le prix et l'appel à l'action**\n- Geist 44 px encre, centré.\n- « 59 € par mois, sans engagement. » (ligne de base 1236, 665 px, U+202F entre 59 et €).\n- « Entendez-le vous-même sur vokio.fr » (ligne de base 1300, 726 px).\n\nAucun numéro, aucune capitale en mono, rien sous y = 1500.",
+   "mouvement": "Temps relatifs, avec l'absolu entre parenthèses.\n\n**Le point seul**\n- 0,00 → 0,20 (36,90 → 37,10) : #point (racine) finit son trajet vers (652,6 ; 560,8), 90 px au-dessus du futur ı.\n- 0,20 → 0,50 (37,10 → 37,40) : immobilité totale. Un papier vide et un point, en silence numérique : la rime avec l'image 0.\n\n**Le wordmark naît sous le point**\n- 0,50 (37,40, image 1122) : #mot-a « Vok » se révèle, clip-path inset(-30% 114% -30% -14%) → inset(-30% -14% -30% -14%), 0,75 s power3.out.\n- 0,733 (37,633, image 1129) : #mot-i puis #mot-o avec 0,05 s de décalage, même masque, 0,30 s power3.out. Le ı est complet à 37,933.\n- 0,80 → 1,10 (37,70 → 38,00) : le point descend de 90 px et se pose sur le ı, power3.out, aucun dépassement. Contact à l'image 1140 (38,000).\n\n**Les textes de fin**\n- 2,00 (38,90) : la ligne 1 de la promesse monte de sa ligne de base (masque, 0,60 s power3.out). 2,20 (39,10) : la ligne 2.\n- 3,50 (40,40) : « 59 € par mois, sans engagement. » monte (0,45 s power3.out). 3,60 (40,50) : « Entendez-le vous-même sur vokio.fr ».\n- 4,05 → 6,60 (40,95 → 43,50) : tenue immobile.",
+   "etat_entree": "Sous-composition vide (tous les segments du mot masqués). #point en fin de trajet vers (652,6 ; 560,8).",
+   "etat_sortie": "L'image finale est tenue jusqu'à 43,50, suivie de 0,30 s de silence numérique. Sur TikTok, la boucle repart proprement sur l'image 0 et la tonalité.",
+   "assets": "- InstrumentSerif-Regular.woff2, InstrumentSerif-Italic.woff2, Geist-Regular.woff2.\n- donnees/mesures.json (centre de #mot-pt relevé par outils/mesurer.py)."
+  }
+ ],
+ "cues_son": [
+  {
+   "id": "ton-1",
+   "debut_s": 0,
+   "duree_s": 1.5,
+   "role": "sfx",
+   "fabrication": "Tonalité de retour d'appel française n° 1, en numpy à 48 kHz :\n- x = sin(2π·440·t) ;\n- mise en forme y = tanh(1,3·x)/tanh(1,3), pour une légère couleur de ligne ;\n- fondus de 10 ms en cosinus surélevé.\n\nL'enveloppe (0 à 1, par image) est écrite dans donnees/secousses.json, clé s1 : l'image lit la même donnée que le son.",
+   "mix": "Crête −18 dBFS, mono au centre (c'est la ligne), aucun effet. Stem point.wav."
+  },
+  {
+   "id": "souffle-ligne",
+   "debut_s": 0,
+   "duree_s": 4.2,
+   "role": "ambience",
+   "fabrication": "La ligne froide, en numpy :\n- labo.bruit_rose(n, graine=3) ;\n- passe-bande de 300 à 3 400 Hz par masque FFT, fronts de 50 Hz en cosinus ;\n- coupe nette de 2 ms à 4,200 s, pile au décroché. C'est la coupure vers le silence de « Accord parfait ».",
+   "mix": "RMS −56 dBFS, mono au centre. Stem ligne.wav. On ne l'entend pas, on entend qu'il s'arrête."
+  },
+  {
+   "id": "ton-2-la",
+   "debut_s": 3.6,
+   "duree_s": 1.9,
+   "role": "signature",
+   "fabrication": "Même oscillateur que ton-1, avec une phase intégrée continue (cumsum). Il démarre à 3,600 avec un fondu de 10 ms.\n\nÀ partir de τ = t − 4,200, la tonalité ne coupe pas, elle s'ouvre en cloche :\n- y = sin(φ + I(τ)·sin φ), avec φ = 2π·440·t ;\n- indice I(τ) = 1,4·min(τ/0,06 ; 1)·exp(−max(τ − 0,06 ; 0)/0,5) ;\n- amplitude exp(−τ/0,45).\n\nC'est le « la » de la signature. L'enveloppe entre 3,60 et 4,20 est ajoutée à secousses.json, clé s1.",
+   "mix": "Crête −18 dBFS. Pan 0 jusqu'à 4,200, puis glissé en 60 ms vers +0,47 (abscisse du point 960, pan = 0,6 × (x − 540)/540). labo.reverbe(1,2 ; 0,12) sur la seule queue. Stem point.wav."
+  },
+  {
+   "id": "clic-decroche",
+   "debut_s": 4.2,
+   "duree_s": 0.03,
+   "role": "sfx",
+   "fabrication": "Clic de prise de ligne, en numpy :\n- 2 ms de bruit blanc fenêtré en Hann, passé dans un passe-bas à un pôle à 3 kHz ;\n- plus un demi-sinus de 25 ms à 180 Hz, 2 dB plus bas.",
+   "mix": "Crête −32 dBFS, pan +0,47. Stem point.wav."
+  },
+  {
+   "id": "cloche-sol-1",
+   "debut_s": 4.44,
+   "duree_s": 1.6,
+   "role": "signature",
+   "fabrication": "sol4 à 392,00 Hz, en cloche FM 1:1 :\n- indice 1,2·exp(−τ/0,25) ;\n- amplitude exp(−τ/0,5), attaque de 5 ms.\n\nC'est la 2e note du motif, entendue au décroché.",
+   "mix": "Crête −20 dBFS, pan +0,47 (le point est encore en x = 960). labo.reverbe(1,2 ; 0,15). Stem point.wav."
+  },
+  {
+   "id": "voix-A1",
+   "debut_s": 4.91,
+   "duree_s": 5.1,
+   "role": "real-call",
+   "fabrication": "**Source** : /root/vokio-audios-metiers-180926/montes/veterinaire.wav, de 0,70 à 5,80 s. Le fichier dure 81,156 s en 16 kHz mono ; avant 66,70, les temps sont identiques à l'original (originaux/veterinaire.json, tour t=0).\n\n**Texte exact** : « Bonjour, je suis Élise, l'assistante vocale de la Clinique vétérinaire du Port ! Comment puis-je vous aider ? »\n\n**Points de coupe vérifiés** :\n- la voix court de 0,79 à 5,75 (énergie à −40 dBFS par fenêtres de 10 ms) ;\n- blancs 0,00 → 0,79 et 5,75 → 7,23.\n\n**Chaîne ffmpeg, commune à toutes les voix** :\n- atrim, afade in et out de 10 ms ;\n- aresample=48000:resampler=soxr ;\n- highpass=f=100 ;\n- equalizer=f=2800:t=q:w=1.2:g=2 ;\n- acompressor=threshold=-24dB:ratio=2.5:attack=5:release=90 ;\n- puis gain linéaire vers −20 LUFS intégrés par extrait.\n\nAucun débruitage, aucune retouche de hauteur. On garde la couleur téléphone : c'est la preuve.",
+   "mix": "Mono au centre, bus voix à 0 dB. Stem voix.wav. Film = fichier + 4,21. Déclenche l'atténuation de la nappe."
+  },
+  {
+   "id": "nappe",
+   "debut_s": 5.1,
+   "duree_s": 31.5,
+   "role": "music",
+   "fabrication": "Nappe additive en numpy, sans ElevenLabs Music (écartée : elle ne tient ni la tonalité ni un changement d'accord à la seconde près).\n\n**Timbre, pour chaque note**\n- Partiels k = 1 à 6, d'amplitude k^−1,5.\n- Deux copies désaccordées de ±3 cents.\n- LFO d'amplitude à 0,1 Hz, ±1 dB, phase propre à chaque note.\n- Passe-bas à un pôle à 1 800 Hz.\n- Puis ffmpeg chorus=0.6:0.9:50|60:0.4|0.32:0.25|0.4:2|2.3 et labo.reverbe(3,0 ; 0,35).\n\n**Plan harmonique en sol majeur** (tonalité mesurée de la voix de l'agente), fondus enchaînés à puissance constante :\n1. 5,10 : entrée en fondu sur 1,5 s, accord de sol (G2 98,00 · D3 146,83 · G3 196,00 · B3 246,94). L'accueil.\n2. 17,59, sur « Laissez-moi voir » : fondu de 0,6 s vers ré sus4 (D3 146,83 · G3 196,00 · A3 220,00 · D4 293,66). La question.\n3. 19,83, sur « Je peux vous proposer » : fondu de 0,8 s vers ré7 (D3 146,83 · F#3 185,00 · A3 220,00 · C4 261,63).\n4. Tenu tel quel à travers le choix, la réservation et la confirmation : c'est la suspension de « La tonalité ».\n\nLa résolution est décrite dans la piste « resolution ». À partir de 33,25, le passe-bas s'ouvre de 1 800 à 2 500 Hz. Coupe franche de 5 ms à 36,600, au raccroché.",
+   "mix": "RMS −32 dBFS seule, stéréo large par le chorus et la réverbe. Atténuée de −6 dB sous toute voix : suiveur d'enveloppe sur le stem voix.wav, seuil −40 dBFS, attaque 30 ms, relâche 250 ms. Stem nappe.wav. Jamais de musique de pub : pas de rythme, pas de mélodie."
+  },
+  {
+   "id": "voix-C1",
+   "debut_s": 10.5,
+   "duree_s": 3.56,
+   "role": "real-call",
+   "fabrication": "**Source** : montes/veterinaire.wav de 10,28 à 13,84 s (temps identiques à l'original, tour t=7).\n\n**Texte exact entendu** : « mon chat, euh, Moka, euh, mange plus depuis hier ».\n\n**Coupes** :\n- on retire « Euh, oui, bonjour, j'vous appelle parce que », qui se termine à 9,99 ;\n- on retire la suite « et il dort beaucoup, je trouve. », qui commence à 14,01.\n\n**Repères mesurés (montes)** :\n- « mon chat » 10,34 · « euh » 10,70 · « Moka » 11,10 · « euh » 11,56 ;\n- blanc de 11,73 à 12,30 ;\n- « mange » 12,30 · « plus » 12,55 · « depuis » 12,91 · « hier » 13,33 ;\n- fin de la voix à 13,68.\n\nMême chaîne que A1.",
+   "mix": "Mono au centre, −20 LUFS. Film = fichier + 0,22."
+  },
+  {
+   "id": "voix-C2",
+   "debut_s": 14.62,
+   "duree_s": 2.34,
+   "role": "real-call",
+   "fabrication": "**Source** : montes/veterinaire.wav de 34,78 à 37,12 s (tour t=34).\n\n**Texte exact** : « Euh, demain, vous avez des disponibilités ? »\n\n**Coupes** : le triage saute, de 15,82 à 34,78 :\n- « Je vois. Est-ce que Moka présente d'autres symptômes… » ;\n- « Non, non, non, j'ai pas l'impression. » ;\n- « Très bien. Dans ce cas… Quel jour vous conviendrait le mieux ? ».\n\nLe motif est écrit dans appel.json.\n\n**Repères** : voix de 34,81 à 37,10 ; « demain » ≈ 35,02 ; « des » ≈ 35,86. Blancs 32,85 → 34,81 et 37,10 → 38,39.",
+   "mix": "Mono au centre, −20 LUFS. Film = fichier − 20,16."
+  },
+  {
+   "id": "voix-A2A3",
+   "debut_s": 17.54,
+   "duree_s": 5.24,
+   "role": "real-call",
+   "fabrication": "**Source** : montes/veterinaire.wav de 48,66 à 53,90 s, d'un seul tenant (tours t=48 et t=50).\n\n**Texte exact** : « Laissez-moi voir. » [VRAI silence de l'outil next_available_slots, de 49,49 à 50,95, soit 1,46 s gardé entier] « Je peux vous proposer neuf heures, dix heures ou onze heures. »\n\nLa coupe tombe avant « Le dernier créneau possible de la journée est onze heures trente. Qu'est-ce qui vous arrangerait ? », qui commence à 54,01 (creux à −50 dB entre 53,81 et 54,00).\n\n**Sautés en amont**, de 37,10 à 48,66 : « Un instant. », validate_date, « Demain, c'est samedi dix-neuf septembre. Pour quelle heure… » et « Bah le matin. ».\n\n**Repères mesurés** (énergie en fenêtres de 10 ms, recoupée par whisper-cli small sur une fenêtre calée à l'attaque) :\n- « Laissez-moi » 48,71 · « voir » 49,17 ;\n- « Je » 50,95 · « proposer » 51,44 ;\n- « neuf » 51,87 (creux du /n/) ;\n- « dix » 52,55 ;\n- « ou » 53,24 ;\n- « onze » 53,50 ;\n- fin 53,80.",
+   "mix": "Mono au centre, −20 LUFS. Film = fichier − 31,12 : « neuf » 20,75, « dix » 21,43, « onze » 22,38."
+  },
+  {
+   "id": "papier-glisse",
+   "debut_s": 18.37,
+   "duree_s": 0.7,
+   "role": "sfx",
+   "fabrication": "ElevenLabs POST /v1/sound-generation, avec la clé pub /root/.secrets/vokio-ads-elevenlabs, via labo.sfx :\n{\"text\":\"A single sheet of thick matte paper sliding slowly across a wooden desk, close microphone, dry room, no music, no reverb\",\"duration_seconds\":0.8,\"prompt_influence\":0.6}\n\n**Prises** : 3 prises en faisant varier duration_seconds (0,8 / 0,85 / 0,9), ce qui donne trois empreintes de cache distinctes.\n\n**Montage** : on garde 0,70 s depuis la première transitoire (−40 dBFS), avec un fondu de sortie de 120 ms et un highpass=f=150.\n\n**Repli numpy** : bruit rose en passe-bande 800 Hz à 6 kHz, attaque 50 ms, décroissance 0,5 s, −34 dBFS.",
+   "mix": "Crête −28 dBFS, pan 0. Tombe dans le silence de l'outil (aucune voix). Stem bruitages.wav."
+  },
+  {
+   "id": "tap-9h",
+   "debut_s": 20.867,
+   "duree_s": 0.25,
+   "role": "sfx",
+   "fabrication": "Le toucher du point, un ré5 court et étouffé en numpy :\n- partiels 587,33 Hz (amplitude 1, τ 0,09 s) et 587,33 × 3,99 Hz (amplitude 0,25, τ 0,03 s) ;\n- attaque de 1 ms ;\n- maillet : 1,5 ms de bruit en passe-bande 2 à 5 kHz, à −18 dB.\n\nPosé à l'image 626, le contact du saut sur place sur « neuf ». Le point a une seule note, le ré, qu'on n'entendra entière que sur le logo : c'est pourquoi on remplace les si, ré et mi du pitch (effet dessin animé).",
+   "mix": "Crête −30 dBFS. Pan = 0,6 × (232 − 540)/540 = −0,34. labo.reverbe(0,8 ; 0,12). Stem point.wav."
+  },
+  {
+   "id": "tap-10h",
+   "debut_s": 21.567,
+   "duree_s": 0.25,
+   "role": "sfx",
+   "fabrication": "Même toucher ré5 que tap-9h, posé à l'image 647 : atterrissage sur 10:00 sur « dix ».",
+   "mix": "Crête −30 dBFS, pan −0,34."
+  },
+  {
+   "id": "tap-11h",
+   "debut_s": 22.5,
+   "duree_s": 0.25,
+   "role": "sfx",
+   "fabrication": "Même toucher ré5, posé à l'image 675 : atterrissage sur 11:00 sur « onze ».",
+   "mix": "Crête −30 dBFS, pan −0,34."
+  },
+  {
+   "id": "voix-C3",
+   "debut_s": 23.24,
+   "duree_s": 1.74,
+   "role": "real-call",
+   "fabrication": "**Source** : montes/veterinaire.wav de 58,80 à 60,54 s (tour t=58).\n\n**Texte exact** : « Euh, bah, à neuf heures, c'est parfait. »\n\n**Coupes** : blancs 57,72 → 58,84 et 60,51 → 63,31. Saute « Très bien. C'est pour quel prénom ? » et « C'est pour Florian. » (63,31 à 66,48).\n\n**Repères** : voix de 58,84 à 60,50 ; « à » ≈ 59,16 ; « neuf » ≈ 59,35 (voix humaine continue, ±0,1, à confirmer à l'oreille) ; « parfait » 60,08.",
+   "mix": "Mono au centre, −20 LUFS. Film = fichier − 35,56."
+  },
+  {
+   "id": "tap-retour-9h",
+   "debut_s": 24,
+   "duree_s": 0.25,
+   "role": "sfx",
+   "fabrication": "Même toucher ré5, posé à l'image 720 : le point revient se poser sur 09:00, choisi par l'appelant.",
+   "mix": "Crête −34 dBFS (plus doux), pan −0,34."
+  },
+  {
+   "id": "cloche-la-rdv",
+   "debut_s": 25.4,
+   "duree_s": 1.2,
+   "role": "signature",
+   "fabrication": "la4 à 440 Hz, même recette que la note 1 de la signature :\n- sinus qui s'ouvre en cloche FM 1:1, indice 0 → 1,4 en 60 ms ;\n- amplitude τ 0,35 s, attaque 8 ms.\n\nLe point commence à écrire le rendez-vous : 2e occurrence du motif, toujours incomplète.",
+   "mix": "Crête −26 dBFS, pan −0,30 (x = 272). labo.reverbe(1,2 ; 0,15). Sur la nappe en ré7, le la et le sol sonnent suspendus."
+  },
+  {
+   "id": "cloche-sol-rdv",
+   "debut_s": 25.64,
+   "duree_s": 1.4,
+   "role": "signature",
+   "fabrication": "sol4 à 392 Hz, même recette que cloche-sol-1 : FM 1:1, indice 1,2·exp(−τ/0,25), amplitude τ 0,45 s.",
+   "mix": "Crête −26 dBFS. Pan −0,11 : x du point à 25,64 = 272 + 703 × power2.inOut(0,343) = 437."
+  },
+  {
+   "id": "feutre-trait",
+   "debut_s": 25.4,
+   "duree_s": 0.7,
+   "role": "sfx",
+   "fabrication": "ElevenLabs POST /v1/sound-generation :\n{\"text\":\"One short soft stroke of a felt-tip marker on paper, left to right, close microphone, very dry, quiet\",\"duration_seconds\":0.9,\"prompt_influence\":0.6}\n\n**Prises** : 3 prises (0,8 / 0,9 / 1,0 s). On garde 0,70 s depuis la transitoire, avec un fondu de sortie de 80 ms.\n\n**Repli numpy** : bruit en passe-bande 2 à 7 kHz, modulé par la vitesse du point (dérivée de x lue dans point-resolu.json).",
+   "mix": "Crête −32 dBFS. Pan automatisé image par image de −0,30 à +0,48, qui suit l'abscisse du point de 272 à 975. Stem bruitages.wav."
+  },
+  {
+   "id": "voix-A4",
+   "debut_s": 26.17,
+   "duree_s": 7.06,
+   "role": "real-call",
+   "fabrication": "**Source** : montes/veterinaire.wav de 67,24 à 74,30 s. Dans l'original, c'est 71,44 → 78,50 (tour t=71) : le montage du 18/09 a déjà retiré 66,70 → 70,90 (« Je vérifie les disponibilités. » + « Un instant. »), donc les temps montes = original − 4,20 après 66,70.\n\n**Texte exact** : « Parfait, je vous note ça pour Florian, pour une consultation vétérinaire, le samedi dix-neuf septembre à neuf heures. Vous recevrez un SMS de confirmation. »\n\n**Repères mesurés (montes)** :\n- « Parfait » 67,31 · « note » 67,99 · « Florian » 68,41 ;\n- pause 68,70 → 68,89 ;\n- « pour » 68,91 · « consultation » 69,17 · « vétérinaire » 69,72 ;\n- pause 70,36 → 70,46 ;\n- « le » 70,46 · « samedi » 70,60 · « dix-neuf » 70,90 · « septembre » 71,26 · « à neuf heures » 71,66 ;\n- fin 71,97 ; pause 71,97 → 72,46 ;\n- « Vous » 72,46 · « recevrez » 72,76 · « un » 73,20 · « SMS » 73,26 · « de » 73,72 · « confirmation » 73,76 ;\n- dernière syllabe 74,00 (dernière bouffée d'énergie de 73,96 à 74,10) ;\n- fin 74,12, puis blanc jusqu'à 75,07.\n\nVoix rapide : chaque repère est à reconfirmer par son/2_aligner.py et à l'oreille, avec une tolérance de 2 images.",
+   "mix": "Mono au centre, −20 LUFS. Film = fichier − 41,07 : « Parfait » 26,24, dernière syllabe de « confirmation » 32,93, fin 33,05."
+  },
+  {
+   "id": "resolution",
+   "debut_s": 32.93,
+   "duree_s": 1.5,
+   "role": "music",
+   "fabrication": "Dans le stem nappe, à la dernière syllabe de « confirmation » (montes 74,00 → film 32,93, image 988), le ré7 se résout en sol majeur :\n- fondu de 0,12 s ;\n- C4 → B3, F#3 → G3, A3 → G3, et la basse descend de D3 146,83 Hz à G2 98,00 Hz ;\n- gonflement de +3 dB en 0,3 s, puis retour au niveau de base en 1,2 s.\n\nC'est l'unique résolution du film : on la sent avant de la comprendre.",
+   "mix": "Toujours atténuée de −6 dB sous la voix, qui finit à 33,05."
+  },
+  {
+   "id": "vibreur",
+   "debut_s": 33.267,
+   "duree_s": 0.45,
+   "role": "sfx",
+   "fabrication": "Vibration du téléphone, dans le blanc réel qui suit « …SMS de confirmation. » (greffe de « Mot pour mot »). En numpy :\n- deux impulsions de 180 ms séparées de 90 ms : 33,267 → 33,447 et 33,537 → 33,717 ;\n- moteur : dent de scie à 165 Hz, 2·((f·t) mod 1) − 1, passe-bas à un pôle à 1 kHz, plus un sinus à 330 Hz à 30 % ;\n- modulation d'amplitude (1 + 0,3·sin(2π·32·t)) ;\n- enveloppe par impulsion : attaque 12 ms, relâche 25 ms ;\n- grésillement : bruit blanc en passe-bande 1,5 à 4 kHz × enveloppe × 0,25.\n\nL'enveloppe par image va dans secousses.json, clé s6 : secousse de la silhouette et du point.",
+   "mix": "Crête −22 dBFS, pan 0. Stem point.wav."
+  },
+  {
+   "id": "voix-C4",
+   "debut_s": 34.45,
+   "duree_s": 1.5,
+   "role": "real-call",
+   "fabrication": "**Source** : montes/veterinaire.wav de 75,05 à 76,55 s. Dans l'original, 79,25 → 80,75 (tour t=79).\n\n**Texte exact** : « Super, merci beaucoup. Au revoir. »\n\n**Repères** : « Super » 75,10 · « merci » 75,64 · « beaucoup » 75,86 · « Au revoir » 76,16 · fin 76,49.\n\n**Coupe** : le « De rien, au revoir. » de l'agente (montes 79,23) saute : c'est l'appelant qui raccroche.",
+   "mix": "Mono au centre, −20 LUFS. Film = fichier − 40,60. Aucun sous-titre : l'œil reste sur le SMS."
+  },
+  {
+   "id": "raccroche",
+   "debut_s": 36.6,
+   "duree_s": 0.08,
+   "role": "sfx",
+   "fabrication": "ElevenLabs POST /v1/sound-generation :\n{\"text\":\"end of a mobile phone call, one soft click and the line goes dead, dry, no beeps\",\"duration_seconds\":0.6,\"prompt_influence\":0.7}\n\n**Prises** : 3 prises (0,6 / 0,65 / 0,7). On garde les 80 premières ms depuis la transitoire, avec un fondu de sortie de 10 ms.\n\n**Repli numpy** : clic-decroche inversé dans le temps, plus un demi-sinus de 30 ms à 120 Hz.",
+   "mix": "Crête −24 dBFS, pan 0. Au même échantillon, la nappe et toutes les queues sont coupées en 5 ms."
+  },
+  {
+   "id": "silence-numerique",
+   "debut_s": 36.68,
+   "duree_s": 0.72,
+   "role": "ambience",
+   "fabrication": "Zéros numériques sur toutes les pistes, de 36,68 à 37,40 (greffe de « Mot pour mot » : le premier vrai silence du film). On entend que la ligne est partie.",
+   "mix": "RMS < −90 dBFS, vérifié sur le master."
+  },
+  {
+   "id": "signature",
+   "debut_s": 37.4,
+   "duree_s": 2.9,
+   "role": "signature",
+   "fabrication": "son/signature.py, recette complète dans signature_sonore :\n- la 440 Hz à 37,40 : sinus qui s'ouvre en cloche, τ 0,35 ;\n- sol 392 Hz à 37,64 : τ 0,45 ;\n- ré 587,33 + 1 174,66 Hz à 38,00 : barre de verre, τ 1,1, maillet de 2 ms, au contact du point sur le ı (image 1140) ;\n- queue jusqu'à environ 40,3.",
+   "mix": "Crêtes −16 / −17 / −15 dBFS. Pan +0,125 (abscisse du ı). labo.reverbe(1,6 ; 0,18), Haas de 18 ms sur la queue du ré. Seul événement sonore de 37,40 à 38,00."
+  },
+  {
+   "id": "nappe-fin",
+   "debut_s": 38,
+   "duree_s": 5.2,
+   "role": "music",
+   "fabrication": "Même timbre que la nappe, accord de sol majeur posé : G2 98,00 · D3 146,83 · G3 196,00 · B3 246,94 · D4 293,66.\n- Attaque de 0,8 s à partir du contact (38,00).\n- Tenue.\n- Fondu de sortie en cosinus de 41,80 à 43,20.",
+   "mix": "RMS −34 dBFS, stéréo large. Aucun son sur les textes de fin."
+  },
+  {
+   "id": "silence-final",
+   "debut_s": 43.2,
+   "duree_s": 0.3,
+   "role": "ambience",
+   "fabrication": "Zéros numériques de 43,20 à 43,50. La boucle TikTok repart sur la tonalité de l'image 0 sans raccord (greffe de « La tonalité »).",
+   "mix": "RMS < −90 dBFS."
+  }
+ ],
+ "textes_ecran": [
+  "Vous avez les\nmains prises.",
+  "Encore une sonnerie,\net il appelle ailleurs.",
+  "Bonjour, je suis Élise,",
+  "l’assistante vocale de la\nClinique vétérinaire du Port.",
+  "Comment puis-je vous aider ?",
+  "mon chat, euh, Moka,\neuh, mange plus\ndepuis hier.",
+  "Appel réel, raccourci.",
+  "Demain, vous avez\ndes disponibilités ?",
+  "Laissez-moi voir.",
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "Capture réelle de app.vokio.fr\nÉtablissement fictif de démonstration.",
+  "Je peux vous proposer\nneuf heures, dix heures\nou onze heures.",
+  "À neuf heures,\nc’est parfait.",
+  "09:00 Florian",
+  "Parfait, je vous note ça\npour Florian,",
+  "pour une consultation vétérinaire,\nle samedi dix-neuf septembre\nà neuf heures.",
+  "Vous recevrez un SMS\nde confirmation.",
+  "Bonjour Florian, votre rendez-vous est confirmé : Consultation vétérinaire, le samedi 19 septembre à 09:00 chez Clinique vétérinaire du Port. Démo Vokio, RDV fictif.",
+  "Vokıo",
+  "Votre ligne répond\nmême quand vous ne pouvez pas.",
+  "59 € par mois, sans engagement.\nEntendez-le vous-même sur vokio.fr"
+ ],
+ "plan_de_fabrication": "**Projet** : /opt/vokio-ads/videos/showcase/point-solaire/, dans le dépôt vokio-ads. Aucun push depuis un sous-agent. Aucune écriture en production, sauf l'étape 0A, qui revient à la session principale avec le go de Florian.\n\n**Sorties** dans /root/vokio-uploads/videos/showcase/ :\n- point-solaire-9x16.mp4 (1080×1920, 30 i/s, 1 305 images, AAC 256k 48 kHz stéréo) ;\n- point-solaire-bande-son.wav ;\n- point-solaire-signature.wav et point-solaire-signature-courte.wav.\n\n**ARBORESCENCE**\n- index.html : racine. Contient #fond papier, les 7 hôtes de sous-compositions, #point (dernier enfant, z-index le plus haut) et un seul <audio id=\"bande-son\" src=\"assets/son/mix.wav\" data-start=\"0\" data-duration=\"43.5\">.\n- compositions/ : s1-sonnerie.html, s2-voix.html, s3-ecoute.html, s4-agenda.html, s5-rendez-vous.html, s6-sms.html, s7-signature.html.\n- donnees/ :\n  - appel.json : les 7 extraits, avec source, entrée et sortie montes et original, début film, qui parle, texte dit, texte montré, motif de chaque coupe ;\n  - mots.json ; point.json ; point-resolu.json ; voix-x.json ; secousses.json ; agenda-geo.json ; bloc-rdv.json ; mesures.json.\n- son/ : 1_extraits.py, 2_aligner.py, 3_synthese.py, 4_elevenlabs.py, 5_mixer.py, 6_master.sh, signature.py, stems/.\n- outils/ : capturer_agenda.py, preparer_agenda.py, resoudre.py, construire.py, mesurer.py, controles.py.\n- assets/ : fonts/ (4 woff2 copiées de repondeur-ou-vokio/assets/fonts/), captures/, iphone.svg, son/.\n\n**Hôtes dans la racine** (data-start / data-duration) :\n- s1 0 / 4,5 · s2 4,5 / 5,9 · s3 10,4 / 6,9 · s4 17,3 / 7,9 · s5 25,2 / 6,15 · s6 31,35 / 5,55 · s7 36,9 / 6,6.\n\n**Règles de la racine**\n- #point est le seul point du film. Il est animé par la timeline racine, parce qu'une sous-composition ne peut pas animer la racine.\n- Ses poses clés sont des nombres figés dans point-resolu.json. s2, s5 et s6 relisent la même donnée pour la ligne, le déroulé du bloc et la secousse.\n- Les données sont injectées en ligne (<script type=\\\"application/json\\\">) par outils/construire.py, entre des marqueurs. Aucune lecture réseau au rendu.\n\n**ÉTAPE 0 · CAPTURE DE L'AGENDA (session principale, avant J3)**\n\nOption A, recommandée par le jury : la vraie Clinique vétérinaire du Port.\n- merchant 73844f00-60d8-4fd7-97d8-59143b86d561, rendez-vous 068432f8-3472-42a0-8081-293839d06246 (Florian, 09:00, 20 min, créé le 18/09 à 16:53:29).\n- Vérifié en lecture seule le 26/09 : aucun merchant_users n'est rattaché à ce merchant. Y rattacher un accès pour un lien magique est une écriture en production : go Florian, script appliquer.py (vérif / --go / --retour) lancé par la session principale, accès retiré après la prise.\n- outils/capturer_agenda.py --etat <session.json> --jour 2026-09-19 (/root/.pwtest/bin/python) :\n  - viewport 390×1400, device_scale_factor 4, page /rendez-vous, vue jour automatique sous 820 px ;\n  - clics sur « Période précédente » jusqu'à ce que l'en-tête affiche samedi 19 septembre ;\n  - 1 200 ms d'attente, souris sortie en (0,0) ;\n  - capture de « main .card-v », plus le relevé DOM (en px CSS) des étiquettes d'heure et du bloc, vers donnees/agenda-geo.json.\n- outils/preparer_agenda.py (PIL) :\n  - recadrage en CSS de x 8 à 269,1 et de y (ligne 09:00 − 17,3) à (ligne 12:00 + 12,8), réduction ×0,9 en Lanczos ;\n  - agenda-apres.png ; bloc-florian.png (boîte du bloc + 1 px CSS) ;\n  - agenda-avant.png : la seule boîte du bloc est remplacée par la même boîte prise une heure plus bas (rangée 10:00, vide et avec la même ligne d'heure), et on contrôle que la différence hors de la boîte est nulle.\n- Relire nom par nom : seul « Florian » doit apparaître.\n\nOption B, sans aucune écriture en production :\n- même script avec la session existante /root/.config/vokio/app-session-veterinaire.json (Clinique vétérinaire des Catalans, établissement fictif, lecture seule), sur le samedi 19/09 ;\n- vérifié vide en base, c'est une vraie matinée vide, sans retouche ;\n- le bloc est un calque HTML dont le CSS est copié de AgendaPro.tsx ×3,6, avec les données réelles du rendez-vous (donnees/bloc-rdv.json) et Geist 500 (woff2 OFL) ;\n- la mention devient « Capture de app.vokio.fr ».\n\n**LOTS PARALLÈLES**\n\nLOT SON (agent 1, J1 à J2) :\n1. son/1_extraits.py : coupe les 7 extraits de appel.json dans montes/veterinaire.wav (atrim, afade 10 ms, aresample=48000:resampler=soxr, chaîne voix) et écrit stems/voix-*.wav et un stems/voix.wav placé.\n2. son/2_aligner.py : alignement par l'énergie.\n   - L'ordre des mots vient du texte de originaux/veterinaire.json. whisper-cli /root/.cache/hyperframes/whisper/whisper.cpp/build/bin/whisper-cli avec -m ggml-small.bin -l fr -ml 1 -sow sert d'indice seulement : il dérive de 0,1 à 0,9 s sur ces fichiers. hf transcribe refuse small, et large-v3 n'est pas en cache.\n   - Chaque attaque est recalée sur le creux ou l'attaque d'énergie à 10 ms le plus proche. Les repères de cette bible sont les valeurs de départ.\n   - Sorties : donnees/mots.json, donnees/voix-x.json.\n3. son/3_synthese.py : tout le numpy de cues_son, phases intégrées (cumsum), 48 kHz stéréo, déterministe. Sorties : stems/point.wav, ligne.wav, nappe.wav et donnees/secousses.json (s1, s6).\n4. son/4_elevenlabs.py : 3 bruitages × 3 prises, choix à l'oreille par la session principale.\n5. son/5_mixer.py : somme des stems, atténuation de la nappe par suiveur, sortie assets/son/mix.wav.\n6. son/6_master.sh :\n   - ebur128, un seul gain = −14 − I mesuré (pas de loudnorm dynamique, qui écraserait le silence numérique) ;\n   - alimiter=limit=0.871:attack=1:release=50, vérification au true peak ;\n   - master-48k-24b.wav.\n7. son/signature.py : les deux fichiers de signature.\n\nJALON J2 : la session principale dépose bande-son et signature seules sur le Drive (rclone gdrive:Vokio/showcase/point-solaire/). Florian écoute avant toute animation.\n\nLOT CAPTURE (agent 2) : écrit et teste à blanc capturer_agenda.py et preparer_agenda.py. Sur une capture de test de Catalans (option B), aucune écriture. La session principale lance la vraie prise.\n\nLOT IMAGE 1 (agent 3, J3) :\n- index.html racine, s1, s2, s3 ;\n- outils/mesurer.py (Playwright : centre du point de s1 et de #mot-pt de s7 après document.fonts.ready, vers donnees/mesures.json) ;\n- outils/resoudre.py : fusionne point.json + mots.json + mesures.json + agenda-geo.json en point-resolu.json. Un repère « mot:neuf@A2A3−0,08 » devient l'instant arrondi à l'image.\n\nLOT IMAGE 2 (agent 4, J3) : s4, s5, s6, s7, assets/iphone.svg. Il démarre sur les valeurs nominales de cette bible (écart attendu ≤ 0,05 s ou ≤ 2 px après résolution).\n\nLOT CONTRÔLES (agent 5, J3) : outils/controles.py (voir contrôles).\n\nIntégration (session principale, J4) :\n1. construire.py, puis hf check.\n2. Planche de snapshots.\n3. flock /tmp/hf-rendu.lock /opt/vokio-ads/bin/hf render /opt/vokio-ads/videos/showcase/point-solaire --fps 30 -o /root/vokio-uploads/videos/showcase/point-solaire-9x16-rendu.mp4 --quiet\n4. Mux : ffmpeg -i rendu.mp4 -i son/master-48k-24b.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 256k -ar 48000 -ac 2 -shortest point-solaire-9x16.mp4\n5. Contrôles, Drive, commit, puis push par la session principale.\n\n**Interdits** : jamais de skills update ni de audio.mjs sync-durations. Lancer /opt/vokio-ads/outils/rustines.py (sans --poser) avant le rendu, pour vérifier que les 5 correctifs sont en place.\n\n**Chemin critique** : 0 → J2 écoute → J3 images → J4 rendu. Le son et les images 1 et 2 avancent en parallèle dès J1.",
+ "controles": "Tous les contrôles sont scriptés dans outils/controles.py. Seuil = échec bloquant.\n\n**1. hf check**\n- /opt/vokio-ads/bin/hf check . : 0 erreur de lint, 0 dépassement de mise en page, 100 % des textes en contraste AA.\n- Si une erreur de lint subsiste, les audits de contraste ne tournent pas (« 0 samples ») : la corriger d'abord.\n\n**2. Planche de snapshots**\n- hf snapshot aux images 0, 45, 90, 126, 150, 216, 300, 333, 432, 480, 540, 573, 626, 647, 675, 720, 762, 783, 870, 942, 960, 998, 1020, 1098, 1116, 1140, 1170, 1215 et 1290, montées en planche contact et regardées une à une.\n\n**3. Trois éléments**\n- Sur chacune de ces images, compter les nœuds [data-element] visibles (opacité > 0,01, intersectant le cadre) : ≤ 3.\n- Le point compte pour un. La mention accrochée à l'agenda porte data-element=\\\"agenda\\\".\n\n**4. Texte**\n- Pour chaque nœud texte : taille calculée ≥ 36 px, bas de boîte < 1 500, gauche ≥ 70, droite ≤ 1 010.\n- Seules exceptions : le wordmark mesuré et les étiquettes de la capture, dont on contrôle la hauteur ≥ 36 px sur l'image.\n- Mono en capitales : 0 nœud (maximum admis : 1 par écran).\n\n**5. Sous-suite (règle 8)**\n- Chaque page de sous-titre, normalisée (minuscules, ponctuation retirée, ’ → '), est une sous-suite des mots du texte dit de son extrait dans appel.json.\n- Les SMS, les étiquettes et le bloc sont des objets, hors contrôle.\n\n**6. Interdits textuels**\n- grep dans index.html, compositions/, donnees/*.json : « — » = 0, « Alauzet » = 0, regex de numéro 0[1-9]( ?[0-9]{2}){4} = 0.\n\n**7. Synchronisation image et son, tolérance ±1 image (33 ms)**\n- Détection d'attaque dans stems/point.wav (premier échantillon > −40 dBFS après t − 50 ms), comparée aux images d'événement de point-resolu.json :\n  - décroché : image 126 (clic, la) ;\n  - toucher neuf 626, dix 647, onze 675, retour 720 ;\n  - début de l'écriture 762 (la) ;\n  - ouverture de la bulle et vibreur 998 ;\n  - raccroché 1098 ;\n  - signature : la 1122, sol 37,64 s, ré 1140.\n- Attaque de chaque mot à l'écran contre mots.json : ±1 image.\n- mots.json contre l'attaque d'énergie de la voix placée : ±2 images, puis écoute de validation des 12 repères clés : Bonjour, neuf, dix, onze, à neuf (appelant), Parfait, Florian, samedi, Vous recevrez, SMS, dernière syllabe de confirmation, Super.\n\n**8. Géométrie**\n- Image 0 : centre de #point contre le centre de l'espaceur du point final ≤ 0,5 px.\n- Image 1140 : centre de #point contre le centre de #mot-pt ≤ 0,5 px, et diamètre 30,8 ± 0,3 px (même esprit que le contrôle 4 de check_wordmark.py).\n- Aux images 626, 647, 675 et 720 : y du point égal à y de la ligne d'heure de agenda-geo.json ± 0,5 px.\n\n**9. Nyquist**\n- Les séries de tremblement et de secousse de secousses.json appliquées à l'image ont une période de 4 images : aucune alternance à 2 images.\n\n**10. Solaire**\n- Sur chaque snapshot, les amas de pixels proches de #EFA424 (ΔE < 8), plus la teinte du bloc, se limitent au point.\n- Le bloc n'est admis qu'entre les images 762 et 942.\n\n**11. Audio sur le MP4 final**\n- ffmpeg ebur128=peak=true : intégré −14,0 ± 0,5 LUFS, true peak ≤ −1,0 dBTP.\n- ffprobe : aac, 48 000 Hz, 2 canaux ; vidéo h264 1080×1920 à 30 i/s, 1 305 images, durée 43,50 ± 0,02 s.\n- RMS < −90 dBFS sur 36,70 → 37,38 et 43,22 → 43,50.\n- Présence de la tonalité dès les 20 premières ms.\n\n**12. Haut-parleur de téléphone**\n- Mix passé en highpass=f=300,lowpass=f=8000 : les crêtes des trois notes de la signature restent à 3 dB près de la pleine bande.\n- Chroma de la nappe (FFT repliée sur 12 classes) : sol, si, ré en tête sur 5,1 → 17,6 et 33,0 → 36,6 ; ré, fa#, la, do sur 19,9 → 32,9.\n\n**13. Voix**\n- Chaque point d'entrée et de sortie d'extrait tombe dans un blanc : énergie < −45 dBFS à ±20 ms.\n- Écart de niveau entre extraits ≤ 1 LU.\n- Somme mono : pas d'annulation sur la signature (écart ≤ 1,5 dB).\n\n**14. Preuve, en lecture seule avant livraison**\n- Requête begin read only : rendez-vous 068432f8 toujours présent, 09:00, Florian ; sms_events confirmation status sent à 16:55:10 ; is_demo = true.\n- Le texte du SMS affiché est comparé caractère par caractère au gabarit de sub-booking-process au commit 9bbd094, rendu avec client_name = Florian, service = Consultation vétérinaire, scheduled_at = 2026-09-19 09:00 Europe/Paris, business_name = Clinique vétérinaire du Port, sans ressource ni adresse.",
+ "greffes": "**Gardé du gagnant « Le point sur le i »**\n- Un seul point, l'unique div de la racine, de l'image 0 au ı.\n- Il est encre tant que ça sonne, solaire quand Vokio agit.\n- Les raccords où le décor vient au point : l'agenda glisse sous lui, le téléphone monte jusqu'à lui, le mot naît sous lui.\n- La tonalité à 440 Hz qui s'ouvre en cloche au décroché.\n- Le motif la · sol · ré appris incomplet, puis résolu sur la marque, accordé sur le sol mesuré de la voix.\n- Le panoramique qui suit l'abscisse du point.\n- Un seul fichier de repères pour l'image et le son.\n- La signature livrée seule.\n\n**Greffé de « Mot pour mot » (preuve)**\n- Le vrai agenda du vrai jour avec le vrai bloc créé par l'appel. L'état avant repeint uniquement ce bloc (option A), et à défaut une vraie matinée vide sans retouche (option B).\n- Le vrai texte du SMS de démo, vérifié en base et dans l'historique git.\n- Le silence de next_available_slots, pendant lequel l'agenda arrive.\n- Le silence de la réservation, pendant lequel le point écrit le bloc.\n- La vibration dans le blanc réel qui suit « confirmation ».\n- Le raccroché, puis un silence numérique avant la signature.\n- Le tamis, en version légère sur les « euh » de l'appelant.\n- La grammaire des mots qui montent à leur instant (16 px, 0,26 s).\n- La mention validée « Établissement fictif de démonstration ».\n- Un seul audio mixé en numpy, et les coupes seulement dans des blancs mesurés.\n\n**Greffé de « Accord parfait » (du bruit à l'harmonie)**\n- La ligne lissée derrière le point, qui avance comme une tête de lecture, à la place du trait qui suivait le RMS de la voix : on garde la plume, on retire la forme d'onde.\n- La ligne froide coupée net au décroché.\n- Un gain unique et un limiteur, sans loudnorm dynamique.\n- Les glissements par phase intégrée.\n- La boucle qui repart sur la tonalité.\n\n**Greffé de « La tonalité » (carte blanche)**\n- La suspension harmonique, en ré sus4 puis ré7, tenue jusqu'à la dernière syllabe de « confirmation », puis la résolution en sol.\n- Le silence final pour la boucle TikTok.\n- L'appel à l'action « Entendez-le vous-même sur vokio.fr ».\n- Un tremblement dessiné à une fréquence que le 30 i/s peut rendre (7,5 Hz, 4 images par cycle).\n\n**Réservé de « Ça sonne juste » (partition)**\n- La note qui tombe à plat (−100 cents sur la courbe t² de la chute du point) et le ralentissement de la sonnerie qui devient un pouls, gardés pour les déclinaisons courtes de 6 à 10 s.\n- L'écoute de la bande son seule avant d'animer.\n\n**Retiré du gagnant sur l'avis du jury**\n- La légende permanente, remplacée par une mention pendant le seul moment sans objet, puis une mention accrochée à l'agenda.\n- L'agenda bac à sable retouché.\n- Le gabarit SMS client.\n- Le trait d'épaisseur RMS.\n- Le balayage de S4.\n- Les notes de marimba si, ré, mi, remplacées par un toucher ré, qui est la note du point.\n- Le mot « samedı » en 230 px, jugé appuyé et contraire à la règle « qui parle = typographie ». Le 2e « la-sol » passe à l'écriture du rendez-vous.\n- La nappe ElevenLabs Music, remplacée par une nappe numpy accordée.\n- Le bruitage « telephone-pose » et les 4 bus HyperFrames."
+}

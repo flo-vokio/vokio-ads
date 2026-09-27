@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<base href="/">
+<title>Banc du film</title>
+<!-- Banc de CONTRÔLE du film entier (outils/controles_dom.py) : monte index.html et ses sept
+     sous-compositions comme le fait HyperFrames (contenu du <template>, scripts rejoués dans l'ordre),
+     puis, pour un instant t, affiche les hôtes dont la fenêtre [début, début + durée[ contient t, place
+     chaque timeline à son temps local et mesure le DOM : éléments [data-element] réellement visibles,
+     textes (corps, boîte, famille), boîtes des mots dits. Servi par http.server depuis la racine du projet.
+     Ne sert qu'aux contrôles : le rendu passe par hf render, jamais par ce banc. -->
+<style>html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}</style>
+<script>window.__timelines = {};</script>
+<script src="donnees/donnees.js"></script>
+<script src="lib/vendor/gsap.min.js"></script>
+<script src="lib/texte.js"></script>
+<script src="lib/point.js"></script>
+<script src="lib/iphone.js"></script>
+<script>
+// Registre des poses : chaque unité .tx-w posée par TEXTE.poser garde son mot dit (extrait, rang, attaque).
+(function () {
+  const poser = TEXTE.poser;
+  window.__poses = [];
+  TEXTE.poser = function (c, lignes, o) {
+    const p = poser(c, lignes, o);
+    p.mots.forEach(function (u) {
+      if (u.mot) {
+        u.el.dataset.extrait = u.mot.extrait; u.el.dataset.rang = String(u.mot.rang);
+        u.el.dataset.debut = String(u.mot.debut); u.el.dataset.image = String(u.mot.image);
+      }
+      u.el.dataset.texte = u.texte;
+    });
+    window.__poses.push(p);
+    return p;
+  };
+})();
+</script>
+</head>
+<body>
+<script>
+async function charger(src) {
+  await new Promise(function (ok, ko) {
+    const s = document.createElement("script");
+    s.src = src; s.onload = ok; s.onerror = function () { ko(new Error("script " + src)); };
+    document.head.appendChild(s);
+  });
+}
+function rejouer(parent, scripts) {
+  return (async function () {
+    for (const s of scripts) {
+      if (s.src) { if (!/lib\/(texte|point)\.js$|gsap|donnees\.js$/.test(s.getAttribute("src"))) await charger(s.getAttribute("src")); }
+      else { const n = document.createElement("script"); n.textContent = s.textContent; parent.appendChild(n); }
+    }
+  })();
+}
+window.__hotes = [];
+async function monterFilm() {
+  const html = await (await fetch("index.html")).text();
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  // le style de la racine
+  doc.querySelectorAll("head style").forEach(function (st) { document.head.appendChild(document.importNode(st, true)); });
+  const racine = document.importNode(doc.getElementById("root"), true);
+  racine.querySelectorAll("audio,video").forEach(function (m) { m.remove(); });
+  document.body.appendChild(racine);
+  // les sous-compositions
+  for (const h of Array.from(racine.querySelectorAll("[data-composition-src]"))) {
+    const src = h.getAttribute("data-composition-src");
+    const d = new DOMParser().parseFromString(await (await fetch(src)).text(), "text/html");
+    const frag = document.importNode(d.querySelector("template").content, true);
+    const scripts = Array.from(frag.querySelectorAll("script"));
+    scripts.forEach(function (s) { s.remove(); });
+    h.appendChild(frag);
+    await rejouer(h, scripts);
+    window.__hotes.push({ el: h, id: h.getAttribute("data-composition-id"),
+                          debut: parseFloat(h.getAttribute("data-start")), duree: parseFloat(h.getAttribute("data-duration")) });
+  }
+  // le script de la racine (timeline « main » du point)
+  const inline = Array.from(doc.querySelectorAll("body > script")).filter(function (s) { return !s.src; });
+  await rejouer(document.body, inline);
+  await document.fonts.ready;
+  return { hotes: window.__hotes.map(function (h) { return [h.id, h.debut, h.duree, !!window.__timelines[h.id]]; }),
+           main: !!window.__timelines.main };
+}
+// v2 (rendu final, 27/09) : comme le runtime HyperFrames, l'hôte hors de sa fenêtre est masqué par
+// visibility:hidden SUR L'HÔTE, et sa timeline reste à son temps borné [0 ; durée] (état de fin après la fenêtre,
+// état initial avant). Avant, le banc ne replaçait que les hôtes actifs et ignorait tout élément d'un hôte masqué :
+// un enfant en visibility:visible explicite (l'agenda de s4, visible de 25,20 à 45,00 sous s5, s6 et s7) passait inaperçu.
+function placer(t) {
+  window.__hotes.forEach(function (h) {
+    const vis = t >= h.debut - 1e-9 && t < h.debut + h.duree;
+    h.el.style.visibility = vis ? "visible" : "hidden";
+    const tl = window.__timelines[h.id];
+    if (tl) tl.seek(Math.min(Math.max(t - h.debut, 0), h.duree), false);
+  });
+  window.__timelines.main.seek(t, false);
+}
+
+// ── Mesure ──
+const PAPIER = "rgb(244, 241, 232)";
+function opacite(el) {
+  let o = 1;
+  for (let e = el; e && e.nodeType === 1; e = e.parentElement) {
+    const cs = getComputedStyle(e);
+    if (cs.display === "none") return 0;
+    o *= parseFloat(cs.opacity);
+  }
+  return o;
+}
+function val(v, ref) { return /%$/.test(v) ? parseFloat(v) / 100 * ref : parseFloat(v); }
+// Rectangle de découpe (clip-path) d'un élément, en coordonnées de la page ; null = pas de découpe.
+function decoupe(e) {
+  const cp = getComputedStyle(e).clipPath;
+  if (!cp || cp === "none") return null;
+  const r = e.getBoundingClientRect();
+  let m = cp.match(/^inset\(([^)]*)\)/);
+  if (m) {
+    const v = m[1].replace(/round.*$/, "").trim().split(/\s+/);
+    const [a, b, c, d] = v.length === 1 ? [v[0], v[0], v[0], v[0]] : v.length === 2 ? [v[0], v[1], v[0], v[1]]
+      : v.length === 3 ? [v[0], v[1], v[2], v[1]] : v;
+    return { x0: r.left + val(d, r.width), y0: r.top + val(a, r.height), x1: r.right - val(b, r.width), y1: r.bottom - val(c, r.height) };
+  }
+  m = cp.match(/^circle\(\s*([\d.\-]+)px\s+at\s+([\d.\-]+)(px|%)\s+([\d.\-]+)(px|%)\s*\)/);
+  if (m) {
+    const R = parseFloat(m[1]);
+    const cx = r.left + (m[3] === "%" ? parseFloat(m[2]) / 100 * r.width : parseFloat(m[2]));
+    const cy = r.top + (m[5] === "%" ? parseFloat(m[4]) / 100 * r.height : parseFloat(m[4]));
+    return { x0: cx - R, y0: cy - R, x1: cx + R, y1: cy + R };
+  }
+  return { inconnu: cp };
+}
+function inter(a, b) {
+  return { x0: Math.max(a.x0, b.x0), y0: Math.max(a.y0, b.y0), x1: Math.min(a.x1, b.x1), y1: Math.min(a.y1, b.y1) };
+}
+function aire(r) { return Math.max(0, r.x1 - r.x0) * Math.max(0, r.y1 - r.y0); }
+const CADRE = { x0: 0, y0: 0, x1: 1080, y1: 1920 };
+// Partie visible d'une boîte (feuille) : cadre ∩ découpes de tous les ancêtres.
+function visible(el, r) {
+  let v = inter(r, CADRE);
+  for (let e = el; e && e.nodeType === 1; e = e.parentElement) {
+    if (aire(v) <= 0.5) return v;
+    const d = decoupe(e);
+    if (d && !d.inconnu) v = inter(v, d);
+  }
+  return v;
+}
+function versRect(r) { return { x0: r.left, y0: r.top, x1: r.right, y1: r.bottom }; }
+// Les feuilles dessinées d'un élément : nœuds texte, images, formes SVG, fonds non papier.
+function feuilles(el) {
+  const out = [];
+  const w = document.createTreeWalker(el, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+  let n = w.currentNode;
+  while (n) {
+    if (n.nodeType === 3) {
+      const par = n.parentElement;
+      if (n.textContent.trim() && getComputedStyle(par).visibility === "visible") {
+        const rg = document.createRange(); rg.selectNodeContents(n);
+        out.push({ type: "texte", el: par, r: versRect(rg.getBoundingClientRect()), texte: n.textContent });
+      }
+    } else {
+      const cs = getComputedStyle(n);
+      const tag = n.tagName.toLowerCase();
+      if (cs.visibility !== "visible") { /* boîte de mesure (#mot-pt), hôte masqué : rien de dessiné */ }
+      else if (tag === "img") out.push({ type: tag, el: n, r: versRect(n.getBoundingClientRect()) });
+      else if (tag === "rect" || tag === "path" || tag === "circle") {
+        // boîte géométrique SVG (sans le trait) élargie d'une demi-épaisseur de trait : un filet droit a une hauteur nulle
+        const r = versRect(n.getBoundingClientRect()), e = (parseFloat(cs.strokeWidth) || 0) / 2;
+        out.push({ type: tag, el: n, r: { x0: r.x0 - e, y0: r.y0 - e, x1: r.x1 + e, y1: r.y1 + e } });
+      }
+      else if (cs.backgroundColor !== "rgba(0, 0, 0, 0)" && cs.backgroundColor !== PAPIER) out.push({ type: "fond", el: n, r: versRect(n.getBoundingClientRect()) });
+    }
+    n = w.nextNode();
+  }
+  return out;
+}
+// Un ancêtre translaté (montée, sortie, vibreur) : le texte n'est pas « au repos ».
+function deplace(el) {
+  for (let e = el; e && e.nodeType === 1; e = e.parentElement) {
+    const tr = getComputedStyle(e).transform;
+    if (tr && tr !== "none") {
+      const m = tr.match(/matrix\(([^)]*)\)/);
+      if (!m) return true;
+      const v = m[1].split(",").map(parseFloat);
+      if (Math.abs(v[4]) > 0.01 || Math.abs(v[5]) > 0.01 || Math.abs(v[0] - 1) > 1e-4 || Math.abs(v[3] - 1) > 1e-4) return true;
+    }
+  }
+  return false;
+}
+function mesurer(t) {
+  placer(t);
+  const elements = [];
+  const textes = [];
+  const candidats = Array.from(document.querySelectorAll("[data-element]"));
+  candidats.forEach(function (el) {
+    const hote = el.closest("[data-composition-src]");
+    // v2 : plus de court-circuit sur l'hôte masqué ; c'est la visibilité CALCULÉE de chaque feuille qui décide.
+    let vu = false;
+    feuilles(el).forEach(function (f) {
+      const o = opacite(f.el);
+      if (o <= 0.01) return;
+      const v = visible(f.el, f.r);
+      if (aire(v) <= 1) return;
+      vu = true;
+      if (f.type === "texte") {
+        const cs = getComputedStyle(f.el);
+        textes.push({ element: el.getAttribute("data-element"), id: f.el.id || (f.el.parentElement && f.el.parentElement.id) || "",
+                      texte: f.texte.trim(), corps: parseFloat(cs.fontSize), famille: cs.fontFamily, style: cs.fontStyle,
+                      x0: +v.x0.toFixed(1), y0: +v.y0.toFixed(1), x1: +v.x1.toFixed(1), y1: +v.y1.toFixed(1),
+                      boite: { x0: +f.r.x0.toFixed(1), y0: +f.r.y0.toFixed(1), x1: +f.r.x1.toFixed(1), y1: +f.r.y1.toFixed(1) },
+                      opacite: +o.toFixed(3), transforme: deplace(f.el) });
+      }
+    });
+    if (vu) elements.push(el.getAttribute("data-element") + (hote ? "@" + hote.getAttribute("data-composition-id") : ""));
+  });
+  // Pages posées par TEXTE.poser (registre window.__poses) : nombre de mots réellement visibles à cet instant.
+  const poses = window.__poses.map(function (p) {
+    let n = 0;
+    p.mots.forEach(function (u) {
+      if (!u.el.isConnected || getComputedStyle(u.el).visibility !== "visible" || opacite(u.el) <= 0.01) return;
+      const v = visible(u.el, versRect(u.el.getBoundingClientRect()));
+      if (aire(v) > 1) n++;
+    });
+    return n;
+  });
+  // Objets (finition du 27/09) : position, opacité effective et filtre de chaque [data-element] (l'agenda et le
+  // téléphone ne doivent jamais sauter de plus de 90 px d'une image à l'autre, et plus rien n'est filé).
+  const objets = candidats.map(function (el) {
+    const r = el.getBoundingClientRect();
+    const hote = el.closest("[data-composition-src]");
+    const vis = getComputedStyle(el).visibility === "visible";
+    return { nom: el.getAttribute("data-element") + (hote ? "@" + hote.getAttribute("data-composition-id") : ""),
+             x: +r.left.toFixed(2), y: +r.top.toFixed(2), opacite: vis ? +opacite(el).toFixed(4) : 0,
+             filtre: getComputedStyle(el).filter, masque: getComputedStyle(el).webkitMaskImage || getComputedStyle(el).maskImage || "none" };
+  });
+  return { t: t, elements: elements, textes: textes, poses: poses, objets: objets };
+}
+// Description des pages posées (une fois) : scène, extrait, texte, mots.
+function pagesPosees() {
+  return window.__poses.map(function (p, i) {
+    const hote = p.mots.length && p.mots[0].el.isConnected ? p.mots[0].el.closest("[data-composition-src]") : null;
+    const ex = p.mots.map(function (u) { return u.mot ? u.mot.extrait : null; }).filter(Boolean);
+    return { index: i, scene: hote ? hote.getAttribute("data-composition-id") : null, connecte: !!hote,
+             extrait: ex.length ? ex[0] : null, lignes: p.lignes.map(function (l) { return l.textContent; }),
+             mots: p.mots.length };
+  });
+}
+// Boîte de repos de chaque mot dit (transform retiré le temps de la lecture).
+function motsDits() {
+  const out = [];
+  document.querySelectorAll(".tx-w[data-extrait]").forEach(function (w) {
+    const hote = w.closest("[data-composition-src]");
+    const avant = w.style.transform;
+    w.style.transform = "none";
+    const r = w.getBoundingClientRect();
+    w.style.transform = avant;
+    out.push({ scene: hote.getAttribute("data-composition-id"), texte: w.dataset.texte, extrait: w.dataset.extrait,
+               rang: +w.dataset.rang, debut: +w.dataset.debut, image: +w.dataset.image,
+               x0: r.left, y0: r.top, x1: r.right, y1: r.bottom, corps: parseFloat(getComputedStyle(w).fontSize) });
+  });
+  return out;
+}
+</script>
+</body>
+</html>

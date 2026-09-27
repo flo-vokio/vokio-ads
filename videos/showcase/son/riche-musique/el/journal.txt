@@ -1,0 +1,6 @@
+/opt/vokio-ads/videos/showcase/son/riche-musique/el/prise0.wav {'lufs': -15.09, 'crete_dbtp': -4.79, 'lra': 6.8}
+/opt/vokio-ads/videos/showcase/son/riche-musique/el/prise1.wav {'lufs': -17.23, 'crete_dbtp': -1.47, 'lra': 21.3}
+/opt/vokio-ads/videos/showcase/son/riche-musique/el/prise2.wav {'lufs': -15.15, 'crete_dbtp': -1.34, 'lra': 8.1}
+fini
+/opt/vokio-ads/videos/showcase/son/riche-musique/el/prise3.wav {'lufs': -16.05, 'crete_dbtp': -1.29, 'lra': 5.5}
+/opt/vokio-ads/videos/showcase/son/riche-musique/el/prise4.wav {'lufs': -12.73, 'crete_dbtp': -1.11, 'lra': 5.5}
