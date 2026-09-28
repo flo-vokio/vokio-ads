@@ -72,6 +72,8 @@ import labo  # noqa: E402
 import signature as S  # noqa: E402
 import mix as MX  # noqa: E402  (données et outils : rien ne se recalcule à l'import)
 import bruitages as B  # noqa: E402
+sys.path.append(str(PROJET / "outils"))
+import chronologie as CH  # noqa: E402
 
 SR = labo.SR
 N = MX.N
@@ -85,7 +87,13 @@ CU = json.loads((SON / "cues.json").read_text())
 G_MASTER = CU["gain_master_db"]                   # 7,84 dB : les stems d'entrée sont déjà à l'échelle du master
 BASE = ("dialogue", "nappe", "sfx", "signature")
 COUCHES = ("ambiance", "point", "ecriture", "objets", "halo")
-STYLO_RETIRE = (41.45, 42.25)          # le stylo du master (cues.json « stylo », 41,50 → 42,20) : la plume le remplace
+# instants écrits dans le film de 47 s, placés dans le film actuel par la chronologie des insertions (son/dialogue.json,
+# outils/chronologie.py ; l'identité sans insertion)
+CHRONO = CH.charger(MX.DIA)
+STYLO_RETIRE = tuple(CHRONO.decaler(t) for t in (41.45, 42.25))   # le stylo du master (cues.json « stylo », 41,50 → 42,20)
+                                                                  # : la plume le remplace
+SMS_LU = tuple(CHRONO.decaler(t) for t in (38.0, 41.0))           # la lecture du SMS (niveau de la pièce)
+SAUT_I = tuple(CHRONO.decaler(t) for t in (42.2, 42.6))           # le saut vers le ı, le trajet le plus rapide
 TT = np.arange(N) / SR
 CUES = []
 
@@ -147,12 +155,21 @@ def lissage(x, attaque, relache, pas=0.001):
     return np.interp(np.arange(n), np.arange(len(g)) * k, y)
 
 
-def bruit_module(n, fc, largeur_oct, graine, nf=1024, pas=256):
+def bruit_module(n, fc, largeur_oct, graine, nf=1024, pas=256, film=False):
     """Bruit blanc filtré par une cloche gaussienne en log-fréquence, centrée sur fc(t) (Hz, tableau de n valeurs),
     largeur à mi-hauteur largeur_oct (octaves, scalaire ou tableau) ; STFT Hann, énergie par trame normalisée (le niveau
-    ne dépend pas de fc : il est donné ensuite par l'enveloppe)."""
+    ne dépend pas de fc : il est donné ensuite par l'enveloppe).
+    film=True (28/09, un bruit de la longueur du film, n = N) : le tirage est celui du film d'avant les insertions de
+    temps, du bruit blanc NEUF inséré dans chaque mesure (CHRONO.texture) ; une insertion multiple du pas de la STFT
+    (147 200 = 575 × 256) garde les trames alignées : après la mesure, le bruit d'avant, décalé ; la norme se prend hors
+    des mesures insérées. Sans insertion : le tirage de toujours."""
     g = np.random.default_rng(graine)
-    xp = g.standard_normal(n + 2 * nf)
+    if film and CHRONO:
+        xp = CHRONO.texture(g.standard_normal(n - CHRONO.total_echantillons + 2 * nf),
+                            np.random.default_rng([graine, 1]).standard_normal(CHRONO.total_echantillons), fondu=0.0,
+                            i0=-nf)
+    else:
+        xp = g.standard_normal(n + 2 * nf)
     win = np.hanning(nf + 1)[:-1]
     nb = (len(xp) - nf) // pas + 1
     idx = np.arange(nb) * pas
@@ -170,7 +187,11 @@ def bruit_module(n, fc, largeur_oct, graine, nf=1024, pas=256):
     for j in range(nb):
         out[j * pas:j * pas + nf] += y[j]
     out = out[nf:nf + n] / 1.5 * np.sqrt(pas / nf * 4)
-    return out / (np.sqrt(np.mean(out ** 2)) + 1e-12)
+    hors = np.ones(n, bool)
+    if film and CHRONO:
+        for a_, b_ in CHRONO.zones_echantillons:
+            hors[max(0, a_ - nf):b_ + nf] = False              # les trames qui touchent une mesure insérée (la norme
+    return out / (np.sqrt(np.mean(out[hors] ** 2)) + 1e-12)     # d'avant, à ≈ 1e-4 dB près : les mêmes trames ailleurs)
 
 
 def momentanee_max(st):
@@ -364,16 +385,24 @@ def ambiance(duck):
     x = int(1.0 * SR)                                         # A, B, A…, fondus enchaînés à puissance constante de 1 s
     r = np.sin(np.pi / 2 * np.linspace(0, 1, x))
 
-    def chaine(p, q):
+    def chaine(p, q, n_=N):
         out, k = p.copy(), 1
-        while len(out) < N:
+        while len(out) < n_:
             nxt = (q, p)[k % 2] if k > 1 else q
             nxt = nxt if k < 2 else np.roll(nxt, int(7.3 * SR))          # la reprise ne recommence pas au même endroit
             out = np.concatenate([out[:-x], out[-x:] * r[::-1] + nxt[:x] * r, nxt[x:]])
             k += 1
-        return out[:N]
-    mil = chaine(a, b)
-    cot = chaine(b, a)                                        # B puis A : décorrélé du milieu
+        return out[:n_]
+
+    def chaine_film(p, q):
+        """28/09 : la chaîne du film d'avant les insertions de temps (la même pièce, au même endroit), la suite des prises
+        dans chaque mesure insérée (CHRONO.texture, fondus de 50 ms) : après la mesure, la pièce validée, décalée."""
+        if not CHRONO:
+            return chaine(p, q)
+        nb = N - CHRONO.total_echantillons
+        return CHRONO.texture(chaine(p, q, nb), chaine(p, q, N + x)[nb:N])
+    mil = chaine_film(a, b)
+    cot = chaine_film(b, a)                                   # B puis A : décorrélé du milieu
     fond = np.stack([mil + 0.6 * cot, mil - 0.6 * cot], axis=1)
     # courbe : entrée 0,4 s ; coupe au raccroché (coupe_film) ; la pièce se rouvre quand le téléphone se TAIT (fin de la
     # 2e secousse du vibreur, 37,117 : 2e revue 27/09, posée sur son début elle restait 35 LU sous le vibreur), en 0,6 s ;
@@ -393,7 +422,7 @@ def ambiance(duck):
     a0, a1 = SEC_S1[0][1], SEC_S1[1][0]
     avant = TT < EV["silence_numerique"]["t"][1]
     fond[avant] *= S.gain(NIV["ambiance_court_terme"] - court_terme(fond * avant[:, None], a0 + 0.1, a1 - 0.1))
-    fond[~avant] *= S.gain(NIV["ambiance_sms"] - court_terme(fond * (~avant)[:, None], 38.0, 41.0))
+    fond[~avant] *= S.gain(NIV["ambiance_sms"] - court_terme(fond * (~avant)[:, None], *SMS_LU))
     cue("fond-piece", "ambiance", 0.0, "0 → raccroché ; fin de la 2e secousse du vibreur (secousses.s6) → signature_re_contact + 0,6",
         f"{A['prise']} puis {Bb['prise']} (fondu 1 s), passe-haut 120 Hz, passe-bas 9 kHz, milieu ± 0,6 × côté décorrélé ; "
         f"−8 dB FIXES pendant tout l'appel (pas de fond qui respire avec la voix) ; la pièce se rouvre quand le vibreur se tait "
@@ -516,8 +545,8 @@ def point(duck):
     a = lissage(a, 0.015, 0.080)
     fc = 1100 * 2 ** (2.4 * np.clip(v / vmax, 0, 1))
     fc = lissage(fc, 0.02, 0.08)
-    air_bas = bruit_module(N, fc, 1.4, graine=151)
-    air_haut = passe_haut(bruit_module(N, np.maximum(2.5 * fc, 5000.0), 1.0, graine=153), AU_DESSUS_LIGNE)
+    air_bas = bruit_module(N, fc, 1.4, graine=151, film=True)
+    air_haut = passe_haut(bruit_module(N, np.maximum(2.5 * fc, 5000.0), 1.0, graine=153, film=True), AU_DESSUS_LIGNE)
     # même sonie K pour les deux airs (là où l'air sonne), pour que le fondu de l'un à l'autre ne change pas le niveau
     w_ = a > 0.02
     kb = float(np.mean(MX.ponderer_k(air_bas[:, None])[w_] ** 2)); kh = float(np.mean(MX.ponderer_k(air_haut[:, None])[w_] ** 2))
@@ -526,7 +555,7 @@ def point(duck):
     st = S.panner(air, MX.pan_point(TT))
     st = st + 0.12 * S.humide(st, 0.6, graine=152)[:N]
     st *= duck[:, None]
-    ref = (TT >= 42.2) & (TT <= 42.6)                         # le saut vers le ı, le trajet le plus rapide
+    ref = (TT >= SAUT_I[0]) & (TT <= SAUT_I[1])               # le saut vers le ı, le trajet le plus rapide
     g = NIV["air_max"] - momentanee_max(st[ref])
     st *= S.gain(g)
     piste += st
@@ -588,10 +617,23 @@ def point(duck):
 # apparaît derrière son bord : la plume frotte donc (a) à la vitesse du point et (b) plus fort là où le bord révèle de
 # l'encre (les jambages de « 09:00 Florian », les fûts du V, du k, du ı, les flancs des o). On lit l'encre DANS la vidéo :
 # profil de colonnes sombres sur l'image de fin d'écriture, bord révélé mesuré sur trois images intermédiaires.
-ECRITS = {"rendez-vous": {"t": (EV["plume_pose"]["t"], EV["ecriture_fin"]["t"]), "image_fin": EV["ecriture_fin"]["image"] - 1,
-                          "lignes": (650, 750), "x0": 330, "images_bord": (764, 768, 772), "decal": 0.15},
-          "vokio": {"t": tuple(EV["plume_mot"]["t"]), "image_fin": EV["plume_mot"]["images"][1] + 1,
-                    "lignes": (690, 880), "x0": 0, "images_bord": (1252, 1256, 1262), "decal": 1.00}}
+# Depuis l'échange du prénom (28/09), l'image écrit en DEUX gestes : « 09:00 » (plume_pose → heure_ecrite), la plume
+# se lève et attend pendant la question, puis « Florian » sous la voix de l'appelant (ecriture_nom) : la plume frotte
+# pendant les deux gestes, jamais en l'air (sur 3,6 s d'un seul tenant, le grain de la prise était trop court et la
+# plume aurait frotté pendant la levée). Sans ces événements (film de 47 s), un seul geste, comme avant. Les images du
+# bord révélé de « Vokıo » passent par la chronologie des insertions.
+if "ecriture_nom" in EV and "heure_ecrite" in EV:
+    ECRITS = {"rendez-vous": {"t": (EV["plume_pose"]["t"], EV["heure_ecrite"]["t"]), "image_fin": EV["ecriture_fin"]["image"] - 1,
+                              "lignes": (650, 750), "x0": 330, "images_bord": (764, 768, 772), "decal": 0.15},
+              "nom": {"t": tuple(EV["ecriture_nom"]["t"]), "image_fin": EV["ecriture_fin"]["image"] - 1,
+                      "lignes": (650, 750), "x0": 330,
+                      "images_bord": tuple(EV["ecriture_nom"]["images"][0] + k for k in (2, 6, 10)), "decal": 0.15}}
+else:
+    ECRITS = {"rendez-vous": {"t": (EV["plume_pose"]["t"], EV["ecriture_fin"]["t"]), "image_fin": EV["ecriture_fin"]["image"] - 1,
+                              "lignes": (650, 750), "x0": 330, "images_bord": (764, 768, 772), "decal": 0.15}}
+ECRITS["vokio"] = {"t": tuple(EV["plume_mot"]["t"]), "image_fin": EV["plume_mot"]["images"][1] + 1,
+                   "lignes": (690, 880), "x0": 0, "images_bord": tuple(CHRONO.decaler_image(i) for i in (1252, 1256, 1262)),
+                   "decal": 1.00}
 PLANCHER_PAPIER = 0.25        # hors encre, la plume frotte encore le papier (−12 dB)
 
 
@@ -697,7 +739,7 @@ def ecriture():
     CHOIX["plume"] = {"retenue": kp, "raison": "le grain continu le plus long (passages à moins de 18 dB de la crête) sans "
                       "transitoire > 6 dB ; le rythme de la prise est retiré (grain aplati), c'est l'image qui le donne",
                       "candidats": [{k: v for k, v in c.items() if k != "g"} for c in cand]}
-    departs = {"rendez-vous": 0.0, "vokio": 0.5}             # deux endroits différents du grain (fraction de la longueur libre)
+    departs = {"rendez-vous": 0.0, "nom": 0.25, "vokio": 0.5}   # endroits différents du grain (fraction de la longueur libre)
     for nom, E in ECRITS.items():
         p0, p1 = E["t"]
         i0 = int(round((p0 - 0.03) * SR)); n = int(round((p1 - p0 + 0.10) * SR))
@@ -711,7 +753,9 @@ def ecriture():
         st = labo.reverbe(mobile(mono, i0 / SR), 0.5, 0.08, graine=171)
         poser(piste, au_niveau(st, NIV["plume"]), i0 / SR)
         PILOTES[nom] = (i0, e)
-        cue(f"plume-{nom}", "ecriture", p0, f"evenements.{'plume_pose → ecriture_fin' if nom == 'rendez-vous' else 'plume_mot'} ; "
+        src_ = {"rendez-vous": "plume_pose → " + ("heure_ecrite" if "nom" in ECRITS else "ecriture_fin"), "nom": "ecriture_nom",
+                "vokio": "plume_mot"}[nom]
+        cue(f"plume-{nom}", "ecriture", p0, f"evenements.{src_} ; "
             f"image {info['image_profil']} (l'encre) ; images {list(E['images_bord'])} (le bord révélé)",
             f"plume prise {kp}, grain continu ({nb_morceaux} passages tenus, aplatis par RMS centrés), passe-bande 1,3-13 kHz ; niveau = "
             f"(v/vmax) × ({PLANCHER_PAPIER} + {1 - PLANCHER_PAPIER} × encre au bord révélé, x + {info['decalage_bord_px']} px), "
@@ -722,7 +766,8 @@ def ecriture():
         pose = p0
         st = mobile(GOUTTE[0] * 1.0, pose)
         poser(piste, au_niveau(st, NIV["pose_plume"]), pose)
-        cue(f"pose-plume-{nom}", "ecriture", pose, "evenements.plume_pose" if nom == "rendez-vous" else "evenements.plume_mot[0]",
+        cue(f"pose-plume-{nom}", "ecriture", pose, {"rendez-vous": "evenements.plume_pose", "nom": "evenements.ecriture_nom[0]",
+                                                     "vokio": "evenements.plume_mot[0]"}[nom],
             "la goutte de la naissance", f"{NIV['pose_plume']} LUFS instantanés", pan=round(float(MX.pan_point(pose)), 3))
     return piste
 

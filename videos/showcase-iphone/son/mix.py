@@ -3,6 +3,7 @@
 
     python3 son/mix.py            le master (sans la variante « monde »)
     python3 son/mix.py --monde    le master ET la variante « monde » (bruitages ElevenLabs en s1), fichier SÉPARÉ
+    python3 son/mix.py --sans-copie /dev/shm/x   sans réécrire les copies de /root/vokio-uploads (livrables du 27/09)
 
 Entrées (aucun instant en dur : chaque temps vient d'une donnée, ou d'un décalage nommé ci-dessous et documenté) :
   son/dialogue.wav + son/dialogue.json      le vrai appel du 18/09 placé aux temps v2 du film (C4 à son vrai blanc)
@@ -61,6 +62,12 @@ SCENES = J(DON / "scenes.json")
 PR = J(DON / "point-resolu.json")["images"]
 POINTJ = J(DON / "point.json")
 DIA = J(ICI / "dialogue.json")
+# la règle des insertions de temps (son/dialogue.json « insertions », videos/showcase/outils/chronologie.py, le même
+# module depuis les deux copies de ce script) : l'horloge d'un oscillateur qui sonne APRÈS une insertion est celle du
+# film d'avant, pour que le son soit le son validé, décalé (28/09) ; sans insertion : l'identité
+sys.path.append(str(Path(__file__).resolve().parents[2] / "showcase" / "outils"))   # en dernier : ne masque rien
+import chronologie as CH  # noqa: E402
+CHRONO = CH.charger(DIA)
 
 DUREE = max(s["fin"] for s in SCENES.values())
 assert abs(DUREE - EV["fin"]["t"]) < 1e-9
@@ -138,6 +145,19 @@ T = {
     "la": EV["signature_la"]["t"], "sol_sig": EV["signature_sol"]["t"], "re": EV["signature_re_contact"]["t"],
 }
 T["air_sms"] = T["vibreur"] + DEC["air_sms_apres_vibreur"]
+
+
+# le la · sol de l'écriture du rendez-vous (point 8), la signature dite une première fois : au début de l'écriture, dans le
+# blanc après « c'est parfait. » (film de 47 s). Depuis l'échange du prénom (28/09), l'image écrit en deux gestes :
+# « 09:00 » sous « Très bien. » (le la · sol y tombait sur « bien. » : 8,2 LU de marge, le pire mot du film), puis
+# « Florian » sous la voix de l'appelant : le la · sol dit le motif quand le NOM est écrit, le sol sur la dernière lettre
+# (evenements.ecriture_fin, 28,933, image 868), le la 0,24 s avant (28,693, la fin de « Florian. ») : dans le blanc entre
+# « Florian. » et « Parfait, », et dans l'arrêt composé de la musique (reprise du pouls à 29,10)
+if "ecriture_nom" in EV:
+    T["la_rdv"] = EV["ecriture_fin"]["t"] - (T["sol_sig"] - T["la"])
+else:
+    T["la_rdv"] = EV["ecriture_debut"]["t"]
+T["sol_rdv"] = T["la_rdv"] + (T["sol_sig"] - T["la"])
 assert abs(round(T["resolution"] * 30) - EV["resolution_confirmation"]["image"]) == 0
 assert abs(T["pedale"] - 4.60) < 1e-6 and abs(T["sol"] - 10.20) < 1e-6, (T["pedale"], T["sol"])
 
@@ -261,7 +281,10 @@ def gain_ducking(voix_mono, seuil=-40.0, profondeur=-8.0, attaque=0.030, relache
     c = np.concatenate([[0.0], np.cumsum(voix_mono ** 2)])
     idx = np.clip(np.arange(N) + w // 2, 0, N); jdx = np.clip(np.arange(N) - w // 2, 0, N)
     rms = np.sqrt(np.maximum(c[idx] - c[jdx], 0) / w)
-    dessus = (20 * np.log10(rms + 1e-12) > seuil).reshape(-1, 48).any(axis=1)      # cadence 1 ms
+    au_dessus = 20 * np.log10(rms + 1e-12) > seuil
+    # cadence 1 ms (blocs de 48) ; un film dont la durée n'est pas un nombre entier de ms (50,066667 s = 2 403 200 éch.,
+    # 28/09) garde son dernier bloc, partiel : aucun effet quand N est un multiple de 48 (film de 47 s)
+    dessus = np.concatenate([au_dessus, np.zeros(-len(au_dessus) % 48, bool)]).reshape(-1, 48).any(axis=1)
     m = len(dessus)
     la, te = int(anticipation * 1000), int(tenue * 1000)
     cs = np.concatenate([[0], np.cumsum(dessus)])
@@ -732,15 +755,17 @@ def avant_la_coupe(sfx, sig):
             f"{niv} dBFS crête",
             pan=round(float(pan_point(tc)), 3))
     # 4.7 le la · sol de l'écriture du rendez-vous (point 8) : la ligne qui s'ouvre, puis le sol ; ils suivent la plume
-    t_ecr = EV["ecriture_debut"]["t"]
+    # (T["la_rdv"] : voir plus haut ; ecriture_debut dans le film de 47 s)
+    t_ecr = T["la_rdv"]
+    src_rdv = "evenements.ecriture_debut" if t_ecr == EV["ecriture_debut"]["t"] else "evenements.ecriture_fin − (signature_sol − signature_la)"
     la, w_la = S.note_la(1.2, tau=0.35)
     poser_mobile(sig, la, t_ecr, NIV["la_rdv"], rev=(1.2, 0.15), graine=35, poids_pan=w_la)
-    cue("cloche-la-rdv", "signature", t_ecr, "evenements.ecriture_debut", "la4 440 Hz, la ligne qui s'ouvre (0-90 ms bande "
+    cue("cloche-la-rdv", "signature", t_ecr, src_rdv, "la4 440 Hz, la ligne qui s'ouvre (0-90 ms bande "
         "téléphone, 90-250 ms vers la cloche FM 1:1 + étincelle), τ 0,35 s, attaque 8 ms, réverbe 1,2 s à 15 %",
         f"{NIV['la_rdv']} dBFS crête", pan=f"centre dans la ligne, puis la plume {pan_point(t_ecr + 0.25):+.3f} → "
         f"{pan_point(EV['ecriture_fin']['t']):+.3f}")
     poser_mobile(sig, S.note_sol(1.4, tau=0.45), t_ecr + d_sol, NIV["sol_rdv"], rev=(1.2, 0.15), graine=36)
-    cue("cloche-sol-rdv", "signature", t_ecr + d_sol, "evenements.ecriture_debut + (signature_sol − signature_la)",
+    cue("cloche-sol-rdv", "signature", t_ecr + d_sol, src_rdv + " + (signature_sol − signature_la)",
         "sol4 392 Hz FM 1:1, τ 0,45 s", f"{NIV['sol_rdv']} dBFS crête", pan=f"suit la plume ({pan_point(t_ecr + d_sol):+.3f})")
     return sfx, sig
 
@@ -754,7 +779,7 @@ def apres_la_coupe(sfx, sig, nap):
     i0 = int(round(v0 * SR)); n = int(round((v1 - v0 + 0.01) * SR))
     t = temps(i0, n)
     env = trapeze(t, s6["segments_s"], s6["rampes_s"])
-    vb = vibreur(t, env)
+    vb = vibreur(temps(CHRONO.vers_base_echantillon(i0), n), env)    # phase du moteur : l'horloge du film d'avant
     vb = vb / np.max(np.abs(vb)) * S.gain(NIV["vibreur"])
     sfx[i0:i0 + n] += vb[:, None]
     cue("vibreur", "sfx", v0, "secousses.s6.segments_s (= evenements.bulle_et_vibreur, image 1100)",
@@ -1051,4 +1076,10 @@ def main(avec_monde=False):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--monde", action="store_true", help="fabrique aussi la variante « monde » (fichier séparé)")
-    main(avec_monde=ap.parse_args().monde)
+    ap.add_argument("--sans-copie", metavar="DOSSIER",
+                    help="(28/09) les copies prévues pour UPLOADS (point-solaire-bande-son-v2.wav, -monde-v2) vont dans "
+                         "DOSSIER : les livrables du 27/09 ne sont pas réécrits (bande classique refaite pour les contrôles)")
+    a_ = ap.parse_args()
+    if a_.sans_copie:
+        UPLOADS = Path(a_.sans_copie)
+    main(avec_monde=a_.monde)

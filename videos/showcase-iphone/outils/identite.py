@@ -3,6 +3,7 @@
 
     python3 outils/identite.py empreindre <projet> <sortie.json> [--at 1.5,20.4] [--garder <chemin>]
     python3 outils/identite.py comparer <reference.json> <candidat.json> [--diff <dossier> --images <ref>,<cand>]
+                                        [--decalage A:N …] [--voulu a-b,c-d]
     python3 outils/identite.py donnees <donnees_ref/> <donnees_cand/>     les JSON (et donnees.js) clé par clé
     python3 outils/identite.py mp4 <film.mp4> <sortie.json>               empreintes d'un MP4 déjà rendu (sans perte)
     python3 outils/identite.py extraire <révision> <dossier>              le projet tel qu'il était au commit (git archive), rendable
@@ -31,7 +32,10 @@
                donnent les mêmes empreintes (vérifié le 27/09) : toute différence vient du projet.
                --at t1,t2 : seulement ces instants, par hf snapshot (PNG RGBA exacts ; --garder <dossier> les garde).
   comparer   : compare deux fichiers d'empreintes image par image ; code 0 si tout est identique, 1 sinon (images différentes
-               groupées en plages). --diff <dossier> --images <ref>,<cand> (les deux MP4 ou dossiers PNG gardés) : carte des
+               groupées en plages). --decalage A:N (répétable, 28/09) : le candidat est la référence où l'on a INSÉRÉ N images
+               avant l'image A de la référence (outils/temps.py --decalages : « --decalage 758:92 » depuis l'échange du
+               prénom) : l'image r de la référence est comparée à l'image r + Σ N du candidat, les images insérées ne sont
+               comparées à rien ; --voulu a-b : plages de la RÉFÉRENCE où l'écart est voulu (rapportées, hors du code de sortie). --diff <dossier> --images <ref>,<cand> (les deux MP4 ou dossiers PNG gardés) : carte des
                écarts (max, nombre de pixels, boîte) de chaque image différente, en PNG.
 
 Usage type (le 9:16 ne doit pas bouger quand on touche au système de formats) :
@@ -174,15 +178,39 @@ def plages(cles):
     return out + autres
 
 
-def comparer(ref, cand, diff=None, images=None):
+def comparer(ref, cand, diff=None, images=None, decalages=None, voulu=None):
     A, B = json.loads(Path(ref).read_text())["images"], json.loads(Path(cand).read_text())["images"]
-    communes = sorted(set(A) & set(B), key=lambda c: (not c.isdigit(), int(c) if c.isdigit() else 0, c))
-    manquantes = sorted(set(A) ^ set(B))
-    cle = "md5" if all("md5" in A[c] and "md5" in B[c] for c in communes) else "sha256"
-    diffs = [c for c in communes if A[c].get(cle) != B[c].get(cle)]
-    print(f"{len(communes)} images comparées ; {len(diffs)} différentes ; {len(manquantes)} présentes d'un seul côté")
+    decs = sorted(decalages or [])
+    voulu = voulu or []
+
+    def vers_cand(c):                  # clé de la référence → clé du candidat (insertions de temps)
+        if not (decs and c.isdigit()):
+            return c
+        r = int(c)
+        return str(r + sum(n for a, n in decs if r >= a))
+    corr = {c: vers_cand(c) for c in A}
+    communes = sorted((c for c in A if corr[c] in B), key=lambda c: (not c.isdigit(), int(c) if c.isdigit() else 0, c))
+    vues = {corr[c] for c in communes}
+    inserees = sorted((k for k in B if k not in vues and k.isdigit()), key=int) if decs else []
+    manquantes = sorted([c for c in A if corr[c] not in B] + [k for k in B if k not in vues and k not in inserees])
+    cle = "md5" if all("md5" in A[c] and "md5" in B[corr[c]] for c in communes) else "sha256"
+    diffs_tout = [c for c in communes if A[c].get(cle) != B[corr[c]].get(cle)]
+    dans = lambda c: c.isdigit() and any(a <= int(c) <= b for a, b in voulu)
+    diffs = [c for c in diffs_tout if not dans(c)]
+    print(f"{len(communes)} images comparées ; {len(diffs)} différentes" + (f" (+ {len(diffs_tout) - len(diffs)} dans les plages voulues "
+          + ", ".join(f"{a}-{b}" for a, b in voulu) + ")" if voulu else "") + f" ; {len(manquantes)} présentes d'un seul côté"
+          + (f" ; {len(inserees)} images insérées du candidat non comparées ({', '.join(plages(inserees))})" if decs else ""))
     if diffs:
-        print("images différentes : " + ", ".join(plages(diffs)[:40]))
+        print("images différentes (numéros de la référence) : " + ", ".join(plages(diffs)[:40]))
+    if decs:
+        bornes = sorted({0, max((int(c) for c in A if c.isdigit()), default=0) + 1} | {a for a, _ in decs}
+                        | {x for a, b in voulu for x in (a, b + 1)})
+        for b0, b1 in zip(bornes, bornes[1:]):
+            L = [c for c in communes if c.isdigit() and b0 <= int(c) < b1]
+            if L:
+                nd = sum(1 for c in L if c in set(diffs_tout))
+                print(f"    référence {L[0]}-{L[-1]} ↔ candidat {corr[L[0]]}-{corr[L[-1]]} : {len(L) - nd} identiques, {nd} différentes"
+                      + (" (écart voulu)" if any(dans(c) for c in L) else ""))
     if manquantes:
         print("présentes d'un seul côté : " + ", ".join(manquantes[:20]))
     if diff and images and diffs:
@@ -194,7 +222,7 @@ def comparer(ref, cand, diff=None, images=None):
                 return next(a for n, a in images_video(src) if str(n) == c).astype(np.int16)
             return np.asarray(Image.open(src / meta[c]["fichier"]).convert("RGB")).astype(np.int16)
         for c in diffs[:60]:
-            a, b = lire(da, A, c), lire(db, B, c)
+            a, b = lire(da, A, c), lire(db, B, corr[c])
             d = np.abs(a - b).max(axis=2)
             ys, xs = np.nonzero(d)
             print(f"  image {c} : écart max {int(d.max())}, {len(xs)} pixels, boîte x {xs.min()}-{xs.max()} y {ys.min()}-{ys.max()}")
@@ -318,7 +346,13 @@ def main():
         empreindre(a[1], a[2], at=at, garder=garder)
         return 0
     d, im = opt("--diff"), opt("--images")
-    return comparer(a[1], a[2], diff=d, images=im)
+    decs = []
+    while "--decalage" in a:
+        v = opt("--decalage")
+        decs += [(int(x.split(":")[0]), int(x.split(":")[1])) for x in v.split(",") if x.strip()]
+    v = opt("--voulu")
+    voulu = [(int(x.split("-")[0]), int(x.split("-")[-1])) for x in (v or "").split(",") if x.strip()]
+    return comparer(a[1], a[2], diff=d, images=im, decalages=decs, voulu=voulu)
 
 
 if __name__ == "__main__":

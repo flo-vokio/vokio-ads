@@ -30,11 +30,14 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="47" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="50.066666" data-width="1080" data-height="1920">
   <div id="fond"></div>
 
-  <!-- Les sept scènes (plan v2, critique.json plan.chantiers[0] A ; finition du 27/09) : une seule piste, bout à bout, 47,00 s.
-       Finition : +1,70 s de lecture du SMS (s6 dure 10,05 s au lieu de 8,35) et +0,30 s de tenue finale (s7 : 5,60 s). -->
+  <!-- Les sept scènes (plan v2, critique.json plan.chantiers[0] A ; finition du 27/09) : une seule piste, bout à bout.
+       Finition : +1,70 s de lecture du SMS (s6 dure 10,05 s au lieu de 8,35) et +0,30 s de tenue finale (s7 : 5,60 s).
+       Échange du prénom (28/09) : 50,066666 s, 1 502 images ; s5 gagne 92 images (9,216666 s), s6 et s7 glissent d'autant.
+       data-start / data-duration de ces hôtes, de la racine et de la bande son sont POSÉS par outils/construire.py
+       (poser_hotes, d'après son/dialogue.json « insertions ») : ne pas les retoucher à la main. -->
   <div id="h-s1-sonnerie" class="clip" data-composition-id="s1-sonnerie" data-composition-src="compositions/s1-sonnerie.html"
        data-start="0" data-duration="4.6333" data-track-index="1" data-width="1080" data-height="1920"></div>
   <div id="h-s2-voix" class="clip" data-composition-id="s2-voix" data-composition-src="compositions/s2-voix.html"
@@ -47,21 +50,24 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   <div id="h-s4-agenda" class="clip" data-composition-id="s4-agenda" data-composition-src="compositions/s4-agenda.html"
        data-start="17.3" data-duration="7.8999" data-track-index="1" data-width="1080" data-height="1920"></div>
   <div id="h-s5-rendez-vous" class="clip" data-composition-id="s5-rendez-vous" data-composition-src="compositions/s5-rendez-vous.html"
-       data-start="25.2" data-duration="6.15" data-track-index="1" data-width="1080" data-height="1920"></div>
-  <!-- s6 : 10.0499 et non 10.05 (31,35 + 10,05 = 41,400000000000006 en flottant : même astuce que s4). -->
+       data-start="25.2" data-duration="9.216666" data-track-index="1" data-width="1080" data-height="1920"></div>
+  <!-- s6 : 10.0499 et non 10.05 (31,35 + 10,05 = 41,400000000000006 en flottant : même astuce que s4).
+       Débuts portés à 6 décimales sans changer d'image (construire.py borne_debut) : s6 34.416667 (une demi-image, 1033),
+       s7 44.466666 (tronqué : 44.466667 dépasserait 1334/30 et HyperFrames ne monterait s7 qu'à l'image 1335). -->
   <div id="h-s6-sms" class="clip" data-composition-id="s6-sms" data-composition-src="compositions/s6-sms.html"
-       data-start="31.35" data-duration="10.0499" data-track-index="1" data-width="1080" data-height="1920"></div>
+       data-start="34.416667" data-duration="10.0499" data-track-index="1" data-width="1080" data-height="1920"></div>
   <div id="h-s7-signature" class="clip" data-composition-id="s7-signature" data-composition-src="compositions/s7-signature.html"
-       data-start="41.4" data-duration="5.6" data-track-index="1" data-width="1080" data-height="1920"></div>
+       data-start="44.466666" data-duration="5.6" data-track-index="1" data-width="1080" data-height="1920"></div>
 
   <!-- Le point racine : animé UNIQUEMENT par la timeline ci-dessous, d'après DONNEES.point (lib/point.js). -->
   <div id="point" data-element="point" aria-hidden="true"></div>
 
   <!-- Bande son unique : assets/son/mix.wav = le master v2 de son/mix.py (vrai appel + nappe + bruitages + signature,
-       −14,0 LUFS, −1,7 dBTP, 48 kHz 24 bits stéréo, 47,000 s), identique octet pour octet à son/mix.wav (mix.py écrit les
+       −14,0 LUFS, −1,7 dBTP, 48 kHz 24 bits stéréo, 47,000 s ; à refaire sur le film de 50,07 s : les livrables portent
+       le mix hybride de $SON/son/hybride, posé par outils/livrer.py), identique octet pour octet à son/mix.wav (mix.py écrit les
        deux). Relance : son/signature.py puis son/mix.py --monde puis son/controle_son.py --images. La variante « monde »
        (son/mix-monde.wav) reste hors du film tant que Florian ne l'a pas écoutée. -->
-  <audio id="bande-son" src="assets/son/mix.wav" data-start="0" data-duration="47" data-track-index="10" data-volume="1"></audio>
+  <audio id="bande-son" src="assets/son/mix.wav" data-start="0" data-duration="50.066666" data-track-index="10" data-volume="1"></audio>
 </div>
 <script>
 (function () {

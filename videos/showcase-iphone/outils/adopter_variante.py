@@ -10,7 +10,8 @@
   note gardée dans l'entrée sous « _variante_adoptee » (datée), variante retirée (et « variantes » si vide), fichier réécrit en
   forme compacte (mise_en_page.ecrire) ; puis contrôle : la mise en page résolue du format SANS variante est exactement celle
   qu'on avait AVEC. Idempotent : une variante déjà adoptée (absente, clés déjà dans l'entrée) ne fait rien.
-  Ensuite : reconstruire le format (python3 outils/format.py <format> --entrees … --check) ; le 9:16 n'est jamais touché.
+  Ensuite : reconstruire le format (python3 outils/format.py <format> --check : dialogue et mots de l'arbre de travail ;
+  --entrees git:HEAD pour ceux du dernier commit) ; le 9:16 n'est jamais touché.
 """
 import argparse
 import copy
@@ -78,7 +79,7 @@ def main():
         M.ecrire(nom, d)
         raise SystemExit("contrôle échoué : la mise en page résolue diffère de la variante ; fichier restauré")
     print(f"→ mise-en-page/{nom} réécrit ; « {fmt} » résout désormais comme « {a.variante} ». Reconstruire : "
-          f"python3 outils/format.py {fmt} --entrees <…> --check")
+          f"python3 outils/format.py {fmt} --check")
     return 0
 
 

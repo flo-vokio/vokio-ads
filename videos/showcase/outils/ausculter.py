@@ -12,7 +12,8 @@
                                    ce qui existe dans TOUS les fichiers (1, 2) et PAS dans --sans (3) : la preuve d'un défaut
     python3 outils/ausculter.py contre H=d.wav --sans 3=c.wav [2=b.wav …] [--de 0 --a 15] [--mots …] [--seuil 10]
                                    ce que le NOUVEAU mix a et qu'aucune version validée n'a : le critère d'acceptation
-    python3 outils/ausculter.py reperes DOSSIER_STEMS --cues cues.json [--ref DOSSIER_STEMS_REF] [--fmax 8000] [--cible 6]
+    python3 outils/ausculter.py reperes DOSSIER_STEMS --cues cues.json [--ref DOSSIER_STEMS_REF] [--cues-ref cues_ref.json]
+                                   [--fmax 8000] [--cible 6] [--insertions son/dialogue.json]
                                    chaque petit son émerge-t-il du reste du mix (et autant que dans la référence) ?
 Chaque fichier peut porter un nom : « nom=chemin » (sinon le nom du fichier).
 
@@ -263,11 +264,24 @@ def contre(x, refs, de=0.0, a=15.0, seuil=10.0, ecart=5.0, plancher=-70.0, mots=
 
 
 # ── repères : un petit son émerge-t-il de ce qui l'entoure ? ───────────────
-def puissances_bandes(x, bandes=BANDES_REPERES, nfft=1024, pas=240):
+def puissances_bandes(x, bandes=BANDES_REPERES, nfft=1024, pas=240, debuts=None):
     """Puissance par trame (Hann 21 ms, pas 5 ms) et par bande, moyenne des deux canaux (linéaire, 0 dB = sinus pleine
-    échelle) : t (centres, s), P (trames, bandes)."""
+    échelle) : t (centres, s), P (trames, bandes). debuts (option, 28/09) : les débuts des trames en échantillons (une
+    grille alignée sur le film d'avant une insertion de temps : chronologie.debuts_trames) au lieu de k·pas."""
     x = L.stereo(x)
     w = np.hanning(nfft)
+    if debuts is not None:
+        debuts = np.asarray(debuts, dtype=np.int64)
+        f = np.fft.rfftfreq(nfft, 1 / SR)
+        masques = [(f >= f1) & (f < f2) for f1, f2 in bandes]
+        ref = (w.sum() / 2) ** 2 / 2
+        P = np.zeros((len(debuts), len(bandes)))
+        for i0 in range(0, len(debuts), 2000):
+            k = debuts[i0:i0 + 2000]
+            idx = np.arange(nfft)[None, :] + k[:, None]
+            S = sum(np.abs(np.fft.rfft(x[idx, c] * w, axis=1)) ** 2 for c in range(2)) / 2 / ref
+            P[i0:i0 + len(k)] = np.stack([S[:, m].sum(axis=1) for m in masques], axis=1)
+        return (debuts + nfft / 2) / SR, P
     nb = max(1, (len(x) - nfft) // pas + 1)
     f = np.fft.rfftfreq(nfft, 1 / SR)
     masques = [(f >= f1) & (f < f2) for f1, f2 in bandes]
@@ -317,14 +331,17 @@ def _libelle(b):
 
 
 def reperes(stems, cues, ref=None, ignorer=(), duree_defaut=0.25, duree_max=1.5, f_max=8000.0, cible_db=6.0,
-            actif_db=10.0, bandes=BANDES_REPERES, cibles_par_id=None):
-    """Voir REPÈRE. stems, ref : {couche: (n, 2)} ; cues : [{id, couche, t, fin?}]. Renvoie [{id, couche, de, a,
-    mix [dB par bande], ref [dB par bande], meilleure_mix, meilleure_ref (bande ≤ f_max), cible_db, ok}]."""
-    def tables(S):
-        T = {k: puissances_bandes(v, bandes) for k, v in S.items()}
+            actif_db=10.0, bandes=BANDES_REPERES, cibles_par_id=None, cues_ref=None, debuts=None):
+    """Voir REPÈRE. stems, ref : {couche: (n, 2)} ; cues : [{id, couche, t, fin?}] ; cues_ref (option) : les cues du film
+    de la référence, la fenêtre de la référence est alors celle du même id (un film où du temps a été inséré). Renvoie
+    [{id, couche, de, a, mix [dB par bande], ref [dB par bande], meilleure_mix, meilleure_ref (bande ≤ f_max), cible_db,
+    ok}]."""
+    par_id = {q["id"]: q for q in (cues_ref or [])}
+    def tables(S, d=None):
+        T = {k: puissances_bandes(v, bandes, debuts=d) for k, v in S.items()}
         tot = sum(p for _, p in T.values())
         return T, tot
-    Tm, totm = tables(stems)
+    Tm, totm = tables(stems, debuts)          # debuts : la grille du film actuel (alignée sur le film d'avant)
     Tr, totr = tables(ref) if ref else (None, None)
     crit = [i for i, b in enumerate(bandes) if b[1] <= f_max]
     out = []
@@ -340,9 +357,13 @@ def reperes(stems, cues, ref=None, ignorer=(), duree_defaut=0.25, duree_max=1.5,
         km = max(crit, key=lambda i: em[i])
         r["meilleure_mix"] = {"bande": _libelle(bandes[km]), "db": round(float(em[km]), 1)}
         cible = (cibles_par_id or {}).get(q["id"], cible_db)
-        if Tr and q["couche"] in Tr:
+        if Tr and q["couche"] in Tr and cues_ref is not None and q["id"] not in par_id:
+            r["ref"], r["meilleure_ref"] = None, None     # né dans ce film (absent des cues de la référence) : pas de
+            r["sans_reference"] = True                    # référence, la cible par défaut (avant : même fenêtre, −99 dB)
+        elif Tr and q["couche"] in Tr:
             tr, Pr = Tr[q["couche"]]
-            mr = trames_actives(tr, Pr, a, b, actif_db)
+            ar, br = fenetre_repere(par_id[q["id"]], duree_defaut, duree_max) if q["id"] in par_id else (a, b)
+            mr = trames_actives(tr, Pr, ar, br, actif_db)
             er = emergences(Pr, totr - Pr, mr)
             kr = max(crit, key=lambda i: er[i])
             r["ref"] = [round(float(v), 1) for v in er]
@@ -431,6 +452,8 @@ def main():
     ap.add_argument("--ecart", type=float, default=5.0)
     ap.add_argument("--cues", help="reperes : cues.json ({cues: [{id, couche, t, fin}]})")
     ap.add_argument("--ref", help="reperes : dossier des stems de référence")
+    ap.add_argument("--cues-ref", help="reperes : cues du film de la référence (fenêtre par id, si du temps a été inséré)")
+    ap.add_argument("--insertions", help="reperes : son/dialogue.json : trames alignées sur le film d'avant (comme mixer.py)")
     ap.add_argument("--ignorer", nargs="*", default=["fond-piece", "air-trajets"])
     ap.add_argument("--fmax", type=float, default=8000.0)
     ap.add_argument("--cible", type=float, default=6.0)
@@ -491,14 +514,21 @@ def main():
         import glob
         lire_d = lambda d: {Path(f).stem: L.lire(f) for f in sorted(glob.glob(f"{d}/*.wav"))}   # noqa: E731
         cues = json.loads(Path(a.cues).read_text())["cues"]
-        r = reperes(lire_d(a.fichiers[0]), cues, lire_d(a.ref) if a.ref else None, a.ignorer, f_max=a.fmax, cible_db=a.cible)
+        cues_ref = json.loads(Path(a.cues_ref).read_text())["cues"] if a.cues_ref else None
+        st_ = lire_d(a.fichiers[0])
+        deb = None
+        if a.insertions:                      # la grille des trames alignée sur le film d'avant (comme mixer.py)
+            import chronologie as CH
+            deb = CH.charger(a.insertions).debuts_trames(len(next(iter(st_.values()))), 240, 1024)
+        r = reperes(st_, cues, lire_d(a.ref) if a.ref else None, a.ignorer, f_max=a.fmax, cible_db=a.cible,
+                    cues_ref=cues_ref, debuts=deb)
         rapport = {"stems": a.fichiers[0], "ref": a.ref, "reperes": r}
         print(f"== {len(r)} repères, émergence de la meilleure bande ≤ {a.fmax:g} Hz (cible min({a.cible:g}, référence))")
         for q in r:
-            ref_ = f"réf {q['meilleure_ref']['db']:+6.1f} ({q['meilleure_ref']['bande']:>8s})  " if "ref" in q else ""
+            ref_ = f"réf {q['meilleure_ref']['db']:+6.1f} ({q['meilleure_ref']['bande']:>8s})  " if q.get("meilleure_ref") else ("sans réf.           " if q.get("sans_reference") else "")
             print(f"   {q['id']:24s} {q['de']:6.2f}-{q['a']:5.2f} {q['couche']:9s} {ref_}mix {q['meilleure_mix']['db']:+6.1f} "
                   f"({q['meilleure_mix']['bande']:>8s})  {'ok' if q['ok'] else 'ENTERRÉ'}   8-16k : "
-                  + (f"réf {q['ref'][-1]:+.1f} " if "ref" in q else "") + f"mix {q['mix'][-1]:+.1f}")
+                  + (f"réf {q['ref'][-1]:+.1f} " if q.get("ref") else "") + f"mix {q['mix'][-1]:+.1f}")
     elif a.cmd == "jointures":
         dia = json.loads(Path(a.dialogue).read_text())
         for nom, x in pistes:

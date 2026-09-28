@@ -185,83 +185,127 @@
   },
   {
    "n": 21,
-   "t": 26.1,
-   "image": 783.0,
-   "x": 740.0,
+   "t": 25.9,
+   "image": 777.0,
+   "x": 512.84,
    "y": 700.0,
    "ease": "power1.out",
-   "note": "il écrit « 09:00 Florian » et s'arrête 14 px après l'encre de « Florian » (783)"
+   "note": "il écrit « 09:00 » sous « Très bien. » et s'arrête dans le blanc qui précède « Florian » (777)"
+  },
+  {
+   "n": 21.1,
+   "t": 26.233333,
+   "image": 787.0,
+   "x": 512.84,
+   "y": 628.0,
+   "ease": "sine.inOut",
+   "note": "l'agente demande le prénom : il lève la plume au-dessus du créneau (787) ; « 09:00 » se lit en entier"
+  },
+  {
+   "n": 21.2,
+   "t": 28.066667,
+   "image": 842.0,
+   "x": 512.84,
+   "y": 628.0,
+   "note": "en suspens, immobile, jusqu'à « C'est » de la réponse (842)"
+  },
+  {
+   "n": 21.3,
+   "t": 28.266667,
+   "image": 848.0,
+   "x": 512.84,
+   "y": 700.0,
+   "ease": "sine.inOut",
+   "note": "il repose la plume là où il l'avait levée"
+  },
+  {
+   "n": 21.4,
+   "t": 28.7,
+   "image": 861.0,
+   "x": 682.0,
+   "y": 700.0,
+   "ease": "none",
+   "note": "il écrit « Florian » à vitesse constante (13.012 px par image) : l'encre de Flo·ri·an paraît sous sa voix"
+  },
+  {
+   "n": 21.5,
+   "t": 28.933333,
+   "image": 868.0,
+   "x": 740.0,
+   "y": 700.0,
+   "ease": "sine.out",
+   "note": "il s'arrête 14 px après l'encre de « Florian » (868)"
   },
   {
    "n": 22,
-   "t": 26.233333,
-   "image": 787.0,
+   "t": 29.066667,
+   "image": 872.0,
    "x": 740.0,
    "y": 640.0,
    "ease": "power2.out",
-   "note": "lève la plume : 60 px au-dessus de la ligne du bloc (787), au-dessus de l'encre du bloc"
+   "note": "lève la plume : 60 px au-dessus de la ligne du bloc (872), au-dessus de l'encre du bloc"
   },
   {
    "n": 23,
-   "t": 26.7,
-   "image": 801.0,
+   "t": 29.533333,
+   "image": 886.0,
    "x": 311.74,
    "y": 661.75,
    "ease": "sine.inOut",
-   "note": "dans la gouttière des heures, sur la ligne 09:00, là où il frappait les heures (801)"
+   "note": "dans la gouttière des heures, sur la ligne 09:00, là où il frappait les heures (886)"
   },
   {
    "n": 24,
-   "t": 27.25,
-   "image": 817.5,
+   "t": 30.316667,
+   "image": 909.5,
    "x": 311.74,
    "y": 661.75
   },
   {
    "n": 25,
-   "t": 27.366667,
-   "image": 821.0,
+   "t": 30.433333,
+   "image": 913.0,
    "x": 311.74,
    "y": 667.75,
    "ease": "power2.in",
-   "note": "hochement de 6 px sur la voyelle de « Florian » (27,355 → image 821), dans la gouttière"
+   "note": "hochement de 6 px sur la voyelle de « Florian » que l'agente répète (image 913), dans la gouttière : il confirme le nom écrit"
   },
   {
    "n": 26,
-   "t": 27.483333,
-   "image": 824.5,
+   "t": 30.55,
+   "image": 916.5,
    "x": 311.74,
    "y": 661.75,
    "ease": "power2.out"
   },
   {
    "n": 27,
-   "t": 31.1,
-   "image": 933.0,
+   "t": 34.166667,
+   "image": 1025.0,
    "x": 311.74,
    "y": 661.75,
-   "note": "il attend dans la gouttière jusqu'à la sortie du dernier sous-titre de s5 (image 933) ; trajet s6 ensuite"
+   "note": "il attend dans la gouttière jusqu'à la sortie du dernier sous-titre de s5 (image 1025) ; trajet s6 ensuite"
   },
   {
    "n": 28,
-   "t": 34.566667,
-   "image": 1037.0,
+   "t": 37.633333,
+   "image": 1129.0,
    "x": 168.99,
    "y": 1283.994,
    "note": "fin du trajet s6 (pistes.trajets[1]) : sous la queue de la bulle, d'où le SMS naîtra"
   },
   {
    "n": 29,
-   "t": 41.0,
-   "image": 1230.0,
+   "t": 44.066667,
+   "image": 1322.0,
    "x": 168.99,
    "y": 1283.994,
    "note": "immobile ; secousse du vibreur 1100 → 1114 (pistes.secousses) ; version iPhone : part AVEC le téléphone (41,00, début de sa sortie ; le plan d'origine : « il quitte la bulle pendant que le téléphone s'en va »), l'iPhone restant opaque tant qu'il n'a pas bougé"
   },
   {
    "n": 30,
-   "t": 41.5,
-   "image": 1245.0,
+   "t": 44.566667,
+   "image": 1337.0,
    "x": 119.319,
    "y": 892,
    "ease": "power2.inOut",
@@ -273,8 +317,8 @@
   },
   {
    "n": 31,
-   "t": 42.2,
-   "image": 1266.0,
+   "t": 45.266667,
+   "image": 1358.0,
    "x": 918.328,
    "y": 892,
    "ease": "sine.inOut",
@@ -282,16 +326,16 @@
   },
   {
    "n": 32,
-   "t": 42.283333,
-   "image": 1268.5,
+   "t": 45.35,
+   "image": 1360.5,
    "x": 918.328,
    "y": 892,
    "note": "demi-image : il bouge déjà à l'image du la"
   },
   {
    "n": 33,
-   "t": 42.533333,
-   "image": 1276.0,
+   "t": 45.6,
+   "image": 1368.0,
    "x": 700.797,
    "y": 508,
    "ease": "power1.out",
@@ -303,8 +347,8 @@
   },
   {
    "n": 34,
-   "t": 42.7,
-   "image": 1281.0,
+   "t": 45.766667,
+   "image": 1373.0,
    "x": 700.797,
    "y": 504,
    "ease": "sine.inOut",
@@ -312,8 +356,8 @@
   },
   {
    "n": 35,
-   "t": 42.9,
-   "image": 1287.0,
+   "t": 45.966667,
+   "image": 1379.0,
    "x": 700.797,
    "y": 618,
    "ease": "power2.in",
@@ -321,8 +365,8 @@
   },
   {
    "n": 36,
-   "t": 47.0,
-   "image": 1410.0,
+   "t": 50.066667,
+   "image": 1502.0,
    "x": 700.797,
    "y": 618,
    "note": "tenue jusqu'à la fin"
@@ -1305,8 +1349,8 @@
       936.0
      ],
      "a": [
-      112.0,
-      1136.0
+      112,
+      1136
      ]
     },
     {
@@ -1320,7 +1364,7 @@
       1136.0
      ],
      "a": [
-      112.0,
+      112,
       1144.0
      ]
     },
@@ -1335,7 +1379,7 @@
       1144.0
      ],
      "a": [
-      112.0,
+      112,
       1136.0
      ]
     },
@@ -1350,7 +1394,7 @@
       1136.0
      ],
      "a": [
-      112.0,
+      112,
       1126.0
      ]
     }
@@ -1358,10 +1402,10 @@
   },
   {
    "nom": "s6",
-   "image0": 933,
-   "image1": 1037,
-   "t0": 31.1,
-   "t1": 34.566667,
+   "image0": 1025,
+   "image1": 1129,
+   "t0": 34.166667,
+   "t1": 37.633333,
    "x": [
     311.74,
     316.447,
@@ -1579,8 +1623,8 @@
    "journal": [
     {
      "vers": "s6 « recevrez »",
-     "depart": 933,
-     "arrivee": 945,
+     "depart": 1025,
+     "arrivee": 1037,
      "forme": "droit",
      "pas_max": 58.1,
      "de": [
@@ -1594,8 +1638,8 @@
     },
     {
      "vers": "s6 « SMS »",
-     "depart": 954,
-     "arrivee": 962,
+     "depart": 1046,
+     "arrivee": 1054,
      "forme": "droit",
      "pas_max": 52.6,
      "de": [
@@ -1609,8 +1653,8 @@
     },
     {
      "vers": "s6 « confirmation. »",
-     "depart": 966,
-     "arrivee": 973,
+     "depart": 1058,
+     "arrivee": 1065,
      "forme": "descente",
      "pas_max": 52.9,
      "de": [
@@ -1624,8 +1668,8 @@
     },
     {
      "vers": "s6 : sous la queue de la bulle, où le SMS naîtra",
-     "depart": 1017,
-     "arrivee": 1037,
+     "depart": 1109,
+     "arrivee": 1129,
      "forme": "droit",
      "pas_max": 79.4,
      "de": [
@@ -2417,8 +2461,8 @@
    },
    {
     "nom": "s6",
-    "t0": 31.1,
-    "t1": 34.566667
+    "t0": 34.166667,
+    "t1": 37.633333
    }
   ],
   "suiveur": {
@@ -2434,8 +2478,8 @@
    },
    {
     "piste": "s6",
-    "t0": 36.666667,
-    "t1": 37.133333
+    "t0": 39.733333,
+    "t1": 40.2
    }
   ]
  },
@@ -2484,15 +2528,15 @@
    "sx": 1.03,
    "sy": 0.97
   },
-  "1287": {
+  "1379": {
    "sx": 1.18,
    "sy": 0.84
   },
-  "1288": {
+  "1380": {
    "sx": 1.07,
    "sy": 0.94
   },
-  "1289": {
+  "1381": {
    "sx": 1.02,
    "sy": 0.98
   }
@@ -2503,8 +2547,8 @@
   "max": 0.25,
   "sans": [
    [
-    41.5,
-    42.2
+    44.566667,
+    45.266667
    ]
   ],
   "definition": "v = |pos(t + 1/60) − pos(t − 1/60)| en px PAR IMAGE (trajectoire sans secousse) ; si v > seuil et t hors des fenêtres « sans » : long = 1 + min(max ; (v − seuil)/pente), sx = long, sy = 1/√long, rot = atan2(vy, vx) ; sinon 1, 1, 0. max 0,25 : l'ellipse ne dépasse jamais 55 × 39 px. « sans » : l'écriture de « Vokıo » (plume_mot), le point y reste rond comme une plume. La table ecrasements (par image) est prioritaire, rot 0, centrée."
@@ -2523,7 +2567,9 @@
   "B": {
    "x0": 366.5,
    "cy": 700.0,
-   "xf": 740.0
+   "xf": 740.0,
+   "x_attente": 512.84,
+   "y_levee": 628.0
   },
   "S": {
    "x": 168.99,

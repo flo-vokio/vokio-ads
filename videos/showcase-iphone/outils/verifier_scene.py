@@ -26,10 +26,11 @@
    7. plume  (s7-signature seulement) plume.py dans chaque format : l'encre de « Vokıo » suit la plume (rien devant, tout derrière,
             bord doux, mot entier à l'arrivée).
    8. bilan  D/bilan.json (D/bilan-partiel.json si --etapes en saute) + tableau imprimé ; code 0 si tout passe, 1 sinon.
-  Réf. et entrées : git:HEAD par défaut (le 9:16 tel que commité, dialogue et mots du commit) ; tant que l'équipe son n'a pas
-  commité son dialogue, passer --ref git:aa4dd24 --entrees git:aa4dd24. --vite : identité aux instants clés seulement.
+  Réf. et entrées : git:HEAD par défaut (le 9:16 tel que commité, dialogue et mots du commit) ; depuis l'échange du prénom
+  (28/09), le commit doit porter le dialogue de 50,07 s (AP, CP) : construire.py refuse celui de 47 s ; avant ce commit :
+  --entrees courant (l'arbre de travail) et --ref <dossier ou révision du film de 50 s>. --vite : identité aux instants clés seulement.
   --etapes : n'en relancer que certaines (les copies D/c9 et D/f<format> d'une passe précédente sont réutilisées).
-  Exemple : verifier_scene.py s5-rendez-vous --dossier /tmp/x/s5 --ref git:aa4dd24 --entrees git:aa4dd24 \\
+  Exemple : verifier_scene.py s5-rendez-vous --dossier /dev/shm/x/s5 \\
                               --mp4 /root/vokio-uploads/videos/showcase/le-point-sur-le-i-iphone.mp4
 Idempotent (D est réécrit) ; les hf snapshot passent sous flock /tmp/hf-rendu.lock (revue_scene.py).
 """
@@ -102,7 +103,7 @@ def main():
     A.add_argument("--dossier", required=True)
     A.add_argument("--format", default="16x9")
     A.add_argument("--ref", default="git:HEAD")
-    A.add_argument("--entrees", default="git:HEAD")
+    A.add_argument("--entrees", default="git:HEAD", help="git:<rév> ou un dossier (entrées figées), ou « courant » : le dialogue et les mots de l'arbre de travail (format.py sans --entrees)")
     A.add_argument("--mp4")
     A.add_argument("--variante", action="append", default=[])
     A.add_argument("--plus", help="instants ajoutés à la planche du format (s, séparés par des virgules)")
@@ -128,7 +129,7 @@ def main():
 
     # 1. le 9:16 ne bouge pas
     if "9x16" in E:
-        code, fin = lancer([PY, OUT / "format.py", "9x16", "--dossier", c9, "--entrees", a.entrees], D / "c9.log")
+        code, fin = lancer([PY, OUT / "format.py", "9x16", "--dossier", c9] + entrees(a), D / "c9.log")
         note("9:16 copie de contrôle", code == 0, resume=fin[-1] if fin else "", journal=str(D / "c9.log"))
         cmd = [PY, OUT / "revue_scene.py", "identite", c9, a.scene, a.ref, "--images", D / "identite-9x16",
                "--json", D / "identite-9x16.json"] + ([] if a.vite else ["--toutes"])
@@ -195,8 +196,13 @@ def main():
     return 0 if ok else 1
 
 
+def entrees(a):
+    """options d'entrées de format.py : « courant » = l'arbre de travail (aucune option)"""
+    return [] if a.entrees in ("", "courant") else ["--entrees", a.entrees]
+
+
 def etape_format(a, D, fx, note):
-    cmd = [PY, OUT / "format.py", a.format, "--dossier", fx, "--entrees", a.entrees, "--check"] \
+    cmd = [PY, OUT / "format.py", a.format, "--dossier", fx, "--check"] + entrees(a) \
         + sum((["--variante", v] for v in a.variante), [])
     code, fin = lancer(cmd, D / f"f{a.format}.log")
     note(f"{a.format} construit + hf check", code == 0, resume=next((ln for ln in fin if "hf check" in ln), fin[-1] if fin else ""),

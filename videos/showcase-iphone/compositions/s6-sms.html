@@ -3,7 +3,10 @@
 <head><meta charset="UTF-8"><title>s6-sms</title></head>
 <body>
 <!--
-  Sous-composition s6-sms · VERSION iPHONE (27/09) · film 31,35 → 41,40 s (hôte 10,0499 s, images 941 à 1241), hôte #h-s6-sms.
+  Sous-composition s6-sms · VERSION iPHONE (27/09) · film 34,416667 → 44,466667 s (hôte 10,0499 s, images 1033 à 1333), hôte #h-s6-sms.
+  ÉCHANGE DU PRÉNOM (28/09) : la scène est celle du film de 47 s, décalée de 92 images (DONNEES.insertions, outils/temps.py) ;
+  les instants et images cités ci-dessous sont ceux du film de 47 s (31,35 → 41,40, images 941 à 1241 : + 3,066667 s, + 92
+  images) ; le script les lit dans DONNEES ou les porte par TEXTE.decaler (941 → 1033, 1078 → 1170, 1100 → 1192).
   Demande de Florian (27/09) : « un screenshot de téléphone plus réaliste type iPhone ». Le SMS arrive dans un iPhone 16 Pro
   (titane naturel), app Messages d'iOS 26, mode clair : un ÉCART ASSUMÉ à la règle 2 (« aucun chrome factice »), à présenter
   comme tel à Florian ; la mention d'iOS « SMS / Aujourd'hui 16:55 » garde sa taille réelle (11 pt = 23,4 px < 36) : dérogation
@@ -185,8 +188,10 @@
   function els(pose) { return pose.mots.map(function (u) { return u.el; }); }
   exiger(window.POINT && typeof POINT.etat === "function" && typeof POINT.secousse === "function",
          "window.POINT absent (lib/point.js est chargé par la racine)");
-  exiger(S.image_debut === 941 && S.image_fin === 1242, "scène attendue sur les images 941 à 1241 (" + S.image_debut + " → " + S.image_fin + ")");
-  const derniereImage = enImage(S.image_fin - 1);                             // 41,366667 : image 1241
+  // images du film de 47 s portées dans le film courant (TEXTE.decaler, + 92 depuis l'échange du prénom)
+  exiger(S.image_debut === TEXTE.decaler(941) && S.image_fin === TEXTE.decaler(1242), "scène attendue sur les images " + TEXTE.decaler(941) +
+         " à " + (TEXTE.decaler(1242) - 1) + " (" + S.image_debut + " → " + S.image_fin + ")");
+  const derniereImage = enImage(S.image_fin - 1);                             // 44,433333 : image 1333 (41,366667 : 1241 du film de 47 s)
 
   // ── Réglages de la scène (finition du 27/09 ; version iPhone : FONDU_SORTIE) ──
   const Y_ENTREE = D.geometrie.s6.y_entree != null ? D.geometrie.s6.y_entree : 380;   // entrée : +380 → 0, power3.out, en apparaissant (≤ 92 px par image)
@@ -258,11 +263,12 @@
          "le clip-path initial du SMS n'est pas centré sur le point");
 
   // ── 1. Le point de la racine, relu (la scène ne l'anime pas ; elle vérifie qu'il fait ce qu'elle attend) ──
-  const T_BULLE = EV.bulle_et_vibreur.t;                                      // 36,666667 : image 1100
+  const T_BULLE = EV.bulle_et_vibreur.t;                                      // 39,733333 : image 1192 (1100 du film de 47 s)
   const N_BULLE = EV.bulle_et_vibreur.image;
   const S6 = D.secousses.s6;
-  exiger(N_BULLE === 1100 && S6.image0 === N_BULLE, "le vibreur et la bulle ne partent pas ensemble de l'image 1100");
-  exiger(EV.silence_numerique.images[0] === 1078 && EV.silence_numerique.images[1] === N_BULLE, "silence numérique ≠ 1078 → 1099");
+  exiger(N_BULLE === TEXTE.decaler(1100) && S6.image0 === N_BULLE, "le vibreur et la bulle ne partent pas ensemble de l'image " + TEXTE.decaler(1100));
+  exiger(EV.silence_numerique.images[0] === TEXTE.decaler(1078) && EV.silence_numerique.images[1] === N_BULLE,
+         "silence numérique ≠ " + TEXTE.decaler(1078) + " → " + (N_BULLE - 1));
   exiger(EV.depart_stylo.image === EV.telephone_sortie.images[0], "le point ne part pas avec le téléphone (image " + EV.depart_stylo.image + ")");
   for (let n = EV.arrivee_bulle.image; n <= EV.depart_stylo.image; n++) {                        // 1037 → 1230
     const e = POINT.etat(enImage(n));

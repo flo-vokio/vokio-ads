@@ -14,9 +14,9 @@
   touché : une variante ne s'applique que si on la nomme (format.py --variante <scène>=<nom>).
 Recette d'une variante en quatre commandes :
     python3 outils/variante.py s6-sms 16x9-haut --poser telephone.x0=770 telephone.haut=20 --note "…"
-    python3 outils/format.py 16x9 --variante s6-sms=16x9-haut --dossier /dev/shm/v --entrees git:aa4dd24 --check --planche
-    python3 outils/verifier_scene.py s6-sms --dossier /dev/shm/vs --variante s6-sms=16x9-haut --ref git:aa4dd24 --entrees git:aa4dd24
-    python3 outils/adopter_variante.py s6-sms 16x9-haut --go      (puis python3 outils/format.py 16x9 --entrees … --check)
+    python3 outils/format.py 16x9 --variante s6-sms=16x9-haut --dossier /dev/shm/v --check --planche
+    python3 outils/verifier_scene.py s6-sms --dossier /dev/shm/vs --variante s6-sms=16x9-haut --ref git:HEAD
+    python3 outils/adopter_variante.py s6-sms 16x9-haut --go      (puis python3 outils/format.py 16x9 --check)
 """
 import argparse
 import copy

@@ -121,6 +121,11 @@ def recoupe(b, z):
     """La boîte b [x0, y0, x1, y1] recoupe-t-elle la boîte z (bords exclus) ?"""
     return b[0] < z[2] and z[0] < b[2] and b[1] < z[3] and z[1] < b[3]
 FPS, N_IMAGES, DUREE = D["fps"], D["images"], D["duree"]
+# 28/09, insertions de temps (outils/temps.py) : les images en dur de ce script sont celles du film de BASE (47,00 s) ; BI les porte
+# dans le film courant d'après DONNEES.insertions (+ 92 depuis l'image 758 : l'échange du prénom). Sans insertion : l'identité.
+sys.path.insert(0, str(PROJET / "outils"))
+import temps  # noqa: E402
+BI = temps.Insertions(D.get("insertions", []), FPS).image
 EV = D["evenements"]
 C = D["couleurs"]
 hexrgb = lambda h: np.array([int(h[k:k + 2], 16) for k in (1, 3, 5)], float)
@@ -243,7 +248,7 @@ dessus = [n for n in range(g0_ + 1, g1_ + 1) if RESOLU[n]["x_sans"] + R_FILM > A
 note("D8 après l'écriture, le point quitte le bloc par-dessus son encre et attend dans la gouttière des heures (09:00)",
      not gout and not dessus,
      {"gouttiere": [XA, Y9], "images": [g1_, IM("depart_gouttiere")], "hors_gouttiere": gout[:8], "sur_l_encre_du_bloc": dessus[:8],
-      "image_821": [RESOLU[821]["x_sans"], RESOLU[821]["y_sans"]]})
+      f"image_{IM('signe_florian')}": [RESOLU[IM("signe_florian")]["x_sans"], RESOLU[IM("signe_florian")]["y_sans"]]})
 
 # ═════════════════════════════ HF. Rapports hf check ═════════════════════════════
 hf = {}
@@ -277,15 +282,18 @@ note("DOM1 éléments simultanés ≤ 3 (toutes les images)", not trop and not D
                    "erreurs_page": DOM["erreurs_page"]})
 
 petits, bas, marges, mono, prudence_textes = set(), [], set(), set(), {}
-# VERSION iPHONE (27/09) : UNE dérogation à la règle 5 (texte ≥ 36 px), PROPOSÉE et NON VALIDÉE par Florian : la mention
+# VERSION iPHONE (27/09) : UNE dérogation à la règle 5 (texte ≥ 36 px), PROPOSÉE le 27/09, VALIDÉE le 28/09 : la mention
 # d'horodatage d'iOS au-dessus de la bulle (« SMS / Aujourd’hui 16:55 »), à sa taille réelle (11 pt de l'écran = 23,4 px),
 # pour que l'écran ressemble à une vraie capture (demande du 27/09 : « un screenshot de téléphone plus réaliste type
-# iPhone »). Elle n'est PAS tue : chaque passe l'affiche « [À VALIDER] » et la range dans rapport["a_valider"]. Si Florian
-# la refuse : supprimer #s6-mention de compositions/s6-sms.html et vider MENTION_IOS. Le SMS, le nom de l'expéditeur et
+# iPhone »). Elle n'est PAS tue : chaque passe la rapporte (DOM2-derogation, rapport["derogations_validees"]). Pour la
+# retirer : supprimer #s6-mention de compositions/s6-sms.html et vider MENTION_IOS. Le SMS, le nom de l'expéditeur et
 # l'heure de la barre d'état font 17 pt = 36,1 px et restent soumis à la règle.
 K_IPHONE = D["geometrie"]["s6"]["pt"]
 MENTION_IOS = {"SMS", "Aujourd’hui", "16:55"}
-DEROGATION_MENTION_IOS = {"regle": f"règle 5 du brief (texte ≥ {CORPS_MIN} px en {FMT['nom']})", "statut": "proposée le 27/09, À VALIDER par Florian",
+# 28/09 : VALIDÉE par Florian (« l'horodatage iOS 11 pt est validé ») : elle n'est plus « À VALIDER », elle est rapportée
+# dans DOM2 comme dérogation validée (rapport["derogations_validees"]), et le contrôle échoue si elle déborde de son objet
+# (autre texte, autre corps que 11 pt réels).
+DEROGATION_MENTION_IOS = {"regle": f"règle 5 du brief (texte ≥ {CORPS_MIN} px en {FMT['nom']})", "statut": "proposée le 27/09, VALIDÉE par Florian le 28/09",
                           "objet": f"mention d'horodatage d'iOS « SMS / Aujourd’hui 16:55 », 11 pt réels = {11 * K_IPHONE:.1f} px (s6, version iPhone)"}
 derogation_iphone = set()
 
@@ -325,7 +333,10 @@ note(f"DOM2 textes (corps ≥ {CORPS_MIN}, aucun texte au repos en zone interdit
       "etiquettes_capture": {"corps_px_film": ep["corps_px_film"], "hauteur_encre_chiffres": ep["hauteur_encre_chiffres"],
                              "capitales": ep["capitales"]}})
 if derogation_iphone:
-    a_valider(f"DOM2-derogation texte < {CORPS_MIN} px", dict(DEROGATION_MENTION_IOS, textes_vus=sorted(derogation_iphone)))
+    rapport.setdefault("derogations_validees", {})[f"DOM2-derogation texte < {CORPS_MIN} px"] = dict(
+        DEROGATION_MENTION_IOS, textes_vus=sorted(derogation_iphone))
+    note(f"DOM2-derogation texte < {CORPS_MIN} px (horodatage iOS, 11 pt réels : validée par Florian le 28/09)",
+         {t for t, _ in derogation_iphone} <= MENTION_IOS, dict(DEROGATION_MENTION_IOS, textes_vus=sorted(derogation_iphone)))
 
 # durée de lecture de chaque page posée par TEXTE.poser
 lectures, courtes = [], []
@@ -431,11 +442,12 @@ preuve = {
 ok_v = (ment.get("s4-agenda") == MENTION and ment.get("s5-rendez-vous") == MENTION and sms_v2 == sms_v1
         and re.fullmatch(r"[A-Za-z0-9 ]{1,11}", expediteur) and expediteur == "Vokio"
         and bulle_vue and min(bulle_vue) >= IM("bulle_et_vibreur") > IM("raccroche")
-        and abs(ex["C4"]["decalage"] - ex["A4"]["decalage"]) < 1e-9 and abs(ex["C4"]["decalage"] + 41.07) < 0.005)
+        and abs(ex["C4"]["decalage"] - ex["A4"]["decalage"]) < 1e-9 and abs(ex["C4"].get("decalage_base", ex["C4"]["decalage"]) + 41.07) < 0.005)
 note("V1 vérité (mention, SMS = gabarit corrigé, expéditeur réel « Vokio », SMS après le raccroché, C4 à −41,07)", ok_v,
      {"mention": ment, "sms_gabarit_corrige": sms_v2 == sms_v1, "sms": sms_v2, "expediteur": expediteur,
       "bulle_visible_des_l_image": min(bulle_vue) if bulle_vue else None, "raccroche": IM("raccroche"),
       "decalages_A4_C4": [ex["A4"]["decalage"], ex["C4"]["decalage"]],
+      "decalages_de_base_A4_C4 (film de 47 s)": [ex["A4"].get("decalage_base"), ex["C4"].get("decalage_base")],
       "mots_a_majuscule_rendus": majuscules, "preuve": preuve})
 
 # ═════════════════════════════ MP4 : décodage image par image ═════════════════════════════
@@ -479,9 +491,11 @@ def masque_point(n, marge):
 mots_dom = DOM["mots"]
 for w in mots_dom:
     w["serie"] = {}
-CLES = sorted({0, 1, 5, 12, 26, 29, 126, 127, 137, 139, 150, 165, 199, 241, 255, 300, 430, 516, 534, 555, 616, 620, 643, 666, 705, 731,
-               762, 783, 787, 795, 801, 821, 935, 945, 973, 1017, 1037, 1054, 1065, 1076, 1100, 1105, 1114, 1150, 1230, 1238,
-               1245, 1250, 1255, 1260, 1266, 1276, 1287, 1290, 1311, 1340, N_IMAGES - 1}
+CLES = sorted({BI(k) for k in (0, 1, 5, 12, 26, 29, 126, 127, 137, 139, 150, 165, 199, 241, 255, 300, 430, 516, 534, 555, 616, 620, 643,
+                                666, 705, 731, 762, 821, 935, 945, 973, 1017, 1037, 1054, 1065, 1076, 1100, 1105, 1114, 1150, 1230,
+                                1238, 1245, 1250, 1255, 1260, 1266, 1276, 1287, 1290, 1311, 1340)} | {N_IMAGES - 1}
+              # l'échange du prénom (s5, images du film courant, lues dans les événements quand ils existent)
+              | {n for k in ("plume_levee", "plume_suspendue", "plume_reposee", "ecriture_nom") if k in EV for n in EV[k]["images"]}
               | {IM(k) for k in ("decroche", "lumiere", "depart_agenda", "arrivee_agenda", "contact_neuf", "contact_dix", "contact_onze",
                                  "contact_retour_neuf", "ecriture_debut", "ecriture_fin", "signe_florian", "arrivee_bulle", "raccroche",
                                  "bulle_et_vibreur", "signature_la", "signature_sol", "signature_re_contact")}
@@ -578,7 +592,7 @@ while True:
             w["serie"][n] = int(((gris[y0:y1, x0:x1] < 201) & ~exclu[y0:y1, x0:x1]).sum())
     if n in IMAGES_POINT:
         points[n] = couverture(img, n)
-    # solaire hors du point (bloc admis de 762 à 941, dans sa boîte)
+    # solaire hors du point (bloc admis de ecriture_debut à la sortie de l'agenda, dans sa boîte : 762 à 1033 depuis le 28/09)
     if sol.any():
         hors = sol & ~masque_point(n, 3)
         if IM("ecriture_debut") <= n <= IMS("agenda_sort")[1]:
@@ -754,7 +768,7 @@ note("I2 plan immobile sur le silence numérique (MP4 : barycentre du point à 0
      {"images": [s0, s1], "etendue_barycentre_px": etendue, "ecart_max_niveaux_zone_81px": ecart_zone81,
       "ecart_max_niveaux_coeur_mp4 (information)": ecart_disque, "source_sans_perte": source_i2,
       "telephone_monte_pendant_le_silence": ({"telephone_monte": IMS("telephone_monte"), "silence": [s0, s1]} if tel_silence else False)})
-note("I3 aucun pixel solaire hors du point (bloc admis de 762 à 941)", not solaire_hors, solaire_hors[:12] or "aucun")
+note(f"I3 aucun pixel solaire hors du point (bloc admis de {IM('ecriture_debut')} à {IMS('agenda_sort')[1]})", not solaire_hors, solaire_hors[:12] or "aucun")
 note("I4 le ı sans point de la fin d'écriture au ré", not i_avec_point,
      i_avec_point[:10] or f"aucun pixel solaire sur le point du ı de {IMS('plume_mot')[1]} à {N_RE - 1}")
 xmax_s2 = max((x for _, x in s2_droite), default=None)
@@ -1018,7 +1032,7 @@ pl = {"1 image / s": planche(list(range(0, N_IMAGES, 30)), SORTIE / "planche-1s.
       }
 # vues à la taille réelle d'affichage : 393 pt (fil en portrait) ; en paysage aussi 852 pt (iPhone tenu en paysage, plein écran)
 for _vue in ([393] if H > W else [852, 393]):
-    pl[f"vue téléphone {_vue} px"] = planche([12, 127, 300, 430, 600, 705, 821, 973, 1150, N_RE, N_IMAGES - 1],
+    pl[f"vue téléphone {_vue} px"] = planche([BI(k) for k in (12, 127, 300, 430, 600, 705, 821, 973, 1150)] + [N_RE, N_IMAGES - 1],
                                               SORTIE / f"vue-telephone-{_vue}.png", 6 if H > W else 3, _vue / W)
 for b in RACCORDS:
     pl[f"raccord-{b}"] = planche(list(range(b - 3, b + 3)), SORTIE / f"raccord-{b}.png", 6, 0.3)
@@ -1182,14 +1196,17 @@ def attaque_adaptee(x, t, note, fenetre=0.010):
 
 CUES = {c["id"]: c for c in json.loads((PROJET / "son" / "cues.json").read_text())["cues"]}
 STEMS = {s: pcm(PROJET / "son" / "stems" / f"{s}.wav") for s in ("sfx", "signature", "nappe")}
-T_SOL_ECR = round(T("ecriture_debut") + d_sol, 6)
+# le la · sol de l'écriture (son/mix.py T["la_rdv"]) : au début de l'écriture dans le film de 47 s ; depuis l'échange du
+# prénom (28/09), le sol sur la dernière lettre de « Florian » (ecriture_fin) et le la 0,24 s avant
+T_LA_ECR = round(T("ecriture_fin") - d_sol, 6) if "ecriture_nom" in EV else T("ecriture_debut")
+T_SOL_ECR = round(T_LA_ECR + d_sol, 6)
 attendus = [  # (nom, id du cue, instant attendu lu dans DONNEES, détecteur)
     ("décroché", "clic-decroche", T("decroche"), None),
     ("toucher 09:00", "tap-9h", T("contact_neuf"), None),
     ("toucher 10:00", "tap-10h", T("contact_dix"), None),
     ("toucher 11:00", "tap-11h", T("contact_onze"), None),
     ("retour 09:00", "tap-retour-9h", T("contact_retour_neuf"), None),
-    ("écriture, la", "cloche-la-rdv", T("ecriture_debut"), None),
+    ("écriture, la", "cloche-la-rdv", T_LA_ECR, None),
     ("écriture, sol", "cloche-sol-rdv", T_SOL_ECR, "sol"),
     ("raccroché", "raccroche", T("raccroche"), None),
     ("vibreur", "vibreur", T("bulle_et_vibreur"), None),

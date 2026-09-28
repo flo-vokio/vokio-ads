@@ -216,6 +216,26 @@ def main():
     florian = {"x0": fx(fb[0] + ox), "y0": fy(fb[1] + oy), "x1": fx(fb[2] + ox), "y1": fy(fb[3] + oy)}
     fl_dom = geo_ap["florian"]
     assert abs((fb[2] + ox) - fl_dom["x1"] * ECH) < 8, (fb[2] + ox, fl_dom)   # encre ≈ avance DOM − approche
+    # 5 bis (28/09, l'échange du prénom) : l'encre de « 09:00 » (70 % d'opacité : couverture ≈ 0,7, la bordure du bloc ≈ 0,2)
+    # et les colonnes d'encre de chaque lettre de « Florian » : le point écrit l'heure, s'arrête dans le blanc qui les sépare
+    # (plume levée pendant la question), puis écrit le nom sous sa voix (construire.py, choregraphie_s5)
+    ohx = int(b_cap[0]) + 20
+    ch = couverture(ap[int(b_cap[1]) + 10:int(b_cap[3]) - 4, ohx:int(fb[0] + ox) - 2], FOND_BLOC, ENCRE_BLOC)
+    ch[ch < 0.35] = 0
+    hb = boite_encre(ch, seuil=0.35)
+    heure = {"x0": fx(hb[0] + ohx), "y0": fy(hb[1] + oy), "x1": fx(hb[2] + ohx), "y1": fy(hb[3] + oy)}
+    cmf = cb.max(axis=0)
+    cols = np.nonzero(cmf > 0.5)[0]
+    runs = [[cols[0], cols[0]]]
+    for c in cols[1:]:
+        if c == runs[-1][1] + 1:
+            runs[-1][1] = c
+        else:
+            runs.append([c, c])
+    assert len(runs) == len("Florian"), f"« Florian » : {len(runs)} colonnes d'encre au lieu de 7 ({runs})"
+    lettres = [{"lettre": l, "x0": fx(a + 1 - cmf[a] + ox), "x1": fx(b + cmf[b] + ox)} for l, (a, b) in zip("Florian", runs)]
+    assert heure["x1"] < florian["x0"] - 10 and abs(lettres[0]["x0"] - florian["x0"]) < 1 and abs(lettres[-1]["x1"] - florian["x1"]) < 1, \
+        (heure, florian, lettres)
     bloc = {
         "option": "A (découpé dans la vraie capture, calque raster)",
         "fichier": "assets/captures/bloc-florian.png",
@@ -227,6 +247,8 @@ def main():
         "texte": "09:00 Florian", "texte_x1": florian["x1"],
         "x_fin": round(florian["x1"] + KP(14) + KP(22), 2),     # 14 px après l'encre + le rayon (× échelle du point du format)
         "florian_encre": florian,
+        "heure_encre": heure,
+        "florian_lettres": lettres,
         "florian_dom": {k: fx(fl_dom[k] * ECH) if k[0] == "x" else fy(fl_dom[k] * ECH) for k in ("x0", "y0", "x1", "y1")},
         "style": dict(geo_ap["bloc_style"], corps_px_css=11, corps_px_film=49.5,
                       note="rgba(239,164,36,.2) sur la colonne, bordure 1 px CSS = 4,5 px film ; « 09:00 » à 70 % d'opacité, « Florian » encre text-noir"),

@@ -117,6 +117,10 @@ PAGES = [
     ("s4-agenda", "A2A3", 0, ["Laissez-moi voir."], "haut_agente"),
     ("s4-agenda", "A2A3", 2, ["Je peux vous proposer", "neuf heures, dix heures", "ou onze heures."], "haut_agente"),
     ("s4-agenda", "C3", 2, ["À neuf heures,", "c’est parfait."], "haut_appelant"),
+    # 28/09, l'échange du prénom (son/dialogue.json : extraits AP, CP nés de l'insertion « prenom ») : la question de l'agente, puis
+    # la réponse de l'appelant, dans leurs styles (qui parle = typographie), une réplique à la fois
+    ("s5-rendez-vous", "AP", 0, ["Très bien.", "C’est pour quel prénom\\u202f?"], "haut_agente"),
+    ("s5-rendez-vous", "CP", 0, ["C’est pour Florian."], "haut_appelant"),
     ("s5-rendez-vous", "A4", 0, ["Parfait, je vous note ça", "pour Florian,"], "haut_agente"),
     ("s5-rendez-vous", "A4", 7, ["pour une consultation", "vétérinaire,"], "haut_agente"),
     ("s5-rendez-vous", "A4", 11, ["le samedi dix-neuf", "septembre à neuf heures."], "haut_agente"),

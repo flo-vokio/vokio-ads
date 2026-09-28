@@ -1,8 +1,9 @@
 {
  "nom": "hybride-16x9",
- "description": "Le meilleur des deux mondes (Florian, 27/09 soir) : la musique de la version 2 + tous les petits sons de la version 3 (ambiance, point, écriture, objets) + le dialogue recoupé dans le vrai blanc (« mon » relevé) + le fond de ligne + la signature. Pour la vidéo iPhone. · Variante 16:9 (28/09) : les petits sons du point, spatialisés pour le 9:16, sont recentrés (mono) hors agenda et passés en miroir pendant l'agenda (s4-s5), où le point est à droite de l'image en 16:9 et à gauche en 9:16.",
- "duree": 47.0,
+ "description": "Le meilleur des deux mondes (Florian, 27/09 soir) : la musique de la version 2 + tous les petits sons de la version 3 (ambiance, point, écriture, objets) + le dialogue recoupé dans le vrai blanc (« mon » relevé) + le fond de ligne + la signature. Pour la vidéo iPhone. · Variante 16:9 (28/09) : les petits sons du point, spatialisés pour le 9:16, sont recentrés (mono) hors agenda et passés en miroir pendant l'agenda (s4-s5), où le point est à droite de l'image en 16:9 et à gauche en 9:16. Depuis l'échange du prénom (28/09 soir), le miroir s'interrompt pendant l'écriture de « Florian » et le retour à la gouttière (28,34 → 29,29) : là, les deux formats mettent le point à DROITE (9:16 x 552-740 sur 1080, 16:9 x 1582-1770 sur 1920) ; le miroir y mettait le nom écrit à gauche (−3 dB D−G) sous une plume à l'extrême droite. Fenêtres tirées des données, bascules au passage du point du 9:16 par le milieu (gauche = droite) : python3 outils/espace_format.py fenetres --format …/formats/16x9/donnees/point-resolu.json --de 17.3 --a 34.416667 --recette son/recettes/hybride-16x9.json [--poser].",
+ "duree": 50.066667,
  "racine": "../stems-amont/iphone",
+ "insertions": "../dialogue.json",
  "pistes": [
   {
    "nom": "dialogue",
@@ -29,8 +30,8 @@
    "gain_db": 0.0,
    "muets": [
     [
-     41.45,
-     42.25
+     44.516667,
+     45.316667
     ]
    ],
    "fondu_muet": 0.0,
@@ -41,14 +42,18 @@
      17.3
     ],
     [
-     31.35,
-     47.0
+     34.416667,
+     50.066667
     ]
    ],
    "miroir": [
     [
      17.3,
-     31.35
+     28.311241
+    ],
+    [
+     29.315115,
+     34.416667
     ]
    ],
    "fondu_espace": 0.05
@@ -76,14 +81,18 @@
      17.3
     ],
     [
-     31.35,
-     47.0
+     34.416667,
+     50.066667
     ]
    ],
    "miroir": [
     [
      17.3,
-     31.35
+     28.311241
+    ],
+    [
+     29.315115,
+     34.416667
     ]
    ],
    "fondu_espace": 0.05
@@ -99,14 +108,18 @@
      17.3
     ],
     [
-     31.35,
-     47.0
+     34.416667,
+     50.066667
     ]
    ],
    "miroir": [
     [
      17.3,
-     31.35
+     28.311241
+    ],
+    [
+     29.315115,
+     34.416667
     ]
    ],
    "fondu_espace": 0.05
@@ -122,21 +135,25 @@
      17.3
     ],
     [
-     31.35,
-     47.0
+     34.416667,
+     50.066667
     ]
    ],
    "miroir": [
     [
      17.3,
-     31.35
+     28.311241
+    ],
+    [
+     29.315115,
+     34.416667
     ]
    ],
    "fondu_espace": 0.05
   }
  ],
  "garde_reperes": {
-  "cues": "../riche-design/cues-design.json",
+  "cues": "../stems-amont/iphone/cues-design.json",
   "reference": "../riche-design/stems",
   "cibles": [
    "musique",
@@ -175,9 +192,17 @@
    "tamis": {
     "cible_db": 8.4,
     "note": "le tamis (« euh » qui s'effacent, 13,95-14,5) tombe sur le relais du bruit de confort de l'appelant (14,03), qui en couvre la queue dans 4-8 kHz ; son seul concurrent est cette ligne, que nous avons ajoutée : on lui rend l'émergence qu'il avait dans le 3 (+8,4 dB), la ligne se creuse dessous (le tamis la masque)"
+   },
+   "plume-nom": {
+    "exclu": "28/09, échange du prénom : la plume écrit « Florian » SOUS le nom dit par l'appelant (28,30-28,70) ; la voix d'abord : jusqu'à 8 kHz, la remonter la mettrait au niveau des consonnes du nom (4-8 kHz : plume −49 à −58 dBFS, voix −41 à −55) ; elle vit en 8-16 kHz, où la ligne n'a rien (+51 dB sur le reste), et ressort seule dans 4-8 kHz après le mot (28,70-28,93 : +3 à +10 dB sur le bruit de confort), signée par le la · sol ; riche-design l'a déjà baissée de 3,1 et 4,8 dB sous « Florian. » et « pour » (marge de la voix)"
+   },
+   "pose-plume-nom": {
+    "exclu": "28/09, échange du prénom : la plume écrit « Florian » SOUS le nom dit par l'appelant (28,30-28,70) ; la voix d'abord : jusqu'à 8 kHz, la remonter la mettrait au niveau des consonnes du nom (4-8 kHz : plume −49 à −58 dBFS, voix −41 à −55) ; elle vit en 8-16 kHz, où la ligne n'a rien (+51 dB sur le reste), et ressort seule dans 4-8 kHz après le mot (28,70-28,93 : +3 à +10 dB sur le bruit de confort), signée par le la · sol ; riche-design l'a déjà baissée de 3,1 et 4,8 dB sous « Florian. » et « pour » (marge de la voix)"
    }
   },
-  "note": "revue du 28/09 : la musique du 2 est 15 à 40 dB au-dessus du lit du 3 entre 1 et 16 kHz ; sans garde, la plume de « Vokıo », sa pose, le papier de l'agenda qui sort et le téléphone qui sort étaient enterrés (outils/ausculter.py reperes). Chaque petit son doit émerger, dans sa meilleure bande jusqu'à 8 kHz, d'au moins min(6 dB, ce qu'il émergeait dans le 3) ; la musique (et la ligne) ne se creusent que dans 3,5-16 kHz (le shaker, le haut de la harpe), le temps du geste, du strict nécessaire ; le crescendo (sous 3,5 kHz) n'est pas touché"
+  "note": "revue du 28/09 : la musique du 2 est 15 à 40 dB au-dessus du lit du 3 entre 1 et 16 kHz ; sans garde, la plume de « Vokıo », sa pose, le papier de l'agenda qui sort et le téléphone qui sort étaient enterrés (outils/ausculter.py reperes). Chaque petit son doit émerger, dans sa meilleure bande jusqu'à 8 kHz, d'au moins min(6 dB, ce qu'il émergeait dans le 3) ; la musique (et la ligne) ne se creusent que dans 3,5-16 kHz (le shaker, le haut de la harpe), le temps du geste, du strict nécessaire ; le crescendo (sous 3,5 kHz) n'est pas touché",
+  "cues_reference": "../riche-design/cues-design.json",
+  "note_insertions": "28/09 (échange du prénom) : les repères sont ceux du calcul amont (stems_amont.py écrit cues-design.json AUX INSTANTS DU FILM ACTUEL, l'écriture du nom comprise, qui ne suit pas la règle) ; l'émergence de référence se lit dans les stems validés du 3 (47 s) à la fenêtre du même repère dans cues_reference"
  },
  "garde_voix": {
   "voix": "dialogue",
@@ -204,12 +229,12 @@
  },
  "silences": [
   [
-   35.9467,
-   36.666667
+   39.013367,
+   39.733334
   ],
   [
-   46.7,
-   47.0
+   49.766667,
+   50.066667
   ]
  ],
  "master": {
@@ -227,9 +252,18 @@
  },
  "mesures": {
   "references": {
-   "1 classique": "/root/vokio-uploads/videos/showcase/point-solaire-bande-son-finition.wav",
-   "2 musique": "/root/vokio-uploads/videos/showcase/point-solaire-bande-son-musique.wav",
-   "3 design": "/root/vokio-uploads/videos/showcase/point-solaire-bande-son-design.wav"
+   "1 classique": {
+    "fichier": "/root/vokio-uploads/videos/showcase/point-solaire-bande-son-finition.wav",
+    "insertions": "../dialogue.json"
+   },
+   "2 musique": {
+    "fichier": "/root/vokio-uploads/videos/showcase/point-solaire-bande-son-musique.wav",
+    "insertions": "../dialogue.json"
+   },
+   "3 design": {
+    "fichier": "/root/vokio-uploads/videos/showcase/point-solaire-bande-son-design.wav",
+    "insertions": "../dialogue.json"
+   }
   },
   "dialogue": "../dialogue.json",
   "evenements": "/opt/vokio-ads/videos/showcase-iphone/donnees/evenements.json",
@@ -245,7 +279,7 @@
    ],
    [
     0,
-    36
+    39.066667
    ]
   ],
   "differentiel": {
@@ -261,14 +295,14 @@
     ],
     [
      15,
-     47
+     50.066667
     ]
    ],
    "seuil": 10.0
   },
   "seuil_saute": 10.0,
   "arc": {
-   "apres": 42.3,
+   "apres": 45.366667,
    "marge_lu": 1.0
   },
   "zooms": [
@@ -293,13 +327,13 @@
     700
    ],
    [
-    33.3,
-    37.4,
+    36.366667,
+    40.466667,
     260
    ],
    [
-    40.5,
-    47,
+    43.566667,
+    50.066667,
     160
    ]
   ],
@@ -337,20 +371,29 @@
     "fenetres": [
      [
       0,
-      47
+      50.066667
      ]
     ],
     "seuil": 10.0,
     "note": "rien de ce qu'a l'hybride ne doit manquer À LA FOIS au 2 et au 3 (une marche créée par le montage)",
     "voulus": [
      [
-      26.08,
-      26.16,
-      "la plume se lève à la fin du rendez-vous (relâche de 12 ms voulue dans riche-design ; le halo du 3 la couvrait)"
+      28.913333,
+      28.993333,
+      "la plume se lève à la fin du rendez-vous (relâche de 12 ms voulue dans riche-design ; le halo du 3 la couvrait) ; 28/09 : fin de l'écriture de « Florian » (evenements.ecriture_fin 28,933 ; 26,10 dans le film de 47 s), mêmes bornes −0,02 / +0,06 s"
+     ],
+     [
+      25.266667,
+      29.236667,
+      "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
      ]
     ]
    }
   ],
   "reperes": {}
- }
+ },
+ "insertions_appliquees": [
+  "prenom"
+ ],
+ "insertions_note": "fenêtres de temps décalées par outils/inserer_temps.py recette (règle de son/dialogue.json « insertions ») ; les notes (texte) gardent les instants du film d'avant"
 }

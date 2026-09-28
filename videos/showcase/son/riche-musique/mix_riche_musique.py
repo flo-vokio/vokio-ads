@@ -72,6 +72,16 @@ accordé sur la basse de l'accord ; l'accord du logo s'ouvre vers le haut (la5 a
 musique reste au niveau de la nappe validée : chaque LU de plus s'y prendrait sur la marge de la voix (voir
 controle_musique.py, T).
 
+L'ÉCHANGE DU PRÉNOM (28/09). Le film gagne une mesure (92 images, 147 200 échantillons) à l'image 758 (25,2667 s, le
+temps 33) : la question de l'agente et la réponse de l'appelant. La partition reste écrite sur la grille du film d'avant
+et se place par la chronologie de son/dialogue.json (outils/chronologie.py) : l'ARRÊT COMPOSÉ (temps 32 → 34 : ni grosse
+caisse ni marimba, le lit seul) dure une mesure de plus (24,50 → 29,10), le sol majeur de la mesure 8 et la pédale de la
+TIENNENT (leurs oscillations font un nombre entier de cycles dans la mesure insérée : pas de raccord, et après l'insertion
+les notes redonnent celles d'avant, décalées), l'arc du bus est tenu, la pause « prénom ? » → « C'est pour Florian. » ne
+lève le bus que de 2 dB (règle de l'arrêt, comme pour la plume), le pouls reprend au temps 38 (29,10), 0,14 s avant
+« Parfait, » comme avant. Aucune note nouvelle. Le la · sol de la plume (stem signature, mix.py T["la_rdv"]) finit
+l'écriture du nom (sol sur ecriture_fin, 28,933) : il tombe dans l'arrêt (controle_plume()).
+
 ELEVENLABS MUSIC. Cinq prises à composition_plan dont les sections suivent le film (el_musique.py ; 3 et 4 avec le plan
 harmonique imposé), évaluées par evaluer_el.py (el/evaluation.json) : tempo tenu à 77,9 BPM pour trois d'entre elles,
 mais aucune ne tient les accords (43 à 68 % du chroma dans l'accord prévu, 87 % pour cette partition), la basse ne les
@@ -96,6 +106,8 @@ import signature as S  # noqa: E402
 import mix as MX  # noqa: E402  (données et outils : rien ne se recalcule à l'import)
 import instruments as I  # noqa: E402
 import mesures as ME  # noqa: E402
+sys.path.append(str(PROJET / "outils"))
+import chronologie as CH  # noqa: E402
 
 SR = labo.SR
 N = MX.N
@@ -111,12 +123,20 @@ IMG = Path("/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/
 
 # ── la grille ───────────────────────────────────────────────────────────────
 BEAT = 23 / 30
-T0 = EV["signature_re_contact"]["t"] - 56 * BEAT
+# INSERTIONS DE TEMPS (28/09, l'échange du prénom) : la partition est ÉCRITE sur la grille du film d'avant (47 s) et
+# PLACÉE dans le film actuel par la chronologie de son/dialogue.json (outils/chronologie.py, la même règle que l'image et
+# le dialogue). Un temps n de la grille tombe à CHRONO.decaler(T0 + n·BEAT) : les temps d'avant le pivot ne bougent pas,
+# ceux d'après glissent de la durée insérée (une mesure = 4 temps = 92 images : la grille reste la grille). T0 est pris
+# sur le ré ramené au film d'avant et posé sur son image (1287 : 42,90 s) : les instants du JSON n'ont que 6 décimales
+# (45,966667 − 3,0666667 = 42,9000003), et 3·10⁻⁷ s de trop sur T0 décalaient d'un échantillon quelques notes
+# humanisées. Voir tb(), arc_bus() et reponses() ; sans insertion, tout est l'identité (42,90 est déjà sur l'image).
+CHRONO = CH.charger(MX.DIA)
+T0 = round(CHRONO.vers_base(EV["signature_re_contact"]["t"]) * 30) / 30 - 56 * BEAT
 
 
 def tb(n):
-    """Instant du temps n de la grille (n peut être fractionnaire : 0,5 = croche, 0,25 = double)."""
-    return T0 + n * BEAT
+    """Instant (film actuel) du temps n de la grille (n peut être fractionnaire : 0,5 = croche, 0,25 = double)."""
+    return CHRONO.decaler(T0 + n * BEAT)
 
 
 for _n, _nom in ((27, "contact_neuf"), (28, "contact_dix"), (29, "contact_onze"), (56, "signature_re_contact")):
@@ -128,8 +148,8 @@ S0, S1 = EV["silence_numerique"]["t"]
 # le la · sol de la plume (son/mix.py, cloche-la-rdv et cloche-sol-rdv : evenements.ecriture_debut, puis + l'écart
 # signature_sol − signature_la) : 25,40 et 25,64 s, entre les temps 33 et 33,5. Deuxième relecture 27/09, défaut 1 : la
 # partition l'ignorait ; c'est le motif, dit une première fois par la signature, et il ne reçoit pas sa troisième note
-T_PLUME_LA = EV["ecriture_debut"]["t"]
-T_PLUME_SOL = T_PLUME_LA + (T["sol_sig"] - T["la"])
+T_PLUME_LA = T["la_rdv"]          # mix.py : evenements.ecriture_debut, ou (28/09) le demi-temps après « Florian. »
+T_PLUME_SOL = T["sol_rdv"]
 
 CUES = []
 
@@ -305,7 +325,7 @@ def cordes():
     t = np.arange(N) / SR
     plan = []
     for k, (t0, nom, voic, _) in enumerate(ACCORDS):
-        fondu = 1.8 if k == 0 else (1.2 if nom == "Asus4" and t0 > 36 else
+        fondu = 1.8 if k == 0 else (1.2 if nom == "Asus4" and t0 > T_RAC else
                                     (0.5 if nom == "D" else (0.3 if nom == "G/clairière" else 0.45)))
         if t0 > T_RAC and not any(p_[0] > T_RAC for p_ in plan):
             plan.append((T_RAC, 0.005, {}))       # le raccroché : l'accord s'arrête ; la mesure 12 repart de rien
@@ -321,7 +341,7 @@ def cordes():
         f = float(I.hz(m))
         pan_note = np.clip((m - 60) / 18, -0.6, 0.6)
         for iv, (c, dp) in enumerate(((-7, -0.25), (0, 0.0), (7, 0.25))):
-            v = I.voix_corde(f, tt, graine=[int(m), iv], desaccord_cents=c)
+            v = I.voix_corde(f, tt, graine=[int(m), iv], desaccord_cents=c, chrono=CHRONO or None)
             out[a:b] += S.panner(v * wm[a:b] / np.sqrt(3), np.clip(pan_note + dp, -0.8, 0.8))
     lp_debut = MX.ffmpeg_filtre(out, "highpass=f=90,lowpass=f=2600,lowpass=f=4000")
     lp_fin = MX.ffmpeg_filtre(out, "highpass=f=90,lowpass=f=5200")
@@ -332,6 +352,55 @@ def cordes():
     return out
 
 
+def verre_frotte(t, f, rng, graine_bruit):
+    """mix.voix_verre (verre frotté : phase intégrée, dérive ±2 cents à 0,2 Hz, trémolo ±0,6 dB à 1,5 Hz, frottement de
+    bruit rose en [2f ; 6f] modulé par la phase, −32 dB sous la note), lu à travers les insertions de temps (28/09) : la
+    note est TENUE pendant chaque mesure insérée qu'elle couvre. Son horloge est celle du film d'avant ; dans la mesure,
+    dérive, trémolo et phase font un nombre entier de cycles (chronologie.cycles_entiers, phase_entiere) ; le frottement
+    est le bruit d'avant, dans lequel on insère un bruit neuf du même spectre, en fondus de 50 ms à puissance constante
+    qui partent de sa suite naturelle et rejoignent son amorce : avant le pivot, la note d'avant à l'octet ; après, la
+    même, décalée. Sans insertion couverte : mix.voix_verre tel quel."""
+    i0, n = int(round(t[0] * SR)), len(t)
+    zones = [(int(round(d * SR)) - i0, int(round(fz * SR)) - i0) for d, fz in CHRONO.zones()]
+    zones = [(a, b) for a, b in zones if 0 < a and b < n]
+    if not zones:
+        return MX.voix_verre(t, f, rng, graine_bruit=graine_bruit)
+    ph0, ph1, ph2 = rng.uniform(0, 2 * np.pi, 3)
+    # la note du film d'avant, telle que mix.voix_verre la rend (même tirage, même longueur) : son bruit et sa norme
+    nb = n - sum(b - a for a, b in zones)
+    t0 = np.arange(i0, i0 + nb) / SR
+    fi0 = f * 2 ** (2.0 * np.sin(2 * np.pi * 0.2 * t0 + ph1) / 1200)
+    phi0 = ph0 + 2 * np.pi * np.concatenate([[0.0], np.cumsum(fi0[:-1])]) / SR
+    y0 = np.sin(phi0) + 0.08 * np.sin(2 * phi0) + 0.03 * np.sin(3 * phi0)
+    brut0 = S.passe_bande(labo.bruit_rose(nb + 8192, graine=graine_bruit)[4096:4096 + nb], 2 * f, 6 * f, front=max(20.0, f / 4))
+    br0 = brut0 * (0.5 + 0.5 * np.sin(phi0)) ** 2
+    norme = S.gain(-32.0) * np.sqrt(np.mean(y0 ** 2)) / (np.sqrt(np.mean(br0 ** 2)) + 1e-12)
+    # la note du film actuel
+    tb = CHRONO.vers_base(t)
+    cents = 2.0 * np.sin(2 * np.pi * 0.2 * tb + 2 * np.pi * CHRONO.cycles_entiers(0.2, t) + ph1)
+    fi = CHRONO.phase_entiere(f * 2 ** (cents / 1200), i0)
+    phi = ph0 + 2 * np.pi * np.concatenate([[0.0], np.cumsum(fi[:-1])]) / SR
+    y = np.sin(phi) + 0.08 * np.sin(2 * phi) + 0.03 * np.sin(3 * phi)
+    X = int(0.050 * SR)
+    u = np.arange(X) / X
+    morceaux, k0, dern = [], 0, 0
+    for j, (a, b) in enumerate(zones):
+        k = a - dern + k0                         # indice, dans la note d'avant, du pivot de cette insertion
+        L = b - a
+        neuf = S.passe_bande(labo.bruit_rose(L + 8192, graine=graine_bruit + 1 + j)[4096:4096 + L], 2 * f, 6 * f,
+                             front=max(20.0, f / 4))
+        neuf *= np.sqrt(np.mean(brut0 ** 2)) / (np.sqrt(np.mean(neuf ** 2)) + 1e-12)
+        neuf[:X] = brut0[k:k + X] * np.cos(np.pi / 2 * u) + neuf[:X] * np.sin(np.pi / 2 * u)
+        neuf[-X:] = neuf[-X:] * np.cos(np.pi / 2 * u) + brut0[k - X:k] * np.sin(np.pi / 2 * u)
+        morceaux += [brut0[k0:k], neuf]
+        k0, dern = k, b
+    morceaux.append(brut0[k0:])
+    brut = np.concatenate(morceaux)
+    br = brut * (0.5 + 0.5 * np.sin(phi)) ** 2 * norme
+    am = S.gain(0.6 * np.sin(2 * np.pi * 1.5 * tb + 2 * np.pi * CHRONO.cycles_entiers(1.5, t) + ph2))
+    return (y + br) * am
+
+
 def pedale_la():
     """La tonalité devenue pédale (comme la v2) : la4 en verre frotté, qui prend le relais de la ligne qui s'ouvre
     (fondu 4,60 → 6,10, le même que la queue du la dans le stem signature), tenue jusqu'au raccroché : le la est une note
@@ -339,7 +408,7 @@ def pedale_la():
     i0 = int(round(T["pedale"] * SR)); i1 = int(round(T_RAC * SR)) + int(0.01 * SR)
     t = np.arange(i0, i1) / SR
     rng = np.random.default_rng([77, 1])
-    y = MX.voix_verre(t, 440.0, rng, graine_bruit=4401)
+    y = verre_frotte(t, 440.0, rng, graine_bruit=4401)
     w = np.sin(np.pi / 2 * np.clip((t - T["pedale"]) / MX.DEC["pedale_fondu"], 0, 1))
     p = piste()
     S.ajouter(p, S.panner(y * w, -0.1), i0)
@@ -590,7 +659,10 @@ def presence_voix(voix, seuil_db=-34.0, attaque=0.030, relache=0.260, anticipati
     c = np.concatenate([[0.0], np.cumsum(voix ** 2)])
     idx = np.clip(np.arange(N) + w // 2, 0, N); jdx = np.clip(np.arange(N) - w // 2, 0, N)
     rms = np.sqrt(np.maximum(c[idx] - c[jdx], 0) / w)
-    dessus = (20 * np.log10(rms + 1e-12) > seuil_db).reshape(-1, 48).any(axis=1)
+    au_dessus = 20 * np.log10(rms + 1e-12) > seuil_db
+    # cadence 1 ms (blocs de 48) ; un film dont la durée n'est pas un nombre entier de ms (50,066667 s = 2 403 200 éch.,
+    # 28/09) garde son dernier bloc, partiel : aucun effet quand N est un multiple de 48 (film de 47 s)
+    dessus = np.concatenate([au_dessus, np.zeros(-len(au_dessus) % 48, bool)]).reshape(-1, 48).any(axis=1)
     m = len(dessus)
     la, te = int(anticipation * 1000), int(tenue * 1000)
     cs = np.concatenate([[0], np.cumsum(dessus)])
@@ -680,8 +752,11 @@ def limiter_descente(g, db_par_50ms):
 
 
 def arc_bus(t):
-    """Fader du bus musique (dB) : l'appel sous la voix, la pulsation qui monte, la levée du SMS, le plein du logo."""
-    return np.interp(t, [0, T_DEC, tb(12), tb(24), tb(43), tb(43) + 0.8, T_RAC, T_VIB, tb(52), tb(55), tb(56), FIN_SON],
+    """Fader du bus musique (dB) : l'appel sous la voix, la pulsation qui monte, la levée du SMS, le plein du logo.
+    Lu à travers CHRONO.vers_base : pendant une mesure insérée, l'arc est TENU (la montée de « neuf » à « -tion » attend
+    que le rendez-vous soit pris) ; avant et après, il redonne ses valeurs d'avant, décalées."""
+    ancres = [0, T_DEC, tb(12), tb(24), tb(43), tb(43) + 0.8, T_RAC, T_VIB, tb(52), tb(55), tb(56), FIN_SON]
+    return np.interp(CHRONO.vers_base(t), CHRONO.vers_base(np.array(ancres, dtype=np.float64)),
                      [0, 0, 1.0, -1.0, 3.0, 1.5, -1.5, -4.0, 0.5, 4.0, 8.5, 11.0])
 
 
@@ -697,11 +772,19 @@ def pauses_du_dialogue():
 
 
 REPONSE_PLUME_DB = 2.0  # … sauf dans la pause où la plume écrit (24,95-26,24) : c'est la signature qui répond (la · sol)
+# … et dans toute pause qui commence pendant l'ARRÊT COMPOSÉ (temps 32 → 34 de la grille : ni grosse caisse ni marimba,
+# le lit seul, de « c'est parfait » à « Parfait, ») : depuis l'échange du prénom (28/09), l'arrêt dure une mesure de plus et
+# sa vraie pause est celle de l'appelant qui réfléchit (« prénom ? » → « C'est pour Florian. ») ; la plume y attend,
+# suspendue : la musique ne s'avance pas plus que pour elle. Dans le film de 47 s, la seule pause de l'arrêt est déjà
+# celle de la plume : rien ne change.
+ARRET_TEMPS = (32, 34)
 
 
 def reponses(t):
     """dB : +REPONSE_DB dans chaque vraie pause, montée qui part 0,05 s après le dernier mot, descente finie 0,30 s
-    avant le mot suivant (le pouls anticipe la voix de 0,30 s) ; +REPONSE_PLUME_DB seulement dans la pause de la plume."""
+    avant le mot suivant (le pouls anticipe la voix de 0,30 s) ; +REPONSE_PLUME_DB seulement dans la pause de la plume
+    et dans les pauses de l'arrêt composé (ARRET_TEMPS)."""
+    arret = (tb(ARRET_TEMPS[0]), tb(ARRET_TEMPS[1]))
     g = np.zeros_like(t)
     for a, b in pauses_du_dialogue():
         t0, t1 = a + 0.05, b - 0.30 - RAMPE_REPONSE
@@ -709,7 +792,7 @@ def reponses(t):
             continue
         r = min(RAMPE_REPONSE, (t1 - t0))
         A = min(REPONSE_DB, 11.0 * r)           # pente ≤ 0,86 dB par 50 ms, même dans une pause courte
-        if a <= T_PLUME_LA <= b:
+        if a <= T_PLUME_LA <= b or arret[0] <= a < arret[1]:
             A = min(A, REPONSE_PLUME_DB)
         g = np.maximum(g, A * fondu_cos(t, t0, r) * (1 - fondu_cos(t, t1, RAMPE_REPONSE)))
     return g
@@ -812,6 +895,12 @@ def rattrapages(lit, pouls, st, iterations=10):
                 # part « effective » du lit : sa puissance plus les termes croisés (ce que la somme lui doit)
                 eff = max(Ptot - Pa - Pp, 1e-3 * Pl)
                 reste = Pv / 10 ** ((cible + 0.2) / 10) - Pa - Pp
+                if reste <= 0:
+                    # (28/09) le lit ne peut PAS sauver ce mot : les sons voulus (touchers, signature) et le pouls prennent
+                    # déjà la marge (l'échange du prénom : le la · sol de la plume sous « Très bien. », 8,4 LU sans
+                    # musique). Plutôt que de creuser le lit de 12 dB pour rien, il ne coûte pas plus de 1 LU au mot
+                    # (même règle que la garde de la voix du mixeur, perte_max_db) ; jamais atteint dans le film de 47 s
+                    reste = Pv / 10 ** ((10 * np.log10(Pv / Pa) - 1.0 + 0.2) / 10) - Pa - Pp
                 bl = -12.0 if reste <= 0 else min(0.0, 10 * np.log10(reste / eff))
             Pvb, Plb, Ppb = P(vb, a, b), P(lb * L_ * B_, a, b), P(pb, a, b)
             Pmb = P(lb * L_ * B_ + pb, a, b)
@@ -858,6 +947,20 @@ def place_a_la_signature(sig=None):
         h = np.where(u < 0.03, fondu_cos(u, -(AVANCE_SIGNATURE + 0.006), 0.006), np.exp(-(u - 0.03) / tau))
         g = np.minimum(g, PROFONDEUR_SIGNATURE * h)
     return g * (1 - fondu_cos(t, T["re"] + 1.6, 0.3))
+
+
+def controle_plume(marge=0.10):
+    """Le la · sol de la plume (stem signature, evenements.ecriture_debut) doit tomber dans l'ARRÊT COMPOSÉ (ARRET_TEMPS),
+    sans note de la musique à moins de `marge` s. Depuis l'échange du prénom, l'image fait écrire « Florian » sous la voix
+    de l'appelant : l'arrêt (temps 32 → 34 de la grille du film d'avant, 24,50 → 29,10 dans le film de 50,07 s) le couvre
+    tant que l'écriture reste entre la fin de « c'est parfait. » et « Parfait, ». À lire après composer()."""
+    arret = (tb(ARRET_TEMPS[0]), tb(ARRET_TEMPS[1]))
+    proches = sorted((round(abs(a_["t"] - x), 4), a_["couche"], a_["t"]) for a_ in ATTAQUES for x in (T_PLUME_LA, T_PLUME_SOL))
+    d = proches[0] if proches else (None, None, None)
+    return {"la": round(T_PLUME_LA, 6), "sol": round(T_PLUME_SOL, 6), "arret": [round(arret[0], 6), round(arret[1], 6)],
+            "dans_l_arret": bool(arret[0] <= T_PLUME_LA and T_PLUME_SOL < arret[1]),
+            "attaque_la_plus_proche": {"ecart_s": d[0], "couche": d[1], "t": d[2]},
+            "ok": bool(arret[0] <= T_PLUME_LA and T_PLUME_SOL < arret[1] and (d[0] is None or d[0] >= marge))}
 
 
 def fondu_final(t):
@@ -1004,6 +1107,7 @@ def main(essai=False, couches=True):
     S.ecrire24(ICI / "mix-musique.wav", R_["mix"])
     np.savez_compressed(ICI / "gains-musique.npz", **{k: v[::48].astype(np.float32) for k, v in R_["gains"].items()})
     rapport = {"version": "musique-270926-relue-2", "grille": {"temps_s": BEAT, "bpm": 60 / BEAT, "t0": T0, "re": tb(56)},
+               "insertions": [dict(i) for i in CHRONO.ins],
                "stems_entree": "stems-avant-limiteur/ (master validé au gain de 7,84 dB, sans sa courbe de limiteur)",
                "gain_master_db": round(float(R_["G"]), 3), "reduction_limiteur_max_db": round(float(R_["red"]), 2),
                "niveaux_couches_db": NIV, "logo_db": LOGO_DB, "reverbe_envois": REVERBE, "ducking": DUCK,

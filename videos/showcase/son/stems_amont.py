@@ -5,10 +5,21 @@ les scripts validés (mix.py, riche-musique, riche-design), sans réécrire aucu
     python3 son/stems_amont.py                    variante iphone (données du point et vidéo de la version iPhone)
     python3 son/stems_amont.py --variante classique
     python3 son/stems_amont.py --force            recalcule même si les entrées n'ont pas changé
+    python3 son/stems_amont.py --video X.mp4      la plume lit l'encre dans X.mp4 (bac à sable du film d'avant)
+    python3 son/stems_amont.py --seulement musique  la musique seule (base mix.py + riche-musique), sans la vidéo : écrit
+                                                  musique.wav + musique.json (cues, attaques, insertions), ne touche ni
+                                                  aux autres stems ni à stems-amont.json (le calcul complet refera tout)
 
-Sortie : son/stems-amont/<variante>/<stem>.wav (float 32 bits, 48 kHz, stéréo, 47,00 s) + stems-amont.json (empreinte des
-entrées, provenance, mesures). Idempotent : si l'empreinte (sha256 des scripts, des données et du dialogue) n'a pas changé
-et que tous les WAV sont là, rien n'est recalculé (≈ 0,5 s au lieu de plusieurs minutes).
+Sortie : son/stems-amont/<variante>/<stem>.wav (float 32 bits, 48 kHz, stéréo, durée du film : scenes.json) +
+stems-amont.json (empreinte des entrées, provenance, mesures) + cues-design.json et cues-musique.json (les repères des
+petits sons et les notes de la musique AUX INSTANTS DE CE CALCUL : outils/mixer.py garde_reperes lit cues-design.json).
+Idempotent : si l'empreinte (sha256 des scripts, des données et du dialogue) n'a pas changé et que tous les fichiers sont
+là, rien n'est recalculé (≈ 0,5 s au lieu de plusieurs minutes).
+
+INSERTIONS DE TEMPS (28/09, l'échange du prénom) : aucun instant n'est à décaler ici. Le dialogue (son/dialogue.json
+"insertions"), les données de l'image (evenements, scenes…) et la partition (riche-musique : tb() à travers
+outils/chronologie.py) portent la même règle. Les données du classique (showcase/donnees) doivent être celles de la
+variante pour les instants que mix.py et riche-* lisent À L'IMPORT (EV_A_L_IMPORT) : sinon, arrêt.
 
 ÉCHELLE COMMUNE : celle des stems du master validé, au gain de master de son/cues.json (7,84 dB), SANS limiteur. C'est
 l'échelle d'entrée de riche-musique et de riche-design ; outils/mixer.py remasterise la somme (un gain, un limiteur).
@@ -59,8 +70,10 @@ for p in (ICI, ICI / "riche-musique", ICI / "riche-design", OUTILS):
 SR = 48000
 VARIANTES = {
     "classique": {"donnees": PROJET / "donnees", "video": Path("/root/vokio-uploads/videos/showcase/le-point-sur-le-i.mp4")},
-    "iphone": {"donnees": Path("/opt/vokio-ads/videos/showcase-iphone/donnees"),
-               "video": Path("/root/vokio-uploads/videos/showcase/le-point-sur-le-i-iphone.mp4")},
+    # 28/09 (échange du prénom, film de 50,07 s) : le rendu image du 9:16 refait par le réalisateur (1 502 images) ; le
+    # film de 47 s était /root/vokio-uploads/videos/showcase/le-point-sur-le-i-iphone.mp4
+    "iphone": {"donnees": PROJET.parent / "showcase-iphone" / "donnees",
+               "video": Path("/root/vokio-uploads/videos/showcase/le-point-sur-le-i-9x16-image.mp4")},
 }
 MONTES = Path("/root/vokio-audios-metiers-180926/montes/veterinaire.wav")
 ZONES_LIGNE = [(11.92, 12.05), (74.92, 75.09)]     # appelant, porte ouverte sans voix (montes, s)
@@ -72,12 +85,20 @@ LIGNE = {"bande": (700.0, 7000.0), "rms_db": -66.0, "fondu_in": 0.25, "graine": 
                      "remplace": True, "anticipation": 0.015, "fondu": 0.010}}
 MUSIQUE = {"relache_quinte": 0.35}      # s (riche-musique.RELACHE_QUINTE ; 0,040 dans la version 2 livrée)
 STEMS = ("dialogue", "sfx", "signature", "nappe", "musique", "ambiance", "point", "ecriture", "objets", "ligne")
+CUES_SORTIES = ("cues-design.json", "cues-musique.json")
+# instants lus à l'IMPORT de mix.py (T, FIN_SON), de riche-musique (grille, plume) et de riche-design (ECRITS) dans
+# showcase/donnees/evenements.json : appliquer_variante remplace MX.EV, pas ce qui en a déjà été tiré
+EV_A_L_IMPORT = {"decroche", "raccroche", "bulle_et_vibreur", "signature_la", "signature_sol", "signature_re_contact",
+                 "silence_final", "fin", "resolution_confirmation", "contact_neuf", "contact_dix", "contact_onze",
+                 "agenda_monte", "silence_numerique", "ecriture_debut", "plume_pose", "ecriture_fin", "plume_mot",
+                 "heure_ecrite", "ecriture_nom"}
 
 
 def empreinte(variante):
     h = hashlib.sha256()
     fichiers = [ICI / "dialogue.json", ICI / "dialogue.wav", ICI / "mix.py", ICI / "signature.py", ICI / "labo.py",
-                ICI / "cues.json", Path(__file__), OUTILS / "fond_ligne.py", OUTILS / "sonlib.py", MONTES]
+                ICI / "cues.json", Path(__file__), OUTILS / "fond_ligne.py", OUTILS / "sonlib.py", MONTES,
+                OUTILS / "chronologie.py"]      # la règle des insertions de temps (riche-musique, riche-design)
     fichiers += sorted((ICI / "riche-musique").glob("*.py")) + sorted((ICI / "riche-design").glob("*.py"))
     fichiers += [ICI / "riche-design" / "prises.json"]
     fichiers += sorted(VARIANTES[variante]["donnees"].glob("*.json"))
@@ -104,6 +125,9 @@ def appliquer_variante(MX, RD, variante):
     MX._V_IMG = np.array([p["v"] for p in MX.PR])
     ev = J("evenements.json")
     diff = sorted(k for k in set(ev) | set(MX.EV) if ev.get(k) != MX.EV.get(k))
+    lus = sorted(set(diff) & EV_A_L_IMPORT)
+    assert not lus, (f"événements {lus} différents entre showcase/donnees et {don} : mix.py et riche-* les ont lus à "
+                     f"l'import ; recopier evenements.json de la variante dans showcase/donnees")
     MX.EV.clear(); MX.EV.update(ev)                        # même objet : RD.EV et les T des modules le voient
     pj = J("point.json")
     assert pj["taille"] == MX.POINTJ["taille"], "la taille du point diffère : T['pedale'] serait faux"
@@ -114,13 +138,14 @@ def appliquer_variante(MX, RD, variante):
     return diff
 
 
-def fabriquer(variante):
+def fabriquer(variante, seulement=None, garder=None):
     import mix as MX
     import stems_avant_limiteur as SAL
     import mix_riche_musique as RM
     import mix_riche_design as RD
     import fond_ligne as FL
     import sonlib as L
+    import chronologie as CH
     diff_ev = appliquer_variante(MX, RD, variante)
     print(f"   variante {variante} : événements différents du classique : {diff_ev or 'aucun'}")
     G = json.loads((ICI / "cues.json").read_text())["gain_master_db"]
@@ -132,7 +157,19 @@ def fabriquer(variante):
     RM.RELACHE_QUINTE = MUSIQUE["relache_quinte"]
     R_ = RM.fabriquer({k: base[k] for k in ("dialogue", "sfx", "signature")}, couches=False)
     musique = R_["musique"]
+    if garder is not None:
+        garder["musique"] = R_                     # couches, courbes de gain : --couches (preuves)
     print(f"   {time.time() - t0:.0f} s ; rattrapages : {len(R_['journal_rat'])} mots, manques : {list(R_['manques']) or 'aucun'}")
+    plume = RM.controle_plume()
+    print(f"   plume (la {plume['la']} · sol {plume['sol']}) dans l'arrêt {plume['arret']} : "
+          f"{'oui' if plume['ok'] else 'NON, à regarder'} ; note la plus proche {plume['attaque_la_plus_proche']}")
+    info_m = {"rattrapages": len(R_["journal_rat"]), "manques": list(R_["manques"]), **MUSIQUE,
+              "insertions": [dict(i) for i in RM.CHRONO.ins], "grille_t0_base": RM.T0, "plume": plume}
+    cues_m = {"cues": sorted(RM.CUES, key=lambda c: c["t"]), "attaques": sorted(RM.ATTAQUES, key=lambda c: c["t"]),
+              "rattrapages": R_["journal_rat"]}
+    if seulement == "musique":
+        return {"musique": musique}, {"variante": variante, "evenements_differents": diff_ev, "musique": info_m,
+                                     "duree_calcul_s": round(time.time() - t0, 1)}, {"cues-musique.json": cues_m}
     print("3. petits sons (riche-design), marges de voix contre la musique")
     sfx_sans_stylo = base["sfx"].copy()
     a_s, b_s = RD.STYLO_RETIRE
@@ -154,7 +191,18 @@ def fabriquer(variante):
     src = L.lire(MONTES)
     S_ = FL.spectre_zones(src, ZONES_LIGNE)
     n = MX.N
-    y = FL.fond(S_, n, graine=LIGNE["graine"], bande=LIGNE["bande"]) * L.gain(LIGNE["rms_db"])
+    # 28/09 : le tirage du fond est celui du film d'avant les insertions de temps (même FFT, même graine), la suite du
+    # même tirage dans chaque mesure insérée (chronologie.texture, fondus de 50 ms) : après la mesure, la ligne validée,
+    # décalée ; sans insertion, le tirage de toujours
+    C_ = CH.charger(ICI / "dialogue.json")
+    if C_:
+        nb = n - C_.total_echantillons
+        y_b = FL.fond(S_, nb, graine=LIGNE["graine"], bande=LIGNE["bande"])
+        y_l = FL.fond(S_, n, graine=LIGNE["graine"], bande=LIGNE["bande"])
+        y_l *= np.sqrt(np.mean(y_b ** 2) / np.mean(y_l[:nb] ** 2))
+        y = C_.texture(y_b, y_l[nb:]) * L.gain(LIGNE["rms_db"])
+    else:
+        y = FL.fond(S_, n, graine=LIGNE["graine"], bande=LIGNE["bande"]) * L.gain(LIGNE["rms_db"])
     w_base = FL.fenetre(n, MX.T["decroche"], MX.T["raccroche"], fondu_in=LIGNE["fondu_in"])
     # (b) bruit de confort de l'appelant, apparié sur sa porte ouverte (film = source + décalage de l'extrait)
     C = LIGNE["confort"]
@@ -187,29 +235,72 @@ def fabriquer(variante):
         assert not np.any(v[int(round(s0 * SR)):int(round(s1 * SR))]), f"{k} : le silence du raccroché n'est pas nul"
     stems = {**base, "musique": musique, **design, "ligne": ligne}
     info = {"gain_master_valide_db": G, "variante": variante, "evenements_differents": diff_ev,
-            "musique": {"rattrapages": len(R_["journal_rat"]), "manques": list(R_["manques"]), **MUSIQUE},
+            "musique": info_m,
             "design": {"rattrapage": ratt, "marges_finales_min": {k: min(d[f"marge_{k}_design"] for d in finale)
                                                                    for k in ("bande", "K")}},
             "ligne": {"zones_source": ZONES_LIGNE, **LIGNE, **info_ligne}, "duree_calcul_s": round(time.time() - t0, 1)}
-    return stems, info
+    cues = {"cues-design.json": {"cues": sorted(RD.CUES, key=lambda c: c["t"]), "note": "repères des petits sons de ce calcul "
+                                 "(riche-design refait sur le dialogue et les données de la variante) : outils/mixer.py "
+                                 "garde_reperes"}, "cues-musique.json": cues_m}
+    return stems, info, cues
+
+
+def ecrire_json(chemin, d):
+    chemin.write_text(json.dumps(d, ensure_ascii=False, indent=1,
+                                 default=lambda o: str(o) if isinstance(o, Path) else float(o)))
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--variante", choices=sorted(VARIANTES), default="iphone")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--seulement", choices=["musique"], help="la musique seule (sans la vidéo) : musique.wav + musique.json")
+    ap.add_argument("--video", help="la vidéo dont la plume lit l'encre, à la place de celle de la variante (bac à sable du "
+                                    "film d'avant : outils/bac_a_sable.py stems --video …)")
+    ap.add_argument("--couches", help="avec --seulement musique : écrit aussi dans ce dossier chaque couche de la partition "
+                                      "(avant voix, f32) et les courbes de gain (gains.npz, au pas de 16 échantillons) : preuves")
     a = ap.parse_args()
+    if a.video:
+        VARIANTES[a.variante]["video"] = Path(a.video).resolve()      # entre dans l'empreinte (chemin)
     out = ICI / "stems-amont" / a.variante
     out.mkdir(parents=True, exist_ok=True)
     (ICI / "stems-amont" / ".gitignore").write_text("*.wav\n")
     emp = empreinte(a.variante)
+    if a.seulement:
+        garde = {}
+        stems, info, cues = fabriquer(a.variante, seulement=a.seulement, garder=garde)
+        import sonlib as L
+        if a.couches:
+            dc = Path(a.couches); dc.mkdir(parents=True, exist_ok=True)
+            R_ = garde["musique"]
+            for k, v in list(R_["C"].items()) + [("lit", R_["lit"]), ("pouls", R_["pouls"])]:
+                ecrire_f32(dc / f"{k}.wav", v)
+            # au pas de 16 échantillons (1/3 ms) : 16 divise 48 et 147 200 (l'insertion du prénom), les courbes de deux films
+            # se comparent donc échantillon pour échantillon, sans interpolation
+            np.savez_compressed(dc / "gains.npz", pas=16,
+                                **{k: np.asarray(v)[::16].astype(np.float32) for k, v in R_["gains"].items()})
+            print(f"   couches et gains → {dc}")
+        v = stems["musique"]
+        ecrire_f32(out / "musique.wav", v)
+        info.update({"empreinte_entrees": emp, "fichier": str(out / "musique.wav"), "sr": SR,
+                     "duree_s": round(len(v) / SR, 6), "echantillons": len(v),
+                     "crete_dbfs": round(float(L.db(np.abs(v).max())), 2), "lufs": L.mesure(v)["I"],
+                     "note": "musique seule (--seulement musique) : les autres stems et stems-amont.json ne sont pas "
+                             "touchés ; le calcul complet la refera à l'identique si les entrées n'ont pas changé"})
+        ecrire_json(out / "musique.json", {**info, **cues["cues-musique.json"]})
+        print(f"   musique  {info['duree_s']} s, crête {info['crete_dbfs']} dBFS, {info['lufs']} LUFS → {out / 'musique.wav'}")
+        return
     meta_f = out / "stems-amont.json"
     if not a.force and meta_f.exists():
         m = json.loads(meta_f.read_text())
-        if m.get("empreinte") == emp and all((out / f"{k}.wav").exists() for k in STEMS):
+        if (m.get("empreinte") == emp and all((out / f"{k}.wav").exists() for k in STEMS)
+                and all((out / c).exists() for c in CUES_SORTIES)):
             print(f"à jour (empreinte {emp[:12]}) : {out}")
             return
-    stems, info = fabriquer(a.variante)
+    stems, info, cues = fabriquer(a.variante)
+    (out / "musique.json").unlink(missing_ok=True)        # celui d'un calcul --seulement musique : périmé
+    for nom, d in cues.items():
+        ecrire_json(out / nom, d)
     import sonlib as L
     mesures = {}
     for k in STEMS:

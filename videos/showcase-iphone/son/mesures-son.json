@@ -3,24 +3,24 @@
   "loudnorm": {
    "lufs": -14.03,
    "crete_dbtp": -1.7,
-   "lra": 6.9
+   "lra": 7.0
   },
   "ebur128": {
    "I": -13.9,
-   "LRA": 9.2,
+   "LRA": 8.1,
    "TP": -1.7
   },
-  "duree_s": 47.0,
+  "duree_s": 50.06666666666667,
   "crete_vraie_numpy_dbtp": -1.7,
   "apres_aac_256k": {
    "loudnorm": {
-    "lufs": -14.04,
-    "crete_dbtp": -1.7,
-    "lra": 6.9
+    "lufs": -14.03,
+    "crete_dbtp": -1.69,
+    "lra": 7.0
    },
    "ebur128": {
     "I": -13.9,
-    "LRA": 9.2,
+    "LRA": 8.1,
     "TP": -1.7
    }
   },
@@ -38,14 +38,28 @@
   "resolution_seule_33.05-34.03": {
    "sfx_zero": true,
    "signature_zero": true,
-   "dialogue_rms_dbfs (souffle de la vraie ligne)": -47.6,
-   "dialogue_rms_33.30-33.95_dbfs (entre les extraits)": -300.0,
-   "nappe_rms_dbfs": -25.2,
+   "dialogue_rms_dbfs (souffle de la vraie ligne)": -46.9,
+   "dialogue_rms_33.30-33.95_dbfs (entre les extraits)": -51.6,
+   "nappe_rms_dbfs": -24.9,
+   "fenetre_film_courant": [
+    36.11666666666667,
+    37.09666666666667
+   ],
+   "fenetres_voix_film_courant": {
+    "rms_max": [
+     36.141667,
+     36.856667
+    ],
+    "zeros": [
+     36.326667,
+     36.856667
+    ]
+   },
    "dialogue_max_rms_25ms_33.075-33.98_dbfs": -50.8,
    "dialogue_zero_33.23-33.98": true
   },
   "dialogue_nul_apres_raccroche": true,
-  "tonalite_20_premieres_ms_rms_dbfs": -20.9,
+  "tonalite_20_premieres_ms_rms_dbfs": -21.0,
   "ok": true
  },
  "C_somme_stems_moins_mix_max": 1.1920928955078125e-07,
@@ -58,7 +72,7 @@
     "image_attendue": 0,
     "attaque_mesuree": -0.0008,
     "ecart_ms": -0.8,
-    "montee_db": 118.3,
+    "montee_db": 118.2,
     "ok": true
    },
    {
@@ -68,7 +82,7 @@
     "image_attendue": 81,
     "attaque_mesuree": 2.6992,
     "ecart_ms": -0.8,
-    "montee_db": 118.3,
+    "montee_db": 118.2,
     "ok": true
    },
    {
@@ -128,75 +142,75 @@
     "image_attendue": 731,
     "attaque_mesuree": 24.3659,
     "ecart_ms": -0.8,
-    "montee_db": 113.9,
+    "montee_db": 113.8,
     "ok": true
    },
    {
     "id": "cloche-la-rdv",
-    "t": 25.4,
-    "image": 762,
-    "image_attendue": 762,
-    "attaque_mesuree": 25.3993,
+    "t": 28.693333,
+    "image": 861,
+    "image_attendue": 861,
+    "attaque_mesuree": 28.6926,
     "ecart_ms": -0.7,
-    "montee_db": 118.8,
+    "montee_db": 118.7,
     "ok": true
    },
    {
     "id": "cloche-sol-rdv",
-    "t": 25.64,
-    "image": 769,
-    "image_attendue": 769,
-    "attaque_mesuree": 25.6403,
+    "t": 28.933333,
+    "image": 868,
+    "image_attendue": 868,
+    "attaque_mesuree": 28.9336,
     "ecart_ms": 0.3,
-    "montee_db": 8.1,
+    "montee_db": 8.2,
     "ok": true
    },
    {
     "id": "raccroche",
-    "t": 35.866667,
-    "image": 1076,
-    "image_attendue": 1076,
-    "attaque_mesuree": 35.8659,
-    "ecart_ms": -0.8,
-    "montee_db": 113.3,
+    "t": 38.933333,
+    "image": 1168,
+    "image_attendue": 1168,
+    "attaque_mesuree": 38.9326,
+    "ecart_ms": -0.7,
+    "montee_db": 113.2,
     "ok": true
    },
    {
     "id": "vibreur",
-    "t": 36.666667,
-    "image": 1100,
-    "image_attendue": 1100,
-    "attaque_mesuree": 36.6659,
-    "ecart_ms": -0.8,
+    "t": 39.733333,
+    "image": 1192,
+    "image_attendue": 1192,
+    "attaque_mesuree": 39.7326,
+    "ecart_ms": -0.7,
     "montee_db": 113.4,
     "ok": true
    },
    {
     "id": "signature-la",
-    "t": 42.3,
-    "image": 1269,
-    "image_attendue": 1269,
-    "attaque_mesuree": 42.2993,
-    "ecart_ms": -0.7,
-    "montee_db": 130.3,
+    "t": 45.366667,
+    "image": 1361,
+    "image_attendue": 1361,
+    "attaque_mesuree": 45.3659,
+    "ecart_ms": -0.8,
+    "montee_db": 130.2,
     "ok": true
    },
    {
     "id": "signature-sol",
-    "t": 42.54,
-    "image": 1276,
+    "t": 45.606667,
+    "image": 1368,
     "image_attendue": null,
-    "attaque_mesuree": 42.5403,
-    "ecart_ms": 0.3,
+    "attaque_mesuree": 45.6069,
+    "ecart_ms": 0.2,
     "montee_db": 7.7,
     "ok": true
    },
    {
     "id": "signature-re",
-    "t": 42.9,
-    "image": 1287,
-    "image_attendue": 1287,
-    "attaque_mesuree": 42.8992,
+    "t": 45.966667,
+    "image": 1379,
+    "image_attendue": 1379,
+    "attaque_mesuree": 45.9659,
     "ecart_ms": -0.8,
     "montee_db": 8.1,
     "ok": true
@@ -212,7 +226,7 @@
    },
    {
     "id": "C1",
-    "decalage_echantillons": -12
+    "decalage_echantillons": -11
    },
    {
     "id": "C2",
@@ -227,93 +241,101 @@
     "decalage_echantillons": -6
    },
    {
+    "id": "AP",
+    "decalage_echantillons": -3
+   },
+   {
+    "id": "CP",
+    "decalage_echantillons": -6
+   },
+   {
     "id": "A4",
     "decalage_echantillons": -3
    },
    {
     "id": "C4",
-    "decalage_echantillons": -8
+    "decalage_echantillons": -9
    }
   ],
   "tolerance_echantillons": 24,
   "ok": true
  },
  "F_voix_sur_reste_LU": {
-  "min": 10.3,
-  "mediane": 19.1,
+  "min": 7.8,
+  "mediane": 18.3,
   "pires": [
    [
-    10.3,
-    "confirmation.",
-    32.435
+    7.8,
+    "pour",
+    30.181667
    ],
    [
-    10.4,
+    10.3,
+    "heures.",
+    33.741667
+   ],
+   [
+    10.5,
     "dix",
     21.42
    ],
    [
-    10.8,
-    "pour",
-    27.115
-   ],
-   [
-    11.3,
+    12.0,
     "parfait.",
     24.565
    ],
    [
-    11.9,
+    12.2,
     "c'est",
     24.405
    ],
    [
-    12.4,
-    "heures.",
-    30.675
+    12.6,
+    "Florian,",
+    30.316667
    ],
    [
-    13.6,
-    "septembre",
-    30.09
+    12.7,
+    "C'est",
+    28.06
    ],
    [
-    13.9,
-    "heures,",
-    24.26
+    12.7,
+    "confirmation.",
+    35.501667
    ]
   ],
-  "ok": true
+  "ok": false
  },
  "F_sonies_LUFS": {
   "voix (4,91 → 35,48)": -14.2,
   "tonalite 1 (0,1 → 1,4)": -17.0,
   "tonalite 2 (2,8 → 4,2)": -17.0,
   "decroche la + sol (4,2 → 4,9)": -21.2,
-  "pedale seule sous A1 (6,4 → 10,1)": -42.2,
-  "nappe, accord de sol (12,5 → 17,5)": -32.6,
-  "nappe, silence de l'outil (18,4 → 19,75)": -27.3,
-  "nappe, debut du re7 (20,0 → 22,6)": -31.1,
-  "nappe, fin du re9 (30,0 → 32,9)": -27.8,
-  "nappe, resolution seule (33,05 → 34,03)": -23.4,
-  "la·sol de l'ecriture (25,4 → 26,1)": -22.0,
-  "vibreur (36,67 → 37,12)": -19.3,
-  "air du SMS (37,60 → 42,20)": -29.8,
-  "stylo (41,50 → 42,20)": -39.3,
-  "signature (42,30 → 45,30)": -13.6,
-  "nappe de fin (43,90 → 45,00)": -15.2
+  "pedale seule sous A1 (6,4 → 10,1)": -42.3,
+  "nappe, accord de sol (12,5 → 17,5)": -32.7,
+  "nappe, silence de l'outil (18,4 → 19,75)": -27.4,
+  "nappe, debut du re7 (20,0 → 22,6)": -31.3,
+  "nappe, fin du re9 (30,0 → 32,9)": -26.6,
+  "nappe, resolution seule (33,05 → 34,03)": -23.1,
+  "la·sol de l'ecriture (25,4 → 26,1)": -22.1,
+  "vibreur (39,73 → 40,18)": -19.3,
+  "air du SMS (40,67 → 45,27)": -29.9,
+  "stylo (44,57 → 45,27)": -39.4,
+  "signature (45,37 → 48,37)": -13.6,
+  "nappe de fin (46,97 → 48,07)": -14.9
  },
  "G_mono": {
   "ecart_sonie_mono_moins_stereo_film_LU": -0.08,
-  "ecart_signature 42,30 → 45,30_LU": -0.48,
+  "ecart_signature 45,37 → 48,37_LU": -0.54,
   "ecart_nappe 12,5 → 17,5_LU": -0.01,
   "ecart_decroche 4,2 → 5,0_LU": -0.11,
-  "ecart_resolution seule 33,1 → 34,0_LU": -1.09,
-  "ecart_air du SMS 37,60 → 42,20_LU": -0.87,
-  "ecart_ecriture 25,4 → 26,2_LU": -0.28,
-  "ecart_nappe de fin 43,70 → 45,70_LU": -0.52,
-  "correlation_LR_min_100ms": 0.395,
-  "correlation_LR_mediane": 0.992,
+  "ecart_resolution seule 33,1 → 34,0_LU": -1.28,
+  "ecart_air du SMS 40,67 → 45,27_LU": -0.85,
+  "ecart_ecriture 25,4 → 26,2_LU": -0.08,
+  "ecart_nappe de fin 46,77 → 48,77_LU": -0.79,
+  "correlation_LR_min_100ms": 0.376,
+  "correlation_LR_mediane": 0.993,
   "fenetres_correlation_negative": 0,
   "signature_film": {
    "correlation_LR": 0.824,
@@ -329,23 +351,23 @@
    "pedale seule 6,4-10,1": -1.81,
    "sol 12,5-17,5": -5.1,
    "sus4 18,2-19,75": -4.7,
-   "re7-re9 20,6-32,85": -3.85,
-   "resolution 33,1-35,8": -6.79,
-   "air SMS 37,60 → 42,20": -1.94,
-   "nappe de fin 43,90 → 45,00": -3.57,
-   "toute la nappe 4,6-35,8": -4.46
+   "re7-re9 20,6-32,85": -3.9,
+   "resolution 33,1-35,8": -6.93,
+   "air SMS 40,67 → 45,27": -2.01,
+   "nappe de fin 46,97 → 48,07": -4.19,
+   "toute la nappe 4,6-35,8": -4.47
   },
-  "perte_voix_db (reference)": -5.63,
+  "perte_voix_db (reference)": -5.57,
   "perte_nappe_ok": true,
   "pedale_la_sol": {
    "sol 12,5-17,5 (G4 dans l'accord, pour memoire)": {
     "la_moins_sol_db": -3.5
    },
    "re7-re9 20,6-32,85": {
-    "la_moins_sol_db": 33.3
+    "la_moins_sol_db": 32.5
    },
    "resolution 33,1-35,8": {
-    "la_moins_sol_db": -14.5
+    "la_moins_sol_db": -16.0
    }
   },
   "pedale_ok": true,
@@ -354,16 +376,16 @@
     "contact": "contact_neuf",
     "t": 20.666667,
     "tap_moins_voix_3-8k_db": 13.2,
-    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 50.9,
-    "voix_moins_tap_500-700_db": 65.9,
-    "tap_instantanee_max_lufs": -27.3,
+    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 50.8,
+    "voix_moins_tap_500-700_db": 66.0,
+    "tap_instantanee_max_lufs": -27.4,
     "ok": true
    },
    {
     "contact": "contact_dix",
     "t": 21.433333,
-    "tap_moins_voix_3-8k_db": 7.8,
-    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 53.1,
+    "tap_moins_voix_3-8k_db": 7.7,
+    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 53.0,
     "voix_moins_tap_500-700_db": 54.6,
     "tap_instantanee_max_lufs": -28.1,
     "ok": true
@@ -372,18 +394,18 @@
     "contact": "contact_onze",
     "t": 22.2,
     "tap_moins_voix_3-8k_db": 23.4,
-    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 57.0,
-    "voix_moins_tap_500-700_db": 69.8,
-    "tap_instantanee_max_lufs": -28.7,
+    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 56.9,
+    "voix_moins_tap_500-700_db": 69.9,
+    "tap_instantanee_max_lufs": -28.8,
     "ok": true
    },
    {
     "contact": "contact_retour_neuf",
     "t": 24.366667,
-    "tap_moins_voix_3-8k_db": 17.7,
-    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 20.3,
-    "voix_moins_tap_500-700_db": 70.8,
-    "tap_instantanee_max_lufs": -31.4,
+    "tap_moins_voix_3-8k_db": 17.6,
+    "tap_moins_voix_4-8k_db (au-dessus de la voix)": 20.2,
+    "voix_moins_tap_500-700_db": 70.9,
+    "tap_instantanee_max_lufs": -31.5,
     "ok": true
    }
   ],
@@ -413,40 +435,40 @@
    "mi",
    "si"
   ],
-  "20.6-26.1": [
+  "20.6-29.166666666666668": [
    "fa#",
    "la",
    "do",
    "ré",
    "mi"
   ],
-  "28.2-32.85": [
+  "31.266666666666666-35.91666666666667": [
    "fa#",
-   "la",
    "do",
+   "la",
    "mi",
    "ré"
   ],
-  "33.1-35.8": [
+  "36.16666666666667-38.86666666666667": [
    "sol",
+   "ré",
    "si",
-   "ré",
-   "fa#",
-   "la"
+   "la",
+   "fa#"
   ],
-  "37.6-42.2": [
-   "ré",
+  "40.666-45.267": [
    "sol",
+   "ré",
    "la",
    "la#",
    "sol#"
   ],
-  "43.9-45.0": [
-   "la",
+  "46.967-48.067": [
    "fa#",
+   "la",
    "ré",
-   "mi",
-   "do#"
+   "do#",
+   "mi"
   ]
  },
  "J_tonalite_contre_secousses_s1": {
@@ -565,90 +587,93 @@
   {
    "cue": "la·sol, fin de l'écriture",
    "fenetre": [
-    26.06,
-    26.1
+    29.353333,
+    29.393333
    ],
-   "x_point": 739.5,
-   "D_moins_G_mesure_db": 4.79,
-   "D_moins_G_attendu_db": 3.09
+   "x_point": 424.8,
+   "D_moins_G_mesure_db": 0.21,
+   "D_moins_G_attendu_db": -1.76
   },
   {
    "cue": "stylo, milieu du mot",
    "fenetre": [
-    41.82,
-    41.88
+    44.887,
+    44.947
    ],
-   "x_point": 518.8,
-   "D_moins_G_mesure_db": -0.38,
-   "D_moins_G_attendu_db": -0.32
+   "x_point": 519.4,
+   "D_moins_G_mesure_db": -0.37,
+   "D_moins_G_attendu_db": -0.31
   }
  ],
  "M_arc_de_sonie": {
-  "mediane_S_dialogue_5-35.4": -14.1,
-  "signature_LUFS": -11.3,
+  "mediane_S_dialogue_5-35.4": -14.2,
+  "signature_LUFS": -11.2,
   "fenetre_signature": [
-   42.9,
-   44.4
+   45.966667,
+   47.467
   ],
-  "signature_moins_mediane_LU": 2.8,
+  "signature_moins_mediane_LU": 3.0,
   "S_max_film": [
    -12.0,
-   45.3
+   48.1
   ],
   "S_max_dialogue_5-35.4": -12.4,
   "S_max_apres_la": [
    -12.0,
-   45.3
+   48.1
   ],
   "M_max_film": [
-   -9.2,
-   43.3
+   -9.3,
+   46.3
   ],
-  "instantanee_au_re_mix": -9.2,
-  "re_piste_signature_400ms": -9.3,
-  "vibreur_instantanee_max": -19.05,
+  "instantanee_au_re_mix": -9.14,
+  "re_piste_signature_400ms": -9.4,
+  "vibreur_instantanee_max": -19.12,
   "S_par_seconde": {
-   "11": -13.9,
-   "12": -13.8,
-   "13": -14.7,
-   "14": -13.6,
-   "15": -14.4,
-   "16": -13.2,
-   "17": -14.2,
-   "18": -14.3,
-   "19": -17.3,
+   "11": -13.7,
+   "12": -13.6,
+   "13": -14.6,
+   "14": -13.7,
+   "15": -14.5,
+   "16": -13.4,
+   "17": -14.3,
+   "18": -14.4,
+   "19": -17.4,
    "20": -19.4,
    "21": -16.0,
-   "22": -14.0,
+   "22": -14.1,
    "23": -13.0,
    "24": -13.3,
    "25": -13.9,
-   "26": -15.2,
-   "27": -15.3,
-   "28": -15.2,
-   "29": -13.7,
-   "30": -12.8,
-   "31": -12.5,
-   "32": -12.4,
-   "33": -13.4,
-   "34": -15.0,
-   "35": -14.5,
-   "36": -15.9,
-   "37": -16.0,
-   "38": -21.9,
-   "39": -26.2,
-   "40": -28.2,
-   "41": -29.8,
-   "42": -29.7,
-   "43": -16.6,
-   "44": -13.2,
-   "45": -12.2,
-   "46": -13.2,
-   "47": -16.7
+   "26": -14.3,
+   "27": -14.3,
+   "28": -15.7,
+   "29": -15.4,
+   "30": -15.3,
+   "31": -14.1,
+   "32": -13.8,
+   "33": -12.9,
+   "34": -12.4,
+   "35": -12.4,
+   "36": -13.4,
+   "37": -14.9,
+   "38": -14.2,
+   "39": -15.6,
+   "40": -15.8,
+   "41": -21.5,
+   "42": -26.3,
+   "43": -27.3,
+   "44": -29.8,
+   "45": -29.7,
+   "46": -17.2,
+   "47": -13.3,
+   "48": -12.1,
+   "49": -13.1,
+   "50": -16.8
   },
-  "M_max_dialogue_5-35.5": -10.15,
-  "M_p95_dialogue_5-35.5": -10.92,
-  "M_max_au_re": -9.2,
+  "M_max_dialogue_5-35.5": -10.11,
+  "M_p95_dialogue_5-35.5": -10.96,
+  "M_max_au_re": -9.14,
   "ok": true
  },
  "N_signatures_seules": {
@@ -672,122 +697,27 @@
   }
  },
  "O_monde": {
-  "mesure": {
-   "lufs": -14.03,
-   "crete_dbtp": -1.7,
-   "lra": 6.9
-  },
-  "crete_vraie_dbtp": -1.7,
-  "aboiement_instantanee_max": -28.5,
-  "loquet_instantanee_max": -28.5,
-  "rien_apres_le_decroche": true,
-  "a_jour_avec_le_master": true,
-  "ecart_hors_s1_avec_le_master_max": 0.0,
-  "choix": {
-   "aboiement": {
-    "retenue": 2,
-    "prises": [
-     {
-      "prise": 1,
-      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/aboiement-prise1.wav",
-      "bouffees": 1,
-      "tronquee": true,
-      "fond_db_sous_crete": -69.0,
-      "crete_db": -8.5,
-      "attaque_s": 0.0008
-     },
-     {
-      "prise": 2,
-      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/aboiement-prise2.wav",
-      "bouffees": 1,
-      "tronquee": false,
-      "fond_db_sous_crete": -59.4,
-      "crete_db": -17.3,
-      "attaque_s": 0.0355
-     },
-     {
-      "prise": 3,
-      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/aboiement-prise3.wav",
-      "bouffees": 1,
-      "tronquee": false,
-      "fond_db_sous_crete": -53.9,
-      "crete_db": -14.3,
-      "attaque_s": 0.1616
-     },
-     {
-      "prise": 4,
-      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/aboiement-prise4.wav",
-      "bouffees": 2,
-      "tronquee": false,
-      "fond_db_sous_crete": -54.3,
-      "crete_db": -26.5,
-      "attaque_s": 0.0641
-     }
-    ]
-   },
-   "loquet": {
-    "retenue": 3,
-    "prises": [
-     {
-      "prise": 1,
-      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/loquet-prise1.wav",
-      "bouffees": 1,
-      "tronquee": true,
-      "fond_db_sous_crete": -60.2,
-      "crete_db": -25.3,
-      "attaque_s": 0.0
-     },
-     {
-      "prise": 2,
-      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/loquet-prise2.wav",
-      "bouffees": 1,
-      "tronquee": false,
-      "fond_db_sous_crete": -56.8,
-      "crete_db": -26.4,
-      "attaque_s": 0.0356
-     },
-     {
-      "prise": 3,
-      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/loquet-prise3.wav",
-      "bouffees": 1,
-      "tronquee": false,
-      "fond_db_sous_crete": -64.1,
-      "crete_db": -19.9,
-      "attaque_s": 0.0967
-     },
-     {
-      "prise": 4,
-      "fichier": "/opt/vokio-ads/videos/showcase/son/monde/loquet-prise4.wav",
-      "bouffees": 1,
-      "tronquee": false,
-      "fond_db_sous_crete": -60.1,
-      "crete_db": -24.5,
-      "attaque_s": 0.1509
-     }
-    ]
-   }
-  },
-  "ok": true
+  "perimee": "mix-monde.wav fait 47.000 s, le film 50.067 s : variante d'un autre film, à refaire par python3 son/mix.py --monde si elle doit exister",
+  "duree_s": 47.0
  },
  "stems_crete_dbtp": {
   "dialogue": -1.65,
-  "nappe": -7.51,
-  "sfx": -11.16,
-  "signature": -1.67
+  "nappe": -7.24,
+  "sfx": -11.23,
+  "signature": -1.75
  },
  "synthese_ok": {
   "A_master": true,
   "B_silences": true,
   "D_synchro": true,
   "E_dialogue_decalage": true,
-  "F_voix_sur_reste_LU": true,
+  "F_voix_sur_reste_LU": false,
   "G_mono": true,
   "H_haut_parleur": true,
   "J_tonalite_contre_secousses_s1": true,
   "J_vibreur_contre_secousses_s6": true,
   "K_clics_hf": true,
   "M_arc_de_sonie": true,
-  "O_monde": true,
   "C_somme": true
  }
 }

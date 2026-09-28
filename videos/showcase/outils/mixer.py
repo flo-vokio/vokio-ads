@@ -31,14 +31,23 @@ LA RECETTE (clés ; toutes optionnelles sauf "pistes")
                du repère peut monter d'autant sur sa fenêtre), poids_hausse (1,25 : coût d'un dB de hausse contre un dB
                de creux), marge_db (0,5 : visée au-dessus de la cible), avance (0,03 s), relache (0,15 s), au_mieux
                (false : hors d'atteinte, on ne fait rien plutôt qu'un creux inutile), ignorer [ids], par_repere {id: {mêmes
-               clés, ou "exclu": "raison"}}} : pour chaque repère, émergence par bande (outils/ausculter.py REPÈRE) ; si la
+               clés, ou "exclu": "raison"}}, cues_reference (option : les cues du film de la référence ; l'émergence
+               d'un repère dans la référence se mesure alors à SA fenêtre dans ce fichier, par id : un repère qui a
+               bougé autrement que le reste garde sa vraie référence ; un repère ABSENT de ce fichier, né dans le film
+               actuel (l'écriture du nom depuis l'échange du prénom), n'a pas de référence : cible_db par défaut)} :
+               pour chaque repère, émergence par bande (outils/ausculter.py REPÈRE) ; si la
                meilleure bande ≤ f_max n'émerge pas de min(cible_db, émergence dans la référence), creux des cibles dans
                `bande` et/ou hausse du repère, au moindre coût, rampes cosinus ; AVANT la garde de la voix (la voix a le
                dernier mot)
+  insertions : dialogue.json (option, 28/09) : les trames d'analyse de garde_reperes et de mesures.reperes sont posées sur
+               la grille du film d'avant les insertions de temps (outils/chronologie.py debuts_trames) : après une mesure
+               insérée, chaque repère est mesuré, et décidé, comme dans le film validé
   silences : [[a, b], …]   zéros numériques EXACTS imposés sur toutes les pistes, puis vérifiés
   master : {lufs (−14), plafond_dbtp (−1,7 : ≤ −1 dBTP après AAC), anticipation, relache}
   sorties : {wav, stems (dossier), mesures (json), planches (dossier), copies [chemins]}
-  mesures : {references {nom: wav} (comparées au mix), dialogue (dialogue.json : jointures et raccords 4-8 kHz, avec
+  mesures : {references {nom: wav, ou nom: {fichier, insertions (dialogue.json)} : une référence du film d'avant lue à
+             travers les insertions de temps, silence dans chaque mesure insérée (outils/chronologie.py)} (comparées au
+             mix), dialogue (dialogue.json : jointures et raccords 4-8 kHz, avec
              mots_json), mots [« C1:0 »…],
              sautes [[de, a], …], evenements (evenements.json : repères), arc {apres: t, marge_lu}, zooms [[de, a, px]],
              differentiel {avec [noms de références qui ont le défaut], sans nom de la référence qui ne l'a pas,
@@ -68,6 +77,7 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import sonlib as L  # noqa: E402
 import ausculter as A  # noqa: E402
+import chronologie as CH  # noqa: E402
 
 MODELE = {
     "nom": "exemple", "description": "musique + voix, la musique se creuse sous la voix", "duree": 30.0,
@@ -114,15 +124,18 @@ def empreinte(R, fichier):
     for k in ("dialogue", "evenements"):
         if m.get(k):
             h.update(chemin(R["_base"], m[k]).read_bytes())
+    if R.get("insertions"):
+        h.update(chemin(R["_base"], R["insertions"]).read_bytes())
     if R.get("garde_voix", {}).get("mots"):
         h.update(chemin(R["_base"], R["garde_voix"]["mots"]).read_bytes())
     Gr = R.get("garde_reperes") or {}
-    if Gr.get("cues"):
-        h.update(chemin(R["_base"], Gr["cues"]).read_bytes())
+    for cle in ("cues", "cues_reference"):
+        if Gr.get(cle):
+            h.update(chemin(R["_base"], Gr[cle]).read_bytes())
     if Gr.get("reference"):
         for f in sorted(chemin(R["_base"], Gr["reference"]).glob("*.wav")):
             h.update(f.name.encode()); h.update(str(f.stat().st_size).encode()); h.update(str(f.stat().st_mtime_ns).encode())
-    for f in (Path(__file__), Path(L.__file__), Path(A.__file__)):
+    for f in (Path(__file__), Path(L.__file__), Path(A.__file__), Path(CH.__file__)):
         h.update(f.read_bytes())
     return h.hexdigest()
 
@@ -221,6 +234,22 @@ def _poids(n, a, b, avance, relache):
     return i0, i1, w
 
 
+def lire_reference(base, v):
+    """Une référence de mesure : un wav, ou {fichier, insertions} (un son du film d'avant, silence dans chaque mesure
+    insérée : les fenêtres du film actuel y retombent sur le même contenu)."""
+    if isinstance(v, dict):
+        x = L.lire(chemin(base, v["fichier"]))
+        return CH.charger(chemin(base, v["insertions"])).inserer(x) if v.get("insertions") else x
+    return L.lire(chemin(base, v))
+
+
+def debuts_insertions(R, n, pas=240, nfft=1024):
+    """28/09 : "insertions" (option de la recette, chemin d'un dialogue.json) : la grille des trames d'analyse de la garde
+    des repères et de leurs mesures est alignée sur le film d'avant (chronologie.debuts_trames) ; sans la clé : None, la
+    grille de toujours."""
+    return CH.charger(chemin(R["_base"], R["insertions"])).debuts_trames(n, pas, nfft) if R.get("insertions") else None
+
+
 def lire_stems(dossier):
     return {f.stem: L.stereo(L.lire(f)) for f in sorted(Path(dossier).glob("*.wav"))}
 
@@ -231,9 +260,11 @@ def garde_reperes(pistes, Gr, n):
     hausse de la piste du repère (h ≥ 0, jusqu'à hausse_max_db), au moindre coût |g| + poids_hausse·h (grille de 0,5 dB),
     sur [t − avance ; fin + relache] en cosinus. Renvoie le journal, repère par repère."""
     cues = json.loads(Path(Gr["_cues"]).read_text())["cues"]
+    cues_ref = ({q["id"]: q for q in json.loads(Path(Gr["_cues_ref"]).read_text())["cues"]} if Gr.get("_cues_ref") else {})
     ign, par = set(Gr.get("ignorer", [])), Gr.get("par_repere", {})
     bandes = A.BANDES_REPERES
-    T = {k: A.puissances_bandes(v, bandes) for k, v in pistes.items()}
+    D = Gr.get("_debuts")                    # la grille des trames (alignée sur le film d'avant une insertion)
+    T = {k: A.puissances_bandes(v, bandes, debuts=D) for k, v in pistes.items()}
     tot = sum(P for _, P in T.values())
     Tr = totr = None
     if Gr.get("_ref"):
@@ -245,7 +276,8 @@ def garde_reperes(pistes, Gr, n):
     def dedans(c, f1, f2):                   # puissance de la cible c dans / hors de la bande du creux
         if (c, f1, f2) not in cache:
             xin = L.passe_bande(pistes[c], f1, f2)
-            cache[(c, f1, f2)] = (A.puissances_bandes(xin, bandes)[1], A.puissances_bandes(pistes[c] - xin, bandes)[1])
+            cache[(c, f1, f2)] = (A.puissances_bandes(xin, bandes, debuts=D)[1],
+                                  A.puissances_bandes(pistes[c] - xin, bandes, debuts=D)[1])
         return cache[(c, f1, f2)]
     creux, hausses, journal = {}, {}, []
     for q in cues:
@@ -266,9 +298,16 @@ def garde_reperes(pistes, Gr, n):
         so = sum(A.somme_active(dedans(c, f1, f2)[1], m) for c in cibles)[crit] if cibles else np.zeros(len(crit))
         sa = A.somme_active(np.maximum(tot - Ps - sum(T[c][1] for c in cibles), 0.0), m)[crit]
         cible = float(o.get("cible_db", 6.0))
-        if Tr and q["couche"] in Tr:
+        if Tr and q["couche"] in Tr and cues_ref and q["id"] not in cues_ref:
+            # 28/09 : un repère NÉ dans le film actuel (l'écriture du nom depuis l'échange du prénom) n'a pas de référence ;
+            # le lire à la même fenêtre dans le film de la référence mesurait un autre moment (−99 dB : aucune garde)
+            J["ref_db"] = None
+            J["sans_reference"] = "absent de cues_reference : cible par défaut"
+        elif Tr and q["couche"] in Tr:
             tr, Pr = Tr[q["couche"]]
-            er = A.emergences(Pr, totr - Pr, A.trames_actives(tr, Pr, a, b, o.get("actif_db", 10.0)))
+            ar, br = (A.fenetre_repere(cues_ref[q["id"]], o.get("duree_defaut", 0.25), o.get("duree_max", 1.5))
+                      if q["id"] in cues_ref else (a, b))
+            er = A.emergences(Pr, totr - Pr, A.trames_actives(tr, Pr, ar, br, o.get("actif_db", 10.0)))
             J["ref_db"] = round(float(max(er[i] for i in crit)), 1)
             cible = min(cible, J["ref_db"])
 
@@ -414,7 +453,9 @@ def mixer(R):
         print(f"   sidechain {r['source']} → {r['cibles']} {r['profondeur_db']} dB {r.get('bande') or 'large bande'}")
     if R.get("garde_reperes"):
         Gr = dict(R["garde_reperes"]); Gr["_cues"] = chemin(R["_base"], Gr["cues"])
+        Gr["_cues_ref"] = chemin(R["_base"], Gr["cues_reference"]) if Gr.get("cues_reference") else None
         Gr["_ref"] = chemin(R["_base"], Gr["reference"]) if Gr.get("reference") else None
+        Gr["_debuts"] = debuts_insertions(R, n)
         jr = garde_reperes(pistes, Gr, n)
         rapport["garde_reperes"] = jr
         act = [j for j in jr if j.get("action") != "aucune" and not j.get("exclu")]
@@ -486,7 +527,7 @@ def mesurer(R, mix, stems, g_lim, rapport):
         s_fin = float(S[ts >= apres].max()); s_avant = float(S[(ts < apres) & (ts > 3)].max())
         out["arc"] = {"S_max_apres": round(s_fin, 2), "S_max_avant": round(s_avant, 2), "ecart_lu": round(s_fin - s_avant, 2),
                       "sommet_sur_la_fin": bool(s_fin >= s_avant + arc.get("marge_lu", 0.0))}
-    refs = {k: L.lire(chemin(R["_base"], v)) for k, v in Ms.get("references", {}).items()}
+    refs = {k: lire_reference(R["_base"], v) for k, v in Ms.get("references", {}).items()}
     comp = {"mix": mix, **refs}
     mots = A.lire_mots(chemin(R["_base"], Ms["mots_json"])) if Ms.get("mots_json") else []
     if Ms.get("mots") and mots:
@@ -520,11 +561,14 @@ def mesurer(R, mix, stems, g_lim, rapport):
     if "reperes" in Ms and R.get("garde_reperes"):
         Gr = {**R["garde_reperes"], **(Ms["reperes"] or {})}
         cues = json.loads(chemin(R["_base"], Gr["cues"]).read_text())["cues"]
+        cues_ref = (json.loads(chemin(R["_base"], Gr["cues_reference"]).read_text())["cues"]
+                    if Gr.get("cues_reference") else None)
         ref_st = lire_stems(chemin(R["_base"], Gr["reference"])) if Gr.get("reference") else None
         exclus = {k for k, v in Gr.get("par_repere", {}).items() if v.get("exclu")}
         rr = A.reperes(stems, cues, ref_st, Gr.get("ignorer", []), f_max=Gr.get("f_max", 8000.0),
                        cible_db=Gr.get("cible_db", 6.0),
-                       cibles_par_id={k: v["cible_db"] for k, v in Gr.get("par_repere", {}).items() if "cible_db" in v})
+                       cibles_par_id={k: v["cible_db"] for k, v in Gr.get("par_repere", {}).items() if "cible_db" in v},
+                       cues_ref=cues_ref, debuts=debuts_insertions(R, len(mix)))
         for q in rr:
             q["exclu"] = q["id"] in exclus
         out["reperes"] = rr

@@ -72,8 +72,39 @@
     };
   }
 
-  function image(t) { return Math.round(t * FPS); }
-  function aImage(t) { return Math.round(t * FPS) / FPS; }   // arrondi à l'image (film)
+  // Arrondi à l'image. Depuis les insertions de temps (28/09), un instant d'APRÈS une insertion est arrondi dans le film de base
+  // (versBase : l'instant d'origine au µs près, puis + les images insérées) : un mot tombé pile sur une demi-image (« samedi »,
+  // 29,45 s = 883,5 images) s'arrondit comme dans le film de 47 s, pas selon le bruit de l'arrondi au µs du décalage de
+  // 3,066667 s (92/30 s n'est pas un nombre entier de µs). Avant toute insertion : Math.round(t × 30), comme toujours.
+  function image(t) { const b = versBase(t); return b ? Math.round(b.t * FPS) + b.n : Math.round(t * FPS); }
+  function aImage(t) { return image(t) / FPS; }   // arrondi à l'image (film)
+  // aImage(t + d) où t est l'instant d'un mot : le décalage d (−1 image, TEXTE.reveler) s'ajoute dans le film de base
+  function aImagePlus(t, d) { const b = versBase(t); return b ? (Math.round((b.t + d) * FPS) + b.n) / FPS : Math.round((t + d) * FPS) / FPS; }
+
+  // INSERTIONS DE TEMPS (28/09, outils/temps.py) : une image ou un instant du film de BASE (47,00 s, 1 410 images, commit
+  // a6d3d8e) porté dans le film courant, d'après DONNEES.insertions ({id, pivot_image, images}, appliquées dans l'ordre : la
+  // règle de son/dialogue.py). Une scène écrit ses repères en images du film de base : TEXTE.decaler(941) = 1033 depuis
+  // l'échange du prénom (+ 92 images à partir de l'image 758). Sans insertion : l'identité.
+  const INSERTIONS = D.insertions || [];
+  // instant du film courant → {t : instant du film de base au µs, n : images insérées avant lui} ; null avant la 1re insertion
+  // ou DANS une insertion (un mot né de l'insertion : AP, CP), arrondi tel quel
+  function versBase(t) {
+    let n = 0;
+    for (let k = INSERTIONS.length - 1; k >= 0; k--) {
+      const i = INSERTIONS[k], p = i.pivot_image / FPS, d = i.images / FPS;
+      if (t >= p + d - 1e-9) { t -= d; n += i.images; }
+      else if (t >= p - 1e-9) return null;
+    }
+    return n ? { t: +t.toFixed(6), n: n } : null;
+  }
+  function decaler(n) {
+    INSERTIONS.forEach(function (i) { if (n >= i.pivot_image) n += i.images; });
+    return n;
+  }
+  function decalerT(t) {
+    INSERTIONS.forEach(function (i) { if (t >= i.pivot_image / FPS - 1e-9) t += i.images / FPS; });
+    return +t.toFixed(6);
+  }
 
   // Construit les lignes dans le conteneur et apparie chaque unité affichée à ses mots dits.
   // options : { extrait (null = texte non dit), depuis (rang de départ, défaut 0),
@@ -164,7 +195,7 @@
         t = o.t + i * (o.pas || 0);
         dec = o.decalage || 0;
       }
-      const tl0 = Math.max(0, aImage(t + dec) - origine);
+      const tl0 = Math.max(0, (u.t == null ? aImage(t + dec) : aImagePlus(t, dec)) - origine);
       tl.fromTo(u.el, { y: dy, opacity: 0 }, { y: 0, opacity: 1, duration: dur, ease: ease, immediateRender: true }, tl0);
     });
     return tl;
@@ -201,5 +232,5 @@
   }
 
   window.TEXTE = { cle: cle, mots: mots, mot: mot, scene: scene, image: image, aImage: aImage,
-                   poser: poser, reveler: reveler, sortir: sortir, FPS: FPS };
+                   poser: poser, reveler: reveler, sortir: sortir, FPS: FPS, decaler: decaler, decalerT: decalerT, aImagePlus: aImagePlus };
 })();

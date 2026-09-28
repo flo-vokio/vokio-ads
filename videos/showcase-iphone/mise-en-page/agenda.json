@@ -1,5 +1,5 @@
 {
- "_note": "L'objet agenda de s4 et s5 (UN objet, mêmes pixels aux deux scènes) : la vraie capture de app.vokio.fr (outils/preparer_agenda.py, 1575 × 675 à 4,5 px par px CSS, JAMAIS redimensionnée) posée en (x ; y) px entiers, qui déborde du cadre à droite, et sa mention solidaire (police = style « mention » de texte.json). boite_hauteur = hauteur de la boîte de l'objet (image + mention quand elle est dessous). y_depart : montée de s4 (+y → 0) ; y_sortie, haut_min, t_haut_min : sortie de s5 (0 → −y_sortie ; le haut de l'objet reste sous haut_min jusqu'à t_haut_min).",
+ "_note": "L'objet agenda de s4 et s5 (UN objet, mêmes pixels aux deux scènes) : la vraie capture de app.vokio.fr (outils/preparer_agenda.py, 1575 × 675 à 4,5 px par px CSS, JAMAIS redimensionnée) posée en (x ; y) px entiers, qui déborde du cadre à droite, et sa mention solidaire (police = style « mention » de texte.json). boite_hauteur = hauteur de la boîte de l'objet (image + mention quand elle est dessous). y_depart : montée de s4 (+y → 0) ; y_sortie, haut_min, t_haut_min : sortie de s5 (0 → −y_sortie ; le haut de l'objet reste sous haut_min jusqu'à t_haut_min, s film). Temps en secondes du film COURANT (28/09 : 31,11 du film de 47 s + 3,066667 de l'échange du prénom = 34,176667 ; outils/temps.py 31.11).",
  "9x16": {
   "x": 70,
   "y": 590,
@@ -8,7 +8,7 @@
   "y_depart": 520,
   "y_sortie": 270,
   "haut_min": 520,
-  "t_haut_min": 31.11
+  "t_haut_min": 34.176667
  },
  "16x9": {
   "_note": "3e passe du 28/09 : la capture reste 1:1 (sa gouttière des heures est faite pour le disque de 44 px). Bord gauche en 1100 ; y 234 : le filet 10:00 tombe sur la ligne de lecture (539,75), 09:00 à 305,75, 11:00 à 773,75 ; bas de l'image 909, 63 px au-dessus des 10 % du bas (989 avant, dans la bande). La grille VIDE passe encore sous le coin « Passer l'annonce » (x ≥ 1500, y ≥ 780) : admis, aucune information n'y est. Mention au-dessus de la carte, lignes de base 150 / 202, x 1120 (sous la bande du haut). haut_min 150 : en 16:9 le sous-titre est à gauche de l'agenda, sa sortie par le haut ne croise rien. y_sortie 270 : les étiquettes montent avec lui en s'effaçant ; le point les franchit par le couloir entre 09:00 et 10:00 (s6-sms.json « couloir »).",
@@ -19,7 +19,7 @@
   "y_depart": 360,
   "y_sortie": 270,
   "haut_min": 150,
-  "t_haut_min": 31.11,
+  "t_haut_min": 34.176667,
   "_variante_adoptee": "« 16x9-v3 », adoptée le 28/09/2026 : 3e passe du 16:9 (revues YouTube 7/10 et Florian 7,5/10)"
  }
 }

@@ -3,7 +3,27 @@
  "sr": 48000,
  "canaux": 2,
  "format": "pcm_s24le",
- "duree_s": 47.0,
+ "duree_s": 50.06666666666667,
+ "fps": 30,
+ "images": 1502,
+ "echantillons": 2403200,
+ "duree_base_s": 47.0,
+ "insertions": [
+  {
+   "id": "prenom",
+   "pivot_image": 758,
+   "images": 92,
+   "extraits": [
+    "AP",
+    "CP"
+   ],
+   "motif": "L'échange du prénom (retour de Florian du 28/09). Pivot 758 (25,2667 s) : un temps de la grille (735 + 23), après la fin de C3 (25,00, SORTIE_CHOIX de s4) et le début de s5 (25,20), avant A4 (26,17). Entre 25,2667 et 26,17 il n'y avait, dans le film de 47 s, que la plume (25,367) et l'écriture de « Florian » (25,40 → 26,10), que l'image remet en scène sous la voix de l'appelant. Tout le reste glisse d'une mesure.",
+   "pivot_s": 25.266667,
+   "s": 3.066667,
+   "echantillons": 147200
+  }
+ ],
+ "insertions_regle": "instant t du film d'avant (47 s, commit a6d3d8e) → t + Σ s des insertions dont t ≥ pivot_s, appliquées dans l'ordre ; en images : image + Σ images des insertions dont image ≥ pivot_image",
  "niveau": "niveau d'origine de montes/veterinaire.wav, aucun filtre ; un seul gain de clip déclaré (extraits[].gains)",
  "appel": {
   "conversation_id": "conv_9401m2tg19wtfxn9cm727n4dtskz",
@@ -14,7 +34,7 @@
   "monte": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
   "montes_vers_original": "original = montes avant 66,70 ; original = montes + 4,20 après (coupe 66,70 → 70,90 de l'original)"
  },
- "regle_de_coupe": "vrai blanc : RMS 5 ms (48 kHz) ≤ -70 dBFS sur toute la rampe d'entrée et sur les 10 dernières ms de la rampe de sortie (plancher de la porte : −81/−82 dBFS) ; rampes cosinus, 40 ms à l'entrée, 60 à 120 ms à la sortie ; décalages inchangés (les mots ne bougent pas)",
+ "regle_de_coupe": "vrai blanc : RMS 5 ms (48 kHz) ≤ -70 dBFS sur toute la rampe d'entrée et sur les 10 dernières ms de la rampe de sortie (plancher de la porte : −81/−82 dBFS) ; rampes cosinus, 40 ms à l'entrée, 60 à 120 ms à la sortie ; décalages inchangés (les mots ne bougent pas), sauf les insertions de temps (\"insertions\"), qui décalent en échantillons entiers tout ce qui suit",
  "extraits": [
   {
    "id": "A1",
@@ -27,6 +47,10 @@
    "film_in": 4.91,
    "film_out": 10.31,
    "decalage_film_moins_source": 4.21,
+   "decalage_base": 4.21,
+   "decalage_echantillons": 202080,
+   "insertions": [],
+   "insertion": null,
    "fondu_s": 0.04,
    "fondu_in_s": 0.04,
    "fondu_out_s": 0.12,
@@ -54,6 +78,10 @@
    "film_in": 10.42,
    "film_out": 14.08,
    "decalage_film_moins_source": 0.22,
+   "decalage_base": 0.22,
+   "decalage_echantillons": 10560,
+   "insertions": [],
+   "insertion": null,
    "fondu_s": 0.04,
    "fondu_in_s": 0.04,
    "fondu_out_s": 0.06,
@@ -96,6 +124,10 @@
    "film_in": 14.56,
    "film_out": 17.04,
    "decalage_film_moins_source": -20.16,
+   "decalage_base": -20.16,
+   "decalage_echantillons": -967680,
+   "insertions": [],
+   "insertion": null,
    "fondu_s": 0.04,
    "fondu_in_s": 0.04,
    "fondu_out_s": 0.06,
@@ -123,6 +155,10 @@
    "film_in": 17.54,
    "film_out": 22.855,
    "decalage_film_moins_source": -31.12,
+   "decalage_base": -31.12,
+   "decalage_echantillons": -1493760,
+   "insertions": [],
+   "insertion": null,
    "fondu_s": 0.04,
    "fondu_in_s": 0.04,
    "fondu_out_s": 0.075,
@@ -150,6 +186,10 @@
    "film_in": 23.2,
    "film_out": 25.0,
    "decalage_film_moins_source": -35.56,
+   "decalage_base": -35.56,
+   "decalage_echantillons": -1706880,
+   "insertions": [],
+   "insertion": null,
    "fondu_s": 0.04,
    "fondu_in_s": 0.04,
    "fondu_out_s": 0.08,
@@ -160,10 +200,66 @@
    ],
    "texte": "Euh, bah, à neuf heures, c'est parfait.",
    "tour_original_t": 58,
-   "motif": "Saute « Très bien. C'est pour quel prénom ? » et « C'est pour Florian. » (63,31 → 66,48). Sortie à 60,56 (film 25,00), là où la queue de « parfait. » rejoint le plancher : pas plus tard, car s4-agenda.html (SORTIE_CHOIX, 25,00) exige que le choix ne sorte pas avant la fin de C3.",
+   "motif": "Sortie à 60,56 (film 25,00), là où la queue de « parfait. » rejoint le plancher : pas plus tard, car s4-agenda.html (SORTIE_CHOIX, 25,00) exige que le choix ne sorte pas avant la fin de C3. Suivi, depuis le 28/09, de l'échange du prénom (AP, CP) ; le film de 47 s le sautait (63,31 → 66,48).",
    "bords_dbfs": [
     -78.3,
     -67.5
+   ]
+  },
+  {
+   "id": "AP",
+   "locuteur": "agent",
+   "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
+   "source_in": 63.24,
+   "source_out": 65.0,
+   "original_in": 63.24,
+   "original_out": 65.0,
+   "film_in": 25.47,
+   "film_out": 27.23,
+   "decalage_film_moins_source": -37.77,
+   "decalage_base": -37.77,
+   "decalage_echantillons": -1812960,
+   "insertions": [],
+   "insertion": "prenom",
+   "fondu_s": 0.04,
+   "fondu_in_s": 0.04,
+   "fondu_out_s": 0.12,
+   "gains": [],
+   "bords_avant_v2_source": null,
+   "texte": "Très bien. C'est pour quel prénom ?",
+   "tour_original_t": 63,
+   "motif": "La question, en entier, « Très bien. » compris (l'accusé de réception naturel de « c'est parfait. », et sans lui il faudrait entrer à 63,82 dans une respiration de l'agente à −70/−72 dBFS, sans porte fermée). Entrée à 63,24 : plancher jusqu'à 63,28, la voix part à 63,29. Sortie à 65,00 : la queue de « prénom ? » décroît de 64,71 (−34 dBFS) au plancher (64,97) ; rampe de 120 ms, comme A1.",
+   "bords_dbfs": [
+    -78.3,
+    -78.3
+   ]
+  },
+  {
+   "id": "CP",
+   "locuteur": "appelant",
+   "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
+   "source_in": 65.74,
+   "source_out": 66.56,
+   "original_in": 65.74,
+   "original_out": 66.56,
+   "film_in": 27.97,
+   "film_out": 28.79,
+   "decalage_film_moins_source": -37.77,
+   "decalage_base": -37.77,
+   "decalage_echantillons": -1812960,
+   "insertions": [],
+   "insertion": "prenom",
+   "fondu_s": 0.04,
+   "fondu_in_s": 0.04,
+   "fondu_out_s": 0.06,
+   "gains": [],
+   "bords_avant_v2_source": null,
+   "texte": "C'est pour Florian.",
+   "tour_original_t": 65,
+   "motif": "La réponse, en entier. Entrée à 65,74, dans le vrai blanc (porte fermée jusqu'à 65,785) : la porte s'ouvre sur la montée du /s/ de « C'est » (65,79 → 65,89, −74 à −53 dBFS, 2,5-4 kHz dominant ; 14 dB sous l'inspiration de C4 dans 2,4-4,5 kHz), gardée telle quelle, sans gain : c'est le début du mot. Sortie à 66,56 : « Florian. » s'éteint à 66,51 et la porte se ferme (plancher dès 66,515) ; rampe de 60 ms dans le plancher, qui ne touche pas la fin du /ɑ̃/. Avant la coupe du montage du 18/09 (66,70). Niveau : « Florian » sort de la chaîne voix de mix.py à −20,0 LUFS (1-4 kHz −35,2 dB), dans la médiane des mots de l'appelant (« chat » −19,1, « demain » −18,9, « neuf » −20,5, « Super » −18,5) : aucun gain de clip.",
+   "bords_dbfs": [
+    -78.3,
+    -78.3
    ]
   },
   {
@@ -174,9 +270,15 @@
    "source_out": 74.33,
    "original_in": 71.44,
    "original_out": 78.53,
-   "film_in": 26.17,
-   "film_out": 33.26,
-   "decalage_film_moins_source": -41.07,
+   "film_in": 29.236667,
+   "film_out": 36.326667,
+   "decalage_film_moins_source": -38.003333,
+   "decalage_base": -41.07,
+   "decalage_echantillons": -1824160,
+   "insertions": [
+    "prenom"
+   ],
+   "insertion": null,
    "fondu_s": 0.04,
    "fondu_in_s": 0.04,
    "fondu_out_s": 0.08,
@@ -187,7 +289,7 @@
    ],
    "texte": "Parfait, je vous note ça pour Florian, pour une consultation vétérinaire, le samedi dix-neuf septembre à neuf heures. Vous recevrez un SMS de confirmation.",
    "tour_original_t": 71,
-   "motif": "La confirmation, en entier. Le montage du 18/09 avait déjà retiré la revérification (original 66,70 → 70,90).",
+   "motif": "La confirmation, en entier. Le montage du 18/09 avait déjà retiré la revérification (original 66,70 → 70,90). 28/09 : glisse d'une mesure avec l'insertion « prenom » (décalage effectif −38,003333, film 29,2367) ; « pour Florian » y devient une confirmation du prénom que l'appelant vient de donner.",
    "bords_dbfs": [
     -75.7,
     -78.3
@@ -201,9 +303,15 @@
    "source_out": 76.72,
    "original_in": 79.06,
    "original_out": 80.92,
-   "film_in": 33.79,
-   "film_out": 35.65,
-   "decalage_film_moins_source": -41.07,
+   "film_in": 36.856667,
+   "film_out": 38.716667,
+   "decalage_film_moins_source": -38.003333,
+   "decalage_base": -41.07,
+   "decalage_echantillons": -1824160,
+   "insertions": [
+    "prenom"
+   ],
+   "insertion": null,
    "fondu_s": 0.04,
    "fondu_in_s": 0.04,
    "fondu_out_s": 0.12,
@@ -217,8 +325,8 @@
      "db": -6.0,
      "raison": "la porte s'ouvre sur une inspiration (2,4-4,5 kHz, −34,6 dBFS après la chaîne voix) : gardée, car elle amène « Super » sans saute, mais 6 dB plus bas",
      "film": [
-      33.845,
-      34.0
+      36.911667,
+      37.066667
      ],
      "fondu_s": 0.03
     }
@@ -229,7 +337,7 @@
    ],
    "texte": "Super, merci beaucoup. Au revoir.",
    "tour_original_t": 79,
-   "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute. v2 : décalage −41,07, le même que A4 : C4 suit A4 après son VRAI blanc. Entrée à 74,86 : la porte s'ouvre à 74,915 (fond de la ligne de l'appelant, 185 ms avant « Super ») ; l'ancienne entrée (75,05) tombait dessus. Sortie à 76,72 (queue de « revoir. » jusqu'à 76,70), avant le raccroché du film (35,867 = 76,937).",
+   "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute. v2 : décalage −41,07, le même que A4 : C4 suit A4 après son VRAI blanc. Entrée à 74,86 : la porte s'ouvre à 74,915 (fond de la ligne de l'appelant, 185 ms avant « Super ») ; l'ancienne entrée (75,05) tombait dessus. Sortie à 76,72 (queue de « revoir. » jusqu'à 76,70), avant le raccroché du film (35,867 = 76,937 dans le film de 47 s ; 38,933 depuis l'insertion « prenom », qui décale C4 d'une mesure comme A4).",
    "bords_dbfs": [
     -78.3,
     -78.3
@@ -259,6 +367,22 @@
    "extrait": "C3",
    "bord": "film_out",
    "t": 25.0,
+   "ok": true
+  },
+  {
+   "image": "outils/construire.py SORTIE_QUESTION",
+   "valeur": 27.84,
+   "extrait": "AP",
+   "bord": "film_out",
+   "t": 27.23,
+   "ok": true
+  },
+  {
+   "image": "outils/construire.py SORTIE_REPONSE",
+   "valeur": 29.08,
+   "extrait": "CP",
+   "bord": "film_out",
+   "t": 28.79,
    "ok": true
   }
  ]

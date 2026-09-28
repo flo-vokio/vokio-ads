@@ -17,12 +17,14 @@
      --rendu film.mp4 (hf render, sous flock /tmp/hf-rendu.lock), --empreinte ref.json (rendu sans perte, empreintes
      image par image comparées à ref.json : outils/identite.py ; code 1 si une image diffère), --entrees git:HEAD (dialogue
      et mots du dernier commit au lieu de ceux, peut-être en chantier, du dossier son/ : le minutage du film reste figé).
+     SANS --entrees (le chemin normal) : son/dialogue.json et donnees/mots.json de l'arbre de travail de ce projet (ceux
+     qu'écrivent son/dialogue.py et outils/mots.py) ; c'est ainsi que le 16:9 de 50,07 s a été construit le 28/09, avant commit.
   --variante '*=<nom>' : un JEU, la variante de ce nom dans chaque fichier de mise-en-page/ qui l'a (outils/mise_en_page.py ; passé
   aussi à preparer_agenda.py, qui pose l'agenda du format).
-  Le 9:16 EST ce projet (python3 outils/construire.py) ; « format.py 9x16 --dossier /tmp/x --entrees git:aa4dd24 --empreinte
-  formats/empreintes-9x16.json » reconstruit une copie de contrôle et prouve qu'elle rend le film à l'image près (1 410 images,
-  ~3 min ; disque sous 1,2 Gio libres : le rendu passe par /dev/shm, outils/rendre.py). Chemin court sans MP4 :
-  « python3 outils/identite.py prouver /tmp/x aa4dd24 » (≈ 145 instants par snapshots, ~2 min).
+  Le 9:16 EST ce projet (python3 outils/construire.py) ; « format.py 9x16 --dossier /dev/shm/x --empreinte
+  formats/empreintes-9x16.json » reconstruit une copie de contrôle et prouve qu'elle rend le film à l'image près (1 502 images
+  depuis l'échange du prénom du 28/09, ~4 min ; disque sous 1,2 Gio libres : le rendu passe par /dev/shm, outils/rendre.py). Chemin court sans MP4 :
+  « python3 outils/identite.py prouver /dev/shm/x HEAD » (≈ 145 instants par snapshots, ~2 min).
 Règle : on n'édite JAMAIS un fichier de D (il est régénéré) : on édite la source, mise-en-page/*.json ou la scène.
 """
 import argparse
@@ -43,9 +45,16 @@ VERROU = "/tmp/hf-rendu.lock"
 SOURCES = ["index.html", "compositions", "lib", "assets", "outils/banc.html", "outils/banc-film.html"]
 IGNORER = {"__pycache__"}
 REF = (1080, 1920)
-# Images clés du storyboard (s film) : une par idée de scène, choisies sur DONNEES.evenements du film de 47,00 s.
-PLANCHE = [("s1 accroche + relance", 3.5), ("s2 Élise, page 2", 7.0), ("s3 tamis fait", 14.8), ("s4 point sur 10:00", 21.5),
-           ("s5 bloc écrit", 26.6), ("s6 SMS ouvert", 38.0), ("s7 signature", 46.9)]
+# Images clés du storyboard (s film) : une par idée de scène, choisies sur DONNEES.evenements du film de 47,00 s (film de BASE),
+# portées dans le film courant par outils/temps.py (son/dialogue.json « insertions » : + 3,066667 s après 25,2667 depuis
+# l'échange du prénom) ; « s5 prénom attendu » est né de l'insertion (film courant : la plume en suspens pendant la question).
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import temps  # noqa: E402
+_T = temps.Insertions.depuis(PROJET / "son" / "dialogue.json")
+PLANCHE = sorted([(nom, round(_T.t(t), 3)) for nom, t in
+                  [("s1 accroche + relance", 3.5), ("s2 Élise, page 2", 7.0), ("s3 tamis fait", 14.8), ("s4 point sur 10:00", 21.5),
+                   ("s5 bloc écrit", 26.6), ("s6 SMS ouvert", 38.0), ("s7 signature", 46.9)]]
+                 + ([("s5 prénom attendu", 27.2)] if any(i["id"] == "prenom" for i in _T.liste) else []), key=lambda x: x[1])
 
 
 def regles(W, H):

@@ -1,0 +1,168 @@
+{
+ "releves": [
+  {
+   "extraits": {
+    "AP": -37.77,
+    "CP": -37.77
+   },
+   "de": 25.32,
+   "a": 28.94,
+   "fichier": "/opt/vokio-ads/videos/showcase-iphone/son/dialogue.wav",
+   "texte": "Très bien. C'est pour quel prénom ? C'est pour Florian",
+   "words": [
+    {
+     "text": "Très",
+     "start": 25.52,
+     "end": 25.68,
+     "type": "word",
+     "speaker_id": "speaker_0",
+     "logprob": -0.006744596175849438
+    },
+    {
+     "text": " ",
+     "start": 25.68,
+     "end": 25.72,
+     "type": "spacing",
+     "speaker_id": "speaker_0",
+     "logprob": 0.0
+    },
+    {
+     "text": "bien.",
+     "start": 25.72,
+     "end": 25.9,
+     "type": "word",
+     "speaker_id": "speaker_0",
+     "logprob": -2.9061114764772357e-05
+    },
+    {
+     "text": " ",
+     "start": 25.9,
+     "end": 26.18,
+     "type": "spacing",
+     "speaker_id": "speaker_0",
+     "logprob": 0.0
+    },
+    {
+     "text": "C'est",
+     "start": 26.18,
+     "end": 26.28,
+     "type": "word",
+     "speaker_id": "speaker_0",
+     "logprob": -2.813322282690933e-06
+    },
+    {
+     "text": " ",
+     "start": 26.28,
+     "end": 26.32,
+     "type": "spacing",
+     "speaker_id": "speaker_0",
+     "logprob": 0.0
+    },
+    {
+     "text": "pour",
+     "start": 26.32,
+     "end": 26.4,
+     "type": "word",
+     "speaker_id": "speaker_0",
+     "logprob": 0.0
+    },
+    {
+     "text": " ",
+     "start": 26.4,
+     "end": 26.44,
+     "type": "spacing",
+     "speaker_id": "speaker_0",
+     "logprob": -3.2186455882765586e-06
+    },
+    {
+     "text": "quel",
+     "start": 26.44,
+     "end": 26.58,
+     "type": "word",
+     "speaker_id": "speaker_0",
+     "logprob": -3.2186455882765586e-06
+    },
+    {
+     "text": " ",
+     "start": 26.58,
+     "end": 26.6,
+     "type": "spacing",
+     "speaker_id": "speaker_0",
+     "logprob": -1.6689286894688848e-06
+    },
+    {
+     "text": "prénom",
+     "start": 26.6,
+     "end": 26.9,
+     "type": "word",
+     "speaker_id": "speaker_0",
+     "logprob": -1.6689286894688848e-06
+    },
+    {
+     "text": " ",
+     "start": 26.9,
+     "end": 26.92,
+     "type": "spacing",
+     "speaker_id": "speaker_0",
+     "logprob": -8.95221673999913e-05
+    },
+    {
+     "text": "?",
+     "start": 26.92,
+     "end": 26.92,
+     "type": "word",
+     "speaker_id": "speaker_0",
+     "logprob": -8.95221673999913e-05
+    },
+    {
+     "text": " ",
+     "start": 26.92,
+     "end": 26.92,
+     "type": "spacing",
+     "speaker_id": "speaker_0",
+     "logprob": -0.0006252956227399409
+    },
+    {
+     "text": "C'est",
+     "start": 28.08,
+     "end": 28.16,
+     "type": "word",
+     "speaker_id": "speaker_1",
+     "logprob": -9.536740890325745e-08
+    },
+    {
+     "text": " ",
+     "start": 28.16,
+     "end": 28.2,
+     "type": "spacing",
+     "speaker_id": "speaker_1",
+     "logprob": -1.1920928244535389e-07
+    },
+    {
+     "text": "pour",
+     "start": 28.2,
+     "end": 28.28,
+     "type": "word",
+     "speaker_id": "speaker_1",
+     "logprob": -1.1920928244535389e-07
+    },
+    {
+     "text": " ",
+     "start": 28.28,
+     "end": 28.34,
+     "type": "spacing",
+     "speaker_id": "speaker_1",
+     "logprob": -0.0003586364327929914
+    },
+    {
+     "text": "Florian",
+     "start": 28.34,
+     "end": 28.68,
+     "type": "word",
+     "speaker_id": "speaker_1",
+     "logprob": -0.0003586364327929914
+    }
+   ]
+  }
+ ]
+}

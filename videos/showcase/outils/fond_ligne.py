@@ -4,8 +4,10 @@ l'appelant est ouverte sans voix, pour porter les jointures du dialogue (plus ja
 
     python3 outils/fond_ligne.py SOURCE.wav --zones 11.92:12.05 74.92:75.09 [--bande 700 7000] [--png spectre.png]
         affiche le spectre moyen (tiers d'octave) des zones et, avec --png, le trace
-    python3 outils/fond_ligne.py SOURCE.wav --zones … --sortie fond.wav --duree 47 --de 4.2 --a 35.867 --rms -60
-        écrit le fond seul (mono dupliqué, float 32 bits) : fondu d'entrée 250 ms, coupe de 5 ms à la fin
+    python3 outils/fond_ligne.py SOURCE.wav --zones … --sortie fond.wav --duree 50.066667 --de 4.2 --a 38.933333 --rms -60
+        écrit le fond seul (mono dupliqué, float 32 bits) : fondu d'entrée 250 ms, coupe de 5 ms à la fin (film de
+        50,07 s depuis l'échange du prénom : décroché 4,20, raccroché 38,933 ; 47 et 35,867 dans le film d'avant) ;
+        son/stems_amont.py n'utilise pas cette ligne : il prend la durée et le raccroché dans les données
     from fond_ligne import spectre_zones, fond, niveau_bande, presence_porte, confort
         S = spectre_zones(x, [(a, b), …])                 (f, dB) : spectre moyen lissé au tiers d'octave
         y = fond(S, n, graine=7, bande=(700, 7000))        bruit mono (n,) à ce spectre, RMS 1

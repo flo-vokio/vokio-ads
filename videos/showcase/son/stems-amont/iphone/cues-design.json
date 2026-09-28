@@ -1,0 +1,683 @@
+{
+ "cues": [
+  {
+   "id": "fond-piece",
+   "couche": "ambiance",
+   "t": 0.0,
+   "echantillon": 0,
+   "image": 0,
+   "source_instant": "0 → raccroché ; fin de la 2e secousse du vibreur (secousses.s6) → signature_re_contact + 0,6",
+   "fabrication": "ambiance-2 puis ambiance-3 (fondu 1 s), passe-haut 120 Hz, passe-bas 9 kHz, milieu ± 0,6 × côté décorrélé ; −8 dB FIXES pendant tout l'appel (pas de fond qui respire avec la voix) ; la pièce se rouvre quand le vibreur se tait (40.183 s, fondu 0,6 s)",
+   "niveau": "-50.0 LUFS court terme dans le blanc des tonalités, -44.0 sur la lecture du SMS",
+   "pan": "large, centré"
+  },
+  {
+   "id": "air-trajets",
+   "couche": "point",
+   "t": 0.0,
+   "echantillon": 0,
+   "image": 0,
+   "source_instant": "point-resolu.json (v, x_sans) à chaque échantillon ; mix.EV décroché → raccroché",
+   "fabrication": "hors de l'appel : bruit filtré, cloche 1,4 oct. centrée à 1,1 kHz × 2^(2,4·v/127.8) ; PENDANT l'appel (décroché → raccroché, rampes 60 ms) : cloche 1 oct. centrée à max(2,5·fc, 5 kHz), passe-haut 4,5 kHz (au-dessus de la ligne), même sonie K, et seulement sur les gestes à v_max ≥ 60 px/image ; niveau ((v − 4)/(127.8 − 4))^1,3, lissé 15/80 ms ; −8 dB sous la voix ; muet quand le point écrit ; réverbe 0,6 s à 12 %",
+   "niveau": "-29.0 LUFS instantanés au saut vers le ı",
+   "pan": "0,6·(x − 540)/540 à chaque échantillon",
+   "trajets": [
+    {
+     "de": 4.567,
+     "a": 4.6,
+     "v_max": 13.9,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 4.667,
+     "a": 4.967,
+     "v_max": 77.1,
+     "instantanee_max_seule": -36.6
+    },
+    {
+     "de": 5.533,
+     "a": 6.033,
+     "v_max": 37.9,
+     "instantanee_max_seule": -118.6
+    },
+    {
+     "de": 6.467,
+     "a": 6.633,
+     "v_max": 86.3,
+     "instantanee_max_seule": -41.1
+    },
+    {
+     "de": 6.833,
+     "a": 7.033,
+     "v_max": 58.2,
+     "instantanee_max_seule": -73.7
+    },
+    {
+     "de": 7.333,
+     "a": 7.6,
+     "v_max": 34.8,
+     "instantanee_max_seule": -127.1
+    },
+    {
+     "de": 7.7,
+     "a": 8.5,
+     "v_max": 72.8,
+     "instantanee_max_seule": -42.3
+    },
+    {
+     "de": 8.933,
+     "a": 9.333,
+     "v_max": 51.4,
+     "instantanee_max_seule": -101.9
+    },
+    {
+     "de": 9.4,
+     "a": 9.667,
+     "v_max": 38.2,
+     "instantanee_max_seule": -155.4
+    },
+    {
+     "de": 10.3,
+     "a": 10.833,
+     "v_max": 47.4,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 14.233,
+     "a": 14.233,
+     "v_max": 2.8,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 17.233,
+     "a": 17.733,
+     "v_max": 84.2,
+     "instantanee_max_seule": -36.7
+    },
+    {
+     "de": 20.433,
+     "a": 20.5,
+     "v_max": 16.3,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 20.6,
+     "a": 20.667,
+     "v_max": 15.3,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 21.167,
+     "a": 21.2,
+     "v_max": 14.6,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 21.267,
+     "a": 21.433,
+     "v_max": 88.8,
+     "instantanee_max_seule": -45.1
+    },
+    {
+     "de": 21.933,
+     "a": 21.967,
+     "v_max": 14.3,
+     "instantanee_max_seule": -102.2
+    },
+    {
+     "de": 22.033,
+     "a": 22.2,
+     "v_max": 86.6,
+     "instantanee_max_seule": -45.5
+    },
+    {
+     "de": 23.967,
+     "a": 24.2,
+     "v_max": 121.8,
+     "instantanee_max_seule": -38.2
+    },
+    {
+     "de": 24.3,
+     "a": 24.367,
+     "v_max": 8.5,
+     "instantanee_max_seule": -62.6
+    },
+    {
+     "de": 25.233,
+     "a": 25.233,
+     "v_max": 26.2,
+     "instantanee_max_seule": -158.3
+    },
+    {
+     "de": 28.333,
+     "a": 28.4,
+     "v_max": 13.0,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 28.467,
+     "a": 29.1,
+     "v_max": 37.5,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 29.167,
+     "a": 29.267,
+     "v_max": 48.0,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 29.333,
+     "a": 29.733,
+     "v_max": 46.8,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 30.4,
+     "a": 30.4,
+     "v_max": 2.7,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 30.467,
+     "a": 30.467,
+     "v_max": 2.6,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 34.167,
+     "a": 34.567,
+     "v_max": 58.1,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 34.867,
+     "a": 35.133,
+     "v_max": 52.6,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 35.267,
+     "a": 35.5,
+     "v_max": 52.7,
+     "instantanee_max_seule": -200.7
+    },
+    {
+     "de": 36.967,
+     "a": 37.633,
+     "v_max": 79.4,
+     "instantanee_max_seule": -39.2
+    },
+    {
+     "de": 44.333,
+     "a": 44.5,
+     "v_max": 78.3,
+     "instantanee_max_seule": -34.0
+    },
+    {
+     "de": 44.6,
+     "a": 45.233,
+     "v_max": 59.5,
+     "instantanee_max_seule": -57.5
+    },
+    {
+     "de": 45.367,
+     "a": 45.567,
+     "v_max": 127.5,
+     "instantanee_max_seule": -29.1
+    },
+    {
+     "de": 45.833,
+     "a": 45.967,
+     "v_max": 39.7,
+     "instantanee_max_seule": -45.4
+    }
+   ],
+   "gestes_pendant_l_appel": [
+    {
+     "de": 4.567,
+     "a": 4.6,
+     "v_max": 41.3,
+     "air": false
+    },
+    {
+     "de": 4.667,
+     "a": 4.967,
+     "v_max": 77.1,
+     "air": true
+    },
+    {
+     "de": 5.533,
+     "a": 6.033,
+     "v_max": 37.9,
+     "air": false
+    },
+    {
+     "de": 6.467,
+     "a": 6.633,
+     "v_max": 86.3,
+     "air": true
+    },
+    {
+     "de": 6.833,
+     "a": 7.033,
+     "v_max": 58.2,
+     "air": false
+    },
+    {
+     "de": 7.333,
+     "a": 7.6,
+     "v_max": 34.8,
+     "air": false
+    },
+    {
+     "de": 7.7,
+     "a": 8.5,
+     "v_max": 72.8,
+     "air": true
+    },
+    {
+     "de": 8.933,
+     "a": 9.333,
+     "v_max": 51.4,
+     "air": false
+    },
+    {
+     "de": 9.4,
+     "a": 9.667,
+     "v_max": 38.2,
+     "air": false
+    },
+    {
+     "de": 10.3,
+     "a": 10.833,
+     "v_max": 47.4,
+     "air": false
+    },
+    {
+     "de": 14.233,
+     "a": 14.233,
+     "v_max": 2.8,
+     "air": false
+    },
+    {
+     "de": 17.233,
+     "a": 17.733,
+     "v_max": 84.2,
+     "air": true
+    },
+    {
+     "de": 20.433,
+     "a": 20.5,
+     "v_max": 16.3,
+     "air": false
+    },
+    {
+     "de": 20.6,
+     "a": 20.667,
+     "v_max": 15.3,
+     "air": false
+    },
+    {
+     "de": 21.167,
+     "a": 21.2,
+     "v_max": 44.5,
+     "air": false
+    },
+    {
+     "de": 21.267,
+     "a": 21.433,
+     "v_max": 88.8,
+     "air": true
+    },
+    {
+     "de": 21.933,
+     "a": 21.967,
+     "v_max": 43.6,
+     "air": false
+    },
+    {
+     "de": 22.033,
+     "a": 22.2,
+     "v_max": 86.6,
+     "air": true
+    },
+    {
+     "de": 23.967,
+     "a": 24.2,
+     "v_max": 121.8,
+     "air": true
+    },
+    {
+     "de": 24.3,
+     "a": 24.367,
+     "v_max": 8.5,
+     "air": false
+    },
+    {
+     "de": 25.233,
+     "a": 25.233,
+     "v_max": 26.2,
+     "air": false
+    },
+    {
+     "de": 28.333,
+     "a": 28.4,
+     "v_max": 13.0,
+     "air": false
+    },
+    {
+     "de": 28.467,
+     "a": 29.1,
+     "v_max": 45.0,
+     "air": false
+    },
+    {
+     "de": 29.167,
+     "a": 29.267,
+     "v_max": 48.0,
+     "air": false
+    },
+    {
+     "de": 29.333,
+     "a": 29.733,
+     "v_max": 48.0,
+     "air": false
+    },
+    {
+     "de": 30.4,
+     "a": 30.4,
+     "v_max": 2.7,
+     "air": false
+    },
+    {
+     "de": 30.467,
+     "a": 30.467,
+     "v_max": 2.7,
+     "air": false
+    },
+    {
+     "de": 34.167,
+     "a": 34.567,
+     "v_max": 58.1,
+     "air": false
+    },
+    {
+     "de": 34.867,
+     "a": 35.133,
+     "v_max": 52.6,
+     "air": false
+    },
+    {
+     "de": 35.267,
+     "a": 35.5,
+     "v_max": 52.7,
+     "air": false
+    },
+    {
+     "de": 36.967,
+     "a": 37.633,
+     "v_max": 79.4,
+     "air": true
+    }
+   ]
+  },
+  {
+   "id": "naissance",
+   "couche": "point",
+   "t": 0.833333,
+   "echantillon": 40000,
+   "image": 25,
+   "source_instant": "evenements.point_pose[0] (le point passe de 0 à 15,75 px en 4 images)",
+   "fabrication": "encre prise 3 (transitoire à 0.084 s), passe-haut 250 Hz + corps 190 → 150 Hz 45 ms + étalement 3-7 kHz τ 50 ms ; réverbe 0,6 s à 10 %",
+   "niveau": "-29.0 LUFS instantanés",
+   "pan": 0.223
+  },
+  {
+   "id": "oiseau-1",
+   "couche": "ambiance",
+   "t": 1.68,
+   "echantillon": 80640,
+   "image": 50,
+   "source_instant": "blanc entre les deux tonalités (secousses.s1 : 1,50 → 2,70)",
+   "fabrication": "oiseau_loin prise 1, geste 0.30 → 1.04 s, 1,2-7 kHz, réverbe 0,9 s à 30 %",
+   "niveau": "-52.0 LUFS instantanés",
+   "pan": -0.45
+  },
+  {
+   "id": "eveil",
+   "couche": "point",
+   "t": 4.233333,
+   "echantillon": 203200,
+   "image": 127,
+   "source_instant": "evenements.lumiere → point.json taille (44 px à 4,60)",
+   "fabrication": "bruit filtré (cloche 1,1 oct.) dont le centre suit le diamètre (5 → 9 kHz), passe-haut 4,5 kHz (au-dessus de la ligne : on vient de décrocher), niveau ∝ vitesse de croissance du diamètre",
+   "niveau": "-37.0 LUFS instantanés",
+   "pan": 0.223
+  },
+  {
+   "id": "tamis",
+   "couche": "objets",
+   "t": 13.95,
+   "echantillon": 669600,
+   "image": 418,
+   "source_instant": "evenements.tamis_fondu[0] → tamis_resserrage[1] (les « euh » s'effacent, les mots se resserrent)",
+   "fabrication": "papier prise 2, 4-14 kHz (un grain fin)",
+   "niveau": "-42.0 LUFS instantanés",
+   "pan": -0.3,
+   "fin": 14.5
+  },
+  {
+   "id": "agenda-monte",
+   "couche": "objets",
+   "t": 18.37,
+   "echantillon": 881760,
+   "image": 551,
+   "source_instant": "evenements.agenda_monte (+520 → 0 px, power3.out) : le vrai silence de l'outil",
+   "fabrication": "papier prise 4, 0,9-14 kHz, niveau ∝ vitesse^0,7",
+   "niveau": "-31.0 LUFS instantanés",
+   "pan": 0.04,
+   "fin": 19.07
+  },
+  {
+   "id": "envol-neuf",
+   "couche": "point",
+   "t": 20.433333,
+   "echantillon": 980800,
+   "image": 613,
+   "source_instant": "evenements.saut_neuf_envol (le point quitte l'heure)",
+   "fabrication": "décollement de papier : transitoire de 20 ms de la prise de papier 4 (celle de l'agenda, à 0.139 s), passe-bande 4,5-9 kHz, réverbe 0,5 s à 8 % ; le contact, lui, est le toucher du master",
+   "niveau": "-40.0 LUFS instantanés",
+   "pan": -0.254
+  },
+  {
+   "id": "envol-dix",
+   "couche": "point",
+   "t": 21.166667,
+   "echantillon": 1016000,
+   "image": 635,
+   "source_instant": "evenements.saut_dix_envol (le point quitte l'heure)",
+   "fabrication": "décollement de papier : transitoire de 20 ms de la prise de papier 4 (celle de l'agenda, à 0.225 s), passe-bande 4,5-9 kHz, réverbe 0,5 s à 8 % ; le contact, lui, est le toucher du master",
+   "niveau": "-40.0 LUFS instantanés",
+   "pan": -0.254
+  },
+  {
+   "id": "envol-onze",
+   "couche": "point",
+   "t": 21.933333,
+   "echantillon": 1052800,
+   "image": 658,
+   "source_instant": "evenements.saut_onze_envol (le point quitte l'heure)",
+   "fabrication": "décollement de papier : transitoire de 20 ms de la prise de papier 4 (celle de l'agenda, à 0.316 s), passe-bande 4,5-9 kHz, réverbe 0,5 s à 8 % ; le contact, lui, est le toucher du master",
+   "niveau": "-40.0 LUFS instantanés",
+   "pan": -0.254
+  },
+  {
+   "id": "envol-retour",
+   "couche": "point",
+   "t": 23.966667,
+   "echantillon": 1150400,
+   "image": 719,
+   "source_instant": "evenements.retour_envol (le point quitte l'heure)",
+   "fabrication": "décollement de papier : transitoire de 20 ms de la prise de papier 4 (celle de l'agenda, à 0.466 s), passe-bande 4,5-9 kHz, réverbe 0,5 s à 8 % ; le contact, lui, est le toucher du master",
+   "niveau": "-40.0 LUFS instantanés",
+   "pan": -0.254
+  },
+  {
+   "id": "plume-rendez-vous",
+   "couche": "ecriture",
+   "t": 25.366667,
+   "echantillon": 1217600,
+   "image": 761,
+   "source_instant": "evenements.plume_pose → heure_ecrite ; image 867 (l'encre) ; images [764, 768, 772] (le bord révélé)",
+   "fabrication": "plume prise 1, grain continu (20 passages tenus, aplatis par RMS centrés), passe-bande 1,3-13 kHz ; niveau = (v/vmax) × (0.25 + 0.75 × encre au bord révélé, x + 21.4 px), lissé 2/12 ms (la plume se tait quand le point s'arrête, frotte plus fort sur les fûts) ; réverbe 0,5 s à 8 %",
+   "niveau": "-27.0 LUFS instantanés",
+   "pan": "suit la plume -0.193 → -0.030",
+   "fin": 25.9,
+   "pilote": {
+    "decalage_bord_px": 21.4,
+    "bords_mesures_px": [
+     21.1,
+     21.5,
+     21.4
+    ],
+    "image_profil": 867,
+    "colonnes_d_encre": 299
+   }
+  },
+  {
+   "id": "pose-plume-rendez-vous",
+   "couche": "ecriture",
+   "t": 25.366667,
+   "echantillon": 1217600,
+   "image": 761,
+   "source_instant": "evenements.plume_pose",
+   "fabrication": "la goutte de la naissance",
+   "niveau": "-34.0 LUFS instantanés",
+   "pan": -0.193
+  },
+  {
+   "id": "plume-nom",
+   "couche": "ecriture",
+   "t": 28.266667,
+   "echantillon": 1356800,
+   "image": 848,
+   "source_instant": "evenements.ecriture_nom ; image 867 (l'encre) ; images [850, 854, 858] (le bord révélé)",
+   "fabrication": "plume prise 1, grain continu (20 passages tenus, aplatis par RMS centrés), passe-bande 1,3-13 kHz ; niveau = (v/vmax) × (0.25 + 0.75 × encre au bord révélé, x + 21.0 px), lissé 2/12 ms (la plume se tait quand le point s'arrête, frotte plus fort sur les fûts) ; réverbe 0,5 s à 8 %",
+   "niveau": "-27.0 LUFS instantanés",
+   "pan": "suit la plume -0.030 → +0.222",
+   "fin": 28.933333,
+   "pilote": {
+    "decalage_bord_px": 21.0,
+    "bords_mesures_px": [
+     21.1,
+     18.1,
+     21.0
+    ],
+    "image_profil": 867,
+    "colonnes_d_encre": 299
+   }
+  },
+  {
+   "id": "pose-plume-nom",
+   "couche": "ecriture",
+   "t": 28.266667,
+   "echantillon": 1356800,
+   "image": 848,
+   "source_instant": "evenements.ecriture_nom[0]",
+   "fabrication": "la goutte de la naissance",
+   "niveau": "-34.0 LUFS instantanés",
+   "pan": -0.03
+  },
+  {
+   "id": "agenda-sort",
+   "couche": "objets",
+   "t": 34.066667,
+   "echantillon": 1635200,
+   "image": 1022,
+   "source_instant": "evenements.agenda_sort (0 → −270 px, power3.in, opacité 1 − p)",
+   "fabrication": "papier prise 3",
+   "niveau": "-34.0 LUFS instantanés",
+   "pan": 0.04,
+   "fin": 34.416667
+  },
+  {
+   "id": "vibreur-bois",
+   "couche": "objets",
+   "t": 39.733333,
+   "echantillon": 1907200,
+   "image": 1192,
+   "source_instant": "secousses.s6.segments_s (= evenements.bulle_et_vibreur) : la même enveloppe que l'image",
+   "fabrication": "vibreur_bois prise 3 (fondamentale 171.7 Hz → ré3 146,83 Hz, rapport 0.855), passe-haut 90 Hz, enveloppe trapèze 12/25 ms de secousses.s6 ; mise en phase avec le moteur (retard 3.35 ms, polarité +1)",
+   "niveau": "moteur + bois = moteur + 2.0 dB",
+   "pan": 0.0,
+   "segments": [
+    [
+     39.733333,
+     39.913333
+    ],
+    [
+     40.003333,
+     40.183333
+    ]
+   ]
+  },
+  {
+   "id": "telephone-sort",
+   "couche": "objets",
+   "t": 44.066667,
+   "echantillon": 2115200,
+   "image": 1322,
+   "source_instant": "evenements.telephone_sortie (0 → −300 px, power3.in, opacité 1 − p)",
+   "fabrication": "glisse_telephone prise 1, 250 Hz-9 kHz, niveau ∝ vitesse^0,7, queue 40 ms, réverbe 0,4 s",
+   "niveau": "-38.0 LUFS instantanés",
+   "pan": 0.0,
+   "fin": 44.466667
+  },
+  {
+   "id": "plume-vokio",
+   "couche": "ecriture",
+   "t": 44.566667,
+   "echantillon": 2139200,
+   "image": 1337,
+   "source_instant": "evenements.plume_mot ; image 1359 (l'encre) ; images [1344, 1348, 1354] (le bord révélé)",
+   "fabrication": "plume prise 1, grain continu (20 passages tenus, aplatis par RMS centrés), passe-bande 1,3-13 kHz ; niveau = (v/vmax) × (0.25 + 0.75 × encre au bord révélé, x + -15.7 px), lissé 2/12 ms (la plume se tait quand le point s'arrête, frotte plus fort sur les fûts) ; réverbe 0,5 s à 8 %",
+   "niveau": "-27.0 LUFS instantanés",
+   "pan": "suit la plume -0.467 → +0.420",
+   "fin": 45.266667,
+   "pilote": {
+    "decalage_bord_px": -15.7,
+    "bords_mesures_px": [
+     -15.1,
+     -15.7,
+     -15.9
+    ],
+    "image_profil": 1359,
+    "colonnes_d_encre": 619
+   }
+  },
+  {
+   "id": "pose-plume-vokio",
+   "couche": "ecriture",
+   "t": 44.566667,
+   "echantillon": 2139200,
+   "image": 1337,
+   "source_instant": "evenements.plume_mot[0]",
+   "fabrication": "la goutte de la naissance",
+   "niveau": "-34.0 LUFS instantanés",
+   "pan": -0.467
+  },
+  {
+   "id": "assise-i",
+   "couche": "point",
+   "t": 46.0,
+   "echantillon": 2208000,
+   "image": 1380,
+   "source_instant": "evenements.signature_re_contact + 1 image (1 288 : le point se relâche, 1,07 × 0,94)",
+   "fabrication": "la goutte de la naissance (encre, passe-haut 250 Hz), réverbe 0,6 s à 10 %",
+   "niveau": "-36.0 LUFS instantanés",
+   "pan": 0.179
+  }
+ ],
+ "note": "repères des petits sons de ce calcul (riche-design refait sur le dialogue et les données de la variante) : outils/mixer.py garde_reperes"
+}

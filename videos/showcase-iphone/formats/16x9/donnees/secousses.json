@@ -190,8 +190,8 @@
   "note": "motif de 4 images = 7,5 Hz, sous Nyquist ; x(n) = 6·env(n)·[0,+1,0,−1][n mod 4], y(n) = 2·env(n)·[+1,0,−1,0][n mod 4] : quadrature, le point décrit un losange ; amplitude_px / motif = alias v1 de l'axe x"
  },
  "s6": {
-  "description": "vibreur du SMS : impulsions 36,6667 → 36,8467 et 36,9367 → 37,1167 s, attaque 12 ms, relâche 25 ms",
-  "image0": 1100,
+  "description": "vibreur du SMS : impulsions 39,7333 → 39,9133 et 40,0033 → 40,1833 s, attaque 12 ms, relâche 25 ms",
+  "image0": 1192,
   "enveloppe": [
    0.8197,
    1.0,
@@ -226,12 +226,12 @@
   "phase_par_image_absolue": false,
   "segments_s": [
    [
-    36.666667,
-    36.846667
+    39.733333,
+    39.913333
    ],
    [
-    36.936667,
-    37.116667
+    40.003333,
+    40.183333
    ]
   ],
   "rampes_s": [
@@ -245,6 +245,6 @@
    ]
   ],
   "frequence_hz": 7.5,
-  "note": "x(n) = 6·env·[+1,0,−1,0][(n−1100) mod 4] ; le téléphone de s6 ET #point lisent la même valeur (POINT.secousse('s6', t))"
+  "note": "x(n) = 6·env·[+1,0,−1,0][(n−1192) mod 4] ; le téléphone de s6 ET #point lisent la même valeur (POINT.secousse('s6', t))"
  }
 }

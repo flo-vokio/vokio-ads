@@ -1,0 +1,1454 @@
+{
+ "note": "preuve de la mesure insérée dans la musique (compositeur, 28/09) : outils/inserer_temps.py verifier sur chaque couche de la partition (avant la voix) et sur le stem ; courbes de gain au pas de 16 éch. ; ancien = film de 47 s (a6d3d8e, stem md5 6ff25d2c…, versions-47s/stems-amont-musique-47s.wav), nouveau = son/stems-amont/iphone/musique.wav (50,066667 s, données de l'image du 28/09, md5 719d8db5…) ; seuil −90 dBFS ; −600 = nul",
+ "couches": {
+  "drone": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -600.0,
+    "t_crete": 28.3333
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -524.2,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -524.2,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  },
+  "coeur": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -600.0,
+    "t_crete": 28.3333
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -513.5,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -513.5,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  },
+  "cordes": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -97.9,
+    "t_crete": 28.3333
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -15.0,
+     "marche_rms_20ms_db": 0.6,
+     "marche_4_16k_db": -1.51,
+     "niveau_rms_20ms_dbfs": -30.2
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -15.0,
+     "marche_rms_20ms_db": 0.61,
+     "marche_4_16k_db": -1.81,
+     "niveau_rms_20ms_dbfs": -30.2
+    }
+   ]
+  },
+  "pedale": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -180.6,
+    "t_crete": 28.419
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -3.1,
+     "marche_rms_20ms_db": -0.02,
+     "marche_4_16k_db": -0.12,
+     "niveau_rms_20ms_dbfs": -43.5
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -3.1,
+     "marche_rms_20ms_db": -0.02,
+     "marche_4_16k_db": -2.39,
+     "niveau_rms_20ms_dbfs": -43.5
+    }
+   ]
+  },
+  "basse": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -32.3,
+    "t_crete": 28.3405,
+    "premier_au_dela_s": 28.3333,
+    "dernier_au_dela_s": 28.3741
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -8.5,
+     "marche_rms_20ms_db": -4.91,
+     "marche_4_16k_db": -5.04,
+     "niveau_rms_20ms_dbfs": -38.1
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -525.9,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  },
+  "marimba": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -600.0,
+    "t_crete": 28.3333
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -542.1,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": -6.02,
+     "niveau_rms_20ms_dbfs": -600.0
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -542.1,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  },
+  "harpe": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -600.0,
+    "t_crete": 28.3333
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -560.0,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -560.0,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  },
+  "verre": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -600.0,
+    "t_crete": 28.3333
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -546.4,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -546.4,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  },
+  "souffle": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -600.0,
+    "t_crete": 28.3333
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -534.4,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -534.4,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  },
+  "grosse_caisse": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -600.0,
+    "t_crete": 28.3333
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -515.5,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -515.5,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  },
+  "shaker": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -600.0,
+    "t_crete": 28.3333
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -575.9,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -575.9,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  },
+  "cymbales": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -600.0,
+    "t_crete": 0.0
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -600.0,
+    "t_crete": 28.3333
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -565.1,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -565.1,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  },
+  "reverbe": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -325.1,
+    "t_crete": 4.2123
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -38.4,
+    "t_crete": 28.3389,
+    "premier_au_dela_s": 28.3333,
+    "dernier_au_dela_s": 30.4615
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -12.9,
+     "marche_rms_20ms_db": 0.54,
+     "marche_4_16k_db": -0.3,
+     "niveau_rms_20ms_dbfs": -42.7
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -24.3,
+     "marche_rms_20ms_db": -0.04,
+     "marche_4_16k_db": 2.29,
+     "niveau_rms_20ms_dbfs": -42.4
+    }
+   ]
+  },
+  "lit": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -45.3,
+    "t_crete": 25.2548,
+    "premier_au_dela_s": 25.0185,
+    "dernier_au_dela_s": 25.2666
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -29.7,
+    "t_crete": 28.9505,
+    "premier_au_dela_s": 28.3333,
+    "dernier_au_dela_s": 50.0666
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -31.0,
+     "marche_rms_20ms_db": 0.47,
+     "marche_4_16k_db": -0.7,
+     "niveau_rms_20ms_dbfs": -36.6
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -36.9,
+     "marche_rms_20ms_db": 0.48,
+     "marche_4_16k_db": -2.79,
+     "niveau_rms_20ms_dbfs": -36.4
+    }
+   ]
+  },
+  "pouls": {
+   "avant_pivot": {
+    "de": 0.0,
+    "a": 25.266667,
+    "crete_dbfs": -47.4,
+    "t_crete": 25.2546,
+    "premier_au_dela_s": 25.0198,
+    "dernier_au_dela_s": 25.2666
+   },
+   "apres_insertion": {
+    "de": 28.333333,
+    "a": 50.066667,
+    "crete_dbfs": -33.3,
+    "t_crete": 28.3417,
+    "premier_au_dela_s": 28.3333,
+    "dernier_au_dela_s": 36.7372
+   },
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -61.3,
+     "marche_rms_20ms_db": -4.87,
+     "marche_4_16k_db": -5.02,
+     "niveau_rms_20ms_dbfs": -42.1
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -577.1,
+     "marche_rms_20ms_db": 0.0,
+     "marche_4_16k_db": 0.0,
+     "niveau_rms_20ms_dbfs": -600.0
+    }
+   ]
+  }
+ },
+ "stem": {
+  "avant_pivot": {
+   "de": 0.0,
+   "a": 25.266667,
+   "crete_dbfs": -40.3,
+   "t_crete": 25.2547,
+   "premier_au_dela_s": 25.0216,
+   "dernier_au_dela_s": 25.2666
+  },
+  "apres_insertion": {
+   "de": 28.333333,
+   "a": 50.066667,
+   "crete_dbfs": -29.7,
+   "t_crete": 28.9505,
+   "premier_au_dela_s": 28.3333,
+   "dernier_au_dela_s": 49.2002
+  },
+  "bords": [
+   {
+    "t": 25.266667,
+    "derivee2_bord_sur_p999_db": -44.0,
+    "marche_rms_20ms_db": -0.73,
+    "marche_4_16k_db": -0.7,
+    "niveau_rms_20ms_dbfs": -34.5
+   },
+   {
+    "t": 28.333333,
+    "derivee2_bord_sur_p999_db": -49.7,
+    "marche_rms_20ms_db": 0.48,
+    "marche_4_16k_db": -2.79,
+    "niveau_rms_20ms_dbfs": -36.4
+   }
+  ],
+  "mesure_inseree": {
+   "de": 25.266667,
+   "a": 28.333333,
+   "rms_dbfs": -35.4,
+   "ancien_mesure_avant_rms_dbfs": -33.0
+  },
+  "niveaux": {
+   "ancien_rms_dbfs": -25.8,
+   "nouveau_rms_dbfs": -26.1
+  }
+ },
+ "stem_ecart_par_seconde_dbfs": [
+  [
+   28,
+   -29.7
+  ],
+  [
+   29,
+   -30.2
+  ],
+  [
+   30,
+   -61.0
+  ],
+  [
+   31,
+   -83.3
+  ],
+  [
+   32,
+   -82.4
+  ],
+  [
+   33,
+   -79.9
+  ],
+  [
+   34,
+   -86.0
+  ],
+  [
+   35,
+   -74.9
+  ],
+  [
+   36,
+   -72.1
+  ],
+  [
+   37,
+   -88.1
+  ],
+  [
+   38,
+   -91.0
+  ],
+  [
+   39,
+   -103.1
+  ],
+  [
+   40,
+   -95.4
+  ],
+  [
+   41,
+   -88.5
+  ],
+  [
+   42,
+   -90.2
+  ],
+  [
+   43,
+   -87.8
+  ],
+  [
+   44,
+   -87.8
+  ],
+  [
+   45,
+   -83.6
+  ],
+  [
+   46,
+   -81.0
+  ],
+  [
+   47,
+   -76.4
+  ],
+  [
+   48,
+   -79.0
+  ],
+  [
+   49,
+   -83.7
+  ]
+ ],
+ "sonie_lufs_ancien_nouveau": {
+  "appel après l'échange": [
+   -28.55,
+   -28.55
+  ],
+  "SMS": [
+   -21.5,
+   -21.5
+  ],
+  "logo": [
+   -14.68,
+   -14.68
+  ]
+ },
+ "automations": {
+  "pv_lit": {
+   "avant_premier_ecart_s": null,
+   "apres_max": 0.782,
+   "apres_dernier_ecart_sup_0_01_s": 29.358
+  },
+  "pv_pouls": {
+   "avant_premier_ecart_s": null,
+   "apres_max": 0.62,
+   "apres_dernier_ecart_sup_0_01_s": 29.833
+  },
+  "pv_pouls_bande": {
+   "avant_premier_ecart_s": null,
+   "apres_max": 0.001,
+   "apres_dernier_ecart_sup_0_01_s": null
+  },
+  "arc_db": {
+   "avant_premier_ecart_s": 25.0,
+   "apres_max": 2.0,
+   "apres_dernier_ecart_sup_0_01_s": 28.986
+  },
+  "reponses_db": {
+   "avant_premier_ecart_s": 25.0,
+   "apres_max": 2.0,
+   "apres_dernier_ecart_sup_0_01_s": 28.986
+  },
+  "clairiere_db": {
+   "avant_premier_ecart_s": null,
+   "apres_max": 0.0,
+   "apres_dernier_ecart_sup_0_01_s": null
+  },
+  "signature_db": {
+   "avant_premier_ecart_s": null,
+   "apres_max": 0.001,
+   "apres_dernier_ecart_sup_0_01_s": null
+  },
+  "pouls_dyn_db": {
+   "avant_premier_ecart_s": null,
+   "apres_max": 1.861,
+   "apres_dernier_ecart_sup_0_01_s": 30.052
+  },
+  "pouls_bande_db": {
+   "avant_premier_ecart_s": null,
+   "apres_max": 0.006,
+   "apres_dernier_ecart_sup_0_01_s": null
+  },
+  "pouls_grave_db": {
+   "avant_premier_ecart_s": null,
+   "apres_max": 0.004,
+   "apres_dernier_ecart_sup_0_01_s": null
+  },
+  "lit_rattrapage_db": {
+   "avant_premier_ecart_s": null,
+   "apres_max": 0.246,
+   "apres_dernier_ecart_sup_0_01_s": 30.659
+  },
+  "lit_rattrapage_bande_db": {
+   "avant_premier_ecart_s": 15.667,
+   "apres_max": 0.0,
+   "apres_dernier_ecart_sup_0_01_s": null
+  },
+  "lit_db": {
+   "avant_premier_ecart_s": 25.0,
+   "apres_max": 4.113,
+   "apres_dernier_ecart_sup_0_01_s": 30.659
+  },
+  "lit_bande_db": {
+   "avant_premier_ecart_s": 15.667,
+   "apres_max": 5.881,
+   "apres_dernier_ecart_sup_0_01_s": 29.427
+  },
+  "lit_dyn_avant_borne_db": {
+   "avant_premier_ecart_s": 25.0,
+   "apres_max": 5.472,
+   "apres_dernier_ecart_sup_0_01_s": 37.054
+  },
+  "lit_bande_avant_borne_db": {
+   "avant_premier_ecart_s": 15.667,
+   "apres_max": 7.817,
+   "apres_dernier_ecart_sup_0_01_s": 37.065
+  },
+  "g_lim": {
+   "avant_premier_ecart_s": 7.224,
+   "apres_max": 0.014,
+   "apres_dernier_ecart_sup_0_01_s": 29.334
+  }
+ },
+ "musique_json": {
+  "duree_s": 50.066667,
+  "echantillons": 2403200,
+  "crete_dbfs": -1.7,
+  "lufs": -19.49,
+  "plume": {
+   "la": 28.693333,
+   "sol": 28.933333,
+   "arret": [
+    24.5,
+    29.1
+   ],
+   "dans_l_arret": true,
+   "attaque_la_plus_proche": {
+    "ecart_s": 0.1656,
+    "couche": "grosse_caisse",
+    "t": 29.0989
+   },
+   "ok": true
+  },
+  "rattrapages": [
+   "16.058 des",
+   "19.925 vous",
+   "22.120 ou",
+   "30.182 pour",
+   "33.742 heures."
+  ]
+ },
+ "essai_mix_hybride_sur_stems_du_bac_a_sable": {
+  "mix": {
+   "I": -14.03,
+   "TP": -1.7,
+   "LRA": 7.0
+  },
+  "arc": {
+   "S_max_apres": -11.05,
+   "S_max_avant": -12.57,
+   "ecart_lu": 1.52,
+   "sommet_sur_la_fin": true
+  },
+  "marge_K_min_lu": 10.5,
+  "pire_mot": "dix",
+  "limiteur": [
+   [
+    7.226,
+    7.239,
+    1.22
+   ],
+   [
+    26.468,
+    26.511,
+    2.04
+   ],
+   [
+    29.323,
+    29.374,
+    2.35
+   ],
+   [
+    45.987,
+    46.006,
+    1.3
+   ]
+  ],
+  "mots_echange": [
+   [
+    "Très",
+    18.8
+   ],
+   [
+    "bien.",
+    19.3
+   ],
+   [
+    "C'est",
+    27.8
+   ],
+   [
+    "pour",
+    23.5
+   ],
+   [
+    "quel",
+    24.0
+   ],
+   [
+    "prénom ?",
+    24.4
+   ],
+   [
+    "C'est",
+    20.2
+   ],
+   [
+    "pour",
+    19.7
+   ],
+   [
+    "Florian.",
+    17.9
+   ],
+   [
+    "Parfait,",
+    17.0
+   ]
+  ],
+  "contre_non_voulues": [
+   {
+    "t": 38.575,
+    "bande": "1-2k",
+    "court": -10.1,
+    "tenu": -11.2,
+    "avant_db": -46.0,
+    "apres_db": -57.2,
+    "mot": null,
+    "2 musique": -4.1,
+    "3 design": -1.7,
+    "bandes": [
+     "1-2k"
+    ],
+    "voulue": null
+   },
+   {
+    "t": 40.19,
+    "bande": "30-100",
+    "court": -23.6,
+    "tenu": -29.2,
+    "avant_db": -57.6,
+    "apres_db": -86.8,
+    "mot": null,
+    "2 musique": -21.4,
+    "3 design": -20.7,
+    "bandes": [
+     "30-100"
+    ],
+    "voulue": null
+   },
+   {
+    "t": 42.165,
+    "bande": "30-100",
+    "court": -11.3,
+    "tenu": -10.7,
+    "avant_db": -56.3,
+    "apres_db": -67.1,
+    "mot": null,
+    "2 musique": -2.7,
+    "3 design": 2.0,
+    "bandes": [
+     "30-100"
+    ],
+    "voulue": null
+   }
+  ],
+  "note": "mixer.py sur son/recettes/hybride.json, stems d'un calcul complet de stems_amont.py fait dans /dev/shm (non installés) : 3 marches hors mots non voulues, aucune dans la musique : 38,575 (ligne et pièce : bruits tirés sur la longueur du film), 40,190 (fin du vibreur, sfx : oscillateur en temps absolu), 42,165 (pièce)"
+ },
+ "reprise_verification": {
+  "note": "reprise du 28/09 soir (compositeur, 2e agent) : vérification indépendante. Bac à sable a6d3d8e (données) + code actuel → stem 47 s md5 6ff25d2c (identique à l'octet au stem validé) ; code actuel + données actuelles → stem 50,07 s md5 719d8db5 (identique au calcul de 17:39, alors que mix_riche_musique.py avait été retouché à 17:45) ; couches et courbes de gain des deux calculs (stems_amont --seulement musique --couches) comparées fenêtre par fenêtre, ancien décalé de 147 200 éch. ; crêtes en dBFS, gains en écart absolu (dB ou 0-1)",
+  "fenetres_s": [
+   "28.3-30.0",
+   "30.0-31.0",
+   "31.0-33.0",
+   "33.0-35.0",
+   "35.0-37.0",
+   "37.0-39.0",
+   "39.0-42.0",
+   "42.0-45.0",
+   "45.0-48.0",
+   "48.0-50.1"
+  ],
+  "couches_ecart_crete_dbfs": {
+   "basse": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -32.3,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   },
+   "coeur": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   },
+   "cordes": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -97.5,
+     -103.0,
+     -103.6,
+     -103.5,
+     -104.2,
+     -99.3,
+     -102.9,
+     -102.9,
+     -99.6,
+     -98.4
+    ]
+   },
+   "cymbales": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   },
+   "drone": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   },
+   "grosse_caisse": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   },
+   "harpe": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   },
+   "lit": {
+    "avant_pivot": -45.3,
+    "apres": [
+     -29.7,
+     -61.1,
+     -97.0,
+     -93.4,
+     -87.5,
+     -92.3,
+     -88.4,
+     -87.8,
+     -76.4,
+     -75.9
+    ]
+   },
+   "marimba": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   },
+   "pedale": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -136.0,
+     -180.6,
+     -180.6,
+     -180.6,
+     -180.6,
+     -180.6,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   },
+   "pouls": {
+    "avant_pivot": -47.4,
+    "apres": [
+     -33.3,
+     -78.8,
+     -83.2,
+     -80.4,
+     -72.2,
+     -92.1,
+     -101.2,
+     -130.1,
+     -115.7,
+     -156.5
+    ]
+   },
+   "reverbe": {
+    "avant_pivot": -325.1,
+    "apres": [
+     -38.4,
+     -78.3,
+     -115.9,
+     -115.6,
+     -114.9,
+     -116.8,
+     -115.3,
+     -112.7,
+     -112.3,
+     -110.4
+    ]
+   },
+   "shaker": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   },
+   "souffle": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   },
+   "verre": {
+    "avant_pivot": -600.0,
+    "apres": [
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0,
+     -600.0
+    ]
+   }
+  },
+  "gains_ecart_max": {
+   "pv_lit": {
+    "avant_pivot": 0.0,
+    "apres": [
+     0.782,
+     0.0,
+     0.0,
+     0.0,
+     0.000832,
+     0.00573,
+     0.000832,
+     5.96e-07,
+     3.29e-10,
+     1.82e-13
+    ]
+   },
+   "pv_pouls": {
+    "avant_pivot": 0.0,
+    "apres": [
+     0.62,
+     0.00433,
+     2.92e-05,
+     0.0,
+     0.000832,
+     0.000103,
+     0.000832,
+     5.96e-07,
+     3.29e-10,
+     1.82e-13
+    ]
+   },
+   "pv_pouls_bande": {
+    "avant_pivot": 0.0,
+    "apres": [
+     1.13e-06,
+     5.96e-08,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.000606,
+     3.12e-06,
+     1.34e-08,
+     5.71e-11
+    ]
+   },
+   "arc_db": {
+    "avant_pivot": 1.28,
+    "apres": [
+     2.0,
+     0.0,
+     0.0,
+     0.0,
+     5.96e-06,
+     2.15e-06,
+     2.15e-06,
+     2.98e-07,
+     9.54e-07,
+     9.54e-07
+    ]
+   },
+   "reponses_db": {
+    "avant_pivot": 1.28,
+    "apres": [
+     2.0,
+     0.0,
+     0.0,
+     0.0,
+     5.84e-06,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "clairiere_db": {
+    "avant_pivot": 0.0,
+    "apres": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.000123,
+     0.0
+    ]
+   },
+   "signature_db": {
+    "avant_pivot": 0.0,
+    "apres": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.00096,
+     0.0
+    ]
+   },
+   "pouls_dyn_db": {
+    "avant_pivot": 0.0,
+    "apres": [
+     1.86,
+     0.013,
+     8.75e-05,
+     0.0,
+     0.0025,
+     0.00031,
+     0.0025,
+     1.79e-06,
+     9.88e-10,
+     5.47e-13
+    ]
+   },
+   "pouls_bande_db": {
+    "avant_pivot": 0.0,
+    "apres": [
+     1.14e-05,
+     9.54e-07,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.00605,
+     3.12e-05,
+     1.34e-07,
+     5.71e-10
+    ]
+   },
+   "pouls_grave_db": {
+    "avant_pivot": 0.0,
+    "apres": [
+     6.68e-06,
+     4.77e-07,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.00363,
+     1.87e-05,
+     8.01e-08,
+     3.43e-10
+    ]
+   },
+   "lit_rattrapage_db": {
+    "avant_pivot": 0.0,
+    "apres": [
+     0.174,
+     0.246,
+     0.0,
+     0.00297,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "lit_rattrapage_bande_db": {
+    "avant_pivot": 0.00839,
+    "apres": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "lit_db": {
+    "avant_pivot": 1.28,
+    "apres": [
+     4.11,
+     0.246,
+     0.0,
+     0.00297,
+     0.00583,
+     0.00367,
+     0.00583,
+     3.87e-06,
+     0.00096,
+     9.54e-07
+    ]
+   },
+   "lit_bande_db": {
+    "avant_pivot": 0.00838,
+    "apres": [
+     5.88,
+     0.0,
+     0.0,
+     0.0,
+     0.00832,
+     0.00533,
+     0.00832,
+     5.95e-06,
+     3.29e-09,
+     1.82e-12
+    ]
+   },
+   "lit_dyn_avant_borne_db": {
+    "avant_pivot": 1.28,
+    "apres": [
+     5.47,
+     0.246,
+     0.0,
+     0.00297,
+     0.00582,
+     0.0401,
+     0.00583,
+     4.17e-06,
+     2.31e-09,
+     1.28e-12
+    ]
+   },
+   "lit_bande_avant_borne_db": {
+    "avant_pivot": 0.00838,
+    "apres": [
+     7.82,
+     0.0,
+     0.0,
+     0.0,
+     0.00832,
+     0.0573,
+     0.00832,
+     5.95e-06,
+     3.29e-09,
+     1.82e-12
+    ]
+   },
+   "g_lim": {
+    "avant_pivot": 0.00598,
+    "apres": [
+     0.0138,
+     1.79e-07,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0059,
+     0.0
+    ]
+   }
+  },
+  "stem_ecart_par_fenetre": [
+   {
+    "crete_dbfs": -29.7,
+    "sous_la_musique_db": -14.4
+   },
+   {
+    "crete_dbfs": -61.0,
+    "sous_la_musique_db": -41.8
+   },
+   {
+    "crete_dbfs": -82.4,
+    "sous_la_musique_db": -60.3
+   },
+   {
+    "crete_dbfs": -79.9,
+    "sous_la_musique_db": -63.2
+   },
+   {
+    "crete_dbfs": -72.1,
+    "sous_la_musique_db": -60.2
+   },
+   {
+    "crete_dbfs": -88.1,
+    "sous_la_musique_db": -64.6
+   },
+   {
+    "crete_dbfs": -88.5,
+    "sous_la_musique_db": -75.3
+   },
+   {
+    "crete_dbfs": -87.8,
+    "sous_la_musique_db": -76.2
+   },
+   {
+    "crete_dbfs": -76.4,
+    "sous_la_musique_db": -74.2
+   },
+   {
+    "crete_dbfs": -79.0,
+    "sous_la_musique_db": -73.4
+   }
+  ],
+  "stem_residu_explique": "après 30,9 s, la différence du stem reste 57 à 90 dB sous la musique (crête −72,1 dBFS à 35,9 s) : trois causes mesurées, toutes des écarts de gain ≤ 0,0083 dB, inaudibles : (a) détecteurs de voix de riche-musique (blocs de 1 ms = 48 éch. ; 147 200 = 3 066,67 ms, pas un nombre entier de blocs) : pv_* ≤ 5,7e-3, lit_bande ≤ 8,3e-3 dB sur 35-42 s ; (b) instants de evenements.json au µs (signature, clairière : 45,966667 au lieu de 45,9666667) : signature_db ≤ 9,6e-4 dB, clairiere ≤ 1,2e-4 dB sur 45-48 s ; (c) cordes tenues à phase entière : ≤ −98 dBFS. La partition elle-même (13 couches frappées) est identique à l'octet.",
+  "jointures": {
+   "bords": [
+    {
+     "t": 25.266667,
+     "derivee2_bord_sur_p999_db": -44.0,
+     "marche_rms_20ms_db": -0.73,
+     "marche_4_16k_db": -0.7,
+     "niveau_rms_20ms_dbfs": -34.5
+    },
+    {
+     "t": 28.333333,
+     "derivee2_bord_sur_p999_db": -49.7,
+     "marche_rms_20ms_db": 0.48,
+     "marche_4_16k_db": -2.79,
+     "niveau_rms_20ms_dbfs": -36.4
+    }
+   ],
+   "variabilite_naturelle": {
+    "48 temps de la grille (ancien)": {
+     "derivee2_bord_sur_p999_db": {
+      "mediane": -27.95,
+      "p90": -9.56
+     },
+     "marche_rms_20ms_db": {
+      "mediane": 1.54,
+      "p90": 5.07
+     },
+     "marche_4_16k_db": {
+      "mediane": 2.34,
+      "p90": 27.32
+     }
+    },
+    "292 instants quelconques 5-45 s (ancien)": {
+     "derivee2_bord_sur_p999_db": {
+      "mediane": -42.95,
+      "p90": -9.9
+     },
+     "marche_rms_20ms_db": {
+      "mediane": 0.5,
+      "p90": 1.44
+     },
+     "marche_4_16k_db": {
+      "mediane": 0.91,
+      "p90": 5.63
+     }
+    }
+   },
+   "sautes_ausculter": "ausculter.py sautes --de 22 --a 32 --mots : 1 marche hors mots (30,82 s, 2-8 kHz, un coup de shaker qui existe à 27,75 dans le film de 47 s) ; aucune à 25,27 ni à 28,33"
+  },
+  "reperes": {
+   "attaques": "164/164 à t (avant 25,266667) ou t + 3,066667 (après), à 1e-4 s près",
+   "cues": "84/84 idem",
+   "silences_stem": "[38,938312 ; 39,733333] et [49,766667 ; 50,066667] : bornes à +147 200 éch. exactement des bornes du film de 47 s"
+  },
+  "chronologie_temps_py": "python3 outils/chronologie.py --verifier-image : accord sur 1 411 images et 423 001 instants, aller et retour, pour son/dialogue.json et une liste synthétique de 3 insertions"
+ }
+}

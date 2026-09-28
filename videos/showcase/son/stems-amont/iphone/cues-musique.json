@@ -1,0 +1,1315 @@
+{
+ "cues": [
+  {
+   "couche": "drone",
+   "t": 0.0,
+   "image": 0,
+   "quoi": "quinte la1 · mi2 · la2 · la3 · mi4, gonfle jusqu'au décroché, sortie en 350 ms",
+   "source": "0 → evenements.decroche"
+  },
+  {
+   "couche": "coeur",
+   "t": 0.7333,
+   "image": 22,
+   "quoi": "battement 1",
+   "source": "grille, temps 1"
+  },
+  {
+   "couche": "coeur",
+   "t": 1.5,
+   "image": 45,
+   "quoi": "battement 2",
+   "source": "grille, temps 2"
+  },
+  {
+   "couche": "coeur",
+   "t": 2.2667,
+   "image": 68,
+   "quoi": "battement 3",
+   "source": "grille, temps 3"
+  },
+  {
+   "couche": "coeur",
+   "t": 3.0333,
+   "image": 91,
+   "quoi": "battement 4",
+   "source": "grille, temps 4"
+  },
+  {
+   "couche": "coeur",
+   "t": 3.8,
+   "image": 114,
+   "quoi": "battement 5",
+   "source": "grille, temps 5"
+  },
+  {
+   "couche": "coeur",
+   "t": 4.2,
+   "image": 126,
+   "quoi": "coupé en 40 ms, zéros ensuite",
+   "source": "evenements.decroche"
+  },
+  {
+   "couche": "cordes",
+   "t": 4.2,
+   "image": 126,
+   "quoi": "Gadd9 : 55 · 59 · 62",
+   "source": "evenements.decroche"
+  },
+  {
+   "couche": "basse",
+   "t": 4.2,
+   "image": 126,
+   "quoi": "sol : le décroché (attaque 0,6 s) · MIDI 43",
+   "source": "evenements.decroche"
+  },
+  {
+   "couche": "pedale",
+   "t": 4.6,
+   "image": 138,
+   "quoi": "la4 440 Hz en verre frotté, fondu 1,5 s, tenu jusqu'au raccroché",
+   "source": "point.json taille (44 px) = mix.T['pedale']"
+  },
+  {
+   "couche": "cordes",
+   "t": 6.1,
+   "image": 183,
+   "quoi": "Gmaj9 : 59 · 62 · 66",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 9.1667,
+   "image": 275,
+   "quoi": "Bm7 : 54 · 59 · 62",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 9.1667,
+   "image": 275,
+   "quoi": "longue · MIDI 47",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 12.2333,
+   "image": 367,
+   "quoi": "Em9 : 55 · 59 · 62 · 66",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 12.2333,
+   "image": 367,
+   "quoi": "longue · MIDI 40",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 15.3,
+   "image": 459,
+   "quoi": "Asus4 : 57 · 62 · 64",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 15.3,
+   "image": 459,
+   "quoi": "longue · MIDI 45",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 16.8333,
+   "image": 505,
+   "quoi": "A : 57 · 61 · 64",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 18.3667,
+   "image": 551,
+   "quoi": "G : 55 · 59 · 62",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 18.3667,
+   "image": 551,
+   "quoi": "longue · MIDI 43",
+   "source": "grille"
+  },
+  {
+   "couche": "harpe",
+   "t": 18.3667,
+   "image": 551,
+   "quoi": "sol4 · si4 · ré5 · sol5 en doubles-croches : l'agenda monte",
+   "source": "evenements.agenda_monte = temps 24"
+  },
+  {
+   "couche": "marimba",
+   "t": 20.6667,
+   "image": 620,
+   "quoi": "entre avec « neuf » : ré5 sous le toucher ré6 · MIDI 74",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 21.4333,
+   "image": 643,
+   "quoi": "Bm7 : 54 · 59 · 62",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 21.4333,
+   "image": 643,
+   "quoi": "1er temps · MIDI 47",
+   "source": "grille"
+  },
+  {
+   "couche": "marimba",
+   "t": 21.4333,
+   "image": 643,
+   "quoi": "« dix » : ré5 · MIDI 74",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 21.4333,
+   "image": 643,
+   "quoi": "temps 28, corps sur MIDI 35",
+   "source": "grille",
+   "f_fin": 61.74
+  },
+  {
+   "couche": "marimba",
+   "t": 22.2,
+   "image": 666,
+   "quoi": "« onze » : ré5 · MIDI 74",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 22.5833,
+   "image": 677,
+   "quoi": "et du 2 · MIDI 47",
+   "source": "grille"
+  },
+  {
+   "couche": "shaker",
+   "t": 22.5833,
+   "image": 677,
+   "quoi": "contretemps dès « onze » ; doubles-croches mesures 9-10 ; retour mesure 12-13",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 22.9675,
+   "image": 689,
+   "quoi": "temps 30, corps sur MIDI 35",
+   "source": "grille",
+   "f_fin": 61.74
+  },
+  {
+   "couche": "basse",
+   "t": 23.7333,
+   "image": 712,
+   "quoi": "4e temps · MIDI 42",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 24.5,
+   "image": 735,
+   "quoi": "G : 55 · 59 · 62",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 24.5,
+   "image": 735,
+   "quoi": "1er temps, court : la plume passe seule · MIDI 43",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 29.0989,
+   "image": 873,
+   "quoi": "temps 34, corps sur MIDI 31",
+   "source": "grille",
+   "f_fin": 49.0
+  },
+  {
+   "couche": "basse",
+   "t": 29.8667,
+   "image": 896,
+   "quoi": "4e temps · MIDI 47",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 30.6328,
+   "image": 919,
+   "quoi": "temps 36, corps sur MIDI 28",
+   "source": "grille",
+   "f_fin": 41.2
+  },
+  {
+   "couche": "cordes",
+   "t": 30.6333,
+   "image": 919,
+   "quoi": "Em9 : 55 · 59 · 62 · 66 · 64",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 30.6333,
+   "image": 919,
+   "quoi": "1er temps · MIDI 40",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 31.7833,
+   "image": 954,
+   "quoi": "et du 2 · MIDI 40",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 32.1659,
+   "image": 965,
+   "quoi": "temps 38, corps sur MIDI 28",
+   "source": "grille",
+   "f_fin": 41.2
+  },
+  {
+   "couche": "basse",
+   "t": 32.9333,
+   "image": 988,
+   "quoi": "4e temps · MIDI 47",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 33.7,
+   "image": 1011,
+   "quoi": "Asus4 : 57 · 62 · 64 · 69",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 33.7,
+   "image": 1011,
+   "quoi": "1er temps · MIDI 45",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 33.701,
+   "image": 1011,
+   "quoi": "temps 40, corps sur MIDI 33",
+   "source": "grille",
+   "f_fin": 55.0
+  },
+  {
+   "couche": "cymbale inversée",
+   "t": 34.6,
+   "image": 1038,
+   "quoi": "monte jusqu'à 36.000",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 34.85,
+   "image": 1046,
+   "quoi": "et du 2 · MIDI 45",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 35.2333,
+   "image": 1057,
+   "quoi": "A : 57 · 61 · 64 · 69",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 35.2333,
+   "image": 1057,
+   "quoi": "3e temps · MIDI 45",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 35.2336,
+   "image": 1057,
+   "quoi": "temps 42, corps sur MIDI 33",
+   "source": "grille",
+   "f_fin": 55.0
+  },
+  {
+   "couche": "cordes",
+   "t": 36.0,
+   "image": 1080,
+   "quoi": "Gadd9 : 55 · 59 · 62 · 67",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 36.0,
+   "image": 1080,
+   "quoi": "« -tion » : sol, tenu jusqu'au raccroché · MIDI 43",
+   "source": "grille"
+  },
+  {
+   "couche": "marimba",
+   "t": 36.0,
+   "image": 1080,
+   "quoi": "« -tion » : ré5 · MIDI 74",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 36.0,
+   "image": 1080,
+   "quoi": "temps 43 (grave), corps sur MIDI 31",
+   "source": "grille",
+   "f_fin": 49.0
+  },
+  {
+   "couche": "miroitement",
+   "t": 36.0,
+   "image": 1080,
+   "quoi": "1.6 s",
+   "source": "grille"
+  },
+  {
+   "couche": "harpe",
+   "t": 36.3833,
+   "image": 1092,
+   "quoi": "réponse : si5 · sol5 · ré5 · si4 (après « -tion »)",
+   "source": "pause 33,05-34,03 (donnees/mots.json), temps 43,5"
+  },
+  {
+   "couche": "marimba",
+   "t": 36.7667,
+   "image": 1103,
+   "quoi": "si4 · MIDI 71",
+   "source": "grille"
+  },
+  {
+   "couche": "marimba",
+   "t": 37.5333,
+   "image": 1126,
+   "quoi": "la4 · MIDI 69",
+   "source": "grille"
+  },
+  {
+   "couche": "marimba",
+   "t": 38.3,
+   "image": 1149,
+   "quoi": "sol4 (l'appel se pose sans ré) · MIDI 67",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 39.8333,
+   "image": 1195,
+   "quoi": "Asus4 : 57 · 62 · 64 · 69 · 74",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 39.8333,
+   "image": 1195,
+   "quoi": "mesure 12 : la (le SMS) · MIDI 45",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 40.5995,
+   "image": 1218,
+   "quoi": "temps 49, corps sur MIDI 33",
+   "source": "grille",
+   "f_fin": 55.0
+  },
+  {
+   "couche": "marimba",
+   "t": 40.6002,
+   "image": 1218,
+   "quoi": "retour du pouls (SMS) · MIDI 76",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 41.3667,
+   "image": 1241,
+   "quoi": "A : 57 · 61 · 64 · 69 · 73 · 76",
+   "source": "grille"
+  },
+  {
+   "couche": "verre",
+   "t": 41.3667,
+   "image": 1241,
+   "quoi": "la5 · sol5 · mi5, rythme de la signature (0 · 0,24 · 0,60)",
+   "source": "grille temps 50 ; écarts = signature_sol − signature_la, signature_re_contact − signature_la"
+  },
+  {
+   "couche": "cordes",
+   "t": 42.9,
+   "image": 1287,
+   "quoi": "G : 55 · 59 · 62 · 67 · 71 · 74",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 42.9,
+   "image": 1287,
+   "quoi": "mesure 13 : croches de sol (la levée) · MIDI 43",
+   "source": "grille"
+  },
+  {
+   "couche": "harpe",
+   "t": 42.9,
+   "image": 1287,
+   "quoi": "montée sol4 → la6 en double-croches (12 notes, sans ré)",
+   "source": "grille, temps 52 → 54,75"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 42.9001,
+   "image": 1287,
+   "quoi": "temps 52, corps sur MIDI 31",
+   "source": "grille",
+   "f_fin": 49.0
+  },
+  {
+   "couche": "basse",
+   "t": 43.2833,
+   "image": 1298,
+   "quoi": "mesure 13 : croches de sol (la levée) · MIDI 43",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 43.6663,
+   "image": 1310,
+   "quoi": "temps 53, corps sur MIDI 31",
+   "source": "grille",
+   "f_fin": 49.0
+  },
+  {
+   "couche": "basse",
+   "t": 43.6667,
+   "image": 1310,
+   "quoi": "mesure 13 : croches de sol (la levée) · MIDI 43",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 44.05,
+   "image": 1322,
+   "quoi": "mesure 13 : croches de sol (la levée) · MIDI 43",
+   "source": "grille"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 44.433,
+   "image": 1333,
+   "quoi": "temps 54, corps sur MIDI 31",
+   "source": "grille",
+   "f_fin": 49.0
+  },
+  {
+   "couche": "basse",
+   "t": 44.4333,
+   "image": 1333,
+   "quoi": "mesure 13 : croches de sol (la levée) · MIDI 43",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 44.8167,
+   "image": 1344,
+   "quoi": "mesure 13 : croches de sol (la levée) · MIDI 43",
+   "source": "grille"
+  },
+  {
+   "couche": "cordes",
+   "t": 45.2,
+   "image": 1356,
+   "quoi": "G/clairière : 55 · 59",
+   "source": "grille"
+  },
+  {
+   "couche": "cymbale inversée",
+   "t": 45.5867,
+   "image": 1368,
+   "quoi": "monte jusqu'à 45.937",
+   "source": "grille"
+  },
+  {
+   "couche": "souffle",
+   "t": 45.6167,
+   "image": 1368,
+   "quoi": "réverbe de ré majeur à l'envers, finit au contact du ré",
+   "source": "evenements.signature_re_contact"
+  },
+  {
+   "couche": "cordes",
+   "t": 45.9667,
+   "image": 1379,
+   "quoi": "D : 50 · 54 · 57 · 62 · 66 · 69 · 78 · 81",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 45.9667,
+   "image": 1379,
+   "quoi": "logo : ré2 · MIDI 38",
+   "source": "grille"
+  },
+  {
+   "couche": "basse",
+   "t": 45.9667,
+   "image": 1379,
+   "quoi": "sous-basse ré1 36,7 Hz",
+   "source": "evenements.signature_re_contact"
+  },
+  {
+   "couche": "grosse caisse",
+   "t": 45.9667,
+   "image": 1379,
+   "quoi": "temps 56 (grave), corps sur MIDI 38",
+   "source": "grille",
+   "f_fin": 73.42
+  },
+  {
+   "couche": "miroitement",
+   "t": 45.9667,
+   "image": 1379,
+   "quoi": "2.6 s",
+   "source": "grille"
+  },
+  {
+   "couche": "harpe",
+   "t": 46.1583,
+   "image": 1385,
+   "quoi": "arpège la3 · fa#4 · la4 · fa#5 · la5 · fa#6 (sans ré), une double-croche après le ré",
+   "source": "grille, temps 56,25 → 57,5"
+  }
+ ],
+ "attaques": [
+  {
+   "couche": "coeur",
+   "t": 0.7333
+  },
+  {
+   "couche": "coeur",
+   "t": 1.5
+  },
+  {
+   "couche": "coeur",
+   "t": 2.2667
+  },
+  {
+   "couche": "coeur",
+   "t": 3.0333
+  },
+  {
+   "couche": "coeur",
+   "t": 3.8
+  },
+  {
+   "couche": "basse",
+   "t": 4.2
+  },
+  {
+   "couche": "basse",
+   "t": 9.1667
+  },
+  {
+   "couche": "basse",
+   "t": 12.2333
+  },
+  {
+   "couche": "basse",
+   "t": 15.3
+  },
+  {
+   "couche": "harpe",
+   "t": 18.3629
+  },
+  {
+   "couche": "basse",
+   "t": 18.3667
+  },
+  {
+   "couche": "harpe",
+   "t": 18.5594
+  },
+  {
+   "couche": "harpe",
+   "t": 18.7506
+  },
+  {
+   "couche": "harpe",
+   "t": 18.9426
+  },
+  {
+   "couche": "marimba",
+   "t": 20.6667
+  },
+  {
+   "couche": "marimba",
+   "t": 21.0517
+  },
+  {
+   "couche": "basse",
+   "t": 21.4333
+  },
+  {
+   "couche": "marimba",
+   "t": 21.4333
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 21.4333
+  },
+  {
+   "couche": "marimba",
+   "t": 21.8134
+  },
+  {
+   "couche": "marimba",
+   "t": 22.2
+  },
+  {
+   "couche": "marimba",
+   "t": 22.5831
+  },
+  {
+   "couche": "basse",
+   "t": 22.5833
+  },
+  {
+   "couche": "shaker",
+   "t": 22.5878
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 22.9675
+  },
+  {
+   "couche": "marimba",
+   "t": 22.969
+  },
+  {
+   "couche": "marimba",
+   "t": 23.3509
+  },
+  {
+   "couche": "shaker",
+   "t": 23.3516
+  },
+  {
+   "couche": "basse",
+   "t": 23.7333
+  },
+  {
+   "couche": "marimba",
+   "t": 23.7345
+  },
+  {
+   "couche": "marimba",
+   "t": 24.117
+  },
+  {
+   "couche": "shaker",
+   "t": 24.1218
+  },
+  {
+   "couche": "basse",
+   "t": 24.5
+  },
+  {
+   "couche": "shaker",
+   "t": 24.8863
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 29.0989
+  },
+  {
+   "couche": "marimba",
+   "t": 29.1034
+  },
+  {
+   "couche": "shaker",
+   "t": 29.4799
+  },
+  {
+   "couche": "marimba",
+   "t": 29.4828
+  },
+  {
+   "couche": "basse",
+   "t": 29.8667
+  },
+  {
+   "couche": "marimba",
+   "t": 29.8676
+  },
+  {
+   "couche": "marimba",
+   "t": 30.2493
+  },
+  {
+   "couche": "shaker",
+   "t": 30.2545
+  },
+  {
+   "couche": "marimba",
+   "t": 30.6311
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 30.6328
+  },
+  {
+   "couche": "basse",
+   "t": 30.6333
+  },
+  {
+   "couche": "shaker",
+   "t": 30.6377
+  },
+  {
+   "couche": "shaker",
+   "t": 30.8244
+  },
+  {
+   "couche": "marimba",
+   "t": 31.014
+  },
+  {
+   "couche": "shaker",
+   "t": 31.0148
+  },
+  {
+   "couche": "shaker",
+   "t": 31.2073
+  },
+  {
+   "couche": "marimba",
+   "t": 31.4011
+  },
+  {
+   "couche": "shaker",
+   "t": 31.4021
+  },
+  {
+   "couche": "shaker",
+   "t": 31.5979
+  },
+  {
+   "couche": "marimba",
+   "t": 31.7831
+  },
+  {
+   "couche": "basse",
+   "t": 31.7833
+  },
+  {
+   "couche": "shaker",
+   "t": 31.7837
+  },
+  {
+   "couche": "shaker",
+   "t": 31.9779
+  },
+  {
+   "couche": "marimba",
+   "t": 32.1637
+  },
+  {
+   "couche": "shaker",
+   "t": 32.1647
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 32.1659
+  },
+  {
+   "couche": "shaker",
+   "t": 32.3591
+  },
+  {
+   "couche": "shaker",
+   "t": 32.5516
+  },
+  {
+   "couche": "marimba",
+   "t": 32.5535
+  },
+  {
+   "couche": "shaker",
+   "t": 32.7413
+  },
+  {
+   "couche": "marimba",
+   "t": 32.9312
+  },
+  {
+   "couche": "basse",
+   "t": 32.9333
+  },
+  {
+   "couche": "shaker",
+   "t": 32.9373
+  },
+  {
+   "couche": "shaker",
+   "t": 33.1242
+  },
+  {
+   "couche": "marimba",
+   "t": 33.3116
+  },
+  {
+   "couche": "shaker",
+   "t": 33.3142
+  },
+  {
+   "couche": "shaker",
+   "t": 33.506
+  },
+  {
+   "couche": "basse",
+   "t": 33.7
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 33.701
+  },
+  {
+   "couche": "marimba",
+   "t": 33.7019
+  },
+  {
+   "couche": "shaker",
+   "t": 33.7041
+  },
+  {
+   "couche": "shaker",
+   "t": 33.8977
+  },
+  {
+   "couche": "marimba",
+   "t": 34.0841
+  },
+  {
+   "couche": "shaker",
+   "t": 34.0841
+  },
+  {
+   "couche": "shaker",
+   "t": 34.2783
+  },
+  {
+   "couche": "marimba",
+   "t": 34.4709
+  },
+  {
+   "couche": "shaker",
+   "t": 34.4727
+  },
+  {
+   "couche": "cymbales",
+   "t": 34.6
+  },
+  {
+   "couche": "shaker",
+   "t": 34.6549
+  },
+  {
+   "couche": "shaker",
+   "t": 34.8495
+  },
+  {
+   "couche": "basse",
+   "t": 34.85
+  },
+  {
+   "couche": "marimba",
+   "t": 34.8518
+  },
+  {
+   "couche": "shaker",
+   "t": 35.0445
+  },
+  {
+   "couche": "shaker",
+   "t": 35.2319
+  },
+  {
+   "couche": "marimba",
+   "t": 35.2323
+  },
+  {
+   "couche": "basse",
+   "t": 35.2333
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 35.2336
+  },
+  {
+   "couche": "shaker",
+   "t": 35.4244
+  },
+  {
+   "couche": "marimba",
+   "t": 35.6192
+  },
+  {
+   "couche": "shaker",
+   "t": 35.6204
+  },
+  {
+   "couche": "shaker",
+   "t": 35.8078
+  },
+  {
+   "couche": "basse",
+   "t": 36.0
+  },
+  {
+   "couche": "marimba",
+   "t": 36.0
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 36.0
+  },
+  {
+   "couche": "cymbales",
+   "t": 36.0
+  },
+  {
+   "couche": "harpe",
+   "t": 36.3825
+  },
+  {
+   "couche": "harpe",
+   "t": 36.5739
+  },
+  {
+   "couche": "harpe",
+   "t": 36.7663
+  },
+  {
+   "couche": "marimba",
+   "t": 36.7667
+  },
+  {
+   "couche": "harpe",
+   "t": 36.9566
+  },
+  {
+   "couche": "marimba",
+   "t": 37.5333
+  },
+  {
+   "couche": "marimba",
+   "t": 38.3
+  },
+  {
+   "couche": "basse",
+   "t": 39.8333
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 40.5995
+  },
+  {
+   "couche": "marimba",
+   "t": 40.6002
+  },
+  {
+   "couche": "marimba",
+   "t": 40.984
+  },
+  {
+   "couche": "verre",
+   "t": 41.3667
+  },
+  {
+   "couche": "verre",
+   "t": 41.6067
+  },
+  {
+   "couche": "shaker",
+   "t": 41.7527
+  },
+  {
+   "couche": "verre",
+   "t": 41.9667
+  },
+  {
+   "couche": "marimba",
+   "t": 42.5151
+  },
+  {
+   "couche": "shaker",
+   "t": 42.5166
+  },
+  {
+   "couche": "basse",
+   "t": 42.9
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 42.9001
+  },
+  {
+   "couche": "shaker",
+   "t": 42.9001
+  },
+  {
+   "couche": "marimba",
+   "t": 42.9007
+  },
+  {
+   "couche": "harpe",
+   "t": 42.9033
+  },
+  {
+   "couche": "harpe",
+   "t": 43.0906
+  },
+  {
+   "couche": "shaker",
+   "t": 43.0923
+  },
+  {
+   "couche": "marimba",
+   "t": 43.2793
+  },
+  {
+   "couche": "harpe",
+   "t": 43.2799
+  },
+  {
+   "couche": "shaker",
+   "t": 43.2802
+  },
+  {
+   "couche": "basse",
+   "t": 43.2833
+  },
+  {
+   "couche": "shaker",
+   "t": 43.4705
+  },
+  {
+   "couche": "harpe",
+   "t": 43.4763
+  },
+  {
+   "couche": "marimba",
+   "t": 43.6631
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 43.6663
+  },
+  {
+   "couche": "shaker",
+   "t": 43.6666
+  },
+  {
+   "couche": "basse",
+   "t": 43.6667
+  },
+  {
+   "couche": "harpe",
+   "t": 43.6706
+  },
+  {
+   "couche": "shaker",
+   "t": 43.8547
+  },
+  {
+   "couche": "harpe",
+   "t": 43.8608
+  },
+  {
+   "couche": "marimba",
+   "t": 44.0457
+  },
+  {
+   "couche": "shaker",
+   "t": 44.0479
+  },
+  {
+   "couche": "basse",
+   "t": 44.05
+  },
+  {
+   "couche": "harpe",
+   "t": 44.0534
+  },
+  {
+   "couche": "shaker",
+   "t": 44.2382
+  },
+  {
+   "couche": "harpe",
+   "t": 44.2425
+  },
+  {
+   "couche": "harpe",
+   "t": 44.4314
+  },
+  {
+   "couche": "shaker",
+   "t": 44.4322
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 44.433
+  },
+  {
+   "couche": "basse",
+   "t": 44.4333
+  },
+  {
+   "couche": "shaker",
+   "t": 44.6238
+  },
+  {
+   "couche": "harpe",
+   "t": 44.6257
+  },
+  {
+   "couche": "basse",
+   "t": 44.8167
+  },
+  {
+   "couche": "shaker",
+   "t": 44.8178
+  },
+  {
+   "couche": "harpe",
+   "t": 44.8185
+  },
+  {
+   "couche": "shaker",
+   "t": 45.0031
+  },
+  {
+   "couche": "harpe",
+   "t": 45.0072
+  },
+  {
+   "couche": "cymbales",
+   "t": 45.5867
+  },
+  {
+   "couche": "basse",
+   "t": 45.9667
+  },
+  {
+   "couche": "basse",
+   "t": 45.9667
+  },
+  {
+   "couche": "grosse_caisse",
+   "t": 45.9667
+  },
+  {
+   "couche": "cymbales",
+   "t": 45.9667
+  },
+  {
+   "couche": "harpe",
+   "t": 46.1569
+  },
+  {
+   "couche": "harpe",
+   "t": 46.3479
+  },
+  {
+   "couche": "harpe",
+   "t": 46.538
+  },
+  {
+   "couche": "harpe",
+   "t": 46.7311
+  },
+  {
+   "couche": "harpe",
+   "t": 46.9229
+  },
+  {
+   "couche": "harpe",
+   "t": 47.1159
+  }
+ ],
+ "rattrapages": {
+  "16.058 des": [
+   {
+    "iteration": 0,
+    "marge_LU": 15.84,
+    "cible_LU": 11.0,
+    "voix_moins_musique_1-4k_db": 9.3,
+    "profondeur_lit_db": 0.0,
+    "profondeur_lit_bande_db": -2.9
+   }
+  ],
+  "19.925 vous": [
+   {
+    "iteration": 0,
+    "marge_LU": 17.42,
+    "cible_LU": 11.0,
+    "voix_moins_musique_1-4k_db": 11.0,
+    "profondeur_lit_db": 0.0,
+    "profondeur_lit_bande_db": -1.8
+   }
+  ],
+  "22.120 ou": [
+   {
+    "iteration": 0,
+    "marge_LU": 14.44,
+    "cible_LU": 11.0,
+    "voix_moins_musique_1-4k_db": 11.0,
+    "profondeur_lit_db": 0.0,
+    "profondeur_lit_bande_db": -1.6
+   }
+  ],
+  "30.182 pour": [
+   {
+    "iteration": 0,
+    "marge_LU": 10.06,
+    "cible_LU": 11.0,
+    "voix_moins_musique_1-4k_db": 20.1,
+    "profondeur_lit_db": -3.39,
+    "profondeur_lit_bande_db": 0.0
+   }
+  ],
+  "33.742 heures.": [
+   {
+    "iteration": 0,
+    "marge_LU": 10.77,
+    "cible_LU": 11.0,
+    "voix_moins_musique_1-4k_db": 21.4,
+    "profondeur_lit_db": -1.34,
+    "profondeur_lit_bande_db": 0.0
+   }
+  ]
+ }
+}

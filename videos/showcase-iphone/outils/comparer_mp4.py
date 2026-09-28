@@ -2,13 +2,19 @@
 """Deux MP4 du même film sont-ils les mêmes images ? Comparaison IMAGE PAR IMAGE, au bit près puis au codec près : usage :
 
     python3 outils/comparer_mp4.py <reference.mp4> <candidat.mp4> [--json r.json] [--pires planche.png] [--seuil 38] [--chute 3]
-                                   [--fort 48] [--part 0.0002] [--n-pires 6]
+                                   [--fort 48] [--part 0.0002] [--n-pires 6] [--decalage A:N …] [--voulu a-b,c-d]
 
   Décode les deux films en RGB (ffmpeg, en flux : rien sur le disque) et compare chaque image n à l'image n :
     identiques  md5 des pixels égaux (même rendu, même encodeur : c'est la preuve la plus forte) ;
     au codec    sinon : PSNR ≥ --seuil dB, pas plus de --chute dB sous le PSNR médian du film, au plus --part des pixels
                 (0,02 %) à plus de --fort niveaux d'écart (un objet déplacé d'un pixel dépasse, le bruit du codec non).
-  Mêmes nombres d'images et même taille exigés. Imprime le bilan (identiques, conformes, hors tolérance groupées en plages),
+  --decalage A:N (répétable, 28/09) : le candidat est la référence où l'on a INSÉRÉ N images juste avant l'image A de la
+                référence (A en images de la référence ; « outils/temps.py --decalages » donne les options du film courant,
+                ex. --decalage 758:92 depuis l'échange du prénom) : l'image r de la référence est comparée à l'image r + Σ N (des
+                insertions dont A ≤ r) du candidat ; les images insérées du candidat ne sont comparées à rien (comptées à part).
+  --voulu a-b,c-d : plages d'images de la RÉFÉRENCE où un écart est voulu (une scène refaite) : comparées et rapportées,
+                mais hors du verdict. Le bilan donne, par plage, les images identiques, conformes et hors tolérance.
+  Mêmes nombres d'images (une fois les insertions comptées) et même taille exigés. Imprime le bilan (identiques, conformes, hors tolérance groupées en plages),
   écrit --json (chaque image : md5 égal, PSNR, part de pixels forts) et --pires (planche des images les moins fidèles :
   référence | candidat | écart × 4). Code 0 si toutes les images sont identiques ou conformes, 1 sinon. Lecture seule, idempotent.
 Exemple (le 9:16 ne bouge pas) :
@@ -44,6 +50,23 @@ def flux(mp4, w, h):
     p.wait()
 
 
+def ref_de(c, decalages):
+    """Image de la référence montrée à l'image c du candidat (None : image insérée) ; decalages = [(A, N)] triés."""
+    cumul = 0
+    for a, n in decalages:
+        debut = a + cumul
+        if c < debut:
+            break
+        if c < debut + n:
+            return None
+        cumul += n
+    return c - cumul
+
+
+def dans(n, plages_):
+    return any(a <= n <= b for a, b in plages_)
+
+
 def plages(nums):
     out = []
     for n in sorted(nums):
@@ -65,23 +88,44 @@ def main():
     A.add_argument("--fort", type=int, default=48)
     A.add_argument("--part", type=float, default=0.0002)
     A.add_argument("--n-pires", type=int, default=6)
+    A.add_argument("--decalage", action="append", default=[], help="A:N : N images insérées avant l'image A de la référence (répétable)")
+    A.add_argument("--voulu", default="", help="plages de la référence où l'écart est voulu : a-b,c-d (hors verdict)")
     a = A.parse_args()
+    decs = sorted((int(x.split(":")[0]), int(x.split(":")[1])) for o in a.decalage for x in o.split(",") if x.strip())
+    voulu = [(int(x.split("-")[0]), int(x.split("-")[-1])) for x in a.voulu.split(",") if x.strip()]
     (wr, hr), (wc, hc) = taille(a.reference), taille(a.candidat)
     if (wr, hr) != (wc, hc):
         raise SystemExit(f"tailles différentes : {wr}×{hr} contre {wc}×{hc}")
     images, garde = [], {}
     fr, fc = flux(a.reference, wr, hr), flux(a.candidat, wc, hc)
-    n = 0
-    for ir, ic in zip(fr, fc):
+    n, inserees, c = 0, [], -1
+
+    def paires():                      # (image du candidat, image de la référence), en suivant les insertions
+        nonlocal c
+        attendue = 0
+        for ic in fc:
+            c += 1
+            r = ref_de(c, decs)
+            if r is None:
+                inserees.append(c)
+                continue
+            while attendue < r:        # (jamais : les insertions ne retirent aucune image de la référence)
+                next(fr); attendue += 1
+            ir = next(fr, None)
+            if ir is None:
+                return
+            attendue += 1
+            yield ir, ic, c
+    for ir, ic, nc in paires():
         egal = hashlib.md5(ir.tobytes()).digest() == hashlib.md5(ic.tobytes()).digest()
         if egal:
-            images.append({"image": n, "identique": True, "psnr": None, "part_forte": 0.0, "ecart_max": 0})
+            images.append({"image": n, "candidat": nc, "identique": True, "psnr": None, "part_forte": 0.0, "ecart_max": 0})
         else:
             d = np.abs(ir.astype(np.int16) - ic.astype(np.int16))
             mse = float((d.astype(np.float64) ** 2).mean())
             psnr = 99.0 if mse == 0 else float(10 * np.log10(255 ** 2 / mse))
             fort = float((d.max(axis=2) > a.fort).mean())
-            images.append({"image": n, "identique": False, "psnr": round(psnr, 2), "part_forte": round(fort, 6),
+            images.append({"image": n, "candidat": nc, "identique": False, "psnr": round(psnr, 2), "part_forte": round(fort, 6),
                            "ecart_max": int(d.max())})
             if a.pires:
                 garde[n] = (ir.copy(), ic.copy())
@@ -92,19 +136,41 @@ def main():
     reste_r, reste_c = sum(1 for _ in fr), sum(1 for _ in fc)
     psnrs = [x["psnr"] for x in images if x["psnr"] is not None]
     med = float(np.median(psnrs)) if psnrs else None
-    hors = [x["image"] for x in images if not x["identique"] and (x["psnr"] < a.seuil or x["psnr"] < med - a.chute
-                                                                   or x["part_forte"] > a.part)]
+    hors_tout = [x["image"] for x in images if not x["identique"] and (x["psnr"] < a.seuil or x["psnr"] < med - a.chute
+                                                                       or x["part_forte"] > a.part)]
+    hors = [r for r in hors_tout if not dans(r, voulu)]
+    hors_voulus = [r for r in hors_tout if dans(r, voulu)]
     ident = sum(1 for x in images if x["identique"])
     ok = not hors and reste_r == 0 and reste_c == 0 and n > 0
+    # par plage de la référence (bornes : les insertions et les plages voulues) : identiques, conformes, hors tolérance
+    bornes = sorted({0, n} | {x for d_ in decs for x in (d_[0],)} | {x for v in voulu for x in (v[0], v[1] + 1)})
+    par_plage = []
+    for b0, b1 in zip(bornes, bornes[1:]):
+        L = [x for x in images if b0 <= x["image"] < b1]
+        if L:
+            h_ = [x["image"] for x in L if x["image"] in set(hors_tout)]
+            par_plage.append({"reference": [b0, b1 - 1], "candidat": [L[0]["candidat"], L[-1]["candidat"]], "images": len(L),
+                              "identiques": sum(1 for x in L if x["identique"]), "hors_tolerance": len(h_),
+                              "conformes_au_codec": len(L) - len(h_) - sum(1 for x in L if x["identique"]),
+                              "psnr_min": min((x["psnr"] for x in L if x["psnr"] is not None), default=None),
+                              "voulu": any(dans(x["image"], voulu) for x in L)})
     bilan = {"reference": str(a.reference), "candidat": str(a.candidat), "taille": [wr, hr], "images": n,
              "images_en_trop": {"reference": reste_r, "candidat": reste_c}, "identiques": ident,
-             "conformes_au_codec": n - ident - len(hors), "hors_tolerance": plages(hors),
+             "conformes_au_codec": n - ident - len(hors_tout), "hors_tolerance": plages(hors),
+             "hors_tolerance_voulus": plages(hors_voulus), "decalages": [f"{x}:{y}" for x, y in decs],
+             "images_inserees_du_candidat": plages(inserees), "par_plage": par_plage,
              "psnr": {"min": min(psnrs) if psnrs else None, "median": med, "max": max(psnrs) if psnrs else None},
              "part_forte_max": max((x["part_forte"] for x in images), default=0),
              "criteres": {"seuil_db": a.seuil, "chute_db": a.chute, "fort_niveaux": a.fort, "part_max": a.part}, "ok": ok}
     print(json.dumps({k: v for k, v in bilan.items()}, ensure_ascii=False))
-    print(("ok  " if ok else "NON ") + f"{ident}/{n} images identiques au bit près, {n - ident - len(hors)} conformes au codec, "
-          f"{len(hors)} hors tolérance" + (f" ({', '.join(plages(hors)[:12])})" if hors else ""))
+    print(("ok  " if ok else "NON ") + f"{ident}/{n} images identiques au bit près, {n - ident - len(hors_tout)} conformes au codec, "
+          f"{len(hors)} hors tolérance" + (f" ({', '.join(plages(hors)[:12])})" if hors else "")
+          + (f", {len(hors_voulus)} hors tolérance dans les plages voulues" if voulu else "")
+          + (f" ; {len(inserees)} images insérées du candidat non comparées ({', '.join(plages(inserees))})" if decs else ""))
+    for P_ in par_plage:
+        print(f"    référence {P_['reference'][0]}-{P_['reference'][1]} ↔ candidat {P_['candidat'][0]}-{P_['candidat'][1]} : "
+              f"{P_['identiques']} identiques, {P_['conformes_au_codec']} conformes, {P_['hors_tolerance']} hors tolérance"
+              + (f", PSNR min {P_['psnr_min']}" if P_['psnr_min'] is not None else "") + (" (écart voulu)" if P_["voulu"] else ""))
     if a.json:
         Path(a.json).write_text(json.dumps(bilan | {"par_image": images}, ensure_ascii=False))
     if a.pires and garde:

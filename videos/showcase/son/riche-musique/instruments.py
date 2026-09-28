@@ -117,16 +117,29 @@ def _table_scie(f, fmax=5200.0, L=4096):
     return _TABLES[cle]
 
 
-def voix_corde(f, t, graine, desaccord_cents=0.0, vibrato=True):
+def voix_corde(f, t, graine, desaccord_cents=0.0, vibrato=True, chrono=None):
     """Une voix d'ensemble : table de scie lue par un accumulateur de phase, vibrato 5,2 Hz ± 4 cents qui entre en
-    0,6 s, dérive lente ± 3 cents, phase propre."""
+    0,6 s, dérive lente ± 3 cents, phase propre.
+    chrono (outils/chronologie.py, 28/09) : une note TENUE à travers une insertion de temps garde son horloge du film
+    d'avant (vers_base) ; dans la mesure insérée, sa dérive, son vibrato et sa phase font chacun un nombre entier de
+    cycles (vibrato ±0,16 Hz, hauteur ±1,4 cent au plus, pendant la mesure) : la note continue sans raccord, et après
+    l'insertion elle redonne exactement celle d'avant, décalée. Sans insertion, ou avant le pivot : à l'octet près."""
     rng = np.random.default_rng(graine)
     n = len(t)
-    tt = t - t[0]
-    cents = desaccord_cents + 3.0 * np.sin(2 * np.pi * rng.uniform(0.07, 0.13) * tt + rng.uniform(0, 6.3))
-    if vibrato:
-        cents = cents + 4.0 * np.clip(tt / 0.6, 0, 1) * np.sin(2 * np.pi * rng.uniform(4.8, 5.6) * tt + rng.uniform(0, 6.3))
-    fi = f * 2 ** (cents / 1200)
+    if chrono:
+        tt = chrono.vers_base(t); tt = tt - tt[0]
+        r1, q1 = rng.uniform(0.07, 0.13), rng.uniform(0, 6.3)
+        cents = desaccord_cents + 3.0 * np.sin(2 * np.pi * r1 * tt + 2 * np.pi * chrono.cycles_entiers(r1, t) + q1)
+        if vibrato:
+            r2, q2 = rng.uniform(4.8, 5.6), rng.uniform(0, 6.3)
+            cents = cents + 4.0 * np.clip(tt / 0.6, 0, 1) * np.sin(2 * np.pi * r2 * tt + 2 * np.pi * chrono.cycles_entiers(r2, t) + q2)
+        fi = chrono.phase_entiere(f * 2 ** (cents / 1200), int(round(t[0] * SR)))
+    else:
+        tt = t - t[0]
+        cents = desaccord_cents + 3.0 * np.sin(2 * np.pi * rng.uniform(0.07, 0.13) * tt + rng.uniform(0, 6.3))
+        if vibrato:
+            cents = cents + 4.0 * np.clip(tt / 0.6, 0, 1) * np.sin(2 * np.pi * rng.uniform(4.8, 5.6) * tt + rng.uniform(0, 6.3))
+        fi = f * 2 ** (cents / 1200)
     ph = rng.uniform(0, 1) + np.concatenate([[0.0], np.cumsum(fi[:-1])]) / SR
     tab = _table_scie(f)
     L = len(tab)

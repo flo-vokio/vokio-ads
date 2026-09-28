@@ -52,6 +52,13 @@ W = {"air_sms": (round(T["vibreur"] + 0.933, 3), round(T["la"] - 0.10, 3)),
      "nappe_fin": (round(T["re"] + 1.0, 3), round(T["re"] + 2.1, 3)), "nappe_fin_mono": (round(T["re"] + 0.8, 3), round(T["re"] + 2.8, 3)),
      "vibreur": (round(T["vibreur"], 3), round(T["vibreur"] + 0.45, 3))}
 f_ = lambda a, b: f"{a:.2f} → {b:.2f}".replace(".", ",")  # noqa: E731
+# 28/09 (échange du prénom) : les instants écrits en secondes ci-dessous sont ceux du FILM DE BASE (47 s) ; Bt() les porte
+# dans le film courant (son/dialogue.json « insertions », videos/showcase/outils/chronologie.py, par mix.CHRONO ; l'identité
+# sans insertion). Les NOMS des clés du rapport gardent les instants du film de base : c'est le contrat que lit
+# outils/controles.py. Le la · sol de l'écriture ne suit pas la règle (mix.T["la_rdv"] : début de l'écriture dans le film de
+# 47 s, fin de « Florian » depuis l'échange) : ses fenêtres partent de LA_E (47 s : 25,4 → 26,1 = LA_E → LA_E + 0,7).
+Bt = M.CHRONO.decaler
+LA_E, SOL_E = M.T["la_rdv"], M.T["sol_rdv"]
 
 
 def ponderer_k(x):
@@ -180,25 +187,32 @@ def main(images=False):
     a_ = R["A_master"]
     R["A_master"]["ok"] = bool(abs(a_["loudnorm"]["lufs"] + 14) <= 0.3 and a_["loudnorm"]["crete_dbtp"] <= -1.5
                                and abs(a_["apres_aac_256k"]["loudnorm"]["lufs"] + 14) <= 0.3
-                               and a_["apres_aac_256k"]["loudnorm"]["crete_dbtp"] <= -1.5 and abs(a_["duree_s"] - DUREE) < 1e-9)
+                               and a_["apres_aac_256k"]["loudnorm"]["crete_dbtp"] <= -1.5 and abs(a_["duree_s"] - DUREE) <= 0.5 / SR)
+    # (28/09 : la durée des données est au µs, 50,066667 ; le film fait N = round(DUREE·SR) échantillons : ½ échantillon)
     # B. silences
     s0, s1 = EV["silence_numerique"]["t"]
     f0 = EV["silence_final"]["t"][0]
     z = lambda x, a, b: bool(not np.any(x[int(round(a * SR)):int(round(b * SR))]))  # noqa: E731
-    r0, r1 = mix[int(round(33.05 * SR)):int(round(34.03 * SR))], None
+    r0, r1 = mix[int(round(Bt(33.05) * SR)):int(round(Bt(34.03) * SR))], None
     B = {"zeros_exacts_silence_numerique": z(mix, s0, s1), "zeros_exacts_silence_final": z(mix, f0, DUREE),
          "stems_zeros_silence_numerique": {n: z(st, s0, s1) for n, st in stems.items()},
-         "resolution_seule_33.05-34.03": {"sfx_zero": z(stems["sfx"], 33.05, 34.03), "signature_zero": z(stems["signature"], 33.05, 34.03),
-                                          "dialogue_rms_dbfs (souffle de la vraie ligne)": round(rms_st(stems["dialogue"], 33.05, 34.03), 1),
-                                          "dialogue_rms_33.30-33.95_dbfs (entre les extraits)": round(rms_st(stems["dialogue"], 33.30, 33.95), 1),
-                                          "nappe_rms_dbfs": round(rms_st(stems["nappe"], 33.05, 34.03), 1)},
+         "resolution_seule_33.05-34.03": {"sfx_zero": z(stems["sfx"], Bt(33.05), Bt(34.03)), "signature_zero": z(stems["signature"], Bt(33.05), Bt(34.03)),
+                                          "dialogue_rms_dbfs (souffle de la vraie ligne)": round(rms_st(stems["dialogue"], Bt(33.05), Bt(34.03)), 1),
+                                          "dialogue_rms_33.30-33.95_dbfs (entre les extraits)": round(rms_st(stems["dialogue"], Bt(33.30), Bt(33.95)), 1),
+                                          "nappe_rms_dbfs": round(rms_st(stems["nappe"], Bt(33.05), Bt(34.03)), 1),
+                                          "fenetre_film_courant": [Bt(33.05), Bt(34.03)]},
          "dialogue_nul_apres_raccroche": z(stems["dialogue"], T["raccroche"] + 0.005, DUREE),
          "tonalite_20_premieres_ms_rms_dbfs": round(float(20 * np.log10(np.sqrt(np.mean(mix[:960] ** 2)))), 1)}
     res = B["resolution_seule_33.05-34.03"]
-    # la voix réelle : la fin de « -tion » s'éteint (≤ −50 dBFS dès 33,075), zéros de 33,23 (fin de A4) à 33,98 (C4)
+    # la voix réelle : la fin de « -tion » s'éteint (≤ −50 dBFS dès « -tion » + 0,12 s), zéros de la fin de A4 au début de C4
+    # (28/09 : fenêtres lues dans dialogue.json ; les nombres des clés sont ceux du 27/09 matin, A4 fini à 33,23 et C4 à
+    # 33,98 : le soir du 27/09, C4 est passé à 33,79 et les fenêtres écrites en secondes ne le suivaient plus)
+    ex_ = {e["id"]: e for e in M.DIA["extraits"]}
+    a4_fin, c4_deb = ex_["A4"]["film_out"], ex_["C4"]["film_in"]
+    res["fenetres_voix_film_courant"] = {"rms_max": [round(T["resolution"] + 0.12, 6), c4_deb], "zeros": [a4_fin, c4_deb]}
     res["dialogue_max_rms_25ms_33.075-33.98_dbfs"] = round(max(rms_st(stems["dialogue"], a, a + 0.025)
-                                                              for a in np.arange(33.075, 33.98 - 0.025, 0.025)), 1)
-    res["dialogue_zero_33.23-33.98"] = z(stems["dialogue"], 33.23, 33.98)
+                                                              for a in np.arange(T["resolution"] + 0.12, c4_deb - 0.025, 0.025)), 1)
+    res["dialogue_zero_33.23-33.98"] = z(stems["dialogue"], a4_fin, c4_deb)
     B["ok"] = bool(B["zeros_exacts_silence_numerique"] and B["zeros_exacts_silence_final"] and all(B["stems_zeros_silence_numerique"].values())
                    and res["sfx_zero"] and res["signature_zero"] and res["dialogue_max_rms_25ms_33.075-33.98_dbfs"] <= -50
                    and res["dialogue_zero_33.23-33.98"] and B["dialogue_nul_apres_raccroche"])
@@ -207,8 +221,13 @@ def main(images=False):
     somme = sum(stems.values())
     R["C_somme_stems_moins_mix_max"] = float(np.max(np.abs(somme - mix)))
     # D. synchro ±5 ms (stems)
-    ponctuels = {"clic-decroche": 126, "cloche-sol-1": None, "tap-9h": 620, "tap-10h": 643, "tap-11h": 666, "tap-retour-9h": 731,
-                 "cloche-la-rdv": 762, "cloche-sol-rdv": 769, "raccroche": 1076, "vibreur": 1100,
+    # images attendues, lues dans les données (28/09 : elles portaient les nombres du film de 47 s) ; le la · sol de
+    # l'écriture suit mix.T["la_rdv"] (début de l'écriture, ou depuis l'échange du prénom la fin de « Florian »)
+    IMG = lambda nom: EV[nom]["image"]           # noqa: E731
+    ponctuels = {"clic-decroche": IMG("decroche"), "cloche-sol-1": None, "tap-9h": IMG("contact_neuf"),
+                 "tap-10h": IMG("contact_dix"), "tap-11h": IMG("contact_onze"), "tap-retour-9h": IMG("contact_retour_neuf"),
+                 "cloche-la-rdv": int(round(M.T["la_rdv"] * 30)), "cloche-sol-rdv": int(round(M.T["sol_rdv"] * 30)),
+                 "raccroche": IMG("raccroche"), "vibreur": IMG("bulle_et_vibreur"),
                  "signature-la": EV["signature_la"]["image"], "signature-sol": None, "signature-re": EV["signature_re_contact"]["image"],
                  "ton-1": 0, "ton-2-la": 81}
     D = []
@@ -252,11 +271,11 @@ def main(images=False):
     L_ = lambda xk, a, b: round(float(sonie(xk, int(a * SR), int(b * SR))), 1)  # noqa: E731
     sk, gk, nk = ponderer_k(stems["sfx"]), ponderer_k(stems["signature"]), ponderer_k(stems["nappe"])
     R["F_sonies_LUFS"] = {
-        "voix (4,91 → 35,48)": L_(dk, 4.91, 35.48), "tonalite 1 (0,1 → 1,4)": L_(sk, 0.1, 1.4), "tonalite 2 (2,8 → 4,2)": L_(gk, 2.8, 4.2),
+        "voix (4,91 → 35,48)": L_(dk, 4.91, Bt(35.48)), "tonalite 1 (0,1 → 1,4)": L_(sk, 0.1, 1.4), "tonalite 2 (2,8 → 4,2)": L_(gk, 2.8, 4.2),
         "decroche la + sol (4,2 → 4,9)": L_(gk, 4.2, 4.9), "pedale seule sous A1 (6,4 → 10,1)": L_(nk, 6.4, 10.1),
         "nappe, accord de sol (12,5 → 17,5)": L_(nk, 12.5, 17.5), "nappe, silence de l'outil (18,4 → 19,75)": L_(nk, 18.4, 19.75),
-        "nappe, debut du re7 (20,0 → 22,6)": L_(nk, 20.0, 22.6), "nappe, fin du re9 (30,0 → 32,9)": L_(nk, 30.0, 32.9),
-        "nappe, resolution seule (33,05 → 34,03)": L_(nk, 33.05, 34.03), "la·sol de l'ecriture (25,4 → 26,1)": L_(gk, 25.4, 26.1),
+        "nappe, debut du re7 (20,0 → 22,6)": L_(nk, 20.0, 22.6), "nappe, fin du re9 (30,0 → 32,9)": L_(nk, Bt(30.0), Bt(32.9)),
+        "nappe, resolution seule (33,05 → 34,03)": L_(nk, Bt(33.05), Bt(34.03)), "la·sol de l'ecriture (25,4 → 26,1)": L_(gk, LA_E, LA_E + 0.7),
         f"vibreur ({f_(*W['vibreur'])})": L_(sk, *W["vibreur"]), f"air du SMS ({f_(*W['air_sms'])})": L_(nk, *W["air_sms"]),
         f"stylo ({f_(*W['stylo'])})": L_(sk, *W["stylo"]), f"signature ({f_(*W['signature'])})": L_(gk, *W["signature"]),
         f"nappe de fin ({f_(*W['nappe_fin'])})": L_(nk, *W["nappe_fin"])}
@@ -265,8 +284,8 @@ def main(images=False):
     m2k = ponderer_k(np.stack([mono, mono], axis=1))
     G = {"ecart_sonie_mono_moins_stereo_film_LU": round(float(sonie(m2k, 0, N) - sonie(mk, 0, N)), 2)}
     for nom, (a, b) in {f"signature {f_(*W['signature'])}": W["signature"], "nappe 12,5 → 17,5": (12.5, 17.5), "decroche 4,2 → 5,0": (4.2, 5.0),
-                        "resolution seule 33,1 → 34,0": (33.1, 34.0), f"air du SMS {f_(*W['air_sms'])}": W["air_sms"],
-                        "ecriture 25,4 → 26,2": (25.4, 26.2), f"nappe de fin {f_(*W['nappe_fin_mono'])}": W["nappe_fin_mono"]}.items():
+                        "resolution seule 33,1 → 34,0": (Bt(33.1), Bt(34.0)), f"air du SMS {f_(*W['air_sms'])}": W["air_sms"],
+                        "ecriture 25,4 → 26,2": (LA_E, LA_E + 0.8), f"nappe de fin {f_(*W['nappe_fin_mono'])}": W["nappe_fin_mono"]}.items():
         G[f"ecart_{nom}_LU"] = round(float(sonie(m2k, int(a * SR), int(b * SR)) - sonie(mk, int(a * SR), int(b * SR))), 2)
     w = 4800
     nb = N // w
@@ -288,17 +307,17 @@ def main(images=False):
     H = {}
     perte = {}
     for nom, (a, b) in {"pedale seule 6,4-10,1": (6.4, 10.1), "sol 12,5-17,5": (12.5, 17.5), "sus4 18,2-19,75": (18.2, 19.75),
-                        "re7-re9 20,6-32,85": (20.6, 32.85), "resolution 33,1-35,8": (33.1, 35.8), f"air SMS {f_(*W['air_sms'])}": W["air_sms"],
-                        f"nappe de fin {f_(*W['nappe_fin'])}": W["nappe_fin"], "toute la nappe 4,6-35,8": (4.6, 35.8)}.items():
+                        "re7-re9 20,6-32,85": (20.6, Bt(32.85)), "resolution 33,1-35,8": (Bt(33.1), Bt(35.8)), f"air SMS {f_(*W['air_sms'])}": W["air_sms"],
+                        f"nappe de fin {f_(*W['nappe_fin'])}": W["nappe_fin"], "toute la nappe 4,6-35,8": (4.6, Bt(35.8))}.items():
         perte[nom] = round(float(20 * np.log10(np.sqrt(np.mean(hp["nappe"][int(a * SR):int(b * SR)] ** 2)) + 1e-15) - rms_st(stems["nappe"], a, b)), 2)
-    perte_voix = round(float(20 * np.log10(np.sqrt(np.mean(hp["dialogue"][int(4.91 * SR):int(35.48 * SR)] ** 2))) - rms_st(stems["dialogue"], 4.91, 35.48)), 2)
+    perte_voix = round(float(20 * np.log10(np.sqrt(np.mean(hp["dialogue"][int(4.91 * SR):int(Bt(35.48) * SR)] ** 2))) - rms_st(stems["dialogue"], 4.91, Bt(35.48))), 2)
     H["perte_nappe_db"] = perte
     H["perte_voix_db (reference)"] = perte_voix
     H["perte_nappe_ok"] = all(v >= -7.0 for v in perte.values())
     hn = hp["nappe"]
     ped = {}
-    for nom, (a, b) in {"sol 12,5-17,5 (G4 dans l'accord, pour memoire)": (12.5, 17.5), "re7-re9 20,6-32,85": (20.6, 32.85),
-                        "resolution 33,1-35,8": (33.1, 35.8)}.items():
+    for nom, (a, b) in {"sol 12,5-17,5 (G4 dans l'accord, pour memoire)": (12.5, 17.5), "re7-re9 20,6-32,85": (20.6, Bt(32.85)),
+                        "resolution 33,1-35,8": (Bt(33.1), Bt(35.8))}.items():
         la, sol = bande(hn, a, b, 430, 450), bande(hn, a, b, 382, 402)
         ped[nom] = {"la_moins_sol_db": round(la - sol, 1)}
     H["pedale_la_sol"] = ped
@@ -326,7 +345,7 @@ def main(images=False):
     # I. chroma de la nappe
     nap = stems["nappe"]
     R["I_chroma_nappe"] = {f"{a}-{b}": chroma(nap, int(a * SR), int(b * SR)) for a, b in
-                           ((6.4, 10.1), (12.5, 17.5), (18.2, 19.75), (20.6, 26.1), (28.2, 32.85), (33.1, 35.8), W["air_sms"], W["nappe_fin"])}
+                           ((6.4, 10.1), (12.5, 17.5), (18.2, 19.75), (20.6, Bt(26.1)), (Bt(28.2), Bt(32.85)), (Bt(33.1), Bt(35.8)), W["air_sms"], W["nappe_fin"])}
     # J. enveloppes
     s1 = M.SEC["s1"]["enveloppe"]
     ton = stems["sfx"][:, 0] + stems["signature"][:, 0]
@@ -380,7 +399,7 @@ def main(images=False):
         return 20 * np.log10(np.tan(a))
     Lp = []
     for nom, st, a, b in (("tap-9h", "sfx", 20.667, 20.70), ("tap-11h", "sfx", 22.2, 22.23),
-                          ("la·sol, fin de l'écriture", "signature", 26.06, 26.10), ("stylo, milieu du mot", "sfx", *W["stylo_milieu"])):
+                          ("la·sol, fin de l'écriture", "signature", round(SOL_E + 0.42, 6), round(SOL_E + 0.46, 6)), ("stylo, milieu du mot", "sfx", *W["stylo_milieu"])):
         Lp.append({"cue": nom, "fenetre": [a, b], "x_point": round(float(M.x_point((a + b) / 2)), 1),
                    "D_moins_G_mesure_db": round(float(balance(stems[st], a, b)), 2),
                    "D_moins_G_attendu_db": round(float(attendu((a + b) / 2)), 2)})
@@ -390,7 +409,7 @@ def main(images=False):
     Mv = {}
     if len(ct):
         tS, MM, SS = ct[:, 0], ct[:, 1], ct[:, 2]
-        dial = SS[(tS >= 5.0) & (tS <= 35.4)]
+        dial = SS[(tS >= 5.0) & (tS <= Bt(35.4))]
         med = float(np.median(dial))
         sig_interv = L_(mk, *W["signature_arc"])
         tmom, lmom = instantanee(mk)
@@ -407,7 +426,7 @@ def main(images=False):
               "re_piste_signature_400ms": L_(gk, T["re"], T["re"] + 0.4),
               "vibreur_instantanee_max": round(vib, 2),
               "S_par_seconde": {int(round(t)): round(float(s), 1) for t, s in zip(tS, SS) if abs(t - round(t)) < 1e-6}}
-        dM = (tmom >= 5.0) & (tmom <= 35.5)
+        dM = (tmom >= 5.0) & (tmom <= Bt(35.5))
         Mv["M_max_dialogue_5-35.5"] = round(float(lmom[dM].max()), 2)
         Mv["M_p95_dialogue_5-35.5"] = round(float(np.percentile(lmom[dM], 95)), 2)
         dR = (tmom >= T["re"]) & (tmom <= T["re"] + 0.8)
@@ -427,7 +446,13 @@ def main(images=False):
     R["N_signatures_seules"] = Nn
     # O. variante monde
     pm = ICI / "stems" / "monde.wav"
-    if pm.exists() and (ICI / "mix-monde.wav").exists():
+    lm = len(labo.lire(ICI / "mix-monde.wav")) if (ICI / "mix-monde.wav").exists() else None
+    if pm.exists() and lm is not None and lm != len(mix):
+        # 28/09 : la variante d'un autre film (47 s ; mix.py --monde n'a pas été relancé : il appelle ElevenLabs) : rapportée
+        # périmée, pas contrôlée (ni « ok » ni échec : elle n'est pas un livrable du film courant)
+        R["O_monde"] = {"perimee": f"mix-monde.wav fait {lm / SR:.3f} s, le film {len(mix) / SR:.3f} s : variante d'un autre "
+                                   "film, à refaire par python3 son/mix.py --monde si elle doit exister", "duree_s": round(lm / SR, 3)}
+    elif pm.exists() and (ICI / "mix-monde.wav").exists():
         mo = labo.lire(pm)
         mok = ponderer_k(mo)
         tt, ll = instantanee(mok)
@@ -512,8 +537,8 @@ def planches(mixp, courbe, hp):
     run(hpn, "showspectrumpic=s=2400x500:legend=1:fscale=log:scale=log:start=100:stop=6000:color=intensity",
         "nappe-haut-parleur-spectre.png")
     for nom, (a, b) in {"z1-sonnerie-decroche": (0, 6.5), "z2-entree-sol": (9.5, 13.0), "z3-agenda-touchers": (17.3, 25.2),
-                        "z4-ecriture": (24.8, 27.2), "z5-tension-resolution": (28.0, 36.0),
-                        "z6-raccroche-silence-vibreur": (35.3, 40.0), "z7-stylo-signature": (round(P0 - 0.3, 2), DUREE)}.items():
+                        "z4-ecriture": (24.8, Bt(27.2)), "z5-tension-resolution": (Bt(28.0), Bt(36.0)),
+                        "z6-raccroche-silence-vibreur": (Bt(35.3), Bt(40.0)), "z7-stylo-signature": (round(P0 - 0.3, 2), DUREE)}.items():
         run(mixp, "showspectrumpic=s=1600x600:legend=1:fscale=log:scale=log:stop=14000:color=intensity",
             f"{nom}-spectre.png", extra=("-ss", str(a), "-t", str(b - a)))
         run(mixp, "showwavespic=s=1600x300:split_channels=1:colors=0x262019|0xC0452C", f"{nom}-onde.png",

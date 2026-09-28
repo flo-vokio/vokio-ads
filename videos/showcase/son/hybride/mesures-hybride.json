@@ -18,7 +18,7 @@
   "sfx": {
    "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/sfx.wav",
    "traitements": [
-    "muets [[41.45, 42.25]] (fondu 0 ms)"
+    "muets [[44.516667, 45.316667]] (fondu 0 ms)"
    ],
    "note": "tonalité, souffle de sonnerie, clic, touchers, vibreur, raccroché ; UN son par geste : sur « Vokıo » le stem sfx amont porte le stylo du master (bruit 3-8 kHz, crête −31,3 dBFS entre 41,45 et 42,25) : le muet l'enlève, la plume (ecriture) le remplace, comme dans le 3"
   },
@@ -276,7 +276,7 @@
     "mot": "Je",
     "t": 19.8,
     "marge_K": 20.6,
-    "marge_bande": 20.0
+    "marge_bande": 19.9
    },
    {
     "mot": "peux",
@@ -383,180 +383,234 @@
    {
     "mot": "parfait.",
     "t": 24.565,
-    "marge_K": 16.2,
-    "marge_bande": 25.5
+    "marge_K": 16.1,
+    "marge_bande": 25.4
+   },
+   {
+    "mot": "Très",
+    "t": 25.515,
+    "marge_K": 18.8,
+    "marge_bande": 37.8
+   },
+   {
+    "mot": "bien.",
+    "t": 25.66,
+    "marge_K": 19.3,
+    "marge_bande": 32.2
+   },
+   {
+    "mot": "C'est",
+    "t": 26.105,
+    "marge_K": 27.8,
+    "marge_bande": 31.5
+   },
+   {
+    "mot": "pour",
+    "t": 26.277,
+    "marge_K": 23.5,
+    "marge_bande": 29.9
+   },
+   {
+    "mot": "quel",
+    "t": 26.4,
+    "marge_K": 24.0,
+    "marge_bande": 33.0
+   },
+   {
+    "mot": "prénom ?",
+    "t": 26.585,
+    "marge_K": 24.4,
+    "marge_bande": 33.5
+   },
+   {
+    "mot": "C'est",
+    "t": 28.06,
+    "marge_K": 20.2,
+    "marge_bande": 17.8
+   },
+   {
+    "mot": "pour",
+    "t": 28.195,
+    "marge_K": 19.7,
+    "marge_bande": 26.1
+   },
+   {
+    "mot": "Florian.",
+    "t": 28.295,
+    "marge_K": 17.9,
+    "marge_bande": 30.4
    },
    {
     "mot": "Parfait,",
-    "t": 26.24,
-    "marge_K": 18.8,
-    "marge_bande": 34.2
+    "t": 29.306667,
+    "marge_K": 17.0,
+    "marge_bande": 30.2
    },
    {
     "mot": "je",
-    "t": 26.59,
-    "marge_K": 18.4,
-    "marge_bande": 39.4
+    "t": 29.656667,
+    "marge_K": 17.4,
+    "marge_bande": 37.0
    },
    {
     "mot": "vous",
-    "t": 26.695,
-    "marge_K": 19.4,
+    "t": 29.761667,
+    "marge_K": 18.4,
     "marge_bande": 20.0
    },
    {
     "mot": "note",
-    "t": 26.785,
-    "marge_K": 18.6,
-    "marge_bande": 25.4
+    "t": 29.851667,
+    "marge_K": 18.2,
+    "marge_bande": 25.5
    },
    {
     "mot": "ça",
-    "t": 26.955,
-    "marge_K": 24.7,
-    "marge_bande": 39.1
+    "t": 30.021667,
+    "marge_K": 24.5,
+    "marge_bande": 39.3
    },
    {
     "mot": "pour",
-    "t": 27.115,
+    "t": 30.181667,
     "marge_K": 15.3,
-    "marge_bande": 22.3
+    "marge_bande": 22.4
    },
    {
     "mot": "Florian,",
-    "t": 27.25,
-    "marge_K": 17.1,
-    "marge_bande": 32.3
+    "t": 30.316667,
+    "marge_K": 17.2,
+    "marge_bande": 32.5
    },
    {
     "mot": "pour",
-    "t": 27.82,
+    "t": 30.886667,
     "marge_K": 17.9,
     "marge_bande": 21.4
    },
    {
     "mot": "une",
-    "t": 27.94,
+    "t": 31.006667,
     "marge_K": 14.7,
     "marge_bande": 12.9
    },
    {
     "mot": "consultation",
-    "t": 28.038,
+    "t": 31.104667,
     "marge_K": 18.5,
     "marge_bande": 33.8
    },
    {
     "mot": "vétérinaire,",
-    "t": 28.695,
+    "t": 31.761667,
     "marge_K": 17.9,
     "marge_bande": 31.3
    },
    {
     "mot": "le",
-    "t": 29.38,
+    "t": 32.446667,
     "marge_K": 18.8,
     "marge_bande": 30.6
    },
    {
     "mot": "samedi",
-    "t": 29.45,
+    "t": 32.516667,
     "marge_K": 17.2,
     "marge_bande": 21.1
    },
    {
     "mot": "dix-neuf",
-    "t": 29.823,
+    "t": 32.889667,
     "marge_K": 19.3,
     "marge_bande": 26.2
    },
    {
     "mot": "septembre",
-    "t": 30.09,
+    "t": 33.156667,
     "marge_K": 18.3,
     "marge_bande": 28.9
    },
    {
     "mot": "à",
-    "t": 30.468,
+    "t": 33.534667,
     "marge_K": 19.4,
     "marge_bande": 30.5
    },
    {
     "mot": "neuf",
-    "t": 30.555,
+    "t": 33.621667,
     "marge_K": 16.8,
     "marge_bande": 20.7
    },
    {
     "mot": "heures.",
-    "t": 30.675,
+    "t": 33.741667,
     "marge_K": 11.4,
     "marge_bande": 23.8
    },
    {
     "mot": "Vous",
-    "t": 31.39,
+    "t": 34.456667,
     "marge_K": 15.2,
     "marge_bande": 14.0
    },
    {
     "mot": "recevrez",
-    "t": 31.492,
+    "t": 34.558667,
     "marge_K": 17.8,
     "marge_bande": 30.0
    },
    {
     "mot": "un",
-    "t": 31.92,
+    "t": 34.986667,
     "marge_K": 17.3,
     "marge_bande": 31.3
    },
    {
     "mot": "SMS",
-    "t": 32.068,
+    "t": 35.134667,
     "marge_K": 17.5,
     "marge_bande": 28.7
    },
    {
     "mot": "de",
-    "t": 32.315,
+    "t": 35.381667,
     "marge_K": 19.1,
     "marge_bande": 28.1
    },
    {
     "mot": "confirmation.",
-    "t": 32.435,
+    "t": 35.501667,
     "marge_K": 13.2,
     "marge_bande": 30.7
    },
    {
     "mot": "Super,",
-    "t": 34.03,
-    "marge_K": 20.1,
+    "t": 37.096667,
+    "marge_K": 20.0,
     "marge_bande": 27.4
    },
    {
     "mot": "merci",
-    "t": 34.325,
+    "t": 37.391667,
     "marge_K": 19.7,
     "marge_bande": 26.9
    },
    {
     "mot": "beaucoup.",
-    "t": 34.6,
+    "t": 37.666667,
     "marge_K": 22.7,
     "marge_bande": 16.2
    },
    {
     "mot": "Au",
-    "t": 35.12,
+    "t": 38.186667,
     "marge_K": 20.1,
     "marge_bande": 29.4
    },
    {
     "mot": "revoir.",
-    "t": 35.24,
+    "t": 38.306667,
     "marge_K": 16.3,
     "marge_bande": 24.7
    }
@@ -678,11 +732,11 @@
    "id": "plume-rendez-vous",
    "couche": "ecriture",
    "de": 25.367,
-   "a": 26.1,
+   "a": 25.9,
    "ref_db": 14.3,
    "cible_db": 6.0,
-   "avant_db": 23.0,
-   "bande_critere": "4k-8k",
+   "avant_db": 20.6,
+   "bande_critere": "2k-4k",
    "action": "aucune"
   },
   {
@@ -692,15 +746,29 @@
    "a": 25.617,
    "ref_db": 15.4,
    "cible_db": 6.0,
-   "avant_db": 23.0,
-   "bande_critere": "4k-8k",
+   "avant_db": 20.6,
+   "bande_critere": "2k-4k",
    "action": "aucune"
+  },
+  {
+   "id": "plume-nom",
+   "couche": "ecriture",
+   "de": 28.267,
+   "a": 28.933,
+   "exclu": "28/09, échange du prénom : la plume écrit « Florian » SOUS le nom dit par l'appelant (28,30-28,70) ; la voix d'abord : jusqu'à 8 kHz, la remonter la mettrait au niveau des consonnes du nom (4-8 kHz : plume −49 à −58 dBFS, voix −41 à −55) ; elle vit en 8-16 kHz, où la ligne n'a rien (+51 dB sur le reste), et ressort seule dans 4-8 kHz après le mot (28,70-28,93 : +3 à +10 dB sur le bruit de confort), signée par le la · sol ; riche-design l'a déjà baissée de 3,1 et 4,8 dB sous « Florian. » et « pour » (marge de la voix)"
+  },
+  {
+   "id": "pose-plume-nom",
+   "couche": "ecriture",
+   "de": 28.267,
+   "a": 28.517,
+   "exclu": "28/09, échange du prénom : la plume écrit « Florian » SOUS le nom dit par l'appelant (28,30-28,70) ; la voix d'abord : jusqu'à 8 kHz, la remonter la mettrait au niveau des consonnes du nom (4-8 kHz : plume −49 à −58 dBFS, voix −41 à −55) ; elle vit en 8-16 kHz, où la ligne n'a rien (+51 dB sur le reste), et ressort seule dans 4-8 kHz après le mot (28,70-28,93 : +3 à +10 dB sur le bruit de confort), signée par le la · sol ; riche-design l'a déjà baissée de 3,1 et 4,8 dB sous « Florian. » et « pour » (marge de la voix)"
   },
   {
    "id": "agenda-sort",
    "couche": "objets",
-   "de": 31.0,
-   "a": 31.35,
+   "de": 34.067,
+   "a": 34.417,
    "ref_db": 14.4,
    "cible_db": 6.0,
    "avant_db": 2.8,
@@ -722,8 +790,8 @@
   {
    "id": "vibreur-bois",
    "couche": "objets",
-   "de": 36.667,
-   "a": 36.917,
+   "de": 39.733,
+   "a": 39.983,
    "ref_db": -10.2,
    "cible_db": -10.2,
    "avant_db": -10.2,
@@ -733,8 +801,8 @@
   {
    "id": "telephone-sort",
    "couche": "objets",
-   "de": 41.0,
-   "a": 41.4,
+   "de": 44.067,
+   "a": 44.467,
    "ref_db": 4.7,
    "cible_db": 4.7,
    "avant_db": -9.6,
@@ -755,8 +823,8 @@
   {
    "id": "plume-vokio",
    "couche": "ecriture",
-   "de": 41.5,
-   "a": 42.2,
+   "de": 44.567,
+   "a": 45.267,
    "ref_db": 21.8,
    "cible_db": 6.0,
    "avant_db": -6.8,
@@ -778,8 +846,8 @@
   {
    "id": "pose-plume-vokio",
    "couche": "ecriture",
-   "de": 41.5,
-   "a": 41.75,
+   "de": 44.567,
+   "a": 44.817,
    "ref_db": 19.0,
    "cible_db": 6.0,
    "avant_db": -3.3,
@@ -801,8 +869,8 @@
   {
    "id": "assise-i",
    "couche": "point",
-   "de": 42.933,
-   "a": 43.183,
+   "de": 46.0,
+   "a": 46.25,
    "ref_db": 4.8,
    "cible_db": 4.8,
    "avant_db": 2.4,
@@ -823,31 +891,36 @@
   }
  ],
  "master": {
-  "gain_db": -0.2,
-  "reduction_limiteur_max_db": -2.47,
-  "t_reduction_max": 26.258,
-  "part_reduction_sup_1_db": 0.00184,
+  "gain_db": -0.24,
+  "reduction_limiteur_max_db": -2.33,
+  "t_reduction_max": 29.325,
+  "part_reduction_sup_1_db": 0.00245,
   "intervalles_sup_1_db": [
    [
     7.226,
-    7.241,
-    1.26
+    7.239,
+    1.22
    ],
    [
-    26.256,
-    26.309,
-    2.47
+    26.468,
+    26.511,
+    2.04
    ],
    [
-    42.92,
-    42.938,
-    1.31
+    29.323,
+    29.374,
+    2.33
+   ],
+   [
+    45.987,
+    46.002,
+    1.27
    ]
   ]
  },
  "amont": {
   "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/stems-amont.json",
-  "empreinte": "28267a71bbbe7a6cc28737ace8c84286185827a254ecada27f9eacbb152d9d48",
+  "empreinte": "9ab3d78d6f9c095972a82a7d8f7f71f0972ce45620f11729c280fdee5aefe378",
   "ligne": {
    "zones_source": [
     [
@@ -888,7 +961,7 @@
    "plancher_porte_ouverte_db": -48.46,
    "fond_base_db": -66.14,
    "gain_confort_db": 15.68,
-   "porte_ouverte_s": 6.935,
+   "porte_ouverte_s": 7.258,
    "bande_apparier": [
     2000.0,
     8000.0
@@ -897,44 +970,71 @@
   "musique": {
    "rattrapages": 5,
    "manques": [],
-   "relache_quinte": 0.35
+   "relache_quinte": 0.35,
+   "insertions": [
+    {
+     "id": "prenom",
+     "pivot_s": 25.266666666666666,
+     "s": 3.066666666666667,
+     "echantillons": 147200,
+     "pivot_image": 758,
+     "images": 92,
+     "pivot_echantillon": 1212800
+    }
+   ],
+   "grille_t0_base": -0.033333333333338544,
+   "plume": {
+    "la": 28.693333,
+    "sol": 28.933333,
+    "arret": [
+     24.5,
+     29.1
+    ],
+    "dans_l_arret": true,
+    "attaque_la_plus_proche": {
+     "ecart_s": 0.1656,
+     "couche": "grosse_caisse",
+     "t": 29.0989
+    },
+    "ok": true
+   }
   }
  },
- "duree_calcul_s": 50.9,
+ "duree_calcul_s": 54.1,
  "mesures": {
   "mix": {
-   "I": -14.02,
+   "I": -14.03,
    "TP": -1.7,
    "LRA": 7.0
   },
   "crete_vraie_dbtp_numpy": -1.7,
   "somme_stems_moins_mix": 3.3306690738754696e-16,
-  "mono_moins_stereo_lu": -0.12,
-  "correlation_min": 0.71,
+  "mono_moins_stereo_lu": -0.11,
+  "correlation_min": 0.69,
   "silences": [
    {
-    "de": 35.9467,
-    "a": 36.666667,
+    "de": 39.013367,
+    "a": 39.733334,
     "zeros_exacts": true
    },
    {
-    "de": 46.7,
-    "a": 47.0,
+    "de": 49.766667,
+    "a": 50.066667,
     "zeros_exacts": true
    }
   ],
   "sonie_court_terme_max": {
-   "t": 45.3,
-   "S": -10.96
+   "t": 48.3,
+   "S": -11.05
   },
   "sonie_momentanee_max": {
-   "t": 43.3,
-   "M": -9.12
+   "t": 46.4,
+   "M": -9.34
   },
   "arc": {
-   "S_max_apres": -10.96,
-   "S_max_avant": -12.55,
-   "ecart_lu": 1.6,
+   "S_max_apres": -11.05,
+   "S_max_avant": -12.57,
+   "ecart_lu": 1.52,
    "sommet_sur_la_fin": true
   },
   "mots": {
@@ -942,16 +1042,16 @@
     "C1:0 mon": {
      "debut": 10.56,
      "fin": 10.66,
-     "lufs": -10.11,
-     "bande_1_4k_db": -23.93,
-     "crete_1_4k_db": -10.9
+     "lufs": -10.15,
+     "bande_1_4k_db": -23.97,
+     "crete_1_4k_db": -10.94
     },
     "C1:1 chat": {
      "debut": 10.66,
      "fin": 10.915,
-     "lufs": -11.46,
-     "bande_1_4k_db": -25.23,
-     "crete_1_4k_db": -14.5
+     "lufs": -11.5,
+     "bande_1_4k_db": -25.27,
+     "crete_1_4k_db": -14.54
     }
    },
    "1 classique": {
@@ -1006,16 +1106,16 @@
     "C1:0 mon": {
      "debut": 10.56,
      "fin": 10.66,
-     "lufs": -10.1,
-     "bande_1_4k_db": -23.93,
-     "crete_1_4k_db": -10.86
+     "lufs": -10.14,
+     "bande_1_4k_db": -23.97,
+     "crete_1_4k_db": -10.9
     },
     "C1:1 chat": {
      "debut": 10.66,
      "fin": 10.915,
-     "lufs": -11.46,
-     "bande_1_4k_db": -25.22,
-     "crete_1_4k_db": -14.53
+     "lufs": -11.5,
+     "bande_1_4k_db": -25.26,
+     "crete_1_4k_db": -14.57
     }
    }
   },
@@ -1025,21 +1125,21 @@
      {
       "t": 0.83,
       "bande": "2-8 kHz",
-      "avant_db": -53.0,
+      "avant_db": -53.1,
       "apres_db": -34.4,
       "delta_db": 18.6
      },
      {
       "t": 2.7,
       "bande": "large",
-      "avant_db": -31.1,
+      "avant_db": -31.2,
       "apres_db": -20.5,
       "delta_db": 10.6
      },
      {
       "t": 4.21,
       "bande": "2-8 kHz",
-      "avant_db": -46.6,
+      "avant_db": -46.7,
       "apres_db": -56.9,
       "delta_db": -10.2
      },
@@ -1054,13 +1154,13 @@
       "t": 4.75,
       "bande": "2-8 kHz",
       "avant_db": -61.9,
-      "apres_db": -51.5,
+      "apres_db": -51.6,
       "delta_db": 10.4
      },
      {
       "t": 8.75,
       "bande": "2-8 kHz",
-      "avant_db": -48.4,
+      "avant_db": -48.5,
       "apres_db": -59.6,
       "delta_db": -11.1
      }
@@ -1191,26 +1291,26 @@
      }
     ]
    },
-   "0-36": {
+   "0-39.066667": {
     "mix": [
      {
       "t": 0.83,
       "bande": "2-8 kHz",
-      "avant_db": -53.0,
+      "avant_db": -53.1,
       "apres_db": -34.4,
       "delta_db": 18.6
      },
      {
       "t": 2.7,
       "bande": "large",
-      "avant_db": -31.1,
+      "avant_db": -31.2,
       "apres_db": -20.5,
       "delta_db": 10.6
      },
      {
       "t": 4.21,
       "bande": "2-8 kHz",
-      "avant_db": -46.6,
+      "avant_db": -46.7,
       "apres_db": -56.9,
       "delta_db": -10.2
      },
@@ -1225,50 +1325,64 @@
       "t": 4.75,
       "bande": "2-8 kHz",
       "avant_db": -61.9,
-      "apres_db": -51.5,
+      "apres_db": -51.6,
       "delta_db": 10.4
      },
      {
       "t": 8.75,
       "bande": "2-8 kHz",
-      "avant_db": -48.4,
+      "avant_db": -48.5,
       "apres_db": -59.6,
       "delta_db": -11.1
      },
      {
       "t": 25.36,
       "bande": "2-8 kHz",
-      "avant_db": -59.2,
+      "avant_db": -59.8,
       "apres_db": -44.8,
-      "delta_db": 14.4
+      "delta_db": 15.0
      },
      {
-      "t": 27.75,
+      "t": 25.4,
+      "bande": "2-8 kHz",
+      "avant_db": -51.5,
+      "apres_db": -39.9,
+      "delta_db": 11.6
+     },
+     {
+      "t": 30.82,
       "bande": "2-8 kHz",
       "avant_db": -62.4,
-      "apres_db": -44.5,
-      "delta_db": 17.9
+      "apres_db": -43.7,
+      "delta_db": 18.7
      },
      {
-      "t": 31.01,
+      "t": 34.08,
       "bande": "2-8 kHz",
-      "avant_db": -63.0,
-      "apres_db": -42.9,
-      "delta_db": 20.1
+      "avant_db": -63.3,
+      "apres_db": -41.8,
+      "delta_db": 21.5
      },
      {
-      "t": 35.88,
+      "t": 38.93,
+      "bande": "large",
+      "avant_db": -36.5,
+      "apres_db": -25.1,
+      "delta_db": 11.4
+     },
+     {
+      "t": 38.94,
       "bande": "2-8 kHz",
       "avant_db": -42.9,
-      "apres_db": -98.9,
-      "delta_db": -56.0
+      "apres_db": -108.0,
+      "delta_db": -65.1
      },
      {
-      "t": 35.9,
+      "t": 38.97,
       "bande": "large",
-      "avant_db": -24.9,
+      "avant_db": -27.2,
       "apres_db": -240.0,
-      "delta_db": -215.1
+      "delta_db": -212.8
      }
     ],
     "1 classique": [
@@ -1322,39 +1436,53 @@
       "delta_db": -18.7
      },
      {
-      "t": 25.4,
+      "t": 24.99,
       "bande": "2-8 kHz",
-      "avant_db": -75.8,
-      "apres_db": -59.2,
-      "delta_db": 16.6
+      "avant_db": -72.3,
+      "apres_db": -83.7,
+      "delta_db": -11.4
      },
      {
-      "t": 33.98,
-      "bande": "2-8 kHz",
-      "avant_db": -73.2,
-      "apres_db": -38.1,
-      "delta_db": 35.1
+      "t": 25.27,
+      "bande": "large",
+      "avant_db": -27.6,
+      "apres_db": -240.0,
+      "delta_db": -212.4
      },
      {
-      "t": 35.48,
+      "t": 25.28,
       "bande": "2-8 kHz",
-      "avant_db": -49.9,
+      "avant_db": -53.4,
+      "apres_db": -133.8,
+      "delta_db": -80.4
+     },
+     {
+      "t": 37.04,
+      "bande": "2-8 kHz",
+      "avant_db": -73.0,
+      "apres_db": -41.2,
+      "delta_db": 31.8
+     },
+     {
+      "t": 38.55,
+      "bande": "2-8 kHz",
+      "avant_db": -51.4,
       "apres_db": -79.2,
-      "delta_db": -29.2
+      "delta_db": -27.8
      },
      {
-      "t": 35.88,
+      "t": 38.94,
       "bande": "2-8 kHz",
       "avant_db": -43.0,
-      "apres_db": -98.7,
-      "delta_db": -55.7
+      "apres_db": -108.0,
+      "delta_db": -65.0
      },
      {
-      "t": 35.9,
+      "t": 38.97,
       "bande": "large",
-      "avant_db": -24.7,
+      "avant_db": -27.0,
       "apres_db": -240.0,
-      "delta_db": -215.3
+      "delta_db": -213.0
      }
     ],
     "2 musique": [
@@ -1380,60 +1508,74 @@
       "delta_db": -13.3
      },
      {
-      "t": 25.4,
+      "t": 25.27,
       "bande": "large",
-      "avant_db": -33.3,
-      "apres_db": -21.2,
-      "delta_db": 12.1
+      "avant_db": -33.5,
+      "apres_db": -240.0,
+      "delta_db": -206.5
      },
      {
-      "t": 27.75,
+      "t": 25.28,
       "bande": "2-8 kHz",
-      "avant_db": -65.6,
-      "apres_db": -44.5,
-      "delta_db": 21.1
+      "avant_db": -61.3,
+      "apres_db": -148.7,
+      "delta_db": -87.3
      },
      {
-      "t": 31.01,
+      "t": 30.82,
       "bande": "2-8 kHz",
-      "avant_db": -65.2,
-      "apres_db": -37.8,
-      "delta_db": 27.4
+      "avant_db": -65.9,
+      "apres_db": -43.6,
+      "delta_db": 22.3
      },
      {
-      "t": 31.21,
+      "t": 34.08,
       "bande": "2-8 kHz",
-      "avant_db": -63.8,
-      "apres_db": -39.6,
-      "delta_db": 24.1
+      "avant_db": -65.1,
+      "apres_db": -36.7,
+      "delta_db": 28.4
      },
      {
-      "t": 33.98,
+      "t": 34.27,
+      "bande": "2-8 kHz",
+      "avant_db": -64.5,
+      "apres_db": -41.4,
+      "delta_db": 23.1
+     },
+     {
+      "t": 37.04,
       "bande": "2-8 kHz",
       "avant_db": -56.2,
-      "apres_db": -38.2,
-      "delta_db": 18.0
+      "apres_db": -41.2,
+      "delta_db": 15.0
      },
      {
-      "t": 35.48,
+      "t": 38.54,
       "bande": "2-8 kHz",
-      "avant_db": -50.2,
-      "apres_db": -67.1,
-      "delta_db": -16.9
+      "avant_db": -46.2,
+      "apres_db": -65.2,
+      "delta_db": -19.0
      },
      {
-      "t": 35.88,
+      "t": 38.93,
+      "bande": "large",
+      "avant_db": -36.2,
+      "apres_db": -25.0,
+      "delta_db": 11.3
+     },
+     {
+      "t": 38.94,
       "bande": "2-8 kHz",
       "avant_db": -43.0,
-      "apres_db": -98.8,
-      "delta_db": -55.8
+      "apres_db": -108.0,
+      "delta_db": -65.0
      },
      {
-      "t": 35.9,
+      "t": 38.97,
       "bande": "large",
-      "avant_db": -24.9,
+      "avant_db": -27.1,
       "apres_db": -240.0,
-      "delta_db": -215.1
+      "delta_db": -212.9
      }
     ],
     "3 design": [
@@ -1494,39 +1636,46 @@
       "delta_db": -14.4
      },
      {
-      "t": 25.35,
-      "bande": "2-8 kHz",
-      "avant_db": -61.4,
-      "apres_db": -45.7,
-      "delta_db": 15.7
+      "t": 25.27,
+      "bande": "large",
+      "avant_db": -27.6,
+      "apres_db": -240.0,
+      "delta_db": -212.4
      },
      {
-      "t": 33.98,
+      "t": 25.28,
       "bande": "2-8 kHz",
-      "avant_db": -60.3,
-      "apres_db": -38.1,
-      "delta_db": 22.1
+      "avant_db": -52.6,
+      "apres_db": -132.6,
+      "delta_db": -80.1
      },
      {
-      "t": 35.48,
+      "t": 37.04,
       "bande": "2-8 kHz",
-      "avant_db": -49.7,
-      "apres_db": -62.0,
-      "delta_db": -12.3
+      "avant_db": -57.9,
+      "apres_db": -41.2,
+      "delta_db": 16.6
      },
      {
-      "t": 35.88,
+      "t": 38.54,
+      "bande": "2-8 kHz",
+      "avant_db": -46.0,
+      "apres_db": -61.6,
+      "delta_db": -15.6
+     },
+     {
+      "t": 38.94,
       "bande": "2-8 kHz",
       "avant_db": -43.0,
-      "apres_db": -98.8,
-      "delta_db": -55.8
+      "apres_db": -108.1,
+      "delta_db": -65.1
      },
      {
-      "t": 35.9,
+      "t": 38.97,
       "bande": "large",
-      "avant_db": -24.8,
+      "avant_db": -27.0,
       "apres_db": -240.0,
-      "delta_db": -215.2
+      "delta_db": -213.0
      }
     ]
    }
@@ -2041,7 +2190,7 @@
      "resolue": true
     }
    ],
-   "15-47": [
+   "15-50.066667": [
     {
      "t": 17.575,
      "bande": "2-8k",
@@ -2278,14 +2427,30 @@
      "resolue": true
     },
     {
-     "t": 26.23,
+     "t": 28.35,
+     "bande": "30-100",
+     "echelle": "tenu",
+     "mot": "Florian.",
+     "1 classique": -24.8,
+     "2 musique": -25.8,
+     "3 design": -19.1,
+     "mix": 1.6,
+     "bandes": [
+      "30-100",
+      "4-8k",
+      "8-16k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 29.295,
      "bande": "2-4k",
      "echelle": "tenu",
      "mot": "Parfait,",
-     "1 classique": 48.6,
-     "2 musique": 37.1,
-     "3 design": 31.6,
-     "mix": 34.3,
+     "1 classique": 48.8,
+     "2 musique": 36.9,
+     "3 design": 31.9,
+     "mix": 34.7,
      "bandes": [
       "2-4k",
       "4-8k",
@@ -2294,21 +2459,21 @@
      "resolue": false
     },
     {
-     "t": 26.29,
+     "t": 29.355,
      "bande": "4-8k",
      "echelle": "court",
      "mot": "Parfait,",
-     "1 classique": -20.6,
-     "2 musique": -17.5,
-     "3 design": -10.6,
-     "mix": -8.5,
+     "1 classique": -19.4,
+     "2 musique": -16.8,
+     "3 design": -10.4,
+     "mix": -8.6,
      "bandes": [
       "4-8k"
      ],
      "resolue": true
     },
     {
-     "t": 26.615,
+     "t": 29.68,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "je",
@@ -2322,13 +2487,13 @@
      "resolue": false
     },
     {
-     "t": 26.885,
+     "t": 29.95,
      "bande": "4-8k",
      "echelle": "court",
      "mot": "note",
-     "1 classique": -13.4,
-     "2 musique": -10.1,
-     "3 design": -4.6,
+     "1 classique": -13.5,
+     "2 musique": -10.2,
+     "3 design": -4.1,
      "mix": -5.5,
      "bandes": [
       "4-8k"
@@ -2336,168 +2501,154 @@
      "resolue": true
     },
     {
-     "t": 26.95,
+     "t": 30.02,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "note",
-     "1 classique": 20.4,
-     "2 musique": 11.7,
-     "3 design": 4.9,
-     "mix": 5.6,
+     "1 classique": 19.9,
+     "2 musique": 12.2,
+     "3 design": 4.8,
+     "mix": 5.7,
      "bandes": [
       "4-8k"
      ],
      "resolue": true
     },
     {
-     "t": 27.73,
+     "t": 30.8,
      "bande": "2-8k",
      "echelle": "tenu",
      "mot": null,
-     "1 classique": 29.6,
+     "1 classique": 29.9,
      "2 musique": 22.8,
-     "3 design": 17.4,
-     "mix": 19.5,
+     "3 design": 17.5,
+     "mix": 19.6,
      "bandes": [
       "2-8k"
      ],
      "resolue": false
     },
     {
-     "t": 28.08,
+     "t": 31.15,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "consultation",
-     "1 classique": 41.2,
-     "2 musique": 28.2,
-     "3 design": 22.6,
-     "mix": 25.9,
+     "1 classique": 41.3,
+     "2 musique": 28.0,
+     "3 design": 22.7,
+     "mix": 25.7,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 28.14,
+     "t": 31.205,
      "bande": "4-8k",
      "echelle": "court",
      "mot": "consultation",
-     "1 classique": 30.7,
-     "2 musique": 30.3,
-     "3 design": 20.4,
-     "mix": 29.2,
+     "1 classique": 29.7,
+     "2 musique": 30.4,
+     "3 design": 22.7,
+     "mix": 29.4,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 28.315,
+     "t": 31.38,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "consultation",
-     "1 classique": 10.5,
-     "2 musique": 22.3,
+     "1 classique": 10.4,
+     "2 musique": 23.0,
      "3 design": 3.8,
-     "mix": 20.8,
+     "mix": 20.5,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 28.385,
-     "bande": "4-8k",
-     "echelle": "court",
-     "mot": "consultation",
-     "1 classique": -10.7,
-     "2 musique": -10.2,
-     "3 design": -3.1,
-     "mix": -10.9,
-     "bandes": [
-      "4-8k"
-     ],
-     "resolue": false
-    },
-    {
-     "t": 28.425,
+     "t": 31.49,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "consultation",
-     "1 classique": 26.0,
-     "2 musique": 20.8,
-     "3 design": 12.4,
-     "mix": 21.0,
+     "1 classique": 26.3,
+     "2 musique": 20.2,
+     "3 design": 12.6,
+     "mix": 21.2,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 28.705,
+     "t": 31.775,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "consultation",
-     "1 classique": 21.6,
-     "2 musique": 29.5,
-     "3 design": 6.3,
-     "mix": 26.5,
+     "1 classique": 22.7,
+     "2 musique": 28.1,
+     "3 design": 6.2,
+     "mix": 26.6,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 29.005,
+     "t": 32.07,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "vétérinaire,",
-     "1 classique": 12.5,
-     "2 musique": 18.6,
-     "3 design": 6.6,
-     "mix": 18.3,
+     "1 classique": 12.9,
+     "2 musique": 17.6,
+     "3 design": 6.7,
+     "mix": 18.0,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 29.125,
+     "t": 32.19,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "vétérinaire,",
-     "1 classique": -12.8,
-     "2 musique": -25.5,
-     "3 design": -6.2,
-     "mix": -24.3,
+     "1 classique": -13.5,
+     "2 musique": -25.1,
+     "3 design": -6.3,
+     "mix": -24.0,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 30.12,
+     "t": 33.185,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "septembre",
      "1 classique": -10.6,
-     "2 musique": -13.7,
-     "3 design": -1.5,
-     "mix": -20.2,
+     "2 musique": -18.1,
+     "3 design": -1.6,
+     "mix": -20.4,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 30.205,
+     "t": 33.27,
      "bande": "2-4k",
      "echelle": "court",
      "mot": "septembre",
-     "1 classique": -27.6,
-     "2 musique": -25.4,
-     "3 design": -17.8,
-     "mix": -23.6,
+     "1 classique": -27.0,
+     "2 musique": -24.7,
+     "3 design": -17.5,
+     "mix": -23.5,
      "bandes": [
       "2-4k",
       "4-8k",
@@ -2506,70 +2657,70 @@
      "resolue": false
     },
     {
-     "t": 30.23,
+     "t": 33.295,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "septembre",
-     "1 classique": 20.6,
-     "2 musique": 28.6,
+     "1 classique": 20.2,
+     "2 musique": 29.4,
      "3 design": 1.1,
-     "mix": 26.8,
+     "mix": 26.7,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 30.305,
+     "t": 33.37,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "septembre",
-     "1 classique": -17.2,
-     "2 musique": -22.1,
+     "1 classique": -16.5,
+     "2 musique": -22.5,
      "3 design": -6.9,
-     "mix": -23.0,
+     "mix": -23.6,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 30.405,
+     "t": 33.47,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "septembre",
-     "1 classique": 18.2,
-     "2 musique": 24.8,
-     "3 design": 8.1,
-     "mix": 21.9,
+     "1 classique": 18.1,
+     "2 musique": 24.7,
+     "3 design": 8.2,
+     "mix": 22.1,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 30.495,
+     "t": 33.56,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "à",
      "1 classique": -10.4,
-     "2 musique": -20.2,
-     "3 design": -4.4,
-     "mix": -20.7,
+     "2 musique": -21.0,
+     "3 design": -4.2,
+     "mix": -21.2,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 31.385,
+     "t": 34.455,
      "bande": "2-8k",
      "echelle": "tenu",
      "mot": "Vous",
-     "1 classique": 33.6,
-     "2 musique": 26.8,
-     "3 design": 14.4,
-     "mix": 14.5,
+     "1 classique": 32.9,
+     "2 musique": 27.1,
+     "3 design": 14.9,
+     "mix": 15.0,
      "bandes": [
       "4-8k",
       "2-8k"
@@ -2577,27 +2728,27 @@
      "resolue": true
     },
     {
-     "t": 31.495,
+     "t": 34.56,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "Vous",
-     "1 classique": 11.0,
-     "2 musique": 19.0,
-     "3 design": 5.6,
-     "mix": 19.1,
+     "1 classique": 11.8,
+     "2 musique": 18.2,
+     "3 design": 6.1,
+     "mix": 19.2,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 31.75,
+     "t": 34.82,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "recevrez",
-     "1 classique": 23.5,
-     "2 musique": 26.7,
-     "3 design": 15.1,
+     "1 classique": 23.6,
+     "2 musique": 26.9,
+     "3 design": 14.9,
      "mix": 25.5,
      "bandes": [
       "4-8k"
@@ -2605,111 +2756,84 @@
      "resolue": false
     },
     {
-     "t": 32.115,
-     "bande": "4-8k",
-     "echelle": "tenu",
-     "mot": "SMS",
-     "1 classique": 10.6,
-     "2 musique": 16.3,
-     "3 design": 5.3,
-     "mix": 15.8,
-     "bandes": [
-      "4-8k"
-     ],
-     "resolue": false
-    },
-    {
-     "t": 32.355,
+     "t": 35.425,
      "bande": "4-8k",
      "echelle": "court",
      "mot": "de",
-     "1 classique": 15.6,
-     "2 musique": 21.5,
-     "3 design": 8.1,
-     "mix": 20.9,
+     "1 classique": 16.6,
+     "2 musique": 20.2,
+     "3 design": 8.7,
+     "mix": 20.3,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 32.5,
+     "t": 35.565,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "confirmation.",
      "1 classique": 26.1,
-     "2 musique": 14.7,
-     "3 design": 7.6,
-     "mix": 15.0,
+     "2 musique": 14.6,
+     "3 design": 7.5,
+     "mix": 15.1,
      "bandes": [
       "4-8k"
      ],
      "resolue": false
     },
     {
-     "t": 34.125,
+     "t": 37.19,
+     "bande": "2-8k",
+     "echelle": "court",
+     "mot": "Super,",
+     "1 classique": 21.5,
+     "2 musique": 19.4,
+     "3 design": 13.7,
+     "mix": 12.2,
+     "bandes": [
+      "4-8k",
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 37.35,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "Super,",
-     "1 classique": 20.5,
-     "2 musique": 12.2,
-     "3 design": 6.2,
-     "mix": 4.2,
+     "1 classique": -12.7,
+     "2 musique": -12.1,
+     "3 design": -5.7,
+     "mix": -4.6,
      "bandes": [
       "4-8k"
      ],
      "resolue": true
     },
     {
-     "t": 34.16,
-     "bande": "4-8k",
-     "echelle": "tenu",
-     "mot": "Super,",
-     "1 classique": 11.6,
-     "2 musique": 10.1,
-     "3 design": 4.9,
-     "mix": 3.5,
-     "bandes": [
-      "4-8k"
-     ],
-     "resolue": true
-    },
-    {
-     "t": 34.28,
-     "bande": "4-8k",
-     "echelle": "tenu",
-     "mot": "Super,",
-     "1 classique": -12.3,
-     "2 musique": -11.9,
-     "3 design": -5.8,
-     "mix": -4.8,
-     "bandes": [
-      "4-8k"
-     ],
-     "resolue": true
-    },
-    {
-     "t": 34.37,
+     "t": 37.435,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": "merci",
-     "1 classique": 12.9,
+     "1 classique": 13.0,
      "2 musique": 10.7,
-     "3 design": 1.4,
-     "mix": 0.9,
+     "3 design": 1.3,
+     "mix": 0.8,
      "bandes": [
       "4-8k"
      ],
      "resolue": true
     },
     {
-     "t": 34.46,
+     "t": 37.525,
      "bande": "4-8k",
      "echelle": "court",
      "mot": "merci",
-     "1 classique": 15.6,
-     "2 musique": 14.8,
-     "3 design": 8.7,
+     "1 classique": 15.8,
+     "2 musique": 15.1,
+     "3 design": 8.8,
      "mix": 6.5,
      "bandes": [
       "4-8k"
@@ -2717,14 +2841,14 @@
      "resolue": true
     },
     {
-     "t": 35.11,
+     "t": 38.175,
      "bande": "1-2k",
      "echelle": "tenu",
      "mot": "Au",
-     "1 classique": 31.5,
+     "1 classique": 31.3,
      "2 musique": 31.5,
-     "3 design": 25.5,
-     "mix": 31.3,
+     "3 design": 25.0,
+     "mix": 31.2,
      "bandes": [
       "1-2k",
       "2-4k",
@@ -2733,14 +2857,14 @@
      "resolue": false
     },
     {
-     "t": 35.455,
+     "t": 38.52,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": null,
-     "1 classique": -40.4,
-     "2 musique": -31.2,
-     "3 design": -24.3,
-     "mix": -10.0,
+     "1 classique": -40.8,
+     "2 musique": -31.5,
+     "3 design": -24.5,
+     "mix": -10.2,
      "bandes": [
       "2-4k",
       "4-8k",
@@ -2749,14 +2873,14 @@
      "resolue": true
     },
     {
-     "t": 35.775,
+     "t": 38.845,
      "bande": "2-8k",
      "echelle": "tenu",
      "mot": null,
-     "1 classique": 26.9,
-     "2 musique": 19.0,
-     "3 design": 7.0,
-     "mix": 7.9,
+     "1 classique": 27.1,
+     "2 musique": 18.9,
+     "3 design": 6.4,
+     "mix": 8.1,
      "bandes": [
       "2-4k",
       "2-8k"
@@ -2764,13 +2888,13 @@
      "resolue": true
     },
     {
-     "t": 35.835,
+     "t": 38.9,
      "bande": "4-8k",
      "echelle": "tenu",
      "mot": null,
      "1 classique": 36.6,
-     "2 musique": 31.4,
-     "3 design": 12.8,
+     "2 musique": 30.7,
+     "3 design": 13.2,
      "mix": 13.5,
      "bandes": [
       "4-8k"
@@ -2778,56 +2902,56 @@
      "resolue": true
     },
     {
-     "t": 42.305,
+     "t": 45.37,
      "bande": "1-2k",
      "echelle": "court",
      "mot": null,
-     "1 classique": 32.5,
-     "2 musique": 26.7,
-     "3 design": 17.8,
-     "mix": 17.3,
+     "1 classique": 31.6,
+     "2 musique": 25.1,
+     "3 design": 18.4,
+     "mix": 17.1,
      "bandes": [
       "1-2k"
      ],
      "resolue": true
     },
     {
-     "t": 42.44,
+     "t": 45.505,
      "bande": "100-300",
      "echelle": "tenu",
      "mot": null,
-     "1 classique": 12.4,
-     "2 musique": 16.4,
-     "3 design": 7.1,
-     "mix": 12.5,
+     "1 classique": 12.8,
+     "2 musique": 16.1,
+     "3 design": 6.9,
+     "mix": 11.9,
      "bandes": [
       "100-300"
      ],
      "resolue": false
     },
     {
-     "t": 42.785,
+     "t": 45.855,
      "bande": "30-100",
      "echelle": "tenu",
      "mot": null,
-     "1 classique": 37.2,
-     "2 musique": 38.4,
-     "3 design": 15.5,
-     "mix": 18.1,
+     "1 classique": 36.8,
+     "2 musique": 39.2,
+     "3 design": 16.9,
+     "mix": 19.6,
      "bandes": [
       "30-100"
      ],
      "resolue": false
     },
     {
-     "t": 42.9,
+     "t": 45.97,
      "bande": "2-4k",
      "echelle": "court",
      "mot": null,
-     "1 classique": 32.4,
-     "2 musique": 28.2,
-     "3 design": 19.4,
-     "mix": 18.7,
+     "1 classique": 31.4,
+     "2 musique": 30.0,
+     "3 design": 19.1,
+     "mix": 18.4,
      "bandes": [
       "2-4k",
       "2-8k"
@@ -2841,7 +2965,7 @@
     {
      "t": 0.03,
      "bande": "30-100",
-     "court": 14.1,
+     "court": 14.0,
      "tenu": 30.7,
      "avant_db": -88.4,
      "apres_db": -57.7,
@@ -2857,8 +2981,8 @@
      "bande": "30-100",
      "court": 14.3,
      "tenu": 22.0,
-     "avant_db": -75.7,
-     "apres_db": -53.7,
+     "avant_db": -75.8,
+     "apres_db": -53.8,
      "mot": null,
      "3 design": 4.3,
      "bandes": [
@@ -2871,7 +2995,7 @@
      "bande": "30-100",
      "court": 13.1,
      "tenu": 14.6,
-     "avant_db": -65.5,
+     "avant_db": -65.6,
      "apres_db": -50.9,
      "mot": null,
      "3 design": 9.2,
@@ -2899,8 +3023,8 @@
      "bande": "30-100",
      "court": 14.0,
      "tenu": 17.5,
-     "avant_db": -47.5,
-     "apres_db": -30.0,
+     "avant_db": -47.6,
+     "apres_db": -30.1,
      "mot": null,
      "3 design": 3.8,
      "bandes": [
@@ -2913,7 +3037,7 @@
      "bande": "30-100",
      "court": 18.8,
      "tenu": 13.8,
-     "avant_db": -53.2,
+     "avant_db": -53.3,
      "apres_db": -39.5,
      "mot": null,
      "3 design": 2.9,
@@ -2942,7 +3066,7 @@
      "court": 12.7,
      "tenu": 14.2,
      "avant_db": -49.5,
-     "apres_db": -35.2,
+     "apres_db": -35.3,
      "mot": null,
      "3 design": 2.8,
      "bandes": [
@@ -2955,7 +3079,7 @@
      "bande": "30-100",
      "court": 10.8,
      "tenu": 13.6,
-     "avant_db": -40.5,
+     "avant_db": -40.6,
      "apres_db": -26.9,
      "mot": null,
      "3 design": 2.2,
@@ -2969,8 +3093,8 @@
      "bande": "30-100",
      "court": 14.4,
      "tenu": 14.5,
-     "avant_db": -39.9,
-     "apres_db": -25.4,
+     "avant_db": -40.0,
+     "apres_db": -25.5,
      "mot": null,
      "3 design": -2.9,
      "bandes": [
@@ -2983,7 +3107,7 @@
      "bande": "30-100",
      "court": 18.5,
      "tenu": 17.7,
-     "avant_db": -42.6,
+     "avant_db": -42.7,
      "apres_db": -25.0,
      "mot": null,
      "3 design": 4.8,
@@ -2997,7 +3121,7 @@
      "bande": "30-100",
      "court": 22.7,
      "tenu": 11.4,
-     "avant_db": -64.6,
+     "avant_db": -64.7,
      "apres_db": -53.3,
      "mot": "l'assistante",
      "3 design": -0.8,
@@ -3026,8 +3150,8 @@
      "bande": "30-100",
      "court": 11.4,
      "tenu": 10.3,
-     "avant_db": -61.0,
-     "apres_db": -50.7,
+     "avant_db": -61.1,
+     "apres_db": -50.8,
      "mot": "Moka,",
      "3 design": 3.2,
      "bandes": [
@@ -3041,7 +3165,7 @@
      "court": -11.6,
      "tenu": -20.1,
      "avant_db": -53.6,
-     "apres_db": -73.7,
+     "apres_db": -73.8,
      "mot": "Moka,",
      "3 design": -0.2,
      "bandes": [
@@ -3054,7 +3178,7 @@
      "bande": "30-100",
      "court": 23.2,
      "tenu": 26.6,
-     "avant_db": -74.4,
+     "avant_db": -74.5,
      "apres_db": -47.8,
      "mot": null,
      "3 design": 1.7,
@@ -3082,7 +3206,7 @@
      "bande": "30-100",
      "court": 10.8,
      "tenu": 10.1,
-     "avant_db": -53.2,
+     "avant_db": -53.3,
      "apres_db": -43.1,
      "mot": "depuis",
      "3 design": -2.6,
@@ -3097,7 +3221,7 @@
      "court": 23.5,
      "tenu": 32.7,
      "avant_db": -58.9,
-     "apres_db": -26.2,
+     "apres_db": -26.3,
      "mot": "Euh,",
      "3 design": 27.0,
      "bandes": [
@@ -3111,7 +3235,7 @@
      "court": 10.6,
      "tenu": 13.3,
      "avant_db": -59.1,
-     "apres_db": -45.8,
+     "apres_db": -45.9,
      "mot": "Euh,",
      "3 design": 5.4,
      "bandes": [
@@ -3120,21 +3244,586 @@
      "voulue": null
     }
    ],
-   "sans 2 musique + 3 design 0-47": [
+   "sans 2 musique + 3 design 0-50.066667": [
     {
-     "t": 26.115,
-     "bande": "4-8k",
-     "court": -12.3,
-     "tenu": -18.3,
-     "avant_db": -54.6,
-     "apres_db": -72.9,
+     "t": 25.36,
+     "bande": "8-16k",
+     "court": 54.4,
+     "tenu": 48.8,
+     "avant_db": -81.9,
+     "apres_db": -33.0,
      "mot": null,
-     "2 musique": -2.7,
-     "3 design": -11.1,
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "1-2k",
+      "2-4k",
+      "4-8k",
+      "8-16k",
+      "2-8k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 25.485,
+     "bande": "30-100",
+     "court": 11.3,
+     "tenu": 41.8,
+     "avant_db": -80.4,
+     "apres_db": -38.6,
+     "mot": "Très",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 25.52,
+     "bande": "2-4k",
+     "court": 12.8,
+     "tenu": 41.9,
+     "avant_db": -63.3,
+     "apres_db": -21.4,
+     "mot": "Très",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "100-300",
+      "0,3-1k",
+      "1-2k",
+      "2-4k",
+      "2-8k",
+      "large"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 25.605,
+     "bande": "30-100",
+     "court": -10.5,
+     "tenu": -17.9,
+     "avant_db": -40.3,
+     "apres_db": -58.2,
+     "mot": "Très",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "30-100",
+      "0,3-1k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 25.64,
+     "bande": "2-4k",
+     "court": -11.8,
+     "tenu": -17.8,
+     "avant_db": -18.3,
+     "apres_db": -36.0,
+     "mot": "Très",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "0,3-1k",
+      "1-2k",
+      "2-4k",
+      "2-8k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 25.715,
+     "bande": "1-2k",
+     "court": 15.0,
+     "tenu": 21.1,
+     "avant_db": -49.0,
+     "apres_db": -27.9,
+     "mot": "bien.",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "1-2k",
+      "2-4k",
+      "2-8k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 25.77,
+     "bande": "1-2k",
+     "court": 16.3,
+     "tenu": 20.7,
+     "avant_db": -47.7,
+     "apres_db": -27.0,
+     "mot": "bien.",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "1-2k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 25.835,
+     "bande": "30-100",
+     "court": 11.1,
+     "tenu": 20.4,
+     "avant_db": -64.5,
+     "apres_db": -44.2,
+     "mot": "bien.",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 25.875,
+     "bande": "1-2k",
+     "court": -16.5,
+     "tenu": -25.2,
+     "avant_db": -28.8,
+     "apres_db": -54.0,
+     "mot": "bien.",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "30-100",
+      "100-300",
+      "0,3-1k",
+      "1-2k",
+      "2-4k",
+      "2-8k",
+      "large"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 25.905,
+     "bande": "1-2k",
+     "court": -18.7,
+     "tenu": -22.7,
+     "avant_db": -35.1,
+     "apres_db": -57.8,
+     "mot": "bien.",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "1-2k",
+      "8-16k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.2,
+     "bande": "30-100",
+     "court": 17.3,
+     "tenu": 27.9,
+     "avant_db": -76.6,
+     "apres_db": -48.7,
+     "mot": "C'est",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "30-100",
+      "100-300",
+      "2-4k",
+      "2-8k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.21,
+     "bande": "0,3-1k",
+     "court": 14.0,
+     "tenu": 20.6,
+     "avant_db": -42.4,
+     "apres_db": -21.8,
+     "mot": "C'est",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "0,3-1k",
+      "1-2k",
+      "large"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.295,
+     "bande": "1-2k",
+     "court": 25.9,
+     "tenu": 22.5,
+     "avant_db": -54.7,
+     "apres_db": -32.3,
+     "mot": "C'est",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "30-100",
+      "100-300",
+      "1-2k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.42,
+     "bande": "2-4k",
+     "court": 18.6,
+     "tenu": 34.1,
+     "avant_db": -60.8,
+     "apres_db": -26.7,
+     "mot": "pour",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "100-300",
+      "1-2k",
+      "2-4k",
+      "2-8k",
+      "large"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.455,
+     "bande": "0,3-1k",
+     "court": 12.6,
+     "tenu": 12.4,
+     "avant_db": -32.0,
+     "apres_db": -19.6,
+     "mot": "quel",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "0,3-1k",
+      "4-8k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.51,
+     "bande": "30-100",
+     "court": 10.3,
+     "tenu": 19.8,
+     "avant_db": -57.0,
+     "apres_db": -37.3,
+     "mot": "quel",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "30-100",
+      "0,3-1k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.57,
+     "bande": "30-100",
+     "court": 11.7,
+     "tenu": 29.7,
+     "avant_db": -66.5,
+     "apres_db": -36.8,
+     "mot": "quel",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "30-100",
+      "100-300"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.59,
+     "bande": "2-4k",
+     "court": 20.9,
+     "tenu": 30.3,
+     "avant_db": -54.9,
+     "apres_db": -24.6,
+     "mot": "quel",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "1-2k",
+      "2-4k",
+      "2-8k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.62,
+     "bande": "100-300",
+     "court": 20.1,
+     "tenu": 22.1,
+     "avant_db": -38.2,
+     "apres_db": -16.1,
+     "mot": "quel",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "100-300"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.67,
+     "bande": "100-300",
+     "court": 21.4,
+     "tenu": 20.1,
+     "avant_db": -34.0,
+     "apres_db": -13.9,
+     "mot": "prénom ?",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "100-300",
+      "0,3-1k",
+      "1-2k",
+      "large"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.69,
+     "bande": "30-100",
+     "court": -12.0,
+     "tenu": -15.1,
+     "avant_db": -44.7,
+     "apres_db": -59.8,
+     "mot": "prénom ?",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "30-100",
+      "2-4k",
+      "2-8k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 26.91,
+     "bande": "100-300",
+     "court": -11.0,
+     "tenu": -24.5,
+     "avant_db": -11.2,
+     "apres_db": -35.6,
+     "mot": "prénom ?",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "100-300",
+      "0,3-1k",
+      "large"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.015,
+     "bande": "4-8k",
+     "court": 12.7,
+     "tenu": 20.2,
+     "avant_db": -75.4,
+     "apres_db": -55.2,
+     "mot": null,
+     "2 musique": 0.0,
+     "3 design": 0.0,
      "bandes": [
       "4-8k"
      ],
-     "voulue": "la plume se lève à la fin du rendez-vous (relâche de 12 ms voulue dans riche-design ; le halo du 3 la couvrait)"
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.065,
+     "bande": "30-100",
+     "court": 10.1,
+     "tenu": 35.7,
+     "avant_db": -76.3,
+     "apres_db": -40.6,
+     "mot": "C'est",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.12,
+     "bande": "0,3-1k",
+     "court": 18.0,
+     "tenu": 21.0,
+     "avant_db": -39.9,
+     "apres_db": -18.9,
+     "mot": "C'est",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "100-300",
+      "0,3-1k",
+      "large"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.18,
+     "bande": "1-2k",
+     "court": 23.7,
+     "tenu": 17.1,
+     "avant_db": -54.9,
+     "apres_db": -37.8,
+     "mot": "C'est",
+     "2 musique": 0.0,
+     "3 design": 0.0,
+     "bandes": [
+      "1-2k",
+      "4-8k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.245,
+     "bande": "0,3-1k",
+     "court": -12.6,
+     "tenu": -23.8,
+     "avant_db": -14.5,
+     "apres_db": -38.4,
+     "mot": "pour",
+     "2 musique": 45.4,
+     "3 design": 56.8,
+     "bandes": [
+      "0,3-1k",
+      "1-2k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.265,
+     "bande": "8-16k",
+     "court": 54.2,
+     "tenu": 50.1,
+     "avant_db": -90.0,
+     "apres_db": -39.9,
+     "mot": "pour",
+     "2 musique": 15.2,
+     "3 design": 22.3,
+     "bandes": [
+      "8-16k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.37,
+     "bande": "0,3-1k",
+     "court": 15.8,
+     "tenu": 22.5,
+     "avant_db": -38.5,
+     "apres_db": -16.0,
+     "mot": "Florian.",
+     "2 musique": 14.3,
+     "3 design": 3.7,
+     "bandes": [
+      "30-100",
+      "100-300",
+      "0,3-1k",
+      "large"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.575,
+     "bande": "30-100",
+     "court": 12.5,
+     "tenu": 20.1,
+     "avant_db": -59.4,
+     "apres_db": -39.2,
+     "mot": "Florian.",
+     "2 musique": 3.2,
+     "3 design": -4.0,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.65,
+     "bande": "1-2k",
+     "court": -11.3,
+     "tenu": -10.4,
+     "avant_db": -31.8,
+     "apres_db": -42.2,
+     "mot": "Florian.",
+     "2 musique": 1.7,
+     "3 design": 1.7,
+     "bandes": [
+      "1-2k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.72,
+     "bande": "30-100",
+     "court": -11.8,
+     "tenu": -26.3,
+     "avant_db": -39.6,
+     "apres_db": -66.0,
+     "mot": "Florian.",
+     "2 musique": -7.9,
+     "3 design": 4.0,
+     "bandes": [
+      "30-100",
+      "100-300",
+      "0,3-1k"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.755,
+     "bande": "30-100",
+     "court": -12.4,
+     "tenu": -22.1,
+     "avant_db": -52.5,
+     "apres_db": -74.6,
+     "mot": null,
+     "2 musique": -2.4,
+     "3 design": -1.0,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "l'échange du prénom (28/09) : la mesure insérée et ce qui la suit jusqu'à « Parfait, » (A4, film_in 29.236667) : « Très bien. C'est pour quel prénom ? », « C'est pour Florian. », l'écriture de « 09:00 » puis de « Florian » ; aucune référence ne les a (elles sont muettes dans la mesure insérée, ailleurs sur l'ancien film) ; à juger à l'oreille"
+    },
+    {
+     "t": 28.955,
+     "bande": "8-16k",
+     "court": -12.9,
+     "tenu": -31.8,
+     "avant_db": -45.3,
+     "apres_db": -77.0,
+     "mot": null,
+     "2 musique": 0.0,
+     "3 design": -4.9,
+     "bandes": [
+      "4-8k",
+      "8-16k"
+     ],
+     "voulue": "la plume se lève à la fin du rendez-vous (relâche de 12 ms voulue dans riche-design ; le halo du 3 la couvrait) ; 28/09 : fin de l'écriture de « Florian » (evenements.ecriture_fin 28,933 ; 26,10 dans le film de 47 s), mêmes bornes −0,02 / +0,06 s"
+    },
+    {
+     "t": 38.575,
+     "bande": "1-2k",
+     "court": -10.0,
+     "tenu": -11.1,
+     "avant_db": -46.1,
+     "apres_db": -57.1,
+     "mot": null,
+     "2 musique": -4.1,
+     "3 design": -1.7,
+     "bandes": [
+      "1-2k"
+     ],
+     "voulue": null
     }
    ]
   },
@@ -3539,7 +4228,7 @@
     "id": "plume-rendez-vous",
     "couche": "ecriture",
     "de": 25.367,
-    "a": 26.1,
+    "a": 25.9,
     "bandes": [
      "40-150",
      "150-400",
@@ -3550,17 +4239,17 @@
      "8k-16k"
     ],
     "mix": [
-     -36.8,
-     -29.6,
-     -24.2,
-     -6.3,
-     11.0,
-     23.0,
-     47.8
+     -36.4,
+     -26.1,
+     -8.2,
+     15.3,
+     20.1,
+     19.8,
+     49.3
     ],
     "meilleure_mix": {
-     "bande": "4k-8k",
-     "db": 23.0
+     "bande": "2k-4k",
+     "db": 20.1
     },
     "ref": [
      -47.9,
@@ -3594,17 +4283,17 @@
      "8k-16k"
     ],
     "mix": [
-     -36.8,
-     -29.6,
-     -24.2,
-     -5.2,
-     11.0,
-     23.0,
-     47.7
+     -36.4,
+     -26.1,
+     -8.2,
+     15.3,
+     20.1,
+     19.7,
+     49.3
     ],
     "meilleure_mix": {
-     "bande": "4k-8k",
-     "db": 23.0
+     "bande": "2k-4k",
+     "db": 20.1
     },
     "ref": [
      -47.9,
@@ -3624,10 +4313,10 @@
     "exclu": false
    },
    {
-    "id": "agenda-sort",
-    "couche": "objets",
-    "de": 31.0,
-    "a": 31.35,
+    "id": "plume-nom",
+    "couche": "ecriture",
+    "de": 28.267,
+    "a": 28.933,
     "bandes": [
      "40-150",
      "150-400",
@@ -3638,9 +4327,77 @@
      "8k-16k"
     ],
     "mix": [
-     -96.8,
-     -101.3,
-     -41.2,
+     -76.0,
+     -82.5,
+     -66.3,
+     -25.8,
+     -14.9,
+     -1.9,
+     51.1
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": -1.9
+    },
+    "ref": null,
+    "meilleure_ref": null,
+    "sans_reference": true,
+    "cible_db": 6.0,
+    "ok": false,
+    "exclu": true
+   },
+   {
+    "id": "pose-plume-nom",
+    "couche": "ecriture",
+    "de": 28.267,
+    "a": 28.517,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -99.0,
+     -104.0,
+     -89.4,
+     -63.0,
+     -26.0,
+     -0.5,
+     51.0
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": -0.5
+    },
+    "ref": null,
+    "meilleure_ref": null,
+    "sans_reference": true,
+    "cible_db": 6.0,
+    "ok": false,
+    "exclu": true
+   },
+   {
+    "id": "agenda-sort",
+    "couche": "objets",
+    "de": 34.067,
+    "a": 34.417,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -91.9,
+     -97.7,
+     -41.1,
      -15.4,
      2.9,
      6.7,
@@ -3670,8 +4427,8 @@
    {
     "id": "vibreur-bois",
     "couche": "objets",
-    "de": 36.667,
-    "a": 36.917,
+    "de": 39.733,
+    "a": 39.983,
     "bandes": [
      "40-150",
      "150-400",
@@ -3688,7 +4445,7 @@
      -24.5,
      -27.8,
      -16.4,
-     51.6
+     58.7
     ],
     "meilleure_mix": {
      "bande": "40-150",
@@ -3714,8 +4471,8 @@
    {
     "id": "telephone-sort",
     "couche": "objets",
-    "de": 41.0,
-    "a": 41.4,
+    "de": 44.067,
+    "a": 44.467,
     "bandes": [
      "40-150",
      "150-400",
@@ -3758,8 +4515,8 @@
    {
     "id": "plume-vokio",
     "couche": "ecriture",
-    "de": 41.5,
-    "a": 42.2,
+    "de": 44.567,
+    "a": 45.267,
     "bandes": [
      "40-150",
      "150-400",
@@ -3802,8 +4559,8 @@
    {
     "id": "pose-plume-vokio",
     "couche": "ecriture",
-    "de": 41.5,
-    "a": 41.75,
+    "de": 44.567,
+    "a": 44.817,
     "bandes": [
      "40-150",
      "150-400",
@@ -3846,8 +4603,8 @@
    {
     "id": "assise-i",
     "couche": "point",
-    "de": 42.933,
-    "a": 43.183,
+    "de": 46.0,
+    "a": 46.25,
     "bandes": [
      "40-150",
      "150-400",
@@ -3897,7 +4654,7 @@
      "hf_avant": -41.2,
      "hf_apres": -45.6,
      "hf_marche": -4.4,
-     "large_avant": -28.2,
+     "large_avant": -28.3,
      "large_apres": -29.1,
      "large_marche": -0.8
     },
@@ -3909,17 +4666,17 @@
      "hf_apres": -63.2,
      "hf_marche": -0.7,
      "large_avant": -35.0,
-     "large_apres": -34.8,
+     "large_apres": -34.9,
      "large_marche": 0.1
     },
     {
      "extrait": "C1",
      "bord": "in",
      "t": 10.42,
-     "hf_avant": -63.3,
+     "hf_avant": -63.4,
      "hf_apres": -63.1,
      "hf_marche": 0.3,
-     "large_avant": -33.3,
+     "large_avant": -33.4,
      "large_apres": -33.0,
      "large_marche": 0.4
     },
@@ -3927,11 +4684,11 @@
      "extrait": "C1",
      "bord": "out",
      "t": 14.08,
-     "hf_avant": -47.8,
+     "hf_avant": -47.9,
      "hf_apres": -48.9,
      "hf_marche": -1.1,
      "large_avant": -34.7,
-     "large_apres": -34.4,
+     "large_apres": -34.5,
      "large_marche": 0.3
     },
     {
@@ -3942,7 +4699,7 @@
      "hf_apres": -61.9,
      "hf_marche": -2.1,
      "large_avant": -38.1,
-     "large_apres": -37.3,
+     "large_apres": -37.4,
      "large_marche": 0.8
     },
     {
@@ -3964,28 +4721,28 @@
      "hf_apres": -51.7,
      "hf_marche": -4.6,
      "large_avant": -35.8,
-     "large_apres": -36.3,
+     "large_apres": -36.4,
      "large_marche": -0.5
     },
     {
      "extrait": "A2A3",
      "bord": "out",
      "t": 22.855,
-     "hf_avant": -63.8,
-     "hf_apres": -63.9,
+     "hf_avant": -63.9,
+     "hf_apres": -64.0,
      "hf_marche": -0.1,
      "large_avant": -36.3,
-     "large_apres": -35.8,
+     "large_apres": -35.9,
      "large_marche": 0.4
     },
     {
      "extrait": "C3",
      "bord": "in",
      "t": 23.2,
-     "hf_avant": -64.1,
+     "hf_avant": -64.2,
      "hf_apres": -62.5,
      "hf_marche": 1.6,
-     "large_avant": -31.2,
+     "large_avant": -31.3,
      "large_apres": -31.3,
      "large_marche": -0.0
     },
@@ -3993,39 +4750,83 @@
      "extrait": "C3",
      "bord": "out",
      "t": 25.0,
-     "hf_avant": -51.6,
-     "hf_apres": -51.9,
+     "hf_avant": -51.7,
+     "hf_apres": -52.0,
      "hf_marche": -0.3,
-     "large_avant": -35.7,
+     "large_avant": -35.8,
      "large_apres": -36.0,
      "large_marche": -0.2
     },
     {
+     "extrait": "AP",
+     "bord": "in",
+     "t": 25.47,
+     "hf_avant": -44.2,
+     "hf_apres": -48.0,
+     "hf_marche": -3.8,
+     "large_avant": -30.0,
+     "large_apres": -30.1,
+     "large_marche": -0.1
+    },
+    {
+     "extrait": "AP",
+     "bord": "out",
+     "t": 27.23,
+     "hf_avant": -62.4,
+     "hf_apres": -61.7,
+     "hf_marche": 0.8,
+     "large_avant": -35.1,
+     "large_apres": -35.1,
+     "large_marche": -0.0
+    },
+    {
+     "extrait": "CP",
+     "bord": "in",
+     "t": 27.97,
+     "hf_avant": -60.9,
+     "hf_apres": -59.7,
+     "hf_marche": 1.3,
+     "large_avant": -32.4,
+     "large_apres": -32.7,
+     "large_marche": -0.3
+    },
+    {
+     "extrait": "CP",
+     "bord": "out",
+     "t": 28.79,
+     "hf_avant": -51.0,
+     "hf_apres": -51.0,
+     "hf_marche": -0.0,
+     "large_avant": -22.8,
+     "large_apres": -24.0,
+     "large_marche": -1.2
+    },
+    {
      "extrait": "A4",
      "bord": "in",
-     "t": 26.17,
-     "hf_avant": -61.6,
-     "hf_apres": -62.2,
-     "hf_marche": -0.6,
-     "large_avant": -26.8,
-     "large_apres": -27.4,
-     "large_marche": -0.5
+     "t": 29.236667,
+     "hf_avant": -62.1,
+     "hf_apres": -62.9,
+     "hf_marche": -0.9,
+     "large_avant": -25.6,
+     "large_apres": -26.1,
+     "large_marche": -0.6
     },
     {
      "extrait": "A4",
      "bord": "out",
-     "t": 33.26,
+     "t": 36.326667,
      "hf_avant": -53.0,
-     "hf_apres": -54.1,
+     "hf_apres": -54.2,
      "hf_marche": -1.2,
-     "large_avant": -28.1,
-     "large_apres": -27.7,
+     "large_avant": -28.2,
+     "large_apres": -27.8,
      "large_marche": 0.4
     },
     {
      "extrait": "C4",
      "bord": "in",
-     "t": 33.79,
+     "t": 36.856667,
      "hf_avant": -53.4,
      "hf_apres": -52.7,
      "hf_marche": 0.7,
@@ -4036,11 +4837,11 @@
     {
      "extrait": "C4",
      "bord": "out",
-     "t": 35.65,
-     "hf_avant": -54.3,
+     "t": 38.716667,
+     "hf_avant": -54.4,
      "hf_apres": -54.5,
      "hf_marche": -0.1,
-     "large_avant": -38.5,
+     "large_avant": -38.6,
      "large_apres": -38.9,
      "large_marche": -0.4
     }
@@ -4157,9 +4958,53 @@
      "large_marche": -0.0
     },
     {
+     "extrait": "AP",
+     "bord": "in",
+     "t": 25.47,
+     "hf_avant": -191.2,
+     "hf_apres": -193.7,
+     "hf_marche": -2.5,
+     "large_avant": -240.0,
+     "large_apres": -240.0,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "AP",
+     "bord": "out",
+     "t": 27.23,
+     "hf_avant": -224.3,
+     "hf_apres": -224.6,
+     "hf_marche": -0.3,
+     "large_avant": -240.0,
+     "large_apres": -240.0,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "CP",
+     "bord": "in",
+     "t": 27.97,
+     "hf_avant": -214.1,
+     "hf_apres": -211.0,
+     "hf_marche": 3.1,
+     "large_avant": -240.0,
+     "large_apres": -240.0,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "CP",
+     "bord": "out",
+     "t": 28.79,
+     "hf_avant": -59.0,
+     "hf_apres": -62.1,
+     "hf_marche": -3.2,
+     "large_avant": -21.1,
+     "large_apres": -20.1,
+     "large_marche": 0.9
+    },
+    {
      "extrait": "A4",
      "bord": "in",
-     "t": 26.17,
+     "t": 29.236667,
      "hf_avant": -72.7,
      "hf_apres": -77.1,
      "hf_marche": -4.4,
@@ -4170,7 +5015,7 @@
     {
      "extrait": "A4",
      "bord": "out",
-     "t": 33.26,
+     "t": 36.326667,
      "hf_avant": -68.6,
      "hf_apres": -68.2,
      "hf_marche": 0.5,
@@ -4181,7 +5026,7 @@
     {
      "extrait": "C4",
      "bord": "in",
-     "t": 33.79,
+     "t": 36.856667,
      "hf_avant": -65.9,
      "hf_apres": -66.4,
      "hf_marche": -0.5,
@@ -4192,7 +5037,7 @@
     {
      "extrait": "C4",
      "bord": "out",
-     "t": 35.65,
+     "t": 38.716667,
      "hf_avant": -78.5,
      "hf_apres": -76.2,
      "hf_marche": 2.3,
@@ -4313,9 +5158,53 @@
      "large_marche": -0.1
     },
     {
+     "extrait": "AP",
+     "bord": "in",
+     "t": 25.47,
+     "hf_avant": -194.0,
+     "hf_apres": -195.5,
+     "hf_marche": -1.5,
+     "large_avant": -240.0,
+     "large_apres": -240.0,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "AP",
+     "bord": "out",
+     "t": 27.23,
+     "hf_avant": -221.5,
+     "hf_apres": -221.5,
+     "hf_marche": -0.1,
+     "large_avant": -240.0,
+     "large_apres": -240.0,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "CP",
+     "bord": "in",
+     "t": 27.97,
+     "hf_avant": -206.7,
+     "hf_apres": -205.2,
+     "hf_marche": 1.6,
+     "large_avant": -240.0,
+     "large_apres": -240.0,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "CP",
+     "bord": "out",
+     "t": 28.79,
+     "hf_avant": -56.6,
+     "hf_apres": -57.7,
+     "hf_marche": -1.1,
+     "large_avant": -22.8,
+     "large_apres": -23.3,
+     "large_marche": -0.5
+    },
+    {
      "extrait": "A4",
      "bord": "in",
-     "t": 26.17,
+     "t": 29.236667,
      "hf_avant": -63.1,
      "hf_apres": -64.1,
      "hf_marche": -1.0,
@@ -4326,7 +5215,7 @@
     {
      "extrait": "A4",
      "bord": "out",
-     "t": 33.26,
+     "t": 36.326667,
      "hf_avant": -53.2,
      "hf_apres": -54.5,
      "hf_marche": -1.3,
@@ -4337,10 +5226,10 @@
     {
      "extrait": "C4",
      "bord": "in",
-     "t": 33.79,
+     "t": 36.856667,
      "hf_avant": -53.7,
      "hf_apres": -53.1,
-     "hf_marche": 0.7,
+     "hf_marche": 0.6,
      "large_avant": -30.4,
      "large_apres": -31.1,
      "large_marche": -0.6
@@ -4348,7 +5237,7 @@
     {
      "extrait": "C4",
      "bord": "out",
-     "t": 35.65,
+     "t": 38.716667,
      "hf_avant": -68.0,
      "hf_apres": -67.8,
      "hf_marche": 0.2,
@@ -4469,9 +5358,53 @@
      "large_marche": 0.0
     },
     {
+     "extrait": "AP",
+     "bord": "in",
+     "t": 25.47,
+     "hf_avant": -190.7,
+     "hf_apres": -193.3,
+     "hf_marche": -2.6,
+     "large_avant": -240.0,
+     "large_apres": -240.0,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "AP",
+     "bord": "out",
+     "t": 27.23,
+     "hf_avant": -228.4,
+     "hf_apres": -229.1,
+     "hf_marche": -0.7,
+     "large_avant": -240.0,
+     "large_apres": -240.0,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "CP",
+     "bord": "in",
+     "t": 27.97,
+     "hf_avant": -206.7,
+     "hf_apres": -204.4,
+     "hf_marche": 2.3,
+     "large_avant": -240.0,
+     "large_apres": -240.0,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "CP",
+     "bord": "out",
+     "t": 28.79,
+     "hf_avant": -45.0,
+     "hf_apres": -47.3,
+     "hf_marche": -2.3,
+     "large_avant": -21.0,
+     "large_apres": -20.0,
+     "large_marche": 0.9
+    },
+    {
      "extrait": "A4",
      "bord": "in",
-     "t": 26.17,
+     "t": 29.236667,
      "hf_avant": -52.5,
      "hf_apres": -53.4,
      "hf_marche": -0.9,
@@ -4482,8 +5415,8 @@
     {
      "extrait": "A4",
      "bord": "out",
-     "t": 33.26,
-     "hf_avant": -57.8,
+     "t": 36.326667,
+     "hf_avant": -57.7,
      "hf_apres": -56.8,
      "hf_marche": 0.9,
      "large_avant": -28.8,
@@ -4493,7 +5426,7 @@
     {
      "extrait": "C4",
      "bord": "in",
-     "t": 33.79,
+     "t": 36.856667,
      "hf_avant": -56.0,
      "hf_apres": -53.6,
      "hf_marche": 2.4,
@@ -4504,7 +5437,7 @@
     {
      "extrait": "C4",
      "bord": "out",
-     "t": 35.65,
+     "t": 38.716667,
      "hf_avant": -56.0,
      "hf_apres": -56.5,
      "hf_marche": -0.5,
@@ -4557,23 +5490,43 @@
      "niveau_min_db": -74.2
     },
     {
-     "raccord": "C3→A4",
-     "de": 24.92,
-     "a": 26.27,
-     "chute_max_db": -11.8,
-     "t_chute": 26.05,
-     "montee_max_db": 19.2,
+     "raccord": "C3→AP",
+     "de": 24.9,
+     "a": 25.545,
+     "chute_max_db": -8.2,
+     "t_chute": 24.91,
+     "montee_max_db": 20.1,
      "t_montee": 25.36,
-     "niveau_min_db": -74.0
+     "niveau_min_db": -68.4
+    },
+    {
+     "raccord": "AP→CP",
+     "de": 26.91,
+     "a": 28.09,
+     "chute_max_db": -4.2,
+     "t_chute": 27.86,
+     "montee_max_db": 10.9,
+     "t_montee": 28.02,
+     "niveau_min_db": -75.3
+    },
+    {
+     "raccord": "CP→A4",
+     "de": 28.67,
+     "a": 29.337,
+     "chute_max_db": -10.6,
+     "t_chute": 29.12,
+     "montee_max_db": 13.6,
+     "t_montee": 29.32,
+     "niveau_min_db": -73.4
     },
     {
      "raccord": "A4→C4",
-     "de": 33.02,
-     "a": 34.06,
-     "chute_max_db": -2.9,
-     "t_chute": 33.98,
-     "montee_max_db": 5.1,
-     "t_montee": 33.89,
+     "de": 36.087,
+     "a": 37.127,
+     "chute_max_db": -2.5,
+     "t_chute": 37.04,
+     "montee_max_db": 5.9,
+     "t_montee": 36.96,
      "niveau_min_db": -57.7
     }
    ],
@@ -4619,23 +5572,43 @@
      "niveau_min_db": -90.0
     },
     {
-     "raccord": "C3→A4",
-     "de": 24.92,
-     "a": 26.27,
-     "chute_max_db": -16.7,
-     "t_chute": 24.97,
-     "montee_max_db": 29.8,
-     "t_montee": 26.24,
+     "raccord": "C3→AP",
+     "de": 24.9,
+     "a": 25.545,
+     "chute_max_db": -31.7,
+     "t_chute": 25.27,
+     "montee_max_db": 31.7,
+     "t_montee": 25.25,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "AP→CP",
+     "de": 26.91,
+     "a": 28.09,
+     "chute_max_db": 0.0,
+     "t_chute": 26.92,
+     "montee_max_db": 0.0,
+     "t_montee": 26.92,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "CP→A4",
+     "de": 28.67,
+     "a": 29.337,
+     "chute_max_db": -3.0,
+     "t_chute": 28.74,
+     "montee_max_db": 30.6,
+     "t_montee": 29.31,
      "niveau_min_db": -90.0
     },
     {
      "raccord": "A4→C4",
-     "de": 33.02,
-     "a": 34.06,
-     "chute_max_db": -7.9,
-     "t_chute": 34.01,
-     "montee_max_db": 41.7,
-     "t_montee": 33.98,
+     "de": 36.087,
+     "a": 37.127,
+     "chute_max_db": -7.6,
+     "t_chute": 37.08,
+     "montee_max_db": 38.8,
+     "t_montee": 37.04,
      "niveau_min_db": -90.0
     }
    ],
@@ -4681,24 +5654,44 @@
      "niveau_min_db": -83.5
     },
     {
-     "raccord": "C3→A4",
-     "de": 24.92,
-     "a": 26.27,
-     "chute_max_db": -15.6,
-     "t_chute": 26.05,
-     "montee_max_db": 21.3,
-     "t_montee": 26.25,
-     "niveau_min_db": -81.1
+     "raccord": "C3→AP",
+     "de": 24.9,
+     "a": 25.545,
+     "chute_max_db": -23.4,
+     "t_chute": 25.27,
+     "montee_max_db": 12.5,
+     "t_montee": 25.26,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "AP→CP",
+     "de": 26.91,
+     "a": 28.09,
+     "chute_max_db": 0.0,
+     "t_chute": 26.92,
+     "montee_max_db": 0.0,
+     "t_montee": 26.92,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "CP→A4",
+     "de": 28.67,
+     "a": 29.337,
+     "chute_max_db": -15.9,
+     "t_chute": 29.12,
+     "montee_max_db": 20.5,
+     "t_montee": 29.31,
+     "niveau_min_db": -81.8
     },
     {
      "raccord": "A4→C4",
-     "de": 33.02,
-     "a": 34.06,
-     "chute_max_db": -7.5,
-     "t_chute": 34.01,
-     "montee_max_db": 11.5,
-     "t_montee": 33.98,
-     "niveau_min_db": -60.0
+     "de": 36.087,
+     "a": 37.127,
+     "chute_max_db": -6.9,
+     "t_chute": 37.08,
+     "montee_max_db": 13.0,
+     "t_montee": 37.05,
+     "niveau_min_db": -60.2
     }
    ],
    "3 design": [
@@ -4743,68 +5736,62 @@
      "niveau_min_db": -74.1
     },
     {
-     "raccord": "C3→A4",
-     "de": 24.92,
-     "a": 26.27,
-     "chute_max_db": -10.2,
-     "t_chute": 25.33,
-     "montee_max_db": 22.7,
-     "t_montee": 25.35,
-     "niveau_min_db": -75.9
+     "raccord": "C3→AP",
+     "de": 24.9,
+     "a": 25.545,
+     "chute_max_db": -32.3,
+     "t_chute": 25.27,
+     "montee_max_db": 6.9,
+     "t_montee": 25.25,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "AP→CP",
+     "de": 26.91,
+     "a": 28.09,
+     "chute_max_db": 0.0,
+     "t_chute": 26.92,
+     "montee_max_db": 0.0,
+     "t_montee": 26.92,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "CP→A4",
+     "de": 28.67,
+     "a": 29.337,
+     "chute_max_db": -8.8,
+     "t_chute": 29.18,
+     "montee_max_db": 8.8,
+     "t_montee": 29.32,
+     "niveau_min_db": -70.9
     },
     {
      "raccord": "A4→C4",
-     "de": 33.02,
-     "a": 34.06,
-     "chute_max_db": -11.4,
-     "t_chute": 33.47,
-     "montee_max_db": 17.2,
-     "t_montee": 33.98,
-     "niveau_min_db": -76.9
+     "de": 36.087,
+     "a": 37.127,
+     "chute_max_db": -14.6,
+     "t_chute": 36.54,
+     "montee_max_db": 18.3,
+     "t_montee": 37.05,
+     "niveau_min_db": -78.0
     }
    ]
   }
  },
  "planches": [
-  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches/film.png",
-  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches/zoom-0-15.png",
-  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches/zoom-3.8-5.4.png",
-  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches/zoom-9.8-10.8.png",
-  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches/zoom-13.7-14.9.png",
-  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches/zoom-33.3-37.4.png",
-  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches/zoom-40.5-47.png",
-  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches/arc-sonie.png",
-  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches/limiteur.png",
-  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches/stems.png"
+  "/root/vokio-uploads/videos/showcase/controles-9x16/son-planches/film.png",
+  "/root/vokio-uploads/videos/showcase/controles-9x16/son-planches/zoom-0-15.png",
+  "/root/vokio-uploads/videos/showcase/controles-9x16/son-planches/zoom-3.8-5.4.png",
+  "/root/vokio-uploads/videos/showcase/controles-9x16/son-planches/zoom-9.8-10.8.png",
+  "/root/vokio-uploads/videos/showcase/controles-9x16/son-planches/zoom-13.7-14.9.png",
+  "/root/vokio-uploads/videos/showcase/controles-9x16/son-planches/zoom-36.3667-40.4667.png",
+  "/root/vokio-uploads/videos/showcase/controles-9x16/son-planches/zoom-43.5667-50.0667.png",
+  "/root/vokio-uploads/videos/showcase/controles-9x16/son-planches/arc-sonie.png",
+  "/root/vokio-uploads/videos/showcase/controles-9x16/son-planches/limiteur.png",
+  "/root/vokio-uploads/videos/showcase/controles-9x16/son-planches/stems.png"
  ],
- "empreinte": "e4455f9813a3a2aa48ba2a979749498c122e1ae5c04563b8622c8794b8990dd6",
+ "empreinte": "f8d58e8d5e853df78729e32124610eb5e0f1c18c9554115f81e3c49c8523f4b0",
  "recette": "/opt/vokio-ads/videos/showcase/son/recettes/hybride.json",
  "wav": "/opt/vokio-ads/videos/showcase/son/hybride/mix-hybride.wav",
- "mp4": {
-  "mp4": "/root/vokio-uploads/videos/showcase/le-point-sur-le-i-final.mp4",
-  "video_source": "/root/vokio-uploads/videos/showcase/le-point-sur-le-i-iphone.mp4",
-  "md5_video_source": "5269c92f62150afc6478af51bb2d8b0b",
-  "md5_video_mp4": "5269c92f62150afc6478af51bb2d8b0b",
-  "video_identique": true,
-  "aac": {
-   "I": -14.04,
-   "TP": -1.71,
-   "LRA": 7.0
-  },
-  "flux": [
-   {
-    "codec_name": "h264",
-    "codec_type": "video",
-    "duration": "47.000000",
-    "nb_frames": "1410"
-   },
-   {
-    "codec_name": "aac",
-    "codec_type": "audio",
-    "sample_rate": "48000",
-    "duration": "47.000000",
-    "nb_frames": "2205"
-   }
-  ]
- }
+ "planches_note": "28/09 : planches écrites dans /dev/shm (purgé), copiées dans le dossier de contrôles du 9:16"
 }

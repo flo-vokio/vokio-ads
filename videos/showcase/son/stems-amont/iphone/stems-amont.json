@@ -1,5 +1,5 @@
 {
- "empreinte": "28267a71bbbe7a6cc28737ace8c84286185827a254ecada27f9eacbb152d9d48",
+ "empreinte": "79facb3a3d8eb89d53b047fa5d6849234e5544512d253386c1fb0c7784827f4e",
  "echelle": "stems du master validé, gain de master compris, sans limiteur",
  "sr": 48000,
  "format": "pcm_f32le stéréo",
@@ -17,58 +17,110 @@
  },
  "mesures": {
   "dialogue": {
-   "crete_dbfs": 0.31,
-   "lufs": -13.4
+   "crete_dbfs": 0.48,
+   "lufs": -13.41
   },
   "sfx": {
    "crete_dbfs": -11.16,
-   "lufs": -21.11
+   "lufs": -21.1
   },
   "signature": {
    "crete_dbfs": -0.14,
-   "lufs": -16.04
+   "lufs": -16.09
   },
   "nappe": {
-   "crete_dbfs": -7.51,
-   "lufs": -22.98
+   "crete_dbfs": -7.17,
+   "lufs": -23.77
   },
   "musique": {
    "crete_dbfs": -1.7,
-   "lufs": -19.45
+   "lufs": -19.49
   },
   "ambiance": {
    "crete_dbfs": -32.53,
-   "lufs": -51.45
+   "lufs": -51.7
   },
   "point": {
    "crete_dbfs": -9.02,
-   "lufs": -36.25
+   "lufs": -36.2
   },
   "ecriture": {
    "crete_dbfs": -8.98,
-   "lufs": -30.14
+   "lufs": -31.0
   },
   "objets": {
    "crete_dbfs": -23.17,
-   "lufs": -36.07
+   "lufs": -36.2
   },
   "ligne": {
    "crete_dbfs": -38.43,
-   "lufs": -55.49
+   "lufs": -55.46
   }
  },
  "gain_master_valide_db": 7.84,
  "variante": "iphone",
- "evenements_differents": [
-  "depart_stylo"
- ],
+ "evenements_differents": [],
  "musique": {
   "rattrapages": 5,
   "manques": [],
-  "relache_quinte": 0.35
+  "relache_quinte": 0.35,
+  "insertions": [
+   {
+    "id": "prenom",
+    "pivot_s": 25.266666666666666,
+    "s": 3.066666666666667,
+    "echantillons": 147200,
+    "pivot_image": 758,
+    "images": 92,
+    "pivot_echantillon": 1212800
+   }
+  ],
+  "grille_t0_base": -0.033333333333338544,
+  "plume": {
+   "la": 28.693333,
+   "sol": 28.933333,
+   "arret": [
+    24.5,
+    29.1
+   ],
+   "dans_l_arret": true,
+   "attaque_la_plus_proche": {
+    "ecart_s": 0.1656,
+    "couche": "grosse_caisse",
+    "t": 29.0989
+   },
+   "ok": true
+  }
  },
  "design": {
-  "rattrapage": [],
+  "rattrapage": [
+   {
+    "passe": 0,
+    "mot": "pour",
+    "debut": 28.195,
+    "critere": "K",
+    "marge_master": 20.3,
+    "marge_avant": 12.7,
+    "cible": 16.0,
+    "couches": [
+     "ecriture"
+    ],
+    "gain_db": -4.8
+   },
+   {
+    "passe": 0,
+    "mot": "Florian.",
+    "debut": 28.295,
+    "critere": "K",
+    "marge_master": 20.1,
+    "marge_avant": 14.1,
+    "cible": 16.0,
+    "couches": [
+     "ecriture"
+    ],
+    "gain_db": -3.1
+   }
+  ],
   "marges_finales_min": {
    "bande": 11.4,
    "K": 10.5
@@ -114,11 +166,11 @@
   "plancher_porte_ouverte_db": -48.46,
   "fond_base_db": -66.14,
   "gain_confort_db": 15.68,
-  "porte_ouverte_s": 6.935,
+  "porte_ouverte_s": 7.258,
   "bande_apparier": [
    2000.0,
    8000.0
   ]
  },
- "duree_calcul_s": 180.2
+ "duree_calcul_s": 219.1
 }
