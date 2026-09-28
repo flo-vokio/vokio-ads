@@ -1,7 +1,7 @@
 #!/root/.pwtest/bin/python
 """Contrôles DOM du film entier, dans le chrome-headless-shell de HyperFrames (même moteur que le rendu).
 
-    /root/.pwtest/bin/python outils/controles_dom.py [sortie.json] [pas_images]
+    /root/.pwtest/bin/python outils/controles_dom.py [sortie.json] [pas_images] [--racine formats/16x9]
 
 Monte outils/banc-film.html (index.html + les sept sous-compositions, scripts rejoués comme HyperFrames),
 puis, pour chaque image n (pas 1 par défaut), place le film à n/30 et relève :
@@ -33,15 +33,21 @@ class Silencieux(http.server.SimpleHTTPRequestHandler):
 
 
 def main():
-    sortie = Path(sys.argv[1]) if len(sys.argv) > 1 else None
-    pas = int(sys.argv[2]) if len(sys.argv) > 2 else 1
-    h = functools.partial(Silencieux, directory=str(PROJET))
+    args = sys.argv[1:]
+    racine = PROJET
+    if "--racine" in args:                       # FORMATS : un projet de format (outils/format.py), servi tel quel
+        i = args.index("--racine"); racine = Path(args[i + 1]).resolve(); del args[i:i + 2]
+    sortie = Path(args[0]) if len(args) > 0 else None
+    pas = int(args[1]) if len(args) > 1 else 1
+    js = (racine / "donnees" / "donnees.js").read_text()
+    taille = json.loads(js[js.index("{"):js.rindex("}") + 1]).get("taille", [1080, 1920])
+    h = functools.partial(Silencieux, directory=str(racine))
     srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), h)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     url = f"http://127.0.0.1:{srv.server_address[1]}/outils/banc-film.html"
     with sync_playwright() as p:
         nav = p.chromium.launch(executable_path=str(CHROME_HF), args=["--font-render-hinting=none"])
-        page = nav.new_page(viewport={"width": 1080, "height": 1920}, device_scale_factor=1)
+        page = nav.new_page(viewport={"width": taille[0], "height": taille[1]}, device_scale_factor=1)
         erreurs = []
         page.on("pageerror", lambda e: erreurs.append(str(e)))
         page.goto(url)

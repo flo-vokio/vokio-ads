@@ -6,6 +6,22 @@
   Sous-composition s3-ecoute · v2 · film 10,40 → 17,30 s (durée 6,90 s, images 312 à 518), hôte #h-s3-ecoute.
   « L'appelant, et un tamis qui se lit comme une idée. » (plan v2, chantier compositions/s3-ecoute.html)
 
+  FORMATS (28/09) : cette scène ne porte AUCUNE valeur de mise en page. Tout vient de DONNEES, écrit par
+  outils/construire.py (outils/format.py <format> pour une copie de format) d'après mise-en-page/texte.json (s3_texte,
+  mention, mention_largeur_max) et mise-en-page/s3-ecoute.json (ecoute) :
+      DONNEES.geometrie.s3_texte           x, top, corps, interligne, style, graisse   (la parole)
+      DONNEES.geometrie.s3_texte.mention   x, top, corps, interligne, largeur_max       (la mention)
+      DONNEES.pages                        coupes et x0 mesurés de chaque unité, par format (le resserrage en découle)
+      DONNEES.point                        le point, place d'écoute comprise (la racine le dessine)
+  Valeurs des formats livrés (px du cadre) :
+                         9:16 (1080 × 1920)                    16:9 (1920 × 1080, YouTube InStream)
+      parole             x 90, lignes de base 874/946/1018      x 144, lignes de base 540/612/684 (ligne de lecture 540)
+      mention            Geist 36/48, x 90, base 330            Geist 40/52, x 144, base 150 (sous la bande du haut, 72)
+      place d'écoute     (112 ; 1136), trajet « descente »       (960 ; 596), trajet « droit », en face de l'appelant
+  Les deux lignes CSS marquées « repli 9:16 » ne valent qu'avant le script (qui réécrit left, top, corps et
+  interligne) ; data-width / data-height de #root sont réécrits par outils/format.py. Les chiffres cités plus bas
+  sont ceux du 9:16, la référence ; ils se lisent en 16:9 par le tableau ci-dessus.
+
   TROIS éléments, jamais plus : la parole de l'appelant, le point (racine) et la mention.
     · La parole : Instrument Serif italique 400 64/72 (finition du 27/09, 96/104 avant : l'agente, Geist 72, parle
       désormais plus fort à l'œil, hauteur d'x 38,2 contre 33,0 px), encre, x 90, lignes de base 874 / 946 / 1018 (DONNEES.geometrie.s3_texte : top =
@@ -21,7 +37,8 @@
       (16,19 → 16,49) et part à 17,20 vers l'agenda.
     · La mention, non dite : « Appel réel sur une ligne de démonstration, raccourci. », Geist 400 36/48
       #6F695F (4,8:1 sur le papier, AA), x 90, ligne de base 330 (zone haute, sûre sur toutes les
-      plateformes). Fondu d'entrée 10,60 → 10,90 (power3.out), de sortie 17,00 → 17,20 (power3.in).
+      plateformes ; 16:9 : 40/52, x 144, base 150, encre jusqu'à 1098,6, largeur_max 1632).
+      Fondu d'entrée 10,60 → 10,90 (power3.out), de sortie 17,00 → 17,20 (power3.in), dans tous les formats.
 
   LE TAMIS (le geste de la scène : Vokio garde l'essentiel)
     1. 13,95 → 14,20 (DONNEES.evenements.tamis_fondu) : les deux « euh, » passent d'opacité 1 à 0 sur place,
@@ -30,18 +47,20 @@
        en x SEUL, d'un seul geste pour les deux lignes (0,35 s power3.inOut), lignes de base et coupures
        inchangées. Ligne 1 : « Moka, » vient se poser derrière « mon chat, » ; ligne 2 : « mange plus » revient
        à x = 90. À 14,15, les « euh, » ne sont plus qu'à 0,5 % et 2,8 % d'opacité, et le départ en power3.in
-       ne les rejoint pas (0,5 px à 14,20, quand ils sont à 0) : rien ne se recouvre. Pas d'image en image :
-       0,5 · 3,7 · 12,1 · 28,3 · 52,7 · 40,1 · 19,0 · 7,1 · 1,6 · 0,1 px (images 426 à 435), le plus grand de
-       429 à 430, au creux du hochement du point (racine, 14,33). Un décalage d'une image entre les deux
-       lignes, essayé, ne se voyait pas et portait le pas à 57 px : écarté.
+       ne les rejoint pas (0,4 px à 14,20, quand ils sont à 0) : rien ne se recouvre. Pas d'image en image
+       (corps 64, power3 de GSAP = puissance 4) : 0,4 · 2,5 · 8,0 · 18,9 · 35,1 · 26,8 · 12,7 · 4,7 · 1,1 · 0,1 px
+       (images 426 à 435), le plus grand de 429 à 430, au creux du hochement du point (racine, 14,33). Un décalage d'une image entre les deux
+       lignes, essayé, ne se voyait pas et portait le pas à 57 px (au corps 96) : écarté.
        Positions finales : celles de la même page posée SANS les « euh » (TEXTE.poser, même CSS). Chaque unité
        étant un inline-block suivi d'une espace, sa place dans la page propre est la somme des avances
        (largeur + espace) des unités gardées qui la précèdent sur sa ligne, avances MESURÉES par
        outils/navigateur.py dans DONNEES.pages (x0 de chaque unité). Au montage, les polices sont encore en
        chargement : la timeline ne mesure donc rien elle-même. Une fois les polices chargées, le script pose
        deux clones cachés de C1 (tel quel, et sans les « euh »), les mesure, les retire, et signale en
-       console_error tout écart de plus de 0,5 px (DONNEES périmé : relancer outils/construire.py).
-       Décalages mesurés au 27/09 : « Moka, » −165,235 px ; « mange » et « plus » −165,234 px.
+       console_error tout écart de plus de 0,5 px (DONNEES périmé : relancer outils/construire.py, ou outils/format.py <format> pour une copie de format).
+       Décalages mesurés le 28/09 (corps 64, les MÊMES dans les deux formats : mêmes coupes, même police) :
+       « Moka, », « mange » et « plus » −110,156 px (−165,235 au corps 96 d'avant la finition).
+       Lus dans window.__s3Controle (mesure, ecart_page, ecart_resserrage, largeur_mention, dx).
     3. 14,50 → 15,10 : la phrase propre « mon chat, Moka, | mange plus | depuis hier. » tient 0,60 s.
     4. 15,10 → 15,28 : C1 sort par ses masques de ligne, vers le bas (0,18 s power3.in), puis opacité 0.
   C2 paraît à 15,3333 (image 460) et sort de 16,98 à 17,16. À 17,20, quand le point part, la page est vide.
@@ -57,16 +76,16 @@
 @font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
 @font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2")}
 #root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
-#s3-parole{position:absolute;left:0;top:0;width:1080px;height:1920px}
+#s3-parole{position:absolute;inset:0}
 /* La parole de l'appelant : Instrument Serif italique 400, 64 px, interlignage 72 px (lignes de base
    874 / 946 / 1018 ; top posé par le script depuis DONNEES.geometrie.s3_texte). Les deux pages occupent la
    même place, une seule à la fois. */
-.s3-page{position:absolute;left:90px;top:804px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:italic;
+.s3-page{position:absolute;left:90px;top:804px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:italic; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
          font-size:64px;line-height:72px;letter-spacing:0;color:#262019;white-space:nowrap}
 /* Les hésitations : gris texte de la DA (#6F695F, 4,8:1 sur le papier : AA). */
 .s3-page .s3-euh{color:#6F695F}
 /* La mention, non dite : Geist 400 36/48, gris, ligne de base 330 (top 294). */
-#s3-mention{position:absolute;left:90px;top:294px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+#s3-mention{position:absolute;left:90px;top:294px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
             font-size:36px;line-height:48px;letter-spacing:0;color:#6F695F;white-space:nowrap;opacity:0}
 </style>
 <div id="root" data-composition-id="s3-ecoute" data-width="1080" data-height="1920">
@@ -105,7 +124,7 @@
   const SORTIE_C1 = 15.10;                    // après 0,60 s de phrase propre
   const SORTIE_C2 = 16.98;
   const MENTION = [10.60, 10.90, 17.00, 17.20];
-  const DEPART = EV.depart_agenda.t;          // 17,20 : le point quitte sa place d'écoute (112 ; 1136)
+  const DEPART = EV.depart_agenda.t;          // 17,20 : le point quitte sa place d'écoute (geometrie.s3_texte.ecoute)
 
   // ── Géométrie du contrat : position posée, style vérifié ──
   const G = D.geometrie.s3_texte;
@@ -113,6 +132,8 @@
   const elMention = document.getElementById("s3-mention");
   elMention.style.top = G.mention.top + "px";
   elMention.style.left = G.mention.x + "px";
+  elMention.style.fontSize = G.mention.corps + "px";           // FORMATS : 36/48 en 9:16, 40/52 en 16:9 (texte.json, mention)
+  elMention.style.lineHeight = G.mention.interligne + "px";
   (function () {
     const cs = getComputedStyle(document.getElementById("s3-c1"));
     exiger(cs.fontSize === G.corps + "px" && cs.lineHeight === G.interligne + "px" && cs.fontStyle === G.style &&
@@ -222,8 +243,8 @@
   // sont posés dans la même tâche, mesurés et retirés (jamais peints) : la page telle quelle (A) et la page
   // propre, sans les « euh, » ni l'espace qui les suit (B). On exige, à 0,5 px près : A = DONNEES.pages
   // (x0 de chaque unité) et B = A + dx (le resserrage mène chaque unité à sa place dans la page propre).
-  // Et la mention mesure au plus geometrie.s3_texte.mention.largeur_max (920). Un écart s'affiche en
-  // console_error dans hf check (DONNEES périmé : relancer outils/construire.py).
+  // Et la mention mesure au plus geometrie.s3_texte.mention.largeur_max (920 en 9:16, 1632 en 16:9). Un écart s'affiche en
+  // console_error dans hf check (DONNEES périmé : relancer outils/construire.py, ou outils/format.py <format> pour une copie de format).
   function controler() {
     const erreurs = [];
     const hote = c1.conteneur.parentNode;

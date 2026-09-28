@@ -1,0 +1,127 @@
+{
+ "unite": "px film ; mesuré dans le chrome-headless-shell de HyperFrames",
+ "moteur": "chrome-headless-shell HyperFrames 152.0.7977.30",
+ "date": "2026-09-28T08:26:55",
+ "s1": {
+  "centre": {
+   "x": 794.506,
+   "y": 533.475
+  },
+  "diametre": 15.75,
+  "ligne_de_base": 540,
+  "lignes": [
+   {
+    "ligne_de_base": 402,
+    "x0": 144,
+    "x1": 782.765625,
+    "largeur": 638.765625
+   },
+   {
+    "ligne_de_base": 540,
+    "x0": 144,
+    "x1": 810.46875,
+    "largeur": 666.46875
+   }
+  ],
+  "espaceur": {
+   "x0": 778.53125,
+   "y0": 540,
+   "x1": 810.46875,
+   "y1": 540,
+   "cx": 794.5,
+   "cy": 540,
+   "l": 31.9375,
+   "h": 0
+  },
+  "glyphe_point": {
+   "unites": [
+    54,
+    -9,
+    159,
+    96
+   ],
+   "upm": 1000,
+   "avance": 213,
+   "corps_px": 150
+  },
+  "methode": "origine DOM du « . » réel (Range, crénage compris) + centre de la boîte d'encre du glyphe (fontTools), ligne de base DOM",
+  "source": "compositions/s1-sonnerie.html #s1-espaceur"
+ },
+ "s7": {
+  "centre": {
+   "x": 1120.797,
+   "y": 230
+  },
+  "diametre": 44,
+  "mot_pt": {
+   "x0": 1098.796875,
+   "y0": 208,
+   "x1": 1142.796875,
+   "y1": 252,
+   "cx": 1120.796875,
+   "cy": 230,
+   "l": 44,
+   "h": 44
+  },
+  "mot": {
+   "x0": 627.984375,
+   "y0": 156,
+   "x1": 1292,
+   "y1": 516,
+   "cx": 959.9921875,
+   "cy": 336,
+   "l": 664.015625,
+   "h": 360
+  },
+  "segments": {
+   "mot-a": {
+    "x0": 627.984375,
+    "x1": 1075.59375,
+    "largeur": 447.609375,
+    "texte": "Vok",
+    "encre_x0": 615.484,
+    "encre_x1": 1130.434
+   },
+   "mot-i": {
+    "x0": 1075.59375,
+    "x1": 1146.796875,
+    "largeur": 71.203125,
+    "texte": "ı",
+    "encre_x0": 1075.594,
+    "encre_x1": 1163.094
+   },
+   "mot-o": {
+    "x0": 1146.796875,
+    "x1": 1292,
+    "largeur": 145.203125,
+    "texte": "o",
+    "encre_x0": 1153.047,
+    "encre_x1": 1303.047
+   }
+  },
+  "ligne_de_base": 472,
+  "glyphe_i": {
+   "origine": 1075.59375,
+   "avance": 71.203125,
+   "encre": {
+    "gauche": 0,
+    "droite": 87.5,
+    "haut": 206.25,
+    "bas": 0,
+    "avance": 89.1998291015625,
+    "police": "400px \"Instrument Serif\", serif"
+   },
+   "fut_x0": 1075.59375,
+   "fut_x1": 1163.09375,
+   "haut_encre": 265.75
+  },
+  "stylo": {
+   "x0": 539.319,
+   "x1": 1338.328,
+   "y": 504,
+   "definition": "x0 = bord gauche de #mot − 0,14 × largeur de « Vok » − 26 ; x1 = bord droit de #mot + 0,14 × largeur du « o » + 26 ; y = ligne de base + 32 (le centre du point passe sous la ligne de base)"
+  },
+  "methode": "centre de getBoundingClientRect() de #mot-pt (boîte CSS du point de la DA)",
+  "source": "compositions/s7-signature.html #mot-pt (Instrument Serif 400 px, top 156)"
+ }
+}

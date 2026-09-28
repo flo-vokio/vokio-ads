@@ -3,11 +3,22 @@
 RENDU, sur le DOM du même moteur et sur les données. Tous les instants viennent de DONNEES (donnees/donnees.js,
 généré par outils/construire.py) : aucun numéro d'image recopié à la main.
 
-    python3 outils/controles.py [film.mp4] [dossier_sortie] [--check rapport-hf-check.json ...]
+    python3 outils/controles.py [film.mp4] [dossier_sortie] [--racine formats/16x9] [--mix son.wav] [--check rapport-hf-check.json ...]
 
 Par défaut : /root/vokio-uploads/videos/showcase/le-point-sur-le-i.mp4 → …/showcase/controles-v2/.
 Rien n'est écrit dans le projet (sorties dans le dossier de contrôle). Aucune lecture réseau ni base de données
 (la preuve en base est un relevé en lecture seule fait à la main, recopié dans le rapport avec sa date).
+
+FORMATS (28/09) : --racine <projet de format> (outils/format.py : formats/16x9, ou une copie --dossier, 9:16 compris) :
+données (donnees/), index.html et compositions/ lus dans la racine ; son/ (mix, stems, cues, mesures) et polices lus dans
+la SOURCE (ce projet : un format ne change pas la bande son). Sans --racine : ce projet, le 9:16. Toute mesure de mise en
+page vient de DONNEES.format (cadre, corps_min, marge_laterale, zones) et de DONNEES.geometrie / DONNEES.mesures, avec la
+valeur du 9:16 en repli quand les données sont d'avant les formats (aa4dd24). Dossier de sortie par défaut d'un format :
+…/showcase/controles-<format>/. Exemples :
+    python3 outils/controles.py /root/vokio-uploads/videos/showcase/le-point-sur-le-i-iphone.mp4 /tmp/c9 --racine /tmp/copie-9x16 \
+            --check /tmp/copie-9x16/rapports/check.json
+    python3 outils/controles.py /root/vokio-uploads/videos/showcase/le-point-sur-le-i-16x9-image.mp4 --racine formats/16x9 \
+            --check formats/16x9/rapports/check.json
 
   D   données (point-resolu.json, evenements) : images, sol − la, ré − la, point sur le « . » et sur #mot-pt,
       contacts sur les filets, vitesse avant contact, pas maximal, immobilité 1078-1099, suiveur à l'arrêt, alternances
@@ -23,6 +34,18 @@ Rien n'est écrit dans le projet (sorties dans le dossier de contrôle). Aucune 
       (≤ 90 px par image en sortie), étirement ≤ 1,25, SMS lisible ≥ 3,8 s et téléphone vide ≤ 1,2 s, aucune encre sous le
       point (s2, s6), point hors du bloc après l'écriture, marge de l'agenda ≥ 70, « Vokıo » à l'encre (bord doux),
       accroche moins large que le wordmark, l'agente plus forte que l'appelant (hauteur d'x)
+  Z   zones sûres du format (DONNEES.format.zones ; 16:9 : 10 % du bas et bouton « Passer l'annonce » interdits, encart de
+      l'annonceur et bande du haut en prudence) : aucun texte au repos, aucun point à l'arrêt, aucun objet porteur d'info
+      (bulle du SMS, bloc « 09:00 Florian ») dans une zone interdite ; point à l'arrêt dans le cadre utile, loin des bords
+  Y   annonce désactivable (DONNEES.format.passer_s, 16:9 : 5,0 s) : Y1, avant le bouton « Passer », l'accroche est entière, le
+      point est devenu solaire, l'agente parle au plus tard à l'image du bouton ; aucun logo avant la signature (s7) ; Y2
+      (strict) le produit est DIT avant le bouton − 0,2 s (« vocale » fini) : « À VALIDER » tant que le minutage ne le permet pas
+  Z2  (28/09) le point à l'arrêt et les objets qui portent l'info à ≥ DONNEES.format.marge_zones px des zones interdites
+  O   occupation du cadre (outils/occupation.py, une image / 0,5 s) : O1, les plans-titres de DONNEES.format.occupation
+      remplissent le cadre à pleine composition (part de la largeur, barycentre) ; les autres scènes sont rapportées
+  --mix W.wav (28/09) : la bande son que le MP4 doit porter (A1 : calage et résidu) ; défaut son/mix.wav. Avec un autre mix,
+      A2 relit SES mesures (mesures*.json de outils/mixer.py, à côté du wav, dont « wav » = ce fichier), pas son/mesures-son.json.
+      Exemple, le 16:9 avec le mix du 9:16 final : --mix /opt/vokio-ads/videos/showcase/son/hybride/mix-hybride.wav
 """
 import json
 import re
@@ -34,16 +57,24 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-PROJET = Path(__file__).resolve().parents[1]
+PROJET = Path(__file__).resolve().parents[1]      # la SOURCE : son/, polices, outils
 args = [a for a in sys.argv[1:]]
 CHECKS = []
 while "--check" in args:
     i = args.index("--check")
     CHECKS.append(Path(args[i + 1]))
     del args[i:i + 2]
+RACINE = PROJET                                   # le projet rendable contrôlé : données, index.html, compositions
+if "--racine" in args:
+    i = args.index("--racine")
+    RACINE = Path(args[i + 1]).resolve()
+    del args[i:i + 2]
+MIX = PROJET / "son" / "mix.wav"                  # A1 : la bande son que le MP4 doit porter (--mix : une autre, ex. le mix hybride)
+if "--mix" in args:
+    i = args.index("--mix")
+    MIX = Path(args[i + 1]).resolve()
+    del args[i:i + 2]
 FILM = Path(args[0]) if len(args) > 0 else Path("/root/vokio-uploads/videos/showcase/le-point-sur-le-i.mp4")
-SORTIE = Path(args[1]) if len(args) > 1 else FILM.parent / "controles-v2"
-SORTIE.mkdir(parents=True, exist_ok=True)
 POLICE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 rapport = {"film": str(FILM)}
 echecs = []
@@ -57,13 +88,30 @@ def note(cle, ok, detail):
 
 
 def lire_json(p):
-    return json.loads((PROJET / p).read_text())
+    return json.loads((RACINE / p).read_text())
 
 
-_js = (PROJET / "donnees" / "donnees.js").read_text()
+_js = (RACINE / "donnees" / "donnees.js").read_text()
 _i = _js.index("window.DONNEES = ") + len("window.DONNEES = ")
 D = json.loads(_js[_i:_js.rstrip().rindex(";")])
 W, H = D["taille"]
+# le format : DONNEES.format (outils/construire.py --format), sinon (données d'avant les formats) l'entrée 9x16 de
+# mise-en-page/formats.json, la référence
+FMT = D.get("format") or dict(json.loads((PROJET / "mise-en-page" / "formats.json").read_text())["9x16"], nom="9x16")
+FMT = {k: v for k, v in FMT.items() if not k.startswith("_")}
+assert (FMT["largeur"], FMT["hauteur"]) == (W, H), f"DONNEES.format {FMT['largeur']}×{FMT['hauteur']} ≠ DONNEES.taille {W}×{H}"
+MARGE, CORPS_MIN = FMT["marge_laterale"], FMT["corps_min"]
+ZONES = FMT.get("zones", [])
+INTERDITES = [z for z in ZONES if z["sorte"] == "interdite"]
+PRUDENCES = [z for z in ZONES if z["sorte"] != "interdite"]
+SORTIE = Path(args[1]) if len(args) > 1 else FILM.parent / ("controles-v2" if FMT["nom"] == "9x16" else f"controles-{FMT['nom']}")
+SORTIE.mkdir(parents=True, exist_ok=True)
+rapport["racine"], rapport["format"] = str(RACINE), FMT["nom"]
+
+
+def recoupe(b, z):
+    """La boîte b [x0, y0, x1, y1] recoupe-t-elle la boîte z (bords exclus) ?"""
+    return b[0] < z[2] and z[0] < b[2] and b[1] < z[3] and z[1] < b[3]
 FPS, N_IMAGES, DUREE = D["fps"], D["images"], D["duree"]
 EV = D["evenements"]
 C = D["couleurs"]
@@ -83,7 +131,7 @@ N_POSE = IMS("point_pose")[1]          # finition : le point de l'accroche est p
 
 # ═════════════════════════════ D. Données ═════════════════════════════
 sc = D["scenes"]
-index_html = (PROJET / "index.html").read_text()
+index_html = (RACINE / "index.html").read_text()
 hotes_html = {m.group(1): (float(m.group(2)), float(m.group(3))) for m in re.finditer(
     r'data-composition-id="([^"]+)" data-composition-src="[^"]+"\s+data-start="([\d.]+)" data-duration="([\d.]+)"', index_html)}
 racine = re.search(r'id="root"[^>]*data-duration="([\d.]+)"', index_html)
@@ -182,8 +230,8 @@ note("HF hf check (rapports fournis)", ok_hf, hf or "aucun rapport fourni (--che
 
 # ═════════════════════════════ DOM ═════════════════════════════
 dom_json = SORTIE / "dom.json"
-subprocess.run(["/root/.pwtest/bin/python", str(PROJET / "outils" / "controles_dom.py"), str(dom_json)], check=True,
-               stderr=subprocess.DEVNULL)
+subprocess.run(["/root/.pwtest/bin/python", str(PROJET / "outils" / "controles_dom.py"), str(dom_json), "--racine", str(RACINE)],
+               check=True, stderr=subprocess.DEVNULL)
 DOM = json.loads(dom_json.read_text())
 trop, comptes = [], {}
 for im in DOM["images"]:
@@ -198,7 +246,7 @@ note("DOM1 éléments simultanés ≤ 3 (toutes les images)", not trop and not D
      trop[:10] or {"images": len(DOM["images"]), "max": max(comptes.values()), "images_a_3": sum(1 for c in comptes.values() if c == 3),
                    "erreurs_page": DOM["erreurs_page"]})
 
-petits, bas, marges, mono = set(), [], set(), set()
+petits, bas, marges, mono, prudence_textes = set(), [], set(), set(), {}
 # VERSION iPHONE (27/09) : UNE dérogation à la règle 5 (texte ≥ 36 px), PROPOSÉE et NON VALIDÉE par Florian : la mention
 # d'horodatage d'iOS au-dessus de la bulle (« SMS / Aujourd’hui 16:55 »), à sa taille réelle (11 pt de l'écran = 23,4 px),
 # pour que l'écran ressemble à une vraie capture (demande du 27/09 : « un screenshot de téléphone plus réaliste type
@@ -207,8 +255,8 @@ petits, bas, marges, mono = set(), [], set(), set()
 # l'heure de la barre d'état font 17 pt = 36,1 px et restent soumis à la règle.
 K_IPHONE = D["geometrie"]["s6"]["pt"]
 MENTION_IOS = {"SMS", "Aujourd’hui", "16:55"}
-DEROGATION_MENTION_IOS = {"regle": "règle 5 du brief (texte ≥ 36 px)", "statut": "proposée le 27/09, À VALIDER par Florian",
-                          "objet": "mention d'horodatage d'iOS « SMS / Aujourd’hui 16:55 », 11 pt réels = 23,4 px (s6, version iPhone)"}
+DEROGATION_MENTION_IOS = {"regle": f"règle 5 du brief (texte ≥ {CORPS_MIN} px en {FMT['nom']})", "statut": "proposée le 27/09, À VALIDER par Florian",
+                          "objet": f"mention d'horodatage d'iOS « SMS / Aujourd’hui 16:55 », 11 pt réels = {11 * K_IPHONE:.1f} px (s6, version iPhone)"}
 derogation_iphone = set()
 
 
@@ -221,26 +269,33 @@ for im in DOM["images"]:
         if t["element"] == "telephone" and t["texte"] in MENTION_IOS and abs(t["corps"] - 11 * K_IPHONE) < 0.01:
             derogation_iphone.add((t["texte"], t["corps"]))
             continue
-        if t["corps"] < 36:
+        if t["corps"] < CORPS_MIN - 1e-6:
             petits.add((t["element"], t["texte"], t["corps"]))
         if "Mono" in t["famille"] and re.search(r"[A-Z]", t["texte"]) and t["texte"] == t["texte"].upper():
             mono.add(t["texte"])
         au_repos = not t["transforme"] and t["opacite"] > 0.99
-        if au_repos and t["y1"] >= 1500 and t["y0"] < H:
-            bas.append((im["image"], t["element"], t["texte"], t["y1"]))
-        if au_repos and (t["boite"]["x0"] < 70 - 0.5 or t["boite"]["x1"] > 1010 + 0.5):
+        b_ = [t["x0"], t["y0"], t["x1"], t["y1"]]
+        for z in ZONES:           # 9:16 : sous 1500 (interface Reels) ; 16:9 : 10 % du bas, bouton « Passer », prudences
+            if au_repos and recoupe(b_, z["boite"]):
+                if z["sorte"] == "interdite":
+                    bas.append((im["image"], t["element"], t["texte"], z["nom"], b_))
+                else:
+                    prudence_textes.setdefault(z["nom"], set()).add((t["element"], t["texte"]))
+        if au_repos and (t["boite"]["x0"] < MARGE - 0.5 or t["boite"]["x1"] > W - MARGE + 0.5):
             marges.add((t["element"], t["texte"], t["boite"]["x0"], t["boite"]["x1"]))
 max_bas = max((t["boite"]["y1"] for im in DOM["images"] for t in im["textes"] if not t["transforme"] and t["opacite"] > .99), default=0)
 ep = AG["etiquettes_police"]
-lab_ok = ep["corps_px_film"] >= 45 and ep["capitales"] == 0
-note("DOM2 textes (corps ≥ 36, bas < 1500 et marges 70-1010 au repos, 0 mono en capitales) ; étiquettes de la capture",
+lab_ok = ep["corps_px_film"] >= max(45, CORPS_MIN) and ep["capitales"] == 0     # capture à 4,5 px film par px CSS, dans tous les formats
+note(f"DOM2 textes (corps ≥ {CORPS_MIN}, aucun texte au repos en zone interdite, marges {MARGE}-{W - MARGE} au repos, 0 mono en "
+     "capitales) ; étiquettes de la capture",
      not petits and not bas and not marges and not mono and lab_ok,
-     {"corps<36": sorted(petits)[:8], "bas>=1500 au repos": bas[:8], "hors marges": sorted(marges)[:8], "mono capitales": sorted(mono),
+     {f"corps<{CORPS_MIN}": sorted(petits)[:8], "zone interdite au repos": bas[:8], "hors marges": sorted(marges)[:8], "mono capitales": sorted(mono),
+      "zones prudence (signalé, non bloquant)": {k: sorted(v)[:8] for k, v in prudence_textes.items()},
       "derogation_iphone (mention d'horodatage iOS, 11 pt réels)": sorted(derogation_iphone), "bas maximal au repos": max_bas, "corps vus": sorted({t["corps"] for im in DOM["images"] for t in im["textes"]}),
       "etiquettes_capture": {"corps_px_film": ep["corps_px_film"], "hauteur_encre_chiffres": ep["hauteur_encre_chiffres"],
                              "capitales": ep["capitales"]}})
 if derogation_iphone:
-    a_valider("DOM2-derogation texte < 36 px", dict(DEROGATION_MENTION_IOS, textes_vus=sorted(derogation_iphone)))
+    a_valider(f"DOM2-derogation texte < {CORPS_MIN} px", dict(DEROGATION_MENTION_IOS, textes_vus=sorted(derogation_iphone)))
 
 # durée de lecture de chaque page posée par TEXTE.poser
 lectures, courtes = [], []
@@ -289,8 +344,8 @@ note("DOM4 sous-suite du texte dit (données et DOM)", not fautes and pages_dom 
      fautes or {"pages": len(D["pages"]), "pages_du_dom_hors_donnees": sorted(pages_dom - pages_don)})
 
 # interdits : fichiers (lib/vendor exclu) et textes rendus
-fichiers = [PROJET / "index.html"] + sorted((PROJET / "compositions").glob("*.html")) + sorted((PROJET / "donnees").glob("*.json")) \
-    + [PROJET / "donnees" / "donnees.js", PROJET / "lib" / "texte.js", PROJET / "lib" / "point.js"]
+fichiers = [RACINE / "index.html"] + sorted((RACINE / "compositions").glob("*.html")) + sorted((RACINE / "donnees").glob("*.json")) \
+    + [RACINE / "donnees" / "donnees.js", RACINE / "lib" / "texte.js", RACINE / "lib" / "point.js", RACINE / "lib" / "iphone.js"]
 tel = re.compile(r"(?<![0-9.:])(?:\+33 ?[1-9]|0[1-9])(?:[ .]?[0-9]{2}){4}(?![0-9])")
 trouves = []
 for f in fichiers:
@@ -317,10 +372,10 @@ def texte_bulle(chemin):
     p = re.search(r'<p id="s6-bulle">(.*?)</p>', h, re.S).group(1)
     return " ".join(re.sub(r"<[^>]+>", "", s) for s in re.findall(r'<span class="s6-l">(.*?)</span>', p))
 
-sms_v2 = texte_bulle(PROJET / "compositions" / "s6-sms.html")
+sms_v2 = texte_bulle(RACINE / "compositions" / "s6-sms.html")
 # VERSION iPHONE : l'expéditeur affiché doit pouvoir exister (alphanumérique ≤ 11 caractères : lettres, chiffres, espace) ;
 # c'est celui que le produit pose par défaut (merchants.sms_from = 'Vokio', décision de Florian).
-_h6 = (PROJET / "compositions" / "s6-sms.html").read_text()
+_h6 = (RACINE / "compositions" / "s6-sms.html").read_text()
 expediteur = re.search(r'<div id="s6-nom"[^>]*><span>(.*?)</span>', _h6).group(1)
 # VERSION iPHONE (27/09) : le SMS n'est plus celui de la v1 mais la formulation corrigée du gabarit (« à 09:00, Clinique… »
 # au lieu de « à 09:00 chez Clinique… ») : on le compare à ce texte-là, au caractère près.
@@ -423,6 +478,33 @@ img_sms_ref = None
 gardees, points = {}, {}
 solaire_hors, i_avec_point, s2_droite, brun, immobile = [], [], [], {}, []
 BLOC = AG["bloc"]
+GEO = D["geometrie"]
+# FORMATS : fenêtres de mesure tirées des données (valeur 9:16 d'origine en commentaire, reproduite par ces formules)
+M1_LIGNES = D["mesures"]["s1"]["lignes"]
+CORPS_S1 = GEO.get("s1", {}).get("phrase", {}).get("corps", 150)
+# F1 : l'encre de l'accroche (9:16 : lignes de base 736 / 874, x 90 → 756) ; la ligne du haut − corps → la dernière + 0,3 corps
+Z_ACC = (int(M1_LIGNES[0]["ligne_de_base"] - CORPS_S1), int(M1_LIGNES[-1]["ligne_de_base"] + 0.3 * CORPS_S1),
+         max(0, int(min(l["x0"] for l in M1_LIGNES)) - 30), min(W, int(max(l["x1"] for l in M1_LIGNES)) + 30))
+# F3 : le haut de l'écran de l'iPhone, bande de 280 px centrée sur l'écran (9:16 : x 400 → 680)
+_ecr = GEO["s6"]["ecran"]
+X_ECRAN = (int(round((_ecr["x0"] + _ecr["x1"]) / 2)) - 140, int(round((_ecr["x0"] + _ecr["x1"]) / 2)) + 140)
+# F5 : le bord gauche de l'agenda, sur la ligne 310 de la capture (9:16 : y 900), balayé de x0 − 60 à x0 + 200 (9:16 : 0 → 200)
+AG_IMG = GEO["agenda"].get("image") or AG["image"]
+Y_F5 = int(round(AG_IMG["y"] + 310))
+X_F5 = (max(0, int(AG_IMG["x"]) - 60), int(AG_IMG["x"]) + 200)
+# F6 / F7 : le wordmark (9:16 : fenêtre y 560 → 870, x 150 → 960 ; bande de la plume dans x 210 → 870)
+G7 = GEO["s7"]
+_seg7 = G7["segments"].values()
+E7 = (min(s["encre_x0"] for s in _seg7), max(s["encre_x1"] for s in _seg7))
+Z_MOT = (int(D["mesures"]["s7"]["mot"]["y0"]) + 16, int(G7["ligne_de_base"]) + 10, max(0, int(E7[0]) - 45), min(W, int(E7[1]) + 77))
+X_PLUME = (int(np.ceil(D["mesures"]["s7"]["mot"]["x0"])) + 2, int(D["mesures"]["s7"]["mot"]["x1"]) - 2)
+# I3 : la sortie de l'agenda (0 → −y_sortie) : la boîte admise du bloc monte d'autant (9:16 : 270 + 2)
+Y_SORTIE_AG = GEO["agenda"].get("y_sortie", 270)
+# I5 : le bord droit que le disque ne passe pas dans s2 (9:16 : 1010 = largeur − marge ; 16:9 : fin de la colonne, 1064)
+X_MAX_S2 = GEO["s2_texte"].get("x_max", W - MARGE)
+# Z : le point, image par image, dans les zones interdites (pixels solaires du MP4)
+sol_zones = {}
+premier_solaire = None
 ref_imm = None
 diffs, prec = [], None
 MOT_PT = (M7["x"], M7["y"])
@@ -451,11 +533,18 @@ while True:
     if sol.any():
         hors = sol & ~masque_point(n, 3)
         if IM("ecriture_debut") <= n <= IMS("agenda_sort")[1]:
-            hors[max(0, int(BLOC["y0"]) - 2 - 272):int(np.ceil(BLOC["y1"])) + 3, int(BLOC["x0"]) - 2:int(BLOC["x1_visible"]) + 2] = False
+            hors[max(0, int(BLOC["y0"]) - 2 - int(Y_SORTIE_AG) - 2):int(np.ceil(BLOC["y1"])) + 3, int(BLOC["x0"]) - 2:int(BLOC["x1_visible"]) + 2] = False
         k = int(hors.sum())
         if k:
             ys, xs = np.nonzero(hors)
             solaire_hors.append((n, k, int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())))
+        if premier_solaire is None and int(sol.sum()) >= 100:
+            premier_solaire = n
+        for z in INTERDITES:
+            zx0, zy0, zx1, zy1 = (int(v) for v in z["boite"])
+            kz = int(sol[zy0:zy1, zx0:zx1].sum())
+            if kz:
+                sol_zones.setdefault(n, []).append((z["nom"], kz))
     # le ı sans point de la fin d'écriture au ré
     if IMS("plume_mot")[1] <= n < N_RE:
         yy, xx = np.ogrid[int(MOT_PT[1]) - 22:int(MOT_PT[1]) + 23, int(MOT_PT[0]) - 22:int(MOT_PT[0]) + 23]
@@ -502,7 +591,7 @@ while True:
                 depart_contacts.append((n, sur, round(ecart_, 1)))
     # finition : l'accroche bouge dès l'image 0 (encre de la zone de la phrase, image à image)
     if n <= 40:
-        z = gris[500:900, 60:1020]
+        z = gris[Z_ACC[0]:Z_ACC[1], Z_ACC[2]:Z_ACC[3]]
         accroche_diff.append((n, int((z < 150).sum())))
     # finition : la bulle se lit (encre de sa zone de texte comparée à l'image de référence) ; le téléphone au repos
     if IM("bulle_et_vibreur") - 2 <= n <= IMS("telephone_sortie")[1]:
@@ -512,15 +601,16 @@ while True:
         # version iPhone : au repos, le bord noir du verre finit à la ligne 499 et l'écran blanc commence à la ligne 501
         # (à moins d'un pixel près : un téléphone encore en mouvement noircit la ligne 501)
         e0 = int(SIL["ecran_haut"])
-        noir = (gris[e0 - 3:e0, 400:680] < 120).mean()
-        blanc = (gris[e0 + 1:e0 + 4, 400:680] > 200).mean()
+        noir = (gris[e0 - 3:e0, X_ECRAN[0]:X_ECRAN[1]] < 120).mean()
+        blanc = (gris[e0 + 1:e0 + 4, X_ECRAN[0]:X_ECRAN[1]] > 200).mean()
         tel_haut[n] = float(min(noir, blanc))
     if n == IM("contact_retour_neuf"):
-        row = img[900].astype(int)
-        marge_agenda = next(x for x in range(0, 200) if np.abs(row[x] - PAPIER).max() > 6)
+        row = img[Y_F5].astype(int)
+        marge_agenda = next((x for x in range(*X_F5) if np.abs(row[x] - PAPIER).max() > 6), None)
     if IMS("plume_mot")[0] <= n <= IMS("plume_mot")[1] or n == IMS("plume_mot")[1] + 3:
-        encre_mot[n] = (gris[560:870, 150:960] < 200).astype(np.uint8) * (255 - gris[560:870, 150:960]).astype(np.int16)
-    # s2 : le point ne passe jamais au-delà de x = 1010
+        zm = gris[Z_MOT[0]:Z_MOT[1], Z_MOT[2]:Z_MOT[3]]
+        encre_mot[n] = (zm < 200).astype(np.uint8) * (255 - zm).astype(np.int16)
+    # s2 : le point ne passe jamais au-delà de X_MAX_S2 (9:16 : 1010 ; 16:9 : 1064)
     if sc["s2-voix"]["image_debut"] <= n < sc["s2-voix"]["image_fin"] and sol.any():
         s2_droite.append((n, int(np.nonzero(sol.any(axis=0))[0].max()) + 1))
     # décroché : aucune image brune (cœur du point : encre OU solaire)
@@ -580,7 +670,7 @@ note("I3 aucun pixel solaire hors du point (bloc admis de 762 à 941)", not sola
 note("I4 le ı sans point de la fin d'écriture au ré", not i_avec_point,
      i_avec_point[:10] or f"aucun pixel solaire sur le point du ı de {IMS('plume_mot')[1]} à {N_RE - 1}")
 xmax_s2 = max((x for _, x in s2_droite), default=None)
-note("I5 point jamais au-delà de x = 1010 en s2", xmax_s2 is not None and xmax_s2 <= 1010,
+note(f"I5 point jamais au-delà de x = {X_MAX_S2:g} en s2", xmax_s2 is not None and xmax_s2 <= X_MAX_S2,
      {"x_max_pixel_solaire": xmax_s2, "image": max(s2_droite, key=lambda z: z[1])[0] if s2_droite else None})
 note("I6 aucune image brune au décroché", all(v["ni_l_un_ni_l_autre"] <= 4 for v in brun.values())
      and brun[IM("decroche")]["encre"] > 40 and brun[IM("lumiere")]["solaire"] > 40, brun)
@@ -631,7 +721,7 @@ note("F3 bulle entière lisible ≥ 3,8 s ; téléphone vide ≤ 1,2 s avant la 
 # (relecture du 27/09, version iPhone) et au départ vers le stylo, le point ne touche pas la bulle qui monte avec le téléphone
 note("F4 aucune encre sous le point ni à moins de 4 px de son bord pendant ses trajets de lecture (s2-s3, s6) ; au départ vers "
      "s7, aucun pixel solaire sur la bulle ni à moins de 4 px d'elle tant que le téléphone est visible",
-     not anneau_encre and not depart_contacts and bord_bulle is not None and bord_bulle["pixels"] > 150000
+     not anneau_encre and not depart_contacts and bord_bulle is not None and bord_bulle["pixels"] > 0.7 * BULLE["largeur"] * BULLE["hauteur"]
      and len(depart_ecarts) == DEPART[1] - DEPART[0] + 1,
      {"trajets": TRAJ, "images_touchees": anneau_encre[:12] or "aucune",
       "depart_vers_stylo": {"images": list(DEPART), "forme_bulle_px": bord_bulle and bord_bulle["pixels"],
@@ -639,17 +729,19 @@ note("F4 aucune encre sous le point ni à moins de 4 px de son bord pendant ses 
                             "ecart_min_px": min((e[3] for e in depart_ecarts), default=None),
                             "par_image (n, opacité du téléphone, pixels solaires sur la bulle, écart px)": depart_ecarts}})
 # F5 marge de l'agenda
-note("F5 bord gauche de l'agenda ≥ 70 px (règle 5)", marge_agenda is not None and marge_agenda >= 70,
-     {"premiere_colonne_non_papier_y900": marge_agenda, "image": IM("contact_retour_neuf")})
+note(f"F5 bord gauche de l'agenda à sa place (x {AG_IMG['x']:g} ± 2) et ≥ marge latérale {MARGE} px (règle 5)",
+     marge_agenda is not None and marge_agenda >= MARGE and abs(marge_agenda - AG_IMG["x"]) <= 2,
+     {f"premiere_colonne_non_papier_y{Y_F5}_x{X_F5[0]}-{X_F5[1]}": marge_agenda, "x_attendu": AG_IMG["x"], "image": IM("contact_retour_neuf"),
+      "bord_droit": f"déborde du cadre à droite (capture 1:1, data-layout-allow-overflow), visible jusqu'à {AG_IMG.get('droite_visible', W)}"})
 # F6 « Vokıo » s'écrit à l'encre : bord doux derrière la plume
 fin_mot = encre_mot.get(IMS("plume_mot")[1] + 3)
 doux = []
 if fin_mot is not None:
     prof_f = fin_mot.sum(axis=0).astype(float)
     for n_ in range(IMS("plume_mot")[0], IMS("plume_mot")[1]):
-        xp = max(RESOLU[k]["x_sans"] for k in range(IMS("plume_mot")[0], n_ + 1)) - 150
+        xp = max(RESOLU[k]["x_sans"] for k in range(IMS("plume_mot")[0], n_ + 1)) - Z_MOT[2]
         a_, b_ = int(xp - 40), int(xp)
-        if a_ < 60 or b_ > 720:
+        if a_ < X_PLUME[0] - Z_MOT[2] or b_ > X_PLUME[1] - Z_MOT[2]:
             continue
         prof = encre_mot[n_].sum(axis=0).astype(float)
         bande_f = prof_f[a_:b_].sum()
@@ -665,8 +757,10 @@ def boite_encre(img_, y0, y1):
     g_ = img_.astype(np.float32)[y0:y1] @ np.array([0.299, 0.587, 0.114], np.float32)
     ys_, xs_ = np.nonzero(g_ < 120)
     return (int(xs_.min()), int(xs_.max()), int(ys_.min()) + y0, int(ys_.max()) + y0) if len(xs_) else None
-b_acc = boite_encre(gardees[N_POSE], 450, 950) if N_POSE in gardees else None
-b_mot = boite_encre(gardees[N_IMAGES - 1], 540, 880)
+# 9:16 : lignes 450 → 950 (accroche) et 540 → 880 (wordmark)
+b_acc = boite_encre(gardees[N_POSE], int(M1_LIGNES[0]["ligne_de_base"] - 1.9 * CORPS_S1), int(M1_LIGNES[-1]["ligne_de_base"] + 0.5 * CORPS_S1)) \
+    if N_POSE in gardees else None
+b_mot = boite_encre(gardees[N_IMAGES - 1], int(D["mesures"]["s7"]["mot"]["y0"]) - 4, int(G7["ligne_de_base"]) + 20)
 note("F7 l'accroche (0,90 s) est moins large que le wordmark final : le plan-titre est le plus grand objet du film",
      b_acc and b_mot and (b_acc[1] - b_acc[0]) < (b_mot[1] - b_mot[0]),
      {"accroche_x0_x1_y0_y1": b_acc, "wordmark_x0_x1_y0_y1": b_mot,
@@ -689,6 +783,95 @@ note("F8 hauteur d'x de l'agente ≥ 1,15 × celle de l'appelant", hx_a >= 1.15 
      {"agente_Geist": [G_["sous_titres_haut"]["agente"]["corps"], round(hx_a, 1)], "appelant_Instrument_Serif_italique": [G_["sous_titres_haut"]["appelant"]["corps"], round(hx_c, 1)],
       "rapport": round(hx_a / hx_c, 3)})
 
+# ═════════════════════════════ Z. Zones sûres du format (DONNEES.format.zones) ═════════════════════════════
+# « interdite » = rien d'important : texte au repos (DOM2), point à l'arrêt, objet qui porte l'info ; « prudence » = pas de
+# texte (signalé), un objet peut y déborder. 9:16 : l'interface Reels / TikTok sous 1500 ; 16:9 (YouTube InStream) : les 10 %
+# du bas, le bouton « Passer l'annonce » (interdites), l'encart de l'annonceur et la bande du haut (prudence).
+def disque(n):
+    e = RESOLU[n]
+    r = e["d"] / 2 * max(e["sx"], e["sy"], 1)
+    return [e["x"] - r, e["y"] - r, e["x"] + r, e["y"] + r]
+
+
+arrets = [n for n in range(1, N_IMAGES - 1) if RESOLU[n]["d"] > 0 and pas[n] < 0.5 and pas[n + 1] < 0.5]
+pt_interdit, pt_prudence, pt_bord = [], {}, []
+for n_a in arrets:                 # (jamais « n » : c'est le nombre d'images décodées, relu par L1)
+    b = disque(n_a)
+    for z in ZONES:
+        if recoupe(b, z["boite"]):
+            if z["sorte"] == "interdite":
+                pt_interdit.append((n_a, z["nom"], [round(v, 1) for v in b]))
+            else:
+                pt_prudence.setdefault(z["nom"], []).append(n_a)
+    if b[0] < MARGE - 0.5 or b[2] > W - MARGE + 0.5 or b[1] < FMT.get("haut_utile", 0) - 0.5 or b[3] > FMT.get("bas_utile", H) + 0.5:
+        pt_bord.append((n_a, [round(v, 1) for v in b]))
+sol_arret = {k: v for k, v in sol_zones.items() if k in set(arrets)}
+en_passant = sorted(sol_zones)
+# objets qui portent l'info, à leur place de repos (données) : la bulle du SMS (queue comprise), le bloc « 09:00 Florian »
+OBJETS_INFO = {"bulle du SMS (s6)": [BULLE["x0"], BULLE["haut"], BULLE["x1"], max(BULLE["bas"], BULLE["queue_pointe"]["y"])],
+               "bloc « 09:00 Florian » (s5)": [BLOC["x0"], BLOC["y0"], BLOC.get("x_fin", BLOC["x1_visible"]), BLOC["y1"]]}
+obj_zones = {k: [z["nom"] for z in ZONES if recoupe(b, z["boite"]) and z["sorte"] == "interdite"] for k, b in OBJETS_INFO.items()}
+obj_prud = {k: [z["nom"] for z in PRUDENCES if recoupe(b, z["boite"])] for k, b in OBJETS_INFO.items()}
+dist_interdite = {k: round(min(max(z["boite"][0] - b[2], b[0] - z["boite"][2], z["boite"][1] - b[3], b[1] - z["boite"][3])
+                               for z in INTERDITES), 1) if INTERDITES else None for k, b in OBJETS_INFO.items()}
+note("Z1 zones interdites : aucun texte au repos (DOM2), aucun point à l'arrêt (données et pixels solaires du MP4), aucun "
+     "objet porteur d'info à sa place de repos",
+     not bas and not pt_interdit and not sol_arret and not any(obj_zones.values()),
+     {"zones": [(z["nom"], z["sorte"], z["boite"]) for z in ZONES], "textes_au_repos": bas[:6] or "aucun",
+      "point_a_l_arret": pt_interdit[:8] or f"aucun ({len(arrets)} images d'arrêt)",
+      "pixels_solaires_du_mp4_a_l_arret": dict(list(sol_arret.items())[:6]) or "aucun",
+      "point_en_passant (admis : il traverse)": [en_passant[0], en_passant[-1], len(en_passant)] if en_passant else "jamais",
+      "objets_info": {k: {"boite": [round(v, 1) for v in b], "zones_interdites": obj_zones[k] or "aucune",
+                          "prudence": obj_prud[k] or "aucune", "distance_min_zone_interdite_px": dist_interdite[k]}
+                      for k, b in OBJETS_INFO.items()},
+      "prudence (signalé)": {"point_a_l_arret": {k: [v[0], v[-1], len(v)] for k, v in pt_prudence.items()} or "aucun",
+                             "textes": {k: sorted(v)[:6] for k, v in prudence_textes.items()} or "aucun"}})
+# Z2 (28/09, revues YouTube et Florian : un point à 0,4 px de la bande interdite passait) : le point à l'arrêt et les objets
+# qui portent l'info restent à marge_zones px au moins de toute zone interdite (DONNEES.format.marge_zones ; absent = 0)
+MARGE_Z = float(FMT.get("marge_zones", 0))
+
+
+def ecart_zone(b, z):
+    """Écart (px) entre la boîte b et la zone z : > 0 séparées (le long de l'axe qui les sépare), ≤ 0 si elles se recoupent."""
+    return max(z[0] - b[2], b[0] - z[2], z[1] - b[3], b[1] - z[3])
+
+
+pt_colle = {}
+for n_a in arrets:
+    b = disque(n_a)
+    for z in INTERDITES:
+        e_ = ecart_zone(b, z["boite"])
+        if e_ < MARGE_Z and (z["nom"] not in pt_colle or e_ < pt_colle[z["nom"]][1]):
+            pt_colle[z["nom"]] = (n_a, round(e_, 1), [round(v, 1) for v in b])
+ecarts_arret = {z["nom"]: round(min(ecart_zone(disque(n_a), z["boite"]) for n_a in arrets), 1) for z in INTERDITES} if arrets else {}
+obj_colles = {k: v for k, v in dist_interdite.items() if v is not None and v < MARGE_Z}
+note(f"Z2 rien de collé aux bords : le point à l'arrêt dans le cadre utile (x {MARGE} → {W - MARGE}, y {FMT.get('haut_utile', 0)} → "
+     f"{FMT.get('bas_utile', H)}), lui et les objets qui portent l'info à ≥ {MARGE_Z:g} px des zones interdites ; textes : marges de DOM2",
+     not pt_bord and not marges and not pt_colle and not obj_colles,
+     {"point_hors_cadre_utile": pt_bord[:8] or "aucun", "marge_zones_px": MARGE_Z,
+      "point_a_l_arret_ecart_min_par_zone_px": ecarts_arret, "point_trop_pres (image, écart, disque)": pt_colle or "aucun",
+      "objets_info_ecart_px": dist_interdite, "objets_trop_pres": obj_colles or "aucun",
+      "textes_hors_marges": sorted(marges)[:6] or "aucun"})
+
+# ═════════════════════════════ O. Occupation du cadre (DONNEES.format.occupation) ═════════════════════════════
+# O1 (28/09, revue DA YouTube) : les plans-titres (DONNEES.format.occupation.scenes) remplissent le cadre à pleine composition
+# (l'image de la scène où la boîte d'encre est la plus large, échantillonnée toutes les 0,5 s) : part de la largeur ≥ largeur_min,
+# barycentre horizontal dans [min, max]. Les autres scènes sont mesurées et rapportées, sans seuil. Mesure : outils/occupation.py.
+sys.path.insert(0, str(PROJET / "outils"))
+import occupation as OCCUP  # noqa: E402
+OCC = FMT.get("occupation") or {}
+occ_img = [(k, OCCUP.mesurer(gardees[k])) for k in sorted(gardees) if k % 15 == 0]
+occ_bilan = OCCUP.bilan_scenes(occ_img, sc, OCC)
+occ_resume = {k: {kk: v[kk] for kk in ("image_pleine", "part_largeur", "bary_x") if kk in v} | ({"ok": v["ok"]} if "ok" in v else {})
+              for k, v in occ_bilan.items()}
+rapport["occupation_du_cadre"] = occ_bilan
+if OCC.get("scenes"):
+    note(f"O1 plans-titres ({', '.join(OCC['scenes'])}) : boîte d'encre ≥ {OCC.get('largeur_min', 0):g} de la largeur et barycentre "
+         f"{OCC.get('barycentre', [0, 1])[0]:g}–{OCC.get('barycentre', [0, 1])[1]:g}, à pleine composition",
+         all(occ_bilan.get(k, {}).get("ok") for k in OCC["scenes"]), occ_resume)
+else:
+    rapport.setdefault("informations", {})["O1 occupation du cadre (format sans seuil)"] = occ_resume
+
 # ── planches ──
 def planche(nums, fichier, colonnes, echelle, source=None):
     source = source or gardees
@@ -709,7 +892,11 @@ def planche(nums, fichier, colonnes, echelle, source=None):
 pl = {"1 image / s": planche(list(range(0, N_IMAGES, 30)), SORTIE / "planche-1s.png", 9, 0.2),
       "1 image / 0,5 s": planche(list(range(0, N_IMAGES, 15)), SORTIE / "planche-0,5s.png", 10, 0.2),
       "images clés": planche(sorted(CLES), SORTIE / "planche-cles.png", 8, 0.25),
-      "vue téléphone 393 px": planche([12, 127, 300, 430, 600, 705, 821, 973, 1150, N_RE, N_IMAGES - 1], SORTIE / "vue-telephone-393.png", 6, 393 / W)}
+      }
+# vues à la taille réelle d'affichage : 393 pt (fil en portrait) ; en paysage aussi 852 pt (iPhone tenu en paysage, plein écran)
+for _vue in ([393] if H > W else [852, 393]):
+    pl[f"vue téléphone {_vue} px"] = planche([12, 127, 300, 430, 600, 705, 821, 973, 1150, N_RE, N_IMAGES - 1],
+                                              SORTIE / f"vue-telephone-{_vue}.png", 6 if H > W else 3, _vue / W)
 for b in RACCORDS:
     pl[f"raccord-{b}"] = planche(list(range(b - 3, b + 3)), SORTIE / f"raccord-{b}.png", 6, 0.3)
 for k, im in pelures.items():
@@ -752,6 +939,49 @@ note("S2 mots à ±1 image de leur attaque (MP4)", not mauvais,
       "ecarts_images": {str(e): sum(1 for x in individuels if x["ecart_images"] == e) for e in sorted({x["ecart_images"] for x in individuels if x["ecart_images"] is not None})},
       "portes_par_leur_ligne": [(x["mot"], x["image_attaque"], x["image_apparition"]) for x in sync if x["par_ligne"]]})
 
+
+# ═════════════════════════════ Y. Annonce désactivable (DONNEES.format.passer_s) ═════════════════════════════
+# Avant le bouton « Passer » (YouTube InStream : 5,0 s), le film a déjà dit le problème (accroche entière, sonnerie), montré
+# l'accent de la marque et le produit (le décroché : clic et point solaire), et l'agente parle au plus tard quand le bouton
+# paraît (image passer_s × fps : avec le dialogue d'aa4dd24, « Bonjour, » commence à 5,00 s, image 150 ; l'extrait A1 s'ouvre
+# à 4,91 s sur son souffle) ; aucun logo avant la signature (s7).
+PASSER = FMT.get("passer_s")
+n_mot = min((im["image"] for im in DOM["images"] if "mot" in [e.split("@")[0] for e in im["elements"]]), default=None)
+A1 = sorted((x for x in sync if x["extrait"] == "A1"), key=lambda x: x["rang"])
+y_det = {"passer_s": PASSER, "accroche_entiere": {"image": 27, "encre_sur_max": round(encre_fin / max(c for _, c in accroche_diff), 3)},
+         "point_solaire_des_l_image (MP4)": premier_solaire, "lumiere (DONNEES)": IM("lumiere"),
+         "agente_premier_mot": A1[0] if A1 else None, "logo_visible_des_l_image (DOM #mot)": n_mot,
+         "debut_signature_s7": sc["s7-signature"]["image_debut"]}
+if PASSER:
+    lim = int(round(PASSER * FPS))
+    mot1 = next((w for w in D["mots"] if w["extrait"] == "A1" and w["rang"] == 0), None)
+    y_det |= {"decroche (DONNEES)": IM("decroche"), "image_du_bouton": lim,
+              "voix_premier_mot_s (DONNEES.mots)": mot1 and mot1["debut"], "extrait_A1_film_in_s": ex["A1"].get("film_in")}
+    ok_y = (encre_fin > 0.95 * max(c for _, c in accroche_diff) and IM("decroche") < lim and premier_solaire is not None
+            and premier_solaire < lim and bool(A1) and A1[0]["image_apparition"] is not None and A1[0]["image_apparition"] <= lim
+            and mot1 is not None and mot1["debut"] <= PASSER + 1e-6 and n_mot is not None and n_mot >= sc["s7-signature"]["image_debut"])
+    note(f"Y1 annonce désactivable : avant « Passer » ({PASSER:g} s), accroche entière, décroché et point solaire ; l'agente parle "
+         "au plus tard à l'image du bouton ; aucun logo avant la signature", ok_y, y_det)
+    # Y2 (28/09, revue YouTube : Y1 passait « au plus tard à l'image du bouton », 5,00 = 5,0) : le PRODUIT est dit avant le
+    # bouton, avec 0,2 s de marge : l'agente a commencé à parler ET le mot qui dit ce qu'on vend (« vocale », de « l'assistante
+    # vocale ») est fini avant passer_s − 0,2 s. Tenu seulement en avançant le décroché (minutage : décision de Florian) : tant que
+    # ce n'est pas le cas, Y2 est rapporté « À VALIDER » (ni ok, ni échec du film), avec les chiffres.
+    MARGE_Y = 0.2
+    prod = next((w for w in D["mots"] if w["extrait"] == "A1" and w["cle"] == "vocale"), None)
+    y2 = {"passer_s": PASSER, "limite_s": round(PASSER - MARGE_Y, 3), "premier_mot": mot1 and {k: mot1[k] for k in ("texte", "debut", "image")},
+          "mot_produit": prod and {k: prod[k] for k in ("texte", "debut", "fin", "image")},
+          "manque_s": None if not prod else round(max(0.0, prod["fin"] - (PASSER - MARGE_Y)), 3),
+          "pistes": ["coupe YouTube de s1 (≈ −2,4 s : une seule tonalité, décroché à 1,8 s ; film de 44,6 s)",
+                     "bumper de 6 s tiré de s7 en séquence d'annonces", "titre et bannière de l'annonce (Google Ads) qui disent le produit"]}
+    ok_y2 = bool(mot1 and prod and mot1["debut"] <= PASSER - MARGE_Y + 1e-6 and prod["fin"] <= PASSER - MARGE_Y + 1e-6)
+    if ok_y2:
+        note(f"Y2 le produit est dit avant « Passer » ({PASSER:g} s − {MARGE_Y:g} s)", True, y2)
+    else:
+        a_valider(f"Y2 le produit est dit avant « Passer » ({PASSER:g} s − {MARGE_Y:g} s) : NON, le minutage du 9:16 le place après "
+                  "(décision de Florian et de l'équipe son)", y2)
+else:
+    rapport.setdefault("informations", {})["Y1 (format sans bouton « Passer »)"] = y_det
+
 # ═════════════════════════════ A et S1. Audio ═════════════════════════════
 SR = 48000
 
@@ -774,7 +1004,8 @@ def db(x):
 
 I_, tp, lra = ebur(FILM)
 A = pcm(FILM)
-M = pcm(PROJET / "son" / "mix.wav")
+M = pcm(MIX)
+rapport["mix_de_reference"] = str(MIX)
 SN, SF = T("silence_numerique"), T("silence_final")
 z1 = A[int(round((SN[0] + 0.004) * SR)):int(round((SN[1] - 0.007) * SR))]
 z2 = A[int(round(SF[0] * SR)):int(round(SF[1] * SR))]
@@ -785,7 +1016,7 @@ best = max(((dec, float(A[4 * SR + dec:4 * SR + dec + len(seg_m), 0].astype(np.f
 n_ = min(len(A), len(M))
 residu = db(np.sqrt(np.mean((A[:n_] - M[:n_]).astype(np.float64) ** 2))) if best[0] == 0 else None
 ok_a = abs(I_ + 14) <= 0.5 and tp <= -1.0 and db(np.abs(z1).max()) < -90 and db(np.abs(z2).max()) < -90 and db(ton) > -40 and best[0] == 0
-note("A1 audio du MP4 (−14 ± 0,5 LUFS, ≤ −1 dBTP, zéros, tonalité, calage sur mix.wav)", ok_a,
+note(f"A1 audio du MP4 (−14 ± 0,5 LUFS, ≤ −1 dBTP, zéros, tonalité, calage sur {MIX.name})", ok_a,
      {"LUFS": I_, "crete_vraie_dBTP": tp, "LRA": lra, "plan.controles 6 (±0,3 ; ≤ −1,5)": abs(I_ + 14) <= 0.3 and tp <= -1.5,
       f"zeros_{SN[0] + 0.004:.2f}-{SN[1] - 0.007:.2f}": {"crete_dBFS": round(db(np.abs(z1).max()), 1), "part_zero_exact": round(float((z1 == 0).mean()), 4)},
       f"zeros_{SF[0]:.2f}-{SF[1]:.2f}": {"crete_dBFS": round(db(np.abs(z2).max()), 1), "part_zero_exact": round(float((z2 == 0).mean()), 4)},
@@ -868,6 +1099,23 @@ ok_s1 = all(v["ecart_ms"] is not None and abs(v["ecart_ms"]) <= 5 and (v.get("cu
             for v in mes.values())
 note("S1 synchro son et image (±5 ms, stems et MP4 ; cues posés aux instants de DONNEES)", ok_s1, mes)
 
+# A2 relit les mesures du chantier son de la bande son CONTRÔLÉE : son/mesures-son.json pour son/mix.wav (défaut) ; pour un
+# autre mix (--mix), ses mesures à lui (outils/mixer.py : « mesures » de la recette, ex. son/hybride/mesures-hybride.json).
+MES_MIX, MIX_DEFAUT = None, MIX.resolve() == (PROJET / "son" / "mix.wav").resolve()
+if not MIX_DEFAUT:
+    MES_MIX = next((c for c in sorted(MIX.parent.glob("mesures*.json"))
+                    if json.loads(c.read_text()).get("wav") in (str(MIX), str(MIX.resolve()))), None)
+if MES_MIX is not None:
+    MX = json.loads(MES_MIX.read_text())
+    mm, gv = MX.get("mesures", {}), MX.get("garde_voix", {})
+    det_mx = {"mesures": str(MES_MIX), "recette": MX.get("recette"), "mix": mm.get("mix"), "somme_stems_moins_mix": mm.get("somme_stems_moins_mix"),
+              "silences": mm.get("silences"), "arc": mm.get("arc"), "voix_marge_K_min_lu": gv.get("marge_K_min_lu"),
+              "voix_marge_K_mediane_lu": gv.get("marge_K_mediane_lu"), "empreinte": MX.get("empreinte")}
+    ok_mx = (mm.get("mix") is not None and abs(mm["mix"]["I"] + 14) <= 0.5 and mm["mix"]["TP"] <= -1.0
+             and all(x.get("zeros_exacts") for x in mm.get("silences", [])) and (gv.get("marge_K_min_lu") or 0) >= 10
+             and abs(mm.get("somme_stems_moins_mix") or 0) < 1e-6)
+    note(f"A2 son du mix fourni (relu dans {MES_MIX.name} : sonie, crête, silences exacts, voix ≥ 10 LU au-dessus du reste, stems = mix)",
+         ok_mx, det_mx)
 SON = json.loads((PROJET / "son" / "mesures-son.json").read_text())
 rapport["son_mesures_du_chantier_son"] = SON.get("synthese_ok")
 hp = SON["H_haut_parleur"]
@@ -894,7 +1142,12 @@ ok_son = (SON["F_voix_sur_reste_LU"]["min"] >= 10 and arc["signature_moins_media
 # Critère du ré : l'intention du plan (« le ré passe au-dessus de la voix », estimée à ≈ −11,5 LUFS à l'échelle v1) ; à
 # l'échelle v2 la voix culmine vers −10 LUFS instantanés : on exige que le ré soit l'instant le plus fort du film (sonie
 # instantanée) et que la fin passe au-dessus du pic du dialogue en sonie court terme (demande de la revue Florian).
-note("A2 son (plan.controles 6, relu dans son/mesures-son.json ; ré = instant le plus fort)", ok_son, detail_son)
+if MIX_DEFAUT:
+    note("A2 son (plan.controles 6, relu dans son/mesures-son.json ; ré = instant le plus fort)", ok_son, detail_son)
+else:
+    if MES_MIX is None:
+        note(f"A2 son du mix fourni : aucune mesure (mesures*.json dont « wav » = {MIX}) à côté du mix", False, str(MIX.parent))
+    rapport.setdefault("informations", {})["A2 du mix classique (son/mesures-son.json, pas la bande contrôlée)"] = {"ok": bool(ok_son)} | detail_son
 
 # ═════════════════════════════ L. Livraison ═════════════════════════════
 pr = json.loads(subprocess.run(["ffprobe", "-v", "error", "-count_frames", "-show_streams", "-show_format", "-of", "json", str(FILM)],

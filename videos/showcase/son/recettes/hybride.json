@@ -1,0 +1,288 @@
+{
+ "nom": "hybride",
+ "description": "Le meilleur des deux mondes (Florian, 27/09 soir) : la musique de la version 2 + tous les petits sons de la version 3 (ambiance, point, écriture, objets) + le dialogue recoupé dans le vrai blanc (« mon » relevé) + le fond de ligne + la signature. Pour la vidéo iPhone.",
+ "duree": 47.0,
+ "racine": "../stems-amont/iphone",
+ "pistes": [
+  {
+   "nom": "dialogue",
+   "fichier": "dialogue.wav",
+   "role": "voix",
+   "gain_db": 0.0,
+   "note": "le vrai appel, coupes dans le vrai blanc (son/dialogue.py), « mon » +4 dB, chaîne voix de mix.py"
+  },
+  {
+   "nom": "ligne",
+   "fichier": "ligne.wav",
+   "gain_db": 0.0,
+   "note": "fond de ligne tiré du vrai appel (outils/fond_ligne.py), à l'échelle du dialogue : fond continu du décroché au raccroché + bruit de confort de l'appelant (il prend le relais quand sa porte VAD se ferme, puis décroît) ; réglages appliqués : rapport → amont.ligne (stems-amont.json, seule source)"
+  },
+  {
+   "nom": "musique",
+   "fichier": "musique.wav",
+   "gain_db": 0.0,
+   "note": "la musique de la version 2 (riche-musique), ducking et rattrapages refaits sur le nouveau dialogue ; au décroché, la quinte de la sonnerie sort en rampe au lieu d'être coupée (rapport → amont.musique.relache_quinte : la coupe de 40 ms creusait 30-300 Hz de −27 dB) ; remplace la nappe de verre (et donc le halo du 3, qui n'existe que pour elle)"
+  },
+  {
+   "nom": "sfx",
+   "fichier": "sfx.wav",
+   "gain_db": 0.0,
+   "muets": [
+    [
+     41.45,
+     42.25
+    ]
+   ],
+   "fondu_muet": 0.0,
+   "note": "tonalité, souffle de sonnerie, clic, touchers, vibreur, raccroché ; UN son par geste : sur « Vokıo » le stem sfx amont porte le stylo du master (bruit 3-8 kHz, crête −31,3 dBFS entre 41,45 et 42,25) : le muet l'enlève, la plume (ecriture) le remplace, comme dans le 3"
+  },
+  {
+   "nom": "signature",
+   "fichier": "signature.wav",
+   "gain_db": 0.0,
+   "note": "tonalité 2 → la ligne qui s'ouvre, cloches sol et la · sol, signature la · sol · ré"
+  },
+  {
+   "nom": "ambiance",
+   "fichier": "ambiance.wav",
+   "gain_db": 0.0,
+   "note": "la pièce (3) : fond d'air très bas, oiseau dans le blanc des tonalités et sur la lecture du SMS ; porte les silences"
+  },
+  {
+   "nom": "point",
+   "fichier": "point.wav",
+   "gain_db": 0.0,
+   "note": "le point (3) : naissance, éveil, air des trajets (trajectoire iPhone), envols, et l'assise sur le ı (42,933) : la goutte de la naissance passée au passe-haut 250 Hz (elle vit au-dessus de 4 kHz, −35,8 dBFS en 8-16 kHz) ; elle ne double ni le ré de la signature ni la grosse caisse ré2, qui sont sous 1 kHz : rendue le 28/09 (la rime naissance 0,83 → pose 42,93)"
+  },
+  {
+   "nom": "ecriture",
+   "fichier": "ecriture.wav",
+   "gain_db": 0.0,
+   "note": "la plume (3) : le rendez-vous et « Vokıo » (encre lue dans la vidéo iPhone) ; sur « Vokıo », voir garde_reperes"
+  },
+  {
+   "nom": "objets",
+   "fichier": "objets.wav",
+   "gain_db": 0.0,
+   "note": "les objets (3) : papier de l'agenda, tamis des « euh », téléphone qui monte et sort, vibreur sur bois"
+  }
+ ],
+ "garde_reperes": {
+  "cues": "../riche-design/cues-design.json",
+  "reference": "../riche-design/stems",
+  "cibles": [
+   "musique",
+   "ligne"
+  ],
+  "bande": [
+   3500,
+   16000
+  ],
+  "cible_db": 6.0,
+  "f_max": 8000,
+  "plancher_db": -10.0,
+  "hausse_max_db": 6.0,
+  "poids_hausse": 1.25,
+  "avance": 0.03,
+  "relache": 0.15,
+  "ignorer": [
+   "fond-piece",
+   "air-trajets",
+   "nappe-s-elargit",
+   "souffle-accorde"
+  ],
+  "par_repere": {
+   "telephone-sort": {
+    "bande": [
+     150,
+     1000
+    ],
+    "cibles": [
+     "musique"
+    ],
+    "plancher_db": -3.0,
+    "hausse_max_db": 12.0,
+    "note": "le glissé du téléphone vit en 150-1 000 Hz, sous le corps de la musique (cordes, marimba, harpe de la levée vers le logo, 14 dB au-dessus) : pas de creux dans les aigus (il n'y a rien), un creux de 3 dB au plus dans son corps et le glissé qui monte (jusqu'à +12 dB) : il émerge comme dans le 3 sans casser la levée"
+   },
+   "tamis": {
+    "cible_db": 8.4,
+    "note": "le tamis (« euh » qui s'effacent, 13,95-14,5) tombe sur le relais du bruit de confort de l'appelant (14,03), qui en couvre la queue dans 4-8 kHz ; son seul concurrent est cette ligne, que nous avons ajoutée : on lui rend l'émergence qu'il avait dans le 3 (+8,4 dB), la ligne se creuse dessous (le tamis la masque)"
+   }
+  },
+  "note": "revue du 28/09 : la musique du 2 est 15 à 40 dB au-dessus du lit du 3 entre 1 et 16 kHz ; sans garde, la plume de « Vokıo », sa pose, le papier de l'agenda qui sort et le téléphone qui sort étaient enterrés (outils/ausculter.py reperes). Chaque petit son doit émerger, dans sa meilleure bande jusqu'à 8 kHz, d'au moins min(6 dB, ce qu'il émergeait dans le 3) ; la musique (et la ligne) ne se creusent que dans 3,5-16 kHz (le shaker, le haut de la harpe), le temps du geste, du strict nécessaire ; le crescendo (sous 3,5 kHz) n'est pas touché"
+ },
+ "garde_voix": {
+  "voix": "dialogue",
+  "mots": "../../donnees/mots.json",
+  "marge_lu": 10.0,
+  "marge_bande_db": 10.0,
+  "bande": [
+   1000,
+   4000
+  ],
+  "cibles": [
+   "musique",
+   "ambiance",
+   "point",
+   "ecriture",
+   "objets",
+   "ligne"
+  ],
+  "plancher_db": -12.0,
+  "perte_max_db": 1.0,
+  "rampe": 0.03,
+  "actif_db": 10.0,
+  "note": "actif_db : la marge se mesure sur le cœur voisé de chaque mot (trames à moins de 10 dB de son maximum). La fenêtre de « des » (16,06-16,19) enjambe deux micro-fermetures de la porte de l'appelant (16,04 et 16,15), où le bruit de confort de la ligne remplace le vrai fond : mesurées sur toute la fenêtre, elles creusaient la musique de 3,2 dB sur « des » (pompage) ; à 10 dB, aucune baisse, « des » garde 10,4 dB dans 1-4 kHz"
+ },
+ "silences": [
+  [
+   35.9467,
+   36.666667
+  ],
+  [
+   46.7,
+   47.0
+  ]
+ ],
+ "master": {
+  "lufs": -14.0,
+  "plafond_dbtp": -1.7
+ },
+ "sorties": {
+  "wav": "../hybride/mix-hybride.wav",
+  "stems": "../hybride/stems",
+  "mesures": "../hybride/mesures-hybride.json",
+  "planches": "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride/planches",
+  "copies": [
+   "/root/vokio-uploads/videos/showcase/point-solaire-bande-son-hybride.wav"
+  ]
+ },
+ "mesures": {
+  "references": {
+   "1 classique": "/root/vokio-uploads/videos/showcase/point-solaire-bande-son-finition.wav",
+   "2 musique": "/root/vokio-uploads/videos/showcase/point-solaire-bande-son-musique.wav",
+   "3 design": "/root/vokio-uploads/videos/showcase/point-solaire-bande-son-design.wav"
+  },
+  "dialogue": "../dialogue.json",
+  "evenements": "/opt/vokio-ads/videos/showcase-iphone/donnees/evenements.json",
+  "mots_json": "../../donnees/mots.json",
+  "mots": [
+   "C1:0",
+   "C1:1"
+  ],
+  "sautes": [
+   [
+    0,
+    15
+   ],
+   [
+    0,
+    36
+   ]
+  ],
+  "differentiel": {
+   "avec": [
+    "1 classique",
+    "2 musique"
+   ],
+   "sans": "3 design",
+   "fenetres": [
+    [
+     0,
+     15
+    ],
+    [
+     15,
+     47
+    ]
+   ],
+   "seuil": 10.0
+  },
+  "seuil_saute": 10.0,
+  "arc": {
+   "apres": 42.3,
+   "marge_lu": 1.0
+  },
+  "zooms": [
+   [
+    0,
+    15,
+    110
+   ],
+   [
+    3.8,
+    5.4,
+    700
+   ],
+   [
+    9.8,
+    10.8,
+    700
+   ],
+   [
+    13.7,
+    14.9,
+    700
+   ],
+   [
+    33.3,
+    37.4,
+    260
+   ],
+   [
+    40.5,
+    47,
+    160
+   ]
+  ],
+  "contre": [
+   {
+    "sans": [
+     "3 design"
+    ],
+    "fenetres": [
+     [
+      0,
+      15
+     ]
+    ],
+    "seuil": 10.0,
+    "voulus": [
+     [
+      0.0,
+      3.95,
+      "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+     ],
+     [
+      12.2,
+      12.26,
+      "la basse entre sur mi (temps 16 de la grille, musique du 2)"
+     ]
+    ],
+    "note": "Florian, (a) : les sautes du début étaient dans 1 et 2, pas dans 3 ; l'hybride ne doit rien avoir sur 0-15 s que le 3 n'a pas, hors sons composés exprès"
+   },
+   {
+    "sans": [
+     "2 musique",
+     "3 design"
+    ],
+    "fenetres": [
+     [
+      0,
+      47
+     ]
+    ],
+    "seuil": 10.0,
+    "note": "rien de ce qu'a l'hybride ne doit manquer À LA FOIS au 2 et au 3 (une marche créée par le montage)",
+    "voulus": [
+     [
+      26.08,
+      26.16,
+      "la plume se lève à la fin du rendez-vous (relâche de 12 ms voulue dans riche-design ; le halo du 3 la couvrait)"
+     ]
+    ]
+   }
+  ],
+  "reperes": {}
+ }
+}

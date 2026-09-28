@@ -7,13 +7,13 @@
   « L'agente parle fort, et le point la suit. » (plan v2, chantier compositions/s2-voix.html)
 
   DEUX éléments, jamais plus : le sous-titre d'Élise et le point.
-    · Le sous-titre : Geist 400 72/84, encre, x 90, lignes de base 874 / 958 / 1042 (874 = la ligne de base de
-      « mains prises. » : le retour chariot du point est littéral). top = 874 − 67 = 807, décalage de ligne de
-      base mesuré dans le chrome-headless-shell de HyperFrames (vérifié au pixel sur les captures : dernière
-      rangée d'encre des lettres sans jambage à 873 / 957 / 1041). Trois pages, lues dans DONNEES.pages :
+    · Le sous-titre : Geist 400 72/84, encre, lignes de base = celles de DONNEES.geometrie.s2_texte (la première est
+      celle de « mains prises. » : le retour chariot du point est littéral). 9:16 : x 90, lignes de base 874 / 958 /
+      1042, top = 874 − 67 = 807, décalage de ligne de base mesuré dans le chrome-headless-shell de HyperFrames (vérifié
+      au pixel sur les captures : dernière rangée d'encre des lettres sans jambage à 873 / 957 / 1041). Trois pages, lues dans DONNEES.pages :
       « Bonjour, je suis Élise, » · « l’assistante vocale | de la Clinique vétérinaire | du Port. » ·
       « Comment puis-je | vous aider ? ». Chaque mot monte de sa ligne de base à son attaque mesurée
-      (TEXTE.reveler par défaut : 16 px, 0,26 s, power3.out, une image d'avance). Sorties par le masque de
+      (TEXTE.reveler : 16 px à 72 px de corps, 0,26 s, power3.out, une image d'avance). Sorties par le masque de
       ligne, vers le bas, power3.in, aux instants de DONNEES.pages[].sortie (finition du 27/09) : pages 1 et 2
       dès que la voix de leur dernier mot s'est tue, en 0,15 s ; page 3 de 10,10 à 10,30 ; mots mis à opacité 0
       une fois sortis. Rien avant 4,9667 (image 149).
@@ -25,8 +25,23 @@
       sortie, descend d'abord à chaque changement de ligne, puis rejoint la place d'écoute de s3.
   Le filet SVG de la v1 (ligne, onde, rembobinage) est supprimé : il se lisait comme une barre de lecture.
 
+  FORMATS (28/09) : aucune mise en page dans ce fichier. Elle vient de mise-en-page/texte.json (styles.s2_texte,
+  largeur_max_s2, x_max_point, une entrée par format), recopiée par outils/construire.py dans DONNEES.geometrie.s2_texte
+  {x, top, corps, interligne, lignes_de_base, x_max} ; les pages (coupes, encre, instants) sont dans DONNEES.pages, les
+  zones sûres dans DONNEES.format. Le CSS ci-dessous garde les valeurs du 9:16 (lignes « repli 9:16 ») : le script pose
+  x, top, corps et interligne d'après le contrat, puis vérifie le style calculé. Le minutage est le même partout.
+  16:9 (YouTube) : x 144 (colonne de lecture 144 → 1064), lignes de base 540 / 624 / 708 (la ligne de lecture du
+  paysage, 540, est aussi celle de l'accroche et de tous les sous-titres), top 473, le disque ne passe pas x 1064 ;
+  mesuré le 28/09 (outils/fiche_format.py, donnees/point-resolu.json) : encre des pages jusqu'à 953,6, le point reste
+  dans x 414 → 1016, y 496 → 708, loin des zones interdites, 48 px avant x_max. La montée des
+  mots (16 px à 72 px de corps, 0,222 em) suit le corps. Gardes du format (section 3) : aucune encre ni aucun disque
+  dans une zone « interdite » de DONNEES.format, encre entre les marges latérales.
+  Revoir la scène : python3 outils/revue_scene.py planche formats/16x9 s2-voix --vues 852,393 ; 9:16 inchangé :
+  python3 outils/revue_scene.py identite <copie 9:16> s2-voix git:aa4dd24 --toutes, et … mp4 <copie 9:16> s2-voix
+  /root/vokio-uploads/videos/showcase/le-point-sur-le-i-iphone.mp4 --toutes.
+
   CE CSS DOIT RESTER IDENTIQUE AU CONTRAT DONNEES.geometrie.s2_texte : outils/navigateur.py pose les mêmes
-  pages avec lui pour calculer les cibles du suiveur (bord droit d'encre + 14 + 22 ; ligne de base − 22).
+  pages avec lui pour calculer les cibles du suiveur (bord droit d'encre + 18 + 22 ; ligne de base − 22).
   Le script le vérifie (style calculé) et lève une erreur au moindre écart.
 
   EMPILEMENT : le sous-titre reste au-dessus du point (z-index 101 > 100), une garde : depuis la finition, le point ne
@@ -37,9 +52,9 @@
 <style>
 @font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}
 #root{position:absolute;inset:0;overflow:hidden;color:#262019;font-family:"Geist",sans-serif}
-#s2-texte{position:absolute;left:0;top:0;width:1080px;height:1920px;z-index:101}
-.s2-page{position:absolute;left:90px;top:807px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
-         font-size:72px;line-height:84px;letter-spacing:0;color:#262019;white-space:nowrap}
+#s2-texte{position:absolute;inset:0;z-index:101}
+.s2-page{position:absolute;left:90px;top:807px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
+         font-size:72px;line-height:84px;letter-spacing:0;color:#262019;white-space:nowrap} /* repli 9:16 : corps et interligne réécrits d'après DONNEES.geometrie */
 </style>
 <div id="root" data-composition-id="s2-voix" data-width="1080" data-height="1920">
   <div id="s2-texte" data-element="sous-titre">
@@ -63,10 +78,11 @@
   const G = D.geometrie.s2_texte;
   const RAYON = D.point.diametre_disque / 2;                   // 22 : le disque de 44 px
   const ECART = 18;                                            // encre → bord du disque (arbitrage 4 : ≥ 18 px)
-  const X_MAX = 1010;                                          // marge droite (règle 5, colonne des boutons)
+  const X_MAX = G.x_max != null ? G.x_max : 1010;             // bord droit du disque (repli 9:16 : 1010, règle 5 ; 16:9 : fin de la colonne de lecture)
   exiger(G.top === G.lignes_de_base[0] - G.decalage_ligne_de_base, "top " + G.top + " ≠ ligne de base − décalage");
   document.querySelectorAll(".s2-page").forEach(function (p) {
     p.style.top = G.top + "px"; p.style.left = G.x + "px";
+    p.style.fontSize = G.corps + "px"; p.style.lineHeight = G.interligne + "px";
     const cs = getComputedStyle(p);
     exiger(cs.fontSize === G.corps + "px" && cs.lineHeight === G.interligne + "px" && cs.fontWeight === String(G.graisse) &&
            cs.fontStyle === G.style && cs.whiteSpace === "nowrap" && (cs.letterSpacing === "0px" || cs.letterSpacing === "normal") &&
@@ -81,7 +97,7 @@
     exiger(p.style === "s2_texte" && p.top === G.top, "page " + (i + 1) + " : style ou top hors contrat");
     p.lignes_de_base.forEach(function (b, k) { exiger(Math.abs(b - G.lignes_de_base[k]) < 0.5, "page " + (i + 1) + " : ligne de base " + b); });
     p.largeurs.forEach(function (l) { exiger(l.largeur <= G.largeur_max + 1e-6, "ligne de " + l.largeur.toFixed(1) + " px > " + G.largeur_max); });
-    // le point, posé 14 px après l'encre du mot, doit rester dans la marge droite
+    // le point, posé ECART px après l'encre du mot, doit rester avant X_MAX
     p.mots.forEach(function (m) {
       exiger(m.encre_x1 + ECART + 2 * RAYON <= X_MAX, "« " + m.texte + " » : le point sortirait de la marge (" + (m.encre_x1 + ECART + 2 * RAYON).toFixed(1) + " px)");
     });
@@ -89,7 +105,8 @@
   const poses = pages.map(function (p, i) {
     return TEXTE.poser("#s2-page-" + (i + 1), p.lignes, { extrait: p.extrait, depuis: p.depuis, chevauchement: true });
   });
-  poses.forEach(function (p) { TEXTE.reveler(tl, p, { scene: sc.id }); });      // 16 px, 0,26 s, power3.out, une image d'avance
+  const DY = 16 * G.corps / 72;                                // 16 px à 72 px de corps (0,222 em), le défaut de TEXTE.reveler
+  poses.forEach(function (p) { TEXTE.reveler(tl, p, { scene: sc.id, dy: DY }); });   // 0,26 s, power3.out, une image d'avance
 
   // ── 2. Sorties par le masque vers le bas, power3.in, aux instants de DONNEES.pages[].sortie ──
   // Pages 1 et 2 : dès que la voix du dernier mot s'est tue, 0,15 s (le point change de page quand elle est sortie) ;
@@ -110,12 +127,34 @@
   // le tween du premier mot part une image avant son attaque, à opacité 0 : la première image visible est celle de l'attaque
   exiger(TEXTE.image(debutPage[0] - UNE) >= 149, "rien ne doit paraître avant 4,9667 (image 149)");
 
-  // ── 3. Le point de la racine reste dans le cadre utile pendant toute la scène (lecture seule) ──
-  // (absent du banc de mesure de navigateur.py, qui pose les pages sans lib/point.js)
+  // ── 3. Gardes du cadre (lecture seule : rien ne change à l'image, une erreur au moindre écart) ──
+  // a) le disque ne passe pas X_MAX ; b) FORMATS : ni encre au repos ni disque dans une zone « interdite » de
+  // DONNEES.format (9:16 : interface Reels sous 1500 ; 16:9 : 10 % du bas, bouton « Passer l'annonce »), et l'encre
+  // reste entre les marges latérales. Sans DONNEES.format (données d'avant les formats), b est sauté. Le point est
+  // absent du banc de mesure de navigateur.py, qui pose les pages sans lib/point.js.
+  const F = D.format;
+  const INTERDITES = F ? F.zones.filter(function (z) { return z.sorte === "interdite"; }) : [];
+  function heurte(b) {
+    return INTERDITES.filter(function (z) { const q = z.boite; return b[0] < q[2] && b[2] > q[0] && b[1] < q[3] && b[3] > q[1]; });
+  }
+  if (F) {
+    pages.forEach(function (p, i) {
+      p.mots.forEach(function (m) {
+        const b = [m.encre_x0, m.ligne_de_base - m.encre_haut, m.encre_x1, m.ligne_de_base + m.encre_bas];
+        exiger(b[0] >= F.marge_laterale - 0.5 && b[2] <= F.largeur - F.marge_laterale + 0.5,
+               "« " + m.texte + " » (page " + (i + 1) + ") hors des marges de " + F.marge_laterale + " px : [" + b.join(", ") + "]");
+        const z = heurte(b);
+        exiger(!z.length, "« " + m.texte + " » (page " + (i + 1) + ") dans la zone interdite « " + (z.length ? z[0].nom : "") + " »");
+      });
+    });
+  }
   if (window.POINT) {
     for (let n = D.scenes[sc.id].image_debut; n < D.scenes[sc.id].image_fin; n++) {
       const e = POINT.etat(n / FPS);
       exiger(e.x + e.d / 2 * Math.max(1, e.sx) <= X_MAX + 0.5, "le point dépasse x = " + X_MAX + " à l'image " + n);
+      const r = e.d / 2 * Math.max(1, e.sx || 1, e.sy || 1);
+      const z = e.d > 0 ? heurte([e.x - r, e.y - r, e.x + r, e.y + r]) : [];
+      exiger(!z.length, "le point entre dans la zone interdite « " + (z.length ? z[0].nom : "") + " » à l'image " + n);
     }
   }
 

@@ -32,6 +32,15 @@
   RACCORD s4 → s5 (755 → 756) : même objet que #s4-agenda (boîte 1575 × 790 sur fond papier opaque) : mêmes pixels.
   RACCORD s5 → s6 (940 → 941) : sous-titre sorti depuis 31,10, agenda presque effacé (opacité 0,05) ; le point est en
   route de la gouttière vers la fin de « recevrez » (DONNEES.point.trajets[1]).
+  FORMATS (système de outils/format.py, 27-28/09) : la scène ne connaît AUCUN px de mise en page ; les px cités plus haut
+  sont ceux du 9:16, la référence, et restent en CSS comme repli (« repli 9:16 »). Tout est lu dans DONNEES :
+  geometrie.agenda (objet, mention, sortie : mise-en-page/agenda.json), geometrie.sous_titres_haut (sous-titres :
+  mise-en-page/texte.json), geometrie.cadre et format (bas utile, haut utile, zones). 16:9 (YouTube) : sous-titres en
+  x 144, lignes de base 540 / 624 ; agenda en (1064 ; 234), 856 px visibles, la mention AU-DESSUS (Geist 40/52, lignes
+  de base 150 / 202) ; bloc « 09:00 Florian » écrit de 1360,5 à 1734 ; gouttière du point en x 1305,74 sur 09:00
+  (305,75) ; sortie 0 → −270 ; même minutage, mêmes événements. Contrôles propres au format, ici : la mention au repos
+  reste sous le haut utile et au-dessus du bas utile, le bloc (l'information) ne touche aucune zone « interdite », aucun
+  sous-titre ne heurte l'objet agenda au repos. Vérifier une retouche : python3 outils/verifier_scene.py s5-rendez-vous.
 -->
 <template id="s5-rendez-vous-template">
 <style>
@@ -41,19 +50,20 @@
    Mêmes valeurs que #s4-agenda (ne pas les changer seules) : fond papier opaque (#F4F1E8 = #fond de la racine,
    invisible), même rendu d'anticrénelage de la mention qu'à la dernière image de s4. Aucune transformation CSS ici :
    la translation et le filé de la sortie sont écrits par la fonction du temps. */
-#s5-agenda{position:absolute;left:70px;top:590px;width:1575px;height:790px;background:#F4F1E8}
+#s5-agenda{position:absolute;left:70px;top:590px;width:1575px;height:790px;background:#F4F1E8} /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
+/* Capture et calque : leur taille propre, 1 px = 1 px dans tous les formats (réécrite par le script d'après DONNEES.agenda.image). */
 #s5-capture{position:absolute;left:0;top:0;width:1575px;height:675px;display:block}
 /* Le calque du bloc, posé exactement sur la capture. Au départ entièrement rogné par la droite : la fonction du
    temps le déroule image par image (clip-path, et une rampe mask-image seulement pendant le jet). */
 #s5-bloc{position:absolute;left:0;top:0;width:1575px;height:675px;display:block;clip-path:inset(0 100% 0 0)}
 /* La mention : Geist 400 36/48, gris texte #6F695F (4,9:1 sur le papier : AA). Ligne de base 36 px sous le haut de la
    ligne (mesuré) : top 1277 → 1313 / 1361, bas 1373 < 1500. Dans l'objet : left 90 − 70 = 20, top 687. */
-#s5-mention{position:absolute;left:20px;top:687px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+#s5-mention{position:absolute;left:20px;top:687px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
             font-size:36px;line-height:48px;letter-spacing:0;color:#6F695F;white-space:nowrap}
 /* ── Le sous-titre : trois pages superposées, une seule visible à la fois ──
    Agente Geist 72/84 (ligne de base 67 px sous le haut, mesuré) : top 263 → 330 / 414. */
-#s5-texte{position:absolute;left:0;top:0;width:1080px;height:600px}
-.s5-agente{position:absolute;left:90px;top:263px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+#s5-texte{position:absolute;left:0;top:0;width:1080px;height:600px} /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
+.s5-agente{position:absolute;left:90px;top:263px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
            font-size:72px;line-height:84px;letter-spacing:0;color:#262019;white-space:nowrap}
 </style>
 <div id="root" data-composition-id="s5-rendez-vous" data-width="1080" data-height="1920">
@@ -91,9 +101,11 @@
 
   // ── Réglages de la scène (plan v2) ──
   const SORTIES = [[27.64, 0.16], [29.20, 0.15], [30.92, 0.18]];   // [début s film, durée s] des trois pages
-  const Y_SORTIE = 270;                         // montée de sortie de l'agenda (finition : 0 → −270, ≤ 90 px par image)
-  const HAUT_MIN = 520;                         // le haut de l'agenda reste sous cette ligne tant qu'un sous-titre vit
-  const T_HAUT_MIN = 31.11;                     // … jusqu'à cet instant (plan)
+  // FORMATS (27/09) : lus dans DONNEES.geometrie.agenda (9:16 : 270, 520, 31,11 : les valeurs d'origine)
+  const GAG = D.geometrie.agenda;
+  const Y_SORTIE = GAG.y_sortie != null ? GAG.y_sortie : 270;      // montée de sortie de l'agenda (0 → −270, ≤ 90 px par image)
+  const HAUT_MIN = GAG.haut_min != null ? GAG.haut_min : 520;      // le haut de l'agenda reste sous cette ligne tant qu'un sous-titre vit
+  const T_HAUT_MIN = GAG.t_haut_min != null ? GAG.t_haut_min : 31.11;   // … jusqu'à cet instant (plan)
   const L_RAMPE = 40;                           // px : bord d'encre doux du jet du bloc (783 → 789)
   const PAS_MAX = 95;                           // px par image, pour tout ce qui bouge dans la scène
 
@@ -113,21 +125,30 @@
            "attributs width / height de #" + im.id + " ≠ DONNEES.agenda.image");
   });
   elMention.style.left = GM.left_dans_l_objet + "px"; elMention.style.top = GM.top_dans_l_objet + "px";
+  // FORMATS : boîte de l'objet, corps de la mention et bas utile lus dans DONNEES.geometrie (9:16 : 1575 × 790, 36/48, 1500)
+  const CADRE = D.geometrie.cadre || { bas_utile: 1500 };   // repli 9:16 (données d'avant les formats)
+  const M_CORPS = GM.corps || 36, M_INTER = GM.interligne || 48;
+  if (GA.boite) { boite.style.width = GA.boite.largeur + "px"; boite.style.height = GA.boite.hauteur + "px"; }
+  elMention.style.fontSize = M_CORPS + "px"; elMention.style.lineHeight = M_INTER + "px";
   exiger(Math.abs(IM.x + GM.left_dans_l_objet - A.mention.x) < 0.01 &&
          Math.abs(IM.y + GM.top_dans_l_objet + GM.decalage_ligne_de_base - A.mention.lignes_de_base[0]) < 0.01,
-         "la mention n'est pas en (x 90 ; ligne de base " + A.mention.lignes_de_base[0] + ")");
+         "la mention n'est pas en (x " + A.mention.x + " ; ligne de base " + A.mention.lignes_de_base[0] + ")");
   const mention = TEXTE.poser(elMention, A.mention.lignes, { extrait: null });
-  exiger(mention.lignes.length === 2 && A.mention.lignes_de_base[1] - A.mention.lignes_de_base[0] === 48,
-         "la mention doit tenir sur 2 lignes de 48 px");
+  exiger(mention.lignes.length === 2 && A.mention.lignes_de_base[1] - A.mention.lignes_de_base[0] === M_INTER,
+         "la mention doit tenir sur 2 lignes de " + M_INTER + " px");
   exiger(A.mention.lignes[0] === "Capture réelle de app.vokio.fr" && A.mention.lignes[1] === "Établissement fictif de démonstration.",
          "mention inattendue (option A : « Capture réelle de app.vokio.fr » / « Établissement fictif de démonstration. »)");
   const HAUTEUR_BOITE = parseFloat(getComputedStyle(boite).height);          // 790
-  const basMention = IM.y + GM.top_dans_l_objet + 2 * 48;                    // 1373
-  exiger(basMention < 1500, "la mention descend sous y = 1500 (" + basMention + ")");
-  exiger(basMention <= IM.y + HAUTEUR_BOITE, "la mention sort de l'objet agenda");
+  const basMention = IM.y + GM.top_dans_l_objet + 2 * M_INTER;               // 9:16 : 1373
+  exiger(basMention < CADRE.bas_utile, "la mention descend sous y = " + CADRE.bas_utile + " (" + basMention + ")");
+  if (GM.top_dans_l_objet >= 0) exiger(basMention <= IM.y + HAUTEUR_BOITE, "la mention sort de l'objet agenda");
+  else exiger(basMention <= IM.y, "la mention (au-dessus) mord sur l'image de l'agenda");
+  // FORMATS : la mention au repos reste sous le haut utile du format (9:16 : 0 ; 16:9 : 72, titre et icônes de YouTube)
+  const hautMention = IM.y + GM.top_dans_l_objet;                            // 9:16 : 1277 ; 16:9 : 110
+  exiger(hautMention >= (CADRE.haut_utile || 0), "la mention monte au-dessus du haut utile (" + hautMention + " < " + CADRE.haut_utile + ")");
   const cm = getComputedStyle(elMention);
-  exiger(cm.fontSize === "36px" && cm.lineHeight === "48px" && cm.color === "rgb(111, 105, 95)",
-         "le CSS de la mention s'écarte de DONNEES.agenda.mention (Geist 36/48 #6F695F)");
+  exiger(cm.fontSize === M_CORPS + "px" && cm.lineHeight === M_INTER + "px" && cm.color === "rgb(111, 105, 95)",
+         "le CSS de la mention s'écarte de DONNEES.agenda.mention (Geist " + M_CORPS + "/" + M_INTER + " #6F695F)");
 
   // ── 1. Le bord révélé du bloc : fonction pure du temps film, lue sur le point ──
   const DROITE = IM.x + IM.largeur;                                           // 1637 : bord droit de l'image (hors cadre)
@@ -176,6 +197,15 @@
   exiger(Math.abs(POINT.etat(EV.plume_pose.t).x_sans - RAYON - B.x0) < 0.01, "la plume ne se pose pas bord contre bord au début du bloc");
   exiger(POINT.etat(T0).x_sans - RAYON >= B.x0 - EPS, "à l'image 762, le bord arrière du point sort du bloc par la gauche");
   exiger(B.florian_encre.x1 <= bord(T1) - RAYON + EPS, "« Florian » n'est pas entièrement écrit quand la plume s'arrête");
+  // FORMATS : le bloc porte l'information de la scène : aucune zone « interdite » du format ne le touche (16:9 : les 10 %
+  // du bas et le bouton « Passer l'annonce » ; la grille VIDE de l'agenda peut, elle, passer dessous).
+  function recoupe(b, z) { return b[0] < z[2] && z[0] < b[2] && b[1] < z[3] && z[1] < b[3]; }
+  const INTERDITES = ((D.format && D.format.zones) || []).filter(function (z) { return z.sorte === "interdite"; });
+  const boiteBloc = [B.x0, B.y0, Math.min(B.x1_reel, IM.droite_visible), B.y1];   // 16:9 : [1338,5 ; 303,5 ; 1920 ; 384,5]
+  exiger(boiteBloc.every(isFinite), "boîte du bloc incomplète dans DONNEES.agenda.bloc (x0, y0, x1_reel, y1)");
+  INTERDITES.forEach(function (z) {
+    exiger(!recoupe(boiteBloc, z.boite), "le bloc « 09:00 Florian » tombe dans la zone interdite « " + z.nom + " »");
+  });
   // Image par image : rien avant 762, monotone de 762 à 787 (bord ET partie pleine), jamais au-delà de l'image, entier dès 787.
   (function () {
     let bPrec = -Infinity, pPrec = -Infinity;
@@ -193,7 +223,15 @@
 
   // ── 2. Les sous-titres : géométrie du contrat, pages de DONNEES.pages ──
   const H = D.geometrie.sous_titres_haut;
-  document.querySelectorAll(".s5-agente").forEach(function (p) { p.style.top = H.agente.top + "px"; p.style.left = H.agente.x + "px"; });
+  if (H.conteneur) {                          // FORMATS : boîte des sous-titres (9:16 : 1080 × 600, exactement ; 16:9 : le cadre)
+    const bt = document.getElementById("s5-texte");
+    bt.style.width = H.conteneur.largeur + "px"; bt.style.height = H.conteneur.hauteur + "px";
+  }
+  document.querySelectorAll(".s5-agente").forEach(function (p) {
+    p.style.top = H.agente.top + "px"; p.style.left = H.agente.x + "px";
+    // FORMATS : corps et interligne du contrat (9:16 et 16:9 : 72/84, ceux du CSS) ; le contrôle ci-dessous garde le reste
+    p.style.fontSize = H.agente.corps + "px"; p.style.lineHeight = H.agente.interligne + "px";
+  });
   (function () {
     const cs = getComputedStyle(document.getElementById("s5-p1"));
     exiger(cs.fontSize === H.agente.corps + "px" && cs.lineHeight === H.agente.interligne + "px" &&
@@ -212,6 +250,21 @@
     }), "les unités posées de la page " + (i + 1) + " ne correspondent plus à DONNEES.pages (relancer outils/construire.py)");
     return pose;
   });
+  // FORMATS : aucun sous-titre ne heurte l'objet agenda au repos (9:16 : l'objet est dessous ; 16:9 : à droite). Encre de
+  // la page lue dans DONNEES.pages (mesurée par construire.py) ; mention comptée jusqu'au bord visible (majorant sûr).
+  (function () {
+    const objet = [[IM.x, IM.y, Math.min(DROITE, IM.droite_visible), IM.y + IM.hauteur],
+                   [A.mention.x, hautMention, IM.droite_visible, hautMention + 2 * M_INTER]];
+    pages.forEach(function (p, i) {
+      const haut = Math.max.apply(null, p.mots.map(function (u) { return u.encre_haut; }));
+      const bas = Math.max.apply(null, p.mots.map(function (u) { return u.encre_bas; }));
+      const b = [Math.min.apply(null, p.largeurs.map(function (l) { return l.encre_x0; })), p.lignes_de_base[0] - haut,
+                 Math.max.apply(null, p.largeurs.map(function (l) { return l.encre_x1; })),
+                 p.lignes_de_base[p.lignes_de_base.length - 1] + bas];
+      exiger(b.every(isFinite), "encre de la page " + (i + 1) + " absente de DONNEES.pages (largeurs, encre_haut, encre_bas)");
+      objet.forEach(function (o) { exiger(!recoupe(b, o), "la page " + (i + 1) + " heurte l'objet agenda au repos"); });
+    });
+  })();
   const REVELE = 0.26;
   function premiereVisible(pose) { return r6(TEXTE.aImage(pose.mots[0].t)); }            // 1re image où la page se voit
   function posee(pose) { return r6(TEXTE.aImage(pose.mots[pose.mots.length - 1].t) - UNE + REVELE); }   // page entière

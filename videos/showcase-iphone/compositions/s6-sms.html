@@ -22,6 +22,11 @@
   et mention, hors de la découpe, en fondu dès que le disque couvre la boîte du texte (aucune lettre coupée) ; 41,00 → 41,40 il
   monte de 300 px (power3.in), opaque jusqu'à 1234 puis effacé en sine.inOut ; le point part avec lui (clé 30, arc sous la bulle).
   Une seule fonction du temps (proxy, ease none, jamais tl.call). Raccord s5 → s6 inchangé ; s6 → s7 : il ne reste que le point.
+  FORMATS (27-28/09) : les cotes ci-dessus sont celles du 9:16. Corps, écran, échelle en points, entrée, sortie et arc du départ
+  viennent de DONNEES.geometrie.s6 (mise-en-page/s6-sms.json, entrée du format, variante par-dessus) ; le CSS garde les valeurs
+  du 9:16 en repli. Une mise en page qui déclare « telephone_monte » (variante 16x9-centre) monte après la coupe du sous-titre.
+  Régler l'arc du départ : outils/depart_point.py ; comparer deux mises en page en mouvement : outils/extrait_mouvement.py ;
+  adopter une variante : outils/adopter_variante.py.
 -->
 <template id="s6-sms-template">
 <style>
@@ -34,15 +39,15 @@
 
 /* ── 2. Le téléphone ── un calque plein cadre que la fonction du temps translate (y : entrée et sortie, x : vibreur) et
    fond (opacité). Les coordonnées de ses enfants sont celles du film. Invisible jusqu'à son entrée. */
-#s6-telephone{position:absolute;left:0;top:0;width:1080px;height:1920px;opacity:0;will-change:transform}
+#s6-telephone{position:absolute;inset:0;opacity:0;will-change:transform}
 /* l'ombre portée sur le papier : un seul flou, doux, sous le corps (l'objet est posé, il ne brille pas) */
-#s6-ombre{position:absolute;left:82px;top:470px;width:916px;height:1917px;border-radius:160px;
+#s6-ombre{position:absolute;left:82px;top:470px;width:916px;height:1917px;border-radius:160px; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
           box-shadow:0 34px 70px -18px rgba(38,32,25,.30),0 10px 22px -8px rgba(38,32,25,.16)}
 /* le corps (titane, bord noir, boutons) : SVG en coordonnées du téléphone, chemins posés par le script (coins continus) */
 #s6-corps{position:absolute;left:0;top:0;overflow:visible}
-#s6-corps-svg{position:absolute;left:82px;top:470px;width:916px;height:1917px;overflow:visible}
+#s6-corps-svg{position:absolute;left:82px;top:470px;width:916px;height:1917px;overflow:visible} /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
 /* L'écran : 402 × 874 pt, 1 pt = 2,124378 px (854 / 402). Toutes les cotes de l'interface sont en points iOS. */
-#s6-ecran{--pt:2.124378px;position:absolute;left:113px;top:500px;width:854px;height:1856.706px;overflow:hidden;
+#s6-ecran{--pt:2.124378px;position:absolute;left:113px;top:500px;width:854px;height:1856.706px;overflow:hidden; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
           background:#FFFFFF;font-family:"Inter",sans-serif;font-variation-settings:"opsz" 17;color:#000;
           -webkit-font-smoothing:antialiased}
 #s6-ecran .pt{position:absolute}
@@ -93,10 +98,10 @@
             border-radius:calc(2.5 * var(--pt));background:#000}
 
 /* ── 1. Le sous-titre ── (identique à la v2) deux pages superposées, jamais visibles ensemble. */
-#s6-texte{position:absolute;left:0;top:0;width:1080px;height:600px}
-.s6-agente{position:absolute;left:90px;top:263px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal;
+#s6-texte{position:absolute;left:0;top:0;width:1080px;height:600px} /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
+.s6-agente{position:absolute;left:90px;top:263px;margin:0;font-family:"Geist",sans-serif;font-weight:400;font-style:normal; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
            font-size:72px;line-height:84px;letter-spacing:0;color:#262019;white-space:nowrap}
-.s6-appelant{position:absolute;left:90px;top:279px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:italic;
+.s6-appelant{position:absolute;left:90px;top:279px;margin:0;font-family:"Instrument Serif",serif;font-weight:400;font-style:italic; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
              font-size:64px;line-height:72px;letter-spacing:0;color:#262019;white-space:nowrap}
 </style>
 <div id="root" data-composition-id="s6-sms" data-width="1080" data-height="1920">
@@ -181,9 +186,9 @@
   const derniereImage = enImage(S.image_fin - 1);                             // 41,366667 : image 1241
 
   // ── Réglages de la scène (finition du 27/09 ; version iPhone : FONDU_SORTIE) ──
-  const Y_ENTREE = 380;                         // entrée : translateY +380 → 0, power3.out, en apparaissant (≤ 92 px par image)
+  const Y_ENTREE = D.geometrie.s6.y_entree != null ? D.geometrie.s6.y_entree : 380;   // entrée : +380 → 0, power3.out, en apparaissant (≤ 92 px par image)
   const APPARITION = 0.30;                      // s : opacité 0 → 1 à l'entrée (power2.out)
-  const Y_SORTIE = 300;                         // sortie : 0 → −300 (le papier monte), power3.in
+  const Y_SORTIE = D.geometrie.s6.y_sortie != null ? D.geometrie.s6.y_sortie : 300;   // sortie : 0 → −300 (le papier monte), power3.in
   const FONDU_SORTIE = 4;                       // images : opaque au début de la sortie (< 4 px), puis sine.inOut jusqu'au bout
   const PAS_MAX = 95;                           // px par image à l'entrée (90 en sortie, arbitrage 2)
   const REVELE_C4 = 0.35, DY = 16;              // l'appelant, ligne par ligne (même grammaire que C2 en s3)
@@ -191,10 +196,28 @@
 
   // ── 0. La géométrie de l'iPhone (DONNEES.geometrie.s6, outils/construire.py), posée et contrôlée ──
   const G6 = D.geometrie.s6, TEL = G6.telephone, ECR = G6.ecran, BU = G6.bulle, PT = G6.point, K = G6.pt;   // K : px par point iOS
-  exiger(TEL.x0 === 82 && TEL.largeur === 916 && TEL.haut === 470 && TEL.hauteur === 1917 && TEL.rayon === 160,
-         "téléphone ≠ contrat (x 82, 916 × 1917, haut 470, rayon 160)");
-  exiger(ECR.x0 === TEL.x0 + TEL.bord_cote && ECR.haut === TEL.haut + TEL.bord_haut && Math.abs(ECR.largeur - 854) < 1e-6 &&
-         Math.abs(K - 854 / 402) < 1e-6, "écran ≠ contrat (x 113, haut 500, 854 px = 402 pt)");
+  // FORMATS (27/09) : le corps, l'écran et l'échelle viennent de DONNEES.geometrie.s6 (mise-en-page/s6-sms.json) ; le CSS garde les
+  // valeurs du 9:16 (x 82, haut 470, 916 × 1917, rayon 160 ; écran 854 px = 402 pt en (113 ; 500)), réécrites ici à l'identique.
+  const CADRE = D.geometrie.cadre || { bas_utile: 1500 };   // repli 9:16 (données d'avant les formats)
+  exiger(ECR.x0 === TEL.x0 + TEL.bord_cote && ECR.haut === TEL.haut + TEL.bord_haut && Math.abs(ECR.largeur - TEL.largeur + 2 * TEL.bord_cote) < 1e-6 &&
+         Math.abs(K - ECR.largeur / ECR.largeur_pt) < 1e-5, "écran ≠ contrat (corps − bords, " + ECR.largeur_pt + " pt)");
+  (function () {
+    const px6 = function (v) { return +(+v).toFixed(3) + "px"; };
+    const ombre = document.getElementById("s6-ombre"), svg = document.getElementById("s6-corps-svg");
+    [ombre, svg].forEach(function (el) {
+      el.style.left = px6(TEL.x0); el.style.top = px6(TEL.haut); el.style.width = px6(TEL.largeur); el.style.height = px6(TEL.hauteur);
+    });
+    ombre.style.borderRadius = px6(TEL.rayon);
+    svg.setAttribute("width", TEL.largeur); svg.setAttribute("height", TEL.hauteur);
+    svg.setAttribute("viewBox", "0 0 " + TEL.largeur + " " + TEL.hauteur);
+    const ec = document.getElementById("s6-ecran");
+    ec.style.setProperty("--pt", K.toFixed(6) + "px");
+    ec.style.left = px6(ECR.x0); ec.style.top = px6(ECR.haut); ec.style.width = px6(ECR.largeur); ec.style.height = px6(ECR.hauteur);
+    const msg = document.getElementById("s6-message"), forme = document.getElementById("s6-forme");
+    [msg, forme].forEach(function (el) { el.style.width = px6(ECR.largeur); el.style.height = px6(ECR.hauteur); });
+    forme.setAttribute("width", ECR.largeur); forme.setAttribute("height", ECR.hauteur);
+    forme.setAttribute("viewBox", "0 0 " + ECR.largeur + " " + ECR.hauteur);
+  })();
   const ecran = document.getElementById("s6-ecran"), cs0 = getComputedStyle(ecran);
   exiger(Math.abs(parseFloat(cs0.getPropertyValue("--pt")) - K) < 1e-6, "--pt du CSS ≠ DONNEES.geometrie.s6.pt");
   exiger(parseFloat(cs0.left) === ECR.x0 && parseFloat(cs0.top) === ECR.haut && parseFloat(cs0.width) === ECR.largeur,
@@ -210,7 +233,8 @@
   // Le SMS (gabarit corrigé, six lignes = DONNEES), la date soulignée, l'expéditeur « Vokio », corps et place : lib/iphone.js.
   const bulle = document.getElementById("s6-bulle");
   const TXT = IPHONE.controlerContenu(G6, bulle, exiger);
-  exiger(BU.bas < 1500 && BU.queue_pointe.y < 1500 && PT.y + POINT.diametre_disque / 2 < 1500, "le SMS ou le point descend sous y = 1 500");
+  exiger(BU.bas < CADRE.bas_utile && BU.queue_pointe.y < CADRE.bas_utile && PT.y + POINT.diametre_disque / 2 < CADRE.bas_utile,
+         "le SMS ou le point descend sous y = " + CADRE.bas_utile);
   // Le centre de l'éclosion : le point, en coordonnées de l'écran ; il attend sous la queue, sur l'écran blanc.
   const CX = PT.x - ECR.x0, CY = PT.y - ECR.haut;                             // 55,99 ; 783,99
   exiger(PT.y - POINT.diametre_disque / 2 - BU.queue_pointe.y >= 10, "le point touche la queue de la bulle");
@@ -224,8 +248,10 @@
   const coins = [[bx, mTop], [bx + bw, mTop], [bx + bw, by + bh], [bx, by + bh + 7 * K]];
   const R_FIN = Math.ceil(Math.max.apply(null, coins.map(function (c) { return Math.hypot(c[0] - CX, c[1] - CY); }))) + 1;
   const message = document.getElementById("s6-message");
-  exiger(message.style.clipPath === "" && getComputedStyle(message).clipPath.indexOf("0px at 56px 784px") >= 0 &&
-         Math.abs(CX - 56) < 0.02 && Math.abs(CY - 784) < 0.1, "le clip-path initial du SMS n'est pas centré sur le point");
+  // le disque d'éclosion est centré sur le point (9:16 : 56 ; 784 dans l'écran, la valeur initiale du CSS) ; rendre() le pose à chaque image
+  message.style.clipPath = "circle(0px at " + (+CX.toFixed(3)) + "px " + (+CY.toFixed(3)) + "px)";
+  exiger(Math.abs(CX - (PT.x - ECR.x0)) < 1e-9 && Math.abs(CY - (PT.y - ECR.haut)) < 1e-9 && CX > 0 && CY > 0,
+         "le clip-path initial du SMS n'est pas centré sur le point");
 
   // ── 1. Le point de la racine, relu (la scène ne l'anime pas ; elle vérifie qu'il fait ce qu'elle attend) ──
   const T_BULLE = EV.bulle_et_vibreur.t;                                      // 36,666667 : image 1100
@@ -247,6 +273,10 @@
 
   // ── 2. Le sous-titre : les deux pages de la scène, telles que DONNEES.pages les donne (identique à la v2) ──
   const Hs = D.geometrie.sous_titres_haut;
+  if (Hs.conteneur) {                          // FORMATS : boîte des sous-titres (9:16 : 1080 × 600, exactement ; 16:9 : le cadre)
+    const bt = document.getElementById("s6-texte");
+    bt.style.width = Hs.conteneur.largeur + "px"; bt.style.height = Hs.conteneur.hauteur + "px";
+  }
   const p1 = document.getElementById("s6-p1"), p2 = document.getElementById("s6-p2");
   p1.style.left = Hs.agente.x + "px"; p1.style.top = Hs.agente.top + "px";
   p2.style.left = Hs.appelant.x + "px"; p2.style.top = Hs.appelant.top + "px";
@@ -295,7 +325,11 @@
   // ── 3. Le téléphone : entrée (avec « Au revoir »), repos, vibreur, sortie ; nets, sans filé (inchangé) ──
   const TM = EV.telephone_monte.t, TS = EV.telephone_sortie.t;
   const DM = r6(TM[1] - TM[0]), DS = r6(TS[1] - TS[0]);
-  exiger(TM[0] >= lignesC4[1].t - EPS && TM[1] <= EV.raccroche.t + EPS, "le téléphone doit entrer avec « Au revoir », avant le raccroché");
+  // FORMATS : une mise en page qui déclare son entrée (mise-en-page/s6-sms.json « telephone_monte », variante 16x9-centre :
+  // l'iPhone centré croiserait le sous-titre) monte APRÈS la coupe du dernier sous-titre ; sinon (9:16) avec « Au revoir ».
+  const MEP6 = (D.geometrie.mise_en_page || {})["s6-sms"] || {};
+  if (MEP6.telephone_monte) exiger(TM[0] >= T_COUPE - EPS && TM[1] <= T_BULLE + EPS, "le téléphone doit monter entre la coupe du sous-titre et la bulle");
+  else exiger(TM[0] >= lignesC4[1].t - EPS && TM[1] <= EV.raccroche.t + EPS, "le téléphone doit entrer avec « Au revoir », avant le raccroché");
   exiger(T_BULLE - TM[1] <= 1.2 + EPS, "le téléphone reste vide plus de 1,2 s avant la bulle");
   exiger(Math.abs(TS[1] - sc.fin) < EPS && TS[0] - EV.bulle_ouverte.t >= 3.8 - EPS, "la bulle entière ne se lit pas 3,8 s avant la sortie");
   const eMonte = POINT.ease("power3.out"), eApp = POINT.ease("power2.out"), eSort = POINT.ease("power3.in");
@@ -323,7 +357,8 @@
     exiger(ECR.haut + Y_ENTREE + ECR.rayon < PT.y - rr, "le haut de l'écran passerait sur le point à l'entrée du téléphone");
     exiger(ECR.x0 + TEL.bord_cote < PT.x - rr, "le bord de l'écran passerait sur le point");
   })();
-  exiger(etatTel(EV.silence_numerique.t[0]).y === 0 && etatTel(T_BULLE).y === 0 && etatTel(TS[0]).y === 0, "le téléphone bouge entre son entrée et sa sortie");
+  // (FORMATS : au repos dès la fin de sa montée si elle finit après le début du silence, variante 16x9-centre ; 9:16 : le silence)
+  exiger(etatTel(Math.max(TM[1], EV.silence_numerique.t[0])).y === 0 && etatTel(T_BULLE).y === 0 && etatTel(TS[0]).y === 0, "le téléphone bouge entre son entrée et sa sortie");
   exiger(etatTel(TS[1]).o === 0 && etatTel(derniereImage).o <= 0.1 && etatTel(enImage(S.image_debut)).o === 0,
          "le téléphone est visible hors de sa fenêtre");
   IPHONE.controlerSortie(etatTel, EV.telephone_sortie.images[0], S.image_fin, enImage, exiger);   // sortie sans fantôme

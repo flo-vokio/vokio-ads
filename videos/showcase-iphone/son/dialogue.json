@@ -1,10 +1,10 @@
 {
- "fichier": "/opt/vokio-ads/videos/showcase/son/dialogue.wav",
+ "fichier": "/opt/vokio-ads/videos/showcase-iphone/son/dialogue.wav",
  "sr": 48000,
  "canaux": 2,
  "format": "pcm_s24le",
  "duree_s": 47.0,
- "niveau": "niveau d'origine de montes/veterinaire.wav, aucun gain, aucun filtre",
+ "niveau": "niveau d'origine de montes/veterinaire.wav, aucun filtre ; un seul gain de clip déclaré (extraits[].gains)",
  "appel": {
   "conversation_id": "conv_9401m2tg19wtfxn9cm727n4dtskz",
   "debut": "2026-09-18 16:51:54 Europe/Paris",
@@ -14,66 +14,102 @@
   "monte": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
   "montes_vers_original": "original = montes avant 66,70 ; original = montes + 4,20 après (coupe 66,70 → 70,90 de l'original)"
  },
- "regle_de_coupe": "énergie < −45 dBFS sur ±20 ms (fenêtres 10 ms, 16 kHz) à chaque bord ; fondus 15 ms cosinus",
+ "regle_de_coupe": "vrai blanc : RMS 5 ms (48 kHz) ≤ -70 dBFS sur toute la rampe d'entrée et sur les 10 dernières ms de la rampe de sortie (plancher de la porte : −81/−82 dBFS) ; rampes cosinus, 40 ms à l'entrée, 60 à 120 ms à la sortie ; décalages inchangés (les mots ne bougent pas)",
  "extraits": [
   {
    "id": "A1",
    "locuteur": "agent",
    "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
    "source_in": 0.7,
-   "source_out": 5.8,
+   "source_out": 6.1,
    "original_in": 0.7,
-   "original_out": 5.8,
+   "original_out": 6.1,
    "film_in": 4.91,
-   "film_out": 10.01,
+   "film_out": 10.31,
    "decalage_film_moins_source": 4.21,
-   "fondu_s": 0.015,
+   "fondu_s": 0.04,
+   "fondu_in_s": 0.04,
+   "fondu_out_s": 0.12,
+   "gains": [],
+   "bords_avant_v2_source": [
+    0.7,
+    5.8
+   ],
    "texte": "Bonjour, je suis Élise, l'assistante vocale de la Clinique vétérinaire du Port ! Comment puis-je vous aider ?",
    "tour_original_t": 0,
-   "motif": "Le décroché, en entier.",
+   "motif": "Le décroché, en entier. Sortie à 6,10 (et non 5,80, en pleine queue de « aider ? » à −63 dBFS) : la queue décroît jusqu'au plancher, rampe de 120 ms.",
    "bords_dbfs": [
-    -78.6,
-    -55.8
+    -78.3,
+    -78.3
    ]
   },
   {
    "id": "C1",
    "locuteur": "appelant",
    "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
-   "source_in": 10.28,
-   "source_out": 13.84,
-   "original_in": 10.28,
-   "original_out": 13.84,
-   "film_in": 10.5,
-   "film_out": 14.06,
+   "source_in": 10.2,
+   "source_out": 13.86,
+   "original_in": 10.2,
+   "original_out": 13.86,
+   "film_in": 10.42,
+   "film_out": 14.08,
    "decalage_film_moins_source": 0.22,
-   "fondu_s": 0.015,
+   "fondu_s": 0.04,
+   "fondu_in_s": 0.04,
+   "fondu_out_s": 0.06,
+   "gains": [
+    {
+     "mot": "mon",
+     "src": [
+      10.335,
+      10.425
+     ],
+     "db": 4.0,
+     "raison": "« mon » : murmure nasal /mɔ̃/ de 90 ms (10,335 → 10,425), 3 à 5 dB sous « chat » dans 300-2 000 Hz ; retour de Florian 27/09 : on ne l'entend pas bien",
+     "film": [
+      10.555,
+      10.645
+     ],
+     "fondu_s": 0.03
+    }
+   ],
+   "bords_avant_v2_source": [
+    10.28,
+    13.84
+   ],
    "texte": "mon chat, euh, Moka, euh, mange plus depuis hier",
    "tour_original_t": 7,
-   "motif": "On retire « Euh, oui, bonjour, j'vous appelle parce que » (fin 9,99) et « et il dort beaucoup, je trouve. » (début 14,01).",
+   "motif": "On retire « Euh, oui, bonjour, j'vous appelle parce que » (fin 9,99, souffle 10,10-10,19) et « et il dort beaucoup, je trouve. » (bouffée 13,87). Entrée à 10,20, dans le vrai blanc après le souffle (porte fermée jusqu'à 10,33) ; sortie à 13,86, avant la bouffée de « et ».",
    "bords_dbfs": [
     -78.3,
-    -62.8
+    -79.0
    ]
   },
   {
    "id": "C2",
    "locuteur": "appelant",
    "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
-   "source_in": 34.76,
-   "source_out": 37.16,
-   "original_in": 34.76,
-   "original_out": 37.16,
-   "film_in": 14.6,
-   "film_out": 17.0,
+   "source_in": 34.72,
+   "source_out": 37.2,
+   "original_in": 34.72,
+   "original_out": 37.2,
+   "film_in": 14.56,
+   "film_out": 17.04,
    "decalage_film_moins_source": -20.16,
-   "fondu_s": 0.015,
+   "fondu_s": 0.04,
+   "fondu_in_s": 0.04,
+   "fondu_out_s": 0.06,
+   "gains": [],
+   "bords_avant_v2_source": [
+    34.76,
+    37.16
+   ],
    "texte": "Euh, demain, vous avez des disponibilités ?",
    "tour_original_t": 34,
-   "motif": "Le triage saute (15,82 → 34,76) : « Je vois. Est-ce que Moka présente d'autres symptômes… », « Non, non, non, j'ai pas l'impression. », « Très bien. Dans ce cas… Quel jour vous conviendrait le mieux ? ».",
+   "motif": "Le triage saute (15,82 → 34,72) : « Je vois. Est-ce que Moka présente d'autres symptômes… », « Non, non, non, j'ai pas l'impression. », « Très bien. Dans ce cas… Quel jour vous conviendrait le mieux ? ». Entrée à 34,72 : la porte s'ouvre à 34,78.",
    "bords_dbfs": [
-    -52.6,
-    -77.7
+    -78.3,
+    -78.3
    ]
   },
   {
@@ -81,39 +117,53 @@
    "locuteur": "agent",
    "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
    "source_in": 48.66,
-   "source_out": 53.9,
+   "source_out": 53.975,
    "original_in": 48.66,
-   "original_out": 53.9,
+   "original_out": 53.975,
    "film_in": 17.54,
-   "film_out": 22.78,
+   "film_out": 22.855,
    "decalage_film_moins_source": -31.12,
-   "fondu_s": 0.015,
+   "fondu_s": 0.04,
+   "fondu_in_s": 0.04,
+   "fondu_out_s": 0.075,
+   "gains": [],
+   "bords_avant_v2_source": [
+    48.66,
+    53.9
+   ],
    "texte": "Laissez-moi voir. Je peux vous proposer neuf heures, dix heures ou onze heures.",
    "tour_original_t": 48,
-   "motif": "D'un seul tenant, avec le VRAI silence de l'outil next_available_slots (49,49 → 50,95, 1,46 s). Sautés en amont : « Un instant. », validate_date, « Demain, c'est samedi dix-neuf septembre. Pour quelle heure… », « Bah le matin. ». Coupé avant « Le dernier créneau possible de la journée est onze heures trente. Qu'est-ce qui vous arrangerait ? » (54,01).",
+   "motif": "D'un seul tenant, avec le VRAI silence de l'outil next_available_slots (49,49 → 50,95, 1,46 s). Sautés en amont : « Un instant. », validate_date, « Demain, c'est samedi dix-neuf septembre. Pour quelle heure… », « Bah le matin. ». Coupé avant « Le dernier créneau possible de la journée est onze heures trente. Qu'est-ce qui vous arrangerait ? » (53,99) : pas de vrai blanc entre les deux phrases, la rampe de 75 ms suit la queue jusqu'à −75 dBFS.",
    "bords_dbfs": [
-    -78.3,
-    -62.5
+    -76.3,
+    -68.9
    ]
   },
   {
    "id": "C3",
    "locuteur": "appelant",
    "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
-   "source_in": 58.8,
-   "source_out": 60.54,
-   "original_in": 58.8,
-   "original_out": 60.54,
-   "film_in": 23.24,
-   "film_out": 24.98,
+   "source_in": 58.76,
+   "source_out": 60.56,
+   "original_in": 58.76,
+   "original_out": 60.56,
+   "film_in": 23.2,
+   "film_out": 25.0,
    "decalage_film_moins_source": -35.56,
-   "fondu_s": 0.015,
+   "fondu_s": 0.04,
+   "fondu_in_s": 0.04,
+   "fondu_out_s": 0.08,
+   "gains": [],
+   "bords_avant_v2_source": [
+    58.8,
+    60.54
+   ],
    "texte": "Euh, bah, à neuf heures, c'est parfait.",
    "tour_original_t": 58,
-   "motif": "Saute « Très bien. C'est pour quel prénom ? » et « C'est pour Florian. » (63,31 → 66,48).",
+   "motif": "Saute « Très bien. C'est pour quel prénom ? » et « C'est pour Florian. » (63,31 → 66,48). Sortie à 60,56 (film 25,00), là où la queue de « parfait. » rejoint le plancher : pas plus tard, car s4-agenda.html (SORTIE_CHOIX, 25,00) exige que le choix ne sorte pas avant la fin de C3.",
    "bords_dbfs": [
     -78.3,
-    -55.9
+    -67.5
    ]
   },
   {
@@ -121,40 +171,95 @@
    "locuteur": "agent",
    "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
    "source_in": 67.24,
-   "source_out": 74.3,
+   "source_out": 74.33,
    "original_in": 71.44,
-   "original_out": 78.5,
+   "original_out": 78.53,
    "film_in": 26.17,
-   "film_out": 33.23,
+   "film_out": 33.26,
    "decalage_film_moins_source": -41.07,
-   "fondu_s": 0.015,
+   "fondu_s": 0.04,
+   "fondu_in_s": 0.04,
+   "fondu_out_s": 0.08,
+   "gains": [],
+   "bords_avant_v2_source": [
+    67.24,
+    74.3
+   ],
    "texte": "Parfait, je vous note ça pour Florian, pour une consultation vétérinaire, le samedi dix-neuf septembre à neuf heures. Vous recevrez un SMS de confirmation.",
    "tour_original_t": 71,
    "motif": "La confirmation, en entier. Le montage du 18/09 avait déjà retiré la revérification (original 66,70 → 70,90).",
    "bords_dbfs": [
-    -78.3,
-    -70.5
+    -75.7,
+    -78.3
    ]
   },
   {
    "id": "C4",
    "locuteur": "appelant",
    "source": "/root/vokio-audios-metiers-180926/montes/veterinaire.wav",
-   "source_in": 75.05,
-   "source_out": 76.55,
-   "original_in": 79.25,
-   "original_out": 80.75,
-   "film_in": 33.98,
-   "film_out": 35.48,
+   "source_in": 74.86,
+   "source_out": 76.72,
+   "original_in": 79.06,
+   "original_out": 80.92,
+   "film_in": 33.79,
+   "film_out": 35.65,
    "decalage_film_moins_source": -41.07,
-   "fondu_s": 0.015,
+   "fondu_s": 0.04,
+   "fondu_in_s": 0.04,
+   "fondu_out_s": 0.12,
+   "gains": [
+    {
+     "mot": "souffle avant « Super »",
+     "src": [
+      74.915,
+      75.07
+     ],
+     "db": -6.0,
+     "raison": "la porte s'ouvre sur une inspiration (2,4-4,5 kHz, −34,6 dBFS après la chaîne voix) : gardée, car elle amène « Super » sans saute, mais 6 dB plus bas",
+     "film": [
+      33.845,
+      34.0
+     ],
+     "fondu_s": 0.03
+    }
+   ],
+   "bords_avant_v2_source": [
+    75.05,
+    76.55
+   ],
    "texte": "Super, merci beaucoup. Au revoir.",
    "tour_original_t": 79,
-   "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute. v2 : décalage −41,07, le même que A4 : C4 suit A4 après son VRAI blanc de 0,75 s (source 74,30 → 75,05) ; la v1 (−40,60) l'allongeait de 0,47 s pour loger le SMS pendant l'appel.",
+   "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute. v2 : décalage −41,07, le même que A4 : C4 suit A4 après son VRAI blanc. Entrée à 74,86 : la porte s'ouvre à 74,915 (fond de la ligne de l'appelant, 185 ms avant « Super ») ; l'ancienne entrée (75,05) tombait dessus. Sortie à 76,72 (queue de « revoir. » jusqu'à 76,70), avant le raccroché du film (35,867 = 76,937).",
    "bords_dbfs": [
-    -50.3,
-    -54.2
+    -78.3,
+    -78.3
    ]
+  }
+ ],
+ "contraintes_image": [
+  {
+   "image": "s3-ecoute.html SORTIE_C1",
+   "valeur": 15.1,
+   "extrait": "C2",
+   "bord": "film_in",
+   "t": 14.56,
+   "ok": true
+  },
+  {
+   "image": "s4-agenda.html SORTIE_CRENEAUX",
+   "valeur": 23.1,
+   "extrait": "A2A3",
+   "bord": "film_out",
+   "t": 22.855,
+   "ok": true
+  },
+  {
+   "image": "s4-agenda.html SORTIE_CHOIX",
+   "valeur": 25.0,
+   "extrait": "C3",
+   "bord": "film_out",
+   "t": 25.0,
+   "ok": true
   }
  ]
 }

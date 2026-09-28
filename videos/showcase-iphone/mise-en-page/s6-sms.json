@@ -1,0 +1,32 @@
+{
+ "_note": "s6-sms (version iPhone) : l'iPhone 16 Pro en px film. telephone = le corps (x0, haut, largeur, hauteur, rayon, lissage des coins continus, bords du verre) ; ecran = 402 × 874 pt, ecran_largeur_px fixe l'échelle (px par point = ecran_largeur_px / 402 ; le SMS 17 pt en découle). Contraintes vérifiées par construire.py : largeur = écran + 2 bord_cote, hauteur ≈ écran + 2 bord_haut (0,5 px). L'interface d'iOS reste en points (IPHONE.bulle de construire.py, commune). ecart_point : px entre la pointe de la queue de la bulle et le haut du disque. y_entree / y_sortie : montée d'entrée (+y → 0) et de sortie (0 → −y). depart_stylo_arc : l'arc {dx, dy} du point quand il quitte la bulle pour le stylo de s7 (clé 30 de DONNEES.point), contrôlé par IPHONE.controlerDepart (≥ 6 px de la bulle tant que le téléphone se voit).",
+ "9x16": {
+  "telephone": {"x0": 82, "haut": 470, "largeur": 916, "hauteur": 1917, "rayon": 160, "lissage": 0.6, "bord_cote": 31, "bord_haut": 30},
+  "ecran": {"largeur_pt": 402, "hauteur_pt": 874, "rayon": 130},
+  "ecran_largeur_px": 854,
+  "ecart_point": 14,
+  "y_entree": 380,
+  "y_sortie": 300,
+  "depart_stylo_arc": {"dx": -30, "dy": 80}
+ },
+ "16x9": {
+  "_note": "Échelle ×1,1077 (946 px d'écran : 2,3532 px par point, SMS 17 pt = 40,0 px, le corps minimal de YouTube). L'objet à droite : x 770 → 1784 (97 px après l'encre de « Super, merci beaucoup. / Au revoir. », qui finit en 673 ; marge droite 136), haut à 20 (le corps déborde dans la bande haute, en prudence : un objet peut y aller ; l'heure de la barre d'état reste dessous) : le point attend sous la queue en (863,7 ; 917,6), bas du disque 939,6, soit 32 px au-dessus des 10 % du bas (972 ; marge_zones 24, controles.py Z2). La bulle finit en x 1454,8, y 864,9 : 45 px avant le coin « Passer l'annonce » (x ≥ 1500, y ≥ 780). Le corps sort du cadre par le bas, comme en 9:16.",
+  "telephone": {"x0": 770, "haut": 20, "largeur": 1014, "hauteur": 2123, "rayon": 177, "lissage": 0.6, "bord_cote": 34, "bord_haut": 33},
+  "ecran": {"largeur_pt": 402, "hauteur_pt": 874, "rayon": 144},
+  "ecran_largeur_px": 946,
+  "ecart_point": 14,
+  "y_entree": 380,
+  "y_sortie": 300,
+  "depart_stylo_arc": {"dx": 40, "dy": 90},
+  "_composition": "Retenue le 28/09 (correctifs des revues YouTube et Florian, variante « 16x9-haut » adoptée) : l'iPhone rangé à droite, les événements du 9:16 INCHANGÉS (il monte avec « Au revoir » à 35,10, à côté du sous-titre). Avant (x0 810, haut 52) : le point attendait 6,5 s à 0,4 px de la bande interdite du bas, la bulle finissait à 5 px du coin « Passer ». Départ vers le stylo (clé 30, arc {dx +40, dy +90}, outils/depart_point.py --balayer) : il reste sur l'écran plus longtemps (arc vers la droite) et ne sort du contour qu'à l'image 1237 (opacité 0,69 ; 1236 à 0,85 avant) ; Σ opacité × part hors du contour 1,33 (2,48 avant ; 9:16 : 0, son stylo est à droite du bord du téléphone) ; pas max 98,6 px par image (106,5 avant ; 9:16 75,3 : le trajet est plus long en paysage) ; ≥ 12,6 px de la bulle. Reste au choix de Florian : la variante « 16x9-centre » (iPhone au centre, 235 px du coin « Passer », mais il monte APRÈS le raccroché, 35,90 au lieu de 35,10 : un événement visuel bouge) ; à régler de nouveau (x0, haut, arc) si elle est retenue.",
+  "_variante_adoptee": "« 16x9-haut », adoptée le 28/09/2026 : Essai 28/09 (correctifs des revues YouTube et Florian) : l'iPhone monte de 32 px et glisse de 40 px vers la gauche, SANS changer d'événement ; le point attend 32 px au-dessus des 10 % du bas (1 px avant), la bulle finit 45 px avant le coin « Passer » (5 avant), 97 px entre l'encre du dernier sous-titre et le corps."
+ },
+ "variantes": {
+  "16x9-centre": {
+   "_note": "RECOMMANDÉE, À VALIDER PAR FLORIAN (un événement visuel bouge, aucun repère son) : l'iPhone ramené vers le centre (x 580 → 1594, centre 1087, au lieu de 810 → 1824). Il ne monte qu'APRÈS le raccroché (35,90 → 36,40 au lieu de 35,10 → 35,60 : sinon il croiserait le dernier sous-titre, « Super, merci beaucoup. / Au revoir. », encre x 144 → 673, coupé à 35,85), 0,27 s avant le vibreur (36,67). Gains : le SMS, la preuve, se lit près du centre de l'écran (TV) ; la bulle finit en x 1265, 235 px avant le coin « Passer l'annonce » (5 px en A) ; une info à la fois (le sous-titre sort, puis le téléphone monte). x 580 et pas 498 (centre exact) : à 498 le point qui attend sous la queue (x 592) tombait dans l'encart de l'annonceur (x < 640) pendant 6,4 s ; à 580 le disque commence en 652. Arc du départ réglé le 28/09 (outils/depart_point.py, balayage de 783 arcs) : {dx 0, dy +100} au lieu de {−30, +80} : comme en 9:16, le point longe le bord gauche du téléphone qui s'efface, sur le cadre, et n'en sort qu'à moitié effacé (image 1238, opacité 0,50 ; entier dehors à 1241, 0,04) au lieu de 1237 (0,69, dehors dès 1239 à 0,31) ; Σ opacité × part hors du contour 0,48 au lieu de 1,10 (9:16 : 0) ; 12,5 px de la bulle au plus près (10,4 avant, contrôle ≥ 6) ; pas max 88,5 px par image (85,6 avant ; A 106,5 ; 9:16 75,3) ; coude 12,6°. Essai écarté le 28/09 : « milieu » x 740 sans changer d'événement (monte avec « Au revoir ») : 67 px seulement entre l'encre du sous-titre et le corps, et un départ ≥ 95 px par image quel que soit l'arc. MISE À JOUR 28/09 soir : l'entrée 16x9 a changé sous elle (haut 52 → 20, arc {+40, +90}) ; ses mesures ci-dessus datent de haut 52 : la variante hérite maintenant de haut 20 (point 32 px au-dessus du bas) ; son arc {0, +100} reste le sien, à rebalayer (outils/depart_point.py --balayer) si Florian la retient.",
+   "telephone": {"x0": 580},
+   "telephone_monte": [35.9, 36.4],
+   "depart_stylo_arc": {"dx": 0, "dy": 100}
+  }
+ }
+}

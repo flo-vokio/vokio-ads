@@ -1,0 +1,23 @@
+{
+ "_note": "s7-signature : le wordmark (#s7-fin : boîte left/right/top, corps, alignement ; le « Vokıo » et #mot-pt y sont MESURÉS par construire.py : ligne de base, centre du point du ı, stylo), la promesse et l'offre (boîtes CSS, corps/interligne ; ligne de base = top + décalage : 72/86 → 67, 44/64 → 47, 64/76 → 60, 40/56 → 42). Le wordmark reste le plus grand objet du film (plus large que l'accroche de s1). Rien sous bas_utile ; en 16:9 le bas de l'offre reste au-dessus de 880 (encart de l'annonceur, à gauche).",
+ "9x16": {
+  "fin": {"left": 0, "right": 0, "top": 544, "corps": 400, "alignement": "center"},
+  "promesse": {"left": 70, "right": 70, "top": 953, "corps": 72, "interligne": 86, "alignement": "center"},
+  "offre": {"left": 70, "right": 70, "top": 1189, "corps": 44, "interligne": 64, "alignement": "center"}
+ },
+ "16x9": {
+  "_note": "Retenue (A, centrée comme en 9:16 : le film entier converge vers ce point du ı ; décentrée, elle se lisait comme un bandeau de site), agrandie le 28/09 (variante « 16x9-grand » adoptée, revues YouTube et Florian : l'offre était le plus petit texte du film). Wordmark 400 px (il ne grandit pas : son point de ı EST le point du film, 0,11 em = 44 px, le même disque de s1 à s7), ligne de base 472 (sa boîte de ligne reste sous la bande haute ; haut du disque au sommet du bond : 94) ; promesse 72/84 (le corps du 9:16 ; 64 avant) en 596 / 680 ; offre 56/68 (40 avant) en 786 / 854 : encre jusqu'à 854, boîte de ligne jusqu'à 871, au-dessus de l'encart de l'annonceur (880), là où sa 2e ligne passe sous x 640. Blancs (encre à encre) : wordmark → promesse 76 px, promesse → offre 66 px. Le stylo part de x ≈ 539, y 504, à gauche du téléphone qui s'efface.",
+  "fin": {"left": 0, "right": 0, "top": 156, "corps": 400, "alignement": "center"},
+  "promesse": {"left": 96, "right": 96, "top": 530, "corps": 72, "interligne": 84, "alignement": "center"},
+  "offre": {"left": 96, "right": 96, "top": 733, "corps": 56, "interligne": 68, "alignement": "center"},
+  "_variante_adoptee": "« 16x9-grand », adoptée le 28/09/2026 : Essai 28/09 : l'offre (l'appel à l'action, le plus petit texte du film) passe de 40 à 56 px et la promesse de 64 à 72 px (le corps du 9:16) ; le wordmark reste à 400 px (son point de ı EST le point du film : 0,11 em = 44 px) et monte de 8 px (ligne de base 472 : sa boîte de ligne reste sous la bande haute, sommet du bond 88 px) ; bas de l'offre 862, au-dessus de l'encart de l'annonceur (880)."
+ },
+ "variantes": {
+  "16x9-C": {
+   "_note": "Écartée (gardée pour la planche) : texte à gauche dans la colonne de lecture, wordmark à droite dans la scène d'objets. Le stylo (x ≈ 995) démarre DANS le téléphone qui s'efface : le point traverserait la bulle.",
+   "fin": {"left": 1000, "right": 96, "top": 304, "corps": 400, "alignement": "center"},
+   "promesse": {"left": 144, "right": 960, "top": 344, "corps": 64, "interligne": 76, "alignement": "left"},
+   "offre": {"left": 144, "right": 960, "top": 522, "corps": 40, "interligne": 56, "alignement": "left"}
+  }
+ }
+}

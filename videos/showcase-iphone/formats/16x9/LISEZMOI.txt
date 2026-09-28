@@ -1,0 +1,3 @@
+Projet GÉNÉRÉ par outils/format.py depuis videos/showcase-iphone : ne rien éditer ici, tout est réécrit.
+Éditer la source (compositions/, lib/, mise-en-page/*.json) puis relancer : python3 outils/format.py <format>
+Rendu : flock /tmp/hf-rendu.lock /opt/vokio-ads/bin/hf render <ce dossier> -o film.mp4 --quiet

@@ -1,0 +1,9 @@
+{
+ "_note": "s3-ecoute : la place d'écoute du point (centre, px film) et la forme du trajet qui l'y mène depuis « aider ? » (FORMES de construire.py : droit, retour, descente). La parole et la mention suivent texte.json (s3_texte, mention). Le hochement (+8 px) et la hausse (−10 px) sont relatifs à cette place.",
+ "9x16": {
+  "ecoute": {"x": 112, "y": 1136, "forme": "descente", "note": "118 px sous la dernière ligne de base (1018), aligné sur le bord gauche du texte (90 + 22)"}
+ },
+ "16x9": {
+  "ecoute": {"x": 960, "y": 596, "forme": "droit", "note": "à droite de la parole, au milieu de son bloc (2e ligne de base 612 − 16, la demi-hauteur d'x), sur la médiane du cadre : il écoute EN FACE de l'appelant, et reste à 495 px de la gouttière de l'agenda (515 en 9:16)"}
+ }
+}

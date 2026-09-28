@@ -1,0 +1,74 @@
+{
+ "s2_texte": {
+  "famille": "\"Geist\",sans-serif",
+  "style": "normal",
+  "graisse": 400,
+  "corps": 72,
+  "interligne": 84,
+  "x": 144,
+  "lignes_de_base": [
+   540,
+   624,
+   708
+  ],
+  "decalage_ligne_de_base": 67,
+  "top": 473
+ },
+ "s3_texte": {
+  "famille": "\"Instrument Serif\",serif",
+  "style": "italic",
+  "graisse": 400,
+  "corps": 64,
+  "interligne": 72,
+  "x": 144,
+  "lignes_de_base": [
+   540,
+   612,
+   684
+  ],
+  "decalage_ligne_de_base": 57,
+  "top": 483
+ },
+ "haut_agente": {
+  "famille": "\"Geist\",sans-serif",
+  "style": "normal",
+  "graisse": 400,
+  "corps": 72,
+  "interligne": 84,
+  "x": 144,
+  "lignes_de_base": [
+   540,
+   624,
+   708
+  ],
+  "decalage_ligne_de_base": 67,
+  "top": 473
+ },
+ "haut_appelant": {
+  "famille": "\"Instrument Serif\",serif",
+  "style": "italic",
+  "graisse": 400,
+  "corps": 64,
+  "interligne": 72,
+  "x": 144,
+  "lignes_de_base": [
+   560,
+   632
+  ],
+  "decalage_ligne_de_base": 57,
+  "top": 503
+ },
+ "mention": {
+  "famille": "\"Geist\",sans-serif",
+  "style": "normal",
+  "graisse": 400,
+  "corps": 40,
+  "interligne": 52,
+  "x": 144,
+  "lignes_de_base": [
+   150
+  ],
+  "decalage_ligne_de_base": 40,
+  "top": 110
+ }
+}

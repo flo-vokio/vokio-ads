@@ -1,7 +1,17 @@
 #!/usr/bin/env python3
 """Construit LA source de vérité partagée (v2) : donnees/donnees.js (window.DONNEES) + les .json jumeaux.
 
-    python3 outils/construire.py          mesure (Chromium), calcule, écrit, résout le point, contrôle
+    python3 outils/construire.py          mesure (Chromium), calcule, écrit, résout le point, contrôle (9:16, donnees/)
+    python3 outils/construire.py --format 16x9 [--racine formats/16x9] [--variante s7-signature=16x9-C] [--entrees D]
+                                          même chose pour un autre format, dans un projet rendable produit par
+                                          outils/format.py (qui l'appelle : c'est le chemin normal) ; --entrees D : lire
+                                          son/dialogue.json et donnees/mots.json dans D (entrées figées, format.py --entrees git:REV)
+
+FORMATS (27/09) : la mise en page vient de mise-en-page/*.json (outils/mise_en_page.py), une entrée par format ; le
+minutage, la voix, les événements et le son sont COMMUNS. --racine = le projet où mesurer (servi à Chromium) et où écrire
+<racine>/donnees/ ; les entrées communes (son/dialogue.json, donnees/mots.json) sont lues dans CE projet-ci.
+DONNEES.format et DONNEES.geometrie portent tout ce qu'une scène doit savoir du cadre (plus de px en dur dans les scènes).
+Pour le 9:16 (défaut), les sorties sont identiques à celles d'avant les formats (contrôle : outils/identite.py).
 
 Ordre de reconstruction : son/dialogue.py → outils/mots.py → outils/preparer_agenda.py → outils/construire.py.
 Entrées (produites avant) :
@@ -17,6 +27,7 @@ Sorties :
 Règle : tout temps d'animation calé sur la voix vient d'ici. Relancer après toute retouche de mots.json,
 de la géométrie de s1/s7, des contrats de texte ou de l'agenda. Plan : critique.json, plan.chantiers[0].
 """
+import argparse
 import json
 import math
 import subprocess
@@ -26,8 +37,25 @@ from pathlib import Path
 
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import mise_en_page  # noqa: E402
+
 PROJET = Path(__file__).resolve().parents[1]
-DON = PROJET / "donnees"
+_ARGS = argparse.ArgumentParser(description="Construit donnees/ (window.DONNEES) pour un format.")
+_ARGS.add_argument("--format", default="9x16")
+_ARGS.add_argument("--racine", default=None, help="projet rendable où mesurer et écrire donnees/ (défaut : ce projet en 9x16, formats/<format> sinon)")
+_ARGS.add_argument("--variante", action="append", default=[], help="<scène>=<nom> : variante de mise-en-page/<scène>.json")
+_ARGS.add_argument("--entrees", default=None, help="dossier où lire son/dialogue.json et donnees/mots.json (défaut : ce projet) ; "
+                                                   "sert aux contrôles d'identité avec des entrées figées (git show)")
+ARGS = _ARGS.parse_args(sys.argv[1:] if __name__ == "__main__" else [])
+FORMAT = ARGS.format
+RACINE = Path(ARGS.racine).resolve() if ARGS.racine else (PROJET if FORMAT == "9x16" else PROJET / "formats" / FORMAT)
+MEP = mise_en_page.charger(FORMAT, dict(v.split("=", 1) for v in ARGS.variante))
+LARGEUR, HAUTEUR = MEP["format"]["largeur"], MEP["format"]["hauteur"]
+DON = RACINE / "donnees"              # sorties (le format)
+ENTREES = Path(ARGS.entrees).resolve() if ARGS.entrees else PROJET
+SRC = ENTREES / "donnees"             # entrées communes à tous les formats (mots.json)
+DIALOGUE = ENTREES / "son" / "dialogue.json"
 PW = "/root/.pwtest/bin/python"
 FPS = 30
 DUREE = 47.0
@@ -50,7 +78,9 @@ HOTES = [("s1-sonnerie", 0.0, 4.6333), ("s2-voix", 4.6333, 5.7667), ("s3-ecoute"
 FINS_NOMINALES = {"s4-agenda": 25.20, "s6-sms": 41.40}
 
 # Contrats de texte (plan J). top = ligne de base − décalage mesuré dans Chromium (styles-pages.json).
-STYLES = {
+# FORMATS : les valeurs viennent de mise-en-page/texte.json (entrée du format) ; le dictionnaire ci-dessous est la
+# RÉFÉRENCE 9:16, gardé pour mémoire et contrôlé égal à texte.json["9x16"] (une seule vérité).
+STYLES_9X16 = {
     "s2_texte": {"famille": '"Geist",sans-serif', "style": "normal", "graisse": 400, "corps": 72, "interligne": 84,
                  "x": 90, "lignes_de_base": [874, 958, 1042]},
     # l'appelant en Instrument Serif italique 64/72 (finition du 27/09, 96/104 avant) : la hauteur d'x de cette italique
@@ -65,8 +95,12 @@ STYLES = {
     "mention": {"famille": '"Geist",sans-serif', "style": "normal", "graisse": 400, "corps": 36, "interligne": 48,
                 "x": 90, "lignes_de_base": [330]},
 }
-LARGEUR_MAX_S2 = 850      # garde-fou : le point (+36 px) reste avant 1010
-LARGEUR_MAX = 920         # marges de 70 à 1010 : x 90 + 920 = 1010
+STYLES = {k: dict(v) for k, v in MEP["texte"]["styles"].items()}
+if FORMAT == "9x16":
+    assert STYLES == STYLES_9X16, "mise-en-page/texte.json[9x16] s'écarte de la référence 9:16 de construire.py"
+LARGEUR_MAX_S2 = MEP["texte"]["largeur_max_s2"]   # garde-fou : le disque (encre + 18 + 22 = +40 px, voir s2-voix.html ECART) reste avant x_max_point (9:16 : 850, 1010)
+LARGEUR_MAX = MEP["texte"]["largeur_max"]         # 9:16 : marges de 70 à 1010 : x 90 + 920 = 1010
+X_MAX_POINT = MEP["texte"]["x_max_point"]         # bord droit que le disque ne passe pas dans s2 (9:16 : 1010)
 
 # L'accroche de s1 (finition du 27/09) : mot à mot par le masque de ligne, dès l'image 0 ; le « . » (#point) se pose
 # en dernier. Lu par compositions/s1-sonnerie.html ET par DONNEES.point.taille (une seule donnée).
@@ -87,7 +121,8 @@ V_TRAJET = 100.0
 V_CALME = 60.0            # préféré : le point quitte le mot plus tôt plutôt que de filer
 ARRETS_S2 = ["Bonjour,", "Élise,", "l’assistante", "vocale", "Clinique", "vétérinaire", "Port.", "Comment", "puis-je", "aider\u202f?"]
 ARRETS_S6 = ["recevrez", "SMS", "confirmation."]
-ECOUTE_DY = 118.0         # s3 : le point écoute 118 px sous la dernière ligne de base de la parole, aligné sur x = 90 + 22
+ECOUTE_DY = 118.0         # s3 (9:16) : le point écoute 118 px sous la dernière ligne de base de la parole, aligné sur x = 90 + 22
+ECOUTE = MEP["s3"]["ecoute"]  # FORMATS : la place d'écoute {x, y, forme} (mise-en-page/s3-ecoute.json)
 
 # VERSION iPHONE (27/09, demande de Florian : « un screenshot de téléphone plus réaliste type iPhone ») : en s6, le SMS
 # arrive dans un iPhone 16 Pro (titane naturel) ouvert sur l'app Messages d'iOS 26, mode clair. La règle « aucun chrome
@@ -97,11 +132,13 @@ ECOUTE_DY = 118.0         # s3 : le point écoute 118 px sous la dernière ligne
 # marges, bouton retour, avatar, pastille du nom, forme de la queue des bulles. Le texte du SMS est la formulation
 # corrigée du gabarit (« à 09:00, Clinique vétérinaire du Port. », au lieu de « à 09:00 chez Clinique vétérinaire du Port. »),
 # coupé comme iOS le coupe : au plus long, mot à mot, dans 255 pt de texte (contrôlé par la scène).
-PT_ECRAN = 854 / 402
+# FORMATS : le corps, l'écran et l'échelle viennent de mise-en-page/s6-sms.json (9:16 : 82 / 470 / 916 × 1917, 854 px d'écran) ;
+# l'interface d'iOS (bulle, en points) est commune.
+_S6 = MEP["s6"]
+PT_ECRAN = _S6["ecran_largeur_px"] / _S6["ecran"]["largeur_pt"]
 IPHONE = {
-    "telephone": {"x0": 82, "haut": 470, "largeur": 916, "hauteur": 1917, "rayon": 160, "lissage": 0.6,
-                  "bord_cote": 31, "bord_haut": 30},
-    "ecran": {"largeur_pt": 402, "hauteur_pt": 874, "rayon": 130},
+    "telephone": dict(_S6["telephone"]),
+    "ecran": dict(_S6["ecran"]),
     "bulle": {"gauche_pt": 16, "haut_pt": 194, "rayon_pt": 20, "padding_pt": [9.5, 13, 9.5, 15], "corps_pt": 17,
               "interligne_pt": 22, "texte_max_pt": 255, "queue_pointe_pt": [9.0, 7.1], "fond": "#E9E9EB", "texte": "#000000",
               # ligne la plus longue (« samedi 19 septembre à 09:00, »), mesurée DANS la scène (chrome-headless-shell de HyperFrames,
@@ -110,7 +147,7 @@ IPHONE = {
               "police": "Inter 400, 17 pt, approche −0,013 em, opsz 17", "largeur_texte_pt": 232.57,
               "lignes": ["Bonjour Florian, votre", "rendez-vous est confirmé :", "Consultation vétérinaire, le",
                          "samedi 19 septembre à 09:00,", "Clinique vétérinaire du Port.", "Démo Vokio, RDV fictif."]},
-    "ecart_point": 14,        # px entre la pointe de la queue et le haut du disque (comme la v2 : 14 px sous la queue)
+    "ecart_point": _S6["ecart_point"],   # px entre la pointe de la queue et le haut du disque (v2 : 14 px sous la queue)
 }
 
 
@@ -156,7 +193,8 @@ def demi(t):
 
 
 def lire_json(nom):
-    return json.loads((DON / nom).read_text())
+    """Lit donnees/<nom> : mots.json (entrée commune) dans ce projet, le reste dans les données du format."""
+    return json.loads(((SRC if nom == "mots.json" else DON) / nom).read_text())
 
 
 def ecrire_json(nom, obj):
@@ -164,7 +202,8 @@ def ecrire_json(nom, obj):
 
 
 def navigateur(*args):
-    r = subprocess.run([PW, str(PROJET / "outils" / "navigateur.py"), *args], capture_output=True, text=True, timeout=600)
+    r = subprocess.run([PW, str(PROJET / "outils" / "navigateur.py"), *args, "--racine", str(RACINE), "--taille", f"{LARGEUR}x{HAUTEUR}"],
+                       capture_output=True, text=True, timeout=600)
     if r.returncode:
         raise SystemExit(f"navigateur.py {args} : {r.stderr[-3000:]}")
     out = json.loads(r.stdout)
@@ -431,8 +470,10 @@ def trajets(pages, sorties, P1, geo_s3, agenda, S_bulle):
     # vers la place d'écoute de s3, quand la dernière page de s2 est sortie
     so = sorties[s2[-1]["_cle"]]
     libre = int(math.ceil((so[0] + so[1]) * FPS - 1e-6))
-    L = (geo_s3["x"] + R_DISQUE, geo_s3["lignes_de_base"][-1] + ECOUTE_DY)
-    t1.aller(L, libre + 16, "descente", libre, n_min=16, raison="s3 : place d'écoute")
+    L = (ECOUTE["x"], ECOUTE["y"])
+    if FORMAT == "9x16":
+        assert L == (geo_s3["x"] + R_DISQUE, geo_s3["lignes_de_base"][-1] + ECOUTE_DY), "s3-ecoute.json[9x16] ≠ 90 + 22 ; 1018 + 118"
+    t1.aller(L, libre + 16, ECOUTE.get("forme", "descente"), libre, n_min=16, raison="s3 : place d'écoute")
     # s3 : le hochement du tamis (14,15 → 14,30 → 14,50) et la hausse sur « disponibilités » (16,19 → 16,49), tenue jusqu'à 17,20
     for (ta, tb, dy, raison) in ((14.15, 14.30, 8.0, "tamis : hochement (bas)"), (14.30, 14.50, 0.0, "tamis : hochement (retour)"),
                                  (16.19, 16.49, -10.0, "hausse sur « disponibilités »")):
@@ -443,6 +484,9 @@ def trajets(pages, sorties, P1, geo_s3, agenda, S_bulle):
     XA, Y9 = agenda["x_point"], agenda["heures"]["09:00"]
     so5 = sorties[[p["_cle"] for p in pages if p["scene"] == "s5-rendez-vous"][-1]]
     f_gout = int(math.ceil((so5[0] + so5[1]) * FPS - 1e-6))          # 933 : le dernier sous-titre de s5 est sorti
+    # FORMATS : en 16:9 le sous-titre n'est plus sur le chemin (il est à gauche, l'agenda à droite) : le point peut quitter la
+    # gouttière plus tôt pour un geste plus calme (mise-en-page/s6-sms.json « depart_gouttiere_avance », images ; 9:16 : 0)
+    f_gout -= int(MEP["s6"].get("depart_gouttiere_avance", 0))
     t2 = Trajet("s6", f_gout, (XA, Y9), boites)
     pa = [p for p in pages if p["scene"] == "s6-sms"][0]
     arrets6 = [m for m in pa["mots"] if m["texte"] in ARRETS_S6]
@@ -512,7 +556,7 @@ def point(mots, agenda, mesures, t1, t2, S_bulle):
         k(27, t2.f0 / FPS, XA, Y9, note=f"il attend dans la gouttière jusqu'à la sortie du dernier sous-titre de s5 (image {t2.f0}) ; trajet s6 ensuite"),
         k(28, t2.f / FPS, S_bulle[0], S_bulle[1], note="fin du trajet s6 (pistes.trajets[1]) : sous la queue de la bulle, d'où le SMS naîtra"),
         k(29, 39.30 + dS, S_bulle[0], S_bulle[1], note="immobile ; secousse du vibreur 1100 → 1114 (pistes.secousses) ; version iPhone : part AVEC le téléphone (41,00, début de sa sortie ; le plan d'origine : « il quitte la bulle pendant que le téléphone s'en va »), l'iPhone restant opaque tant qu'il n'a pas bougé"),
-        k(30, 39.8000 + dS, stylo["x0"], SY, "power2.inOut", {"dx": -30, "dy": 80}, note="s7 : départ du stylo, sous la ligne de base (ligne de base + 32) ; version iPhone : le point part de plus bas (394 px au lieu de 182), sur 15 images (1230 → 1245) en power2.inOut : pointe ≈ 75 px par image (v2 ≈ 68), dernier pas < 1 px (v2 0,2) : il se pose sur le stylo avant d'écrire, sans coude. Arc {dx −30, dy +80} (relecture du 27/09 : en ligne droite, il montait plus vite que la bulle et glissait sur le SMS encore lisible, de 1234 à 1240) : il sort par la gauche SOUS la bulle qui monte, longe le bord gauche du téléphone qui s'efface (jamais au-delà de son contour) et remonte au stylo ; ≥ 11 px de la bulle et de sa queue tant que le téléphone est visible (contrôlé par s6-sms.html et controles.py F4)"),
+        k(30, 39.8000 + dS, stylo["x0"], SY, "power2.inOut", dict(MEP["s6"]["depart_stylo_arc"]), note="s7 : départ du stylo, sous la ligne de base (ligne de base + 32) ; version iPhone : le point part de plus bas (394 px au lieu de 182), sur 15 images (1230 → 1245) en power2.inOut : pointe ≈ 75 px par image (v2 ≈ 68), dernier pas < 1 px (v2 0,2) : il se pose sur le stylo avant d'écrire, sans coude. Arc {dx −30, dy +80} (relecture du 27/09 : en ligne droite, il montait plus vite que la bulle et glissait sur le SMS encore lisible, de 1234 à 1240) : il sort par la gauche SOUS la bulle qui monte, longe le bord gauche du téléphone qui s'efface (jamais au-delà de son contour) et remonte au stylo ; ≥ 11 px de la bulle et de sa queue tant que le téléphone est visible (contrôlé par s6-sms.html et controles.py F4)"),
         k(31, 40.5000 + dS, stylo["x1"], SY, "sine.inOut", note="il écrit « Vokıo » (plume_mot) ; rond pendant l'écriture (etirement.sans)"),
         k(32, 40.5833 + dS, stylo["x1"], SY, note="demi-image : il bouge déjà à l'image du la"),
         k(33, 40.8333 + dS, M["x"], M["y"] - 110, "power1.out", {"dx": 40, "dy": -40}, note="sommet du bond, image du sol (montée balistique)"),
@@ -589,7 +633,9 @@ def evenements(mots, pt, pages, t2):
         "resolution_confirmation": a_img(syl["voyelle"]),
         "depart_telephone": j6["s6 : sous la queue de la bulle, où le SMS naîtra"]["depart"] / FPS,
         "arrivee_bulle": t2.f / FPS,
-        "telephone_monte": [35.10, 35.60],
+        # FORMATS : un format peut faire monter le téléphone plus tard (mise-en-page/s6-sms.json « telephone_monte », variante
+        # 16x9-centre : après le raccroché, le téléphone centré ne croise pas le dernier sous-titre) ; 9:16 : 35,10 → 35,60
+        "telephone_monte": list(MEP["s6"].get("telephone_monte", [35.10, 35.60])),
         "raccroche": 1076 / FPS, "silence_numerique": [35.9467, 1100 / FPS],
         "bulle_et_vibreur": 1100 / FPS, "bulle_ouverte": 1114 / FPS, "telephone_sortie": [39.30 + dS, 39.70 + dS],
         "depart_stylo": 39.30 + dS,
@@ -651,8 +697,45 @@ def reperes(mots):
     ]
 
 
+def geometrie_mise_en_page():
+    """La part de DONNEES.geometrie qui ne dépend d'aucune mesure : le cadre et les boîtes CSS des scènes (s1, s7). Écrite
+    AVANT les mesures (donnees.js provisoire) : s1 et s7 se posent d'après elle dans le banc de mesure."""
+    s1, s7 = MEP["s1"], MEP["s7"]
+    return {
+        "cadre": {"format": FORMAT, "largeur": LARGEUR, "hauteur": HAUTEUR, "marge_laterale": MEP["format"]["marge_laterale"],
+                  "haut_utile": MEP["format"]["haut_utile"], "bas_utile": MEP["format"]["bas_utile"], "corps_min": MEP["format"]["corps_min"]},
+        "s1": {"phrase": dict(s1["phrase"]), "relance": dict(s1["relance"])},
+        "s7": {"fin": dict(s7["fin"]), "promesse": dict(s7["promesse"]), "offre": dict(s7["offre"])},
+    }
+
+
+def donnees_provisoires():
+    """donnees.js minimal pour le banc de mesure d'un projet neuf (formats/…) : les scènes s1 et s7 s'y montent sans
+    erreur (DONNEES.scenes, mots, accroche, secousses, geometrie de mise en page) ; les sections calculées plus loin
+    (point, événements, pages) manquent : s1 et s7 le savent (« complet » faux) et ne posent que leur géométrie."""
+    dialogue = json.loads(DIALOGUE.read_text())
+    mj = lire_json("mots.json")
+    scenes = {}
+    for sid, d, h in HOTES:
+        fin = FINS_NOMINALES.get(sid, round(d + h, 6))
+        scenes[sid] = {"debut": d, "fin": fin, "duree": round(fin - d, 4), "image_debut": img(d), "image_fin": img(fin),
+                       "hote": f"h-{sid}", "hote_start": d, "hote_duration": h, "fichier": f"compositions/{sid}.html"}
+    P = {"version": "provisoire (mesures en cours)", "fps": FPS, "duree": DUREE, "images": IMAGES, "taille": [LARGEUR, HAUTEUR],
+         "format": MEP["format"], "couleurs": COULEURS, "scenes": scenes,
+         "mots": [{k: w[k] for k in ("texte", "cle", "debut", "fin", "image", "locuteur", "extrait", "rang")}
+                  | ({"voyelle": w["voyelle"]} if "voyelle" in w else {}) for w in mj["mots"]],
+         "syllabes": mj["syllabes"], "secousses": secousses(), "accroche": ACCROCHE, "geometrie": geometrie_mise_en_page(),
+         "dialogue": {"extraits": [{"id": e["id"]} for e in dialogue["extraits"]]}}
+    (DON / "donnees.js").write_text("/* donnees/donnees.js PROVISOIRE (outils/construire.py, mesures en cours) */\nwindow.DONNEES = "
+                                    + json.dumps(P, ensure_ascii=False, separators=(",", ":")) + ";\n")
+
+
 def main():
-    DON.mkdir(exist_ok=True)
+    DON.mkdir(parents=True, exist_ok=True)
+    if RACINE != PROJET or not (DON / "donnees.js").exists():
+        donnees_provisoires()           # projet de format neuf : le banc de mesure a besoin de DONNEES.scenes et de la mise en page
+    elif FORMAT == "9x16":
+        pass                            # 9:16 : le banc mesure avec les données en place, exactement comme avant les formats
     # 1. géométrie mesurée dans Chromium (s1 : le « . » ; s7 : #mot-pt à 400 px)
     g = navigateur("geometrie")
     s7 = g["s7"]
@@ -673,21 +756,28 @@ def main():
                "segments": {k: {"x0": v["boite"]["x0"], "x1": v["boite"]["x1"], "largeur": v["boite"]["l"], "texte": v["texte"],
                                 "encre_x0": round(v["encre_x0"], 3), "encre_x1": round(v["encre_x1"], 3)} for k, v in segs.items()},
                "ligne_de_base": s7["ligne_de_base"], "glyphe_i": s7["glyphe_i"], "stylo": stylo,
-               "methode": s7["methode_centre"], "source": "compositions/s7-signature.html #mot-pt (Instrument Serif 400 px, top 544)"},
+               "methode": s7["methode_centre"], "source": f"compositions/s7-signature.html #mot-pt (Instrument Serif {MEP['s7']['fin']['corps']} px, top {MEP['s7']['fin']['top']})"},
     }
-    assert abs(mesures["s1"]["lignes"][1]["ligne_de_base"] - 874) < 0.51, ("« mains prises. » doit rester sur la ligne de base 874 (celle de s2)",
-                                                                         mesures["s1"]["lignes"])
-    assert abs(mesures["s7"]["ligne_de_base"] - 860) < 0.51, mesures["s7"]["ligne_de_base"]
+    b_s2 = STYLES["s2_texte"]["lignes_de_base"][0]
+    assert abs(mesures["s1"]["lignes"][1]["ligne_de_base"] - b_s2) < 0.51, (f"« mains prises. » doit rester sur la ligne de base {b_s2} (celle de s2) : "
+                                                                          "mise-en-page/s1-sonnerie.json (top) ou texte.json (s2_texte)", mesures["s1"]["lignes"])
+    assert abs(mesures["s1"]["lignes"][1]["x0"] - STYLES["s2_texte"]["x"]) < 0.51, ("l'accroche doit partir du x de s2", mesures["s1"]["lignes"])
+    b7 = MEP["s7"]["fin"].get("ligne_de_base", 860 if FORMAT == "9x16" else None)
+    assert b7 is None or abs(mesures["s7"]["ligne_de_base"] - b7) < 0.51, (f"s7 : ligne de base mesurée {mesures['s7']['ligne_de_base']} ≠ {b7} attendue "
+                                                                          "(mise-en-page/s7-signature.json : top, ligne_de_base)")
+    print(f"s1 : « . » en {mesures['s1']['centre']} ; s7 : ligne de base {mesures['s7']['ligne_de_base']}, #mot-pt en {mesures['s7']['centre']}")
     assert abs(mesures["s7"]["diametre"] - 44) < 0.3, mesures["s7"]["diametre"]
     ecrire_json("mesures.json", mesures)
 
     # 2. données de base (sans pages ni suiveur) : écrites une première fois pour le banc des pages
-    dialogue = json.loads((PROJET / "son" / "dialogue.json").read_text())
+    dialogue = json.loads(DIALOGUE.read_text())      # commun à tous les formats
     assert abs(dialogue["duree_s"] - DUREE) < 1e-9, f"son/dialogue.py doit être relancé ({DUREE:.2f} s)"
     mj = lire_json("mots.json")
     mots = mj["mots"]
     agenda = lire_json("agenda-geo.json")
     assert agenda.get("version") == 2 and agenda["echelle"] == 4.5, "outils/preparer_agenda.py v2 doit être relancé"
+    assert agenda["image"]["x"] == MEP["agenda"]["x"] and agenda["image"]["y"] == MEP["agenda"]["y"], \
+        f"{DON / 'agenda-geo.json'} n'est pas celui du format {FORMAT} : outils/preparer_agenda.py --format {FORMAT} --sortie …"
     sec = secousses()
     scenes = {}
     for sid, d, h in HOTES:
@@ -698,7 +788,7 @@ def main():
     D = {
         "version": datetime.now().isoformat(timespec="seconds"),
         "film": "Le point sur le i", "revision": "v2", "fps": FPS, "duree": DUREE, "images": IMAGES,
-        "taille": [1080, 1920], "couleurs": COULEURS,
+        "taille": [LARGEUR, HAUTEUR], "couleurs": COULEURS,
         "scenes": scenes,
         "dialogue": {"fichier": "son/dialogue.wav", "conversation_id": dialogue["appel"]["conversation_id"],
                      "extraits": [{k: e[k] for k in ("id", "locuteur", "film_in", "film_out", "source_in", "source_out",
@@ -711,6 +801,8 @@ def main():
         "agenda": agenda,
         "mesures": {"s1": mesures["s1"], "s7": mesures["s7"]},
         "accroche": ACCROCHE,
+        "format": MEP["format"] | ({"variantes": MEP["variantes"]} if MEP.get("variantes") else {}),
+        "geometrie": geometrie_mise_en_page(),
     }
 
     def ecrire_js():
@@ -779,19 +871,21 @@ def main():
     pt = point(mots, agenda, mesures, t1, t2, S_bulle)
     ev = evenements(mots, pt, D["pages"], t2)
     rep = reperes(mots)
+    ST = STYLES
     geometrie = {
-        "s2_texte": dict(STYLES["s2_texte"], largeur_max=LARGEUR_MAX_S2,
-                         css=f"position:absolute; left:90px; top:{STYLES['s2_texte']['top']}px; margin:0; font:400 72px/84px \"Geist\"; letter-spacing:0; white-space:nowrap"),
-        "s3_texte": dict(STYLES["s3_texte"], largeur_max=LARGEUR_MAX,
-                         css=f"position:absolute; left:90px; top:{STYLES['s3_texte']['top']}px; margin:0; font:italic 400 64px/72px \"Instrument Serif\"; letter-spacing:0",
-                         mention=dict(STYLES["mention"], texte="Appel réel sur une ligne de démonstration, raccourci.", couleur=COULEURS["gris"],
-                                      largeur_max=920)),
+        "s2_texte": dict(ST["s2_texte"], largeur_max=LARGEUR_MAX_S2,
+                         css=f"position:absolute; left:{ST['s2_texte']['x']}px; top:{ST['s2_texte']['top']}px; margin:0; font:400 {ST['s2_texte']['corps']}px/{ST['s2_texte']['interligne']}px \"Geist\"; letter-spacing:0; white-space:nowrap"),
+        "s3_texte": dict(ST["s3_texte"], largeur_max=LARGEUR_MAX,
+                         css=f"position:absolute; left:{ST['s3_texte']['x']}px; top:{ST['s3_texte']['top']}px; margin:0; font:italic 400 {ST['s3_texte']['corps']}px/{ST['s3_texte']['interligne']}px \"Instrument Serif\"; letter-spacing:0",
+                         mention=dict(ST["mention"], texte="Appel réel sur une ligne de démonstration, raccourci.", couleur=COULEURS["gris"],
+                                      largeur_max=MEP["texte"]["mention_largeur_max"])),
         "sous_titres_haut": {
-            "agente": dict(STYLES["haut_agente"], css=f"position:absolute; left:90px; top:{STYLES['haut_agente']['top']}px; font:400 72px/84px \"Geist\""),
-            "appelant": dict(STYLES["haut_appelant"], css=f"position:absolute; left:90px; top:{STYLES['haut_appelant']['top']}px; font:italic 400 64px/72px \"Instrument Serif\""),
-            "note": "s4, s5 et s6 ; l'agenda commence à y = 590 (image), son étiquette 09:00 à 641"},
+            "agente": dict(ST["haut_agente"], css=f"position:absolute; left:{ST['haut_agente']['x']}px; top:{ST['haut_agente']['top']}px; font:400 {ST['haut_agente']['corps']}px/{ST['haut_agente']['interligne']}px \"Geist\""),
+            "appelant": dict(ST["haut_appelant"], css=f"position:absolute; left:{ST['haut_appelant']['x']}px; top:{ST['haut_appelant']['top']}px; font:italic 400 {ST['haut_appelant']['corps']}px/{ST['haut_appelant']['interligne']}px \"Instrument Serif\""),
+            "note": "s4, s5 et s6 ; l'agenda commence à y = 590 (image), son étiquette 09:00 à 641" if FORMAT == "9x16" else
+                    f"s4, s5 et s6 ; l'agenda (image) en ({agenda['image']['x']} ; {agenda['image']['y']}), son filet 09:00 à {agenda['heures']['09:00']}"},
         "s6": G6,
-        "s7": {"corps": 400, "top": 544, "ligne_de_base": mesures["s7"]["ligne_de_base"], "stylo_y": stylo["y"],
+        "s7": {"corps": MEP["s7"]["fin"]["corps"], "top": MEP["s7"]["fin"]["top"], "ligne_de_base": mesures["s7"]["ligne_de_base"], "stylo_y": stylo["y"],
                "stylo_x0": stylo["x0"], "stylo_x1": stylo["x1"], "mot": {"x0": s7["mot"]["x0"], "x1": s7["mot"]["x1"]},
                "segments": mesures["s7"]["segments"], "mot_pt_centre": mesures["s7"]["centre"], "diametre": mesures["s7"]["diametre"],
                "masque_depart": "inset(-30% 114% -30% -14%)", "masque_ouvert": "inset(-30% -14% -30% -14%)"},
@@ -804,6 +898,29 @@ def main():
                    "x_point": agenda["x_point"], "heures": {h: agenda["heures"][h] for h in ("09:00", "10:00", "11:00")},
                    "note": "détail complet dans DONNEES.agenda (agenda-geo.json v2) ; l'objet agenda (image + mention) est posé en (image.x ; image.y)"},
     }
+    # FORMATS (27/09) : ce que les scènes lisaient en px en dur. Ajouts seulement : les clés ci-dessus ne changent pas.
+    GM = geometrie_mise_en_page()
+    geometrie["cadre"] = GM["cadre"]
+    geometrie["s1"] = dict(GM["s1"], lignes_de_base=[l["ligne_de_base"] for l in mesures["s1"]["lignes"]],
+                           note="boîtes CSS de #s1-phrase et #s1-relance (left = x, top, font-size = corps, line-height = interligne)")
+    geometrie["s2_texte"]["x_max"] = X_MAX_POINT
+    geometrie["sous_titres_haut"]["conteneur"] = {"largeur": MEP["texte"]["conteneur_sous_titres"][0],
+                                                  "hauteur": MEP["texte"]["conteneur_sous_titres"][1],
+                                                  "note": "boîte de #s4-texte, #s5-texte, #s6-texte en (0 ; 0)"}
+    geometrie["s3_texte"]["ecoute"] = dict(ECOUTE)
+    MA = MEP["agenda"]
+    geometrie["agenda"].update({
+        "boite": {"x": agenda["image"]["x"], "y": agenda["image"]["y"], "largeur": agenda["image"]["largeur"], "hauteur": MA["boite_hauteur"],
+                  "note": "la boîte de l'objet (#s4-agenda, #s5-agenda) : image en (0 ; 0) dedans ; la mention en (left_dans_l_objet ; top_dans_l_objet), "
+                          "négatif = au-dessus de l'image"},
+        "y_depart": MA["y_depart"], "y_sortie": MA["y_sortie"], "haut_min": MA["haut_min"], "t_haut_min": MA["t_haut_min"]})
+    geometrie["agenda"]["mention"].update({"corps": STYLES["mention"]["corps"], "interligne": STYLES["mention"]["interligne"],
+                                          "couleur": COULEURS["gris"]})
+    geometrie["s6"].update({"y_entree": MEP["s6"]["y_entree"], "y_sortie": MEP["s6"]["y_sortie"],
+                            "depart_stylo_arc": dict(MEP["s6"]["depart_stylo_arc"])})
+    geometrie["s7"].update(GM["s7"])
+    # toutes les entrées de mise-en-page/*.json du format, telles quelles (clés libres des scènes : lues par leur composition)
+    geometrie["mise_en_page"] = MEP["scenes"]
     D.update({"reperes": rep, "point": pt, "evenements": ev, "geometrie": geometrie})
     for nom, obj in (("secousses.json", sec), ("point.json", pt), ("scenes.json", scenes), ("evenements.json", ev),
                      ("reperes.json", rep), ("styles-pages.json", STYLES)):
@@ -893,6 +1010,20 @@ def main():
             if min(abs(v[k]), abs(v[k - 1]), abs(v[k - 2])) > 0.5 and np.sign(v[k]) == -np.sign(v[k - 1]) == np.sign(v[k - 2]):
                 err.append(f"alternance à 2 images ({axe}) vers {k + 1}")
                 break
+    # FORMATS : le point reste dans le cadre, et ne s'arrête jamais (≥ 8 images immobiles) dans une zone interdite du format
+    # (9:16 : l'interface Reels sous 1500 ; 16:9 : les 10 % du bas et le bouton « Passer l'annonce »)
+    arret = 0
+    for k, e in enumerate(res):
+        r_ = e["d"] / 2 * max(e["sx"], e["sy"])
+        if e["d"] > 0 and (e["x"] - r_ < 0 or e["x"] + r_ > LARGEUR or e["y"] - r_ < 0 or e["y"] + r_ > HAUTEUR):
+            err.append(f"le point sort du cadre à l'image {k} ({e['x']:.0f} ; {e['y']:.0f})"); break
+    for k, e in enumerate(res):
+        arret = arret + 1 if k and pas[k] < 0.5 else 0
+        if arret == 8 and e["d"] > 0:
+            b = [e["x"] - e["d"] / 2, e["y"] - e["d"] / 2, e["x"] + e["d"] / 2, e["y"] + e["d"] / 2]
+            z = mise_en_page.zones_touchees(MEP, b)
+            if z:
+                err.append(f"le point s'arrête à l'image {k - 7} en ({e['x']:.0f} ; {e['y']:.0f}) dans la zone « {z[0]} » ({FORMAT})")
     print(f"image 0 : ({R[0]['x']}, {R[0]['y']}) sans secousse ({R[0]['x_sans']}, {R[0]['y_sans']}), écart {e0:.3f} px, d {R[0]['d']}")
     print(f"image {N_RE} : ({R[N_RE]['x']}, {R[N_RE]['y']}) d {R[N_RE]['d']} sx/sy {R[N_RE]['sx']}/{R[N_RE]['sy']} (écart {eRe:.3f} px à #mot-pt {M})")
     for n in sorted({0, 25, 27, 29, 126, 127, 137, 139, 141, 150, 516, 534, 613, 616, 619, 620, 643, 666, 730, 731, 761, 762, 783, 787, 801,

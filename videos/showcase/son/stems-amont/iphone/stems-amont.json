@@ -1,0 +1,124 @@
+{
+ "empreinte": "28267a71bbbe7a6cc28737ace8c84286185827a254ecada27f9eacbb152d9d48",
+ "echelle": "stems du master validé, gain de master compris, sans limiteur",
+ "sr": 48000,
+ "format": "pcm_f32le stéréo",
+ "stems": {
+  "dialogue": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/dialogue.wav",
+  "sfx": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/sfx.wav",
+  "signature": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/signature.wav",
+  "nappe": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/nappe.wav",
+  "musique": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/musique.wav",
+  "ambiance": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/ambiance.wav",
+  "point": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/point.wav",
+  "ecriture": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/ecriture.wav",
+  "objets": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/objets.wav",
+  "ligne": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/ligne.wav"
+ },
+ "mesures": {
+  "dialogue": {
+   "crete_dbfs": 0.31,
+   "lufs": -13.4
+  },
+  "sfx": {
+   "crete_dbfs": -11.16,
+   "lufs": -21.11
+  },
+  "signature": {
+   "crete_dbfs": -0.14,
+   "lufs": -16.04
+  },
+  "nappe": {
+   "crete_dbfs": -7.51,
+   "lufs": -22.98
+  },
+  "musique": {
+   "crete_dbfs": -1.7,
+   "lufs": -19.45
+  },
+  "ambiance": {
+   "crete_dbfs": -32.53,
+   "lufs": -51.45
+  },
+  "point": {
+   "crete_dbfs": -9.02,
+   "lufs": -36.25
+  },
+  "ecriture": {
+   "crete_dbfs": -8.98,
+   "lufs": -30.14
+  },
+  "objets": {
+   "crete_dbfs": -23.17,
+   "lufs": -36.07
+  },
+  "ligne": {
+   "crete_dbfs": -38.43,
+   "lufs": -55.49
+  }
+ },
+ "gain_master_valide_db": 7.84,
+ "variante": "iphone",
+ "evenements_differents": [
+  "depart_stylo"
+ ],
+ "musique": {
+  "rattrapages": 5,
+  "manques": [],
+  "relache_quinte": 0.35
+ },
+ "design": {
+  "rattrapage": [],
+  "marges_finales_min": {
+   "bande": 11.4,
+   "K": 10.5
+  }
+ },
+ "ligne": {
+  "zones_source": [
+   [
+    11.92,
+    12.05
+   ],
+   [
+    74.92,
+    75.09
+   ]
+  ],
+  "bande": [
+   700.0,
+   7000.0
+  ],
+  "rms_db": -66.0,
+  "fondu_in": 0.25,
+  "graine": 7,
+  "confort": {
+   "apparier": [
+    2000.0,
+    8000.0
+   ],
+   "ecart_db": -2.0,
+   "ouvre_db": 10.0,
+   "sous_db": 8.0,
+   "relache": 0.35,
+   "remplace": true,
+   "anticipation": 0.015,
+   "fondu": 0.01
+  },
+  "zones_film_porte_ouverte": [
+   [
+    12.14,
+    12.27
+   ]
+  ],
+  "plancher_porte_ouverte_db": -48.46,
+  "fond_base_db": -66.14,
+  "gain_confort_db": 15.68,
+  "porte_ouverte_s": 6.935,
+  "bande_apparier": [
+   2000.0,
+   8000.0
+  ]
+ },
+ "duree_calcul_s": 180.2
+}

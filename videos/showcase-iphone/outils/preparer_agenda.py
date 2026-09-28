@@ -4,6 +4,9 @@ les rééchantillonner, et écrit la géométrie en px FILM.
 
     python3 outils/preparer_agenda.py     écrit assets/captures/agenda-avant.png, agenda-apres.png,
                                           bloc-florian.png et donnees/agenda-geo.json (v2)
+    python3 outils/preparer_agenda.py --format 16x9 --sortie formats/16x9/donnees/agenda-geo.json --sans-images
+                                          la géométrie d'un autre format (pose et mention : mise-en-page/agenda.json) ;
+                                          les recadrages PNG sont communs à tous les formats (--sans-images : non réécrits)
 
 Entrées (prises par la session principale le 27/09, aucune écriture en production) :
   assets/captures/agenda-avant-v2-brut.png   1575 × 2070 : « main .card-v » entière, dsf 4,5, viewport 390 px
@@ -26,20 +29,36 @@ Règles (plan v2, chantier « assets/captures ») :
     découpé dans la capture « après » ; contrôle : avant + calque = après, au pixel près.
 Tous les relevés d'encre sont faits sur les pixels (les boîtes DOM sont gardées à côté, en « dom »).
 """
+import argparse
 import json
 import os
+import sys
 from datetime import datetime
 from pathlib import Path
 
 import numpy as np
 from PIL import Image
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import mise_en_page  # noqa: E402
+
 PROJET = Path(__file__).resolve().parents[1]
 CAP = PROJET / "assets" / "captures"
+_A = argparse.ArgumentParser()
+_A.add_argument("--format", default="9x16")
+_A.add_argument("--sortie", default=None, help="chemin de agenda-geo.json (défaut : donnees/agenda-geo.json de ce projet)")
+_A.add_argument("--sans-images", action="store_true", help="ne réécrit pas les recadrages PNG (communs aux formats)")
+ARGS = _A.parse_args(sys.argv[1:] if __name__ == "__main__" else [])
+MEP = mise_en_page.charger(ARGS.format)
 ECH = 4.5                        # px capture = px film par px CSS
-POSE_X, POSE_Y = 70, 590         # coin haut gauche de l'image dans le film (entiers : 1 px image = 1 px écran) ;
-                                 # x = 70 (finition 27/09) : la carte respecte la marge latérale de 70 px (règle 5), 62 la débordait de 8 px
-DROITE_VISIBLE = 1080
+# 9:16 : (70 ; 590) : coin haut gauche de l'image dans le film (entiers : 1 px image = 1 px écran) ;
+# x = 70 (finition 27/09) : la carte respecte la marge latérale de 70 px (règle 5), 62 la débordait de 8 px.
+# FORMATS : la pose vient de mise-en-page/agenda.json, la largeur visible = celle du cadre.
+POSE_X, POSE_Y = MEP["agenda"]["x"], MEP["agenda"]["y"]
+DROITE_VISIBLE = MEP["format"]["largeur"]
+LARGEUR_CADRE, HAUTEUR_CADRE = MEP["format"]["largeur"], MEP["format"]["hauteur"]
+MENTION_GEO = MEP["agenda"]["mention"]
+STYLE_MENTION = MEP["texte"]["styles"]["mention"]      # la mention de l'agenda a le style de la mention de s3
 PAPIER_CARTE = np.array([244, 241, 232])   # fond de la carte (rgb), relevé
 ENCRE_ETIQ = np.array([108, 103, 95])      # text-faint des étiquettes, relevé
 FOND_BLOC = np.array([240, 222, 188])      # fond du bloc (rgba(239,164,36,.2) sur la colonne), relevé
@@ -143,7 +162,8 @@ def main():
         return round(POSE_Y + (yc - Y0), 2)
 
     for src, dst, arr in (("agenda-avant-v2-brut.png", "agenda-avant.png", av), ("agenda-apres-v2-brut.png", "agenda-apres.png", ap)):
-        Image.open(CAP / src).convert("RGB").crop((X0, Y0, X1, Y1)).save(CAP / dst, optimize=True)
+        if not ARGS.sans_images:
+            Image.open(CAP / src).convert("RGB").crop((X0, Y0, X1, Y1)).save(CAP / dst, optimize=True)
     a2 = np.asarray(Image.open(CAP / "agenda-avant.png")).astype(np.int16)
     p2 = np.asarray(Image.open(CAP / "agenda-apres.png")).astype(np.int16)
     assert a2.shape == (H, W, 3)
@@ -153,7 +173,10 @@ def main():
     rgba = np.zeros((H, W, 4), dtype=np.uint8)
     rgba[by0:by1, bx0:bx1, :3] = p2[by0:by1, bx0:bx1]
     rgba[by0:by1, bx0:bx1, 3] = 255
-    Image.fromarray(rgba, "RGBA").save(CAP / "bloc-florian.png", optimize=True)
+    if not ARGS.sans_images:
+        Image.fromarray(rgba, "RGBA").save(CAP / "bloc-florian.png", optimize=True)
+    else:
+        assert (np.asarray(Image.open(CAP / "bloc-florian.png")) == rgba).all(), "bloc-florian.png n'est plus à jour (relancer sans --sans-images)"
     comp = a2.copy()
     comp[by0:by1, bx0:bx1] = p2[by0:by1, bx0:bx1]
     assert (comp == p2).all(), "le calque ne reconstitue pas l'après"
@@ -211,7 +234,7 @@ def main():
     date_prise = datetime.fromtimestamp(os.path.getmtime(CAP / "agenda-apres-v2-brut.png")).isoformat(timespec="seconds")
     geo = {
         "version": 2,
-        "unite": "px FILM (1080×1920) ; 1 px capture = 1 px film (aucun rééchantillonnage) ; y des filets = centre du filet de 4,5 px",
+        "unite": f"px FILM ({LARGEUR_CADRE}×{HAUTEUR_CADRE}) ; 1 px capture = 1 px film (aucun rééchantillonnage) ; y des filets = centre du filet de 4,5 px",
         "echelle": ECH, "echelle_px_film_par_px_css": ECH,
         "source": {"avant": "assets/captures/agenda-avant-v2-brut.png", "apres": "assets/captures/agenda-apres-v2-brut.png",
                    "releves_dom": ["assets/captures/agenda-avant-v2-geo.json", "assets/captures/agenda-apres-v2-geo.json"],
@@ -222,7 +245,8 @@ def main():
                   "droite_visible": DROITE_VISIBLE,
                   "css": f"position:absolute; left:{POSE_X}px; top:{POSE_Y}px; width:{W}px; height:{H}px (1:1, jamais redimensionnée ; déborde à droite, le cadre la coupe à {DROITE_VISIBLE} : data-layout-allow-overflow)"},
         "carte": {"x0": fx(carte_x0_cap), "x1": fx(carte_x1_cap), "bordure_px": ECH,
-                  "note": f"bord gauche de la carte (bordure 1 px CSS comprise) en x = {POSE_X} (marge latérale de 70 px) ; bord droit hors cadre"},
+                  "note": f"bord gauche de la carte (bordure 1 px CSS comprise) en x = {POSE_X}" + (" (marge latérale de 70 px)" if POSE_X == 70 else "")
+                          + " ; bord droit hors cadre"},
         "heures": {f["heure"]: f["centre"] for f in F_film},
         "filets": F_film,
         "pas_heure": round(F[1]["centre"] - F[0]["centre"], 2),
@@ -234,9 +258,10 @@ def main():
         "x_point": x_point,
         "x_point_calcul": f"(bord droit d'encre des étiquettes {encre_droite} + colonne_x {col_x}) / 2",
         "bloc": bloc,
-        "mention": {"lignes": MENTION, "x": 90, "lignes_de_base": [1313, 1361],
-                    "police": "Geist 400, 36 px, interlignage 48 px, #6F695F",
-                    "note": "accrochée sous l'image (data-element=\"agenda\"), solidaire ; bas de boîte < 1500"},
+        "mention": {"lignes": MENTION, "x": MENTION_GEO["x"], "lignes_de_base": list(MENTION_GEO["lignes_de_base"]),
+                    "police": f"Geist 400, {STYLE_MENTION['corps']} px, interlignage {STYLE_MENTION['interligne']} px, #6F695F",
+                    "note": ("accrochée sous l'image" if MENTION_GEO["lignes_de_base"][0] > POSE_Y else "accrochée au-dessus de l'image")
+                            + f" (data-element=\"agenda\"), solidaire ; bas de boîte < {MEP['format']['bas_utile']}"},
         "preuve": {"en_tete_dom": "Samedi 26 Septembre",
                    "note_en_tete": "en-tête de l'espace fictif des Catalans au moment de la prise, hors cadre ; l'espace a été remis dans l'état exact du rendez-vous du Port",
                    "etablissement_capture": "espace fictif de démonstration des Catalans (vétérinaire), app.vokio.fr",
@@ -249,7 +274,10 @@ def main():
                                                                             "haut_texte_aide_px_capture": int(aide), "Y1": Y1},
                       "etiquettes_visibles": visibles, "corps_etiquettes_px": 10 * ECH},
     }
-    (PROJET / "donnees").mkdir(exist_ok=True)
+    sortie = Path(ARGS.sortie) if ARGS.sortie else PROJET / "donnees" / "agenda-geo.json"
+    sortie.parent.mkdir(parents=True, exist_ok=True)
+    assert MENTION_GEO["lignes_de_base"][1] - MENTION_GEO["lignes_de_base"][0] == STYLE_MENTION["interligne"], \
+        "agenda.json : l'écart des deux lignes de la mention ≠ interligne du style mention (texte.json)"
     def natif(o):   # numpy → types JSON
         if isinstance(o, np.bool_):
             return bool(o)
@@ -258,7 +286,8 @@ def main():
         if isinstance(o, np.floating):
             return round(float(o), 3)
         raise TypeError(type(o))
-    (PROJET / "donnees" / "agenda-geo.json").write_text(json.dumps(geo, ensure_ascii=False, indent=1, default=natif))
+    sortie.write_text(json.dumps(geo, ensure_ascii=False, indent=1, default=natif))
+    print(f"→ {sortie}")
     print(json.dumps({k: geo[k] for k in ("heures", "pas_heure", "colonne_x", "x_point")}, ensure_ascii=False))
     print("bloc :", {k: bloc[k] for k in ("x0", "y0", "y1", "centre_y", "hauteur", "texte_x1", "x_fin")})
     print("étiquette 09:00 (encre) :", etiq["09:00"]["encre"])

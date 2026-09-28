@@ -17,6 +17,14 @@ html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#F4F1E8
 <script src="donnees/donnees.js" onerror="window.__sansDonnees = true"></script>
 <script>
   if (!window.DONNEES) window.DONNEES = { fps: 30, mots: [], scenes: {}, point: null };
+  // FORMATS : la fenêtre du banc = DONNEES.taille (1080 × 1920 par défaut, la taille écrite dans le style ci-dessus)
+  (function () {
+    const T = window.DONNEES.taille;
+    if (!T) return;
+    const st = document.createElement("style");
+    st.textContent = "html,body{width:" + T[0] + "px;height:" + T[1] + "px}#banc{width:" + T[0] + "px;height:" + T[1] + "px}";
+    document.head.appendChild(st);
+  })();
 </script>
 <script src="lib/texte.js"></script>
 </head>

@@ -34,9 +34,20 @@
   Le point n'est ni dessiné ni animé ici : la scène LIT POINT.etat(t) (masques) et DONNEES (instants, géométrie).
   Contrat relu sur les données au montage (exiger) : images des événements, ordre plume · la · sol · ré · promesse ·
   offre, clés du point au départ et à l'arrivée du stylo, clé du contact = centre MESURÉ de #mot-pt, diamètre,
-  continuité des masques aux deux bouts de l'écriture, tenue finale ≥ 1,6 s, rien sous y = 1500.
+  continuité des masques aux deux bouts de l'écriture, tenue finale ≥ 1,6 s, rien sous DONNEES.geometrie.cadre.bas_utile.
   RACCORDS : à l'image 1241, s6 est sortie (téléphone effacé à 41,40) ; à 1242, s7 est vide (masques fermés,
   textes sous leur masque) : papier + point, au pixel près des deux côtés. Fin du film à 47,00 (image 1410).
+
+  FORMATS (système de outils/format.py) : AUCUN px de mise en page n'est écrit ici. Les boîtes du wordmark (#s7-fin),
+  de la promesse et de l'offre viennent de mise-en-page/s7-signature.json (entrée du format, variantes par-dessus), recopiées
+  par construire.py dans DONNEES.geometrie.s7.fin / .promesse / .offre ; le CSS ne garde que le repli 9:16 (lignes marquées
+  « repli 9:16 »). Tout le reste est MESURÉ par construire.py dans cette mise en page : ligne de base, segments, centre de
+  #mot-pt, stylo (DONNEES.geometrie.s7, DONNEES.mesures.s7). Les chiffres cités plus haut (images, 860, 1500…) sont ceux
+  du 9:16 ; en 16:9 (défaut, wordmark centré) : ligne de base 480, point du ı en (1120,8 ; 238), stylo y 512 de x 539,3 à
+  1338,3, offre au-dessus de 880 (encart de l'annonceur) : outils/fiche_format.py formats/16x9 en donne la fiche mesurée.
+  Le masque d'encre est en coordonnées LOCALES de #s7-fin (x film − left de #s7-fin) : juste aussi quand le wordmark n'est
+  pas en left 0 (variante 16x9-C). Vérifier une retouche dans les deux formats : outils/verifier_scene.py s7-signature
+  (9:16 à l'image près, 16:9 construit, planche, raccords, règles ; commande complète dans son en-tête).
 -->
 <template id="s7-signature-template">
 <style>
@@ -49,11 +60,11 @@
    où #point (racine) se pose à l'image 1236. Balisage et CSS de ux-retravail/repondeur-ou-vokio/index.html
    (ı sans point + point solaire rond, left 63,5 %, margin-left −.055em, top .13em, .11em).
    Ne pas changer police, corps, top ni texte sans relancer outils/construire.py. */
-#s7-fin{position:absolute;left:0;right:0;top:544px;margin:0;text-align:center;font-family:"Instrument Serif",serif;font-weight:400;font-size:400px;line-height:.9}
+#s7-fin{position:absolute;left:0;right:0;top:544px;margin:0;text-align:center;font-family:"Instrument Serif",serif;font-weight:400;font-size:400px;line-height:.9} /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
 #mot{display:inline-flex;align-items:baseline;font-family:"Instrument Serif",serif;font-weight:400;font-size:400px;letter-spacing:-.045em;line-height:.9;color:#262019}
 #mot .seg{display:inline-block;clip-path:inset(-30% 114% -30% -14%)}
-/* L'encre qui coule derrière la plume (finition) : un masque en dégradé sur #s7-fin (x local = x film : left 0),
-   posé par la fonction du temps pendant plume_mot seulement. */
+/* L'encre qui coule derrière la plume (finition) : un masque en dégradé sur #s7-fin (x local = x film − left de
+   #s7-fin, 0 en 9:16 et en 16:9 par défaut), posé par la fonction du temps pendant plume_mot seulement. */
 #s7-fin{-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
 #mot .i{position:relative;font-style:normal}
 #mot-pt{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;border-radius:50%;background:#EFA424;visibility:hidden}
@@ -62,12 +73,12 @@
    mesuré dans le chrome-headless-shell de HyperFrames) : top 1020 − 67 = 953 → lignes de base 1020 / 1106 (plan v2).
    Boîte de 70 à 1010 : marges latérales de 70 px, le centrage reste sur x = 540. Interlignage < 1,3 em :
    chevauchement des boîtes de police voulu (TEXTE.poser, chevauchement: true), pas de l'encre. */
-#s7-promesse{position:absolute;left:70px;right:70px;top:953px;margin:0;text-align:center;font-family:"Instrument Serif",serif;
+#s7-promesse{position:absolute;left:70px;right:70px;top:953px;margin:0;text-align:center;font-family:"Instrument Serif",serif; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
              font-weight:400;font-style:normal;font-size:72px;line-height:86px;letter-spacing:0;color:#262019}
 #s7-promesse .s7-chute{font-style:italic}
 /* ── 3. L'offre ── Geist 400 44 px, interlignage 64 px, encre. Ligne de base 47 px sous le haut de la ligne
    (mesuré) : top 1236 − 47 = 1189 → lignes de base 1236 / 1300 ; bas de boîte 1317 < 1500. */
-#s7-offre{position:absolute;left:70px;right:70px;top:1189px;margin:0;text-align:center;font-family:"Geist",sans-serif;
+#s7-offre{position:absolute;left:70px;right:70px;top:1189px;margin:0;text-align:center;font-family:"Geist",sans-serif; /* repli 9:16 : réécrit par le script d'après DONNEES.geometrie */
           font-weight:400;font-style:normal;font-size:44px;line-height:64px;letter-spacing:0;color:#262019}
 /* Anticrénelage constant. À 44 px, Chromium dessine le Geist au repos en sous-pixel (franges colorées) mais
    en niveaux de gris dès qu'il est translaté d'une fraction de pixel : sans précaution, chaque ligne de
@@ -96,6 +107,21 @@
   const tl = gsap.timeline({ paused: true });
   function exiger(ok, msg) { if (!ok) throw new Error("s7-signature : " + msg); }
   const proche = function (a, b, tol) { return Math.abs(a - b) <= (tol != null ? tol : 0.01); };
+
+  // ── FORMATS (27/09) : les boîtes du wordmark, de la promesse et de l'offre viennent de DONNEES.geometrie.s7 (fin, promesse,
+  // offre ; mise-en-page/s7-signature.json). Le CSS ci-dessous garde les valeurs du 9:16, réécrites ici à l'identique. Posées
+  // AVANT toute mesure : outils/navigateur.py mesure #mot-pt dans CETTE mise en page (le point du film s'y pose).
+  const GL = D.geometrie && D.geometrie.s7;
+  const CADRE = (D.geometrie && D.geometrie.cadre) || { bas_utile: 1500 };   // repli 9:16 (données d'avant les formats)
+  if (GL && GL.fin) {
+    [["s7-fin", GL.fin], ["s7-promesse", GL.promesse], ["s7-offre", GL.offre]].forEach(function (x) {
+      const el = document.getElementById(x[0]), g = x[1];
+      el.style.left = g.left + "px"; el.style.right = g.right + "px"; el.style.top = g.top + "px";
+      el.style.fontSize = g.corps + "px"; el.style.textAlign = g.alignement;
+      if (g.interligne != null) el.style.lineHeight = g.interligne + "px";
+    });
+    document.getElementById("mot").style.fontSize = GL.fin.corps + "px";
+  }
 
   // ── 0. Le contrat, relu sur les données (sans POINT : la scène se monte aussi dans le banc de mesure) ──
   const G7 = D.geometrie && D.geometrie.s7;
@@ -157,6 +183,9 @@
   }
   const L_ENCRE = 40;                                              // px : largeur du bord d'encre, derrière la plume
   const fin7 = document.getElementById("s7-fin");
+  // Le dégradé se place dans la boîte de #s7-fin : x local = x film − left de #s7-fin (left calculé du CSS ou de
+  // DONNEES.geometrie.s7.fin, posé plus haut ; 0 en 9:16 et en 16:9 par défaut, 1000 dans la variante 16x9-C).
+  const X0_FIN = parseFloat(getComputedStyle(fin7).left) || 0;
   let masqueCourant = null;
   function masques(tF) {
     let xp = null;
@@ -168,7 +197,8 @@
       if (s.el.style.clipPath !== css) s.el.style.clipPath = css;
     });
     if (xp != null) {
-      m = "linear-gradient(to right, #000 0px, #000 " + (+(xp - L_ENCRE).toFixed(3)) + "px, rgba(0,0,0,0) " + (+xp.toFixed(3)) + "px)";
+      const xl = xp - X0_FIN;
+      m = "linear-gradient(to right, #000 0px, #000 " + (+(xl - L_ENCRE).toFixed(3)) + "px, rgba(0,0,0,0) " + (+xl.toFixed(3)) + "px)";
     }
     if (m !== masqueCourant) { fin7.style.webkitMaskImage = fin7.style.maskImage = m; masqueCourant = m; }
   }
@@ -192,7 +222,7 @@
   exiger(promesse.lignes.length === 2 && offre.lignes.length === 2, "la promesse et l'offre tiennent chacune sur deux lignes");
   const cs = getComputedStyle(document.getElementById("s7-offre"));
   const basOffre = parseFloat(cs.top) + 2 * parseFloat(cs.lineHeight);
-  exiger(!(basOffre > 1500), "l'offre descend sous y = 1500 (" + basOffre + ")");
+  exiger(!(basOffre > CADRE.bas_utile), "l'offre descend sous y = " + CADRE.bas_utile + " (" + basOffre + ")");
 
   // Chaque ligne monte d'un bloc (tous ses mots ensemble) depuis sous son masque de ligne (.tx-ligne).
   // 130 % de la hauteur de ligne, la valeur de TEXTE.sortir : en dessous, le haut des accents

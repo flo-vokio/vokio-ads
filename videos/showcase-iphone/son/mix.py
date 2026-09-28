@@ -94,7 +94,8 @@ NIV = {
 
 # décalages nommés (le plan les donne par rapport à un événement ; aucune autre constante de temps)
 DEC = {
-    "sol_avant_C1": 0.30,          # point 4 : l'accord de sol entre 0,30 s avant l'extrait C1 (10,50 → 10,20)
+    "sol_avant_mon": 0.36,         # point 4 : l'accord de sol entre 0,36 s avant « mon » (10,56 → 10,20). 27/09 soir : ancré
+                                   # sur le mot et non plus sur C1.film_in (le bord de C1 a reculé dans le vrai blanc, 10,42)
     "pedale_fondu": 1.5,           # point 3 : 4,60 → 6,10
     "resolution_fondu": 0.12,      # points 3 et 4 : fondu centré sur la voyelle de « -tion »
     "air_sms_apres_vibreur": 0.053333,     # point 11 : 36,72 = bulle_et_vibreur + 1,6 image
@@ -127,7 +128,7 @@ def extrait(id_):
 T = {
     "decroche": EV["decroche"]["t"],
     "pedale": POINTJ["taille"][-1]["t"],                   # 4,60 : le point atteint 44 px, la pédale naît
-    "sol": extrait("C1")["film_in"] - DEC["sol_avant_C1"],  # 10,20
+    "sol": mot("C1", 0)["debut"] - DEC["sol_avant_mon"],   # 10,20 (« mon » 10,56 − 0,36)
     "sus4": mot("A2A3", 0)["debut"],                       # 17,59 « Laissez-moi »
     "re7": mot("A2A3", 2)["debut"],                        # 19,80 « Je peux vous proposer »
     "re9": extrait("A4")["film_in"],                       # 26,17 « Parfait »
@@ -527,7 +528,7 @@ def nappe(duck):
         info[f"rms_{k}"] = round(rms_db(piste[j - SR // 4:j + SR // 4]), 2)
     piste *= duck[:, None]
     noms = ("accord-sol", "re-sus4", "re7", "re9", "resolution-sol")
-    sources = {"accord-sol": "dialogue.json C1.film_in − 0,30", "re-sus4": "mots A2A3[0].debut (« Laissez-moi »)",
+    sources = {"accord-sol": "mots C1[0].debut (« mon ») − 0,36", "re-sus4": "mots A2A3[0].debut (« Laissez-moi »)",
                "re7": "mots A2A3[2].debut (« Je peux vous proposer »)", "re9": "dialogue.json A4.film_in (« Parfait »)",
                "resolution-sol": "mots.syllabes.confirmation_derniere_syllabe.voyelle − 0,06 (fondu centré)"}
     for nom, (t0, d, acc, _) in zip(noms, plan):

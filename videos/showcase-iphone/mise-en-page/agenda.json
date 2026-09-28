@@ -1,0 +1,24 @@
+{
+ "_note": "L'objet agenda de s4 et s5 (UN objet, mêmes pixels aux deux scènes) : la vraie capture de app.vokio.fr (outils/preparer_agenda.py, 1575 × 675 à 4,5 px par px CSS, JAMAIS redimensionnée) posée en (x ; y) px entiers, qui déborde du cadre à droite, et sa mention solidaire (police = style « mention » de texte.json). boite_hauteur = hauteur de la boîte de l'objet (image + mention quand elle est dessous). y_depart : montée de s4 (+y → 0) ; y_sortie, haut_min, t_haut_min : sortie de s5 (0 → −y_sortie ; le haut de l'objet reste sous haut_min jusqu'à t_haut_min).",
+ "9x16": {
+  "x": 70,
+  "y": 590,
+  "mention": {"x": 90, "lignes_de_base": [1313, 1361]},
+  "boite_hauteur": 790,
+  "y_depart": 520,
+  "y_sortie": 270,
+  "haut_min": 520,
+  "t_haut_min": 31.11
+ },
+ "16x9": {
+  "_note": "Scène d'objet à droite de la colonne de lecture : bord gauche de la carte en 1064 (fin de la colonne ; 88 px après l'encre la plus longue des sous-titres, « septembre à neuf heures. »), 856 px de carte visibles (étiquettes, colonne du jour, bloc « 09:00 Florian » entier : le point finit d'écrire en 1734). y 234 : le filet 10:00 tombe sur la ligne de lecture (539,75) ; 09:00 à 305,75, 11:00 à 773,75, au-dessus du coin « Passer l'annonce » (780). La mention passe AU-DESSUS de la carte (lignes de base 150 / 202) : dessous, elle tombait dans les 10 % du bas et sous le bouton « Passer l'annonce ».",
+  "x": 1064,
+  "y": 234,
+  "mention": {"x": 1084, "lignes_de_base": [150, 202]},
+  "boite_hauteur": 675,
+  "y_depart": 360,
+  "y_sortie": 270,
+  "haut_min": 200,
+  "t_haut_min": 31.11
+ }
+}

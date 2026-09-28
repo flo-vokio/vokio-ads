@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Piste de dialogue du film « Le point sur le i » : les extraits du VRAI appel, placés aux temps du film.
 
-    python3 son/dialogue.py            écrit son/dialogue.wav + son/dialogue.json, et contrôle chaque coupe
+    python3 son/dialogue.py            écrit son/dialogue.wav + son/dialogue.json, et contrôle chaque coupe (code 1 si une
+                                       coupe sort du vrai blanc ou si un bord dépasse ce qu'exige l'image)
 
 Source : l'appel du 18/09/2026 à 16:51:54 (Paris) sur la ligne de démonstration de la Clinique
 vétérinaire du Port, conversation ElevenLabs conv_9401m2tg19wtfxn9cm727n4dtskz, 85 s.
@@ -11,12 +12,28 @@ vétérinaire du Port, conversation ElevenLabs conv_9401m2tg19wtfxn9cm727n4dtskz
     l'échantillon près avant 66,70, et montes = original − 4,20 après 70,90. Aucun autre blanc raboté.
 On coupe dans montes (PCM, pas de second décodage MP3).
 
-Règles :
-  - on ne coupe QUE dans des blancs : énergie < −45 dBFS sur ±20 ms autour de chaque point (fenêtres 10 ms) ;
-  - fondus de 15 ms en cosinus surélevé à chaque bord ;
-  - aucun traitement : niveau d'origine, pas de normalisation, pas d'égalisation (la chaîne voix de la bible
-    est le travail du sound designer, qui repart de ce fichier ou de dialogue.json) ;
-  - 48 kHz stéréo (double mono), PCM 24 bits, durée = durée du film. Hors extraits : zéros numériques.
+Règles (révision du 27/09 au soir, retour de Florian : « deux sautes de son au début » et « on n'entend pas bien le mon ») :
+  - LE VRAI BLANC. La voix de l'appelant passe par une porte (VAD) : entre deux phrases la source tombe sur un plancher de
+    −81/−82 dBFS (RMS 5 ms, 48 kHz), le vrai blanc. L'ancienne règle (< −45 dBFS à ±20 ms) laissait couper dans des
+    queues à −55/−63 dBFS : la chaîne voix de mix.py (compresseur + gain de sonie) les remonte de ~25 dB, et le fondu de
+    15 ms les faisait tomber net sur du silence numérique (la « saute » : 10,01 fin de « aider ? », 14,06 fin de « hier »,
+    35,48 fin de « Au revoir » ; 33,98 entrée de « Super » sur la porte déjà ouverte).
+    Désormais : TOUTE la rampe d'entrée et les 10 dernières ms de la rampe de sortie sont ≤ −70 dBFS (RMS 5 ms), et
+    la rampe de sortie couvre la décroissance naturelle de la queue. Une seule exception, déclarée dans l'extrait
+    ("blanc_out_dbfs") : A2A3, où l'agente enchaîne deux phrases sans que la porte se ferme (queue à −69/−79 dBFS), et
+    C3, dont la sortie ne peut pas dépasser 25,00 (s4-agenda.html exige SORTIE_CHOIX ≥ C3.film_out) : queue à −67 dBFS,
+    rampe de 80 ms. Les visuels lisent film_out de A2A3 (≤ 23,10) et de C3 (≤ 25,00), film_in de C2 (≤ 15,10).
+    Les mots ne bougent pas : seul le bord s'allonge dans le blanc (même décalage film − source, donc film_in plus tôt ou
+    film_out plus tard).
+  - fondus en cosinus surélevé : 40 ms à l'entrée, 60 à 120 ms à la sortie (champ par extrait) ;
+  - un seul traitement, déclaré : des gains de clip doux (champ "gains", rampes de 30 ms) : « mon » de
+    « mon chat » (+4 dB) : murmure nasal court, 3 à 5 dB sous « chat » dans 300-2 000 Hz à la source ; après la chaîne
+    voix de mix.py (dont le compresseur reprend ~2,6 dB), « mon » finit 1,35 LU au-dessus de « chat » dans le mix
+    hybride (−10,1 contre −11,5 LUFS, +1,3 dB dans 1-4 kHz ; avant : −11,6 contre −11,1, −0,5 LU). Mesuré à la
+    chaîne voix : +3 dB donnerait +0,9 LU, +2,5 dB +0,7 LU (outils/ausculter.py mots … --cles C1:0 C1:1) ; l'inspiration qui précède « Super » (C4), −6 dB. Sinon niveau
+    d'origine, pas de normalisation, pas d'égalisation ;
+  - 48 kHz stéréo (double mono), PCM 24 bits, durée = durée du film. Hors extraits : zéros numériques (le fond de ligne
+    qui porte les jointures est un stem à part : son/stems_amont.py, outils/fond_ligne.py).
 """
 import json
 import subprocess
@@ -31,38 +48,62 @@ MONTES = Path("/root/vokio-audios-metiers-180926/montes/veterinaire.wav")
 ORIGINAL = Path("/root/vokio-audios-metiers-180926/originaux/veterinaire.json")
 SR = 48000
 DUREE_FILM = 47.0   # v2, finition du 27/09 : 47,00 s, 1 410 images (le SMS se lit, la fin tient)
-FONDU = 0.015
+FONDU_IN, FONDU_OUT = 0.040, 0.060
+BLANC_DBFS = -70.0  # vrai blanc : plancher de la porte à −81/−82 dBFS, marge de 11 dB
+FONDU_GAIN = 0.030
+
 
 # Décalage montes → original : 0 avant 66,70 ; +4,20 après 70,90 (montes).
 def vers_original(t):
     return round(t + (4.20 if t >= 66.70 else 0.0), 3)
 
-# Les sept extraits. source = secondes dans montes/veterinaire.wav ; film = source + decalage.
-# texte = mots EXACTS dits dans l'extrait, pris dans la transcription d'origine (originaux/veterinaire.json).
+
+# Les sept extraits. src = secondes dans montes/veterinaire.wav ; film = src + decalage (décalages inchangés : les mots
+# ne bougent pas). texte = mots EXACTS dits dans l'extrait, pris dans la transcription d'origine.
+# "avant" = les bords de la v2 (27/09 matin), gardés pour la trace.
 EXTRAITS = [
-    {"id": "A1", "locuteur": "agent", "tour_t": 0, "src_in": 0.70, "src_out": 5.80, "decalage": 4.21,
+    {"id": "A1", "locuteur": "agent", "tour_t": 0, "src_in": 0.70, "src_out": 6.10, "decalage": 4.21,
+     "fondu_out": 0.120, "avant": [0.70, 5.80],
      "texte": "Bonjour, je suis Élise, l'assistante vocale de la Clinique vétérinaire du Port ! Comment puis-je vous aider ?",
-     "motif": "Le décroché, en entier."},
-    {"id": "C1", "locuteur": "appelant", "tour_t": 7, "src_in": 10.28, "src_out": 13.84, "decalage": 0.22,
+     "motif": "Le décroché, en entier. Sortie à 6,10 (et non 5,80, en pleine queue de « aider ? » à −63 dBFS) : la queue "
+              "décroît jusqu'au plancher, rampe de 120 ms."},
+    {"id": "C1", "locuteur": "appelant", "tour_t": 7, "src_in": 10.20, "src_out": 13.86, "decalage": 0.22,
+     "fondu_out": 0.060, "avant": [10.28, 13.84],
+     "gains": [{"mot": "mon", "src": [10.335, 10.425], "db": 4.0,
+                "raison": "« mon » : murmure nasal /mɔ̃/ de 90 ms (10,335 → 10,425), 3 à 5 dB sous « chat » dans 300-2 000 Hz ; "
+                          "retour de Florian 27/09 : on ne l'entend pas bien"}],
      "texte": "mon chat, euh, Moka, euh, mange plus depuis hier",
-     "motif": "On retire « Euh, oui, bonjour, j'vous appelle parce que » (fin 9,99) et « et il dort beaucoup, je trouve. » (début 14,01)."},
-    {"id": "C2", "locuteur": "appelant", "tour_t": 34, "src_in": 34.76, "src_out": 37.16, "decalage": -20.16,
+     "motif": "On retire « Euh, oui, bonjour, j'vous appelle parce que » (fin 9,99, souffle 10,10-10,19) et « et il dort beaucoup, "
+              "je trouve. » (bouffée 13,87). Entrée à 10,20, dans le vrai blanc après le souffle (porte fermée jusqu'à 10,33) ; "
+              "sortie à 13,86, avant la bouffée de « et »."},
+    {"id": "C2", "locuteur": "appelant", "tour_t": 34, "src_in": 34.72, "src_out": 37.20, "decalage": -20.16,
+     "avant": [34.76, 37.16],
      "texte": "Euh, demain, vous avez des disponibilités ?",
-     "motif": "Le triage saute (15,82 → 34,76) : « Je vois. Est-ce que Moka présente d'autres symptômes… », « Non, non, non, j'ai pas l'impression. », « Très bien. Dans ce cas… Quel jour vous conviendrait le mieux ? »."},
-    {"id": "A2A3", "locuteur": "agent", "tour_t": 48, "src_in": 48.66, "src_out": 53.90, "decalage": -31.12,
+     "motif": "Le triage saute (15,82 → 34,72) : « Je vois. Est-ce que Moka présente d'autres symptômes… », « Non, non, non, j'ai pas l'impression. », « Très bien. Dans ce cas… Quel jour vous conviendrait le mieux ? ». Entrée à 34,72 : la porte s'ouvre à 34,78."},
+    {"id": "A2A3", "locuteur": "agent", "tour_t": 48, "src_in": 48.66, "src_out": 53.975, "decalage": -31.12,
+     "fondu_out": 0.075, "avant": [48.66, 53.90],
+     "blanc_out_dbfs": -66.0,          # exception déclarée : aucune porte fermée entre les deux phrases de l'agente
      "texte": "Laissez-moi voir. Je peux vous proposer neuf heures, dix heures ou onze heures.",
-     "motif": "D'un seul tenant, avec le VRAI silence de l'outil next_available_slots (49,49 → 50,95, 1,46 s). Sautés en amont : « Un instant. », validate_date, « Demain, c'est samedi dix-neuf septembre. Pour quelle heure… », « Bah le matin. ». Coupé avant « Le dernier créneau possible de la journée est onze heures trente. Qu'est-ce qui vous arrangerait ? » (54,01)."},
-    {"id": "C3", "locuteur": "appelant", "tour_t": 58, "src_in": 58.80, "src_out": 60.54, "decalage": -35.56,
+     "motif": "D'un seul tenant, avec le VRAI silence de l'outil next_available_slots (49,49 → 50,95, 1,46 s). Sautés en amont : « Un instant. », validate_date, « Demain, c'est samedi dix-neuf septembre. Pour quelle heure… », « Bah le matin. ». Coupé avant « Le dernier créneau possible de la journée est onze heures trente. Qu'est-ce qui vous arrangerait ? » (53,99) : pas de vrai blanc entre les deux phrases, la rampe de 75 ms suit la queue jusqu'à −75 dBFS."},
+    {"id": "C3", "locuteur": "appelant", "tour_t": 58, "src_in": 58.76, "src_out": 60.56, "decalage": -35.56,
+     "fondu_out": 0.080, "avant": [58.80, 60.54],
+     "blanc_out_dbfs": -66.0,          # exception déclarée : la sortie est bornée à 25,00 par l'image (s4-agenda.html)
      "texte": "Euh, bah, à neuf heures, c'est parfait.",
-     "motif": "Saute « Très bien. C'est pour quel prénom ? » et « C'est pour Florian. » (63,31 → 66,48)."},
-    {"id": "A4", "locuteur": "agent", "tour_t": 71, "src_in": 67.24, "src_out": 74.30, "decalage": -41.07,
+     "motif": "Saute « Très bien. C'est pour quel prénom ? » et « C'est pour Florian. » (63,31 → 66,48). Sortie à 60,56 (film 25,00), là où la queue de « parfait. » rejoint le plancher : pas plus tard, car s4-agenda.html (SORTIE_CHOIX, 25,00) exige que le choix ne sorte pas avant la fin de C3."},
+    {"id": "A4", "locuteur": "agent", "tour_t": 71, "src_in": 67.24, "src_out": 74.33, "decalage": -41.07,
+     "fondu_out": 0.080, "avant": [67.24, 74.30],
      "texte": "Parfait, je vous note ça pour Florian, pour une consultation vétérinaire, le samedi dix-neuf septembre à neuf heures. Vous recevrez un SMS de confirmation.",
      "motif": "La confirmation, en entier. Le montage du 18/09 avait déjà retiré la revérification (original 66,70 → 70,90)."},
-    {"id": "C4", "locuteur": "appelant", "tour_t": 79, "src_in": 75.05, "src_out": 76.55, "decalage": -41.07,
+    {"id": "C4", "locuteur": "appelant", "tour_t": 79, "src_in": 74.86, "src_out": 76.72, "decalage": -41.07,
+     "fondu_out": 0.120, "avant": [75.05, 76.55],
+     "gains": [{"mot": "souffle avant « Super »", "src": [74.915, 75.070], "db": -6.0,
+                "raison": "la porte s'ouvre sur une inspiration (2,4-4,5 kHz, −34,6 dBFS après la chaîne voix) : gardée, "
+                          "car elle amène « Super » sans saute, mais 6 dB plus bas"}],
      "texte": "Super, merci beaucoup. Au revoir.",
      "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute. v2 : décalage −41,07, "
-              "le même que A4 : C4 suit A4 après son VRAI blanc de 0,75 s (source 74,30 → 75,05) ; la v1 (−40,60) "
-              "l'allongeait de 0,47 s pour loger le SMS pendant l'appel."},
+              "le même que A4 : C4 suit A4 après son VRAI blanc. Entrée à 74,86 : la porte s'ouvre à 74,915 (fond de la ligne "
+              "de l'appelant, 185 ms avant « Super ») ; l'ancienne entrée (75,05) tombait dessus. Sortie à 76,72 (queue de "
+              "« revoir. » jusqu'à 76,70), avant le raccroché du film (35,867 = 76,937)."},
 ]
 
 
@@ -73,14 +114,59 @@ def lire(chemin, sr):
     return np.frombuffer(brut, dtype="<f4").astype(np.float64)
 
 
-def niveau(sig, sr, t, w=0.010):
-    a, b = int(round((t - w / 2) * sr)), int(round((t + w / 2) * sr))
-    x = sig[max(0, a):max(0, b)]
-    return 20 * np.log10(np.sqrt(np.mean(x ** 2)) + 1e-12) if len(x) else -240.0
+def profil5(sig):
+    """RMS 5 ms (dBFS) de la source, fenêtres jointives."""
+    n = int(0.005 * SR)
+    k = len(sig) // n
+    return 20 * np.log10(np.sqrt(np.mean(sig[:k * n].reshape(k, n) ** 2, axis=1)) + 1e-12)
 
 
-def max_autour(sig, sr, t, r=0.020):
-    return max(niveau(sig, sr, x) for x in np.arange(t - r, t + r + 1e-9, 0.005))
+def max_sur(p, a, b):
+    i, j = int(np.floor(a / 0.005)), int(np.ceil(b / 0.005))
+    return float(p[i:max(j, i + 1)].max())
+
+
+def rampe(n):
+    return 0.5 - 0.5 * np.cos(np.linspace(0, np.pi, n))
+
+
+def gain_de_clip(n, i0, g, sr=SR):
+    """Courbe de gain (n,) : 1 partout, g.db sur [a ; b] (s relatives au début du morceau), rampes de FONDU_GAIN dehors."""
+    t = np.arange(n) / sr + i0
+    a, b = g["src"]
+    f = FONDU_GAIN
+    p = np.zeros(n)
+    p[(t >= a) & (t <= b)] = 1
+    m = (t >= a - f) & (t < a); p[m] = 0.5 - 0.5 * np.cos(np.pi * (t[m] - (a - f)) / f)
+    m = (t > b) & (t <= b + f); p[m] = 0.5 + 0.5 * np.cos(np.pi * (t[m] - b) / f)
+    return 1 + (10 ** (g["db"] / 20) - 1) * p
+
+
+# Ce que l'image exige des bords (compositions/*.html, « exiger(SORTIE ≥ e.film_… − EPS) ») : lu dans le HTML, vérifié à
+# chaque exécution, pour qu'une recoupe ne casse jamais le rendu quand donnees/ sera régénéré par outils/construire.py.
+CONTRAINTES_IMAGE = [  # (fichier, constante, extrait, bord)
+    ("s3-ecoute.html", "SORTIE_C1", "C2", "film_in"),
+    ("s4-agenda.html", "SORTIE_CRENEAUX", "A2A3", "film_out"),
+    ("s4-agenda.html", "SORTIE_CHOIX", "C3", "film_out"),
+]
+
+
+def contraintes_image(sortie):
+    """Vérifie bord ≤ constante de l'image (surImage = première image ≥ t, à 30 i/s). Renvoie la liste des écarts."""
+    import math
+    import re
+    res = []
+    for fichier, cst, ex, bord in CONTRAINTES_IMAGE:
+        html = (PROJET / "compositions" / fichier).read_text()
+        m = re.search(rf"const {cst}\s*=\s*(surImage\()?\s*([0-9.]+)", html)
+        assert m, f"{cst} introuvable dans {fichier}"
+        v = float(m.group(2))
+        if m.group(1):
+            v = math.ceil(v * 30 - 1e-6) / 30
+        b = next(e for e in sortie if e["id"] == ex)[bord]
+        res.append({"image": f"{fichier} {cst}", "valeur": round(v, 4), "extrait": ex, "bord": bord, "t": b,
+                    "ok": b <= v + 1e-4})
+    return res
 
 
 def main():
@@ -88,64 +174,79 @@ def main():
     assert orig["conversation_id"] == "conv_9401m2tg19wtfxn9cm727n4dtskz", orig["conversation_id"]
     tours = {(t["t"], t["role"]): t["message"] for t in orig["transcript"] if t["message"]}
 
-    src16 = lire(MONTES, 16000)
     src = lire(MONTES, SR)
+    p = profil5(src)
     piste = np.zeros(int(round(DUREE_FILM * SR)))
-    n_f = int(round(FONDU * SR))
-    rampe = 0.5 - 0.5 * np.cos(np.linspace(0, np.pi, n_f))
 
     sortie, ok = [], True
     for e in EXTRAITS:
         role = "agent" if e["locuteur"] == "agent" else "user"
         dit = tours[(e["tour_t"], role)]
-        # le texte de l'extrait doit être une sous-chaîne contiguë du tour d'origine (ou de deux tours pour A2A3)
         if e["id"] == "A2A3":
             dit = tours[(48, "agent")] + " " + tours[(50, "agent")]
         assert e["texte"] in dit, (e["id"], e["texte"], dit)
 
+        f_in, f_out = e.get("fondu_in", FONDU_IN), e.get("fondu_out", FONDU_OUT)
         a, b = int(round(e["src_in"] * SR)), int(round(e["src_out"] * SR))
         morceau = src[a:b].copy()
-        morceau[:n_f] *= rampe
-        morceau[-n_f:] *= rampe[::-1]
+        for g in e.get("gains", []):
+            morceau *= gain_de_clip(len(morceau), e["src_in"], g)
+        n_i, n_o = int(round(f_in * SR)), int(round(f_out * SR))
+        morceau[:n_i] *= rampe(n_i)
+        morceau[-n_o:] *= rampe(n_o)[::-1]
         film_in = round(e["src_in"] + e["decalage"], 3)
         film_out = round(e["src_out"] + e["decalage"], 3)
         i = int(round(film_in * SR))
         piste[i:i + len(morceau)] += morceau
 
-        m_in, m_out = max_autour(src16, 16000, e["src_in"]), max_autour(src16, 16000, e["src_out"])
-        blanc = m_in < -45 and m_out < -45
+        b_in = max_sur(p, e["src_in"], e["src_in"] + f_in)             # toute la rampe d'entrée
+        b_out = max_sur(p, e["src_out"] - 0.010, e["src_out"])          # les 10 dernières ms de la rampe de sortie
+        blanc = b_in <= BLANC_DBFS and b_out <= e.get("blanc_out_dbfs", BLANC_DBFS)
         ok &= blanc
-        print(f"{e['id']:5s} source {e['src_in']:6.2f} → {e['src_out']:6.2f}  film {film_in:6.2f} → {film_out:6.2f}  "
-              f"bords {m_in:6.1f} / {m_out:6.1f} dBFS  {'ok' if blanc else 'PAS DANS UN BLANC'}")
+        print(f"{e['id']:5s} source {e['src_in']:6.3f} → {e['src_out']:6.3f}  film {film_in:6.3f} → {film_out:6.3f}  "
+              f"rampes {f_in * 1000:3.0f}/{f_out * 1000:3.0f} ms  bords {b_in:6.1f} / {b_out:6.1f} dBFS  "
+              f"{'vrai blanc' if blanc else 'HORS DU VRAI BLANC'}"
+              + "".join(f"  gain {g['mot']} {g['db']:+.1f} dB" for g in e.get("gains", [])))
         sortie.append({
             "id": e["id"], "locuteur": e["locuteur"],
             "source": str(MONTES), "source_in": e["src_in"], "source_out": e["src_out"],
             "original_in": vers_original(e["src_in"]), "original_out": vers_original(e["src_out"]),
             "film_in": film_in, "film_out": film_out, "decalage_film_moins_source": e["decalage"],
-            "fondu_s": FONDU, "texte": e["texte"], "tour_original_t": e["tour_t"], "motif": e["motif"],
-            "bords_dbfs": [round(m_in, 1), round(m_out, 1)],
+            "fondu_s": f_in, "fondu_in_s": f_in, "fondu_out_s": f_out,
+            "gains": [dict(g, film=[round(g["src"][0] + e["decalage"], 3), round(g["src"][1] + e["decalage"], 3)],
+                           fondu_s=FONDU_GAIN) for g in e.get("gains", [])],
+            "bords_avant_v2_source": e.get("avant"),
+            "texte": e["texte"], "tour_original_t": e["tour_t"], "motif": e["motif"],
+            "bords_dbfs": [round(b_in, 1), round(b_out, 1)],
         })
     for x, y in zip(sortie, sortie[1:]):
-        assert x["film_out"] <= y["film_in"], (x["id"], y["id"])
+        assert x["film_out"] < y["film_in"], (x["id"], y["id"])
+    img = contraintes_image(sortie)
+    for c in img:
+        print(f"image : {c['extrait']}.{c['bord']} = {c['t']:.3f} ≤ {c['image']} = {c['valeur']:.3f}  {'ok' if c['ok'] else 'CASSE LE RENDU'}")
+    ok &= all(c["ok"] for c in img)
 
-    # 48 kHz, stéréo double mono, 24 bits, niveau d'origine
+    # 48 kHz, stéréo double mono, 24 bits, niveau d'origine (sauf le gain de clip déclaré)
     st = np.stack([piste, piste], axis=1).astype("<f4")
     wav = ICI / "dialogue.wav"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "f32le", "-ar", str(SR), "-ac", "2", "-i", "-",
                     "-c:a", "pcm_s24le", str(wav)], input=st.tobytes(), check=True)
     meta = {
         "fichier": str(wav), "sr": SR, "canaux": 2, "format": "pcm_s24le", "duree_s": DUREE_FILM,
-        "niveau": "niveau d'origine de montes/veterinaire.wav, aucun gain, aucun filtre",
+        "niveau": "niveau d'origine de montes/veterinaire.wav, aucun filtre ; un seul gain de clip déclaré (extraits[].gains)",
         "appel": {"conversation_id": orig["conversation_id"], "debut": "2026-09-18 16:51:54 Europe/Paris",
                   "duree_s": orig["call_duration_secs"], "etablissement": orig["etablissement"],
                   "brut": "/root/vokio-audios-metiers-180926/originaux/veterinaire.mp3",
                   "monte": str(MONTES),
                   "montes_vers_original": "original = montes avant 66,70 ; original = montes + 4,20 après (coupe 66,70 → 70,90 de l'original)"},
-        "regle_de_coupe": "énergie < −45 dBFS sur ±20 ms (fenêtres 10 ms, 16 kHz) à chaque bord ; fondus 15 ms cosinus",
+        "regle_de_coupe": (f"vrai blanc : RMS 5 ms (48 kHz) ≤ {BLANC_DBFS:.0f} dBFS sur toute la rampe d'entrée et sur les 10 "
+                           "dernières ms de la rampe de sortie (plancher de la porte : −81/−82 dBFS) ; rampes cosinus, "
+                           f"{FONDU_IN * 1000:.0f} ms à l'entrée, 60 à 120 ms à la sortie ; décalages inchangés (les mots ne bougent pas)"),
         "extraits": sortie,
+        "contraintes_image": img,
     }
     (ICI / "dialogue.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1))
-    print(("toutes les coupes tombent dans un blanc" if ok else "ÉCHEC : une coupe hors blanc"), "→", wav)
+    print(("toutes les coupes tombent dans le vrai blanc" if ok else "ÉCHEC : une coupe hors du vrai blanc"), "→", wav)
     sys.exit(0 if ok else 1)
 
 

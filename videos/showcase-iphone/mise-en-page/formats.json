@@ -1,0 +1,47 @@
+{
+ "_note": "Les formats du film. Lu par outils/mise_en_page.py (construire.py, preparer_agenda.py, format.py ; planche des zones : format.py --planche). Zones en px du cadre : [x0, y0, x1, y1], y vers le bas. « interdite » = rien d'important (texte, point à l'arrêt, objet qui porte l'info) ; « prudence » = éviter le texte, un objet peut y déborder. corps_min = corps minimal d'un texte à lire (px). passer_s (annonce désactivable) = instant du bouton « Passer » : ce qui doit être dit avant (problème, accent de la marque, produit), contrôlé par outils/controles.py Y1 (tenu) et Y2 (le produit dit avant le bouton : strict, « À VALIDER » tant que le minutage ne le permet pas). marge_zones = écart minimal (px) entre une zone interdite et le point à l'arrêt ou un objet qui porte l'info (controles.py Z2 ; absent = 0). occupation = seuils de l'occupation du cadre par les plans-titres (controles.py O1, outils/occupation.py) : part de la largeur couverte par la boîte d'encre et barycentre horizontal, médianes sur la scène (les autres scènes sont mesurées et rapportées, sans seuil). Le 9:16 est la RÉFÉRENCE : ses valeurs ne bougent pas sans nouvelle empreinte (outils/identite.py).",
+ "9x16": {
+  "largeur": 1080,
+  "hauteur": 1920,
+  "plateformes": "Instagram Reels, TikTok, pub Meta",
+  "corps_min": 36,
+  "marge_laterale": 70,
+  "haut_utile": 0,
+  "bas_utile": 1500,
+  "zones": [
+   {"nom": "interface Reels / TikTok (légende, boutons, compte)", "sorte": "interdite", "boite": [0, 1500, 1080, 1920]}
+  ]
+ },
+ "16x9": {
+  "largeur": 1920,
+  "hauteur": 1080,
+  "plateformes": "YouTube : annonce InStream désactivable (ordinateur, TV, téléphone tenu en paysage)",
+  "_marque": "Décision 28/09 (architecte), relue le 28/09 (revues YouTube et Florian) : AUCUN logo à l'image avant la signature (image 1245, 41,5 s). La marque est présente dès l'image 0 par le lecteur lui-même (annonce InStream : nom de l'annonceur, URL à afficher vokio.fr, bouton d'action ; encart annonceur et bannière associée sur ordinateur) : à régler dans Google Ads (nom d'annonceur Vokio, URL à afficher vokio.fr, bouton « Essayer », titre « Votre ligne répond même quand vous ne pouvez pas », bannière associée = le wordmark) ; joindre AUSSI le 9:16 à la même annonce : sur un téléphone tenu en portrait, YouTube sert le vertical (le 16:9 y tombe à 393 pt de large, les textes de 40 px à 8 pt, illisibles). Avant le bouton « Passer » (5,0 s, image 150), les 5 premières secondes portent : le problème (accroche lisible dès 0,90 s, sonnerie), le décroché (clic à 4,20 s) et l'accent de la marque (le point devient solaire à 4,23 s, image 127). Le PRODUIT n'est pas dit avant le bouton : « Bonjour, » commence à 5,00 s (DONNEES.mots, image 150, l'image même du bouton ; l'extrait A1 s'ouvre à 4,91 s sur un souffle) et « l'assistante vocale » est dite de 6,63 à 7,39 s. Le dire avant 5 s demande d'avancer le décroché (coupe YouTube de s1, environ −2,4 s, film de 44,6 s) : décision de Florian et de l'équipe son, pas faite (controles.py Y2 le garde « À VALIDER »). Complément possible hors de ce film : une annonce bumper de 6 s tirée de s7 (le point écrit « Vokıo » et se pose), en séquence d'annonces. Écartés : logo en coin permanent (4e élément dès l'image 0 ; son point du ı montré d'emblée tue la chute, le point qui se pose sur le ı) ; relance remplacée par « Vokio décroche » (vend la fin avant le décroché, sonne comme un narrateur) ; signature en ouverture (1 s perdue sur les 5 qui comptent, idée cassée) ; relance tenue jusqu'à 5,3 s (le décroché efface la menace « il appelle ailleurs » : c'est l'idée de s1).",
+  "corps_min": 40,
+  "marge_laterale": 96,
+  "haut_utile": 72,
+  "bas_utile": 972,
+  "passer_s": 5.0,
+  "marge_zones": 24,
+  "occupation": {"scenes": ["s1-sonnerie", "s7-signature"], "largeur_min": 0.45, "barycentre": [0.3, 0.7], "_note": "plans-titres seulement : les sous-titres de s2 à s6 gardent le corps et la colonne du 9:16 (x 144 → 1064, bornée par l'objet de s4 à s6 et par le point de 44 px)"},
+  "zones": [
+   {"nom": "barre de lecture et bandeau de l'annonce (10 % du bas)", "sorte": "interdite", "boite": [0, 972, 1920, 1080]},
+   {"nom": "bouton « Passer l'annonce » et son compte à rebours", "sorte": "interdite", "boite": [1500, 780, 1920, 1080]},
+   {"nom": "encart de l'annonceur et bouton d'action (ordinateur)", "sorte": "prudence", "boite": [0, 880, 640, 1080]},
+   {"nom": "titre, « Sponsorisé » et icônes du lecteur (mobile, TV)", "sorte": "prudence", "boite": [0, 0, 1920, 72]}
+  ]
+ },
+ "1x1": {
+  "prevu": true,
+  "largeur": 1080,
+  "hauteur": 1080,
+  "plateformes": "fil Instagram et Facebook (carré)",
+  "corps_min": 36,
+  "marge_laterale": 70,
+  "haut_utile": 60,
+  "bas_utile": 980,
+  "zones": [
+   {"nom": "légende et boutons du fil (bas)", "sorte": "prudence", "boite": [0, 980, 1080, 1080]}
+  ]
+ }
+}

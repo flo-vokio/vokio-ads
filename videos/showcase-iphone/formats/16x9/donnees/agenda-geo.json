@@ -1,0 +1,258 @@
+{
+ "version": 2,
+ "unite": "px FILM (1920×1080) ; 1 px capture = 1 px film (aucun rééchantillonnage) ; y des filets = centre du filet de 4,5 px",
+ "echelle": 4.5,
+ "echelle_px_film_par_px_css": 4.5,
+ "source": {
+  "avant": "assets/captures/agenda-avant-v2-brut.png",
+  "apres": "assets/captures/agenda-apres-v2-brut.png",
+  "releves_dom": [
+   "assets/captures/agenda-avant-v2-geo.json",
+   "assets/captures/agenda-apres-v2-geo.json"
+  ],
+  "echelle_capture": 4.5,
+  "recadrage_px_capture": [
+   0,
+   655,
+   1575,
+   1330
+  ],
+  "carte_px_css": {
+   "w": 350,
+   "h": 459.5
+  }
+ },
+ "image": {
+  "fichier": "assets/captures/agenda-avant.png",
+  "apres": "assets/captures/agenda-apres.png",
+  "x": 1064,
+  "y": 234,
+  "largeur": 1575,
+  "hauteur": 675,
+  "droite": 2639,
+  "bas": 909,
+  "droite_visible": 1920,
+  "css": "position:absolute; left:1064px; top:234px; width:1575px; height:675px (1:1, jamais redimensionnée ; déborde à droite, le cadre la coupe à 1920 : data-layout-allow-overflow)"
+ },
+ "carte": {
+  "x0": 1064.0,
+  "x1": 2639.0,
+  "bordure_px": 4.5,
+  "note": "bord gauche de la carte (bordure 1 px CSS comprise) en x = 1064 ; bord droit hors cadre"
+ },
+ "heures": {
+  "09:00": 305.75,
+  "10:00": 539.75,
+  "11:00": 773.75,
+  "12:00": 1007.75,
+  "13:00": 1241.77
+ },
+ "filets": [
+  {
+   "heure": "09:00",
+   "haut": 303.51,
+   "bas": 308.0,
+   "centre": 305.75,
+   "epaisseur": 4.49,
+   "visible": true
+  },
+  {
+   "heure": "10:00",
+   "haut": 537.5,
+   "bas": 542.0,
+   "centre": 539.75,
+   "epaisseur": 4.5,
+   "visible": true
+  },
+  {
+   "heure": "11:00",
+   "haut": 771.5,
+   "bas": 776.0,
+   "centre": 773.75,
+   "epaisseur": 4.5,
+   "visible": true
+  },
+  {
+   "heure": "12:00",
+   "haut": 1005.5,
+   "bas": 1010.0,
+   "centre": 1007.75,
+   "epaisseur": 4.5,
+   "visible": false
+  },
+  {
+   "heure": "13:00",
+   "haut": 1239.54,
+   "bas": 1244.0,
+   "centre": 1241.77,
+   "epaisseur": 4.46,
+   "visible": false
+  }
+ ],
+ "pas_heure": 234.0,
+ "etiquettes": {
+  "09:00": {
+   "x0": 1143.01,
+   "y0": 285.28,
+   "x1": 1272.93,
+   "y1": 319.48,
+   "dom": {
+    "x0": 1140.5,
+    "y0": 269.75,
+    "x1": 1275.5,
+    "y1": 337.25
+   },
+   "visible": true
+  },
+  "10:00": {
+   "x0": 1144.0,
+   "y0": 519.32,
+   "x1": 1272.93,
+   "y1": 553.44,
+   "dom": {
+    "x0": 1140.5,
+    "y0": 503.75,
+    "x1": 1275.5,
+    "y1": 571.25
+   },
+   "visible": true
+  },
+  "11:00": {
+   "x0": 1144.0,
+   "y0": 753.32,
+   "x1": 1272.93,
+   "y1": 787.44,
+   "dom": {
+    "x0": 1140.5,
+    "y0": 737.75,
+    "x1": 1275.5,
+    "y1": 805.25
+   },
+   "visible": true
+  },
+  "12:00": {
+   "x0": 1144.0,
+   "y0": 987.27,
+   "x1": 1272.93,
+   "y1": 1021.44,
+   "dom": {
+    "x0": 1140.5,
+    "y0": 971.75,
+    "x1": 1275.5,
+    "y1": 1039.25
+   },
+   "visible": false
+  },
+  "13:00": {
+   "x0": 1144.0,
+   "y0": 1221.29,
+   "x1": 1272.93,
+   "y1": 1255.51,
+   "dom": {
+    "x0": 1140.5,
+    "y0": 1205.75,
+    "x1": 1275.5,
+    "y1": 1273.25
+   },
+   "visible": false
+  }
+ },
+ "etiquettes_police": {
+  "famille": "mono de l'app (font-mono)",
+  "corps_px_css": 10,
+  "corps_px_film": 45.0,
+  "couleur": "#6C675F (text-faint)",
+  "hauteur_encre_chiffres": 34.2,
+  "capitales": 0
+ },
+ "colonne_x": 1338.54,
+ "x_point": 1305.74,
+ "x_point_calcul": "(bord droit d'encre des étiquettes 1272.93 + colonne_x 1338.54) / 2",
+ "bloc": {
+  "option": "A (découpé dans la vraie capture, calque raster)",
+  "fichier": "assets/captures/bloc-florian.png",
+  "calque": "même taille et même position que agenda-avant.png ; opaque seulement dans boite_px_image",
+  "boite_px_image": [
+   272,
+   67,
+   1492,
+   153
+  ],
+  "x0": 1338.5,
+  "y0": 303.5,
+  "x1_reel": 2553.5,
+  "y1": 384.5,
+  "x1_visible": 1920,
+  "hauteur": 81.0,
+  "centre_y": 344.0,
+  "texte": "09:00 Florian",
+  "texte_x1": 1698.0,
+  "x_fin": 1734.0,
+  "florian_encre": {
+   "x0": 1541.0,
+   "y0": 336.0,
+   "x1": 1698.0,
+   "y1": 371.0
+  },
+  "florian_dom": {
+   "x0": 1536.5,
+   "y0": 321.5,
+   "x1": 1703.0,
+   "y1": 384.5
+  },
+  "style": {
+   "bg": "rgba(239, 164, 36, 0.2)",
+   "bord": "rgba(239, 164, 36, 0.55)",
+   "rayon": "6px",
+   "bordure": "1px",
+   "corps_px_css": 11,
+   "corps_px_film": 49.5,
+   "note": "rgba(239,164,36,.2) sur la colonne, bordure 1 px CSS = 4,5 px film ; « 09:00 » à 70 % d'opacité, « Florian » encre text-noir"
+  },
+  "rdv": "Consultation vétérinaire, samedi 09:00, 20 min, « 09:00 Florian » : l'état exact du vrai rendez-vous de la Clinique vétérinaire du Port (samedi 19/09/2026, créé le 18/09 à 16:53:29), reproduit dans l'espace fictif des Catalans"
+ },
+ "mention": {
+  "lignes": [
+   "Capture réelle de app.vokio.fr",
+   "Établissement fictif de démonstration."
+  ],
+  "x": 1084,
+  "lignes_de_base": [
+   150,
+   202
+  ],
+  "police": "Geist 400, 40 px, interlignage 52 px, #6F695F",
+  "note": "accrochée au-dessus de l'image (data-element=\"agenda\"), solidaire ; bas de boîte < 972"
+ },
+ "preuve": {
+  "en_tete_dom": "Samedi 26 Septembre",
+  "note_en_tete": "en-tête de l'espace fictif des Catalans au moment de la prise, hors cadre ; l'espace a été remis dans l'état exact du rendez-vous du Port",
+  "etablissement_capture": "espace fictif de démonstration des Catalans (vétérinaire), app.vokio.fr",
+  "etablissement_appel": "Clinique vétérinaire du Port (établissement fictif de démonstration)",
+  "etat_reproduit": "samedi, plage 09:00-13:00, bloc « 09:00 Florian », Consultation vétérinaire, 20 min",
+  "date_de_prise": "2026-09-27T00:51:56",
+  "dsf": 4.5,
+  "viewport_css": [
+   390,
+   null
+  ],
+  "ecriture_production": "aucune"
+ },
+ "controles": {
+  "echelle_sans_reechantillonnage": true,
+  "avant_plus_calque_egal_apres": true,
+  "difference_hors_bloc_px": 0,
+  "chrome_hors_cadre": {
+   "bas_bascule_px_capture": 544,
+   "Y0": 655,
+   "haut_texte_aide_px_capture": 1667,
+   "Y1": 1330
+  },
+  "etiquettes_visibles": [
+   "09:00",
+   "10:00",
+   "11:00"
+  ],
+  "corps_etiquettes_px": 45.0
+ }
+}

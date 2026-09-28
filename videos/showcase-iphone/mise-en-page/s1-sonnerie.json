@@ -1,0 +1,18 @@
+{
+ "_note": "s1-sonnerie : l'accroche (le « . » final est le point du film, mesuré par construire.py) et la relance. top = haut CSS de la boîte (px) ; ligne de base = top + décalage (150/138 : 120 ; 72/80 italique : 64, mesurés dans le moteur de HyperFrames). CONTRAT : la ligne de base de « mains prises. » = la 1re ligne de base de s2 (texte.json, s2_texte) et x = celui de s2 : le retour chariot du point est littéral (construire.py le vérifie). L'accroche reste moins large que le wordmark de s7 (le plus grand objet du film).",
+ "9x16": {
+  "phrase": {"x": 90, "top": 616, "corps": 150, "interligne": 138},
+  "relance": {"x": 90, "top": 966, "corps": 72, "interligne": 80}
+ },
+ "16x9": {
+  "_note": "Deux colonnes, la grille du paysage : la phrase dans la colonne de lecture (x 144 ; lignes de base 402 / 540), la relance dans la colonne des objets (x 1064, celle de l'agenda et du téléphone ; lignes de base 460 / 540 : sa 2e ligne sur la ligne de lecture, comme « mains prises. »). Elle paraît à droite du point qui tremble, dans le sens de la lecture ; l'accroche occupe 144 → 1604 dès 2,7 s. 150 px = 14 % de la hauteur : lisible sur un téléphone en paysage dès l'image 27.",
+  "phrase": {"x": 144, "top": 282, "corps": 150, "interligne": 138},
+  "relance": {"x": 1064, "top": 396, "corps": 72, "interligne": 80}
+ },
+ "variantes": {
+  "16x9-dessous": {
+   "_note": "Écartée (gardée pour la planche) : la relance sous la phrase, comme en 9:16 (lignes de base 696 / 776) : un simple recadrage, 60 % du cadre vide pendant les cinq premières secondes.",
+   "relance": {"x": 144, "top": 632}
+  }
+ }
+}

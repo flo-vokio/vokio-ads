@@ -7,6 +7,8 @@
                                                                 avec le CSS du contrat de leur scène (DONNEES.geometrie) :
                                                                 bord droit d'encre et ligne de base de chaque unité
 Appelé par outils/construire.py ; utilisable seul pour vérifier une scène modifiée.
+Options (FORMATS, 27/09) : --racine <projet> (défaut : ce projet) sert CE dossier à Chromium (un projet de format produit
+par outils/format.py : ses compositions, ses données) ; --taille LxH (défaut 1080x1920) = la fenêtre du banc.
 """
 import functools
 import http.server
@@ -20,6 +22,17 @@ from fontTools.ttLib import TTFont
 from playwright.sync_api import sync_playwright
 
 PROJET = Path(__file__).resolve().parents[1]
+_a = sys.argv[1:]
+TAILLE = (1080, 1920)
+for _opt in ("--racine", "--taille"):
+    if _opt in _a:
+        _i = _a.index(_opt)
+        if _opt == "--racine":
+            PROJET = Path(_a[_i + 1]).resolve()
+        else:
+            TAILLE = tuple(int(v) for v in _a[_i + 1].split("x"))
+        del _a[_i:_i + 2]
+sys.argv = [sys.argv[0]] + _a
 CHROME_HF = Path("/root/.cache/hyperframes/chrome/chrome-headless-shell/linux-152.0.7977.30/"
                  "chrome-headless-shell-linux64/chrome-headless-shell")
 
@@ -245,7 +258,7 @@ def main():
             print(f"repli Chromium Playwright ({e})", file=sys.stderr)
             nav = p.chromium.launch(args=["--font-render-hinting=none"])
             moteur = "chromium playwright"
-        page = nav.new_page(viewport={"width": 1080, "height": 1920}, device_scale_factor=1)
+        page = nav.new_page(viewport={"width": TAILLE[0], "height": TAILLE[1]}, device_scale_factor=1)
         erreurs = []
         page.on("pageerror", lambda e: erreurs.append(str(e)))
         page.goto(url)

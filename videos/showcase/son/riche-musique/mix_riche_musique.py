@@ -245,13 +245,20 @@ def fondu_cos(t, t0, d):
     return MX.fondu_cos(t, t0, d)
 
 
+RELACHE_QUINTE = 0.040           # s : sortie de la quinte au décroché (voir drone_sonnerie ; stems_amont.py la règle)
+
+
 # ── 1. couches ──────────────────────────────────────────────────────────────
 def drone_sonnerie():
     """s1, tension retenue : quinte à vide la1 · mi2 · la2 · la3 · mi4 · mi5 (la = la tonalité, la dominante de ré), sinus +
     harmoniques 2 à 5 (−18, −14, −20, −26 dB), qui gonfle de 0 à 4,2 s (+7 dB) et respire au temps (± 1,2 dB, 1,3 Hz) ;
     coupée en 40 ms au décroché. Relecture 27/09 (défaut 6) : la1 de 1 à 0,6, la3 de 0,12 à 0,8, mi4 et mi5 ajoutés (0,55 et
-    0,12), harmoniques 3 à 5 ajoutées : au-dessus de 250 Hz, la quinte existe aussi sur un haut-parleur de téléphone."""
-    t = np.arange(int(round((T_DEC + 0.05) * SR))) / SR
+    0,12), harmoniques 3 à 5 ajoutées : au-dessus de 250 Hz, la quinte existe aussi sur un haut-parleur de téléphone.
+    RELACHE_QUINTE (28/09) : durée de la rampe cosinus de sortie au décroché ; 0,040 = la version 2 livrée, à l'échantillon
+    près (la normalisation se fait toujours sur la version coupée en 40 ms) ; son/stems_amont.py la passe à 0,35 s pour le
+    mix hybride (la coupe de 40 ms laissait un trou de −27 dB en 30-300 Hz entre la quinte et l'entrée du sol2)."""
+    rel = float(RELACHE_QUINTE)
+    t = np.arange(int(round((T_DEC + max(0.05, rel + 0.01)) * SR))) / SR
     y = np.zeros_like(t)
     harm = ((2, 0.12, 0.5), (3, S.gain(-14), 1.1), (4, S.gain(-20), 2.0), (5, S.gain(-26), 2.9))
     for m, a in ((33, 0.6), (40, 0.4), (45, 0.6), (57, 0.8), (64, 0.55), (76, 0.12)):
@@ -261,11 +268,16 @@ def drone_sonnerie():
     y *= souffle
     y[:int(0.4 * SR)] *= S.rampe_cos(int(0.4 * SR))
     k0 = int(round(T_DEC * SR)); k = int(0.040 * SR)
-    y[k0:k0 + k] *= S.rampe_cos(k)[::-1]
-    y[k0 + k:] = 0
+    ref = y[:int(round((T_DEC + 0.05) * SR))].copy()            # la version coupée en 40 ms : sa crête fixe le niveau
+    ref[k0:k0 + k] *= S.rampe_cos(k)[::-1]
+    ref[k0 + k:] = 0
+    kr = int(rel * SR)
+    y[k0:k0 + kr] *= S.rampe_cos(kr)[::-1]
+    y[k0 + kr:] = 0
     p = piste()
-    S.ajouter(p, S.panner(y / np.max(np.abs(y)), 0.0), 0)
-    cue("drone", 0.0, "quinte la1 · mi2 · la2 · la3 · mi4, gonfle jusqu'au décroché, coupée en 40 ms", "0 → evenements.decroche")
+    S.ajouter(p, S.panner(y / np.max(np.abs(ref)), 0.0), 0)
+    cue("drone", 0.0, f"quinte la1 · mi2 · la2 · la3 · mi4, gonfle jusqu'au décroché, sortie en {rel * 1000:.0f} ms",
+        "0 → evenements.decroche")
     return p
 
 
