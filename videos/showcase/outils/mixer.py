@@ -148,6 +148,17 @@ def traiter_piste(p, n):
         x = L.egaliseur(x, p["eq"]); journal.append(f"EQ {len(p['eq'])} bandes")
     if p.get("pan"):
         x = L.balance(x, p["pan"]); journal.append(f"pan {p['pan']:+.2f}")
+    # Spatialisation propre à un format (28/09) : une piste spatialisée pour le 9:16 peut contredire l'image
+    # d'un autre format. « mono » : true ou [[t0, t1], …] recentre (L = R = (L+R)/2) ; « miroir » : [[t0, t1], …]
+    # échange gauche et droite. Fenêtres en secondes, raccords en fondu de « fondu_espace » (défaut 0,03 s).
+    for cle, op in (("mono", lambda y: np.repeat(y.mean(axis=1, keepdims=True), 2, axis=1)), ("miroir", lambda y: y[:, ::-1])):
+        v = p.get(cle)
+        if not v:
+            continue
+        fen = [[0.0, n / L.SR]] if v is True else v
+        env = L.enveloppe_fenetres(n, fen, 1.0, p.get("fondu_espace", 0.03), base=0.0)   # poids 1 dans les fenêtres
+        x = x * (1 - env[:, None]) + op(x) * env[:, None]
+        journal.append(f"{cle} {'film entier' if v is True else v}")
     if p.get("muets"):
         f = p.get("fondu_muet", 0.0)
         env = L.enveloppe_fenetres(n, p["muets"], 0.0, f) if f > 0 else np.ones(n)

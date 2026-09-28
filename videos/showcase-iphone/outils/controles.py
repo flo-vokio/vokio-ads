@@ -40,9 +40,16 @@ valeur du 9:16 en repli quand les données sont d'avant les formats (aa4dd24). D
   Y   annonce désactivable (DONNEES.format.passer_s, 16:9 : 5,0 s) : Y1, avant le bouton « Passer », l'accroche est entière, le
       point est devenu solaire, l'agente parle au plus tard à l'image du bouton ; aucun logo avant la signature (s7) ; Y2
       (strict) le produit est DIT avant le bouton − 0,2 s (« vocale » fini) : « À VALIDER » tant que le minutage ne le permet pas
-  Z2  (28/09) le point à l'arrêt et les objets qui portent l'info à ≥ DONNEES.format.marge_zones px des zones interdites
-  O   occupation du cadre (outils/occupation.py, une image / 0,5 s) : O1, les plans-titres de DONNEES.format.occupation
-      remplissent le cadre à pleine composition (part de la largeur, barycentre) ; les autres scènes sont rapportées
+  Z2  (28/09) le point à l'arrêt et les objets qui portent l'info à ≥ DONNEES.format.marge_zones px des zones interdites ;
+      3e passe : là où le point ATTEND (≥ 0,5 s), ≥ marge_point_arret des zones interdites et ≥ marge_zones des zones de
+      prudence (secousse comprise : le vibreur déplace le point)
+  O   occupation du cadre (outils/occupation.py, une image / 0,5 s) : O1, les scènes et les fenêtres de temps de
+      DONNEES.format.occupation, à pleine composition ET sur la durée (médianes, 1er quartile, barycentres horizontal et
+      vertical) ; seuils fixés d'après la règle (note occupation._note de formats.json)
+  3e passe du 16:9 (28/09) : I2 sans exception (un téléphone qui monte pendant le silence numérique fait échouer) ; D2 et F1
+      suivent le glissement de l'accroche (DONNEES.geometrie.s1.glisse) ; F3 prend le bas de l'îlot dynamique comme repère du
+      repos quand le haut de l'écran sort du cadre ; DOM4 admet une page de l'appelant recoupée (mêmes mots, « Au revoir. »
+      en dernière ligne) ; Y2 rapporte la part d'encre autour du bouton « Passer »
   --mix W.wav (28/09) : la bande son que le MP4 doit porter (A1 : calage et résidu) ; défaut son/mix.wav. Avec un autre mix,
       A2 relit SES mesures (mesures*.json de outils/mixer.py, à côté du wav, dont « wav » = ce fichier), pas son/mesures-son.json.
       Exemple, le 16:9 avec le mix du 9:16 final : --mix /opt/vokio-ads/videos/showcase/son/hybride/mix-hybride.wav
@@ -50,6 +57,7 @@ valeur du 9:16 en repli quand les données sont d'avant les formats (aa4dd24). D
 import json
 import re
 import subprocess
+import tempfile
 import sys
 import unicodedata
 from pathlib import Path
@@ -128,6 +136,12 @@ IMS = lambda nom: EV[nom]["images"]
 T = lambda nom: EV[nom]["t"]
 N_RE = IM("signature_re_contact")
 N_POSE = IMS("point_pose")[1]          # finition : le point de l'accroche est posé (15,75 px) à l'image 29, invisible à 0
+# RECOMPOSITION (28/09) : les tailles du point viennent des données (9:16 : 44 et 44). D_FIN = le point posé sur le ı (#mot-pt, taille
+# CSS de #point) ; D_FILM = le disque de s1 à s6 (diametre_film, présent quand il diffère : il grandit en quittant le téléphone).
+# K_VIT = l'échelle des vitesses de construire.py (la plus grande de : disque, wordmark, texte de s2) : seuils de pas maximal.
+D_FIN = D["point"]["diametre_disque"]
+D_FILM = D["point"].get("diametre_film", D_FIN)
+K_VIT = max(D_FILM / 44, D_FIN / 44, D.get("geometrie", {}).get("s2_texte", {}).get("corps", 72) / 72)
 
 # ═════════════════════════════ D. Données ═════════════════════════════
 sc = D["scenes"]
@@ -147,13 +161,27 @@ note("D1 images, scènes, intervalles", N_IMAGES == int(round(DUREE * FPS)) and 
       "scenes": {k: [v["image_debut"], v["image_fin"] - 1] for k, v in sc.items()}})
 
 e0, eP, eR, eF = RESOLU[0], RESOLU[N_POSE], RESOLU[N_RE], RESOLU[N_RE + 3]
-ecart0 = float(np.hypot(eP["x_sans"] - M1["x"], eP["y_sans"] - M1["y"]))
+# 3e passe du 16:9 (28/09) : l'accroche peut partir CENTRÉE et glisser à sa place (DONNEES.geometrie.s1.glisse) ; le « . » attendu
+# à l'image N_POSE est alors décalé de dx × (1 − ease(u)). 9:16 : pas de glisse, dx = 0.
+GLISSE = (D.get("geometrie", {}).get("s1") or {}).get("glisse")
+
+
+def dx_glisse(t):
+    if not GLISSE:
+        return 0.0
+    u = min(1.0, max(0.0, (t - GLISSE["t"][0]) / (GLISSE["t"][1] - GLISSE["t"][0])))
+    k_, sens = {"power1": 2, "power2": 3, "power3": 4, "power4": 5}[GLISSE["ease"].split(".")[0]], GLISSE["ease"].split(".")[1]
+    e_ = u ** k_ if sens == "in" else 1 - (1 - u) ** k_ if sens == "out" else (2 ** (k_ - 1)) * u ** k_ if u < 0.5 else 1 - ((-2 * u + 2) ** k_) / 2
+    return GLISSE["dx"] * (1 - e_)
+
+
+ecart0 = float(np.hypot(eP["x_sans"] - (M1["x"] + dx_glisse(N_POSE / FPS)), eP["y_sans"] - M1["y"]))
 ecartR = float(np.hypot(eR["x"] - M7["x"], eR["y"] - M7["y"]))
 note("D2 point sur le « . » (posé à l'image 29, invisible à 0), sur #mot-pt (ré) et rond ensuite",
-     ecart0 <= 0.5 and e0["d"] == 0 and abs(eP["d"] - D["mesures"]["s1"]["diametre"]) <= 0.05 and ecartR <= 0.5 and abs(eF["d"] - 44) <= 0.3
+     ecart0 <= 0.5 and e0["d"] == 0 and abs(eP["d"] - D["mesures"]["s1"]["diametre"]) <= 0.05 and ecartR <= 0.5 and abs(eF["d"] - D_FIN) <= 0.3 * D_FIN / 44
      and eF["sx"] == 1 and eF["sy"] == 1,
      {"image0_diametre": e0["d"], f"image{N_POSE}_sans_secousse": [eP["x_sans"], eP["y_sans"]], f"image{N_POSE}_diametre": eP["d"],
-      "point_du_s1": [M1["x"], M1["y"]], "ecart_px": round(ecart0, 3),
+      "point_du_s1": [M1["x"], M1["y"]], "glisse_de_l_accroche_px": round(dx_glisse(N_POSE / FPS), 3), "ecart_px": round(ecart0, 3),
       f"image{N_RE}": [eR["x"], eR["y"]], "mot_pt": [M7["x"], M7["y"]], "ecart_re_px": round(ecartR, 3),
       f"image{N_RE + 3}": {"d": eF["d"], "sx": eF["sx"], "sy": eF["sy"]}})
 
@@ -164,15 +192,16 @@ for nom, yf in FILETS.items():
     contacts[nom] = {"image": n, "y": RESOLU[n]["y"], "filet": yf, "ecart": round(RESOLU[n]["y"] - yf, 3),
                      "pas_entrant_px": round(pas[n], 2), "v_image_precedente": RESOLU[n - 1]["v"]}
 ok_c = all(abs(c["ecart"]) <= 0.5 for c in contacts.values()) and all(
-    c["pas_entrant_px"] >= (5 if nom == "contact_retour_neuf" else 10) for nom, c in contacts.items())
+    c["pas_entrant_px"] >= (5 if nom == "contact_retour_neuf" else 10) * D_FILM / 44 for nom, c in contacts.items())
 note("D3 contacts sur les filets, vitesse avant contact", ok_c, contacts)
 
 a0, a1 = IMS("anticipation")[0], 150
 pas_hors = max(v for n, v in pas.items() if not (a0 <= n <= a1))
 pas_cr = max(v for n, v in pas.items() if a0 <= n <= a1)
 n_hors = max((n for n in pas if not (a0 <= n <= a1)), key=lambda n: pas[n])
-note("D4 pas maximal", pas_hors <= 130 and pas_cr <= 150,
-     {"max_hors_retour_chariot": [round(pas_hors, 1), n_hors], "max_retour_chariot_137_150": round(pas_cr, 1)})
+note(f"D4 pas maximal ({130 * K_VIT:g} px par image, {150 * K_VIT:g} au retour chariot : 130 et 150 × l'échelle des vitesses du format)",
+     pas_hors <= 130 * K_VIT + 1e-6 and pas_cr <= 150 * K_VIT + 1e-6,
+     {"max_hors_retour_chariot": [round(pas_hors, 1), n_hors], "max_retour_chariot_137_150": round(pas_cr, 1), "echelle_vitesses": round(K_VIT, 4)})
 
 s0, s1 = IM("raccroche") + 2, IMS("silence_numerique")[1] - 1        # 1078 → 1099
 imm = max(abs(RESOLU[n][k] - RESOLU[s0][k]) for n in range(s0, s1 + 1) for k in ("x", "y", "d", "sx", "sy"))
@@ -202,14 +231,15 @@ p0_, p1_ = IMS("plume_mot")
 ronds = all(RESOLU[n]["sx"] == 1 and RESOLU[n]["sy"] == 1 for n in range(p0_, p1_ + 1))
 note("D7 étirement plafonné à 1,25 (plus de pilule), point rond pendant l'écriture de « Vokıo »",
      sx_max[0] <= 1.25 + 1e-6 and ronds,
-     {"sx_max_hors_ecrasements": sx_max[0], "image": sx_max[1], "ellipse_max_px": [round(44 * sx_max[0], 1), round(44 / np.sqrt(sx_max[0]), 1)],
+     {"sx_max_hors_ecrasements": sx_max[0], "image": sx_max[1], "ellipse_max_px": [round(D_FIN * sx_max[0], 1), round(D_FIN / np.sqrt(sx_max[0]), 1)],
       f"rond_de_{p0_}_a_{p1_}": ronds})
 
 XA, Y9 = AG["x_point"], AG["heures"]["09:00"]
 g0_, g1_ = IMS("vers_gouttiere")
-gout = [n for n in range(g1_, IM("depart_gouttiere") + 1) if not (abs(RESOLU[n]["x_sans"] - XA) < 0.01 and abs(RESOLU[n]["y_sans"] - Y9) <= 6.01)]
-dessus = [n for n in range(g0_ + 1, g1_ + 1) if RESOLU[n]["x_sans"] + 22 > AG["bloc"]["florian_encre"]["x0"] - 200
-          and RESOLU[n]["x_sans"] - 22 < AG["bloc"]["florian_encre"]["x1"] + 2 and RESOLU[n]["y_sans"] + 22 * max(1, RESOLU[n]["sx"]) > AG["bloc"]["florian_encre"]["y0"] - 2]
+gout = [n for n in range(g1_, IM("depart_gouttiere") + 1) if not (abs(RESOLU[n]["x_sans"] - XA) < 0.01 and abs(RESOLU[n]["y_sans"] - Y9) <= 6 * D_FILM / 44 + 0.01)]
+R_FILM = D_FILM / 2
+dessus = [n for n in range(g0_ + 1, g1_ + 1) if RESOLU[n]["x_sans"] + R_FILM > AG["bloc"]["florian_encre"]["x0"] - 200
+          and RESOLU[n]["x_sans"] - R_FILM < AG["bloc"]["florian_encre"]["x1"] + 2 and RESOLU[n]["y_sans"] + R_FILM * max(1, RESOLU[n]["sx"]) > AG["bloc"]["florian_encre"]["y0"] - 2]
 note("D8 après l'écriture, le point quitte le bloc par-dessus son encre et attend dans la gouttière des heures (09:00)",
      not gout and not dessus,
      {"gouttiere": [XA, Y9], "images": [g1_, IM("depart_gouttiere")], "hors_gouttiere": gout[:8], "sur_l_encre_du_bloc": dessus[:8],
@@ -340,8 +370,14 @@ for p in D["pages"]:
 sans_blanc = lambda s: re.sub(r"[\s\u00a0\u202f]", "", s)     # l'espace fine est rendue par un <span> vide (.tx-fine)
 pages_dom = {(pg["extrait"], sans_blanc(" | ".join(pg["lignes"]))) for pg in DOM["pages"] if pg["extrait"]}
 pages_don = {(p["extrait"], sans_blanc(" | ".join(p["lignes"]))) for p in D["pages"]}
-note("DOM4 sous-suite du texte dit (données et DOM)", not fautes and pages_dom <= pages_don and ("C4", sans_blanc("Super, merci beaucoup. | Au revoir.")) in pages_dom,
-     fautes or {"pages": len(D["pages"]), "pages_du_dom_hors_donnees": sorted(pages_dom - pages_don)})
+# la page de l'appelant de s6 est posée entière (3e passe du 16:9 : un format peut la recouper, texte.json « coupes » ; les mots
+# sont les mêmes, « Au revoir. » reste sa dernière ligne, et la page du DOM est celle des données)
+c4_dom = [pg["lignes"] for pg in DOM["pages"] if pg["extrait"] == "C4"]
+c4_ok = any(sans_blanc("".join(l)) == sans_blanc("Super, merci beaucoup. Au revoir.") and sans_blanc(l[-1]) == sans_blanc("Au revoir.")
+            for l in c4_dom)
+note("DOM4 sous-suite du texte dit (données et DOM)", not fautes and pages_dom <= pages_don and c4_ok,
+     fautes or {"pages": len(D["pages"]), "pages_du_dom_hors_donnees": sorted(pages_dom - pages_don),
+                "page_de_l_appelant_s6": [" | ".join(l) for l in c4_dom]})
 
 # interdits : fichiers (lib/vendor exclu) et textes rendus
 fichiers = [RACINE / "index.html"] + sorted((RACINE / "compositions").glob("*.html")) + sorted((RACINE / "donnees").glob("*.json")) \
@@ -462,6 +498,10 @@ IMAGES_POINT = {N_POSE, N_RE, N_RE + 3} | {IM(k) for k in FILETS} | {IM(k) - 1 f
 # finition : aucune encre sous le point dans ses trajets de lecture (s2, s6) ; accroche ; SMS ; marge ; écriture du mot
 TRAJ = [(t["image0"], t["image1"]) for t in D["point"]["trajets"]]
 anneau_encre, accroche_diff, sms_encre, tel_haut, marge_agenda, encre_mot = [], [], {}, {}, None, {}
+# 3e passe (28/09, revue YouTube : « l'image du bouton ne montre qu'un point seul ») : part d'encre de chaque image autour du
+# bouton « Passer » (passer_s − 0,5 → passer_s + 0,2), rapportée par Y2 (information : le plancher est une décision de minutage)
+encre_bouton = []
+_PB = (int(round((FMT["passer_s"] - 0.5) * FPS)), int(round((FMT["passer_s"] + 0.2) * FPS))) if FMT.get("passer_s") else None
 REF_SMS = IMS("telephone_sortie")[0] - 1        # la bulle entière, au repos, dernière image avant la sortie
 BULLE = D["geometrie"]["s6"]["bulle"]
 # relecture du 27/09 (version iPhone) : au départ vers le stylo (1230 → 1241), aucun pixel solaire sur la bulle ni à moins
@@ -474,6 +514,13 @@ bord_bulle, depart_contacts, depart_ecarts = None, [], []
 Z_SMS = (int(BULLE["x0"]) + 30, int(BULLE["haut"]) + 26, int(BULLE["x1"]) - 30, int(BULLE["haut"] + BULLE["hauteur"]) - 26)
 # version iPhone : le téléphone est « au repos » quand le haut de son écran est à sa place (y 500, voir tel_haut)
 SIL = {"ecran_haut": D["geometrie"]["s6"]["ecran"]["haut"]}
+# 3e passe du 16:9 (28/09) : quand le haut de l'écran sort du cadre (16:9, téléphone monté à −40 : écran à −7), le repère devient
+# le BAS de l'îlot dynamique (noir au-dessus, écran blanc dessous : 14,6 + 36,2 pt sous le haut de l'écran), sur sa partie
+# droite (centre ± 90 px, hors des bouts arrondis). 9:16 : le haut de l'écran, comme avant.
+SIL["repere"] = "haut de l'écran"
+if SIL["ecran_haut"] < 3:
+    SIL["repere"] = "bas de l'îlot dynamique"
+    SIL["ecran_haut"] = SIL["ecran_haut"] + (14.6 + 36.2) * D["geometrie"]["s6"]["pt"]
 img_sms_ref = None
 gardees, points = {}, {}
 solaire_hors, i_avec_point, s2_droite, brun, immobile = [], [], [], {}, []
@@ -483,8 +530,10 @@ GEO = D["geometrie"]
 M1_LIGNES = D["mesures"]["s1"]["lignes"]
 CORPS_S1 = GEO.get("s1", {}).get("phrase", {}).get("corps", 150)
 # F1 : l'encre de l'accroche (9:16 : lignes de base 736 / 874, x 90 → 756) ; la ligne du haut − corps → la dernière + 0,3 corps
+# (3e passe : si l'accroche part centrée, la fenêtre couvre sa place de départ ET sa place finale)
+_dxg = int(np.ceil(abs(dx_glisse(0.0))))
 Z_ACC = (int(M1_LIGNES[0]["ligne_de_base"] - CORPS_S1), int(M1_LIGNES[-1]["ligne_de_base"] + 0.3 * CORPS_S1),
-         max(0, int(min(l["x0"] for l in M1_LIGNES)) - 30), min(W, int(max(l["x1"] for l in M1_LIGNES)) + 30))
+         max(0, int(min(l["x0"] for l in M1_LIGNES)) - 30), min(W, int(max(l["x1"] for l in M1_LIGNES)) + 30 + _dxg))
 # F3 : le haut de l'écran de l'iPhone, bande de 280 px centrée sur l'écran (9:16 : x 400 → 680)
 _ecr = GEO["s6"]["ecran"]
 X_ECRAN = (int(round((_ecr["x0"] + _ecr["x1"]) / 2)) - 140, int(round((_ecr["x0"] + _ecr["x1"]) / 2)) + 140)
@@ -547,13 +596,14 @@ while True:
                 sol_zones.setdefault(n, []).append((z["nom"], kz))
     # le ı sans point de la fin d'écriture au ré
     if IMS("plume_mot")[1] <= n < N_RE:
-        yy, xx = np.ogrid[int(MOT_PT[1]) - 22:int(MOT_PT[1]) + 23, int(MOT_PT[0]) - 22:int(MOT_PT[0]) + 23]
-        m = (xx + .5 - MOT_PT[0]) ** 2 + (yy + .5 - MOT_PT[1]) ** 2 <= 20 ** 2
-        k = int((sol[int(MOT_PT[1]) - 22:int(MOT_PT[1]) + 23, int(MOT_PT[0]) - 22:int(MOT_PT[0]) + 23] & m).sum())
+        rI = int(round(D_FIN / 2))                                   # 22 en 9:16 : le point du ı (0,11 em)
+        yy, xx = np.ogrid[int(MOT_PT[1]) - rI:int(MOT_PT[1]) + rI + 1, int(MOT_PT[0]) - rI:int(MOT_PT[0]) + rI + 1]
+        m = (xx + .5 - MOT_PT[0]) ** 2 + (yy + .5 - MOT_PT[1]) ** 2 <= (D_FIN / 2 - 2) ** 2
+        k = int((sol[int(MOT_PT[1]) - rI:int(MOT_PT[1]) + rI + 1, int(MOT_PT[0]) - rI:int(MOT_PT[0]) + rI + 1] & m).sum())
         if k:
             i_avec_point.append((n, k))
     # finition : encre dans l'anneau du point (bord du disque + 4 px) pendant les trajets de lecture (s2, s6)
-    if any(a <= n <= b for a, b in TRAJ) and RESOLU[n]["d"] > 40:
+    if any(a <= n <= b for a, b in TRAJ) and RESOLU[n]["d"] > 0.9 * D_FILM:
         e = RESOLU[n]
         m_in = masque_point(n, 1)
         m_out = masque_point(n, 5)
@@ -589,6 +639,8 @@ while True:
             depart_ecarts.append((n, round(TEL_DOM[n]["opacite"], 3), sur, round(-1.0 if sur else ecart_, 1)))
             if sur or ecart_ < 4:
                 depart_contacts.append((n, sur, round(ecart_, 1)))
+    if _PB and _PB[0] <= n <= _PB[1]:
+        encre_bouton.append((n, round(float((np.abs(img.astype(np.int16) - np.array(PAPIER, np.int16)).max(axis=2) > 24).mean()), 4)))
     # finition : l'accroche bouge dès l'image 0 (encre de la zone de la phrase, image à image)
     if n <= 40:
         z = gris[Z_ACC[0]:Z_ACC[1], Z_ACC[2]:Z_ACC[3]]
@@ -601,8 +653,9 @@ while True:
         # version iPhone : au repos, le bord noir du verre finit à la ligne 499 et l'écran blanc commence à la ligne 501
         # (à moins d'un pixel près : un téléphone encore en mouvement noircit la ligne 501)
         e0 = int(SIL["ecran_haut"])
-        noir = (gris[e0 - 3:e0, X_ECRAN[0]:X_ECRAN[1]] < 120).mean()
-        blanc = (gris[e0 + 1:e0 + 4, X_ECRAN[0]:X_ECRAN[1]] > 200).mean()
+        xr = X_ECRAN if SIL["repere"] == "haut de l'écran" else (X_ECRAN[0] + 50, X_ECRAN[1] - 50)
+        noir = (gris[e0 - 3:e0, xr[0]:xr[1]] < 120).mean()
+        blanc = (gris[e0 + 1:e0 + 4, xr[0]:xr[1]] > 200).mean()
         tel_haut[n] = float(min(noir, blanc))
     if n == IM("contact_retour_neuf"):
         row = img[Y_F5].astype(int)
@@ -628,7 +681,13 @@ while True:
         zone = img[int(e["y"]) - 40:int(e["y"]) + 41, int(e["x"]) - 40:int(e["x"]) + 41].astype(np.int16)
         if ref_imm is None:
             ref_imm = zone
-        immobile.append((n, int(np.abs(zone - ref_imm).max())))
+            ref_disque = masque_point(n, -2)
+        # le disque seul (l'ellipse du point rognée de 2 px : son bord antialiasé se mêle au fond) : ce qui compte quand un objet
+        # bouge SOUS le point (16:9 recomposé : le téléphone centré monte pendant le silence, telephone_monte 35,90 → 36,40)
+        d_ = np.abs(img.astype(np.int16) - gardees_ref_img).max(axis=2)[ref_disque] if n > s0 else np.zeros(1, np.int16)
+        immobile.append((n, int(np.abs(zone - ref_imm).max()), int(d_.max())))
+    if n == s0:
+        gardees_ref_img = img.copy()
     # pelures d'oignon (plus sombre = min de luminance, en couleur)
     for k_, (a, b) in PELURES.items():
         if a <= n <= b:
@@ -657,15 +716,44 @@ for k, v in gc.items():
     v["deplacement_px"] = None if not (v["contact"] and v["avant"]) else round(float(np.hypot(v["contact"]["x"] - v["avant"]["x"], v["contact"]["y"] - v["avant"]["y"])), 2)
 ok_i1 = (g0 and abs(g0["dx"]) <= .5 and abs(g0["dy"]) <= .5
          and gR and abs(gR["x"] - M7["x"]) <= .5 and abs(gR["y"] - M7["y"]) <= .5
-         and gF and abs(gF["d"] - 44) <= .3
+         and gF and abs(gF["d"] - D_FIN) <= .3 * D_FIN / 44
          and all(v["contact"] and abs(v["contact"]["y"] - v["filet"]) <= .5 and v["deplacement_px"] and v["deplacement_px"] > 1 for v in gc.values()))
 note("I1 point sur le MP4 (0, ré, rond, contacts, déplacement avant contact)", ok_i1,
      {f"image{N_POSE} (posé, dessiné, secousse comprise)": g0, f"image{N_RE}": gR, "mot_pt": [M7["x"], M7["y"]], f"image{N_RE + 3}": gF, "contacts": gc})
 cs = [points[k] for k in range(s0, s1 + 1) if points.get(k)]
 etendue = None if not cs else round(max(max(c["x"] for c in cs) - min(c["x"] for c in cs), max(c["y"] for c in cs) - min(c["y"] for c in cs)), 3)
-note("I2 point immobile sur le silence numérique (MP4 : barycentre à 0,1 px, écart de pixels au bruit du codec)",
-     etendue is not None and etendue <= 0.1 and max(v for _, v in immobile) <= 8,
-     {"images": [s0, s1], "etendue_barycentre_px": etendue, "ecart_max_niveaux_zone_81px": max(v for _, v in immobile) if immobile else None})
+# RECOMPOSITION (28/09) : si le téléphone bouge pendant le silence (DONNEES.evenements.telephone_monte le recoupe : 16:9, il monte
+# après le raccroché), la zone de 81 px autour du point voit l'écran glisser dessous, et l'encodeur h264 remue jusqu'au cœur du disque
+# (13 niveaux mesurés le 28/09, pour 3 au repos) : le MP4 ne peut plus prouver l'immobilité au pixel. La preuve se fait alors À LA
+# SOURCE, sans perte : hf snapshot de la racine à 4 instants du silence, cœur du disque (rayon − 2 px) identique au bit près ; le MP4
+# garde le barycentre (≤ 0,1 px). 9:16 : le téléphone est posé avant le silence, zone de 81 px du MP4 comme avant.
+tel_silence = IMS("telephone_monte")[1] > s0
+ecart_zone81 = max(v[1] for v in immobile) if immobile else None
+ecart_disque = max(v[2] for v in immobile) if immobile else None
+source_i2 = None
+if tel_silence:
+    from PIL import Image as _Image
+    with tempfile.TemporaryDirectory(dir="/dev/shm" if Path("/dev/shm").exists() else None) as _d:
+        _inst = [round(k / FPS, 4) for k in (s0, (2 * s0 + s1) // 3, (s0 + 2 * s1) // 3, s1)]
+        subprocess.run(["flock", "/tmp/hf-rendu.lock", "/opt/vokio-ads/bin/hf", "snapshot", str(RACINE), "--no-end", "--at",
+                        ",".join(str(x) for x in _inst), "-o", _d, "--describe", "false"], check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        _fs = sorted(Path(_d).glob("frame-*.png"))
+        _ims = [np.asarray(_Image.open(f).convert("RGB")).astype(np.int16) for f in _fs]
+        _e = RESOLU[s0]
+        _yy, _xx = np.mgrid[0:H, 0:W]
+        _coeur = (_xx + .5 - _e["x"]) ** 2 + (_yy + .5 - _e["y"]) ** 2 <= (_e["d"] / 2 - 2) ** 2
+        source_i2 = {"instants_s": _inst, "images": len(_ims),
+                     "ecart_max_coeur_du_disque_sans_perte": int(max(np.abs(a_ - _ims[0])[_coeur].max() for a_ in _ims[1:])) if len(_ims) > 1 else None}
+# 3e passe du 16:9 (28/09, revue Florian : « le temps mort immobile qu'il a validé n'existe plus ») : l'exception est RETIRÉE.
+# Le silence numérique est un PLAN immobile, dans tous les formats : un téléphone qui monte pendant le silence fait échouer I2,
+# quelle que soit l'immobilité du point (la preuve sans perte reste rapportée, pour information).
+ok_i2 = (etendue is not None and etendue <= 0.1 and not tel_silence and ecart_zone81 is not None and ecart_zone81 <= 8)
+note("I2 plan immobile sur le silence numérique (MP4 : barycentre du point à 0,1 px, écart de pixels autour du point au bruit du "
+     "codec ; aucun objet ne bouge : le téléphone est posé avant le silence)", ok_i2,
+     {"images": [s0, s1], "etendue_barycentre_px": etendue, "ecart_max_niveaux_zone_81px": ecart_zone81,
+      "ecart_max_niveaux_coeur_mp4 (information)": ecart_disque, "source_sans_perte": source_i2,
+      "telephone_monte_pendant_le_silence": ({"telephone_monte": IMS("telephone_monte"), "silence": [s0, s1]} if tel_silence else False)})
 note("I3 aucun pixel solaire hors du point (bloc admis de 762 à 941)", not solaire_hors, solaire_hors[:12] or "aucun")
 note("I4 le ı sans point de la fin d'écriture au ré", not i_avec_point,
      i_avec_point[:10] or f"aucun pixel solaire sur le point du ı de {IMS('plume_mot')[1]} à {N_RE - 1}")
@@ -716,6 +804,7 @@ note("F3 bulle entière lisible ≥ 3,8 s ; téléphone vide ≤ 1,2 s avant la 
      duree_sms >= 3.8 - 1e-6 and vide is not None and vide <= 1.2 + 1e-6 and pleines and min(pleines) > IM("raccroche"),
      {"bulle_entiere_images": [min(pleines), max(pleines)] if pleines else None, "duree_lisible_s": round(duree_sms, 2),
       "telephone_au_repos_des": min(repos) if repos else None, "vide_avant_bulle_s": None if vide is None else round(vide, 2),
+      "repere_du_repos": f"{SIL['repere']} (ligne {SIL['ecran_haut']:.1f})",
       "raccroche": IM("raccroche"), "bulle": IM("bulle_et_vibreur")})
 # F4 aucune encre sous le point pendant qu'il lit (s2, s6)
 # (relecture du 27/09, version iPhone) et au départ vers le stylo, le point ne touche pas la bulle qui monte avec le téléphone
@@ -777,11 +866,16 @@ def hx(police, corps):
                        capture_output=True, text=True, check=True)
     return float(r.stdout.strip())
 G_ = D["geometrie"]
-hx_a = hx("Geist-Regular.woff2", G_["sous_titres_haut"]["agente"]["corps"])
-hx_c = hx("InstrumentSerif-Italic.woff2", G_["sous_titres_haut"]["appelant"]["corps"])
-note("F8 hauteur d'x de l'agente ≥ 1,15 × celle de l'appelant", hx_a >= 1.15 * hx_c and G_["s3_texte"]["corps"] == G_["sous_titres_haut"]["appelant"]["corps"],
-     {"agente_Geist": [G_["sous_titres_haut"]["agente"]["corps"], round(hx_a, 1)], "appelant_Instrument_Serif_italique": [G_["sous_titres_haut"]["appelant"]["corps"], round(hx_c, 1)],
-      "rapport": round(hx_a / hx_c, 3)})
+# RECOMPOSITION (28/09) : deux paires, une par acte. Les scènes de voix seule (s2 l'agente, s3 l'appelant) et les scènes d'objet
+# (s4 à s6, sous-titres à côté de l'agenda et du téléphone) peuvent avoir leurs corps (16:9 : 100/88 et 84/74 ; 9:16 : 72/64 et
+# 72/64) : la règle est que, DANS chaque acte, l'agente parle plus fort que l'appelant.
+PAIRES_F8 = {"s2-s3 (voix seule)": (G_["s2_texte"]["corps"], G_["s3_texte"]["corps"]),
+             "s4-s6 (à côté de l'objet)": (G_["sous_titres_haut"]["agente"]["corps"], G_["sous_titres_haut"]["appelant"]["corps"])}
+f8 = {}
+for nom_p, (ca, cc) in PAIRES_F8.items():
+    ha, hc = hx("Geist-Regular.woff2", ca), hx("InstrumentSerif-Italic.woff2", cc)
+    f8[nom_p] = {"agente_Geist": [ca, round(ha, 1)], "appelant_Instrument_Serif_italique": [cc, round(hc, 1)], "rapport": round(ha / hc, 3)}
+note("F8 hauteur d'x de l'agente ≥ 1,15 × celle de l'appelant, dans chaque acte", all(v["rapport"] >= 1.15 for v in f8.values()), f8)
 
 # ═════════════════════════════ Z. Zones sûres du format (DONNEES.format.zones) ═════════════════════════════
 # « interdite » = rien d'important : texte au repos (DOM2), point à l'arrêt, objet qui porte l'info ; « prudence » = pas de
@@ -845,10 +939,34 @@ for n_a in arrets:
             pt_colle[z["nom"]] = (n_a, round(e_, 1), [round(v, 1) for v in b])
 ecarts_arret = {z["nom"]: round(min(ecart_zone(disque(n_a), z["boite"]) for n_a in arrets), 1) for z in INTERDITES} if arrets else {}
 obj_colles = {k: v for k, v in dist_interdite.items() if v is not None and v < MARGE_Z}
+# 3e passe du 16:9 (28/09, revues YouTube et Florian : le point attendait 6,4 s à 12 px de l'encart de l'annonceur, à 30 px de la
+# bande du bas) : là où le point ATTEND (tenue ≥ 0,5 s d'images d'arrêt consécutives), il reste à ≥ marge_point_arret px des zones
+# interdites (DONNEES.format.marge_point_arret ; absent = marge_zones) et à ≥ marge_zones px des zones de PRUDENCE.
+MARGE_A = float(FMT.get("marge_point_arret", MARGE_Z))
+tenues, _run = [], []
+for n_a in arrets:
+    if _run and n_a == _run[-1] + 1:
+        _run.append(n_a)
+    else:
+        if len(_run) >= FPS // 2:
+            tenues.append(_run)
+        _run = [n_a]
+if len(_run) >= FPS // 2:
+    tenues.append(_run)
+tenue_colle = {}
+for run in tenues:
+    for z, lim in [(z, MARGE_A) for z in INTERDITES] + [(z, MARGE_Z) for z in PRUDENCES]:
+        e_ = min(ecart_zone(disque(n_a), z["boite"]) for n_a in run)
+        if e_ < lim:
+            tenue_colle[f"{z['nom']} · images {run[0]}-{run[-1]}"] = {"ecart_px": round(e_, 1), "exige_px": lim}
+ecarts_tenues = {f"images {r[0]}-{r[-1]}": {z["nom"]: round(min(ecart_zone(disque(n_a), z["boite"]) for n_a in r), 1) for z in ZONES}
+                 for r in tenues}
 note(f"Z2 rien de collé aux bords : le point à l'arrêt dans le cadre utile (x {MARGE} → {W - MARGE}, y {FMT.get('haut_utile', 0)} → "
-     f"{FMT.get('bas_utile', H)}), lui et les objets qui portent l'info à ≥ {MARGE_Z:g} px des zones interdites ; textes : marges de DOM2",
-     not pt_bord and not marges and not pt_colle and not obj_colles,
-     {"point_hors_cadre_utile": pt_bord[:8] or "aucun", "marge_zones_px": MARGE_Z,
+     f"{FMT.get('bas_utile', H)}), lui et les objets qui portent l'info à ≥ {MARGE_Z:g} px des zones interdites ; là où il ATTEND "
+     f"(≥ 0,5 s), ≥ {MARGE_A:g} px des zones interdites et ≥ {MARGE_Z:g} px des zones de prudence ; textes : marges de DOM2",
+     not pt_bord and not marges and not pt_colle and not obj_colles and not tenue_colle,
+     {"point_hors_cadre_utile": pt_bord[:8] or "aucun", "marge_zones_px": MARGE_Z, "marge_point_arret_px (tenues)": MARGE_A,
+      "tenues_trop_pres (zone · images)": tenue_colle or "aucune", "tenues_ecart_par_zone_px": ecarts_tenues,
       "point_a_l_arret_ecart_min_par_zone_px": ecarts_arret, "point_trop_pres (image, écart, disque)": pt_colle or "aucun",
       "objets_info_ecart_px": dist_interdite, "objets_trop_pres": obj_colles or "aucun",
       "textes_hors_marges": sorted(marges)[:6] or "aucun"})
@@ -860,15 +978,20 @@ note(f"Z2 rien de collé aux bords : le point à l'arrêt dans le cadre utile (x
 sys.path.insert(0, str(PROJET / "outils"))
 import occupation as OCCUP  # noqa: E402
 OCC = FMT.get("occupation") or {}
-occ_img = [(k, OCCUP.mesurer(gardees[k])) for k in sorted(gardees) if k % 15 == 0]
-occ_bilan = OCCUP.bilan_scenes(occ_img, sc, OCC)
-occ_resume = {k: {kk: v[kk] for kk in ("image_pleine", "part_largeur", "bary_x") if kk in v} | ({"ok": v["ok"]} if "ok" in v else {})
-              for k, v in occ_bilan.items()}
+occ_img = [(k, OCCUP.mesurer(gardees[k], utile=(FMT.get("haut_utile", 0), FMT.get("bas_utile", H)))) for k in sorted(gardees) if k % 15 == 0]
+occ_bilan = OCCUP.bilan_scenes(occ_img, sc, OCC, fps=FPS)
+occ_resume = {k: {kk: v[kk] for kk in ("image_pleine", "part_largeur", "bary_x", "hauteur_utile", "largeur_mediane", "largeur_q1",
+                                        "bary_x_median", "bary_y_median", "fenetre_s") if kk in v}
+              | ({"seuils": v["seuils"], "ok": v["ok"], "raisons": v["raisons"]} if "ok" in v else {}) for k, v in occ_bilan.items()}
 rapport["occupation_du_cadre"] = occ_bilan
-if OCC.get("scenes"):
-    note(f"O1 plans-titres ({', '.join(OCC['scenes'])}) : boîte d'encre ≥ {OCC.get('largeur_min', 0):g} de la largeur et barycentre "
-         f"{OCC.get('barycentre', [0, 1])[0]:g}–{OCC.get('barycentre', [0, 1])[1]:g}, à pleine composition",
-         all(occ_bilan.get(k, {}).get("ok") for k in OCC["scenes"]), occ_resume)
+vises = [k for k, v in occ_bilan.items() if "ok" in v]
+if vises:
+    # recomposition du 28/09 : un seuil PAR SCÈNE (DONNEES.format.occupation.par_scene) ; la forme commune des plans-titres
+    # (scenes, largeur_min, barycentre) reste lue. 3e passe (28/09) : la SÉRIE compte aussi (médianes, 1er quartile, barycentre
+    # vertical) et des FENÊTRES de temps (occupation.fenetres : l'accroche, la voix seule), seuils fixés d'après la règle.
+    note(f"O1 occupation du cadre ({', '.join(vises)}) : à pleine composition ET sur la durée (médianes, 1er quartile, "
+         "barycentres horizontal et vertical), aux seuils de DONNEES.format.occupation",
+         all(occ_bilan[k]["ok"] for k in vises), occ_resume)
 else:
     rapport.setdefault("informations", {})["O1 occupation du cadre (format sans seuil)"] = occ_resume
 
@@ -971,6 +1094,8 @@ if PASSER:
     y2 = {"passer_s": PASSER, "limite_s": round(PASSER - MARGE_Y, 3), "premier_mot": mot1 and {k: mot1[k] for k in ("texte", "debut", "image")},
           "mot_produit": prod and {k: prod[k] for k in ("texte", "debut", "fin", "image")},
           "manque_s": None if not prod else round(max(0.0, prod["fin"] - (PASSER - MARGE_Y)), 3),
+          "part_d_encre_autour_du_bouton (image, part)": encre_bouton,
+          "plancher_d_encre_min (4,5 → 5,2 s)": min((v for _, v in encre_bouton), default=None),
           "pistes": ["coupe YouTube de s1 (≈ −2,4 s : une seule tonalité, décroché à 1,8 s ; film de 44,6 s)",
                      "bumper de 6 s tiré de s7 en séquence d'annonces", "titre et bannière de l'annonce (Google Ads) qui disent le produit"]}
     ok_y2 = bool(mot1 and prod and mot1["debut"] <= PASSER - MARGE_Y + 1e-6 and prod["fin"] <= PASSER - MARGE_Y + 1e-6)

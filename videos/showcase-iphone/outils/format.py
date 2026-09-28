@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Produit un projet RENDABLE du film pour un format (16x9, 1x1…) sans dupliquer les scènes à la main.
 
-    python3 outils/format.py 16x9 [--dossier D] [--variante s7-signature=16x9-C] [--sans-construire]
+    python3 outils/format.py 16x9 [--dossier D] [--variante s7-signature=16x9-x | --variante '*=16x9-x'] [--sans-construire]
                              [--check] [--snapshots 3.5,21,46.9 | --planche] [--rendu film.mp4] [--empreinte ref.json]
 
   1. copie la source (index.html, compositions/, lib/, assets/, outils/banc*.html) dans D (défaut formats/<format>/),
@@ -17,6 +17,8 @@
      --rendu film.mp4 (hf render, sous flock /tmp/hf-rendu.lock), --empreinte ref.json (rendu sans perte, empreintes
      image par image comparées à ref.json : outils/identite.py ; code 1 si une image diffère), --entrees git:HEAD (dialogue
      et mots du dernier commit au lieu de ceux, peut-être en chantier, du dossier son/ : le minutage du film reste figé).
+  --variante '*=<nom>' : un JEU, la variante de ce nom dans chaque fichier de mise-en-page/ qui l'a (outils/mise_en_page.py ; passé
+  aussi à preparer_agenda.py, qui pose l'agenda du format).
   Le 9:16 EST ce projet (python3 outils/construire.py) ; « format.py 9x16 --dossier /tmp/x --entrees git:aa4dd24 --empreinte
   formats/empreintes-9x16.json » reconstruit une copie de contrôle et prouve qu'elle rend le film à l'image près (1 410 images,
   ~3 min ; disque sous 1,2 Gio libres : le rendu passe par /dev/shm, outils/rendre.py). Chemin court sans MP4 :
@@ -224,7 +226,8 @@ def main():
         a.entrees = str(fig)
     if not a.sans_construire:
         r = lancer([sys.executable, PROJET / "outils" / "preparer_agenda.py", "--format", a.format,
-                    "--sortie", dest / "donnees" / "agenda-geo.json", "--sans-images"])
+                    "--sortie", dest / "donnees" / "agenda-geo.json", "--sans-images"]
+                   + sum((["--variante", v] for v in a.variante), []))
         if r.returncode:
             raise SystemExit("preparer_agenda.py a échoué")
         r = lancer([sys.executable, PROJET / "outils" / "construire.py", "--format", a.format, "--racine", dest]

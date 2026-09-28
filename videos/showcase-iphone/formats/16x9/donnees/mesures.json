@@ -1,36 +1,36 @@
 {
  "unite": "px film ; mesuré dans le chrome-headless-shell de HyperFrames",
  "moteur": "chrome-headless-shell HyperFrames 152.0.7977.30",
- "date": "2026-09-28T08:26:55",
+ "date": "2026-09-28T12:21:37",
  "s1": {
   "centre": {
-   "x": 794.506,
-   "y": 533.475
+   "x": 924.607,
+   "y": 532.17
   },
-  "diametre": 15.75,
+  "diametre": 18.9,
   "ligne_de_base": 540,
   "lignes": [
    {
-    "ligne_de_base": 402,
+    "ligne_de_base": 374,
     "x0": 144,
-    "x1": 782.765625,
-    "largeur": 638.765625
+    "x1": 910.484375,
+    "largeur": 766.484375
    },
    {
     "ligne_de_base": 540,
     "x0": 144,
-    "x1": 810.46875,
-    "largeur": 666.46875
+    "x1": 943.765625,
+    "largeur": 799.765625
    }
   ],
   "espaceur": {
-   "x0": 778.53125,
+   "x0": 905.4375,
    "y0": 540,
-   "x1": 810.46875,
+   "x1": 943.765625,
    "y1": 540,
-   "cx": 794.5,
+   "cx": 924.6015625,
    "cy": 540,
-   "l": 31.9375,
+   "l": 38.328125,
    "h": 0
   },
   "glyphe_point": {
@@ -42,86 +42,86 @@
    ],
    "upm": 1000,
    "avance": 213,
-   "corps_px": 150
+   "corps_px": 180
   },
   "methode": "origine DOM du « . » réel (Range, crénage compris) + centre de la boîte d'encre du glyphe (fontTools), ligne de base DOM",
   "source": "compositions/s1-sonnerie.html #s1-espaceur"
  },
  "s7": {
   "centre": {
-   "x": 1120.797,
-   "y": 230
+   "x": 1152.961,
+   "y": 236.789
   },
-  "diametre": 44,
+  "diametre": 52.797,
   "mot_pt": {
-   "x0": 1098.796875,
-   "y0": 208,
-   "x1": 1142.796875,
-   "y1": 252,
-   "cx": 1120.796875,
-   "cy": 230,
-   "l": 44,
-   "h": 44
+   "x0": 1126.5625,
+   "y0": 210.390625,
+   "x1": 1179.359375,
+   "y1": 263.1875,
+   "cx": 1152.9609375,
+   "cy": 236.7890625,
+   "l": 52.796875,
+   "h": 52.796875
   },
   "mot": {
-   "x0": 627.984375,
-   "y0": 156,
-   "x1": 1292,
-   "y1": 516,
+   "x0": 561.578125,
+   "y0": 148,
+   "x1": 1358.40625,
+   "y1": 580,
    "cx": 959.9921875,
-   "cy": 336,
-   "l": 664.015625,
-   "h": 360
+   "cy": 364,
+   "l": 796.828125,
+   "h": 432
   },
   "segments": {
    "mot-a": {
-    "x0": 627.984375,
-    "x1": 1075.59375,
-    "largeur": 447.609375,
+    "x0": 561.578125,
+    "x1": 1098.703125,
+    "largeur": 537.125,
     "texte": "Vok",
-    "encre_x0": 615.484,
-    "encre_x1": 1130.434
+    "encre_x0": 546.578,
+    "encre_x1": 1164.517
    },
    "mot-i": {
-    "x0": 1075.59375,
-    "x1": 1146.796875,
-    "largeur": 71.203125,
+    "x0": 1098.703125,
+    "x1": 1184.15625,
+    "largeur": 85.453125,
     "texte": "ı",
-    "encre_x0": 1075.594,
-    "encre_x1": 1163.094
+    "encre_x0": 1098.703,
+    "encre_x1": 1203.703
    },
    "mot-o": {
-    "x0": 1146.796875,
-    "x1": 1292,
-    "largeur": 145.203125,
+    "x0": 1184.15625,
+    "x1": 1358.40625,
+    "largeur": 174.25,
     "texte": "o",
-    "encre_x0": 1153.047,
-    "encre_x1": 1303.047
+    "encre_x0": 1191.656,
+    "encre_x1": 1371.656
    }
   },
-  "ligne_de_base": 472,
+  "ligne_de_base": 527,
   "glyphe_i": {
-   "origine": 1075.59375,
-   "avance": 71.203125,
+   "origine": 1098.703125,
+   "avance": 85.453125,
    "encre": {
     "gauche": 0,
-    "droite": 87.5,
-    "haut": 206.25,
+    "droite": 105,
+    "haut": 247.5,
     "bas": 0,
-    "avance": 89.1998291015625,
-    "police": "400px \"Instrument Serif\", serif"
+    "avance": 107.039794921875,
+    "police": "480px \"Instrument Serif\", serif"
    },
-   "fut_x0": 1075.59375,
-   "fut_x1": 1163.09375,
-   "haut_encre": 265.75
+   "fut_x0": 1098.703125,
+   "fut_x1": 1203.703125,
+   "haut_encre": 279.5
   },
   "stylo": {
-   "x0": 539.319,
-   "x1": 1338.328,
-   "y": 504,
+   "x0": 455.181,
+   "x1": 1414.001,
+   "y": 565.4,
    "definition": "x0 = bord gauche de #mot − 0,14 × largeur de « Vok » − 26 ; x1 = bord droit de #mot + 0,14 × largeur du « o » + 26 ; y = ligne de base + 32 (le centre du point passe sous la ligne de base)"
   },
   "methode": "centre de getBoundingClientRect() de #mot-pt (boîte CSS du point de la DA)",
-  "source": "compositions/s7-signature.html #mot-pt (Instrument Serif 400 px, top 156)"
+  "source": "compositions/s7-signature.html #mot-pt (Instrument Serif 480 px, top 148)"
  }
 }

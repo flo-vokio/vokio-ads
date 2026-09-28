@@ -1,0 +1,4794 @@
+{
+ "pistes": {
+  "dialogue": {
+   "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/dialogue.wav",
+   "traitements": [],
+   "note": "le vrai appel, coupes dans le vrai blanc (son/dialogue.py), « mon » +4 dB, chaîne voix de mix.py"
+  },
+  "ligne": {
+   "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/ligne.wav",
+   "traitements": [],
+   "note": "fond de ligne tiré du vrai appel (outils/fond_ligne.py), à l'échelle du dialogue : fond continu du décroché au raccroché + bruit de confort de l'appelant (il prend le relais quand sa porte VAD se ferme, puis décroît) ; réglages appliqués : rapport → amont.ligne (stems-amont.json, seule source)"
+  },
+  "musique": {
+   "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/musique.wav",
+   "traitements": [],
+   "note": "la musique de la version 2 (riche-musique), ducking et rattrapages refaits sur le nouveau dialogue ; au décroché, la quinte de la sonnerie sort en rampe au lieu d'être coupée (rapport → amont.musique.relache_quinte : la coupe de 40 ms creusait 30-300 Hz de −27 dB) ; remplace la nappe de verre (et donc le halo du 3, qui n'existe que pour elle)"
+  },
+  "sfx": {
+   "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/sfx.wav",
+   "traitements": [
+    "mono [[0.0, 17.3], [31.35, 47.0]]",
+    "miroir [[17.3, 31.35]]",
+    "muets [[41.45, 42.25]] (fondu 0 ms)"
+   ],
+   "note": "tonalité, souffle de sonnerie, clic, touchers, vibreur, raccroché ; UN son par geste : sur « Vokıo » le stem sfx amont porte le stylo du master (bruit 3-8 kHz, crête −31,3 dBFS entre 41,45 et 42,25) : le muet l'enlève, la plume (ecriture) le remplace, comme dans le 3"
+  },
+  "signature": {
+   "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/signature.wav",
+   "traitements": [],
+   "note": "tonalité 2 → la ligne qui s'ouvre, cloches sol et la · sol, signature la · sol · ré"
+  },
+  "ambiance": {
+   "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/ambiance.wav",
+   "traitements": [],
+   "note": "la pièce (3) : fond d'air très bas, oiseau dans le blanc des tonalités et sur la lecture du SMS ; porte les silences"
+  },
+  "point": {
+   "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/point.wav",
+   "traitements": [
+    "mono [[0.0, 17.3], [31.35, 47.0]]",
+    "miroir [[17.3, 31.35]]"
+   ],
+   "note": "le point (3) : naissance, éveil, air des trajets (trajectoire iPhone), envols, et l'assise sur le ı (42,933) : la goutte de la naissance passée au passe-haut 250 Hz (elle vit au-dessus de 4 kHz, −35,8 dBFS en 8-16 kHz) ; elle ne double ni le ré de la signature ni la grosse caisse ré2, qui sont sous 1 kHz : rendue le 28/09 (la rime naissance 0,83 → pose 42,93)"
+  },
+  "ecriture": {
+   "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/ecriture.wav",
+   "traitements": [
+    "mono [[0.0, 17.3], [31.35, 47.0]]",
+    "miroir [[17.3, 31.35]]"
+   ],
+   "note": "la plume (3) : le rendez-vous et « Vokıo » (encre lue dans la vidéo iPhone) ; sur « Vokıo », voir garde_reperes"
+  },
+  "objets": {
+   "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/objets.wav",
+   "traitements": [
+    "mono [[0.0, 17.3], [31.35, 47.0]]",
+    "miroir [[17.3, 31.35]]"
+   ],
+   "note": "les objets (3) : papier de l'agenda, tamis des « euh », téléphone qui monte et sort, vibreur sur bois"
+  }
+ },
+ "sidechain": [],
+ "garde_voix": {
+  "baisses": [],
+  "marge_K_min_lu": 10.5,
+  "marge_K_mediane_lu": 19.3,
+  "marge_bande_min_db": -14.1,
+  "pire_mot": {
+   "mot": "dix",
+   "t": 21.42,
+   "marge_K": 10.5,
+   "marge_bande": -4.7,
+   "limite_bande_par_non_cibles": true
+  },
+  "hors_sons_voulus": {
+   "marge_K_min_lu": 11.4,
+   "marge_bande_min_db": 10.4
+  },
+  "mots_limites_par_non_cibles": [
+   "neuf (20.55)",
+   "dix (21.42)",
+   "ou (22.12)",
+   "onze (22.20)",
+   "heures, (24.26)",
+   "c'est (24.41)"
+  ],
+  "mots": [
+   {
+    "mot": "Bonjour,",
+    "t": 5.0,
+    "marge_K": 19.3,
+    "marge_bande": 34.7
+   },
+   {
+    "mot": "je",
+    "t": 5.68,
+    "marge_K": 19.3,
+    "marge_bande": 34.7
+   },
+   {
+    "mot": "suis",
+    "t": 5.81,
+    "marge_K": 21.3,
+    "marge_bande": 35.5
+   },
+   {
+    "mot": "Élise,",
+    "t": 6.055,
+    "marge_K": 21.7,
+    "marge_bande": 25.6
+   },
+   {
+    "mot": "l'assistante",
+    "t": 6.63,
+    "marge_K": 22.3,
+    "marge_bande": 29.4
+   },
+   {
+    "mot": "vocale",
+    "t": 7.048,
+    "marge_K": 22.9,
+    "marge_bande": 33.9
+   },
+   {
+    "mot": "de",
+    "t": 7.388,
+    "marge_K": 23.4,
+    "marge_bande": 26.6
+   },
+   {
+    "mot": "la",
+    "t": 7.475,
+    "marge_K": 23.5,
+    "marge_bande": 31.2
+   },
+   {
+    "mot": "Clinique",
+    "t": 7.59,
+    "marge_K": 23.6,
+    "marge_bande": 29.3
+   },
+   {
+    "mot": "vétérinaire",
+    "t": 8.04,
+    "marge_K": 20.8,
+    "marge_bande": 32.6
+   },
+   {
+    "mot": "du",
+    "t": 8.372,
+    "marge_K": 23.6,
+    "marge_bande": 30.3
+   },
+   {
+    "mot": "Port !",
+    "t": 8.5,
+    "marge_K": 23.3,
+    "marge_bande": 29.4
+   },
+   {
+    "mot": "Comment",
+    "t": 9.1,
+    "marge_K": 23.7,
+    "marge_bande": 30.6
+   },
+   {
+    "mot": "puis-je",
+    "t": 9.342,
+    "marge_K": 19.3,
+    "marge_bande": 37.3
+   },
+   {
+    "mot": "vous",
+    "t": 9.562,
+    "marge_K": 15.7,
+    "marge_bande": 21.4
+   },
+   {
+    "mot": "aider ?",
+    "t": 9.678,
+    "marge_K": 19.9,
+    "marge_bande": 28.0
+   },
+   {
+    "mot": "mon",
+    "t": 10.56,
+    "marge_K": 21.0,
+    "marge_bande": 33.3
+   },
+   {
+    "mot": "chat,",
+    "t": 10.66,
+    "marge_K": 22.6,
+    "marge_bande": 31.9
+   },
+   {
+    "mot": "euh,",
+    "t": 10.915,
+    "marge_K": 18.0,
+    "marge_bande": 23.7
+   },
+   {
+    "mot": "Moka,",
+    "t": 11.395,
+    "marge_K": 22.4,
+    "marge_bande": 31.1
+   },
+   {
+    "mot": "euh,",
+    "t": 12.52,
+    "marge_K": 20.7,
+    "marge_bande": 28.3
+   },
+   {
+    "mot": "mange",
+    "t": 12.73,
+    "marge_K": 21.7,
+    "marge_bande": 19.0
+   },
+   {
+    "mot": "plus",
+    "t": 13.055,
+    "marge_K": 23.3,
+    "marge_bande": 21.8
+   },
+   {
+    "mot": "depuis",
+    "t": 13.272,
+    "marge_K": 21.3,
+    "marge_bande": 25.7
+   },
+   {
+    "mot": "hier",
+    "t": 13.72,
+    "marge_K": 24.1,
+    "marge_bande": 25.9
+   },
+   {
+    "mot": "Euh,",
+    "t": 14.65,
+    "marge_K": 20.3,
+    "marge_bande": 30.6
+   },
+   {
+    "mot": "demain,",
+    "t": 15.372,
+    "marge_K": 22.0,
+    "marge_bande": 29.6
+   },
+   {
+    "mot": "vous",
+    "t": 15.752,
+    "marge_K": 22.1,
+    "marge_bande": 12.7
+   },
+   {
+    "mot": "avez",
+    "t": 15.838,
+    "marge_K": 22.2,
+    "marge_bande": 25.2
+   },
+   {
+    "mot": "des",
+    "t": 16.058,
+    "marge_K": 15.7,
+    "marge_bande": 10.4
+   },
+   {
+    "mot": "disponibilités ?",
+    "t": 16.188,
+    "marge_K": 20.7,
+    "marge_bande": 22.8
+   },
+   {
+    "mot": "Laissez-moi",
+    "t": 17.59,
+    "marge_K": 23.5,
+    "marge_bande": 24.6
+   },
+   {
+    "mot": "voir.",
+    "t": 18.005,
+    "marge_K": 14.9,
+    "marge_bande": 23.4
+   },
+   {
+    "mot": "Je",
+    "t": 19.8,
+    "marge_K": 20.6,
+    "marge_bande": 20.0
+   },
+   {
+    "mot": "peux",
+    "t": 19.83,
+    "marge_K": 19.7,
+    "marge_bande": 19.7
+   },
+   {
+    "mot": "vous",
+    "t": 19.925,
+    "marge_K": 18.8,
+    "marge_bande": 13.4
+   },
+   {
+    "mot": "proposer",
+    "t": 20.02,
+    "marge_K": 21.7,
+    "marge_bande": 24.8
+   },
+   {
+    "mot": "neuf",
+    "t": 20.555,
+    "marge_K": 14.4,
+    "marge_bande": 1.7,
+    "limite_bande_par_non_cibles": true
+   },
+   {
+    "mot": "heures,",
+    "t": 20.785,
+    "marge_K": 20.0,
+    "marge_bande": 33.5
+   },
+   {
+    "mot": "dix",
+    "t": 21.42,
+    "marge_K": 10.5,
+    "marge_bande": -4.7,
+    "limite_bande_par_non_cibles": true
+   },
+   {
+    "mot": "heures",
+    "t": 21.57,
+    "marge_K": 19.6,
+    "marge_bande": 31.4
+   },
+   {
+    "mot": "ou",
+    "t": 22.12,
+    "marge_K": 14.8,
+    "marge_bande": -14.1,
+    "limite_bande_par_non_cibles": true
+   },
+   {
+    "mot": "onze",
+    "t": 22.2,
+    "marge_K": 14.0,
+    "marge_bande": 1.3,
+    "limite_bande_par_non_cibles": true
+   },
+   {
+    "mot": "heures.",
+    "t": 22.37,
+    "marge_K": 16.5,
+    "marge_bande": 26.7
+   },
+   {
+    "mot": "Euh,",
+    "t": 23.28,
+    "marge_K": 17.9,
+    "marge_bande": 29.9
+   },
+   {
+    "mot": "bah,",
+    "t": 23.49,
+    "marge_K": 18.7,
+    "marge_bande": 29.2
+   },
+   {
+    "mot": "à",
+    "t": 23.97,
+    "marge_K": 17.6,
+    "marge_bande": 31.0
+   },
+   {
+    "mot": "neuf",
+    "t": 24.085,
+    "marge_K": 16.3,
+    "marge_bande": 27.1
+   },
+   {
+    "mot": "heures,",
+    "t": 24.26,
+    "marge_K": 13.1,
+    "marge_bande": 4.9,
+    "limite_bande_par_non_cibles": true
+   },
+   {
+    "mot": "c'est",
+    "t": 24.405,
+    "marge_K": 19.9,
+    "marge_bande": 4.2,
+    "limite_bande_par_non_cibles": true
+   },
+   {
+    "mot": "parfait.",
+    "t": 24.565,
+    "marge_K": 16.2,
+    "marge_bande": 25.5
+   },
+   {
+    "mot": "Parfait,",
+    "t": 26.24,
+    "marge_K": 18.8,
+    "marge_bande": 34.2
+   },
+   {
+    "mot": "je",
+    "t": 26.59,
+    "marge_K": 18.4,
+    "marge_bande": 39.4
+   },
+   {
+    "mot": "vous",
+    "t": 26.695,
+    "marge_K": 19.4,
+    "marge_bande": 20.0
+   },
+   {
+    "mot": "note",
+    "t": 26.785,
+    "marge_K": 18.6,
+    "marge_bande": 25.4
+   },
+   {
+    "mot": "ça",
+    "t": 26.955,
+    "marge_K": 24.7,
+    "marge_bande": 39.1
+   },
+   {
+    "mot": "pour",
+    "t": 27.115,
+    "marge_K": 15.3,
+    "marge_bande": 22.3
+   },
+   {
+    "mot": "Florian,",
+    "t": 27.25,
+    "marge_K": 17.1,
+    "marge_bande": 32.3
+   },
+   {
+    "mot": "pour",
+    "t": 27.82,
+    "marge_K": 17.9,
+    "marge_bande": 21.4
+   },
+   {
+    "mot": "une",
+    "t": 27.94,
+    "marge_K": 14.7,
+    "marge_bande": 12.9
+   },
+   {
+    "mot": "consultation",
+    "t": 28.038,
+    "marge_K": 18.5,
+    "marge_bande": 33.8
+   },
+   {
+    "mot": "vétérinaire,",
+    "t": 28.695,
+    "marge_K": 17.9,
+    "marge_bande": 31.3
+   },
+   {
+    "mot": "le",
+    "t": 29.38,
+    "marge_K": 18.8,
+    "marge_bande": 30.6
+   },
+   {
+    "mot": "samedi",
+    "t": 29.45,
+    "marge_K": 17.2,
+    "marge_bande": 21.1
+   },
+   {
+    "mot": "dix-neuf",
+    "t": 29.823,
+    "marge_K": 19.3,
+    "marge_bande": 26.2
+   },
+   {
+    "mot": "septembre",
+    "t": 30.09,
+    "marge_K": 18.3,
+    "marge_bande": 28.9
+   },
+   {
+    "mot": "à",
+    "t": 30.468,
+    "marge_K": 19.4,
+    "marge_bande": 30.5
+   },
+   {
+    "mot": "neuf",
+    "t": 30.555,
+    "marge_K": 16.8,
+    "marge_bande": 20.7
+   },
+   {
+    "mot": "heures.",
+    "t": 30.675,
+    "marge_K": 11.4,
+    "marge_bande": 23.8
+   },
+   {
+    "mot": "Vous",
+    "t": 31.39,
+    "marge_K": 15.2,
+    "marge_bande": 14.0
+   },
+   {
+    "mot": "recevrez",
+    "t": 31.492,
+    "marge_K": 17.8,
+    "marge_bande": 30.0
+   },
+   {
+    "mot": "un",
+    "t": 31.92,
+    "marge_K": 17.3,
+    "marge_bande": 31.3
+   },
+   {
+    "mot": "SMS",
+    "t": 32.068,
+    "marge_K": 17.5,
+    "marge_bande": 28.7
+   },
+   {
+    "mot": "de",
+    "t": 32.315,
+    "marge_K": 19.1,
+    "marge_bande": 28.1
+   },
+   {
+    "mot": "confirmation.",
+    "t": 32.435,
+    "marge_K": 13.2,
+    "marge_bande": 30.7
+   },
+   {
+    "mot": "Super,",
+    "t": 34.03,
+    "marge_K": 20.1,
+    "marge_bande": 27.4
+   },
+   {
+    "mot": "merci",
+    "t": 34.325,
+    "marge_K": 19.8,
+    "marge_bande": 26.9
+   },
+   {
+    "mot": "beaucoup.",
+    "t": 34.6,
+    "marge_K": 22.7,
+    "marge_bande": 16.2
+   },
+   {
+    "mot": "Au",
+    "t": 35.12,
+    "marge_K": 20.1,
+    "marge_bande": 29.4
+   },
+   {
+    "mot": "revoir.",
+    "t": 35.24,
+    "marge_K": 16.3,
+    "marge_bande": 24.7
+   }
+  ]
+ },
+ "garde_reperes": [
+  {
+   "id": "naissance",
+   "couche": "point",
+   "de": 0.833,
+   "a": 1.083,
+   "ref_db": 35.7,
+   "cible_db": 6.0,
+   "avant_db": 27.5,
+   "bande_critere": "4k-8k",
+   "action": "aucune"
+  },
+  {
+   "id": "oiseau-1",
+   "couche": "ambiance",
+   "de": 1.68,
+   "a": 1.93,
+   "ref_db": 77.4,
+   "cible_db": 6.0,
+   "avant_db": 52.4,
+   "bande_critere": "4k-8k",
+   "action": "aucune"
+  },
+  {
+   "id": "eveil",
+   "couche": "point",
+   "de": 4.233,
+   "a": 4.483,
+   "ref_db": 21.6,
+   "cible_db": 6.0,
+   "avant_db": 21.1,
+   "bande_critere": "4k-8k",
+   "action": "aucune"
+  },
+  {
+   "id": "tamis",
+   "couche": "objets",
+   "de": 13.95,
+   "a": 14.5,
+   "ref_db": 8.4,
+   "cible_db": 8.4,
+   "avant_db": 5.7,
+   "bande_critere": "4k-8k",
+   "creux_db": -0.5,
+   "bande_creux": [
+    3500,
+    16000
+   ],
+   "cibles": [
+    "musique",
+    "ligne"
+   ],
+   "hausse_db": 3.0,
+   "prevu_db": 8.9,
+   "bande_obtenue": "4k-8k",
+   "insuffisant": false
+  },
+  {
+   "id": "agenda-monte",
+   "couche": "objets",
+   "de": 18.37,
+   "a": 19.07,
+   "ref_db": 32.7,
+   "cible_db": 6.0,
+   "avant_db": 26.7,
+   "bande_critere": "4k-8k",
+   "action": "aucune"
+  },
+  {
+   "id": "envol-neuf",
+   "couche": "point",
+   "de": 20.433,
+   "a": 20.683,
+   "ref_db": 33.6,
+   "cible_db": 6.0,
+   "avant_db": 33.4,
+   "bande_critere": "4k-8k",
+   "action": "aucune"
+  },
+  {
+   "id": "envol-dix",
+   "couche": "point",
+   "de": 21.167,
+   "a": 21.417,
+   "ref_db": 33.1,
+   "cible_db": 6.0,
+   "avant_db": 34.4,
+   "bande_critere": "4k-8k",
+   "action": "aucune"
+  },
+  {
+   "id": "envol-onze",
+   "couche": "point",
+   "de": 21.933,
+   "a": 22.183,
+   "ref_db": 34.9,
+   "cible_db": 6.0,
+   "avant_db": 36.0,
+   "bande_critere": "4k-8k",
+   "action": "aucune"
+  },
+  {
+   "id": "envol-retour",
+   "couche": "point",
+   "de": 23.967,
+   "a": 24.217,
+   "ref_db": 12.3,
+   "cible_db": 6.0,
+   "avant_db": 12.2,
+   "bande_critere": "4k-8k",
+   "action": "aucune"
+  },
+  {
+   "id": "plume-rendez-vous",
+   "couche": "ecriture",
+   "de": 25.367,
+   "a": 26.1,
+   "ref_db": 14.3,
+   "cible_db": 6.0,
+   "avant_db": 23.0,
+   "bande_critere": "4k-8k",
+   "action": "aucune"
+  },
+  {
+   "id": "pose-plume-rendez-vous",
+   "couche": "ecriture",
+   "de": 25.367,
+   "a": 25.617,
+   "ref_db": 15.4,
+   "cible_db": 6.0,
+   "avant_db": 23.0,
+   "bande_critere": "4k-8k",
+   "action": "aucune"
+  },
+  {
+   "id": "agenda-sort",
+   "couche": "objets",
+   "de": 31.0,
+   "a": 31.35,
+   "ref_db": 14.4,
+   "cible_db": 6.0,
+   "avant_db": 2.8,
+   "bande_critere": "2k-4k",
+   "creux_db": -5.0,
+   "bande_creux": [
+    3500,
+    16000
+   ],
+   "cibles": [
+    "musique",
+    "ligne"
+   ],
+   "hausse_db": 0.0,
+   "prevu_db": 6.7,
+   "bande_obtenue": "4k-8k",
+   "insuffisant": false
+  },
+  {
+   "id": "vibreur-bois",
+   "couche": "objets",
+   "de": 36.667,
+   "a": 36.917,
+   "ref_db": -10.2,
+   "cible_db": -10.2,
+   "avant_db": -10.2,
+   "bande_critere": "40-150",
+   "action": "aucune"
+  },
+  {
+   "id": "telephone-sort",
+   "couche": "objets",
+   "de": 41.0,
+   "a": 41.4,
+   "ref_db": 4.7,
+   "cible_db": 4.7,
+   "avant_db": -9.6,
+   "bande_critere": "150-400",
+   "creux_db": -3.0,
+   "bande_creux": [
+    150,
+    1000
+   ],
+   "cibles": [
+    "musique"
+   ],
+   "hausse_db": 12.0,
+   "prevu_db": 5.4,
+   "bande_obtenue": "150-400",
+   "insuffisant": false
+  },
+  {
+   "id": "plume-vokio",
+   "couche": "ecriture",
+   "de": 41.5,
+   "a": 42.2,
+   "ref_db": 21.8,
+   "cible_db": 6.0,
+   "avant_db": -6.8,
+   "bande_critere": "4k-8k",
+   "creux_db": -10.0,
+   "bande_creux": [
+    3500,
+    16000
+   ],
+   "cibles": [
+    "musique",
+    "ligne"
+   ],
+   "hausse_db": 3.5,
+   "prevu_db": 6.7,
+   "bande_obtenue": "4k-8k",
+   "insuffisant": false
+  },
+  {
+   "id": "pose-plume-vokio",
+   "couche": "ecriture",
+   "de": 41.5,
+   "a": 41.75,
+   "ref_db": 19.0,
+   "cible_db": 6.0,
+   "avant_db": -3.7,
+   "bande_critere": "4k-8k",
+   "creux_db": -10.0,
+   "bande_creux": [
+    3500,
+    16000
+   ],
+   "cibles": [
+    "musique",
+    "ligne"
+   ],
+   "hausse_db": 0.5,
+   "prevu_db": 6.6,
+   "bande_obtenue": "4k-8k",
+   "insuffisant": false
+  },
+  {
+   "id": "assise-i",
+   "couche": "point",
+   "de": 42.933,
+   "a": 43.183,
+   "ref_db": 4.8,
+   "cible_db": 4.8,
+   "avant_db": 2.3,
+   "bande_critere": "4k-8k",
+   "creux_db": 0.0,
+   "bande_creux": [
+    3500,
+    16000
+   ],
+   "cibles": [
+    "musique",
+    "ligne"
+   ],
+   "hausse_db": 3.0,
+   "prevu_db": 5.3,
+   "bande_obtenue": "4k-8k",
+   "insuffisant": false
+  }
+ ],
+ "master": {
+  "gain_db": -0.19,
+  "reduction_limiteur_max_db": -2.48,
+  "t_reduction_max": 26.258,
+  "part_reduction_sup_1_db": 0.00187,
+  "intervalles_sup_1_db": [
+   [
+    7.226,
+    7.242,
+    1.27
+   ],
+   [
+    26.256,
+    26.31,
+    2.48
+   ],
+   [
+    42.92,
+    42.938,
+    1.33
+   ]
+  ]
+ },
+ "amont": {
+  "fichier": "/opt/vokio-ads/videos/showcase/son/stems-amont/iphone/stems-amont.json",
+  "empreinte": "28267a71bbbe7a6cc28737ace8c84286185827a254ecada27f9eacbb152d9d48",
+  "ligne": {
+   "zones_source": [
+    [
+     11.92,
+     12.05
+    ],
+    [
+     74.92,
+     75.09
+    ]
+   ],
+   "bande": [
+    700.0,
+    7000.0
+   ],
+   "rms_db": -66.0,
+   "fondu_in": 0.25,
+   "graine": 7,
+   "confort": {
+    "apparier": [
+     2000.0,
+     8000.0
+    ],
+    "ecart_db": -2.0,
+    "ouvre_db": 10.0,
+    "sous_db": 8.0,
+    "relache": 0.35,
+    "remplace": true,
+    "anticipation": 0.015,
+    "fondu": 0.01
+   },
+   "zones_film_porte_ouverte": [
+    [
+     12.14,
+     12.27
+    ]
+   ],
+   "plancher_porte_ouverte_db": -48.46,
+   "fond_base_db": -66.14,
+   "gain_confort_db": 15.68,
+   "porte_ouverte_s": 6.935,
+   "bande_apparier": [
+    2000.0,
+    8000.0
+   ]
+  },
+  "musique": {
+   "rattrapages": 5,
+   "manques": [],
+   "relache_quinte": 0.35
+  }
+ },
+ "duree_calcul_s": 56.6,
+ "mesures": {
+  "mix": {
+   "I": -14.02,
+   "TP": -1.7,
+   "LRA": 6.9
+  },
+  "crete_vraie_dbtp_numpy": -1.7,
+  "somme_stems_moins_mix": 3.3306690738754696e-16,
+  "mono_moins_stereo_lu": -0.11,
+  "correlation_min": 0.71,
+  "silences": [
+   {
+    "de": 35.9467,
+    "a": 36.666667,
+    "zeros_exacts": true
+   },
+   {
+    "de": 46.7,
+    "a": 47.0,
+    "zeros_exacts": true
+   }
+  ],
+  "sonie_court_terme_max": {
+   "t": 45.3,
+   "S": -10.95
+  },
+  "sonie_momentanee_max": {
+   "t": 43.3,
+   "M": -9.11
+  },
+  "arc": {
+   "S_max_apres": -10.95,
+   "S_max_avant": -12.54,
+   "ecart_lu": 1.6,
+   "sommet_sur_la_fin": true
+  },
+  "mots": {
+   "mix": {
+    "C1:0 mon": {
+     "debut": 10.56,
+     "fin": 10.66,
+     "lufs": -10.1,
+     "bande_1_4k_db": -23.92,
+     "crete_1_4k_db": -10.89
+    },
+    "C1:1 chat": {
+     "debut": 10.66,
+     "fin": 10.915,
+     "lufs": -11.45,
+     "bande_1_4k_db": -25.22,
+     "crete_1_4k_db": -14.49
+    }
+   },
+   "1 classique": {
+    "C1:0 mon": {
+     "debut": 10.56,
+     "fin": 10.66,
+     "lufs": -11.64,
+     "bande_1_4k_db": -25.67,
+     "crete_1_4k_db": -14.71
+    },
+    "C1:1 chat": {
+     "debut": 10.66,
+     "fin": 10.915,
+     "lufs": -11.13,
+     "bande_1_4k_db": -24.9,
+     "crete_1_4k_db": -14.02
+    }
+   },
+   "2 musique": {
+    "C1:0 mon": {
+     "debut": 10.56,
+     "fin": 10.66,
+     "lufs": -11.76,
+     "bande_1_4k_db": -25.78,
+     "crete_1_4k_db": -14.81
+    },
+    "C1:1 chat": {
+     "debut": 10.66,
+     "fin": 10.915,
+     "lufs": -11.3,
+     "bande_1_4k_db": -25.03,
+     "crete_1_4k_db": -14.07
+    }
+   },
+   "3 design": {
+    "C1:0 mon": {
+     "debut": 10.56,
+     "fin": 10.66,
+     "lufs": -11.68,
+     "bande_1_4k_db": -25.72,
+     "crete_1_4k_db": -14.74
+    },
+    "C1:1 chat": {
+     "debut": 10.66,
+     "fin": 10.915,
+     "lufs": -11.18,
+     "bande_1_4k_db": -24.95,
+     "crete_1_4k_db": -14.11
+    }
+   },
+   "voix_seule": {
+    "C1:0 mon": {
+     "debut": 10.56,
+     "fin": 10.66,
+     "lufs": -10.09,
+     "bande_1_4k_db": -23.92,
+     "crete_1_4k_db": -10.85
+    },
+    "C1:1 chat": {
+     "debut": 10.66,
+     "fin": 10.915,
+     "lufs": -11.45,
+     "bande_1_4k_db": -25.21,
+     "crete_1_4k_db": -14.52
+    }
+   }
+  },
+  "sautes": {
+   "0-15": {
+    "mix": [
+     {
+      "t": 0.83,
+      "bande": "2-8 kHz",
+      "avant_db": -53.0,
+      "apres_db": -34.4,
+      "delta_db": 18.6
+     },
+     {
+      "t": 2.7,
+      "bande": "large",
+      "avant_db": -31.1,
+      "apres_db": -20.5,
+      "delta_db": 10.6
+     },
+     {
+      "t": 4.21,
+      "bande": "2-8 kHz",
+      "avant_db": -46.6,
+      "apres_db": -56.9,
+      "delta_db": -10.2
+     },
+     {
+      "t": 4.24,
+      "bande": "2-8 kHz",
+      "avant_db": -55.2,
+      "apres_db": -45.0,
+      "delta_db": 10.2
+     },
+     {
+      "t": 4.75,
+      "bande": "2-8 kHz",
+      "avant_db": -61.9,
+      "apres_db": -51.5,
+      "delta_db": 10.4
+     },
+     {
+      "t": 8.75,
+      "bande": "2-8 kHz",
+      "avant_db": -48.4,
+      "apres_db": -59.6,
+      "delta_db": -11.1
+     }
+    ],
+    "1 classique": [
+     {
+      "t": 1.5,
+      "bande": "large",
+      "avant_db": -20.9,
+      "apres_db": -49.1,
+      "delta_db": -28.1
+     },
+     {
+      "t": 2.7,
+      "bande": "large",
+      "avant_db": -48.5,
+      "apres_db": -20.8,
+      "delta_db": 27.6
+     },
+     {
+      "t": 4.21,
+      "bande": "2-8 kHz",
+      "avant_db": -46.4,
+      "apres_db": -57.7,
+      "delta_db": -11.3
+     },
+     {
+      "t": 8.75,
+      "bande": "2-8 kHz",
+      "avant_db": -48.5,
+      "apres_db": -63.5,
+      "delta_db": -15.0
+     },
+     {
+      "t": 12.42,
+      "bande": "2-8 kHz",
+      "avant_db": -79.6,
+      "apres_db": -69.6,
+      "delta_db": 10.0
+     },
+     {
+      "t": 14.06,
+      "bande": "2-8 kHz",
+      "avant_db": -60.6,
+      "apres_db": -84.6,
+      "delta_db": -24.0
+     }
+    ],
+    "2 musique": [
+     {
+      "t": 2.7,
+      "bande": "large",
+      "avant_db": -31.0,
+      "apres_db": -20.4,
+      "delta_db": 10.6
+     },
+     {
+      "t": 4.21,
+      "bande": "2-8 kHz",
+      "avant_db": -46.6,
+      "apres_db": -57.9,
+      "delta_db": -11.3
+     },
+     {
+      "t": 8.75,
+      "bande": "2-8 kHz",
+      "avant_db": -48.5,
+      "apres_db": -61.9,
+      "delta_db": -13.3
+     }
+    ],
+    "3 design": [
+     {
+      "t": 0.83,
+      "bande": "2-8 kHz",
+      "avant_db": -52.9,
+      "apres_db": -34.3,
+      "delta_db": 18.6
+     },
+     {
+      "t": 1.5,
+      "bande": "large",
+      "avant_db": -21.0,
+      "apres_db": -47.3,
+      "delta_db": -26.3
+     },
+     {
+      "t": 2.7,
+      "bande": "large",
+      "avant_db": -46.6,
+      "apres_db": -20.9,
+      "delta_db": 25.7
+     },
+     {
+      "t": 4.21,
+      "bande": "2-8 kHz",
+      "avant_db": -46.4,
+      "apres_db": -56.7,
+      "delta_db": -10.3
+     },
+     {
+      "t": 4.24,
+      "bande": "2-8 kHz",
+      "avant_db": -55.2,
+      "apres_db": -44.8,
+      "delta_db": 10.4
+     },
+     {
+      "t": 4.75,
+      "bande": "2-8 kHz",
+      "avant_db": -66.9,
+      "apres_db": -51.6,
+      "delta_db": 15.3
+     },
+     {
+      "t": 6.48,
+      "bande": "2-8 kHz",
+      "avant_db": -67.4,
+      "apres_db": -56.6,
+      "delta_db": 10.8
+     },
+     {
+      "t": 8.75,
+      "bande": "2-8 kHz",
+      "avant_db": -48.6,
+      "apres_db": -63.0,
+      "delta_db": -14.4
+     }
+    ]
+   },
+   "0-36": {
+    "mix": [
+     {
+      "t": 0.83,
+      "bande": "2-8 kHz",
+      "avant_db": -53.0,
+      "apres_db": -34.4,
+      "delta_db": 18.6
+     },
+     {
+      "t": 2.7,
+      "bande": "large",
+      "avant_db": -31.1,
+      "apres_db": -20.5,
+      "delta_db": 10.6
+     },
+     {
+      "t": 4.21,
+      "bande": "2-8 kHz",
+      "avant_db": -46.6,
+      "apres_db": -56.9,
+      "delta_db": -10.2
+     },
+     {
+      "t": 4.24,
+      "bande": "2-8 kHz",
+      "avant_db": -55.2,
+      "apres_db": -45.0,
+      "delta_db": 10.2
+     },
+     {
+      "t": 4.75,
+      "bande": "2-8 kHz",
+      "avant_db": -61.9,
+      "apres_db": -51.5,
+      "delta_db": 10.4
+     },
+     {
+      "t": 8.75,
+      "bande": "2-8 kHz",
+      "avant_db": -48.4,
+      "apres_db": -59.6,
+      "delta_db": -11.1
+     },
+     {
+      "t": 25.36,
+      "bande": "2-8 kHz",
+      "avant_db": -59.2,
+      "apres_db": -44.8,
+      "delta_db": 14.4
+     },
+     {
+      "t": 27.75,
+      "bande": "2-8 kHz",
+      "avant_db": -62.4,
+      "apres_db": -44.5,
+      "delta_db": 17.9
+     },
+     {
+      "t": 31.01,
+      "bande": "2-8 kHz",
+      "avant_db": -63.0,
+      "apres_db": -42.8,
+      "delta_db": 20.1
+     },
+     {
+      "t": 35.88,
+      "bande": "2-8 kHz",
+      "avant_db": -42.9,
+      "apres_db": -98.9,
+      "delta_db": -56.0
+     },
+     {
+      "t": 35.9,
+      "bande": "large",
+      "avant_db": -24.9,
+      "apres_db": -240.0,
+      "delta_db": -215.1
+     }
+    ],
+    "1 classique": [
+     {
+      "t": 1.5,
+      "bande": "large",
+      "avant_db": -20.9,
+      "apres_db": -49.1,
+      "delta_db": -28.1
+     },
+     {
+      "t": 2.7,
+      "bande": "large",
+      "avant_db": -48.5,
+      "apres_db": -20.8,
+      "delta_db": 27.6
+     },
+     {
+      "t": 4.21,
+      "bande": "2-8 kHz",
+      "avant_db": -46.4,
+      "apres_db": -57.7,
+      "delta_db": -11.3
+     },
+     {
+      "t": 8.75,
+      "bande": "2-8 kHz",
+      "avant_db": -48.5,
+      "apres_db": -63.5,
+      "delta_db": -15.0
+     },
+     {
+      "t": 12.42,
+      "bande": "2-8 kHz",
+      "avant_db": -79.6,
+      "apres_db": -69.6,
+      "delta_db": 10.0
+     },
+     {
+      "t": 14.06,
+      "bande": "2-8 kHz",
+      "avant_db": -60.6,
+      "apres_db": -84.6,
+      "delta_db": -24.0
+     },
+     {
+      "t": 22.78,
+      "bande": "2-8 kHz",
+      "avant_db": -64.6,
+      "apres_db": -83.4,
+      "delta_db": -18.7
+     },
+     {
+      "t": 25.4,
+      "bande": "2-8 kHz",
+      "avant_db": -75.8,
+      "apres_db": -59.2,
+      "delta_db": 16.6
+     },
+     {
+      "t": 33.98,
+      "bande": "2-8 kHz",
+      "avant_db": -73.2,
+      "apres_db": -38.1,
+      "delta_db": 35.1
+     },
+     {
+      "t": 35.48,
+      "bande": "2-8 kHz",
+      "avant_db": -49.9,
+      "apres_db": -79.2,
+      "delta_db": -29.2
+     },
+     {
+      "t": 35.88,
+      "bande": "2-8 kHz",
+      "avant_db": -43.0,
+      "apres_db": -98.7,
+      "delta_db": -55.7
+     },
+     {
+      "t": 35.9,
+      "bande": "large",
+      "avant_db": -24.7,
+      "apres_db": -240.0,
+      "delta_db": -215.3
+     }
+    ],
+    "2 musique": [
+     {
+      "t": 2.7,
+      "bande": "large",
+      "avant_db": -31.0,
+      "apres_db": -20.4,
+      "delta_db": 10.6
+     },
+     {
+      "t": 4.21,
+      "bande": "2-8 kHz",
+      "avant_db": -46.6,
+      "apres_db": -57.9,
+      "delta_db": -11.3
+     },
+     {
+      "t": 8.75,
+      "bande": "2-8 kHz",
+      "avant_db": -48.5,
+      "apres_db": -61.9,
+      "delta_db": -13.3
+     },
+     {
+      "t": 25.4,
+      "bande": "large",
+      "avant_db": -33.3,
+      "apres_db": -21.2,
+      "delta_db": 12.1
+     },
+     {
+      "t": 27.75,
+      "bande": "2-8 kHz",
+      "avant_db": -65.6,
+      "apres_db": -44.5,
+      "delta_db": 21.1
+     },
+     {
+      "t": 31.01,
+      "bande": "2-8 kHz",
+      "avant_db": -65.2,
+      "apres_db": -37.8,
+      "delta_db": 27.4
+     },
+     {
+      "t": 31.21,
+      "bande": "2-8 kHz",
+      "avant_db": -63.8,
+      "apres_db": -39.6,
+      "delta_db": 24.1
+     },
+     {
+      "t": 33.98,
+      "bande": "2-8 kHz",
+      "avant_db": -56.2,
+      "apres_db": -38.2,
+      "delta_db": 18.0
+     },
+     {
+      "t": 35.48,
+      "bande": "2-8 kHz",
+      "avant_db": -50.2,
+      "apres_db": -67.1,
+      "delta_db": -16.9
+     },
+     {
+      "t": 35.88,
+      "bande": "2-8 kHz",
+      "avant_db": -43.0,
+      "apres_db": -98.8,
+      "delta_db": -55.8
+     },
+     {
+      "t": 35.9,
+      "bande": "large",
+      "avant_db": -24.9,
+      "apres_db": -240.0,
+      "delta_db": -215.1
+     }
+    ],
+    "3 design": [
+     {
+      "t": 0.83,
+      "bande": "2-8 kHz",
+      "avant_db": -52.9,
+      "apres_db": -34.3,
+      "delta_db": 18.6
+     },
+     {
+      "t": 1.5,
+      "bande": "large",
+      "avant_db": -21.0,
+      "apres_db": -47.3,
+      "delta_db": -26.3
+     },
+     {
+      "t": 2.7,
+      "bande": "large",
+      "avant_db": -46.6,
+      "apres_db": -20.9,
+      "delta_db": 25.7
+     },
+     {
+      "t": 4.21,
+      "bande": "2-8 kHz",
+      "avant_db": -46.4,
+      "apres_db": -56.7,
+      "delta_db": -10.3
+     },
+     {
+      "t": 4.24,
+      "bande": "2-8 kHz",
+      "avant_db": -55.2,
+      "apres_db": -44.8,
+      "delta_db": 10.4
+     },
+     {
+      "t": 4.75,
+      "bande": "2-8 kHz",
+      "avant_db": -66.9,
+      "apres_db": -51.6,
+      "delta_db": 15.3
+     },
+     {
+      "t": 6.48,
+      "bande": "2-8 kHz",
+      "avant_db": -67.4,
+      "apres_db": -56.6,
+      "delta_db": 10.8
+     },
+     {
+      "t": 8.75,
+      "bande": "2-8 kHz",
+      "avant_db": -48.6,
+      "apres_db": -63.0,
+      "delta_db": -14.4
+     },
+     {
+      "t": 25.35,
+      "bande": "2-8 kHz",
+      "avant_db": -61.4,
+      "apres_db": -45.7,
+      "delta_db": 15.7
+     },
+     {
+      "t": 33.98,
+      "bande": "2-8 kHz",
+      "avant_db": -60.3,
+      "apres_db": -38.1,
+      "delta_db": 22.1
+     },
+     {
+      "t": 35.48,
+      "bande": "2-8 kHz",
+      "avant_db": -49.7,
+      "apres_db": -62.0,
+      "delta_db": -12.3
+     },
+     {
+      "t": 35.88,
+      "bande": "2-8 kHz",
+      "avant_db": -43.0,
+      "apres_db": -98.8,
+      "delta_db": -55.8
+     },
+     {
+      "t": 35.9,
+      "bande": "large",
+      "avant_db": -24.8,
+      "apres_db": -240.0,
+      "delta_db": -215.2
+     }
+    ]
+   }
+  },
+  "differentiel": {
+   "0-15": [
+    {
+     "t": 4.08,
+     "bande": "8-16k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 32.7,
+     "2 musique": 32.6,
+     "3 design": 22.1,
+     "mix": 22.1,
+     "bandes": [
+      "8-16k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 4.135,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 27.7,
+     "2 musique": 27.6,
+     "3 design": 17.8,
+     "mix": 17.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 4.21,
+     "bande": "8-16k",
+     "echelle": "court",
+     "mot": null,
+     "1 classique": -42.7,
+     "2 musique": -42.6,
+     "3 design": -30.3,
+     "mix": -30.3,
+     "bandes": [
+      "4-8k",
+      "8-16k",
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 4.3,
+     "bande": "100-300",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 28.6,
+     "2 musique": 12.7,
+     "3 design": 2.8,
+     "mix": -3.3,
+     "bandes": [
+      "100-300"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 4.96,
+     "bande": "2-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 32.1,
+     "2 musique": 25.5,
+     "3 design": 11.5,
+     "mix": 11.5,
+     "bandes": [
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 5.015,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Bonjour,",
+     "1 classique": 19.4,
+     "2 musique": 17.6,
+     "3 design": -1.0,
+     "mix": -0.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 5.115,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "Bonjour,",
+     "1 classique": 22.9,
+     "2 musique": 22.0,
+     "3 design": 10.1,
+     "mix": 9.0,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 5.17,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Bonjour,",
+     "1 classique": -23.5,
+     "2 musique": -21.5,
+     "3 design": -14.1,
+     "mix": -12.2,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 5.355,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Bonjour,",
+     "1 classique": 19.9,
+     "2 musique": 17.5,
+     "3 design": 9.4,
+     "mix": 7.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 5.435,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Bonjour,",
+     "1 classique": -28.8,
+     "2 musique": -21.8,
+     "3 design": -13.0,
+     "mix": -10.4,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 5.7,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "je",
+     "1 classique": 35.3,
+     "2 musique": 27.5,
+     "3 design": 18.9,
+     "mix": 16.0,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 6.075,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Élise,",
+     "1 classique": 20.5,
+     "2 musique": 16.3,
+     "3 design": 8.8,
+     "mix": 7.2,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 6.605,
+     "bande": "2-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 55.0,
+     "2 musique": 39.5,
+     "3 design": 18.9,
+     "mix": 19.1,
+     "bandes": [
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 6.85,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "l'assistante",
+     "1 classique": -14.6,
+     "2 musique": -12.1,
+     "3 design": -3.5,
+     "mix": -4.2,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 6.88,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "l'assistante",
+     "1 classique": 19.5,
+     "2 musique": 13.6,
+     "3 design": 3.7,
+     "mix": 3.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 7.18,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "vocale",
+     "1 classique": 29.1,
+     "2 musique": 21.1,
+     "3 design": 14.8,
+     "mix": 11.9,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 7.39,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "vocale",
+     "1 classique": 21.8,
+     "2 musique": 11.6,
+     "3 design": 6.2,
+     "mix": 4.1,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 7.595,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "la",
+     "1 classique": 15.9,
+     "2 musique": 10.4,
+     "3 design": 5.0,
+     "mix": 3.3,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 7.655,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Clinique",
+     "1 classique": -16.4,
+     "2 musique": -12.9,
+     "3 design": -3.4,
+     "mix": -2.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 7.87,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Clinique",
+     "1 classique": 19.5,
+     "2 musique": 11.9,
+     "3 design": 1.4,
+     "mix": 1.3,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 7.95,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Clinique",
+     "1 classique": -13.2,
+     "2 musique": -11.7,
+     "3 design": -6.3,
+     "mix": -6.1,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 8.015,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Clinique",
+     "1 classique": 28.3,
+     "2 musique": 19.6,
+     "3 design": -0.9,
+     "mix": -0.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 8.085,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "vétérinaire",
+     "1 classique": 11.3,
+     "2 musique": 10.9,
+     "3 design": 3.6,
+     "mix": 3.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 8.205,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "vétérinaire",
+     "1 classique": 20.2,
+     "2 musique": 16.0,
+     "3 design": 8.5,
+     "mix": 8.3,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 8.225,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "vétérinaire",
+     "1 classique": 17.3,
+     "2 musique": 15.6,
+     "3 design": 4.5,
+     "mix": 4.6,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 8.3,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "vétérinaire",
+     "1 classique": -14.0,
+     "2 musique": -12.5,
+     "3 design": -1.0,
+     "mix": -1.0,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 8.345,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "vétérinaire",
+     "1 classique": 27.2,
+     "2 musique": 21.3,
+     "3 design": -0.1,
+     "mix": -0.1,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 8.395,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "du",
+     "1 classique": -29.7,
+     "2 musique": -26.3,
+     "3 design": -6.2,
+     "mix": -6.3,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 8.49,
+     "bande": "2-8k",
+     "echelle": "court",
+     "mot": "Port !",
+     "1 classique": 32.4,
+     "2 musique": 32.7,
+     "3 design": 25.6,
+     "mix": 26.1,
+     "bandes": [
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 8.72,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": -26.6,
+     "2 musique": -22.5,
+     "3 design": -16.4,
+     "mix": -14.1,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 9.125,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Comment",
+     "1 classique": 20.1,
+     "2 musique": 17.2,
+     "3 design": 10.8,
+     "mix": 8.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 9.34,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Comment",
+     "1 classique": 24.9,
+     "2 musique": 18.5,
+     "3 design": 12.2,
+     "mix": 8.6,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 10.525,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 35.1,
+     "2 musique": 28.1,
+     "3 design": 19.0,
+     "mix": 18.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 12.52,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "euh,",
+     "1 classique": 22.4,
+     "2 musique": 20.7,
+     "3 design": 15.6,
+     "mix": 9.2,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 14.03,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": -31.3,
+     "2 musique": -23.9,
+     "3 design": -6.3,
+     "mix": -5.8,
+     "bandes": [
+      "4-8k",
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 14.62,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 36.3,
+     "2 musique": 28.6,
+     "3 design": 20.7,
+     "mix": 17.0,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    }
+   ],
+   "15-47": [
+    {
+     "t": 17.575,
+     "bande": "2-8k",
+     "echelle": "tenu",
+     "mot": "Laissez-moi",
+     "1 classique": 50.4,
+     "2 musique": 33.7,
+     "3 design": 20.0,
+     "mix": 20.1,
+     "bandes": [
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 17.83,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "Laissez-moi",
+     "1 classique": -13.8,
+     "2 musique": -11.9,
+     "3 design": -5.3,
+     "mix": -3.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 17.895,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Laissez-moi",
+     "1 classique": 14.9,
+     "2 musique": 11.2,
+     "3 design": 4.1,
+     "mix": 3.3,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 17.965,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Laissez-moi",
+     "1 classique": -19.2,
+     "2 musique": -15.9,
+     "3 design": -8.4,
+     "mix": -6.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 18.295,
+     "bande": "2-8k",
+     "echelle": "tenu",
+     "mot": "voir.",
+     "1 classique": -15.0,
+     "2 musique": -13.6,
+     "3 design": 0.9,
+     "mix": 0.8,
+     "bandes": [
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 19.8,
+     "bande": "2-4k",
+     "echelle": "court",
+     "mot": "Je",
+     "1 classique": 29.0,
+     "2 musique": 22.7,
+     "3 design": 11.2,
+     "mix": 22.6,
+     "bandes": [
+      "2-4k",
+      "2-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 20.66,
+     "bande": "8-16k",
+     "echelle": "court",
+     "mot": "neuf",
+     "1 classique": 53.3,
+     "2 musique": 53.2,
+     "3 design": 48.0,
+     "mix": 48.0,
+     "bandes": [
+      "4-8k",
+      "8-16k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 21.155,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "heures,",
+     "1 classique": -12.3,
+     "2 musique": -11.8,
+     "3 design": -3.6,
+     "mix": -3.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 21.25,
+     "bande": "2-4k",
+     "echelle": "tenu",
+     "mot": "heures,",
+     "1 classique": -22.3,
+     "2 musique": -17.3,
+     "3 design": -10.7,
+     "mix": -15.1,
+     "bandes": [
+      "2-4k",
+      "2-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 21.395,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 52.2,
+     "2 musique": 49.0,
+     "3 design": 21.6,
+     "mix": 21.7,
+     "bandes": [
+      "4-8k",
+      "8-16k",
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 21.43,
+     "bande": "8-16k",
+     "echelle": "court",
+     "mot": "dix",
+     "1 classique": 53.1,
+     "2 musique": 53.0,
+     "3 design": 11.1,
+     "mix": 11.2,
+     "bandes": [
+      "4-8k",
+      "8-16k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 21.98,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "heures",
+     "1 classique": -16.8,
+     "2 musique": -14.9,
+     "3 design": -7.6,
+     "mix": -7.4,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 22.13,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "ou",
+     "1 classique": 55.4,
+     "2 musique": 49.7,
+     "3 design": 39.9,
+     "mix": 38.6,
+     "bandes": [
+      "2-4k",
+      "4-8k",
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 22.2,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "ou",
+     "1 classique": 56.6,
+     "2 musique": 53.4,
+     "3 design": 20.8,
+     "mix": 21.0,
+     "bandes": [
+      "4-8k",
+      "8-16k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 23.255,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 36.9,
+     "2 musique": 36.0,
+     "3 design": 16.2,
+     "mix": 26.4,
+     "bandes": [
+      "2-4k",
+      "4-8k",
+      "2-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 24.94,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "parfait.",
+     "1 classique": -28.1,
+     "2 musique": -23.4,
+     "3 design": -17.9,
+     "mix": -14.1,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 26.23,
+     "bande": "2-4k",
+     "echelle": "tenu",
+     "mot": "Parfait,",
+     "1 classique": 48.6,
+     "2 musique": 37.1,
+     "3 design": 31.6,
+     "mix": 34.3,
+     "bandes": [
+      "2-4k",
+      "4-8k",
+      "2-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 26.29,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "Parfait,",
+     "1 classique": -20.6,
+     "2 musique": -17.5,
+     "3 design": -10.6,
+     "mix": -8.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 26.615,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "je",
+     "1 classique": -22.0,
+     "2 musique": -18.1,
+     "3 design": -11.4,
+     "mix": -14.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 26.885,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "note",
+     "1 classique": -13.4,
+     "2 musique": -10.1,
+     "3 design": -4.6,
+     "mix": -5.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 26.95,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "note",
+     "1 classique": 20.4,
+     "2 musique": 11.7,
+     "3 design": 4.9,
+     "mix": 5.6,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 27.73,
+     "bande": "2-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 29.6,
+     "2 musique": 22.8,
+     "3 design": 17.4,
+     "mix": 19.5,
+     "bandes": [
+      "2-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 28.08,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "consultation",
+     "1 classique": 41.2,
+     "2 musique": 28.2,
+     "3 design": 22.6,
+     "mix": 25.9,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 28.14,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "consultation",
+     "1 classique": 30.7,
+     "2 musique": 30.3,
+     "3 design": 20.4,
+     "mix": 29.2,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 28.315,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "consultation",
+     "1 classique": 10.5,
+     "2 musique": 22.3,
+     "3 design": 3.8,
+     "mix": 20.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 28.385,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "consultation",
+     "1 classique": -10.7,
+     "2 musique": -10.2,
+     "3 design": -3.1,
+     "mix": -10.9,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 28.425,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "consultation",
+     "1 classique": 26.0,
+     "2 musique": 20.8,
+     "3 design": 12.4,
+     "mix": 21.0,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 28.705,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "consultation",
+     "1 classique": 21.6,
+     "2 musique": 29.5,
+     "3 design": 6.3,
+     "mix": 26.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 29.005,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "vétérinaire,",
+     "1 classique": 12.5,
+     "2 musique": 18.6,
+     "3 design": 6.6,
+     "mix": 18.3,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 29.125,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "vétérinaire,",
+     "1 classique": -12.8,
+     "2 musique": -25.5,
+     "3 design": -6.2,
+     "mix": -24.3,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 30.12,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "septembre",
+     "1 classique": -10.6,
+     "2 musique": -13.7,
+     "3 design": -1.5,
+     "mix": -20.2,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 30.205,
+     "bande": "2-4k",
+     "echelle": "court",
+     "mot": "septembre",
+     "1 classique": -27.6,
+     "2 musique": -25.4,
+     "3 design": -17.8,
+     "mix": -23.6,
+     "bandes": [
+      "2-4k",
+      "4-8k",
+      "2-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 30.23,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "septembre",
+     "1 classique": 20.6,
+     "2 musique": 28.6,
+     "3 design": 1.1,
+     "mix": 26.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 30.305,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "septembre",
+     "1 classique": -17.2,
+     "2 musique": -22.1,
+     "3 design": -6.9,
+     "mix": -23.0,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 30.405,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "septembre",
+     "1 classique": 18.2,
+     "2 musique": 24.8,
+     "3 design": 8.1,
+     "mix": 21.9,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 30.495,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "à",
+     "1 classique": -10.4,
+     "2 musique": -20.2,
+     "3 design": -4.4,
+     "mix": -20.7,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 31.385,
+     "bande": "2-8k",
+     "echelle": "tenu",
+     "mot": "Vous",
+     "1 classique": 33.6,
+     "2 musique": 26.8,
+     "3 design": 14.4,
+     "mix": 14.5,
+     "bandes": [
+      "4-8k",
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 31.495,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Vous",
+     "1 classique": 11.0,
+     "2 musique": 19.0,
+     "3 design": 5.6,
+     "mix": 19.1,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 31.75,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "recevrez",
+     "1 classique": 23.5,
+     "2 musique": 26.7,
+     "3 design": 15.1,
+     "mix": 25.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 32.115,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "SMS",
+     "1 classique": 10.6,
+     "2 musique": 16.3,
+     "3 design": 5.3,
+     "mix": 15.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 32.355,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "de",
+     "1 classique": 15.6,
+     "2 musique": 21.5,
+     "3 design": 8.1,
+     "mix": 20.9,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 32.5,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "confirmation.",
+     "1 classique": 26.1,
+     "2 musique": 14.7,
+     "3 design": 7.6,
+     "mix": 15.0,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 34.125,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Super,",
+     "1 classique": 20.5,
+     "2 musique": 12.2,
+     "3 design": 6.2,
+     "mix": 4.2,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 34.16,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Super,",
+     "1 classique": 11.6,
+     "2 musique": 10.1,
+     "3 design": 4.9,
+     "mix": 3.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 34.28,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "Super,",
+     "1 classique": -12.3,
+     "2 musique": -11.9,
+     "3 design": -5.8,
+     "mix": -4.8,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 34.37,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": "merci",
+     "1 classique": 12.9,
+     "2 musique": 10.7,
+     "3 design": 1.4,
+     "mix": 0.9,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 34.46,
+     "bande": "4-8k",
+     "echelle": "court",
+     "mot": "merci",
+     "1 classique": 15.6,
+     "2 musique": 14.8,
+     "3 design": 8.7,
+     "mix": 6.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 35.11,
+     "bande": "1-2k",
+     "echelle": "tenu",
+     "mot": "Au",
+     "1 classique": 31.5,
+     "2 musique": 31.5,
+     "3 design": 25.5,
+     "mix": 31.3,
+     "bandes": [
+      "1-2k",
+      "2-4k",
+      "2-8k"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 35.455,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": -40.4,
+     "2 musique": -31.2,
+     "3 design": -24.3,
+     "mix": -10.0,
+     "bandes": [
+      "2-4k",
+      "4-8k",
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 35.775,
+     "bande": "2-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 26.9,
+     "2 musique": 19.0,
+     "3 design": 7.0,
+     "mix": 7.9,
+     "bandes": [
+      "2-4k",
+      "2-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 35.835,
+     "bande": "4-8k",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 36.6,
+     "2 musique": 31.4,
+     "3 design": 12.8,
+     "mix": 13.5,
+     "bandes": [
+      "4-8k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 42.305,
+     "bande": "1-2k",
+     "echelle": "court",
+     "mot": null,
+     "1 classique": 32.5,
+     "2 musique": 26.7,
+     "3 design": 17.8,
+     "mix": 17.3,
+     "bandes": [
+      "1-2k"
+     ],
+     "resolue": true
+    },
+    {
+     "t": 42.44,
+     "bande": "100-300",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 12.4,
+     "2 musique": 16.4,
+     "3 design": 7.1,
+     "mix": 12.5,
+     "bandes": [
+      "100-300"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 42.785,
+     "bande": "30-100",
+     "echelle": "tenu",
+     "mot": null,
+     "1 classique": 37.2,
+     "2 musique": 38.4,
+     "3 design": 15.5,
+     "mix": 18.1,
+     "bandes": [
+      "30-100"
+     ],
+     "resolue": false
+    },
+    {
+     "t": 42.9,
+     "bande": "2-4k",
+     "echelle": "court",
+     "mot": null,
+     "1 classique": 32.4,
+     "2 musique": 28.2,
+     "3 design": 19.4,
+     "mix": 18.7,
+     "bandes": [
+      "2-4k",
+      "2-8k"
+     ],
+     "resolue": true
+    }
+   ]
+  },
+  "contre": {
+   "sans 3 design 0-15": [
+    {
+     "t": 0.03,
+     "bande": "30-100",
+     "court": 14.1,
+     "tenu": 30.7,
+     "avant_db": -88.4,
+     "apres_db": -57.7,
+     "mot": null,
+     "3 design": 0.4,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 0.065,
+     "bande": "30-100",
+     "court": 14.3,
+     "tenu": 22.0,
+     "avant_db": -75.7,
+     "apres_db": -53.7,
+     "mot": null,
+     "3 design": 4.3,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 0.1,
+     "bande": "30-100",
+     "court": 13.1,
+     "tenu": 14.6,
+     "avant_db": -65.5,
+     "apres_db": -50.9,
+     "mot": null,
+     "3 design": 9.2,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 0.65,
+     "bande": "30-100",
+     "court": 10.1,
+     "tenu": 14.6,
+     "avant_db": -48.1,
+     "apres_db": -33.5,
+     "mot": null,
+     "3 design": -0.6,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 0.73,
+     "bande": "30-100",
+     "court": 14.0,
+     "tenu": 17.5,
+     "avant_db": -47.5,
+     "apres_db": -30.0,
+     "mot": null,
+     "3 design": 3.8,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 1.095,
+     "bande": "30-100",
+     "court": 18.8,
+     "tenu": 13.8,
+     "avant_db": -53.2,
+     "apres_db": -39.5,
+     "mot": null,
+     "3 design": 2.9,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 1.5,
+     "bande": "30-100",
+     "court": 11.1,
+     "tenu": 14.8,
+     "avant_db": -42.8,
+     "apres_db": -28.1,
+     "mot": null,
+     "3 design": 9.6,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 1.85,
+     "bande": "30-100",
+     "court": 12.7,
+     "tenu": 14.2,
+     "avant_db": -49.4,
+     "apres_db": -35.2,
+     "mot": null,
+     "3 design": 2.8,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 2.255,
+     "bande": "30-100",
+     "court": 10.8,
+     "tenu": 13.6,
+     "avant_db": -40.5,
+     "apres_db": -26.9,
+     "mot": null,
+     "3 design": 2.2,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 3.025,
+     "bande": "30-100",
+     "court": 14.4,
+     "tenu": 14.5,
+     "avant_db": -39.9,
+     "apres_db": -25.4,
+     "mot": null,
+     "3 design": -2.9,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 3.79,
+     "bande": "30-100",
+     "court": 18.5,
+     "tenu": 17.7,
+     "avant_db": -42.6,
+     "apres_db": -25.0,
+     "mot": null,
+     "3 design": 4.8,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la quinte qui gonfle et les battements du cœur de la sonnerie (musique du 2)"
+    },
+    {
+     "t": 6.92,
+     "bande": "30-100",
+     "court": 22.7,
+     "tenu": 11.4,
+     "avant_db": -64.6,
+     "apres_db": -53.2,
+     "mot": "l'assistante",
+     "3 design": -0.8,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": null
+    },
+    {
+     "t": 10.54,
+     "bande": "1-2k",
+     "court": 17.6,
+     "tenu": 38.7,
+     "avant_db": -63.2,
+     "apres_db": -24.4,
+     "mot": "mon",
+     "3 design": 33.4,
+     "bandes": [
+      "30-100",
+      "1-2k"
+     ],
+     "voulue": null
+    },
+    {
+     "t": 11.79,
+     "bande": "30-100",
+     "court": 11.4,
+     "tenu": 10.3,
+     "avant_db": -61.0,
+     "apres_db": -50.7,
+     "mot": "Moka,",
+     "3 design": 3.2,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": null
+    },
+    {
+     "t": 11.95,
+     "bande": "30-100",
+     "court": -11.6,
+     "tenu": -20.1,
+     "avant_db": -53.6,
+     "apres_db": -73.7,
+     "mot": "Moka,",
+     "3 design": -0.2,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": null
+    },
+    {
+     "t": 12.225,
+     "bande": "30-100",
+     "court": 23.2,
+     "tenu": 26.6,
+     "avant_db": -74.4,
+     "apres_db": -47.8,
+     "mot": null,
+     "3 design": 1.7,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": "la basse entre sur mi (temps 16 de la grille, musique du 2)"
+    },
+    {
+     "t": 13.34,
+     "bande": "30-100",
+     "court": 10.6,
+     "tenu": 17.8,
+     "avant_db": -56.8,
+     "apres_db": -39.0,
+     "mot": "depuis",
+     "3 design": 9.9,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": null
+    },
+    {
+     "t": 13.645,
+     "bande": "30-100",
+     "court": 10.8,
+     "tenu": 10.1,
+     "avant_db": -53.2,
+     "apres_db": -43.1,
+     "mot": "depuis",
+     "3 design": -2.6,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": null
+    },
+    {
+     "t": 14.62,
+     "bande": "1-2k",
+     "court": 23.5,
+     "tenu": 32.7,
+     "avant_db": -58.9,
+     "apres_db": -26.2,
+     "mot": "Euh,",
+     "3 design": 27.0,
+     "bandes": [
+      "1-2k"
+     ],
+     "voulue": null
+    },
+    {
+     "t": 14.745,
+     "bande": "30-100",
+     "court": 10.6,
+     "tenu": 13.3,
+     "avant_db": -59.1,
+     "apres_db": -45.8,
+     "mot": "Euh,",
+     "3 design": 5.4,
+     "bandes": [
+      "30-100"
+     ],
+     "voulue": null
+    }
+   ],
+   "sans 2 musique + 3 design 0-47": [
+    {
+     "t": 26.115,
+     "bande": "4-8k",
+     "court": -12.3,
+     "tenu": -18.3,
+     "avant_db": -54.6,
+     "apres_db": -72.9,
+     "mot": null,
+     "2 musique": -2.7,
+     "3 design": -11.1,
+     "bandes": [
+      "4-8k"
+     ],
+     "voulue": "la plume se lève à la fin du rendez-vous (relâche de 12 ms voulue dans riche-design ; le halo du 3 la couvrait)"
+    }
+   ]
+  },
+  "reperes": [
+   {
+    "id": "naissance",
+    "couche": "point",
+    "de": 0.833,
+    "a": 1.083,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     3.4,
+     6.2,
+     -25.8,
+     1.4,
+     12.6,
+     27.5,
+     51.5
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 27.5
+    },
+    "ref": [
+     35.7,
+     7.4,
+     -25.7,
+     1.5,
+     12.7,
+     27.7,
+     51.7
+    ],
+    "meilleure_ref": {
+     "bande": "40-150",
+     "db": 35.7
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "oiseau-1",
+    "couche": "ambiance",
+    "de": 1.68,
+    "a": 1.93,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -25.6,
+     -18.3,
+     -8.9,
+     -12.9,
+     -4.2,
+     52.4,
+     43.0
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 52.4
+    },
+    "ref": [
+     48.6,
+     2.6,
+     -6.4,
+     -11.9,
+     -4.2,
+     77.4,
+     73.5
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 77.4
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "eveil",
+    "couche": "point",
+    "de": 4.233,
+    "a": 4.483,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -99.0,
+     -99.0,
+     -126.0,
+     -98.0,
+     -9.2,
+     21.1,
+     34.9
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 21.1
+    },
+    "ref": [
+     -99.0,
+     -99.0,
+     -125.7,
+     -97.8,
+     -8.8,
+     21.6,
+     35.0
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 21.6
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "tamis",
+    "couche": "objets",
+    "de": 13.95,
+    "a": 14.5,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -99.0,
+     -99.0,
+     -99.0,
+     -99.0,
+     -28.3,
+     8.9,
+     38.6
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 8.9
+    },
+    "ref": [
+     -99.0,
+     -99.0,
+     -99.0,
+     -99.0,
+     -29.7,
+     8.4,
+     35.8
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 8.4
+    },
+    "cible_db": 8.4,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "agenda-monte",
+    "couche": "objets",
+    "de": 18.37,
+    "a": 19.07,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -99.0,
+     -119.2,
+     -47.2,
+     -20.5,
+     -1.9,
+     26.7,
+     46.1
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 26.7
+    },
+    "ref": [
+     -99.0,
+     -119.5,
+     -46.6,
+     -16.6,
+     -6.8,
+     32.7,
+     46.1
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 32.7
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "envol-neuf",
+    "couche": "point",
+    "de": 20.433,
+    "a": 20.683,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -98.4,
+     -99.4,
+     -78.8,
+     -65.2,
+     -33.9,
+     33.4,
+     44.9
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 33.4
+    },
+    "ref": [
+     -98.3,
+     -99.5,
+     -79.3,
+     -64.8,
+     -33.9,
+     33.6,
+     44.9
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 33.6
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "envol-dix",
+    "couche": "point",
+    "de": 21.167,
+    "a": 21.417,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -92.9,
+     -105.4,
+     -88.0,
+     -70.0,
+     -23.0,
+     34.4,
+     42.8
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 34.4
+    },
+    "ref": [
+     -91.9,
+     -105.3,
+     -86.9,
+     -70.0,
+     -23.2,
+     33.1,
+     42.8
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 33.1
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "envol-onze",
+    "couche": "point",
+    "de": 21.933,
+    "a": 22.183,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -91.8,
+     -104.0,
+     -88.4,
+     -69.6,
+     -26.8,
+     36.0,
+     47.7
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 36.0
+    },
+    "ref": [
+     -88.2,
+     -103.8,
+     -88.4,
+     -69.6,
+     -26.8,
+     34.9,
+     47.1
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 34.9
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "envol-retour",
+    "couche": "point",
+    "de": 23.967,
+    "a": 24.217,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -116.1,
+     -110.2,
+     -112.2,
+     -89.4,
+     -40.7,
+     12.2,
+     5.0
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 12.2
+    },
+    "ref": [
+     -116.0,
+     -110.2,
+     -112.1,
+     -89.3,
+     -40.5,
+     12.3,
+     47.8
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 12.3
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "plume-rendez-vous",
+    "couche": "ecriture",
+    "de": 25.367,
+    "a": 26.1,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -36.8,
+     -29.6,
+     -24.2,
+     -6.3,
+     11.0,
+     23.0,
+     47.8
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 23.0
+    },
+    "ref": [
+     -47.9,
+     -35.4,
+     -25.4,
+     -6.8,
+     8.5,
+     14.3,
+     55.1
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 14.3
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "pose-plume-rendez-vous",
+    "couche": "ecriture",
+    "de": 25.367,
+    "a": 25.617,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -36.8,
+     -29.6,
+     -24.2,
+     -5.2,
+     11.0,
+     23.0,
+     47.7
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 23.0
+    },
+    "ref": [
+     -47.9,
+     -35.4,
+     -25.4,
+     -5.6,
+     8.5,
+     15.4,
+     55.8
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 15.4
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "agenda-sort",
+    "couche": "objets",
+    "de": 31.0,
+    "a": 31.35,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -96.8,
+     -101.3,
+     -41.2,
+     -15.4,
+     2.9,
+     6.7,
+     6.9
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 6.7
+    },
+    "ref": [
+     -92.6,
+     -106.0,
+     -45.2,
+     -23.4,
+     -6.6,
+     14.4,
+     46.6
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 14.4
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "vibreur-bois",
+    "couche": "objets",
+    "de": 36.667,
+    "a": 36.917,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -10.2,
+     -10.7,
+     -30.1,
+     -24.5,
+     -27.8,
+     -16.4,
+     51.5
+    ],
+    "meilleure_mix": {
+     "bande": "40-150",
+     "db": -10.2
+    },
+    "ref": [
+     -10.2,
+     -10.6,
+     -30.0,
+     -24.5,
+     -27.8,
+     -16.4,
+     51.6
+    ],
+    "meilleure_ref": {
+     "bande": "40-150",
+     "db": -10.2
+    },
+    "cible_db": -10.2,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "telephone-sort",
+    "couche": "objets",
+    "de": 41.0,
+    "a": 41.4,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -34.8,
+     5.4,
+     0.2,
+     -12.1,
+     -27.9,
+     -26.3,
+     -24.5
+    ],
+    "meilleure_mix": {
+     "bande": "150-400",
+     "db": 5.4
+    },
+    "ref": [
+     -32.4,
+     4.7,
+     -9.4,
+     -5.9,
+     -18.2,
+     -16.3,
+     -19.4
+    ],
+    "meilleure_ref": {
+     "bande": "150-400",
+     "db": 4.7
+    },
+    "cible_db": 4.7,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "plume-vokio",
+    "couche": "ecriture",
+    "de": 41.5,
+    "a": 42.2,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -57.1,
+     -25.4,
+     -15.1,
+     -12.3,
+     -4.9,
+     6.7,
+     19.9
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 6.7
+    },
+    "ref": [
+     -39.2,
+     -15.3,
+     -15.0,
+     10.3,
+     21.6,
+     21.8,
+     41.3
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 21.8
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "pose-plume-vokio",
+    "couche": "ecriture",
+    "de": 41.5,
+    "a": 41.75,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -57.1,
+     -25.4,
+     -15.1,
+     -9.2,
+     -6.1,
+     9.6,
+     39.5
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 9.6
+    },
+    "ref": [
+     -39.2,
+     -15.3,
+     -15.0,
+     9.4,
+     16.8,
+     19.0,
+     43.0
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 19.0
+    },
+    "cible_db": 6.0,
+    "ok": true,
+    "exclu": false
+   },
+   {
+    "id": "assise-i",
+    "couche": "point",
+    "de": 42.933,
+    "a": 43.183,
+    "bandes": [
+     "40-150",
+     "150-400",
+     "400-1k",
+     "1k-2k",
+     "2k-4k",
+     "4k-8k",
+     "8k-16k"
+    ],
+    "mix": [
+     -65.3,
+     -38.2,
+     -34.9,
+     -22.1,
+     -8.7,
+     5.3,
+     14.2
+    ],
+    "meilleure_mix": {
+     "bande": "4k-8k",
+     "db": 5.3
+    },
+    "ref": [
+     -67.1,
+     -39.5,
+     -36.9,
+     -24.0,
+     -10.5,
+     4.8,
+     13.4
+    ],
+    "meilleure_ref": {
+     "bande": "4k-8k",
+     "db": 4.8
+    },
+    "cible_db": 4.8,
+    "ok": true,
+    "exclu": false
+   }
+  ],
+  "jointures": {
+   "mix": [
+    {
+     "extrait": "A1",
+     "bord": "in",
+     "t": 4.91,
+     "hf_avant": -41.2,
+     "hf_apres": -45.6,
+     "hf_marche": -4.4,
+     "large_avant": -28.2,
+     "large_apres": -29.1,
+     "large_marche": -0.8
+    },
+    {
+     "extrait": "A1",
+     "bord": "out",
+     "t": 10.31,
+     "hf_avant": -62.5,
+     "hf_apres": -63.1,
+     "hf_marche": -0.7,
+     "large_avant": -34.9,
+     "large_apres": -34.8,
+     "large_marche": 0.1
+    },
+    {
+     "extrait": "C1",
+     "bord": "in",
+     "t": 10.42,
+     "hf_avant": -63.3,
+     "hf_apres": -63.0,
+     "hf_marche": 0.3,
+     "large_avant": -33.3,
+     "large_apres": -33.0,
+     "large_marche": 0.4
+    },
+    {
+     "extrait": "C1",
+     "bord": "out",
+     "t": 14.08,
+     "hf_avant": -47.9,
+     "hf_apres": -49.0,
+     "hf_marche": -1.1,
+     "large_avant": -34.7,
+     "large_apres": -34.4,
+     "large_marche": 0.3
+    },
+    {
+     "extrait": "C2",
+     "bord": "in",
+     "t": 14.56,
+     "hf_avant": -59.8,
+     "hf_apres": -62.0,
+     "hf_marche": -2.1,
+     "large_avant": -38.1,
+     "large_apres": -37.3,
+     "large_marche": 0.8
+    },
+    {
+     "extrait": "C2",
+     "bord": "out",
+     "t": 17.04,
+     "hf_avant": -52.8,
+     "hf_apres": -53.6,
+     "hf_marche": -0.8,
+     "large_avant": -36.4,
+     "large_apres": -36.1,
+     "large_marche": 0.3
+    },
+    {
+     "extrait": "A2A3",
+     "bord": "in",
+     "t": 17.54,
+     "hf_avant": -47.0,
+     "hf_apres": -51.7,
+     "hf_marche": -4.6,
+     "large_avant": -35.8,
+     "large_apres": -36.3,
+     "large_marche": -0.5
+    },
+    {
+     "extrait": "A2A3",
+     "bord": "out",
+     "t": 22.855,
+     "hf_avant": -63.8,
+     "hf_apres": -63.9,
+     "hf_marche": -0.1,
+     "large_avant": -36.3,
+     "large_apres": -35.8,
+     "large_marche": 0.4
+    },
+    {
+     "extrait": "C3",
+     "bord": "in",
+     "t": 23.2,
+     "hf_avant": -64.1,
+     "hf_apres": -62.5,
+     "hf_marche": 1.6,
+     "large_avant": -31.2,
+     "large_apres": -31.3,
+     "large_marche": -0.0
+    },
+    {
+     "extrait": "C3",
+     "bord": "out",
+     "t": 25.0,
+     "hf_avant": -51.6,
+     "hf_apres": -51.9,
+     "hf_marche": -0.3,
+     "large_avant": -35.7,
+     "large_apres": -36.0,
+     "large_marche": -0.2
+    },
+    {
+     "extrait": "A4",
+     "bord": "in",
+     "t": 26.17,
+     "hf_avant": -61.6,
+     "hf_apres": -62.2,
+     "hf_marche": -0.6,
+     "large_avant": -26.8,
+     "large_apres": -27.3,
+     "large_marche": -0.5
+    },
+    {
+     "extrait": "A4",
+     "bord": "out",
+     "t": 33.26,
+     "hf_avant": -53.0,
+     "hf_apres": -54.1,
+     "hf_marche": -1.2,
+     "large_avant": -28.1,
+     "large_apres": -27.7,
+     "large_marche": 0.4
+    },
+    {
+     "extrait": "C4",
+     "bord": "in",
+     "t": 33.79,
+     "hf_avant": -53.4,
+     "hf_apres": -52.6,
+     "hf_marche": 0.7,
+     "large_avant": -30.4,
+     "large_apres": -31.0,
+     "large_marche": -0.6
+    },
+    {
+     "extrait": "C4",
+     "bord": "out",
+     "t": 35.65,
+     "hf_avant": -54.3,
+     "hf_apres": -54.5,
+     "hf_marche": -0.1,
+     "large_avant": -38.5,
+     "large_apres": -38.9,
+     "large_marche": -0.4
+    }
+   ],
+   "1 classique": [
+    {
+     "extrait": "A1",
+     "bord": "in",
+     "t": 4.91,
+     "hf_avant": -74.5,
+     "hf_apres": -75.6,
+     "hf_marche": -1.1,
+     "large_avant": -28.1,
+     "large_apres": -28.5,
+     "large_marche": -0.4
+    },
+    {
+     "extrait": "A1",
+     "bord": "out",
+     "t": 10.31,
+     "hf_avant": -136.8,
+     "hf_apres": -130.6,
+     "hf_marche": 6.2,
+     "large_avant": -47.8,
+     "large_apres": -47.5,
+     "large_marche": 0.4
+    },
+    {
+     "extrait": "C1",
+     "bord": "in",
+     "t": 10.42,
+     "hf_avant": -115.1,
+     "hf_apres": -112.9,
+     "hf_marche": 2.2,
+     "large_avant": -49.2,
+     "large_apres": -49.3,
+     "large_marche": -0.1
+    },
+    {
+     "extrait": "C1",
+     "bord": "out",
+     "t": 14.08,
+     "hf_avant": -82.6,
+     "hf_apres": -86.0,
+     "hf_marche": -3.4,
+     "large_avant": -39.4,
+     "large_apres": -38.6,
+     "large_marche": 0.8
+    },
+    {
+     "extrait": "C2",
+     "bord": "in",
+     "t": 14.56,
+     "hf_avant": -78.7,
+     "hf_apres": -80.2,
+     "hf_marche": -1.5,
+     "large_avant": -27.4,
+     "large_apres": -29.3,
+     "large_marche": -1.9
+    },
+    {
+     "extrait": "C2",
+     "bord": "out",
+     "t": 17.04,
+     "hf_avant": -84.8,
+     "hf_apres": -87.6,
+     "hf_marche": -2.7,
+     "large_avant": -36.8,
+     "large_apres": -36.4,
+     "large_marche": 0.4
+    },
+    {
+     "extrait": "A2A3",
+     "bord": "in",
+     "t": 17.54,
+     "hf_avant": -82.5,
+     "hf_apres": -83.7,
+     "hf_marche": -1.1,
+     "large_avant": -32.7,
+     "large_apres": -35.5,
+     "large_marche": -2.8
+    },
+    {
+     "extrait": "A2A3",
+     "bord": "out",
+     "t": 22.855,
+     "hf_avant": -83.9,
+     "hf_apres": -82.8,
+     "hf_marche": 1.1,
+     "large_avant": -32.3,
+     "large_apres": -31.4,
+     "large_marche": 0.8
+    },
+    {
+     "extrait": "C3",
+     "bord": "in",
+     "t": 23.2,
+     "hf_avant": -78.8,
+     "hf_apres": -80.8,
+     "hf_marche": -2.0,
+     "large_avant": -25.5,
+     "large_apres": -28.7,
+     "large_marche": -3.2
+    },
+    {
+     "extrait": "C3",
+     "bord": "out",
+     "t": 25.0,
+     "hf_avant": -82.1,
+     "hf_apres": -83.0,
+     "hf_marche": -0.9,
+     "large_avant": -30.6,
+     "large_apres": -30.6,
+     "large_marche": -0.0
+    },
+    {
+     "extrait": "A4",
+     "bord": "in",
+     "t": 26.17,
+     "hf_avant": -72.7,
+     "hf_apres": -77.1,
+     "hf_marche": -4.4,
+     "large_avant": -22.1,
+     "large_apres": -27.5,
+     "large_marche": -5.4
+    },
+    {
+     "extrait": "A4",
+     "bord": "out",
+     "t": 33.26,
+     "hf_avant": -68.6,
+     "hf_apres": -68.2,
+     "hf_marche": 0.5,
+     "large_avant": -28.9,
+     "large_apres": -28.4,
+     "large_marche": 0.5
+    },
+    {
+     "extrait": "C4",
+     "bord": "in",
+     "t": 33.79,
+     "hf_avant": -65.9,
+     "hf_apres": -66.4,
+     "hf_marche": -0.5,
+     "large_avant": -25.7,
+     "large_apres": -25.9,
+     "large_marche": -0.1
+    },
+    {
+     "extrait": "C4",
+     "bord": "out",
+     "t": 35.65,
+     "hf_avant": -78.5,
+     "hf_apres": -76.2,
+     "hf_marche": 2.3,
+     "large_avant": -33.7,
+     "large_apres": -32.7,
+     "large_marche": 1.0
+    }
+   ],
+   "2 musique": [
+    {
+     "extrait": "A1",
+     "bord": "in",
+     "t": 4.91,
+     "hf_avant": -70.9,
+     "hf_apres": -67.3,
+     "hf_marche": 3.6,
+     "large_avant": -28.5,
+     "large_apres": -29.0,
+     "large_marche": -0.6
+    },
+    {
+     "extrait": "A1",
+     "bord": "out",
+     "t": 10.31,
+     "hf_avant": -67.0,
+     "hf_apres": -66.4,
+     "hf_marche": 0.6,
+     "large_avant": -34.9,
+     "large_apres": -34.8,
+     "large_marche": 0.1
+    },
+    {
+     "extrait": "C1",
+     "bord": "in",
+     "t": 10.42,
+     "hf_avant": -66.2,
+     "hf_apres": -67.1,
+     "hf_marche": -0.9,
+     "large_avant": -33.3,
+     "large_apres": -33.0,
+     "large_marche": 0.3
+    },
+    {
+     "extrait": "C1",
+     "bord": "out",
+     "t": 14.08,
+     "hf_avant": -65.5,
+     "hf_apres": -65.5,
+     "hf_marche": 0.0,
+     "large_avant": -35.3,
+     "large_apres": -34.7,
+     "large_marche": 0.6
+    },
+    {
+     "extrait": "C2",
+     "bord": "in",
+     "t": 14.56,
+     "hf_avant": -64.5,
+     "hf_apres": -66.9,
+     "hf_marche": -2.4,
+     "large_avant": -37.9,
+     "large_apres": -37.2,
+     "large_marche": 0.7
+    },
+    {
+     "extrait": "C2",
+     "bord": "out",
+     "t": 17.04,
+     "hf_avant": -66.3,
+     "hf_apres": -66.9,
+     "hf_marche": -0.6,
+     "large_avant": -36.4,
+     "large_apres": -36.1,
+     "large_marche": 0.3
+    },
+    {
+     "extrait": "A2A3",
+     "bord": "in",
+     "t": 17.54,
+     "hf_avant": -69.3,
+     "hf_apres": -66.0,
+     "hf_marche": 3.3,
+     "large_avant": -36.1,
+     "large_apres": -36.4,
+     "large_marche": -0.3
+    },
+    {
+     "extrait": "A2A3",
+     "bord": "out",
+     "t": 22.855,
+     "hf_avant": -66.3,
+     "hf_apres": -66.2,
+     "hf_marche": 0.1,
+     "large_avant": -36.2,
+     "large_apres": -35.7,
+     "large_marche": 0.5
+    },
+    {
+     "extrait": "C3",
+     "bord": "in",
+     "t": 23.2,
+     "hf_avant": -67.2,
+     "hf_apres": -66.0,
+     "hf_marche": 1.2,
+     "large_avant": -31.2,
+     "large_apres": -31.2,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "C3",
+     "bord": "out",
+     "t": 25.0,
+     "hf_avant": -65.5,
+     "hf_apres": -65.8,
+     "hf_marche": -0.3,
+     "large_avant": -36.0,
+     "large_apres": -36.1,
+     "large_marche": -0.1
+    },
+    {
+     "extrait": "A4",
+     "bord": "in",
+     "t": 26.17,
+     "hf_avant": -63.1,
+     "hf_apres": -64.1,
+     "hf_marche": -1.0,
+     "large_avant": -26.8,
+     "large_apres": -27.3,
+     "large_marche": -0.5
+    },
+    {
+     "extrait": "A4",
+     "bord": "out",
+     "t": 33.26,
+     "hf_avant": -53.2,
+     "hf_apres": -54.5,
+     "hf_marche": -1.3,
+     "large_avant": -28.0,
+     "large_apres": -27.7,
+     "large_marche": 0.3
+    },
+    {
+     "extrait": "C4",
+     "bord": "in",
+     "t": 33.79,
+     "hf_avant": -53.7,
+     "hf_apres": -53.1,
+     "hf_marche": 0.7,
+     "large_avant": -30.4,
+     "large_apres": -31.1,
+     "large_marche": -0.6
+    },
+    {
+     "extrait": "C4",
+     "bord": "out",
+     "t": 35.65,
+     "hf_avant": -68.0,
+     "hf_apres": -67.8,
+     "hf_marche": 0.2,
+     "large_avant": -38.3,
+     "large_apres": -38.9,
+     "large_marche": -0.5
+    }
+   ],
+   "3 design": [
+    {
+     "extrait": "A1",
+     "bord": "in",
+     "t": 4.91,
+     "hf_avant": -40.9,
+     "hf_apres": -45.4,
+     "hf_marche": -4.4,
+     "large_avant": -27.9,
+     "large_apres": -28.5,
+     "large_marche": -0.6
+    },
+    {
+     "extrait": "A1",
+     "bord": "out",
+     "t": 10.31,
+     "hf_avant": -72.3,
+     "hf_apres": -72.1,
+     "hf_marche": 0.2,
+     "large_avant": -47.6,
+     "large_apres": -47.3,
+     "large_marche": 0.3
+    },
+    {
+     "extrait": "C1",
+     "bord": "in",
+     "t": 10.42,
+     "hf_avant": -73.4,
+     "hf_apres": -72.8,
+     "hf_marche": 0.7,
+     "large_avant": -48.7,
+     "large_apres": -48.0,
+     "large_marche": 0.6
+    },
+    {
+     "extrait": "C1",
+     "bord": "out",
+     "t": 14.08,
+     "hf_avant": -53.7,
+     "hf_apres": -54.6,
+     "hf_marche": -0.9,
+     "large_avant": -38.7,
+     "large_apres": -38.3,
+     "large_marche": 0.4
+    },
+    {
+     "extrait": "C2",
+     "bord": "in",
+     "t": 14.56,
+     "hf_avant": -62.8,
+     "hf_apres": -66.9,
+     "hf_marche": -4.1,
+     "large_avant": -27.3,
+     "large_apres": -29.2,
+     "large_marche": -1.9
+    },
+    {
+     "extrait": "C2",
+     "bord": "out",
+     "t": 17.04,
+     "hf_avant": -65.0,
+     "hf_apres": -69.5,
+     "hf_marche": -4.5,
+     "large_avant": -37.0,
+     "large_apres": -36.5,
+     "large_marche": 0.5
+    },
+    {
+     "extrait": "A2A3",
+     "bord": "in",
+     "t": 17.54,
+     "hf_avant": -46.9,
+     "hf_apres": -51.7,
+     "hf_marche": -4.8,
+     "large_avant": -32.6,
+     "large_apres": -35.4,
+     "large_marche": -2.8
+    },
+    {
+     "extrait": "A2A3",
+     "bord": "out",
+     "t": 22.855,
+     "hf_avant": -60.9,
+     "hf_apres": -63.4,
+     "hf_marche": -2.5,
+     "large_avant": -32.3,
+     "large_apres": -31.5,
+     "large_marche": 0.8
+    },
+    {
+     "extrait": "C3",
+     "bord": "in",
+     "t": 23.2,
+     "hf_avant": -55.4,
+     "hf_apres": -58.4,
+     "hf_marche": -2.9,
+     "large_avant": -25.5,
+     "large_apres": -28.7,
+     "large_marche": -3.2
+    },
+    {
+     "extrait": "C3",
+     "bord": "out",
+     "t": 25.0,
+     "hf_avant": -58.0,
+     "hf_apres": -63.5,
+     "hf_marche": -5.5,
+     "large_avant": -30.6,
+     "large_apres": -30.6,
+     "large_marche": 0.0
+    },
+    {
+     "extrait": "A4",
+     "bord": "in",
+     "t": 26.17,
+     "hf_avant": -52.5,
+     "hf_apres": -53.4,
+     "hf_marche": -0.9,
+     "large_avant": -22.1,
+     "large_apres": -27.5,
+     "large_marche": -5.4
+    },
+    {
+     "extrait": "A4",
+     "bord": "out",
+     "t": 33.26,
+     "hf_avant": -57.8,
+     "hf_apres": -56.8,
+     "hf_marche": 0.9,
+     "large_avant": -28.8,
+     "large_apres": -28.4,
+     "large_marche": 0.4
+    },
+    {
+     "extrait": "C4",
+     "bord": "in",
+     "t": 33.79,
+     "hf_avant": -56.0,
+     "hf_apres": -53.6,
+     "hf_marche": 2.4,
+     "large_avant": -25.7,
+     "large_apres": -25.8,
+     "large_marche": -0.1
+    },
+    {
+     "extrait": "C4",
+     "bord": "out",
+     "t": 35.65,
+     "hf_avant": -56.0,
+     "hf_apres": -56.5,
+     "hf_marche": -0.5,
+     "large_avant": -33.7,
+     "large_apres": -32.9,
+     "large_marche": 0.9
+    }
+   ]
+  },
+  "raccords_4_8k": {
+   "mix": [
+    {
+     "raccord": "A1→C1",
+     "de": 9.94,
+     "a": 10.59,
+     "chute_max_db": -6.6,
+     "t_chute": 10.58,
+     "montee_max_db": 19.6,
+     "t_montee": 10.55,
+     "niveau_min_db": -73.3
+    },
+    {
+     "raccord": "C1→C2",
+     "de": 13.87,
+     "a": 14.68,
+     "chute_max_db": -3.6,
+     "t_chute": 14.14,
+     "montee_max_db": 9.5,
+     "t_montee": 14.62,
+     "niveau_min_db": -70.7
+    },
+    {
+     "raccord": "C2→A2A3",
+     "de": 16.91,
+     "a": 17.62,
+     "chute_max_db": -3.9,
+     "t_chute": 17.54,
+     "montee_max_db": 6.0,
+     "t_montee": 17.29,
+     "niveau_min_db": -66.7
+    },
+    {
+     "raccord": "A2A3→C3",
+     "de": 22.66,
+     "a": 23.31,
+     "chute_max_db": -12.4,
+     "t_chute": 22.98,
+     "montee_max_db": 16.7,
+     "t_montee": 23.27,
+     "niveau_min_db": -74.2
+    },
+    {
+     "raccord": "C3→A4",
+     "de": 24.92,
+     "a": 26.27,
+     "chute_max_db": -11.8,
+     "t_chute": 26.05,
+     "montee_max_db": 19.2,
+     "t_montee": 25.36,
+     "niveau_min_db": -74.0
+    },
+    {
+     "raccord": "A4→C4",
+     "de": 33.02,
+     "a": 34.06,
+     "chute_max_db": -2.9,
+     "t_chute": 33.98,
+     "montee_max_db": 5.1,
+     "t_montee": 33.89,
+     "niveau_min_db": -57.7
+    }
+   ],
+   "1 classique": [
+    {
+     "raccord": "A1→C1",
+     "de": 9.94,
+     "a": 10.59,
+     "chute_max_db": -5.6,
+     "t_chute": 10.58,
+     "montee_max_db": 25.1,
+     "t_montee": 10.55,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "C1→C2",
+     "de": 13.87,
+     "a": 14.68,
+     "chute_max_db": -20.9,
+     "t_chute": 14.06,
+     "montee_max_db": 28.9,
+     "t_montee": 14.62,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "C2→A2A3",
+     "de": 16.91,
+     "a": 17.62,
+     "chute_max_db": -10.0,
+     "t_chute": 16.95,
+     "montee_max_db": 12.1,
+     "t_montee": 17.59,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "A2A3→C3",
+     "de": 22.66,
+     "a": 23.31,
+     "chute_max_db": -8.4,
+     "t_chute": 22.72,
+     "montee_max_db": 28.5,
+     "t_montee": 23.26,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "C3→A4",
+     "de": 24.92,
+     "a": 26.27,
+     "chute_max_db": -16.7,
+     "t_chute": 24.97,
+     "montee_max_db": 29.8,
+     "t_montee": 26.24,
+     "niveau_min_db": -90.0
+    },
+    {
+     "raccord": "A4→C4",
+     "de": 33.02,
+     "a": 34.06,
+     "chute_max_db": -7.9,
+     "t_chute": 34.01,
+     "montee_max_db": 41.7,
+     "t_montee": 33.98,
+     "niveau_min_db": -90.0
+    }
+   ],
+   "2 musique": [
+    {
+     "raccord": "A1→C1",
+     "de": 9.94,
+     "a": 10.59,
+     "chute_max_db": -5.6,
+     "t_chute": 10.58,
+     "montee_max_db": 23.7,
+     "t_montee": 10.55,
+     "niveau_min_db": -85.2
+    },
+    {
+     "raccord": "C1→C2",
+     "de": 13.87,
+     "a": 14.68,
+     "chute_max_db": -14.9,
+     "t_chute": 14.06,
+     "montee_max_db": 20.9,
+     "t_montee": 14.62,
+     "niveau_min_db": -85.0
+    },
+    {
+     "raccord": "C2→A2A3",
+     "de": 16.91,
+     "a": 17.62,
+     "chute_max_db": -8.5,
+     "t_chute": 16.95,
+     "montee_max_db": 6.2,
+     "t_montee": 17.6,
+     "niveau_min_db": -85.8
+    },
+    {
+     "raccord": "A2A3→C3",
+     "de": 22.66,
+     "a": 23.31,
+     "chute_max_db": -17.4,
+     "t_chute": 22.98,
+     "montee_max_db": 22.2,
+     "t_montee": 22.96,
+     "niveau_min_db": -83.5
+    },
+    {
+     "raccord": "C3→A4",
+     "de": 24.92,
+     "a": 26.27,
+     "chute_max_db": -15.6,
+     "t_chute": 26.05,
+     "montee_max_db": 21.3,
+     "t_montee": 26.25,
+     "niveau_min_db": -81.1
+    },
+    {
+     "raccord": "A4→C4",
+     "de": 33.02,
+     "a": 34.06,
+     "chute_max_db": -7.5,
+     "t_chute": 34.01,
+     "montee_max_db": 11.5,
+     "t_montee": 33.98,
+     "niveau_min_db": -60.0
+    }
+   ],
+   "3 design": [
+    {
+     "raccord": "A1→C1",
+     "de": 9.94,
+     "a": 10.59,
+     "chute_max_db": -5.6,
+     "t_chute": 10.58,
+     "montee_max_db": 19.5,
+     "t_montee": 10.55,
+     "niveau_min_db": -75.7
+    },
+    {
+     "raccord": "C1→C2",
+     "de": 13.87,
+     "a": 14.68,
+     "chute_max_db": -3.9,
+     "t_chute": 14.14,
+     "montee_max_db": 12.5,
+     "t_montee": 14.62,
+     "niveau_min_db": -74.9
+    },
+    {
+     "raccord": "C2→A2A3",
+     "de": 16.91,
+     "a": 17.62,
+     "chute_max_db": -5.1,
+     "t_chute": 16.94,
+     "montee_max_db": 6.9,
+     "t_montee": 17.29,
+     "niveau_min_db": -74.9
+    },
+    {
+     "raccord": "A2A3→C3",
+     "de": 22.66,
+     "a": 23.31,
+     "chute_max_db": -8.5,
+     "t_chute": 22.7,
+     "montee_max_db": 11.9,
+     "t_montee": 23.27,
+     "niveau_min_db": -74.1
+    },
+    {
+     "raccord": "C3→A4",
+     "de": 24.92,
+     "a": 26.27,
+     "chute_max_db": -10.2,
+     "t_chute": 25.33,
+     "montee_max_db": 22.7,
+     "t_montee": 25.35,
+     "niveau_min_db": -75.9
+    },
+    {
+     "raccord": "A4→C4",
+     "de": 33.02,
+     "a": 34.06,
+     "chute_max_db": -11.4,
+     "t_chute": 33.47,
+     "montee_max_db": 17.2,
+     "t_montee": 33.98,
+     "niveau_min_db": -76.9
+    }
+   ]
+  }
+ },
+ "planches": [
+  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride-16x9/planches/film.png",
+  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride-16x9/planches/zoom-0-15.png",
+  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride-16x9/planches/zoom-3.8-5.4.png",
+  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride-16x9/planches/zoom-9.8-10.8.png",
+  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride-16x9/planches/zoom-13.7-14.9.png",
+  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride-16x9/planches/zoom-33.3-37.4.png",
+  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride-16x9/planches/zoom-40.5-47.png",
+  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride-16x9/planches/arc-sonie.png",
+  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride-16x9/planches/limiteur.png",
+  "/tmp/claude-0/-root/5cdc3174-18c1-52f2-a7e6-50c04cd57657/scratchpad/final/hybride-16x9/planches/stems.png"
+ ],
+ "empreinte": "7ecf9721f5253d28d4b20c496029a6ab6612c85bbe463074842dd64f13d8df5c",
+ "recette": "/opt/vokio-ads/videos/showcase/son/recettes/hybride-16x9.json",
+ "wav": "/opt/vokio-ads/videos/showcase/son/hybride-16x9/mix-hybride-16x9.wav"
+}

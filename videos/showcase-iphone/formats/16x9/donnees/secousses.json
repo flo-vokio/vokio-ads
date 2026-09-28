@@ -144,21 +144,21 @@
    0.0,
    0.0
   ],
-  "amplitude_x": 6.0,
+  "amplitude_x": 7.2,
   "motif_x": [
    0,
    1,
    0,
    -1
   ],
-  "amplitude_y": 2.0,
+  "amplitude_y": 2.4,
   "motif_y": [
    1,
    0,
    -1,
    0
   ],
-  "amplitude_px": 6.0,
+  "amplitude_px": 7.2,
   "motif": [
    0,
    1,
@@ -209,14 +209,14 @@
    0.1669,
    0.0
   ],
-  "amplitude_x": 6.0,
+  "amplitude_x": 6.646,
   "motif_x": [
    1,
    0,
    -1,
    0
   ],
-  "amplitude_px": 6.0,
+  "amplitude_px": 6.646,
   "motif": [
    1,
    0,

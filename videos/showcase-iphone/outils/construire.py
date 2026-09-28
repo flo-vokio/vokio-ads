@@ -26,10 +26,16 @@ Sorties :
   donnees/point-resolu.json  (POINT.etat(n/30) évalué DANS Chromium par lib/point.js, pour le son en python)
 Règle : tout temps d'animation calé sur la voix vient d'ici. Relancer après toute retouche de mots.json,
 de la géométrie de s1/s7, des contrats de texte ou de l'agenda. Plan : critique.json, plan.chantiers[0].
+3e passe du 16:9 (28/09) : les étiquettes d'heure de la capture (09:00, 10:00, 11:00 : des pixels, pas des mots) sont des
+obstacles du trajet s6 (etiquettes_capture, qui suivent la sortie de l'agenda) ; forme « couloir » pour le premier geste depuis
+la gouttière (mise-en-page/s6-sms.json forme_depart_gouttiere, couloir_dy) ; glissement de l'accroche de s1
+(s1-sonnerie.json « glisse », GLISSE : clés 1.1 et 1.2 du point, DONNEES.geometrie.s1.glisse) ; CONSTRUIRE_REJETS=1 imprime,
+pour chaque geste planifié, le départ choisi et les départs rejetés (pas trop grand, heurt avec quel mot ou quelle étiquette).
 """
 import argparse
 import json
 import math
+import os
 import subprocess
 import sys
 from datetime import datetime
@@ -52,6 +58,25 @@ FORMAT = ARGS.format
 RACINE = Path(ARGS.racine).resolve() if ARGS.racine else (PROJET if FORMAT == "9x16" else PROJET / "formats" / FORMAT)
 MEP = mise_en_page.charger(FORMAT, dict(v.split("=", 1) for v in ARGS.variante))
 LARGEUR, HAUTEUR = MEP["format"]["largeur"], MEP["format"]["hauteur"]
+# RECOMPOSITION (28/09) : trois échelles par format, relatives au 9:16 (outils/mise_en_page.py) ; chaque constante en px suit
+# la géométrie qu'elle mesure. kp / km / kv rendent la valeur du 9:16 TELLE QUELLE quand leur échelle vaut 1 (entiers compris) :
+# donnees/ du 9:16 reste identique à l'octet (outils/identite.py).
+#   K_POINT (kp) : le disque du film de s1 à s6 (formats.json « echelle_point », 1 par défaut : 44 px) : écart à l'encre, sauts sur
+#                  les heures, levée de plume, hochements (l'agenda reste la capture 1:1 : sa gouttière est faite pour 44 px) ;
+#   K_MOT   (km) : le wordmark de s7 (corps / 400) et son point de ı (0,11 em) : stylo, bond, diamètre final. Quand K_MOT ≠ K_POINT,
+#                  le point change de taille en quittant le téléphone (départ du stylo → pose du stylo, 41,00 → 41,50) ;
+#   K_VIT   (kv) : les vitesses (V_TRAJET, V_CALME, retour chariot, étirement, pas maximal) : les distances à parcourir grandissent
+#                  avec le texte de s2 (corps / 72) et avec le wordmark ; la plus grande des échelles du format.
+K_POINT = mise_en_page.echelle_point(MEP)
+K_MOT = mise_en_page.echelle_mot(MEP)
+K_VIT = max(K_POINT, K_MOT, MEP["texte"]["styles"]["s2_texte"]["corps"] / 72)
+
+
+def _k(k):
+    return (lambda v: v) if k == 1 else (lambda v: round(v * k, 4))
+
+
+kp, km, kv = _k(K_POINT), _k(K_MOT), _k(K_VIT)
 DON = RACINE / "donnees"              # sorties (le format)
 ENTREES = Path(ARGS.entrees).resolve() if ARGS.entrees else PROJET
 SRC = ENTREES / "donnees"             # entrées communes à tous les formats (mots.json)
@@ -114,11 +139,11 @@ ACCROCHE = {"debut": 0.0, "pas": 0.10, "duree": 0.50, "depart_yPercent": 80, "ea
 # de l'encre du dernier mot révélé (ECART_MIN au bord du disque) et ANTICIPE : il glisse vers la fin du mot suivant et y
 # est arrivé à l'image où ce mot paraît ; les mots courts qu'il ne peut pas précéder calmement sont franchis (ils
 # paraissent derrière lui). Vitesse de pointe ≤ V_TRAJET px par image.
-R_DISQUE = 22.0
-ECART_MIN = 18.0
-MARGE_ENCRE = 2.0         # distance minimale disque → boîte d'encre d'un mot visible
-V_TRAJET = 100.0
-V_CALME = 60.0            # préféré : le point quitte le mot plus tôt plutôt que de filer
+R_DISQUE = kp(22.0)       # 9:16 : 22 ; FORMATS : 22 × K_POINT (le disque du film de s1 à s6)
+ECART_MIN = kp(18.0)
+MARGE_ENCRE = kp(2.0)     # distance minimale disque → boîte d'encre d'un mot visible
+V_TRAJET = kv(100.0)      # px par image × K_VIT
+V_CALME = kv(60.0)        # préféré : le point quitte le mot plus tôt plutôt que de filer
 ARRETS_S2 = ["Bonjour,", "Élise,", "l’assistante", "vocale", "Clinique", "vétérinaire", "Port.", "Comment", "puis-je", "aider\u202f?"]
 ARRETS_S6 = ["recevrez", "SMS", "confirmation."]
 ECOUTE_DY = 118.0         # s3 (9:16) : le point écoute 118 px sous la dernière ligne de base de la parole, aligné sur x = 90 + 22
@@ -232,6 +257,11 @@ def enveloppe_par_image(segments, i0, n_img):
 
 
 def secousses():
+    # RECOMPOSITION (28/09) : les amplitudes suivent la taille de ce qui tremble (9:16 : 6 et 2 px, inchangées) : en s1 le « . »
+    # de l'accroche (corps de l'accroche / 150), en s6 le téléphone (px par point iOS / celui du 9:16, 854 / 402)
+    k1 = MEP["s1"]["phrase"]["corps"] / 150
+    k6 = PT_ECRAN / (854 / 402)
+    a = lambda v, k: v if k == 1 else round(v * k, 3)
     # s1 (plan E) : tonalité 440 Hz, 1,5 s on (0 → 1,5) puis 2e sonnerie 2,7 → 4,2 ; fondus de 10 ms ; à 4,2 la
     # 2e tonalité ne coupe pas (elle s'ouvre en cloche) : pas de rampe de sortie, le tremblement s'arrête net et
     # l'enveloppe est forcée à 0 dès l'image 126 (décroché). 139 valeurs : images 0 à 138.
@@ -247,8 +277,8 @@ def secousses():
         "s1": {"description": "tonalité d'attente 440 Hz (ton-1 0 → 1,5 s ; ton-2 2,7 → 4,2 s), attaques et relâche de ton-1 10 ms, "
                               "ton-2 sans relâche (il devient cloche) ; 0 dès l'image 126 (décroché)",
                "image0": 0, "enveloppe": env1,
-               "amplitude_x": 6.0, "motif_x": [0, 1, 0, -1], "amplitude_y": 2.0, "motif_y": [1, 0, -1, 0],
-               "amplitude_px": 6.0, "motif": [0, 1, 0, -1],
+               "amplitude_x": a(6.0, k1), "motif_x": [0, 1, 0, -1], "amplitude_y": a(2.0, k1), "motif_y": [1, 0, -1, 0],
+               "amplitude_px": a(6.0, k1), "motif": [0, 1, 0, -1],
                "phase_par_image_absolue": True,
                "segments_s": [[a, b] for a, b, _, _ in s1_seg], "rampes_s": [[fa, fr] for _, _, fa, fr in s1_seg],
                "frequence_hz": 7.5,
@@ -256,7 +286,7 @@ def secousses():
                        "quadrature, le point décrit un losange ; amplitude_px / motif = alias v1 de l'axe x"},
         "s6": {"description": "vibreur du SMS : impulsions 36,6667 → 36,8467 et 36,9367 → 37,1167 s, attaque 12 ms, relâche 25 ms",
                "image0": 1100, "enveloppe": env6,
-               "amplitude_x": 6.0, "motif_x": [1, 0, -1, 0], "amplitude_px": 6.0, "motif": [1, 0, -1, 0],
+               "amplitude_x": a(6.0, k6), "motif_x": [1, 0, -1, 0], "amplitude_px": a(6.0, k6), "motif": [1, 0, -1, 0],
                "phase_par_image_absolue": False,
                "segments_s": [[round(a, 6), round(b, 6)] for a, b, _, _ in s6_seg], "rampes_s": [[fa, fr] for _, _, fa, fr in s6_seg],
                "frequence_hz": 7.5,
@@ -304,19 +334,54 @@ FORMES = {
     # changement de ligne : le point descend d'abord (il quitte la ligne lue par la droite), puis glisse à gauche
     # dans la bande de la ligne suivante, encore vide
     "descente": {"x": (0.15, 1.0, "sine.inOut"), "y": (0.0, 0.40, "sine.inOut")},
+    # 3e passe du 16:9 (28/09, revue Florian : la « descente » passait sur l'étiquette « 10:00 » de la capture) : sortie de la
+    # gouttière des heures PAR LE COULOIR entre deux étiquettes. y va d'abord à la hauteur du couloir (COULOIR_Y), s'y tient
+    # pendant que x franchit la colonne des étiquettes, puis rejoint le mot ; x part à 10 % du geste.
+    "couloir": {"x": (0.10, 1.0, "sine.inOut"), "y": (0.0, 0.30, "sine.inOut"), "y2": (0.50, 1.0, "sine.inOut")},
 }
+COULOIR_Y = None      # posé par trajets() (milieu des filets 09:00 et 10:00 + mise-en-page/s6-sms.json « couloir_dy »)
 
 
 def mouvement(A, B, forme):
     F = FORMES[forme]
     (x0, x1, ex), (y0, y1, ey) = F["x"], F["y"]
     fx, fy = ease(ex), ease(ey)
+    if "y2" in F:                     # deux temps en y : A → couloir, tenue, couloir → B
+        (z0, z1, ez), fz, YC = F["y2"], ease(F["y2"][2]), COULOIR_Y
+
+        def f(u):
+            ux = cadre((u - x0) / (x1 - x0))
+            y = A[1] + (YC - A[1]) * fy(cadre((u - y0) / (y1 - y0)))
+            y += (B[1] - YC) * fz(cadre((u - z0) / (z1 - z0)))
+            return (A[0] + (B[0] - A[0]) * fx(ux), y)
+        return f
 
     def f(u):
         ux = cadre((u - x0) / (x1 - x0))
         uy = cadre((u - y0) / (y1 - y0))
         return (A[0] + (B[0] - A[0]) * fx(ux), A[1] + (B[1] - A[1]) * fy(uy))
     return f
+
+
+def etiquettes_capture(agenda, f0, f1):
+    """Les étiquettes d'heure de la VRAIE capture (pixels de agenda-avant.png, pas des mots du DOM) comme obstacles du point,
+    image par image de f0 à f1 : leur boîte d'encre (agenda-geo.json « etiquettes », visibles) suit la sortie de l'agenda
+    (evenements.agenda_sort 31,00 → 31,35 : y = −y_sortie × power3.in(p), opacité 1 − p, comme s5-rendez-vous.html) ; une
+    étiquette cesse d'être un obstacle sous 20 % d'opacité (contraste < 1,2:1 sur le papier). 3e passe du 16:9 (28/09)."""
+    AS0, AS1 = 31.00, 31.35
+    YS = MEP["agenda"]["y_sortie"]
+    e4 = ease("power3.in")
+    out = []
+    for n in range(f0, f1 + 1):
+        p = cadre((n / FPS - AS0) / (AS1 - AS0))
+        if 1 - p < 0.20:
+            continue
+        dy = -YS * e4(p)
+        for h, b in agenda["etiquettes"].items():
+            if b.get("visible"):
+                out.append({"texte": f"étiquette {h} de la capture", "page": "capture", "vis": n, "fin": n + 1,
+                            "x0": b["x0"], "x1": b["x1"], "y0": b["y0"] + dy, "y1": b["y1"] + dy})
+    return out
 
 
 def boites_mots(pages, sorties):
@@ -420,6 +485,8 @@ class Trajet:
                 rejets.append((depart, "heurt", h[:2]))
                 continue
             A = self.pos
+            if os.environ.get("CONSTRUIRE_REJETS"):      # diagnostic : pourquoi ce départ et pas un plus calme
+                print(f"  {raison} : départ {depart} ; rejets {rejets[:10]}", file=sys.stderr)
             self.xs += xs; self.ys += ys
             self.journal.append({"vers": raison, "depart": depart, "arrivee": arrivee, "forme": forme, "pas_max": round(pas, 1),
                                  "de": [round(A[0], 2), round(A[1], 2)], "a": [round(B[0], 2), round(B[1], 2)]})
@@ -455,7 +522,7 @@ def trajets(pages, sorties, P1, geo_s3, agenda, S_bulle):
         B, vis = fin_mot(m), img(m["revele"]) + 1
         if prec is None:
             forme, libre, n_min = "retour", 139, 11          # le retour chariot : sur la ligne de base de « mains prises. »
-            t1.aller(B, vis, forme, libre, n_min=n_min, raison=f"retour chariot, puis s2 « {m['texte']} »", v_max=140.0)
+            t1.aller(B, vis, forme, libre, n_min=n_min, raison=f"retour chariot, puis s2 « {m['texte']} »", v_max=kv(140.0))
             prec = (ip, m)
             continue
         elif prec[0] != ip:
@@ -475,8 +542,8 @@ def trajets(pages, sorties, P1, geo_s3, agenda, S_bulle):
         assert L == (geo_s3["x"] + R_DISQUE, geo_s3["lignes_de_base"][-1] + ECOUTE_DY), "s3-ecoute.json[9x16] ≠ 90 + 22 ; 1018 + 118"
     t1.aller(L, libre + 16, ECOUTE.get("forme", "descente"), libre, n_min=16, raison="s3 : place d'écoute")
     # s3 : le hochement du tamis (14,15 → 14,30 → 14,50) et la hausse sur « disponibilités » (16,19 → 16,49), tenue jusqu'à 17,20
-    for (ta, tb, dy, raison) in ((14.15, 14.30, 8.0, "tamis : hochement (bas)"), (14.30, 14.50, 0.0, "tamis : hochement (retour)"),
-                                 (16.19, 16.49, -10.0, "hausse sur « disponibilités »")):
+    for (ta, tb, dy, raison) in ((14.15, 14.30, kp(8.0), "tamis : hochement (bas)"), (14.30, 14.50, 0.0, "tamis : hochement (retour)"),
+                                 (16.19, 16.49, kp(-10.0), "hausse sur « disponibilités »")):
         t1.tenir(img(ta))
         t1.aller((L[0], L[1] + dy), img(tb), "droit", img(ta), n_min=img(tb) - img(ta), raison=raison)
     t1.tenir(516)
@@ -487,14 +554,23 @@ def trajets(pages, sorties, P1, geo_s3, agenda, S_bulle):
     # FORMATS : en 16:9 le sous-titre n'est plus sur le chemin (il est à gauche, l'agenda à droite) : le point peut quitter la
     # gouttière plus tôt pour un geste plus calme (mise-en-page/s6-sms.json « depart_gouttiere_avance », images ; 9:16 : 0)
     f_gout -= int(MEP["s6"].get("depart_gouttiere_avance", 0))
-    t2 = Trajet("s6", f_gout, (XA, Y9), boites)
+    # 3e passe du 16:9 (28/09) : les étiquettes d'heure de la capture sont des obstacles du trajet s6 tant qu'elles se voient
+    # (le planificateur ne connaissait que les sous-titres : la « descente » passait sur « 10:00 » sans que rien ne le voie)
+    global COULOIR_Y
+    COULOIR_Y = round((agenda["heures"]["09:00"] + agenda["heures"]["10:00"]) / 2 + MEP["s6"].get("couloir_dy", 0), 3)
+    t2 = Trajet("s6", f_gout, (XA, Y9), boites + etiquettes_capture(agenda, f_gout, f_gout + 60))
     pa = [p for p in pages if p["scene"] == "s6-sms"][0]
     arrets6 = [m for m in pa["mots"] if m["texte"] in ARRETS_S6]
     assert [m["texte"] for m in arrets6] == ARRETS_S6
     prec = None
+    # FORMATS (recomposition du 28/09) : la forme du premier geste, de la gouttière des heures au premier mot de s6
+    # (mise-en-page/s6-sms.json « forme_depart_gouttiere », « droit » par défaut, celui du 9:16). En 16:9 les sous-titres sont
+    # À GAUCHE de l'agenda : en ligne droite, le point repassait sur l'étiquette « 09:00 » qui s'efface (controles.py F4,
+    # image 934) ; « descente » le fait d'abord descendre sous la rangée des étiquettes, puis glisser vers le mot.
+    forme0 = MEP["s6"].get("forme_depart_gouttiere", "droit")
     for m in arrets6:
         B, vis = fin_mot(m), img(m["revele"]) + 1
-        forme = "droit" if prec is None or prec["ligne"] == m["ligne"] else "descente"
+        forme = forme0 if prec is None else ("droit" if prec["ligne"] == m["ligne"] else "descente")
         t2.aller(B, vis, forme, f_gout, n_min=6, raison=f"s6 « {m['texte']} »")
         prec = m
     so6 = sorties[pa["_cle"]]
@@ -503,44 +579,60 @@ def trajets(pages, sorties, P1, geo_s3, agenda, S_bulle):
     return t1, t2, boites
 
 
-ETIREMENT = {"seuil": 30, "pente": 90, "max": 0.25}   # long ≤ 1,25 (arbitrage 2 : plus de pilule de 92 px)
+ETIREMENT = {"seuil": kv(30), "pente": kv(90), "max": 0.25}   # long ≤ 1,25 (arbitrage 2 : plus de pilule de 92 px) ; px par image × K_VIT
+
+
+GLISSE = None         # {"dx", "t": [t0, t1], "ease"} : glissement de l'accroche de s1 (main(), d'après mise-en-page/s1-sonnerie.json « glisse »)
 
 
 def point(mots, agenda, mesures, t1, t2, S_bulle):
     s1c, s1d = mesures["s1"]["centre"], mesures["s1"]["diametre"]
     M, D = mesures["s7"]["centre"], mesures["s7"]["diametre"]
+    # le disque du film (s1 → s6) et le point du ı (#mot-pt, D) : les mêmes en 9:16 ; sinon le point prend la taille du ı en
+    # quittant le téléphone (départ du stylo → pose du stylo), sans changer aucun instant
+    D_FILM = D if K_MOT == K_POINT else float(kp(44.0))
     stylo = mesures["s7"]["stylo"]
     XA = agenda["x_point"]
     H = agenda["heures"]
     Y9, Y10, Y11 = H["09:00"], H["10:00"], H["11:00"]
     bloc = agenda["bloc"]
-    BX0 = round(bloc["x0"] + D / 2, 3)
+    BX0 = round(bloc["x0"] + D_FILM / 2, 3)
     BCY = bloc["centre_y"]
     BXF = bloc["x_fin"]
     SY = stylo["y"]
+    # hauteur du bond sur le ı au-dessus du point de #mot-pt, en px du 9:16 (× K_MOT) : mise-en-page/s7-signature.json « bond »
+    # (défaut 110, celui du 9:16) ; un format serré en hauteur l'abaisse pour que le sommet reste loin du bord du cadre
+    BOND = MEP["s7"].get("bond", 110)
     P1x, P1y = s1c["x"], s1c["y"]
     dS = DECALAGE_SMS
     k = lambda n, t, x, y, ease=None, arc=None, note=None: {kk: v for kk, v in (
         ("n", n), ("t", demi(t)), ("image", round(demi(t) * FPS, 1)), ("x", round(x, 3)), ("y", round(y, 3)),
         ("ease", ease), ("arc", arc), ("note", note)) if v is not None}
     e1 = (t1.xs[-1], t1.ys[-1])
+    # 3e passe du 16:9 (28/09, revue YouTube : la moitié droite du cadre restait vide 2,9 s) : un format peut poser l'accroche
+    # CENTRÉE puis la faire glisser à sa place avant la relance (mise-en-page/s1-sonnerie.json « glisse », GLISSE résolu par
+    # main()) ; le point, qui est le « . » de « prises », glisse avec elle (même instants, même ease). 9:16 : aucune clé ajoutée.
+    gl = GLISSE
+    dxg = gl["dx"] if gl else 0
     pos = [
-        k(1, 0.0, P1x, P1y, note="s1 : point final de « mains prises. » (mesuré) ; invisible (0 px) jusqu'à 0,8333, posé à 0,9667 (DONNEES.accroche.point), encre ; tremble avec la tonalité"),
+        k(1, 0.0, P1x + dxg, P1y, note="s1 : point final de « mains prises. » (mesuré) ; invisible (0 px) jusqu'à 0,8333, posé à 0,9667 (DONNEES.accroche.point), encre ; tremble avec la tonalité"),
+    ] + ([k(1.1, gl["t"][0], P1x + dxg, P1y, note="s1 : l'accroche centrée commence à glisser vers sa place (DONNEES.geometrie.s1.glisse)"),
+          k(1.2, gl["t"][1], P1x, P1y, gl["ease"], note="s1 : l'accroche est à sa place, avant la relance ; le point est son « . »")] if gl else []) + [
         k(2, 4.5667, P1x, P1y, note="décroché à 126 (contraction), solaire à 127, gonfle jusqu'à 44 px à 4,60"),
-        k(3, 4.6333, P1x + 10, P1y, "power2.out", note="anticipation : recul de 10 px vers la droite (137 → 139)"),
+        k(3, 4.6333, P1x + kp(10), P1y, "power2.out", note="anticipation : recul de 10 px vers la droite (137 → 139)"),
         k(4, 17.20, e1[0], e1[1], note="fin du trajet planifié s2-s3 (pistes.trajets[0], images 139 → 516)"),
         k(5, 17.80, XA, Y9, "bezier(.45,0,.15,1)", note="s4 : attend sur la ligne 09:00 (l'agenda monte dessous 18,37 → 19,07)"),
         k(6, 20.4333, XA, Y9, note="« neuf » : envol 613"),
-        k(7, 20.5333, XA, Y9 - 36, "power2.out", note="sommet 616"),
+        k(7, 20.5333, XA, Y9 - kp(36), "power2.out", note="sommet 616"),
         k(8, 20.6667, XA, Y9, "power2.in", note="contact 09:00, image 620 (voyelle de « neuf »)"),
         k(9, 21.1667, XA, Y9, note="« dix » : envol 635"),
-        k(10, 21.2333, XA + 12, Y9 - 20, "power2.out", note="sommet 637, côté colonne (loin de l'encre de « 09:00 »)"),
-        k(11, 21.4333, XA, Y10, "power2.in", {"dx": 14}, note="contact 10:00, image 643 (voyelle de « dix »)"),
+        k(10, 21.2333, XA + kp(12), Y9 - kp(20), "power2.out", note="sommet 637, côté colonne (loin de l'encre de « 09:00 »)"),
+        k(11, 21.4333, XA, Y10, "power2.in", {"dx": kp(14)}, note="contact 10:00, image 643 (voyelle de « dix »)"),
         k(12, 21.9333, XA, Y10, note="« onze » : envol 658"),
-        k(13, 22.0000, XA + 8, Y10 - 14, "power2.out", note="sommet 660, côté colonne"),
-        k(14, 22.2000, XA, Y11, "power2.in", {"dx": 10}, note="contact 11:00, image 666 (voyelle de « onze »)"),
+        k(13, 22.0000, XA + kp(8), Y10 - kp(14), "power2.out", note="sommet 660, côté colonne"),
+        k(14, 22.2000, XA, Y11, "power2.in", {"dx": kp(10)}, note="contact 11:00, image 666 (voyelle de « onze »)"),
         k(15, 23.9667, XA, Y11, note="retour : envol 719 (« à » de l'appelant)"),
-        k(16, 24.2333, XA, Y9 - 20, "bezier(.4,0,.4,1)", {"dx": 24}, note="sommet 727, en arc côté colonne"),
+        k(16, 24.2333, XA, Y9 - kp(20), "bezier(.4,0,.4,1)", {"dx": kp(24)}, note="sommet 727, en arc côté colonne"),
         k(17, 24.3667, XA, Y9, "power2.in", note="contact retour 09:00, image 731"),
         k(18, 25.2000, XA, Y9, note="s5"),
         k(19, 25.3667, BX0, BCY, "power2.inOut", note="plume posée au bord gauche du bloc (761)"),
@@ -548,10 +640,10 @@ def point(mots, agenda, mesures, t1, t2, S_bulle):
         k(21, 26.1000, BXF, BCY, "power1.out", note="il écrit « 09:00 Florian » et s'arrête 14 px après l'encre de « Florian » (783)"),
         # arbitrage 5 : sitôt l'écriture finie, le point quitte le bloc (il ne reste pas collé à « Florian » comme une
         # pastille) : il lève la plume au-dessus du bloc, puis rejoint la gouttière des heures, aligné sur 09:00
-        k(22, 787 / FPS, BXF, BCY - 60, "power2.out", note="lève la plume : 60 px au-dessus de la ligne du bloc (787), au-dessus de l'encre du bloc"),
+        k(22, 787 / FPS, BXF, BCY - kp(60), "power2.out", note="lève la plume : 60 px au-dessus de la ligne du bloc (787), au-dessus de l'encre du bloc"),
         k(23, 801 / FPS, XA, Y9, "sine.inOut", note="dans la gouttière des heures, sur la ligne 09:00, là où il frappait les heures (801)"),
         k(24, 27.2500, XA, Y9),
-        k(25, 821 / FPS, XA, Y9 + 6, "power2.in", note="hochement de 6 px sur la voyelle de « Florian » (27,355 → image 821), dans la gouttière"),
+        k(25, 821 / FPS, XA, Y9 + kp(6), "power2.in", note="hochement de 6 px sur la voyelle de « Florian » (27,355 → image 821), dans la gouttière"),
         k(26, 27.4833, XA, Y9, "power2.out"),
         k(27, t2.f0 / FPS, XA, Y9, note=f"il attend dans la gouttière jusqu'à la sortie du dernier sous-titre de s5 (image {t2.f0}) ; trajet s6 ensuite"),
         k(28, t2.f / FPS, S_bulle[0], S_bulle[1], note="fin du trajet s6 (pistes.trajets[1]) : sous la queue de la bulle, d'où le SMS naîtra"),
@@ -559,8 +651,8 @@ def point(mots, agenda, mesures, t1, t2, S_bulle):
         k(30, 39.8000 + dS, stylo["x0"], SY, "power2.inOut", dict(MEP["s6"]["depart_stylo_arc"]), note="s7 : départ du stylo, sous la ligne de base (ligne de base + 32) ; version iPhone : le point part de plus bas (394 px au lieu de 182), sur 15 images (1230 → 1245) en power2.inOut : pointe ≈ 75 px par image (v2 ≈ 68), dernier pas < 1 px (v2 0,2) : il se pose sur le stylo avant d'écrire, sans coude. Arc {dx −30, dy +80} (relecture du 27/09 : en ligne droite, il montait plus vite que la bulle et glissait sur le SMS encore lisible, de 1234 à 1240) : il sort par la gauche SOUS la bulle qui monte, longe le bord gauche du téléphone qui s'efface (jamais au-delà de son contour) et remonte au stylo ; ≥ 11 px de la bulle et de sa queue tant que le téléphone est visible (contrôlé par s6-sms.html et controles.py F4)"),
         k(31, 40.5000 + dS, stylo["x1"], SY, "sine.inOut", note="il écrit « Vokıo » (plume_mot) ; rond pendant l'écriture (etirement.sans)"),
         k(32, 40.5833 + dS, stylo["x1"], SY, note="demi-image : il bouge déjà à l'image du la"),
-        k(33, 40.8333 + dS, M["x"], M["y"] - 110, "power1.out", {"dx": 40, "dy": -40}, note="sommet du bond, image du sol (montée balistique)"),
-        k(34, 41.0000 + dS, M["x"], M["y"] - 114, "sine.inOut", note="suspension : il flotte encore de 4 px vers le haut"),
+        k(33, 40.8333 + dS, M["x"], M["y"] - km(BOND), "power1.out", {"dx": km(40), "dy": km(-40)}, note="sommet du bond, image du sol (montée balistique)"),
+        k(34, 41.0000 + dS, M["x"], M["y"] - km(BOND + 4), "sine.inOut", note="suspension : il flotte encore de 4 px vers le haut"),
         k(35, 41.2000 + dS, M["x"], M["y"], "power2.in", note="contact sur le ı, image du ré"),
         k(36, DUREE, M["x"], M["y"], note="tenue jusqu'à la fin"),
     ]
@@ -573,6 +665,8 @@ def point(mots, agenda, mesures, t1, t2, S_bulle):
            731: (1.08, 0.93), 732: (1.03, 0.97),
            n_re: (1.18, 0.84), n_re + 1: (1.07, 0.94), n_re + 2: (1.02, 0.98)}
     d_ne = round(0.81 * s1d, 3)          # contraction du décroché (17/21 en v2)
+    croissance = [] if D_FILM == D else [{"t": demi(39.30 + dS), "d": D_FILM},
+                                         {"t": demi(39.80 + dS), "d": D, "ease": "power2.inOut"}]
     tp0, tp1 = ACCROCHE["point"]
     tr = [t1.sortie(), t2.sortie()]
     return {
@@ -580,11 +674,15 @@ def point(mots, agenda, mesures, t1, t2, S_bulle):
         "lecture": "entre deux clés : de la clé i à la clé i+1 avec l'ease de la clé i+1 (gsap.parseEase, ou bezier(x1,y1,x2,y2) résolu par Newton) ; "
                    "arc {dx, dy} ajouté × 4p(1−p) ; avant la 1re / après la dernière : tenue ; pendant un trajet (pistes.trajets), "
                    "position = échantillons du trajet (une valeur par image, interpolée). Évaluer avec POINT.etat(t) (lib/point.js), jamais à la main.",
-        "diametre_disque": D,
+        "diametre_disque": max(D, D_FILM),
+        **({} if D_FILM == D else {"diametre_film": D_FILM,
+                                   "note_diametres": "diametre_disque = taille CSS de #point (la plus grande, 1:1 au repos sur le ı) ; "
+                                                     "diametre_film = le disque de s1 à s6 (rayon des trajets et des gardes des scènes) ; "
+                                                     "le point grandit de l'un à l'autre de 41,00 à 41,50 (DONNEES.point.taille)"}),
         "position": pos,
         "taille": [{"t": 0.0, "d": 0.0}, {"t": tp0, "d": 0.0}, {"t": tp1, "d": s1d, "ease": "power3.out"},
                    {"t": demi(4.1667), "d": s1d}, {"t": 4.20, "d": d_ne, "ease": "none"},
-                   {"t": demi(4.2333), "d": d_ne}, {"t": 4.60, "d": D, "ease": "power3.out"}],
+                   {"t": demi(4.2333), "d": d_ne}, {"t": 4.60, "d": D_FILM, "ease": "power3.out"}] + croissance,
         "couleur": [{"t": 0.0, "c": COULEURS["encre"]}, {"t": 4.20, "c": COULEURS["encre"]},
                     {"t": demi(4.2333), "c": COULEURS["solaire"], "ease": "none"}],
         "trajets": tr,
@@ -742,8 +840,8 @@ def main():
     segs = s7["segments"]
     w_vok = segs["mot-a"]["boite"]["l"]
     w_o = segs["mot-o"]["boite"]["l"]
-    stylo = {"x0": round(s7["mot"]["x0"] - 0.14 * w_vok - 26, 3), "x1": round(s7["mot"]["x1"] + 0.14 * w_o + 26, 3),
-             "y": round(s7["ligne_de_base"] + 32, 3),
+    stylo = {"x0": round(s7["mot"]["x0"] - 0.14 * w_vok - km(26), 3), "x1": round(s7["mot"]["x1"] + 0.14 * w_o + km(26), 3),
+             "y": round(s7["ligne_de_base"] + km(32), 3),
              "definition": "x0 = bord gauche de #mot − 0,14 × largeur de « Vok » − 26 ; x1 = bord droit de #mot + 0,14 × largeur du « o » + 26 ; "
                            "y = ligne de base + 32 (le centre du point passe sous la ligne de base)"}
     mesures = {
@@ -766,7 +864,7 @@ def main():
     assert b7 is None or abs(mesures["s7"]["ligne_de_base"] - b7) < 0.51, (f"s7 : ligne de base mesurée {mesures['s7']['ligne_de_base']} ≠ {b7} attendue "
                                                                           "(mise-en-page/s7-signature.json : top, ligne_de_base)")
     print(f"s1 : « . » en {mesures['s1']['centre']} ; s7 : ligne de base {mesures['s7']['ligne_de_base']}, #mot-pt en {mesures['s7']['centre']}")
-    assert abs(mesures["s7"]["diametre"] - 44) < 0.3, mesures["s7"]["diametre"]
+    assert abs(mesures["s7"]["diametre"] - km(44)) < km(0.3), (mesures["s7"]["diametre"], km(44))
     ecrire_json("mesures.json", mesures)
 
     # 2. données de base (sans pages ni suiveur) : écrites une première fois pour le banc des pages
@@ -813,7 +911,13 @@ def main():
     ecrire_js()
 
     # 3. les pages v2, posées par TEXTE.poser avec le CSS du contrat de leur scène (règle 8 + encre + ligne de base)
-    rp = navigateur("pages", str(DON / "styles-pages.json"))
+    # FORMATS (recomposition du 28/09) : les coupes de lignes propres au format (texte.json « coupes », mêmes mots)
+    coupes = {k: v for k, v in (MEP["texte"].get("coupes") or {}).items()}
+    if coupes:
+        ecrire_json("coupes.json", coupes)
+    elif (DON / "coupes.json").exists():
+        (DON / "coupes.json").unlink()
+    rp = navigateur("pages", str(DON / "styles-pages.json"), *([str(DON / "coupes.json")] if coupes else []))
     pg, decal = rp["pages"], rp["decalages"]
     for nom, css in STYLES.items():
         css["decalage_ligne_de_base"] = decal[nom]
@@ -863,6 +967,20 @@ def main():
 
     # 4. les trajets planifiés (s2-s3, s6) puis le point
     P1 = (mesures["s1"]["centre"]["x"], mesures["s1"]["centre"]["y"])
+    # 3e passe du 16:9 : le glissement de l'accroche (mise-en-page/s1-sonnerie.json « glisse » : {"x_depart": "centre" | px,
+    # "t": [t0, t1], "ease"}) ; « centre » : le bloc d'encre (lignes mesurées, « . » compris) centré dans le cadre au départ
+    global GLISSE
+    G_ = MEP["s1"].get("glisse")
+    if G_:
+        L_ = mesures["s1"]["lignes"]
+        bx0 = min(l["x0"] for l in L_)
+        bx1 = max(max(l["x1"] for l in L_), P1[0] + mesures["s1"]["diametre"] / 2)
+        dxg = round((LARGEUR - (bx1 - bx0)) / 2 - bx0) if G_["x_depart"] == "centre" else round(G_["x_depart"] - MEP["s1"]["phrase"]["x"])
+        t0g, t1g = (demi(v) for v in G_["t"])
+        assert ACCROCHE["point"][1] <= t0g < t1g < 2.6667 - 1e-9, "s1 glisse : après la pose du « . » (0,9667), fini avant la relance (2,6667)"
+        GLISSE = {"dx": dxg, "t": [t0g, t1g], "ease": G_.get("ease", "power3.inOut"),
+                  "bloc_encre": [round(bx0, 1), round(bx1, 1)],
+                  "note": "x(t) = x + dx × (1 − ease(u)), u = (t − t0)/(t1 − t0) borné à [0, 1] : #s1-phrase (s1-sonnerie.html) et le point (clés 1.1, 1.2)"}
     G6 = geometrie_iphone()
     S_bulle = (G6["point"]["x"], G6["point"]["y"])     # version iPhone : (168,99 ; 1282,93), 14 px sous la pointe de la queue
     t1, t2, boites = trajets(D["pages"], sorties, P1, STYLES["s3_texte"], agenda, S_bulle)
@@ -903,6 +1021,8 @@ def main():
     geometrie["cadre"] = GM["cadre"]
     geometrie["s1"] = dict(GM["s1"], lignes_de_base=[l["ligne_de_base"] for l in mesures["s1"]["lignes"]],
                            note="boîtes CSS de #s1-phrase et #s1-relance (left = x, top, font-size = corps, line-height = interligne)")
+    if GLISSE:
+        geometrie["s1"]["glisse"] = GLISSE
     geometrie["s2_texte"]["x_max"] = X_MAX_POINT
     geometrie["sous_titres_haut"]["conteneur"] = {"largeur": MEP["texte"]["conteneur_sous_titres"][0],
                                                   "hauteur": MEP["texte"]["conteneur_sous_titres"][1],
@@ -955,7 +1075,7 @@ def main():
     R = {e["image"]: e for e in res}
     assert len(res) == IMAGES + 1
     N_RE = ev["signature_re_contact"]["image"]
-    e0 = ecart((R[0]["x_sans"], R[0]["y_sans"]), P1)
+    e0 = ecart((R[0]["x_sans"], R[0]["y_sans"]), (P1[0] + (GLISSE["dx"] if GLISSE else 0), P1[1]))
     if e0 > 0.5: err.append(f"image 0 : écart {e0:.2f} px au point final de s1")
     n_pose = ev["point_pose"]["images"][1]
     if abs(R[n_pose]["d"] - mesures["s1"]["diametre"]) > 0.05 or R[0]["d"] > 1e-6:
@@ -964,16 +1084,16 @@ def main():
     eRe = ecart((R[N_RE]["x"], R[N_RE]["y"]), M)
     if eRe > 0.5: err.append(f"image {N_RE} : écart {eRe:.2f} px à #mot-pt")
     for n in (N_RE, N_RE + 3):
-        if abs(R[n]["d"] - 44) > 0.3: err.append(f"image {n} : diamètre {R[n]['d']}")
+        if abs(R[n]["d"] - km(44)) > km(0.3): err.append(f"image {n} : diamètre {R[n]['d']}")
     if not (R[N_RE + 3]["sx"] == 1 and R[N_RE + 3]["sy"] == 1): err.append(f"image {N_RE + 3} : déformation {R[N_RE + 3]['sx']} / {R[N_RE + 3]['sy']}")
     A = pt["reperes"]["A"]
     for n, yl in ((620, A["y9"]), (643, A["y10"]), (666, A["y11"]), (731, A["y9"])):
         if abs(R[n]["y"] - yl) > 0.5: err.append(f"contact {n} : y {R[n]['y']} ≠ {yl}")
     pas = [0.0] + [ecart((res[k]["x_sans"], res[k]["y_sans"]), (res[k - 1]["x_sans"], res[k - 1]["y_sans"])) for k in range(1, len(res))]
-    for n, vmin in ((620, 10), (643, 10), (666, 10), (N_RE, 10), (731, 5)):
+    for n, vmin in ((620, kp(10)), (643, kp(10)), (666, kp(10)), (N_RE, km(10)), (731, kp(5))):
         if pas[n] < vmin: err.append(f"contact {n} : dernier pas {pas[n]:.1f} px < {vmin}")
     for k in range(1, len(res)):
-        lim = 150 if 137 <= k <= 150 else 130
+        lim = kv(150) if 137 <= k <= 150 else kv(130)
         if pas[k] > lim: err.append(f"pas de {pas[k]:.1f} px à l'image {k} (> {lim})")
     s0, s1_ = ev["silence_numerique"]["images"]
     for k in range(s0 + 1, s1_):

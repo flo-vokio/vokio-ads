@@ -21,7 +21,8 @@
  *   POINT.trajet(t)         → [x, y] du trajet planifié qui couvre t (s2-s3 ou s6), ou null
  *   POINT.ease(nom)         → fonction d'ease : GSAP (gsap.parseEase) ou « bezier(x1,y1,x2,y2) » (Newton, 8 itérations)
  *   POINT.proprietes(t)     → { xPercent, yPercent, x, y, rotation, scaleX, scaleY, backgroundColor } pour gsap.set
- *   POINT.diametre_disque   → D0 = 44 (diamètre CSS de #point = diamètre mesuré de #mot-pt)
+ *   POINT.diametre_disque   → D0 = 44 (diamètre mesuré de #mot-pt, le point posé sur le ı)
+ *   POINT.boite             → round(D0) : la taille CSS de #point (px entiers), base de scaleX / scaleY
  *
  * Données (DONNEES.point) : position [{t, x, y, ease, arc:{dx,dy}}], taille [{t, d, ease}], couleur [{t, c, ease}],
  * trajets [{nom, t0, t1, image0, x[], y[]}] (suiveur = alias du premier), pistes {trajets, secousses:[{piste,t0,t1}]},
@@ -172,12 +173,16 @@
   }
 
   const D0 = P.diametre_disque;
+  // FORMATS (recomposition du 28/09) : Chromium dessine #point dans une boîte de px ENTIERS. Un diamètre non entier (59,391 px, le
+  // point du ı d'un wordmark de 540 px) y était arrondi à 59 (mesuré sur les images sans perte : 58,8 au lieu de 59,4). La boîte
+  // CSS vaut donc round(D0) (index.html) et l'échelle se calcule sur elle : le disque dessiné vaut d exactement. 9:16 : 44, inchangé.
+  const BOITE = Math.round(D0);
   function proprietes(t) {
     const s = etat(t);
     return { xPercent: -50, yPercent: -50, x: s.x, y: s.y, rotation: s.rot,
-             scaleX: s.d / D0 * s.sx, scaleY: s.d / D0 * s.sy, backgroundColor: s.couleur };
+             scaleX: s.d / BOITE * s.sx, scaleY: s.d / BOITE * s.sy, backgroundColor: s.couleur };
   }
 
   window.POINT = { etat: etat, position: position, secousse: secousse, secousseY: secousseY, suiveur: suiveur, trajet: trajet,
-                   ease: ease, proprietes: proprietes, diametre_disque: D0 };
+                   ease: ease, proprietes: proprietes, diametre_disque: D0, boite: BOITE };
 })();

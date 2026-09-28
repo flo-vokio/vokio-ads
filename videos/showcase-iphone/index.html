@@ -72,6 +72,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   // backgroundColor } : secousses, écrasements (table par image) et étirement de vitesse compris.
   // Toujours dans le tween proxy ci-dessous, jamais avec tl.call.
   function rendre(t) { gsap.set(el, POINT.proprietes(t)); }
+  // FORMATS (recomposition du 28/09) : la boîte CSS = POINT.boite = round(D0), D0 le diamètre mesuré de #mot-pt du format (44 px
+  // en 9:16, comme le CSS ci-dessus ; un format au wordmark plus grand a un point de ı plus grand) : scaleX / scaleY = d / boîte.
+  el.style.width = el.style.height = POINT.boite + "px";
   rendre(0);
   const tl = gsap.timeline({ paused: true });
   const proxy = { t: 0 };

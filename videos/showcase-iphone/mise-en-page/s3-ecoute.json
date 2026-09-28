@@ -4,6 +4,7 @@
   "ecoute": {"x": 112, "y": 1136, "forme": "descente", "note": "118 px sous la dernière ligne de base (1018), aligné sur le bord gauche du texte (90 + 22)"}
  },
  "16x9": {
-  "ecoute": {"x": 960, "y": 596, "forme": "droit", "note": "à droite de la parole, au milieu de son bloc (2e ligne de base 612 − 16, la demi-hauteur d'x), sur la médiane du cadre : il écoute EN FACE de l'appelant, et reste à 495 px de la gouttière de l'agenda (515 en 9:16)"}
+  "ecoute": {"x": 640, "y": 616, "forme": "droit", "note": "3e passe du 28/09 (champ-contrechamp) : le point écoute du côté de l'agente, au tiers gauche, EN FACE de la colonne de l'appelant (x 1000, 360 px), à mi-hauteur de son bloc (2e ligne de base 638 − 22) ; trajet droit depuis « aider ? » (82 px). Le son du point (son air, mix hybride du 9:16) est à gauche (pan −0,48) : l'image le met à gauche du centre (−0,2 dans la loi du 16:9), du même côté ; avant, x 1100, il l'était à l'opposé."},
+  "_variante_adoptee": "« 16x9-v3 », adoptée le 28/09/2026 : 3e passe du 16:9 (revues YouTube 7/10 et Florian 7,5/10)"
  }
 }

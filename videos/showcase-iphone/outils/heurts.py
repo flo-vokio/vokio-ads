@@ -18,6 +18,12 @@
   code 1 s'il reste un heurt non permis. --json : le rapport complet (chaque image). Lecture seule, idempotent :
   n'écrit que --json. Pourquoi : un objet qui se déplace SOUS le point (la mention de l'agenda qui monte, en 16:9)
   ne passe pas par le planificateur de construire.py, qui ne connaît que les sous-titres.
+  Étiquettes de la capture (3e passe du 16:9, 28/09) : les heures « 09:00 », « 10:00 », « 11:00 » de l'agenda sont des PIXELS
+  de la vraie capture, pas des mots du DOM ; elles sont relevées comme l'élément « capture » (boîte d'encre de
+  DONNEES.agenda.etiquettes, suivie avec l'image #s4-capture / #s5-capture, à son opacité effective). Le départ de la
+  gouttière vers « recevrez » passait sur « 10:00 » (image 937) sans qu'aucun contrôle ne le voie. Le planificateur de
+  construire.py les connaît aussi (etiquettes_capture, jusqu'à 20 % d'opacité). --opacite-min : opacité effective sous
+  laquelle un mot ou une étiquette n'est plus un obstacle (défaut 0,01 : tout ce qui se voit, comme avant).
 """
 import argparse
 import fnmatch
@@ -69,6 +75,30 @@ JS_IMAGE = r"""
                   texte: f.texte.trim(), encre: [+x0.toFixed(1), +y0.toFixed(1), +x1.toFixed(1), +y1.toFixed(1)], opacite: +o.toFixed(3) });
     });
   });
+  // 3e passe du 16:9 (28/09) : les étiquettes d'heure de la VRAIE capture (pixels de agenda-avant.png, aucun nœud texte) :
+  // boîtes d'encre de DONNEES.agenda.etiquettes (visibles), déplacées avec l'image (#s4-capture, #s5-capture : boîte réelle,
+  // translation de sortie comprise) et comptées à l'opacité effective de l'image. Élément « capture ».
+  const AG = DONNEES.agenda;
+  if (AG && AG.etiquettes && AG.image) {
+    ["s4-capture", "s5-capture"].forEach(function (id) {
+      const im = document.getElementById(id);
+      if (!im) return;
+      const hote = im.closest("[data-composition-src]");
+      if (hote && getComputedStyle(hote).visibility !== "visible") return;
+      if (getComputedStyle(im).visibility !== "visible") return;
+      const o = opacite(im);
+      if (o <= 0.01) return;
+      const r = im.getBoundingClientRect(), dx = r.left - AG.image.x, dy = r.top - AG.image.y;
+      Object.keys(AG.etiquettes).forEach(function (h) {
+        const b = AG.etiquettes[h];
+        if (!b.visible) return;
+        const v = visible(im, { x0: b.x0 + dx, y0: b.y0 + dy, x1: b.x1 + dx, y1: b.y1 + dy });
+        if (aire(v) <= 1) return;
+        mots.push({ scene: hote ? hote.getAttribute("data-composition-id") : "racine", element: "capture",
+                    texte: h, encre: [+v.x0.toFixed(1), +v.y0.toFixed(1), +v.x1.toFixed(1), +v.y1.toFixed(1)], opacite: +o.toFixed(3) });
+      });
+    });
+  }
   return { t: t, point: { x: e.x, y: e.y, r: +R.toFixed(2), dessine: dessine, opacite: +opP.toFixed(3) }, mots: mots };
 }
 """
@@ -105,6 +135,7 @@ def main():
     A.add_argument("--marge", type=float, default=0.0)
     A.add_argument("--permis", action="append", default=[])
     A.add_argument("--json")
+    A.add_argument("--opacite-min", type=float, default=0.01, help="opacité effective sous laquelle un mot n'est plus un obstacle (défaut 0,01 : tout ce qui se voit)")
     a = A.parse_args()
     racine = Path(a.racine).resolve()
     D = lire_donnees(racine)
@@ -143,6 +174,8 @@ def main():
         if not P["dessine"]:
             continue
         for m in r["mots"]:
+            if m["opacite"] < a.opacite_min:
+                continue
             d = distance_rect(P["x"], P["y"], m["encre"])
             prof = P["r"] + a.marge - d
             if prof > 0:

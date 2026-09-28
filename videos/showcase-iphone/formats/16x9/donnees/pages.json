@@ -10,17 +10,17 @@
     "Bonjour, je suis Élise,"
    ],
    "style": "s2_texte",
-   "top": 473,
+   "top": 449,
    "lignes_de_base": [
     540
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 824.641,
-     "encre_x0": 150,
-     "encre_x1": 822.165,
-     "largeur": 680.641
+     "x1": 1089.328,
+     "encre_x0": 153,
+     "encre_x1": 1085.215,
+     "largeur": 945.328
     }
    ],
    "mots": [
@@ -34,12 +34,12 @@
      "revele": 4.966667,
      "fin_voix": 5.43,
      "x0": 144,
-     "x1": 410.406,
-     "encre_x0": 150,
-     "encre_x1": 407.928,
+     "x1": 514,
+     "encre_x0": 153,
+     "encre_x1": 509.9,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 12
+     "encre_haut": 72,
+     "encre_bas": 16
     },
     {
      "texte": "je",
@@ -50,13 +50,13 @@
      "local": 1.033367,
      "revele": 5.633333,
      "fin_voix": 5.81,
-     "x0": 428.406,
-     "x1": 486.812,
-     "encre_x0": 427.406,
-     "encre_x1": 484.406,
+     "x0": 539,
+     "x1": 620.109,
+     "encre_x0": 538,
+     "encre_x1": 616.0,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 11
+     "encre_haut": 72,
+     "encre_bas": 15
     },
     {
      "texte": "suis",
@@ -67,13 +67,13 @@
      "local": 1.1667,
      "revele": 5.766667,
      "fin_voix": 6.055,
-     "x0": 504.812,
-     "x1": 636.141,
-     "encre_x0": 507.812,
-     "encre_x1": 633.701,
+     "x0": 645.109,
+     "x1": 827.516,
+     "encre_x0": 649.109,
+     "encre_x1": 823.509,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "encre_haut": 72,
+     "encre_bas": 2
     },
     {
      "texte": "Élise,",
@@ -84,13 +84,13 @@
      "local": 1.433367,
      "revele": 6.033333,
      "fin_voix": 6.29,
-     "x0": 654.141,
-     "x1": 824.641,
-     "encre_x0": 660.141,
-     "encre_x1": 822.165,
+     "x0": 852.516,
+     "x1": 1089.328,
+     "encre_x0": 861.516,
+     "encre_x1": 1085.215,
      "ligne_de_base": 540,
-     "encre_haut": 66,
-     "encre_bas": 12
+     "encre_haut": 91,
+     "encre_bas": 16
     }
    ],
    "cle": "s2-voix#0",
@@ -110,33 +110,33 @@
     "du Port."
    ],
    "style": "s2_texte",
-   "top": 473,
+   "top": 449,
    "lignes_de_base": [
     540,
-    624,
-    708
+    652,
+    764
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 748.953,
-     "encre_x0": 149,
-     "encre_x1": 746.553,
-     "largeur": 604.953
+     "x1": 984.219,
+     "encre_x0": 152,
+     "encre_x1": 980.109,
+     "largeur": 840.219
     },
     {
      "x0": 144,
-     "x1": 955.984,
-     "encre_x0": 147,
-     "encre_x1": 953.581,
-     "largeur": 811.984
+     "x1": 1271.734,
+     "encre_x0": 148,
+     "encre_x1": 1267.625,
+     "largeur": 1127.734
     },
     {
      "x0": 144,
-     "x1": 398.328,
-     "encre_x0": 147,
-     "encre_x1": 395.845,
-     "largeur": 254.328
+     "x1": 497.203,
+     "encre_x0": 148,
+     "encre_x1": 493.1,
+     "largeur": 353.203
     }
    ],
    "mots": [
@@ -150,12 +150,12 @@
      "revele": 6.6,
      "fin_voix": 7.048,
      "x0": 144,
-     "x1": 515.953,
-     "encre_x0": 149,
-     "encre_x1": 513.56,
+     "x1": 660.609,
+     "encre_x0": 152,
+     "encre_x1": 656.5,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "encre_haut": 72,
+     "encre_bas": 2
     },
     {
      "texte": "vocale",
@@ -166,13 +166,13 @@
      "local": 2.400033,
      "revele": 7,
      "fin_voix": 7.388,
-     "x0": 533.953,
-     "x1": 748.953,
-     "encre_x0": 534.953,
-     "encre_x1": 746.553,
+     "x0": 685.609,
+     "x1": 984.219,
+     "encre_x0": 687.609,
+     "encre_x1": 980.109,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "encre_haut": 71,
+     "encre_bas": 2
     },
     {
      "texte": "de",
@@ -184,12 +184,12 @@
      "revele": 7.366667,
      "fin_voix": 7.475,
      "x0": 144,
-     "x1": 226.516,
-     "encre_x0": 147,
-     "encre_x1": 224.12,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x1": 258.609,
+     "encre_x0": 148,
+     "encre_x1": 254.5,
+     "ligne_de_base": 652,
+     "encre_haut": 71,
+     "encre_bas": 2
     },
     {
      "texte": "la",
@@ -200,13 +200,13 @@
      "local": 2.833367,
      "revele": 7.433333,
      "fin_voix": 7.59,
-     "x0": 244.516,
-     "x1": 303.422,
-     "encre_x0": 249.516,
-     "encre_x1": 302.74,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x0": 283.609,
+     "x1": 365.422,
+     "encre_x0": 291.609,
+     "encre_x1": 364.309,
+     "ligne_de_base": 652,
+     "encre_haut": 71,
+     "encre_bas": 2
     },
     {
      "texte": "Clinique",
@@ -217,13 +217,13 @@
      "local": 2.9667,
      "revele": 7.566667,
      "fin_voix": 8.04,
-     "x0": 321.422,
-     "x1": 590.141,
-     "encre_x0": 324.422,
-     "encre_x1": 587.734,
-     "ligne_de_base": 624,
-     "encre_haut": 53,
-     "encre_bas": 11
+     "x0": 390.422,
+     "x1": 763.625,
+     "encre_x0": 394.422,
+     "encre_x1": 759.522,
+     "ligne_de_base": 652,
+     "encre_haut": 73,
+     "encre_bas": 15
     },
     {
      "texte": "vétérinaire",
@@ -234,13 +234,13 @@
      "local": 3.400033,
      "revele": 8,
      "fin_voix": 8.372,
-     "x0": 608.141,
-     "x1": 955.984,
-     "encre_x0": 609.141,
-     "encre_x1": 953.581,
-     "ligne_de_base": 624,
-     "encre_haut": 53,
-     "encre_bas": 1
+     "x0": 788.625,
+     "x1": 1271.734,
+     "encre_x0": 790.625,
+     "encre_x1": 1267.625,
+     "ligne_de_base": 652,
+     "encre_haut": 73,
+     "encre_bas": 2
     },
     {
      "texte": "du",
@@ -252,12 +252,12 @@
      "revele": 8.333333,
      "fin_voix": 8.45,
      "x0": 144,
-     "x1": 226.812,
-     "encre_x0": 147,
-     "encre_x1": 221.4,
-     "ligne_de_base": 708,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x1": 259,
+     "encre_x0": 148,
+     "encre_x1": 251.5,
+     "ligne_de_base": 764,
+     "encre_haut": 71,
+     "encre_bas": 2
     },
     {
      "texte": "Port.",
@@ -268,13 +268,13 @@
      "local": 3.8667,
      "revele": 8.466667,
      "fin_voix": 8.7,
-     "x0": 244.812,
-     "x1": 398.328,
-     "encre_x0": 250.812,
-     "encre_x1": 395.845,
-     "ligne_de_base": 708,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x0": 284,
+     "x1": 497.203,
+     "encre_x0": 293,
+     "encre_x1": 493.1,
+     "ligne_de_base": 764,
+     "encre_haut": 71,
+     "encre_bas": 2
     }
    ],
    "cle": "s2-voix#1",
@@ -293,25 +293,25 @@
     "vous aider ?"
    ],
    "style": "s2_texte",
-   "top": 473,
+   "top": 449,
    "lignes_de_base": [
     540,
-    624
+    652
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 708.719,
-     "encre_x0": 147,
-     "encre_x1": 706.318,
-     "largeur": 564.719
+     "x1": 928.312,
+     "encre_x0": 148,
+     "encre_x1": 924.206,
+     "largeur": 784.312
     },
     {
      "x0": 144,
-     "x1": 534.188,
-     "encre_x0": 145,
-     "encre_x1": 531.938,
-     "largeur": 390.188
+     "x1": 685.922,
+     "encre_x0": 146,
+     "encre_x1": 682.016,
+     "largeur": 541.922
     }
    ],
    "mots": [
@@ -325,11 +325,11 @@
      "revele": 9.066667,
      "fin_voix": 9.342,
      "x0": 144,
-     "x1": 465.422,
-     "encre_x0": 147,
-     "encre_x1": 463.184,
+     "x1": 590.406,
+     "encre_x0": 148,
+     "encre_x1": 587.2,
      "ligne_de_base": 540,
-     "encre_haut": 53,
+     "encre_haut": 73,
      "encre_bas": 2
     },
     {
@@ -341,13 +341,13 @@
      "local": 4.700033,
      "revele": 9.3,
      "fin_voix": 9.562,
-     "x0": 483.422,
-     "x1": 708.719,
-     "encre_x0": 488.422,
-     "encre_x1": 706.318,
+     "x0": 615.406,
+     "x1": 928.312,
+     "encre_x0": 623.406,
+     "encre_x1": 924.206,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 11
+     "encre_haut": 72,
+     "encre_bas": 15
     },
     {
      "texte": "vous",
@@ -359,12 +359,12 @@
      "revele": 9.533333,
      "fin_voix": 9.678,
      "x0": 144,
-     "x1": 299.391,
-     "encre_x0": 145,
-     "encre_x1": 296.936,
-     "ligne_de_base": 624,
-     "encre_haut": 40,
-     "encre_bas": 1
+     "x1": 359.812,
+     "encre_x0": 146,
+     "encre_x1": 355.8,
+     "ligne_de_base": 652,
+     "encre_haut": 55,
+     "encre_bas": 2
     },
     {
      "texte": "aider ?",
@@ -375,13 +375,13 @@
      "local": 5.033367,
      "revele": 9.633333,
      "fin_voix": 9.97,
-     "x0": 317.391,
-     "x1": 534.188,
-     "encre_x0": 320.391,
-     "encre_x1": 531.938,
-     "ligne_de_base": 624,
-     "encre_haut": 53,
-     "encre_bas": 1
+     "x0": 384.812,
+     "x1": 685.922,
+     "encre_x0": 388.812,
+     "encre_x1": 682.016,
+     "ligne_de_base": 652,
+     "encre_haut": 73,
+     "encre_bas": 2
     }
    ],
    "cle": "s2-voix#2",
@@ -401,33 +401,33 @@
     "depuis hier."
    ],
    "style": "s3_texte",
-   "top": 483,
+   "top": 461,
    "lignes_de_base": [
     540,
-    612,
-    684
+    638,
+    736
    ],
    "largeurs": [
     {
-     "x0": 144,
-     "x1": 639.406,
-     "encre_x0": 144,
-     "encre_x1": 633.375,
-     "largeur": 495.406
+     "x0": 1000,
+     "x1": 1681.172,
+     "encre_x0": 1001,
+     "encre_x1": 1672.891,
+     "largeur": 681.172
     },
     {
-     "x0": 144,
-     "x1": 518.688,
-     "encre_x0": 144,
-     "encre_x1": 519.359,
-     "largeur": 374.688
+     "x0": 1000,
+     "x1": 1515.203,
+     "encre_x0": 1001,
+     "encre_x1": 1516.612,
+     "largeur": 515.203
     },
     {
-     "x0": 144,
-     "x1": 412.25,
-     "encre_x0": 144,
-     "encre_x1": 406.226,
-     "largeur": 268.25
+     "x0": 1000,
+     "x1": 1368.828,
+     "encre_x0": 1001,
+     "encre_x1": 1360.547,
+     "largeur": 368.828
     }
    ],
    "mots": [
@@ -440,13 +440,13 @@
      "local": 0.166667,
      "revele": 10.533333,
      "fin_voix": 10.915,
-     "x0": 144,
-     "x1": 376.328,
-     "encre_x0": 144,
-     "encre_x1": 370.304,
+     "x0": 1000,
+     "x1": 1319.453,
+     "encre_x0": 1001,
+     "encre_x1": 1311.168,
      "ligne_de_base": 540,
-     "encre_haut": 48,
-     "encre_bas": 10
+     "encre_haut": 66,
+     "encre_bas": 14
     },
     {
      "texte": "euh,",
@@ -457,13 +457,13 @@
      "local": 0.5,
      "revele": 10.866667,
      "fin_voix": 11.395,
-     "x0": 387.219,
-     "x1": 486.484,
-     "encre_x0": 387.219,
-     "encre_x1": 480.467,
+     "x0": 1334.422,
+     "x1": 1470.922,
+     "encre_x0": 1335.422,
+     "encre_x1": 1462.638,
      "ligne_de_base": 540,
-     "encre_haut": 48,
-     "encre_bas": 10
+     "encre_haut": 66,
+     "encre_bas": 14
     },
     {
      "texte": "Moka,",
@@ -474,13 +474,13 @@
      "local": 1,
      "revele": 11.366667,
      "fin_voix": 11.95,
-     "x0": 497.375,
-     "x1": 639.406,
-     "encre_x0": 494.375,
-     "encre_x1": 633.375,
+     "x0": 1485.891,
+     "x1": 1681.172,
+     "encre_x0": 1481.891,
+     "encre_x1": 1672.891,
      "ligne_de_base": 540,
-     "encre_haut": 48,
-     "encre_bas": 10
+     "encre_haut": 66,
+     "encre_bas": 14
     },
     {
      "texte": "euh,",
@@ -491,13 +491,13 @@
      "local": 2.133333,
      "revele": 12.5,
      "fin_voix": 12.73,
-     "x0": 144,
-     "x1": 243.266,
-     "encre_x0": 144,
-     "encre_x1": 237.248,
-     "ligne_de_base": 612,
-     "encre_haut": 48,
-     "encre_bas": 10
+     "x0": 1000,
+     "x1": 1136.5,
+     "encre_x0": 1001,
+     "encre_x1": 1128.216,
+     "ligne_de_base": 638,
+     "encre_haut": 66,
+     "encre_bas": 14
     },
     {
      "texte": "mange",
@@ -508,13 +508,13 @@
      "local": 2.333333,
      "revele": 12.7,
      "fin_voix": 12.96,
-     "x0": 254.156,
-     "x1": 411.797,
-     "encre_x0": 254.156,
-     "encre_x1": 412.516,
-     "ligne_de_base": 612,
-     "encre_haut": 39,
-     "encre_bas": 14
+     "x0": 1151.469,
+     "x1": 1368.219,
+     "encre_x0": 1152.469,
+     "encre_x1": 1369.589,
+     "ligne_de_base": 638,
+     "encre_haut": 53,
+     "encre_bas": 20
     },
     {
      "texte": "plus",
@@ -525,13 +525,13 @@
      "local": 2.666667,
      "revele": 13.033333,
      "fin_voix": 13.272,
-     "x0": 422.688,
-     "x1": 518.688,
-     "encre_x0": 416.688,
-     "encre_x1": 519.359,
-     "ligne_de_base": 612,
-     "encre_haut": 48,
-     "encre_bas": 14
+     "x0": 1383.188,
+     "x1": 1515.203,
+     "encre_x0": 1375.188,
+     "encre_x1": 1516.612,
+     "ligne_de_base": 638,
+     "encre_haut": 66,
+     "encre_bas": 19
     },
     {
      "texte": "depuis",
@@ -542,13 +542,13 @@
      "local": 2.866667,
      "revele": 13.233333,
      "fin_voix": 13.72,
-     "x0": 144,
-     "x1": 295.688,
-     "encre_x0": 144,
-     "encre_x1": 296.352,
-     "ligne_de_base": 684,
-     "encre_haut": 48,
-     "encre_bas": 14
+     "x0": 1000,
+     "x1": 1208.562,
+     "encre_x0": 1001,
+     "encre_x1": 1209.984,
+     "ligne_de_base": 736,
+     "encre_haut": 66,
+     "encre_bas": 19
     },
     {
      "texte": "hier.",
@@ -559,12 +559,12 @@
      "local": 3.333333,
      "revele": 13.7,
      "fin_voix": 13.9,
-     "x0": 306.578,
-     "x1": 412.25,
-     "encre_x0": 306.578,
-     "encre_x1": 406.226,
-     "ligne_de_base": 684,
-     "encre_haut": 48,
+     "x0": 1223.531,
+     "x1": 1368.828,
+     "encre_x0": 1223.531,
+     "encre_x1": 1360.547,
+     "ligne_de_base": 736,
+     "encre_haut": 66,
      "encre_bas": 1
     }
    ],
@@ -579,25 +579,25 @@
     "des disponibilités ?"
    ],
    "style": "s3_texte",
-   "top": 483,
+   "top": 461,
    "lignes_de_base": [
     540,
-    612
+    638
    ],
    "largeurs": [
     {
-     "x0": 144,
-     "x1": 573.734,
-     "encre_x0": 141,
-     "encre_x1": 575.085,
-     "largeur": 429.734
+     "x0": 1000,
+     "x1": 1590.875,
+     "encre_x0": 996,
+     "encre_x1": 1592.983,
+     "largeur": 590.875
     },
     {
-     "x0": 144,
-     "x1": 573.594,
-     "encre_x0": 144,
-     "encre_x1": 575.672,
-     "largeur": 429.594
+     "x0": 1000,
+     "x1": 1590.688,
+     "encre_x0": 1001,
+     "encre_x1": 1594.172,
+     "largeur": 590.688
     }
    ],
    "mots": [
@@ -610,13 +610,13 @@
      "local": 4.966667,
      "revele": 15.333333,
      "fin_voix": 15.752,
-     "x0": 144,
-     "x1": 344.391,
-     "encre_x0": 141,
-     "encre_x1": 338.368,
+     "x0": 1000,
+     "x1": 1275.531,
+     "encre_x0": 996,
+     "encre_x1": 1267.256,
      "ligne_de_base": 540,
-     "encre_haut": 47,
-     "encre_bas": 10
+     "encre_haut": 64,
+     "encre_bas": 14
     },
     {
      "texte": "vous",
@@ -627,12 +627,12 @@
      "local": 5.366667,
      "revele": 15.733333,
      "fin_voix": 15.838,
-     "x0": 355.281,
-     "x1": 459.219,
-     "encre_x0": 356.281,
-     "encre_x1": 459.889,
+     "x0": 1290.5,
+     "x1": 1433.422,
+     "encre_x0": 1291.5,
+     "encre_x1": 1434.836,
      "ligne_de_base": 540,
-     "encre_haut": 34,
+     "encre_haut": 46,
      "encre_bas": 1
     },
     {
@@ -644,12 +644,12 @@
      "local": 5.433333,
      "revele": 15.8,
      "fin_voix": 16.058,
-     "x0": 470.109,
-     "x1": 573.734,
-     "encre_x0": 470.109,
-     "encre_x1": 575.085,
+     "x0": 1448.391,
+     "x1": 1590.875,
+     "encre_x0": 1449.391,
+     "encre_x1": 1592.983,
      "ligne_de_base": 540,
-     "encre_haut": 34,
+     "encre_haut": 46,
      "encre_bas": 1
     },
     {
@@ -661,12 +661,12 @@
      "local": 5.666667,
      "revele": 16.033333,
      "fin_voix": 16.188,
-     "x0": 144,
-     "x1": 215.938,
-     "encre_x0": 144,
-     "encre_x1": 216.608,
-     "ligne_de_base": 612,
-     "encre_haut": 48,
+     "x0": 1000,
+     "x1": 1098.922,
+     "encre_x0": 1001,
+     "encre_x1": 1100.336,
+     "ligne_de_base": 638,
+     "encre_haut": 66,
      "encre_bas": 1
     },
     {
@@ -678,13 +678,13 @@
      "local": 5.8,
      "revele": 16.166667,
      "fin_voix": 16.94,
-     "x0": 226.828,
-     "x1": 573.594,
-     "encre_x0": 226.828,
-     "encre_x1": 575.672,
-     "ligne_de_base": 612,
-     "encre_haut": 49,
-     "encre_bas": 14
+     "x0": 1113.891,
+     "x1": 1590.688,
+     "encre_x0": 1114.891,
+     "encre_x1": 1594.172,
+     "ligne_de_base": 638,
+     "encre_haut": 67,
+     "encre_bas": 19
     }
    ],
    "cle": "s3-ecoute#1"
@@ -697,17 +697,17 @@
     "Laissez-moi voir."
    ],
    "style": "haut_agente",
-   "top": 473,
+   "top": 462,
    "lignes_de_base": [
     540
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 693.734,
-     "encre_x0": 150,
-     "encre_x1": 691.255,
-     "largeur": 549.734
+     "x1": 785.359,
+     "encre_x0": 151,
+     "encre_x1": 782.475,
+     "largeur": 641.359
     }
    ],
    "mots": [
@@ -721,12 +721,12 @@
      "revele": 17.566667,
      "fin_voix": 18.005,
      "x0": 144,
-     "x1": 543.031,
-     "encre_x0": 150,
-     "encre_x1": 537.456,
+     "x1": 609.531,
+     "encre_x0": 151,
+     "encre_x1": 603.033,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "voir.",
@@ -737,13 +737,13 @@
      "local": 0.7,
      "revele": 17.966667,
      "fin_voix": 18.37,
-     "x0": 561.031,
-     "x1": 693.734,
-     "encre_x0": 562.031,
-     "encre_x1": 691.255,
+     "x0": 630.547,
+     "x1": 785.359,
+     "encre_x0": 631.547,
+     "encre_x1": 782.475,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "encre_haut": 60,
+     "encre_bas": 2
     }
    ],
    "cle": "s4-agenda#0"
@@ -758,33 +758,33 @@
     "ou onze heures."
    ],
    "style": "haut_agente",
-   "top": 473,
+   "top": 462,
    "lignes_de_base": [
     540,
-    624,
-    708
+    638,
+    736
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 893.984,
-     "encre_x0": 148,
-     "encre_x1": 891.69,
-     "largeur": 749.984
-    },
-    {
-     "x0": 144,
-     "x1": 905.938,
+     "x1": 1019.031,
      "encre_x0": 149,
-     "encre_x1": 903.495,
-     "largeur": 761.938
+     "encre_x1": 1016.183,
+     "largeur": 875.031
     },
     {
      "x0": 144,
-     "x1": 657.812,
+     "x1": 1032.984,
+     "encre_x0": 150,
+     "encre_x1": 1029.297,
+     "largeur": 888.984
+    },
+    {
+     "x0": 144,
+     "x1": 743.484,
      "encre_x0": 147,
-     "encre_x1": 655.326,
-     "largeur": 513.812
+     "encre_x1": 740.586,
+     "largeur": 599.484
     }
    ],
    "mots": [
@@ -798,11 +798,11 @@
      "revele": 19.766667,
      "fin_voix": 19.83,
      "x0": 144,
-     "x1": 226.953,
-     "encre_x0": 148,
-     "encre_x1": 224.552,
+     "x1": 240.781,
+     "encre_x0": 149,
+     "encre_x1": 237.644,
      "ligne_de_base": 540,
-     "encre_haut": 52,
+     "encre_haut": 60,
      "encre_bas": 2
     },
     {
@@ -814,13 +814,13 @@
      "local": 2.533333,
      "revele": 19.8,
      "fin_voix": 19.925,
-     "x0": 244.953,
-     "x1": 409.188,
-     "encre_x0": 249.953,
-     "encre_x1": 406.065,
+     "x0": 261.797,
+     "x1": 453.406,
+     "encre_x0": 267.797,
+     "encre_x1": 450.261,
      "ligne_de_base": 540,
-     "encre_haut": 40,
-     "encre_bas": 11
+     "encre_haut": 46,
+     "encre_bas": 13
     },
     {
      "texte": "vous",
@@ -831,13 +831,13 @@
      "local": 2.633333,
      "revele": 19.9,
      "fin_voix": 20.02,
-     "x0": 427.188,
-     "x1": 582.578,
-     "encre_x0": 428.188,
-     "encre_x1": 580.124,
+     "x0": 474.422,
+     "x1": 655.703,
+     "encre_x0": 475.422,
+     "encre_x1": 652.014,
      "ligne_de_base": 540,
-     "encre_haut": 40,
-     "encre_bas": 1
+     "encre_haut": 46,
+     "encre_bas": 2
     },
     {
      "texte": "proposer",
@@ -848,13 +848,13 @@
      "local": 2.733333,
      "revele": 20,
      "fin_voix": 20.555,
-     "x0": 600.578,
-     "x1": 893.984,
-     "encre_x0": 605.578,
-     "encre_x1": 891.69,
+     "x0": 676.719,
+     "x1": 1019.031,
+     "encre_x0": 682.719,
+     "encre_x1": 1016.183,
      "ligne_de_base": 540,
-     "encre_haut": 40,
-     "encre_bas": 11
+     "encre_haut": 46,
+     "encre_bas": 13
     },
     {
      "texte": "neuf",
@@ -866,12 +866,12 @@
      "revele": 20.533333,
      "fin_voix": 20.785,
      "x0": 144,
-     "x1": 292.828,
-     "encre_x0": 149,
-     "encre_x1": 290.384,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x1": 317.641,
+     "encre_x0": 150,
+     "encre_x1": 314.448,
+     "ligne_de_base": 638,
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "heures,",
@@ -882,13 +882,13 @@
      "local": 3.5,
      "revele": 20.766667,
      "fin_voix": 21.27,
-     "x0": 310.828,
-     "x1": 548.875,
-     "encre_x0": 315.828,
-     "encre_x1": 546.388,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 12
+     "x0": 338.656,
+     "x1": 616.375,
+     "encre_x0": 344.656,
+     "encre_x1": 613.477,
+     "ligne_de_base": 638,
+     "encre_haut": 60,
+     "encre_bas": 14
     },
     {
      "texte": "dix",
@@ -899,13 +899,13 @@
      "local": 4.133333,
      "revele": 21.4,
      "fin_voix": 21.57,
-     "x0": 566.875,
-     "x1": 664.375,
-     "encre_x0": 569.875,
-     "encre_x1": 661.243,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x0": 637.391,
+     "x1": 751.141,
+     "encre_x0": 640.391,
+     "encre_x1": 747.987,
+     "ligne_de_base": 638,
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "heures",
@@ -916,13 +916,13 @@
      "local": 4.266667,
      "revele": 21.533333,
      "fin_voix": 22.02,
-     "x0": 682.375,
-     "x1": 905.938,
-     "encre_x0": 687.375,
-     "encre_x1": 903.495,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x0": 772.156,
+     "x1": 1032.984,
+     "encre_x0": 778.156,
+     "encre_x1": 1029.297,
+     "ligne_de_base": 638,
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "ou",
@@ -934,12 +934,12 @@
      "revele": 22.1,
      "fin_voix": 22.2,
      "x0": 144,
-     "x1": 225.938,
+     "x1": 239.594,
      "encre_x0": 147,
-     "encre_x1": 220.536,
-     "ligne_de_base": 708,
-     "encre_haut": 40,
-     "encre_bas": 1
+     "encre_x1": 233.292,
+     "ligne_de_base": 736,
+     "encre_haut": 46,
+     "encre_bas": 2
     },
     {
      "texte": "onze",
@@ -950,13 +950,13 @@
      "local": 4.9,
      "revele": 22.166667,
      "fin_voix": 22.37,
-     "x0": 243.938,
-     "x1": 401.766,
-     "encre_x0": 246.938,
-     "encre_x1": 399.37,
-     "ligne_de_base": 708,
-     "encre_haut": 40,
-     "encre_bas": 1
+     "x0": 260.609,
+     "x1": 444.75,
+     "encre_x0": 263.609,
+     "encre_x1": 441.614,
+     "ligne_de_base": 736,
+     "encre_haut": 46,
+     "encre_bas": 2
     },
     {
      "texte": "heures.",
@@ -967,13 +967,13 @@
      "local": 5.066667,
      "revele": 22.333333,
      "fin_voix": 22.69,
-     "x0": 419.766,
-     "x1": 657.812,
-     "encre_x0": 424.766,
-     "encre_x1": 655.326,
-     "ligne_de_base": 708,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x0": 465.766,
+     "x1": 743.484,
+     "encre_x0": 471.766,
+     "encre_x1": 740.586,
+     "ligne_de_base": 736,
+     "encre_haut": 60,
+     "encre_bas": 2
     }
    ],
    "cle": "s4-agenda#1"
@@ -987,25 +987,25 @@
     "c’est parfait."
    ],
    "style": "haut_appelant",
-   "top": 503,
+   "top": 493,
    "lignes_de_base": [
     560,
-    632
+    644
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 463.906,
-     "encre_x0": 139,
-     "encre_x1": 457.888,
-     "largeur": 319.906
+     "x1": 513.906,
+     "encre_x0": 138,
+     "encre_x1": 506.693,
+     "largeur": 369.906
     },
     {
      "x0": 144,
-     "x1": 423,
-     "encre_x0": 144,
-     "encre_x1": 416.981,
-     "largeur": 279
+     "x1": 466.594,
+     "encre_x0": 145,
+     "encre_x1": 459.379,
+     "largeur": 322.594
     }
    ],
    "mots": [
@@ -1019,11 +1019,11 @@
      "revele": 23.933333,
      "fin_voix": 24.085,
      "x0": 144,
-     "x1": 173.25,
-     "encre_x0": 139,
-     "encre_x1": 174,
+     "x1": 177.828,
+     "encre_x0": 138,
+     "encre_x1": 178,
      "ligne_de_base": 560,
-     "encre_haut": 61,
+     "encre_haut": 71,
      "encre_bas": 0
     },
     {
@@ -1035,12 +1035,12 @@
      "local": 6.8,
      "revele": 24.066667,
      "fin_voix": 24.26,
-     "x0": 184.141,
-     "x1": 289.75,
-     "encre_x0": 184.141,
-     "encre_x1": 298.268,
+     "x0": 190.422,
+     "x1": 312.531,
+     "encre_x0": 191.422,
+     "encre_x1": 322.32,
      "ligne_de_base": 560,
-     "encre_haut": 48,
+     "encre_haut": 56,
      "encre_bas": 1
     },
     {
@@ -1052,13 +1052,13 @@
      "local": 6.966667,
      "revele": 24.233333,
      "fin_voix": 24.405,
-     "x0": 300.641,
-     "x1": 463.906,
-     "encre_x0": 300.641,
-     "encre_x1": 457.888,
+     "x0": 325.125,
+     "x1": 513.906,
+     "encre_x0": 325.125,
+     "encre_x1": 506.693,
      "ligne_de_base": 560,
-     "encre_haut": 48,
-     "encre_bas": 10
+     "encre_haut": 55,
+     "encre_bas": 12
     },
     {
      "texte": "c’est",
@@ -1070,11 +1070,11 @@
      "revele": 24.366667,
      "fin_voix": 24.565,
      "x0": 144,
-     "x1": 233.547,
-     "encre_x0": 144,
-     "encre_x1": 235.128,
-     "ligne_de_base": 632,
-     "encre_haut": 47,
+     "x1": 247.531,
+     "encre_x0": 145,
+     "encre_x1": 249.398,
+     "ligne_de_base": 644,
+     "encre_haut": 55,
      "encre_bas": 1
     },
     {
@@ -1086,13 +1086,13 @@
      "local": 7.266667,
      "revele": 24.533333,
      "fin_voix": 24.95,
-     "x0": 244.438,
-     "x1": 423,
-     "encre_x0": 238.438,
-     "encre_x1": 416.981,
-     "ligne_de_base": 632,
-     "encre_haut": 48,
-     "encre_bas": 14
+     "x0": 260.125,
+     "x1": 466.594,
+     "encre_x0": 253.125,
+     "encre_x1": 459.379,
+     "ligne_de_base": 644,
+     "encre_haut": 56,
+     "encre_bas": 16
     }
    ],
    "cle": "s4-agenda#2"
@@ -1106,25 +1106,25 @@
     "pour Florian,"
    ],
    "style": "haut_agente",
-   "top": 473,
+   "top": 462,
    "lignes_de_base": [
     540,
-    624
+    638
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 888.75,
-     "encre_x0": 150,
-     "encre_x1": 888.069,
-     "largeur": 744.75
+     "x1": 1012.906,
+     "encre_x0": 151,
+     "encre_x1": 1011.622,
+     "largeur": 868.906
     },
     {
      "x0": 144,
-     "x1": 551.406,
-     "encre_x0": 149,
-     "encre_x1": 548.919,
-     "largeur": 407.406
+     "x1": 619.312,
+     "encre_x0": 150,
+     "encre_x1": 616.414,
+     "largeur": 475.312
     }
    ],
    "mots": [
@@ -1138,12 +1138,12 @@
      "revele": 26.2,
      "fin_voix": 26.59,
      "x0": 144,
-     "x1": 376.141,
-     "encre_x0": 150,
-     "encre_x1": 373.656,
+     "x1": 414.828,
+     "encre_x0": 151,
+     "encre_x1": 411.932,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 12
+     "encre_haut": 60,
+     "encre_bas": 14
     },
     {
      "texte": "je",
@@ -1154,13 +1154,13 @@
      "local": 1.4,
      "revele": 26.566667,
      "fin_voix": 26.695,
-     "x0": 394.141,
-     "x1": 452.547,
-     "encre_x0": 393.141,
-     "encre_x1": 450.141,
+     "x0": 435.844,
+     "x1": 503.969,
+     "encre_x0": 434.844,
+     "encre_x1": 500.844,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 11
+     "encre_haut": 60,
+     "encre_bas": 13
     },
     {
      "texte": "vous",
@@ -1171,13 +1171,13 @@
      "local": 1.5,
      "revele": 26.666667,
      "fin_voix": 26.785,
-     "x0": 470.547,
-     "x1": 625.938,
-     "encre_x0": 471.547,
-     "encre_x1": 623.483,
+     "x0": 524.984,
+     "x1": 706.266,
+     "encre_x0": 525.984,
+     "encre_x1": 702.577,
      "ligne_de_base": 540,
-     "encre_haut": 40,
-     "encre_bas": 1
+     "encre_haut": 46,
+     "encre_bas": 2
     },
     {
      "texte": "note",
@@ -1188,13 +1188,13 @@
      "local": 1.6,
      "revele": 26.766667,
      "fin_voix": 26.955,
-     "x0": 643.938,
-     "x1": 791.469,
-     "encre_x0": 648.938,
-     "encre_x1": 789.074,
+     "x0": 727.281,
+     "x1": 899.406,
+     "encre_x0": 733.281,
+     "encre_x1": 896.273,
      "ligne_de_base": 540,
-     "encre_haut": 48,
-     "encre_bas": 1
+     "encre_haut": 55,
+     "encre_bas": 2
     },
     {
      "texte": "ça",
@@ -1205,13 +1205,13 @@
      "local": 1.766667,
      "revele": 26.933333,
      "fin_voix": 27.115,
-     "x0": 809.469,
-     "x1": 888.75,
-     "encre_x0": 812.469,
-     "encre_x1": 888.069,
+     "x0": 920.422,
+     "x1": 1012.906,
+     "encre_x0": 923.422,
+     "encre_x1": 1011.622,
      "ligne_de_base": 540,
-     "encre_haut": 40,
-     "encre_bas": 16
+     "encre_haut": 46,
+     "encre_bas": 19
     },
     {
      "texte": "pour",
@@ -1223,12 +1223,12 @@
      "revele": 27.066667,
      "fin_voix": 27.25,
      "x0": 144,
-     "x1": 295.359,
-     "encre_x0": 149,
-     "encre_x1": 293.056,
-     "ligne_de_base": 624,
-     "encre_haut": 40,
-     "encre_bas": 11
+     "x1": 320.578,
+     "encre_x0": 150,
+     "encre_x1": 317.732,
+     "ligne_de_base": 638,
+     "encre_haut": 46,
+     "encre_bas": 13
     },
     {
      "texte": "Florian,",
@@ -1239,13 +1239,13 @@
      "local": 2.066667,
      "revele": 27.233333,
      "fin_voix": 27.64,
-     "x0": 313.359,
-     "x1": 551.406,
-     "encre_x0": 319.359,
-     "encre_x1": 548.919,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 12
+     "x0": 341.594,
+     "x1": 619.312,
+     "encre_x0": 348.594,
+     "encre_x1": 616.414,
+     "ligne_de_base": 638,
+     "encre_haut": 60,
+     "encre_bas": 14
     }
    ],
    "cle": "s5-rendez-vous#0"
@@ -1259,25 +1259,25 @@
     "vétérinaire,"
    ],
    "style": "haut_agente",
-   "top": 473,
+   "top": 462,
    "lignes_de_base": [
     540,
-    624
+    638
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 857.844,
-     "encre_x0": 149,
-     "encre_x1": 852.997,
-     "largeur": 713.844
+     "x1": 976.844,
+     "encre_x0": 150,
+     "encre_x1": 971.028,
+     "largeur": 832.844
     },
     {
      "x0": 144,
-     "x1": 506.312,
+     "x1": 566.703,
      "encre_x0": 145,
-     "encre_x1": 503.832,
-     "largeur": 362.312
+     "encre_x1": 563.805,
+     "largeur": 422.703
     }
    ],
    "mots": [
@@ -1291,12 +1291,12 @@
      "revele": 27.8,
      "fin_voix": 27.94,
      "x0": 144,
-     "x1": 295.359,
-     "encre_x0": 149,
-     "encre_x1": 293.056,
+     "x1": 320.578,
+     "encre_x0": 150,
+     "encre_x1": 317.732,
      "ligne_de_base": 540,
-     "encre_haut": 40,
-     "encre_bas": 11
+     "encre_haut": 46,
+     "encre_bas": 13
     },
     {
      "texte": "une",
@@ -1307,13 +1307,13 @@
      "local": 2.733333,
      "revele": 27.9,
      "fin_voix": 28.038,
-     "x0": 313.359,
-     "x1": 436.125,
-     "encre_x0": 318.359,
-     "encre_x1": 433.727,
+     "x0": 341.594,
+     "x1": 484.828,
+     "encre_x0": 347.594,
+     "encre_x1": 481.69,
      "ligne_de_base": 540,
-     "encre_haut": 40,
-     "encre_bas": 1
+     "encre_haut": 46,
+     "encre_bas": 2
     },
     {
      "texte": "consultation",
@@ -1324,13 +1324,13 @@
      "local": 2.833333,
      "revele": 28,
      "fin_voix": 28.695,
-     "x0": 454.125,
-     "x1": 857.844,
-     "encre_x0": 457.125,
-     "encre_x1": 852.997,
+     "x0": 505.844,
+     "x1": 976.844,
+     "encre_x0": 508.844,
+     "encre_x1": 971.028,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "vétérinaire,",
@@ -1342,12 +1342,12 @@
      "revele": 28.666667,
      "fin_voix": 29.3,
      "x0": 144,
-     "x1": 506.312,
+     "x1": 566.703,
      "encre_x0": 145,
-     "encre_x1": 503.832,
-     "ligne_de_base": 624,
-     "encre_haut": 53,
-     "encre_bas": 12
+     "encre_x1": 563.805,
+     "ligne_de_base": 638,
+     "encre_haut": 61,
+     "encre_bas": 14
     }
    ],
    "cle": "s5-rendez-vous#1"
@@ -1357,29 +1357,38 @@
    "extrait": "A4",
    "depuis": 11,
    "lignes": [
-    "le samedi dix-neuf",
-    "septembre à neuf heures."
+    "le samedi",
+    "dix-neuf septembre",
+    "à neuf heures."
    ],
    "style": "haut_agente",
-   "top": 473,
+   "top": 462,
    "lignes_de_base": [
     540,
-    624
+    638,
+    736
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 748.688,
-     "encre_x0": 149,
-     "encre_x1": 746.234,
-     "largeur": 604.688
+     "x1": 511.797,
+     "encre_x0": 150,
+     "encre_x1": 505.286,
+     "largeur": 367.797
     },
     {
      "x0": 144,
-     "x1": 978.016,
+     "x1": 894.062,
      "encre_x0": 147,
-     "encre_x1": 975.529,
-     "largeur": 834.016
+     "encre_x1": 890.936,
+     "largeur": 750.062
+    },
+    {
+     "x0": 144,
+     "x1": 683.688,
+     "encre_x0": 147,
+     "encre_x1": 680.789,
+     "largeur": 539.688
     }
    ],
    "mots": [
@@ -1393,12 +1402,12 @@
      "revele": 29.333333,
      "fin_voix": 29.45,
      "x0": 144,
-     "x1": 203.188,
-     "encre_x0": 149,
-     "encre_x1": 200.792,
+     "x1": 213.062,
+     "encre_x0": 150,
+     "encre_x1": 209.924,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "samedi",
@@ -1409,30 +1418,30 @@
      "local": 4.266667,
      "revele": 29.433333,
      "fin_voix": 29.823,
-     "x0": 221.188,
-     "x1": 459.234,
-     "encre_x0": 224.188,
-     "encre_x1": 453.652,
+     "x0": 234.078,
+     "x1": 511.797,
+     "encre_x0": 237.078,
+     "encre_x1": 505.286,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "dix-neuf",
-     "ligne": 0,
+     "ligne": 1,
      "rang": 13,
      "t": 29.823,
      "image": 895,
      "local": 4.633333,
      "revele": 29.8,
      "fin_voix": 29.99,
-     "x0": 477.234,
-     "x1": 748.688,
-     "encre_x0": 480.234,
-     "encre_x1": 746.234,
-     "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x0": 144,
+     "x1": 460.688,
+     "encre_x0": 147,
+     "encre_x1": 457.5,
+     "ligne_de_base": 638,
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "septembre",
@@ -1443,64 +1452,64 @@
      "local": 4.9,
      "revele": 30.066667,
      "fin_voix": 30.468,
-     "x0": 144,
-     "x1": 497.453,
-     "encre_x0": 147,
-     "encre_x1": 495.056,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 11
+     "x0": 481.703,
+     "x1": 894.062,
+     "encre_x0": 484.703,
+     "encre_x1": 890.936,
+     "ligne_de_base": 638,
+     "encre_haut": 60,
+     "encre_bas": 13
     },
     {
      "texte": "à",
-     "ligne": 1,
+     "ligne": 2,
      "rang": 15,
      "t": 30.468,
      "image": 914,
      "local": 5.266667,
      "revele": 30.433333,
      "fin_voix": 30.555,
-     "x0": 515.453,
-     "x1": 555.141,
-     "encre_x0": 518.453,
-     "encre_x1": 554.453,
-     "ligne_de_base": 624,
-     "encre_haut": 53,
-     "encre_bas": 1
+     "x0": 144,
+     "x1": 190.297,
+     "encre_x0": 147,
+     "encre_x1": 189,
+     "ligne_de_base": 736,
+     "encre_haut": 61,
+     "encre_bas": 2
     },
     {
      "texte": "neuf",
-     "ligne": 1,
+     "ligne": 2,
      "rang": 16,
      "t": 30.555,
      "image": 917,
      "local": 5.366667,
      "revele": 30.533333,
      "fin_voix": 30.675,
-     "x0": 573.141,
-     "x1": 721.969,
-     "encre_x0": 578.141,
-     "encre_x1": 719.525,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x0": 211.312,
+     "x1": 384.953,
+     "encre_x0": 217.312,
+     "encre_x1": 381.761,
+     "ligne_de_base": 736,
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "heures.",
-     "ligne": 1,
+     "ligne": 2,
      "rang": 17,
      "t": 30.675,
      "image": 920,
      "local": 5.466667,
      "revele": 30.633333,
      "fin_voix": 30.9,
-     "x0": 739.969,
-     "x1": 978.016,
-     "encre_x0": 744.969,
-     "encre_x1": 975.529,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x0": 405.969,
+     "x1": 683.688,
+     "encre_x0": 411.969,
+     "encre_x1": 680.789,
+     "ligne_de_base": 736,
+     "encre_haut": 60,
+     "encre_bas": 2
     }
    ],
    "cle": "s5-rendez-vous#2"
@@ -1514,25 +1523,25 @@
     "de confirmation."
    ],
    "style": "haut_agente",
-   "top": 473,
+   "top": 462,
    "lignes_de_base": [
     540,
-    624
+    638
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 880.094,
+     "x1": 1002.812,
      "encre_x0": 145,
-     "encre_x1": 877.002,
-     "largeur": 736.094
+     "encre_x1": 999.041,
+     "largeur": 858.812
     },
     {
      "x0": 144,
-     "x1": 670.266,
+     "x1": 757.984,
      "encre_x0": 147,
-     "encre_x1": 667.78,
-     "largeur": 526.266
+     "encre_x1": 755.09,
+     "largeur": 613.984
     }
    ],
    "mots": [
@@ -1546,12 +1555,12 @@
      "revele": 31.366667,
      "fin_voix": 31.492,
      "x0": 144,
-     "x1": 307.812,
+     "x1": 335.109,
      "encre_x0": 145,
-     "encre_x1": 305.36,
+     "encre_x1": 331.42,
      "ligne_de_base": 540,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "recevrez",
@@ -1562,13 +1571,13 @@
      "local": 0.15,
      "revele": 31.466667,
      "fin_voix": 31.92,
-     "x0": 325.812,
-     "x1": 605.688,
-     "encre_x0": 330.812,
-     "encre_x1": 602.013,
+     "x0": 356.125,
+     "x1": 682.641,
+     "encre_x0": 362.125,
+     "encre_x1": 678.525,
      "ligne_de_base": 540,
-     "encre_haut": 40,
-     "encre_bas": 1
+     "encre_haut": 46,
+     "encre_bas": 2
     },
     {
      "texte": "un",
@@ -1579,13 +1588,13 @@
      "local": 0.583333,
      "revele": 31.9,
      "fin_voix": 32.068,
-     "x0": 623.688,
-     "x1": 706.922,
-     "encre_x0": 628.688,
-     "encre_x1": 702.088,
+     "x0": 703.656,
+     "x1": 800.766,
+     "encre_x0": 709.656,
+     "encre_x1": 794.956,
      "ligne_de_base": 540,
-     "encre_haut": 40,
-     "encre_bas": 1
+     "encre_haut": 46,
+     "encre_bas": 2
     },
     {
      "texte": "SMS",
@@ -1596,12 +1605,12 @@
      "local": 0.716667,
      "revele": 32.033333,
      "fin_voix": 32.315,
-     "x0": 724.922,
-     "x1": 880.094,
-     "encre_x0": 727.922,
-     "encre_x1": 877.002,
+     "x0": 821.781,
+     "x1": 1002.812,
+     "encre_x0": 825.781,
+     "encre_x1": 999.041,
      "ligne_de_base": 540,
-     "encre_haut": 53,
+     "encre_haut": 61,
      "encre_bas": 2
     },
     {
@@ -1614,12 +1623,12 @@
      "revele": 32.266667,
      "fin_voix": 32.435,
      "x0": 144,
-     "x1": 226.516,
+     "x1": 240.266,
      "encre_x0": 147,
-     "encre_x1": 224.12,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "encre_x1": 237.14,
+     "ligne_de_base": 638,
+     "encre_haut": 60,
+     "encre_bas": 2
     },
     {
      "texte": "confirmation.",
@@ -1630,13 +1639,13 @@
      "local": 1.083333,
      "revele": 32.4,
      "fin_voix": 33.05,
-     "x0": 244.516,
-     "x1": 670.266,
-     "encre_x0": 247.516,
-     "encre_x1": 667.78,
-     "ligne_de_base": 624,
-     "encre_haut": 52,
-     "encre_bas": 1
+     "x0": 261.281,
+     "x1": 757.984,
+     "encre_x0": 264.281,
+     "encre_x1": 755.09,
+     "ligne_de_base": 638,
+     "encre_haut": 60,
+     "encre_bas": 2
     }
    ],
    "cle": "s6-sms#0",
@@ -1651,29 +1660,38 @@
    "extrait": "C4",
    "depuis": 0,
    "lignes": [
-    "Super, merci beaucoup.",
+    "Super, merci",
+    "beaucoup.",
     "Au revoir."
    ],
    "style": "haut_appelant",
-   "top": 503,
+   "top": 493,
    "lignes_de_base": [
     560,
-    632
+    644,
+    728
    ],
    "largeurs": [
     {
      "x0": 144,
-     "x1": 679.328,
+     "x1": 478.578,
      "encre_x0": 144,
-     "encre_x1": 673.306,
-     "largeur": 535.328
+     "encre_x1": 478.256,
+     "largeur": 334.578
     },
     {
      "x0": 144,
-     "x1": 365.078,
-     "encre_x0": 139,
-     "encre_x1": 359.055,
-     "largeur": 221.078
+     "x1": 415.812,
+     "encre_x0": 146,
+     "encre_x1": 408.596,
+     "largeur": 271.812
+    },
+    {
+     "x0": 144,
+     "x1": 399.625,
+     "encre_x0": 138,
+     "encre_x1": 392.411,
+     "largeur": 255.625
     }
    ],
    "mots": [
@@ -1687,12 +1705,12 @@
      "revele": 34,
      "fin_voix": 34.325,
      "x0": 144,
-     "x1": 289.219,
+     "x1": 311.906,
      "encre_x0": 144,
-     "encre_x1": 283.2,
+     "encre_x1": 304.7,
      "ligne_de_base": 560,
-     "encre_haut": 47,
-     "encre_bas": 14
+     "encre_haut": 55,
+     "encre_bas": 16
     },
     {
      "texte": "merci",
@@ -1703,34 +1721,34 @@
      "local": 2.983333,
      "revele": 34.3,
      "fin_voix": 34.6,
-     "x0": 300.109,
-     "x1": 433.359,
-     "encre_x0": 300.109,
-     "encre_x1": 432.925,
+     "x0": 324.5,
+     "x1": 478.578,
+     "encre_x0": 325.5,
+     "encre_x1": 478.256,
      "ligne_de_base": 560,
-     "encre_haut": 46,
+     "encre_haut": 53,
      "encre_bas": 1
     },
     {
      "texte": "beaucoup.",
-     "ligne": 0,
+     "ligne": 1,
      "rang": 2,
      "t": 34.6,
      "image": 1038,
      "local": 3.25,
      "revele": 34.566667,
      "fin_voix": 35.08,
-     "x0": 444.25,
-     "x1": 679.328,
-     "encre_x0": 445.25,
-     "encre_x1": 673.306,
-     "ligne_de_base": 560,
-     "encre_haut": 48,
-     "encre_bas": 14
+     "x0": 144,
+     "x1": 415.812,
+     "encre_x0": 146,
+     "encre_x1": 408.596,
+     "ligne_de_base": 644,
+     "encre_haut": 55,
+     "encre_bas": 16
     },
     {
      "texte": "Au",
-     "ligne": 1,
+     "ligne": 2,
      "rang": 3,
      "t": 35.12,
      "image": 1054,
@@ -1738,28 +1756,28 @@
      "revele": 35.1,
      "fin_voix": 35.24,
      "x0": 144,
-     "x1": 204.484,
-     "encre_x0": 139,
-     "encre_x1": 203.968,
-     "ligne_de_base": 632,
-     "encre_haut": 47,
+     "x1": 213.938,
+     "encre_x0": 138,
+     "encre_x1": 213.338,
+     "ligne_de_base": 728,
+     "encre_haut": 55,
      "encre_bas": 1
     },
     {
      "texte": "revoir.",
-     "ligne": 1,
+     "ligne": 2,
      "rang": 4,
      "t": 35.24,
      "image": 1057,
      "local": 3.883333,
      "revele": 35.2,
      "fin_voix": 35.42,
-     "x0": 215.375,
-     "x1": 365.078,
-     "encre_x0": 215.375,
-     "encre_x1": 359.055,
-     "ligne_de_base": 632,
-     "encre_haut": 46,
+     "x0": 226.531,
+     "x1": 399.625,
+     "encre_x0": 227.531,
+     "encre_x1": 392.411,
+     "ligne_de_base": 728,
+     "encre_haut": 53,
      "encre_bas": 1
     }
    ],

@@ -4,7 +4,7 @@ les rééchantillonner, et écrit la géométrie en px FILM.
 
     python3 outils/preparer_agenda.py     écrit assets/captures/agenda-avant.png, agenda-apres.png,
                                           bloc-florian.png et donnees/agenda-geo.json (v2)
-    python3 outils/preparer_agenda.py --format 16x9 --sortie formats/16x9/donnees/agenda-geo.json --sans-images
+    python3 outils/preparer_agenda.py --format 16x9 --sortie formats/16x9/donnees/agenda-geo.json --sans-images [--variante s=n | *=n]
                                           la géométrie d'un autre format (pose et mention : mise-en-page/agenda.json) ;
                                           les recadrages PNG sont communs à tous les formats (--sans-images : non réécrits)
 
@@ -48,8 +48,9 @@ _A = argparse.ArgumentParser()
 _A.add_argument("--format", default="9x16")
 _A.add_argument("--sortie", default=None, help="chemin de agenda-geo.json (défaut : donnees/agenda-geo.json de ce projet)")
 _A.add_argument("--sans-images", action="store_true", help="ne réécrit pas les recadrages PNG (communs aux formats)")
+_A.add_argument("--variante", action="append", default=[], help="<scène>=<nom> (ou *=<nom>, un jeu) : la même que construire.py")
 ARGS = _A.parse_args(sys.argv[1:] if __name__ == "__main__" else [])
-MEP = mise_en_page.charger(ARGS.format)
+MEP = mise_en_page.charger(ARGS.format, dict(v.split("=", 1) for v in ARGS.variante))
 ECH = 4.5                        # px capture = px film par px CSS
 # 9:16 : (70 ; 590) : coin haut gauche de l'image dans le film (entiers : 1 px image = 1 px écran) ;
 # x = 70 (finition 27/09) : la carte respecte la marge latérale de 70 px (règle 5), 62 la débordait de 8 px.
@@ -58,6 +59,9 @@ POSE_X, POSE_Y = MEP["agenda"]["x"], MEP["agenda"]["y"]
 DROITE_VISIBLE = MEP["format"]["largeur"]
 LARGEUR_CADRE, HAUTEUR_CADRE = MEP["format"]["largeur"], MEP["format"]["hauteur"]
 MENTION_GEO = MEP["agenda"]["mention"]
+# RECOMPOSITION (28/09) : le point du film suit le wordmark du format (mise_en_page.echelle_point) ; 9:16 : valeurs telles quelles
+K_POINT = mise_en_page.echelle_point(MEP)
+KP = (lambda v: v) if K_POINT == 1 else (lambda v: v * K_POINT)
 STYLE_MENTION = MEP["texte"]["styles"]["mention"]      # la mention de l'agenda a le style de la mention de s3
 PAPIER_CARTE = np.array([244, 241, 232])   # fond de la carte (rgb), relevé
 ENCRE_ETIQ = np.array([108, 103, 95])      # text-faint des étiquettes, relevé
@@ -221,7 +225,7 @@ def main():
         "x1_visible": DROITE_VISIBLE, "hauteur": round(b_cap[3] - b_cap[1], 2),
         "centre_y": round((fy(b_cap[1]) + fy(b_cap[3])) / 2, 2),
         "texte": "09:00 Florian", "texte_x1": florian["x1"],
-        "x_fin": round(florian["x1"] + 14 + 22, 2),
+        "x_fin": round(florian["x1"] + KP(14) + KP(22), 2),     # 14 px après l'encre + le rayon (× échelle du point du format)
         "florian_encre": florian,
         "florian_dom": {k: fx(fl_dom[k] * ECH) if k[0] == "x" else fy(fl_dom[k] * ECH) for k in ("x0", "y0", "x1", "y1")},
         "style": dict(geo_ap["bloc_style"], corps_px_css=11, corps_px_film=49.5,

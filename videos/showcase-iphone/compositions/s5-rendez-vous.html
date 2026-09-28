@@ -152,7 +152,9 @@
 
   // ── 1. Le bord révélé du bloc : fonction pure du temps film, lue sur le point ──
   const DROITE = IM.x + IM.largeur;                                           // 1637 : bord droit de l'image (hors cadre)
-  const RAYON = POINT.diametre_disque / 2;                                    // 22
+  const D_FILM = D.point.diametre_film || POINT.diametre_disque;               // le disque du film (recomposition du 28/09)
+  const RAYON = D_FILM / 2;                                                   // 22
+  const KP = D_FILM / 44;                       // échelle du disque du format (1 en 9:16) : les écarts du geste, en diamètres de point
   const T0 = EV.ecriture_debut.t, T1 = EV.ecriture_fin.t, SV = EV.suivi_bloc.t;
   exiger(EV.ecriture_debut.image === 762 && EV.ecriture_fin.image === 783 &&
          EV.suivi_bloc.images[0] === 783 && EV.suivi_bloc.images[1] === 789, "instants du déroulé inattendus (762 / 783 / 789)");
@@ -193,7 +195,7 @@
   // Le contrat, relu dans les données (bloc de la vraie capture, point de la racine) :
   exiger(Math.abs(POINT.etat(T0).y_sans - B.centre_y) < 0.01, "le point n'est pas sur la ligne du bloc à ecriture_debut");
   exiger(Math.abs(POINT.etat(T1).x_sans - B.x_fin) < 0.01, "le point n'est pas au bout de l'écriture (x_fin) à ecriture_fin");
-  exiger(Math.abs(B.x_fin - RAYON - B.texte_x1 - 14) < 0.01, "le point ne s'arrête pas 14 px après l'encre de « Florian »");
+  exiger(Math.abs(B.x_fin - RAYON - B.texte_x1 - 14 * KP) < 0.01, "le point ne s'arrête pas 14 px (× échelle du point) après l'encre de « Florian »");
   exiger(Math.abs(POINT.etat(EV.plume_pose.t).x_sans - RAYON - B.x0) < 0.01, "la plume ne se pose pas bord contre bord au début du bloc");
   exiger(POINT.etat(T0).x_sans - RAYON >= B.x0 - EPS, "à l'image 762, le bord arrière du point sort du bloc par la gauche");
   exiger(B.florian_encre.x1 <= bord(T1) - RAYON + EPS, "« Florian » n'est pas entièrement écrit quand la plume s'arrête");
@@ -240,8 +242,8 @@
   })();
   const pages = D.pages.filter(function (p) { return p.scene === sc.id; });
   exiger(pages.length === 3, "3 pages attendues dans DONNEES.pages, " + pages.length + " trouvées");
-  exiger(pages.every(function (p) { return p.extrait === "A4" && p.style === "haut_agente" && p.lignes.length <= 2; }),
-         "pages A4, style haut_agente, deux lignes au plus, attendues");
+  exiger(pages.every(function (p) { return p.extrait === "A4" && p.style === "haut_agente" && p.lignes.length <= 3; }),
+         "pages A4, style haut_agente, trois lignes au plus, attendues (deux en 9:16 ; texte.json « coupes » peut en couper une en trois)");
   // interlignage 84/72 = 1,17 em < 1,3 : les boîtes de police se chevauchent d'une ligne à l'autre (pas l'encre)
   const poses = pages.map(function (p, i) {
     const pose = TEXTE.poser("#s5-p" + (i + 1), p.lignes, { extrait: p.extrait, depuis: p.depuis, chevauchement: true });
@@ -339,11 +341,11 @@
     }
     for (let n = G[1]; n <= EV.depart_gouttiere.image; n++) {
       const e = POINT.etat(r6(n / FPS));
-      exiger(Math.abs(e.x_sans - x9) < 0.01 && Math.abs(e.y_sans - y9) <= 6.01, "le point quitte la gouttière avant l'image " +
+      exiger(Math.abs(e.x_sans - x9) < 0.01 && Math.abs(e.y_sans - y9) <= 6 * KP + 0.01, "le point quitte la gouttière avant l'image " +
              EV.depart_gouttiere.image + " (" + n + ")");
     }
     const eH = POINT.etat(r6(EV.signe_florian.image / FPS));                // image forcée 821 (voyelle 27,355)
-    exiger(Math.abs(eH.x_sans - x9) < 0.01 && Math.abs(eH.y_sans - (y9 + 6)) < 0.01, "le hochement de 6 px n'est pas à l'image 821");
+    exiger(Math.abs(eH.x_sans - x9) < 0.01 && Math.abs(eH.y_sans - (y9 + 6 * KP)) < 0.01, "le hochement de 6 px (× échelle du point) n'est pas à l'image 821");
     exiger(EV.depart_gouttiere.t >= FIN_SOUS_TITRE - EPS, "le point quitte la gouttière avant que le dernier sous-titre soit sorti");
   })();
 

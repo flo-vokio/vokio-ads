@@ -7,6 +7,7 @@
 
   from mise_en_page import charger
   M = charger("16x9", {"s7-signature": "16x9-C"})
+  M = charger("16x9", {"*": "16x9-recompose"})   un JEU : la variante de ce nom dans chaque fichier qui l'a (format.py --variante '*=…')
   M["format"]        formats.json[<format>] + "nom"
   M["texte"]         texte.json[<format>]        (styles des sous-titres dits et de la mention, largeurs, x_max_point)
   M["s1"] M["s3"] M["agenda"] M["s6"] M["s7"]     les fichiers de scène, entrée <format> (variante appliquée par-dessus)
@@ -14,7 +15,7 @@
                      ajouté par une scène, ex. s2-voix.json : facultatif) ; construire.py les recopie telles quelles dans
                      DONNEES.geometrie.mise_en_page.<nom> : une scène ajoute une clé de mise en page SANS toucher au python
 Une variante est une entrée de « variantes » dans le fichier de la scène ; elle remplace les clés qu'elle donne (fusion
-récursive). Un format « prevu » (1x1) sans entrée dans un fichier de scène lève une erreur explicite : la scène n'a pas
+récursive) ; une clé posée à null est RETIRÉE (retour au défaut du 9:16). Un format « prevu » (1x1) sans entrée dans un fichier de scène lève une erreur explicite : la scène n'a pas
 encore sa mise en page. Rien n'est écrit.
 """
 import copy
@@ -29,14 +30,38 @@ FICHIERS = {"texte": "texte.json", "s1": "s1-sonnerie.json", "s3": "s3-ecoute.js
 SCENES = {"s1-sonnerie": "s1", "s3-ecoute": "s3", "agenda": "agenda", "s6-sms": "s6", "s7-signature": "s7", "texte": "texte"}
 
 
+CORPS_WORDMARK_9X16 = 400     # le wordmark du 9:16 : son point de ı (0,11 em) fait 44 px, LE disque du film
+
+
+def echelle_point(M):
+    """Échelle du DISQUE du film de s1 à s6 dans le format M, relative au 9:16 (44 px) : formats.json « echelle_point »,
+    1 par défaut. L'agenda de s4-s5 est la vraie capture à 1:1, sa gouttière des heures est faite pour un disque de 44 px :
+    un format qui le grossit doit aussi grossir l'agenda (recomposition du 28/09). Lu par construire.py (rayon, écart à l'encre,
+    sauts, levées, hochements), preparer_agenda.py (fin d'écriture du bloc) et controles.py."""
+    return float(M["format"].get("echelle_point", 1.0))
+
+
+def echelle_mot(M):
+    """Échelle du WORDMARK de s7 dans le format M, relative au 9:16 : corps / 400. Son point de ı (0,11 em) est le point du film
+    posé : 44 px × échelle. Quand elle diffère de echelle_point, le point grandit (ou rapetisse) en quittant le téléphone, pendant
+    son vol vers le stylo (construire.py, DONNEES.point.taille) : le stylo, le bond et le diamètre final suivent le wordmark.
+    9:16 : exactement 1.0 (ses formules restent identiques au bit près : outils/identite.py)."""
+    return M["s7"]["fin"]["corps"] / CORPS_WORDMARK_9X16
+
+
 def lire(nom):
     return json.loads((DOSSIER / nom).read_text())
 
 
 def fusion(a, b):
+    """b par-dessus a, récursivement ; une valeur null dans b RETIRE la clé de a (3e passe du 16:9 : une variante revient au
+    défaut du 9:16, ex. « telephone_monte »: null)."""
     out = copy.deepcopy(a)
     for k, v in b.items():
         if k.startswith("_"):
+            continue
+        if v is None:
+            out.pop(k, None)
             continue
         out[k] = fusion(out[k], v) if isinstance(v, dict) and isinstance(out.get(k), dict) else copy.deepcopy(v)
     return out
@@ -77,6 +102,14 @@ def charger(fmt, variantes=None):
     variantes = dict(variantes or {})
     M = {"format": dict(sans_notes(F[fmt]), nom=fmt), "scenes": {}}
     facultatifs = {f.stem: f.name for f in sorted(DOSSIER.glob("s[0-9]-*.json")) if f.name not in FICHIERS.values()}
+    if "*" in variantes:           # un JEU de variantes : « *=16x9-recompose » = la variante de ce nom dans CHAQUE fichier qui l'a
+        nom_jeu = variantes.pop("*")
+        jeu = {Path(nom).stem: nom_jeu for nom in list(FICHIERS.values()) + list(facultatifs.values())
+               if nom_jeu in lire(nom).get("variantes", {})}
+        if not jeu:
+            raise SystemExit(f"jeu de variantes « {nom_jeu} » : aucun fichier de mise-en-page/ ne l'a")
+        for s, v in jeu.items():
+            variantes.setdefault(s, v)
     for cle, nom in list(FICHIERS.items()) + list(facultatifs.items()):
         d = lire(nom)
         if fmt not in d:
@@ -115,6 +148,8 @@ def verifier(M):
     assert abs(M["s6"]["ecran"]["hauteur_pt"] * k + 2 * t6["bord_haut"] - t6["hauteur"]) < 0.5, "s6 : hauteur ≠ écran + 2 bords (0,5 px)"
     for cle in ("promesse", "offre"):
         assert M["s7"][cle]["corps"] >= F["corps_min"], f"s7 {cle} : corps < {F['corps_min']}"
+    if F["nom"] == "9x16":
+        assert echelle_point(M) == 1.0 and echelle_mot(M) == 1.0, "9:16 : le point du film fait 44 px, le wordmark 400 px"
 
 
 def zones_touchees(M, boite, sortes=("interdite",)):

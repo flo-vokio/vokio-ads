@@ -76,8 +76,10 @@
 
   // ── 0. Le contrat de géométrie (DONNEES.geometrie.s2_texte), celui des cibles du suiveur ──
   const G = D.geometrie.s2_texte;
-  const RAYON = D.point.diametre_disque / 2;                   // 22 : le disque de 44 px
-  const ECART = 18;                                            // encre → bord du disque (arbitrage 4 : ≥ 18 px)
+  // FORMATS (recomposition du 28/09) : le disque du film (diametre_film, présent quand il diffère du point du ı de s7)
+  const D_FILM = D.point.diametre_film || D.point.diametre_disque;
+  const RAYON = D_FILM / 2;                                    // 22 : le disque de 44 px
+  const ECART = 18 * D_FILM / 44;                              // encre → bord du disque (arbitrage 4 : ≥ 18 px ; × échelle du disque)
   const X_MAX = G.x_max != null ? G.x_max : 1010;             // bord droit du disque (repli 9:16 : 1010, règle 5 ; 16:9 : fin de la colonne de lecture)
   exiger(G.top === G.lignes_de_base[0] - G.decalage_ligne_de_base, "top " + G.top + " ≠ ligne de base − décalage");
   document.querySelectorAll(".s2-page").forEach(function (p) {

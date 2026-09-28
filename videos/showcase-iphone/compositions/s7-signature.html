@@ -218,8 +218,21 @@
   promesse.lignes[1].classList.add("s7-chute");                    // la chute, en italique
   // « 59 € » : espace fine insécable U+202F, rendue par TEXTE (.tx-fine, 0,16 em)
   const offre = TEXTE.poser("#s7-offre", ["59 € par mois, sans engagement.", "Entendez-le vous-même sur vokio.fr"],
-    { extrait: null });
+    { extrait: null, chevauchement: true });
+  // chevauchement (data-layout-allow-overlap, sans effet sur l'image) : la boîte de découpe des segments du wordmark déborde
+  // de 30 % sous sa boîte de ligne (masque de la DA) ; au wordmark de 540 px du 16:9 recomposé, elle descend jusqu'à l'offre
+  // (789 pour un haut d'offre à 737), dont l'encre reste 166 px sous la ligne de base de « Vokıo » (hf check le lisait comme deux textes superposés)
   exiger(promesse.lignes.length === 2 && offre.lignes.length === 2, "la promesse et l'offre tiennent chacune sur deux lignes");
+  // FORMATS (recomposition du 28/09) : « une_ligne » (mise-en-page/s7-signature.json, entrée du format) pose les deux lignes
+  // CÔTE À CÔTE, séparées d'une espace du texte : le cadre large lit « Votre ligne répond même quand vous ne pouvez pas. » d'un
+  // trait. Chaque moitié garde son masque et son instant (la chute en italique monte après). Absent (9:16) : rien ne change.
+  [[GL && GL.promesse, promesse], [GL && GL.offre, offre]].forEach(function (x) {
+    if (!(x[0] && x[0].une_ligne)) return;
+    x[1].lignes.forEach(function (l, i) {
+      l.style.display = "inline-block";
+      if (i) l.parentNode.insertBefore(document.createTextNode(" "), l);
+    });
+  });
   const cs = getComputedStyle(document.getElementById("s7-offre"));
   const basOffre = parseFloat(cs.top) + 2 * parseFloat(cs.lineHeight);
   exiger(!(basOffre > CADRE.bas_utile), "l'offre descend sous y = " + CADRE.bas_utile + " (" + basOffre + ")");

@@ -25,6 +25,9 @@
   FORMATS (27-28/09) : les cotes ci-dessus sont celles du 9:16. Corps, écran, échelle en points, entrée, sortie et arc du départ
   viennent de DONNEES.geometrie.s6 (mise-en-page/s6-sms.json, entrée du format, variante par-dessus) ; le CSS garde les valeurs
   du 9:16 en repli. Une mise en page qui déclare « telephone_monte » (variante 16x9-centre) monte après la coupe du sous-titre.
+  3e passe du 16:9 (28/09, revue Florian) : le 16:9 ne la déclare plus ; il recoupe la page de l'appelant en trois lignes
+  (« Super, merci | beaucoup. | Au revoir. », texte.json « coupes ») pour que le téléphone monte AVEC « Au revoir », comme en
+  9:16, sans croiser le sous-titre (outils/controle_format.py E6) : le silence numérique redevient un plan immobile.
   Régler l'arc du départ : outils/depart_point.py ; comparer deux mises en page en mouvement : outils/extrait_mouvement.py ;
   adopter une variante : outils/adopter_variante.py.
 -->
@@ -196,6 +199,7 @@
 
   // ── 0. La géométrie de l'iPhone (DONNEES.geometrie.s6, outils/construire.py), posée et contrôlée ──
   const G6 = D.geometrie.s6, TEL = G6.telephone, ECR = G6.ecran, BU = G6.bulle, PT = G6.point, K = G6.pt;   // K : px par point iOS
+  const R_FILM = (D.point.diametre_film || POINT.diametre_disque) / 2;       // le rayon du disque du film (22 ; recomposition du 28/09)
   // FORMATS (27/09) : le corps, l'écran et l'échelle viennent de DONNEES.geometrie.s6 (mise-en-page/s6-sms.json) ; le CSS garde les
   // valeurs du 9:16 (x 82, haut 470, 916 × 1917, rayon 160 ; écran 854 px = 402 pt en (113 ; 500)), réécrites ici à l'identique.
   const CADRE = D.geometrie.cadre || { bas_utile: 1500 };   // repli 9:16 (données d'avant les formats)
@@ -233,12 +237,12 @@
   // Le SMS (gabarit corrigé, six lignes = DONNEES), la date soulignée, l'expéditeur « Vokio », corps et place : lib/iphone.js.
   const bulle = document.getElementById("s6-bulle");
   const TXT = IPHONE.controlerContenu(G6, bulle, exiger);
-  exiger(BU.bas < CADRE.bas_utile && BU.queue_pointe.y < CADRE.bas_utile && PT.y + POINT.diametre_disque / 2 < CADRE.bas_utile,
+  exiger(BU.bas < CADRE.bas_utile && BU.queue_pointe.y < CADRE.bas_utile && PT.y + R_FILM < CADRE.bas_utile,
          "le SMS ou le point descend sous y = " + CADRE.bas_utile);
   // Le centre de l'éclosion : le point, en coordonnées de l'écran ; il attend sous la queue, sur l'écran blanc.
   const CX = PT.x - ECR.x0, CY = PT.y - ECR.haut;                             // 55,99 ; 783,99
-  exiger(PT.y - POINT.diametre_disque / 2 - BU.queue_pointe.y >= 10, "le point touche la queue de la bulle");
-  exiger(PT.x - POINT.diametre_disque / 2 - ECR.x0 >= 30, "le point est trop près du bord de l'écran");
+  exiger(PT.y - R_FILM - BU.queue_pointe.y >= 10, "le point touche la queue de la bulle");
+  exiger(PT.x - R_FILM - ECR.x0 >= 30, "le point est trop près du bord de l'écran");
   // Rayon final : le coin le plus lointain de la zone du SMS (mention et bulle, queue comprise) + 1 px, comme avant. La mention,
   // centrée sur 201 pt et large de moins de 110 pt, finit avant 256 pt, à gauche du bord droit de la bulle.
   const mention = document.getElementById("s6-mention");
@@ -280,8 +284,11 @@
   const p1 = document.getElementById("s6-p1"), p2 = document.getElementById("s6-p2");
   p1.style.left = Hs.agente.x + "px"; p1.style.top = Hs.agente.top + "px";
   p2.style.left = Hs.appelant.x + "px"; p2.style.top = Hs.appelant.top + "px";
-  exiger(Hs.agente.corps === 72 && Hs.agente.interligne === 84 && Hs.appelant.corps === 64 && Hs.appelant.interligne === 72,
-         "corps des sous-titres ≠ contrat (agente 72/84, appelant 64/72)");
+  // FORMATS (recomposition du 28/09) : corps et interligne du contrat (9:16 : 72/84 et 64/72, ceux du CSS ; 16:9 : texte.json)
+  p1.style.fontSize = Hs.agente.corps + "px"; p1.style.lineHeight = Hs.agente.interligne + "px";
+  p2.style.fontSize = Hs.appelant.corps + "px"; p2.style.lineHeight = Hs.appelant.interligne + "px";
+  exiger((D.format && D.format.nom !== "9x16") || (Hs.agente.corps === 72 && Hs.agente.interligne === 84 && Hs.appelant.corps === 64 && Hs.appelant.interligne === 72),
+         "corps des sous-titres ≠ contrat du 9:16 (agente 72/84, appelant 64/72)");
   [[p1, Hs.agente], [p2, Hs.appelant]].forEach(function (x) {
     const cs = getComputedStyle(x[0]);
     exiger(cs.fontSize === x[1].corps + "px" && cs.lineHeight === x[1].interligne + "px", "le CSS de #" + x[0].id + " s'écarte du contrat");
@@ -290,8 +297,13 @@
   exiger(pages.length === 2, "2 pages attendues dans DONNEES.pages, " + pages.length + " trouvées");
   exiger(pages[0].extrait === "A4" && pages[0].depuis === 18 && pages[0].lignes.join(" | ") === "Vous recevrez un SMS | de confirmation.",
          "page de l'agente inattendue : " + pages[0].lignes.join(" | "));
-  exiger(pages[1].extrait === "C4" && pages[1].lignes.join(" | ") === "Super, merci beaucoup. | Au revoir.",
-         "page de l'appelant inattendue : " + pages[1].lignes.join(" | "));
+  // 3e passe du 16:9 (28/09) : un format peut recouper la page de l'appelant (texte.json « coupes », mêmes mots, contrôlé par
+  // outils/navigateur.py), pourvu que « Au revoir. » reste sa dernière ligne (le téléphone entre avec elle) ; 9:16 : 2 lignes.
+  const L4 = pages[1].lignes;
+  exiger(pages[1].extrait === "C4" && ((D.format && D.format.nom !== "9x16")
+           ? L4.join(" ") === "Super, merci beaucoup. Au revoir." && L4[L4.length - 1] === "Au revoir."
+           : L4.join(" | ") === "Super, merci beaucoup. | Au revoir."),
+         "page de l'appelant inattendue : " + L4.join(" | "));
   exiger(pages[0].sortie && pages[0].sortie.t > 0, "DONNEES.pages[].sortie absent (relancer outils/construire.py)");
   const T_SORTIE_A4 = pages[0].sortie.t, SORTIE_A4 = pages[0].sortie.duree;   // 33,70 ; 0,18
   const agente = TEXTE.poser(p1, pages[0].lignes, { extrait: pages[0].extrait, depuis: pages[0].depuis, chevauchement: true });
@@ -309,7 +321,8 @@
     const unites = appelant.mots.filter(function (u) { return u.ligne === il; });
     return { els: unites.map(function (u) { return u.el; }), t: r6(TEXTE.aImage(unites[0].t) - UNE), unites: unites };
   });
-  exiger(lignesC4.length === 2 && lignesC4[0].t >= FIN_A4 - EPS, "l'appelant entre avant que l'agente soit sortie");
+  exiger(lignesC4.length === L4.length && lignesC4[0].t >= FIN_A4 - EPS, "l'appelant entre avant que l'agente soit sortie");
+  const auRevoir = lignesC4[lignesC4.length - 1];                             // « Au revoir. », la dernière ligne
   lignesC4.forEach(function (L) {
     tl.fromTo(L.els, { y: DY, opacity: 0 }, { y: 0, opacity: 1, duration: REVELE_C4, ease: "power3.out", immediateRender: true },
               sc.local(L.t));
@@ -319,7 +332,7 @@
   const T_COUPE = r6((N_RACCROCHE - 0.5) / FPS);                              // 35,85
   const derMot = appelant.mots[appelant.mots.length - 1];
   exiger(derMot.mots[derMot.mots.length - 1].fin < T_COUPE, "« Au revoir » doit finir avant le raccroché");
-  exiger(lignesC4[1].t + REVELE_C4 <= T_COUPE && T_COUPE - lignesC4[1].t >= 0.6, "« Au revoir. » n'est pas posé 0,6 s avant la coupe");
+  exiger(auRevoir.t + REVELE_C4 <= T_COUPE && T_COUPE - auRevoir.t >= 0.6, "« Au revoir. » n'est pas posé 0,6 s avant la coupe");
   tl.set(els(appelant), { opacity: 0 }, sc.local(T_COUPE));
 
   // ── 3. Le téléphone : entrée (avec « Au revoir »), repos, vibreur, sortie ; nets, sans filé (inchangé) ──
@@ -329,7 +342,7 @@
   // l'iPhone centré croiserait le sous-titre) monte APRÈS la coupe du dernier sous-titre ; sinon (9:16) avec « Au revoir ».
   const MEP6 = (D.geometrie.mise_en_page || {})["s6-sms"] || {};
   if (MEP6.telephone_monte) exiger(TM[0] >= T_COUPE - EPS && TM[1] <= T_BULLE + EPS, "le téléphone doit monter entre la coupe du sous-titre et la bulle");
-  else exiger(TM[0] >= lignesC4[1].t - EPS && TM[1] <= EV.raccroche.t + EPS, "le téléphone doit entrer avec « Au revoir », avant le raccroché");
+  else exiger(TM[0] >= auRevoir.t - EPS && TM[1] <= EV.raccroche.t + EPS, "le téléphone doit entrer avec « Au revoir », avant le raccroché");
   exiger(T_BULLE - TM[1] <= 1.2 + EPS, "le téléphone reste vide plus de 1,2 s avant la bulle");
   exiger(Math.abs(TS[1] - sc.fin) < EPS && TS[0] - EV.bulle_ouverte.t >= 3.8 - EPS, "la bulle entière ne se lit pas 3,8 s avant la sortie");
   const eMonte = POINT.ease("power3.out"), eApp = POINT.ease("power2.out"), eSort = POINT.ease("power3.in");
@@ -353,7 +366,7 @@
     }
     // Pendant l'entrée, le point reste sur l'écran blanc : le haut de l'écran (coin arrondi compris, borné par son rayon)
     // passe toujours au-dessus du disque, et son bord gauche à sa gauche.
-    const rr = POINT.diametre_disque / 2;
+    const rr = R_FILM;
     exiger(ECR.haut + Y_ENTREE + ECR.rayon < PT.y - rr, "le haut de l'écran passerait sur le point à l'entrée du téléphone");
     exiger(ECR.x0 + TEL.bord_cote < PT.x - rr, "le bord de l'écran passerait sur le point");
   })();

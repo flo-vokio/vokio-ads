@@ -99,7 +99,7 @@
    "texte_montre": [
     "Parfait, je vous note ça / pour Florian,",
     "pour une consultation / vétérinaire,",
-    "le samedi dix-neuf / septembre à neuf heures.",
+    "le samedi / dix-neuf septembre / à neuf heures.",
     "Vous recevrez un SMS / de confirmation."
    ]
   },
@@ -116,7 +116,7 @@
    "motif": "L'appelant raccroche : le « De rien, au revoir. » de l'agente (montes 79,23) saute. v2 : décalage −41,07, le même que A4 : C4 suit A4 après son VRAI blanc de 0,75 s (source 74,30 → 75,05) ; la v1 (−40,60) l'allongeait de 0,47 s pour loger le SMS pendant l'appel.",
    "texte_dit": "Super, merci beaucoup. Au revoir.",
    "texte_montre": [
-    "Super, merci beaucoup. / Au revoir."
+    "Super, merci / beaucoup. / Au revoir."
    ]
   }
  ]

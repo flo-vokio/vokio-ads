@@ -177,8 +177,13 @@
     const bt = document.getElementById("s4-texte");
     bt.style.width = H.conteneur.largeur + "px"; bt.style.height = H.conteneur.hauteur + "px";
   }
-  document.querySelectorAll(".s4-agente").forEach(function (p) { p.style.top = H.agente.top + "px"; p.style.left = H.agente.x + "px"; });
-  document.querySelectorAll(".s4-appelant").forEach(function (p) { p.style.top = H.appelant.top + "px"; p.style.left = H.appelant.x + "px"; });
+  // FORMATS (recomposition du 28/09) : corps et interligne du contrat aussi (9:16 : 72/84 et 64/72, ceux du CSS ; 16:9 : texte.json)
+  [[".s4-agente", H.agente], [".s4-appelant", H.appelant]].forEach(function (x) {
+    document.querySelectorAll(x[0]).forEach(function (p) {
+      p.style.top = x[1].top + "px"; p.style.left = x[1].x + "px";
+      p.style.fontSize = x[1].corps + "px"; p.style.lineHeight = x[1].interligne + "px";
+    });
+  });
   [["#s4-voir", H.agente], ["#s4-choix", H.appelant]].forEach(function (x) {
     const cs = getComputedStyle(document.querySelector(x[0]));
     exiger(cs.fontSize === x[1].corps + "px" && cs.lineHeight === x[1].interligne + "px" && cs.fontStyle === x[1].style &&
@@ -294,7 +299,7 @@
   const MARGE_POINT = 8;                        // px d'air entre le bord du disque et la boîte de ligne de la mention
   const APPARITION_MENTION = 0.30;              // s : opacité 0 → 1 de la mention seule, power2.out
   exiger(D.point && D.point.diametre_disque > 0, "DONNEES.point.diametre_disque absent");
-  const R_POINT = D.point.diametre_disque / 2;
+  const R_POINT = (D.point.diametre_film || D.point.diametre_disque) / 2;   // le disque du film (recomposition du 28/09)
   const XP = A.x_point, YP = A.heures["09:00"];
   const lignesMention = A.mention.lignes_de_base.map(function (b) {
     const haut = b - GM.decalage_ligne_de_base;

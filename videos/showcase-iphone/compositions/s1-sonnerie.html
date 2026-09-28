@@ -28,6 +28,11 @@
   même dans tous les formats. 16:9 (YouTube) : accroche x 144, top 282 (lignes de base 402 et 540, la ligne de
   lecture du paysage), le « . » en (794,5 ; 533,5) ; relance dans la colonne des objets, x 1064, top 396 (lignes de
   base 460 et 540). La montée de la relance (16 px à 72 px de corps) suit son corps.
+  3e PASSE DU 16:9 (28/09, revue YouTube : la moitié droite du cadre restait vide 2,9 s) : une mise en page peut déclarer
+  « glisse » (mise-en-page/s1-sonnerie.json : x_depart « centre » ou px, t [t0, t1], ease) : l'accroche est posée CENTRÉE,
+  puis glisse à sa place (x) entre t0 et t1, AVANT la relance (2,6667) qui s'écrit dans la place libérée ; le point, qui est
+  son « . », glisse avec elle (DONNEES.point.position, clés 1.1 et 1.2, même formule). 16:9 : bloc d'encre centré, glisse
+  de 2,10 à 2,60 en power3.inOut, dans le silence entre les deux sonneries. 9:16 : pas de glisse, rien ne change.
   Revoir la scène image par image (options en tête de l'outil) : python3 outils/revue_scene.py planche formats/16x9
   s1-sonnerie ; 9:16 inchangé : python3 outils/revue_scene.py identite COPIE_9x16 s1-sonnerie git:aa4dd24.
   Trois éléments au plus : la phrase, la relance, le point. Aucun temps de voix : il n'y a pas de voix dans s1.
@@ -114,9 +119,22 @@
         gsap.set(el, { yPercent: AC.depart_yPercent * (1 - eMot(u)), opacity: eOp(Math.min(1, u / 0.3)) });
       });
     };
-    poserAccroche(0);
+    // 3e passe du 16:9 (28/09) : un format peut poser l'accroche CENTRÉE, puis la faire glisser à sa place avant la relance
+    // (DONNEES.geometrie.s1.glisse : dx, t [t0, t1], ease ; outils/construire.py). x(t) = x + dx × (1 − ease(u)) : la même
+    // formule que les clés 1.1 → 1.2 du point, qui est le « . » de « prises ». Seulement dans le film (window.POINT) : le banc
+    // de mesure (outils/navigateur.py, sans lib/point.js) mesure le « . » à sa place finale. 9:16 : pas de glisse, rien ne change.
+    const GL = (window.POINT && G1 && G1.glisse) || null;
+    const elPhrase = document.getElementById("s1-phrase");
+    const eGl = GL ? gsap.parseEase(GL.ease) : null;
+    const poserGlisse = function (t) {
+      if (!GL) return;
+      const u = Math.max(0, Math.min(1, (t - GL.t[0]) / (GL.t[1] - GL.t[0])));
+      const dx = GL.dx * (1 - eGl(u));
+      elPhrase.style.transform = Math.abs(dx) < 1e-4 ? "none" : "translate(" + (+dx.toFixed(4)) + "px, 0px)";
+    };
+    poserAccroche(0); poserGlisse(0);
     const pa = { t: 0 };
-    tl.to(pa, { t: sc.duree, duration: sc.duree, ease: "none", onUpdate: function () { poserAccroche(pa.t); } }, 0);
+    tl.to(pa, { t: sc.duree, duration: sc.duree, ease: "none", onUpdate: function () { poserAccroche(pa.t); poserGlisse(pa.t); } }, 0);
     if (window.POINT) exiger(t0(0) < 0, "à l'image 0, le premier mot doit déjà monter");     // dans le film (pas au banc de mesure)
     exiger(r6(t0(motsPhrase.length - 1) + AC.duree) <= AC.lisible + EPS, "l'accroche n'est pas entière à " + AC.lisible + " s");
     exiger(AC.point[0] >= t0(motsPhrase.length - 1) + 0.8 * AC.duree - EPS, "le point se pose avant que « prises » soit monté");

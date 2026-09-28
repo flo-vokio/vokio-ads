@@ -1,6 +1,6 @@
 {
- "_note": "Contrats des sous-titres DITS (règle 8) et de la mention, par format. Lu par outils/construire.py : navigateur.py pose chaque page avec ce CSS, mesure l'encre, et le planificateur du point s'en sert (cibles, heurts). Toute retouche déplace le point : relancer outils/format.py <format>. Les coupes de lignes (pages) sont dans outils/navigateur.py (PAGES), communes aux formats tant que « pages » n'est pas donné ici. top = ligne de base − décalage mesuré (jamais écrit à la main).",
- "_16x9": "Colonne de lecture x 144 → 1064 (920 px, la largeur utile du 9:16 : mêmes coupes, même trajet du point, translaté). Ligne de lecture = 540, la médiane du cadre, POUR TOUTES LES SCÈNES : en paysage l'objet se pose à droite, le sous-titre ne remonte plus en haut comme en 9:16 (il ne bouge plus de tout le film).",
+ "_note": "Contrats des sous-titres DITS (règle 8) et de la mention, par format. Lu par outils/construire.py : navigateur.py pose chaque page avec ce CSS, mesure l'encre, et le planificateur du point s'en sert (cibles, heurts). Toute retouche déplace le point : relancer outils/format.py <format>. Les coupes de lignes (pages) sont dans outils/navigateur.py (PAGES), communes aux formats ; « coupes » ({\"<scène>#<rang>\": [lignes]}) en recoupe une pour un format, mêmes mots (contrôlé). top = ligne de base − décalage mesuré (jamais écrit à la main).",
+ "_16x9": "Recomposition du 28/09 (revues « youtube » 5,5/10 et « florian » 7/10 : « le 9:16 translaté, pas recomposé »). Colonne de lecture x 144, ligne de lecture 620 pour TOUTES les scènes (la 2e ligne de l'accroche y est posée : retour chariot littéral). Deux actes, chacun son corps : voix seule (s2 l'agente Geist 100/112, s3 l'appelant italique 88/98 : le cadre large n'a qu'elles à montrer) ; à côté de l'objet (s4 à s6, agente 84/98, appelant 74/84 : l'agenda, capture 1:1, commence en x 1100 ; « neuf heures, dix heures », la ligne la plus longue, finit en 1029). Dans chaque acte l'agente parle plus fort (controles.py F8, hauteur d'x ≥ 1,15 ×). « coupes » : la seule page recoupée pour le cadre large, « le samedi / dix-neuf septembre / à neuf heures. » (en deux lignes, « septembre à neuf heures. » mordait sur l'agenda) ; mêmes mots, même minutage (outils/navigateur.py pages_coupees). x_max_point 1440 : le disque ne passe pas x 1440 en s2 (encre la plus longue 1268). Bas des textes : « du Port. » (ligne de base 844) et « à neuf heures. » (816) au-dessus de l'encart de l'annonceur (880).",
  "_conteneur": "conteneur_sous_titres = [largeur, hauteur] de #s4-texte, #s5-texte, #s6-texte (boîte des sous-titres des scènes d'objet). 9:16 : 1080 × 600 EXACTEMENT : en plein cadre, Chromium composait autrement le point qui passe sous la boîte (anticrénelage du disque changé sur 226 images de s6, vu par outils/identite.py le 27/09).",
  "9x16": {
   "styles": {
@@ -17,17 +17,20 @@
   "conteneur_sous_titres": [1080, 600]
  },
  "16x9": {
+  "_note": "3e passe du 28/09 : ligne de lecture à 540 (50 % du cadre ; 57 % avant, 45,5 % en 9:16) pour tous les sous-titres dits, qui ne descendent plus sous 790 (s2, 3 lignes) ; s2 (l'agente seule) garde la colonne de gauche x 144, lignes de base 540 / 652 / 764 ; s3 (l'appelant seul) passe dans la colonne de DROITE, x 1000, 540 / 638 / 736 : un champ-contrechamp typographique (qui parle reste dit par la typographie ; la place renforce), l'encre de l'acte « voix seule » a son barycentre médian à 0,48 (0,28 avant) ; s4-s6 : agente 540 / 638 / 736, appelant 560 / 644 / 728, à gauche de l'objet. Coupe « s6-sms#1 » : « Super, merci | beaucoup. | Au revoir. » (encre jusqu'à 478) : le téléphone monte AVEC « Au revoir », comme en 9:16, 126 px à droite du sous-titre (controle_format.py E6).",
   "styles": {
-   "s2_texte": {"famille": "\"Geist\",sans-serif", "style": "normal", "graisse": 400, "corps": 72, "interligne": 84, "x": 144, "lignes_de_base": [540, 624, 708]},
-   "s3_texte": {"famille": "\"Instrument Serif\",serif", "style": "italic", "graisse": 400, "corps": 64, "interligne": 72, "x": 144, "lignes_de_base": [540, 612, 684]},
-   "haut_agente": {"famille": "\"Geist\",sans-serif", "style": "normal", "graisse": 400, "corps": 72, "interligne": 84, "x": 144, "lignes_de_base": [540, 624, 708]},
-   "haut_appelant": {"famille": "\"Instrument Serif\",serif", "style": "italic", "graisse": 400, "corps": 64, "interligne": 72, "x": 144, "lignes_de_base": [560, 632]},
+   "s2_texte": {"famille": "\"Geist\",sans-serif", "style": "normal", "graisse": 400, "corps": 100, "interligne": 112, "x": 144, "lignes_de_base": [540, 652, 764]},
+   "s3_texte": {"famille": "\"Instrument Serif\",serif", "style": "italic", "graisse": 400, "corps": 88, "interligne": 98, "x": 1000, "lignes_de_base": [540, 638, 736]},
+   "haut_agente": {"famille": "\"Geist\",sans-serif", "style": "normal", "graisse": 400, "corps": 84, "interligne": 98, "x": 144, "lignes_de_base": [540, 638, 736]},
+   "haut_appelant": {"famille": "\"Instrument Serif\",serif", "style": "italic", "graisse": 400, "corps": 74, "interligne": 84, "x": 144, "lignes_de_base": [560, 644, 728]},
    "mention": {"famille": "\"Geist\",sans-serif", "style": "normal", "graisse": 400, "corps": 40, "interligne": 52, "x": 144, "lignes_de_base": [150]}
   },
-  "largeur_max_s2": 850,
-  "largeur_max": 920,
-  "x_max_point": 1064,
+  "largeur_max_s2": 1200,
+  "largeur_max": 960,
+  "x_max_point": 1440,
   "mention_largeur_max": 1632,
-  "conteneur_sous_titres": [1920, 1080]
+  "conteneur_sous_titres": [1920, 1080],
+  "coupes": {"s5-rendez-vous#2": ["le samedi", "dix-neuf septembre", "à neuf heures."], "s6-sms#1": ["Super, merci", "beaucoup.", "Au revoir."]},
+  "_variante_adoptee": "« 16x9-v3 », adoptée le 28/09/2026 : 3e passe du 16:9 (revues YouTube 7/10 et Florian 7,5/10)"
  }
 }

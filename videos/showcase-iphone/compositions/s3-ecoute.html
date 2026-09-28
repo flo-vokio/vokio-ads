@@ -128,7 +128,11 @@
 
   // ── Géométrie du contrat : position posée, style vérifié ──
   const G = D.geometrie.s3_texte;
-  document.querySelectorAll(".s3-page").forEach(function (p) { p.style.top = G.top + "px"; p.style.left = G.x + "px"; });
+  document.querySelectorAll(".s3-page").forEach(function (p) {
+    p.style.top = G.top + "px"; p.style.left = G.x + "px";
+    // FORMATS (recomposition du 28/09) : corps et interligne du contrat (9:16 : 64/72, ceux du CSS ; 16:9 : texte.json)
+    p.style.fontSize = G.corps + "px"; p.style.lineHeight = G.interligne + "px";
+  });
   const elMention = document.getElementById("s3-mention");
   elMention.style.top = G.mention.top + "px";
   elMention.style.left = G.mention.x + "px";

@@ -11,14 +11,15 @@
   "t_haut_min": 31.11
  },
  "16x9": {
-  "_note": "Scène d'objet à droite de la colonne de lecture : bord gauche de la carte en 1064 (fin de la colonne ; 88 px après l'encre la plus longue des sous-titres, « septembre à neuf heures. »), 856 px de carte visibles (étiquettes, colonne du jour, bloc « 09:00 Florian » entier : le point finit d'écrire en 1734). y 234 : le filet 10:00 tombe sur la ligne de lecture (539,75) ; 09:00 à 305,75, 11:00 à 773,75, au-dessus du coin « Passer l'annonce » (780). La mention passe AU-DESSUS de la carte (lignes de base 150 / 202) : dessous, elle tombait dans les 10 % du bas et sous le bouton « Passer l'annonce ».",
-  "x": 1064,
+  "_note": "3e passe du 28/09 : la capture reste 1:1 (sa gouttière des heures est faite pour le disque de 44 px). Bord gauche en 1100 ; y 234 : le filet 10:00 tombe sur la ligne de lecture (539,75), 09:00 à 305,75, 11:00 à 773,75 ; bas de l'image 909, 63 px au-dessus des 10 % du bas (989 avant, dans la bande). La grille VIDE passe encore sous le coin « Passer l'annonce » (x ≥ 1500, y ≥ 780) : admis, aucune information n'y est. Mention au-dessus de la carte, lignes de base 150 / 202, x 1120 (sous la bande du haut). haut_min 150 : en 16:9 le sous-titre est à gauche de l'agenda, sa sortie par le haut ne croise rien. y_sortie 270 : les étiquettes montent avec lui en s'effaçant ; le point les franchit par le couloir entre 09:00 et 10:00 (s6-sms.json « couloir »).",
+  "x": 1100,
   "y": 234,
-  "mention": {"x": 1084, "lignes_de_base": [150, 202]},
+  "mention": {"x": 1120, "lignes_de_base": [150, 202]},
   "boite_hauteur": 675,
   "y_depart": 360,
   "y_sortie": 270,
-  "haut_min": 200,
-  "t_haut_min": 31.11
+  "haut_min": 150,
+  "t_haut_min": 31.11,
+  "_variante_adoptee": "« 16x9-v3 », adoptée le 28/09/2026 : 3e passe du 16:9 (revues YouTube 7/10 et Florian 7,5/10)"
  }
 }

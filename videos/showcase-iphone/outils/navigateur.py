@@ -3,9 +3,12 @@
 
     /root/.pwtest/bin/python outils/navigateur.py geometrie   → JSON : point final de s1, #mot-pt de s7
     /root/.pwtest/bin/python outils/navigateur.py resoudre    → JSON : POINT.etat(n/30) pour chaque image
-    /root/.pwtest/bin/python outils/navigateur.py pages       → JSON : les pages de sous-titres v2 posées par TEXTE.poser
+    /root/.pwtest/bin/python outils/navigateur.py pages [styles.json [coupes.json]]
+                                                              → JSON : les pages de sous-titres v2 posées par TEXTE.poser
                                                                 avec le CSS du contrat de leur scène (DONNEES.geometrie) :
-                                                                bord droit d'encre et ligne de base de chaque unité
+                                                                bord droit d'encre et ligne de base de chaque unité ;
+                                                                coupes.json : les lignes propres au format (texte.json
+                                                                « coupes », écrit par construire.py), mêmes mots
 Appelé par outils/construire.py ; utilisable seul pour vérifier une scène modifiée.
 Options (FORMATS, 27/09) : --racine <projet> (défaut : ce projet) sert CE dossier à Chromium (un projet de format produit
 par outils/format.py : ses compositions, ses données) ; --taille LxH (défaut 1080x1920) = la fenêtre du banc.
@@ -120,6 +123,27 @@ PAGES = [
     ("s6-sms", "A4", 18, ["Vous recevrez un SMS", "de confirmation."], "haut_agente"),
     ("s6-sms", "C4", 0, ["Super, merci beaucoup.", "Au revoir."], "haut_appelant"),
 ]
+
+def pages_coupees(coupes):
+    """PAGES avec les coupes de lignes d'un format (mise-en-page/texte.json, « coupes » : {"<scène>#<rang dans la scène>":
+    [lignes]}) : seules les COUPES changent, jamais les mots (contrôlé : même texte, espaces comprises, une fois les lignes
+    jointes) ; le minutage des pages n'en dépend pas. Sans coupes : PAGES telles quelles (9:16)."""
+    norm = lambda s: s.replace("\\u202f", "\u202f").replace("\\u00a0", "\u00a0")
+    rang, out, vues = {}, [], set()
+    for scene, extrait, depuis, lignes, style in PAGES:
+        k = rang.get(scene, 0); rang[scene] = k + 1
+        cle = f"{scene}#{k}"
+        if cle in coupes:
+            neuves = [norm(l) for l in coupes[cle]]
+            if " ".join(neuves) != " ".join(norm(l) for l in lignes):
+                raise SystemExit(f"coupes {cle} : {neuves} ne recoupe pas le texte de la page ({[norm(l) for l in lignes]})")
+            lignes = neuves
+            vues.add(cle)
+        out.append((scene, extrait, depuis, lignes, style))
+    if set(coupes) - vues:
+        raise SystemExit(f"coupes inconnues : {sorted(set(coupes) - vues)} (clés « <scène>#<rang> », rang 0 = 1re page de la scène)")
+    return out
+
 
 POLICES_CSS = (
     '@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2")}'
@@ -268,7 +292,8 @@ def main():
         elif phase == "pages":
             styles = json.loads(Path(sys.argv[2]).read_text()) if len(sys.argv) > 2 else json.loads(
                 (PROJET / "donnees" / "styles-pages.json").read_text())
-            r = page.evaluate(PAGES_JS, [PAGES, styles, POLICES_CSS])
+            coupes = json.loads(Path(sys.argv[3]).read_text()) if len(sys.argv) > 3 else {}
+            r = page.evaluate(PAGES_JS, [pages_coupees(coupes), styles, POLICES_CSS])
         else:
             n = int(sys.argv[2]) if len(sys.argv) > 2 else 1350
             r = {"images": page.evaluate(RESOUDRE_JS, n)}

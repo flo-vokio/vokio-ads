@@ -95,15 +95,20 @@ def fiche(D, ENC=None):
 
     m1 = D["mesures"]["s1"]
     g1 = G["s1"]
+    # recomposition du 28/09 : le disque du film (s1 → s6) et le point posé sur le ı (s7) peuvent différer (DONNEES.point)
+    rF = D["point"].get("diametre_film", D["point"]["diametre_disque"]) / 2
+    rI = D["point"]["diametre_disque"] / 2
     out["scenes"]["s1-sonnerie"] = {"temps": temps("s1-sonnerie"), "boites": [
         boite("accroche « Vous avez les mains prises. » Instrument Serif " + f"{g1['phrase']['corps']}/{g1['phrase']['interligne']}",
               [m1["lignes"][0]["x0"], m1["lignes"][0]["ligne_de_base"] - 0.75 * g1["phrase"]["corps"],
                max(l["x1"] for l in m1["lignes"]), m1["lignes"][-1]["ligne_de_base"] + 0.25 * g1["phrase"]["corps"]],
               lignes_de_base=[l["ligne_de_base"] for l in m1["lignes"]]),
-        boite(f"relance italique gris {g1['relance']['corps']}/{g1['relance']['interligne']} (boîte CSS, ligne de base = top + 64)",
-              [g1["relance"]["x"], g1["relance"]["top"], g1["relance"]["x"] + 540, g1["relance"]["top"] + 2 * g1["relance"]["interligne"]], cle=("relance", "s1-sonnerie"),
-              lignes_de_base=[g1["relance"]["top"] + 64, g1["relance"]["top"] + 64 + g1["relance"]["interligne"]]),
-        boite("« . » = le point du film (centre)", [m1["centre"]["x"] - 22, m1["centre"]["y"] - 22, m1["centre"]["x"] + 22, m1["centre"]["y"] + 22],
+        boite(f"relance italique gris {g1['relance']['corps']}/{g1['relance']['interligne']} (boîte CSS, ligne de base ≈ top + 0,89 corps)",
+              [g1["relance"]["x"], g1["relance"]["top"], g1["relance"]["x"] + 540 * g1["relance"]["corps"] / 72,
+               g1["relance"]["top"] + 2 * g1["relance"]["interligne"]], cle=("relance", "s1-sonnerie"),
+              lignes_de_base=[round(g1["relance"]["top"] + 64 * g1["relance"]["corps"] / 72, 1),
+                              round(g1["relance"]["top"] + 64 * g1["relance"]["corps"] / 72 + g1["relance"]["interligne"], 1)]),
+        boite("« . » = le point du film (centre)", [m1["centre"]["x"] - rF, m1["centre"]["y"] - rF, m1["centre"]["x"] + rF, m1["centre"]["y"] + rF],
               centre=[r1(m1["centre"]["x"]), r1(m1["centre"]["y"])]),
     ]}
     out["scenes"]["s2-voix"] = {"temps": temps("s2-voix"), "texte": {k: G["s2_texte"][k] for k in ("x", "corps", "interligne", "lignes_de_base", "x_max")},
@@ -131,7 +136,7 @@ def fiche(D, ENC=None):
         boite("iPhone 16 Pro (corps ; sort du cadre par le bas)", [T["x0"], T["haut"], T["x1"], min(T["bas"], F["hauteur"])], objet=True),
         boite("textes de l'écran (barre d'état, nom, horodatage, SMS)", [T["x0"], T["haut"], T["x1"], B["bas"]], cle=("telephone", "s6-sms")),
         boite(f"bulle du SMS (Inter 17 pt = {r1(B['corps_px'])} px)", [B["x0"], B["haut"], B["x1"], B["bas"]]),
-        boite("le point sous la queue (attente, éclosion)", [s6["point"]["x"] - 22, s6["point"]["y"] - 22, s6["point"]["x"] + 22, s6["point"]["y"] + 22],
+        boite("le point sous la queue (attente, éclosion)", [s6["point"]["x"] - rF, s6["point"]["y"] - rF, s6["point"]["x"] + rF, s6["point"]["y"] + rF],
               centre=[r1(s6["point"]["x"]), r1(s6["point"]["y"])]),
     ], "entree_sortie": {"y_entree": s6.get("y_entree"), "y_sortie": s6.get("y_sortie"), "depart_stylo_arc": s6.get("depart_stylo_arc")}}
     s7 = G["s7"]
@@ -139,10 +144,12 @@ def fiche(D, ENC=None):
     out["scenes"]["s7-signature"] = {"temps": temps("s7-signature"), "boites": [
         boite(f"wordmark « Vokıo » Instrument Serif {fin['corps']} (ligne de base {s7['ligne_de_base']})",
               [s7["mot"]["x0"], s7["ligne_de_base"] - 0.72 * fin["corps"], s7["mot"]["x1"], s7["ligne_de_base"] + 0.05 * fin["corps"]]),
-        boite("point du ı (#mot-pt)", [s7["mot_pt_centre"]["x"] - 22, s7["mot_pt_centre"]["y"] - 22, s7["mot_pt_centre"]["x"] + 22, s7["mot_pt_centre"]["y"] + 22],
+        boite("point du ı (#mot-pt)", [s7["mot_pt_centre"]["x"] - rI, s7["mot_pt_centre"]["y"] - rI, s7["mot_pt_centre"]["x"] + rI, s7["mot_pt_centre"]["y"] + rI],
               centre=[r1(s7["mot_pt_centre"]["x"]), r1(s7["mot_pt_centre"]["y"])]),
-        boite(f"promesse {pr['corps']}/{pr['interligne']} (2 lignes, centrée)", [pr["left"], pr["top"], F["largeur"] - pr["right"], pr["top"] + 2 * pr["interligne"]], cle=("promesse", "s7-signature")),
-        boite(f"offre {of['corps']}/{of['interligne']} (2 lignes, centrée)", [of["left"], of["top"], F["largeur"] - of["right"], of["top"] + 2 * of["interligne"]], cle=("offre", "s7-signature")),
+        boite(f"promesse {pr['corps']}/{pr['interligne']} ({'1 ligne' if pr.get('une_ligne') else '2 lignes'}, centrée)",
+              [pr["left"], pr["top"], F["largeur"] - pr["right"], pr["top"] + (1 if pr.get("une_ligne") else 2) * pr["interligne"]], cle=("promesse", "s7-signature")),
+        boite(f"offre {of['corps']}/{of['interligne']} ({'1 ligne' if of.get('une_ligne') else '2 lignes'}, centrée)",
+              [of["left"], of["top"], F["largeur"] - of["right"], of["top"] + (1 if of.get("une_ligne") else 2) * of["interligne"]], cle=("offre", "s7-signature")),
     ], "stylo": {"y": s7["stylo_y"], "x0": r1(s7["stylo_x0"]), "x1": r1(s7["stylo_x1"])}}
     out["point"] = [{"t": k["t"], "x": r1(k["x"]), "y": r1(k["y"]), "note": k.get("note", "")[:110]} for k in D["point"]["position"]]
     out["evenements"] = {k: v.get("t") for k, v in EV.items() if isinstance(v, dict) and "t" in v}

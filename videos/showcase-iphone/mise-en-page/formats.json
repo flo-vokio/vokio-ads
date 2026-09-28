@@ -1,5 +1,5 @@
 {
- "_note": "Les formats du film. Lu par outils/mise_en_page.py (construire.py, preparer_agenda.py, format.py ; planche des zones : format.py --planche). Zones en px du cadre : [x0, y0, x1, y1], y vers le bas. « interdite » = rien d'important (texte, point à l'arrêt, objet qui porte l'info) ; « prudence » = éviter le texte, un objet peut y déborder. corps_min = corps minimal d'un texte à lire (px). passer_s (annonce désactivable) = instant du bouton « Passer » : ce qui doit être dit avant (problème, accent de la marque, produit), contrôlé par outils/controles.py Y1 (tenu) et Y2 (le produit dit avant le bouton : strict, « À VALIDER » tant que le minutage ne le permet pas). marge_zones = écart minimal (px) entre une zone interdite et le point à l'arrêt ou un objet qui porte l'info (controles.py Z2 ; absent = 0). occupation = seuils de l'occupation du cadre par les plans-titres (controles.py O1, outils/occupation.py) : part de la largeur couverte par la boîte d'encre et barycentre horizontal, médianes sur la scène (les autres scènes sont mesurées et rapportées, sans seuil). Le 9:16 est la RÉFÉRENCE : ses valeurs ne bougent pas sans nouvelle empreinte (outils/identite.py).",
+ "_note": "Les formats du film. Lu par outils/mise_en_page.py (construire.py, preparer_agenda.py, format.py ; planche des zones : format.py --planche). Zones en px du cadre : [x0, y0, x1, y1], y vers le bas. « interdite » = rien d'important (texte, point à l'arrêt, objet qui porte l'info) ; « prudence » = éviter le texte, un objet peut y déborder. corps_min = corps minimal d'un texte à lire (px). passer_s (annonce désactivable) = instant du bouton « Passer » : ce qui doit être dit avant (problème, accent de la marque, produit), contrôlé par outils/controles.py Y1 (tenu) et Y2 (le produit dit avant le bouton : strict, « À VALIDER » tant que le minutage ne le permet pas). marge_zones = écart minimal (px) entre une zone interdite et le point à l'arrêt ou un objet qui porte l'info (controles.py Z2 ; absent = 0). occupation = seuils de l'occupation du cadre (controles.py O1, outils/occupation.py) : « par_scene » {scène: largeur_min, barycentre [min, max], hauteur_min} (recomposition du 28/09), mesurés à pleine composition ; l'ancienne forme commune (scenes, largeur_min, barycentre) reste lue. echelle_point (facultatif, 1 par défaut) = taille du disque du film de s1 à s6 relative au 9:16 (44 px) ; le point posé sur le ı suit, lui, le wordmark (s7-signature.json, corps / 400) : outils/mise_en_page.py echelle_point, echelle_mot. Le 9:16 est la RÉFÉRENCE : ses valeurs ne bougent pas sans nouvelle empreinte (outils/identite.py).",
  "9x16": {
   "largeur": 1080,
   "hauteur": 1920,
@@ -23,7 +23,24 @@
   "bas_utile": 972,
   "passer_s": 5.0,
   "marge_zones": 24,
-  "occupation": {"scenes": ["s1-sonnerie", "s7-signature"], "largeur_min": 0.45, "barycentre": [0.3, 0.7], "_note": "plans-titres seulement : les sous-titres de s2 à s6 gardent le corps et la colonne du 9:16 (x 144 → 1064, bornée par l'objet de s4 à s6 et par le point de 44 px)"},
+  "marge_point_arret": 60,
+  "_marge_point_arret": "3e passe (28/09, revues YouTube et Florian) : là où le point ATTEND (≥ 0,5 s d'arrêt), il reste à ≥ 60 px des zones interdites et à ≥ marge_zones (24) des zones de prudence (encart de l'annonceur, bande du haut) : controles.py Z2. Avant : 30 px de la bande du bas et 12 px de l'encart.",
+  "occupation": {
+   "_note": "3e passe du 28/09 (revue YouTube : « O1 mesure l'image la plus pleine, avec des seuils posés juste sous la mesure ») : seuils fixés d'après la RÈGLE, jamais d'après la mesure, et jugés sur la DURÉE autant que sur l'image pleine (outils/occupation.py juger, controles.py O1 ; échantillon toutes les 0,5 s). Règles : un plan centré (l'accroche posée, le SMS, la signature) a son barycentre médian à 0,5 ± 0,05 à 0,1 ; un acte équilibré (la voix seule, s2 + s3, en champ-contrechamp) à 0,5 ± 0,15 ; la ligne de lecture des actes à la voix (s2 à s5) garde le barycentre vertical médian à 0,45 ± 0,15 (0,455 = la ligne de lecture du 9:16, 874 / 1920) ; un plan-titre couvre au moins les 3/4 de la largeur à pleine composition ; l'objet de s4-s5 (la capture) au moins 0,8 de la largeur et 0,7 de la hauteur utile. s2 seule n'a pas de barycentre horizontal : c'est le champ (l'agente, à gauche), jugé avec son contrechamp (s3) dans la fenêtre « voix seule ». Mesures de la 3e passe dans le compte rendu (controles-16x9/controles.json, O1).",
+   "par_scene": {
+    "s1-sonnerie": {"largeur_min": 0.75, "barycentre": [0.35, 0.65], "hauteur_min": 0.35},
+    "s2-voix": {"largeur_min": 0.5, "bary_y_median": [0.3, 0.6]},
+    "s3-ecoute": {"largeur_mediane_min": 0.5, "barycentre_median": [0.35, 0.65], "bary_y_median": [0.3, 0.6]},
+    "s4-agenda": {"largeur_min": 0.8, "hauteur_min": 0.7, "bary_y_median": [0.3, 0.6]},
+    "s5-rendez-vous": {"largeur_min": 0.8, "hauteur_min": 0.7, "bary_y_median": [0.3, 0.6]},
+    "s6-sms": {"largeur_min": 0.5, "barycentre_median": [0.4, 0.6], "hauteur_min": 0.9},
+    "s7-signature": {"largeur_min": 0.6, "barycentre": [0.45, 0.55], "hauteur_min": 0.6}
+   },
+   "fenetres": {
+    "accroche posée (0 → 2,1 s)": {"t": [0.0, 2.1], "barycentre_median": [0.45, 0.55]},
+    "voix seule (s2 + s3)": {"t": [4.6333, 17.3], "barycentre_median": [0.35, 0.65]}
+   }
+  },
   "zones": [
    {"nom": "barre de lecture et bandeau de l'annonce (10 % du bas)", "sorte": "interdite", "boite": [0, 972, 1920, 1080]},
    {"nom": "bouton « Passer l'annonce » et son compte à rebours", "sorte": "interdite", "boite": [1500, 780, 1920, 1080]},
