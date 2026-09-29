@@ -1,0 +1,14 @@
+{
+ "_note": "Version courte 9:16 pour la pub Meta (29/09), testée face au film entier de 50,07 s. Segments en images du film COURANT (1 502), [début, fin). Tête : image 80 (2,667 s), la 2e sonnerie et la relance qui s'écrit, l'accroche déjà posée dès l'image 0 (dans le film long, l'image 0 est presque vide). Coupe 1 (2 mesures) : 3 images après le décroché → juste avant « mon chat » (l'accueil d'Élise est retiré). Coupe 2 (1 mesure) : après « depuis hier » → avant « Laissez-moi voir » (retire « Euh, demain, vous avez des disponibilités ? » ; le point reste à sa place d'écoute des deux côtés). Coupe 3 (5 mesures) : après « c'est parfait », avant que la plume se pose → SMS ouvert dans l'iPhone (retire le prénom, le récapitulatif, « Vous recevrez un SMS », l'au revoir, le raccroché). Fin : la signature entière, bloc de fin remonté (s7-signature 9x16-court, s6-sms 9x16-court). Montage : python3 outils/court.py courts/9x16-court.json --image <rendu long de formats/9x16-court>.",
+ "nom": "le-point-sur-le-i-court-9x16",
+ "sortie": "le-point-sur-le-i-court-9x16.mp4",
+ "racine": "formats/9x16-court",
+ "format": {"base": "9x16", "variantes": {"s7-signature": "9x16-court", "s6-sms": "9x16-court"}},
+ "mix": "/opt/vokio-ads/videos/showcase/son/hybride/mix-hybride.wav",
+ "segments": [[80, 130], [314, 424], [516, 755], [1215, 1502]],
+ "fondu_ms": 50,
+ "fondu_tete_ms": 10,
+ "marge_mots_ms": 60,
+ "lufs": -14.0,
+ "crete_max_dbtp": -1.0
+}

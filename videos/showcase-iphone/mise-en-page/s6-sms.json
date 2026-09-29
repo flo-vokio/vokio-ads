@@ -22,5 +22,11 @@
   "couloir_dy": -40,
   "_composition": "3e passe du 28/09 (revue Florian : « le temps mort immobile qu'il a validé n'existe plus ») : plus de « telephone_monte » propre au format : le téléphone monte AVEC « Au revoir » (35,10 → 35,60 du film de 47 s ; 38,17 → 38,67 depuis l'échange du prénom, qui décale tout s6 de 92 images : outils/temps.py), comme en 9:16, et le silence numérique (35,95 → 36,67 ; 39,01 → 39,73) redevient un plan immobile (controles.py I2, sans exception) ; c'est la page de l'appelant qui est recoupée en trois lignes (texte.json « coupes »). Premier geste de la gouttière vers « recevrez » par le « couloir » (forme de construire.py) : le point descend à mi-chemin des étiquettes 09:00 et 10:00, 40 px au-dessus (couloir_dy −40, y 382,75 : l'agenda monte en sortant), franchit la colonne des étiquettes, puis rejoint le mot ; départ 933, pas max 90,7, ≥ 12 px des étiquettes (heurts.py, qui les voit désormais : la « descente » passait sur « 10:00 », image 937). Départ vers le stylo (clé 30), arc {dx +70, dy +90} (outils/depart_point.py, 1 369 arcs balayés, 21 sous un coude de 15° : coude 3,7°, pas max 80,1, ≥ 11,5 px de la bulle, Σ opacité × part hors du contour 0,60). Le point grandit pendant ce vol (44 → 52,8 px, le point du ı du wordmark de 480 : DONNEES.point.taille), +20 % au lieu de +35 %.",
   "_variante_adoptee": "« 16x9-v3 » puis « 16x9-v3b » (x0 604), adoptées le 28/09/2026 : 3e passe du 16:9 (revues YouTube 7/10 et Florian 7,5/10)"
+ },
+ "variantes": {
+  "9x16-court": {
+   "_note": "Version courte (29/09) : le wordmark monte de 90 px (s7-signature 9x16-court) ; l'arc du 9:16 (-30, 80) touchait la bulle (0,1 px). Balayage depart_point.py : (-40, 100) = écart bulle 8,9 px, pas max 92,9, coude 14,6°, Σ o·hors 0,13 (seul arc sous 15° avec écart ≥ 8).",
+   "depart_stylo_arc": {"dx": -40, "dy": 100}
+  }
  }
 }

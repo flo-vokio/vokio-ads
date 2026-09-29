@@ -1,0 +1,375 @@
+{
+ "accroche": {
+  "t": [
+   0.0,
+   0.9
+  ],
+  "images": [
+   0,
+   27
+  ]
+ },
+ "point_pose": {
+  "t": [
+   0.833333,
+   0.966667
+  ],
+  "images": [
+   25,
+   29
+  ]
+ },
+ "decroche": {
+  "t": 4.2,
+  "image": 126
+ },
+ "lumiere": {
+  "t": 4.233333,
+  "image": 127
+ },
+ "anticipation": {
+  "t": [
+   4.566667,
+   4.633333
+  ],
+  "images": [
+   137,
+   139
+  ]
+ },
+ "suiveur": {
+  "t": [
+   4.633333,
+   17.2
+  ],
+  "images": [
+   139,
+   516
+  ]
+ },
+ "tamis_fondu": {
+  "t": [
+   13.95,
+   14.2
+  ],
+  "images": [
+   419,
+   426
+  ]
+ },
+ "tamis_resserrage": {
+  "t": [
+   14.15,
+   14.5
+  ],
+  "images": [
+   425,
+   435
+  ]
+ },
+ "depart_agenda": {
+  "t": 17.2,
+  "image": 516
+ },
+ "arrivee_agenda": {
+  "t": 17.8,
+  "image": 534
+ },
+ "agenda_monte": {
+  "t": [
+   18.37,
+   19.07
+  ],
+  "images": [
+   551,
+   572
+  ]
+ },
+ "saut_neuf_envol": {
+  "t": 20.433333,
+  "image": 613
+ },
+ "saut_neuf_sommet": {
+  "t": 20.533333,
+  "image": 616
+ },
+ "contact_neuf": {
+  "t": 20.666667,
+  "image": 620
+ },
+ "saut_dix_envol": {
+  "t": 21.166667,
+  "image": 635
+ },
+ "saut_dix_sommet": {
+  "t": 21.233333,
+  "image": 637
+ },
+ "contact_dix": {
+  "t": 21.433333,
+  "image": 643
+ },
+ "saut_onze_envol": {
+  "t": 21.933333,
+  "image": 658
+ },
+ "saut_onze_sommet": {
+  "t": 22.0,
+  "image": 660
+ },
+ "contact_onze": {
+  "t": 22.2,
+  "image": 666
+ },
+ "retour_envol": {
+  "t": 23.966667,
+  "image": 719
+ },
+ "retour_sommet": {
+  "t": 24.233333,
+  "image": 727
+ },
+ "contact_retour_neuf": {
+  "t": 24.366667,
+  "image": 731
+ },
+ "plume_pose": {
+  "t": 25.366667,
+  "image": 761
+ },
+ "ecriture_debut": {
+  "t": 25.4,
+  "image": 762
+ },
+ "heure_ecrite": {
+  "t": 25.9,
+  "image": 777
+ },
+ "plume_levee": {
+  "t": [
+   25.9,
+   26.233333
+  ],
+  "images": [
+   777,
+   787
+  ]
+ },
+ "plume_suspendue": {
+  "t": [
+   26.233333,
+   28.066667
+  ],
+  "images": [
+   787,
+   842
+  ]
+ },
+ "plume_reposee": {
+  "t": [
+   28.066667,
+   28.266667
+  ],
+  "images": [
+   842,
+   848
+  ]
+ },
+ "ecriture_nom": {
+  "t": [
+   28.266667,
+   28.933333
+  ],
+  "images": [
+   848,
+   868
+  ]
+ },
+ "ecriture_fin": {
+  "t": 28.933333,
+  "image": 868
+ },
+ "suivi_bloc": {
+  "t": [
+   28.933333,
+   29.133333
+  ],
+  "images": [
+   868,
+   874
+  ]
+ },
+ "vers_gouttiere": {
+  "t": [
+   28.933333,
+   29.533333
+  ],
+  "images": [
+   868,
+   886
+  ]
+ },
+ "signe_florian": {
+  "t": 30.416667,
+  "image": 913
+ },
+ "agenda_sort": {
+  "t": [
+   34.066667,
+   34.416667
+  ],
+  "images": [
+   1022,
+   1033
+  ]
+ },
+ "depart_gouttiere": {
+  "t": 34.166667,
+  "image": 1025
+ },
+ "voix_sms": {
+  "t": [
+   34.166667,
+   35.5
+  ],
+  "images": [
+   1025,
+   1065
+  ]
+ },
+ "resolution_confirmation": {
+  "t": 36.033333,
+  "image": 1081
+ },
+ "depart_telephone": {
+  "t": 36.966667,
+  "image": 1109
+ },
+ "arrivee_bulle": {
+  "t": 37.633333,
+  "image": 1129
+ },
+ "telephone_monte": {
+  "t": [
+   38.166667,
+   38.666667
+  ],
+  "images": [
+   1145,
+   1160
+  ]
+ },
+ "raccroche": {
+  "t": 38.933333,
+  "image": 1168
+ },
+ "silence_numerique": {
+  "t": [
+   39.013367,
+   39.733333
+  ],
+  "images": [
+   1170,
+   1192
+  ]
+ },
+ "bulle_et_vibreur": {
+  "t": 39.733333,
+  "image": 1192
+ },
+ "bulle_ouverte": {
+  "t": 40.2,
+  "image": 1206
+ },
+ "telephone_sortie": {
+  "t": [
+   44.066667,
+   44.466667
+  ],
+  "images": [
+   1322,
+   1334
+  ]
+ },
+ "depart_stylo": {
+  "t": 44.066667,
+  "image": 1322
+ },
+ "plume_mot": {
+  "t": [
+   44.566667,
+   45.266667
+  ],
+  "images": [
+   1337,
+   1358
+  ]
+ },
+ "signature_la": {
+  "t": 45.366667,
+  "image": 1361
+ },
+ "signature_sol": {
+  "t": 45.606667,
+  "image": 1368
+ },
+ "signature_re_contact": {
+  "t": 45.966667,
+  "image": 1379
+ },
+ "promesse": {
+  "t": [
+   46.566667,
+   46.766667
+  ],
+  "images": [
+   1397,
+   1403
+  ]
+ },
+ "offre": {
+  "t": [
+   47.466667,
+   47.566667
+  ],
+  "images": [
+   1424,
+   1427
+  ]
+ },
+ "silence_final": {
+  "t": [
+   49.766667,
+   50.066667
+  ],
+  "images": [
+   1493,
+   1502
+  ]
+ },
+ "fin": {
+  "t": 50.066666,
+  "image": 1502
+ },
+ "saut_neuf_debut": {
+  "t": 20.433333,
+  "image": 613
+ },
+ "saut_dix_debut": {
+  "t": 21.166667,
+  "image": 635
+ },
+ "saut_onze_debut": {
+  "t": 21.933333,
+  "image": 658
+ },
+ "retour_debut": {
+  "t": 23.966667,
+  "image": 719
+ },
+ "ecriture_pose": {
+  "t": 25.366667,
+  "image": 761
+ },
+ "_note": "Temps film ; image = round(t × 30), sauf signe_florian (image de la voyelle de « Florian » dite par l'agente : 913). Un bruitage de contact se pose à l'échantillon round(t × 48000). Intervalles : {t: [début, fin], images: [...]}. Finition du 27/09 : le téléphone n'entre qu'avec « Au revoir » (vide 1,07 s avant la bulle), la bulle entière se lit 3.87 s ; tout ce qui suit est décalé de 1.7 s, la tenue finale de 0.3 s en plus (film de base de 47,00 s). 28/09, l'échange du prénom (son/dialogue.json « insertions ») : tout ce qui suit l'image 758 du film de base glisse de 92 images (film de 50.066667 s, 1502 images) ; heure_ecrite, plume_levee, plume_suspendue, plume_reposee, ecriture_nom : le point écrit « 09:00 », attend le prénom plume levée, puis écrit « Florian » sous la voix de l'appelant. Alias v1 gardés : saut_*_debut (= envol), retour_debut, ecriture_pose."
+}

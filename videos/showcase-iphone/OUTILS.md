@@ -379,3 +379,18 @@ sous une plume à l'extrême droite). `espace_format.py mesurer` : 0 contradicti
 `mix-hybride.wav` (inchangé à l'octet par le mix du 16:9). Bumpers : mêmes 180 images que ceux du film de 47 s (PSNR ≥ 47 dB, codec),
 même son (mix source identique à −56 dB au moins ; forme d'onde de l'AAC seule), −14,0 LUFS ; preuves :
 `$UP/controles-16x9/comparer-bumpers-47s-contre-50s.json`, `preuve-continuite-mix-16x9-47s-contre-50s.json`, `espace-16x9-*.json`.
+
+## 8. Version courte (pub Meta, 29/09)
+
+| Besoin | Commande |
+|---|---|
+| Chercher des coupes possibles : bords dans un blanc du vrai appel ET longueur = mesures entières (92 images) | `python3 outils/court.py courts/9x16-court.json --verifier-seulement` (modifier « segments » et relancer ; code 1 si une coupe tombe dans un mot, n'est pas en mesures entières, ou si le texte dit n'est plus une sous-suite) |
+| Construire le projet du format court (fin remontée : « vokio.fr » au-dessus de y 1250, sous la légende Reels) | `python3 outils/format.py 9x16 --variante s7-signature=9x16-court --variante s6-sms=9x16-court --dossier formats/9x16-court --check` |
+| Rendre le long de ce format, sans perte | `python3 outils/rendre.py formats/9x16-court -o /dev/shm/c/longue.mp4 --son son/dialogue.wav --crf 0 --tmp shm` |
+| Monter le court (image à l'image près, mix validé recoupé avec fondus de 50 ms, gain unique vers −14 LUFS, livrer.py, planche 1 i/s, table des coupes, mots au temps du court) | `python3 outils/court.py courts/9x16-court.json --image /dev/shm/c/longue.mp4` → `$UP/le-point-sur-le-i-court-9x16*.{mp4,wav,json,png}` |
+| Écouter les coupes par la mesure | `python3 $SON/outils/ausculter.py trous $UP/le-point-sur-le-i-court-9x16-mix.wav --mots $UP/le-point-sur-le-i-court-9x16-mots.json` (comparer aux mêmes instants du long : ce qui existe déjà dans le long est hérité) |
+
+Règles de la recette : la tête est libre (le court commence où l'on veut) ; chaque coupe interne retire k × 92 images, donc la
+musique garde sa grille (même phase dans la mesure des deux côtés, la grosse caisse et le ré du logo retombent sur leurs temps) ;
+seul l'accord peut changer au milieu d'une mesure (fondu de 50 ms). `controles.py` sur le court : les contrôles de minutage du
+film long (D, S, V…) n'ont pas de sens après montage ; les contrôles de mise en page se jugent sur le LONG du format.

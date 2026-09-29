@@ -1,0 +1,119 @@
+[
+ {
+  "nom": "Bonjour",
+  "extrait": "A1",
+  "texte": "Bonjour,",
+  "debut": 5.0,
+  "voyelle": 5.02,
+  "image": 150,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "neuf",
+  "extrait": "A2A3",
+  "texte": "neuf",
+  "debut": 20.555,
+  "voyelle": 20.672,
+  "image": 617,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "dix",
+  "extrait": "A2A3",
+  "texte": "dix",
+  "debut": 21.42,
+  "voyelle": 21.43,
+  "image": 643,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "onze",
+  "extrait": "A2A3",
+  "texte": "onze",
+  "debut": 22.2,
+  "voyelle": 22.205,
+  "image": 666,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "à neuf (appelant)",
+  "extrait": "C3",
+  "texte": "à",
+  "debut": 23.97,
+  "voyelle": 23.97,
+  "image": 719,
+  "locuteur": "appelant"
+ },
+ {
+  "nom": "Parfait",
+  "extrait": "A4",
+  "texte": "Parfait,",
+  "debut": 29.306667,
+  "voyelle": 29.321667,
+  "image": 879,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "Florian",
+  "extrait": "A4",
+  "texte": "Florian,",
+  "debut": 30.316667,
+  "voyelle": 30.421667,
+  "image": 910,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "samedi",
+  "extrait": "A4",
+  "texte": "samedi",
+  "debut": 32.516667,
+  "voyelle": 32.536667,
+  "image": 976,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "Vous recevrez",
+  "extrait": "A4",
+  "texte": "Vous",
+  "debut": 34.456667,
+  "voyelle": 34.466667,
+  "image": 1034,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "SMS",
+  "extrait": "A4",
+  "texte": "SMS",
+  "debut": 35.134667,
+  "voyelle": 35.181667,
+  "image": 1054,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "dernière syllabe de confirmation",
+  "extrait": "A4",
+  "texte": "-tion",
+  "debut": 35.881667,
+  "voyelle": 36.021667,
+  "image": 1076,
+  "locuteur": "agent"
+ },
+ {
+  "nom": "Super",
+  "extrait": "C4",
+  "texte": "Super,",
+  "debut": 37.096667,
+  "voyelle": 37.111667,
+  "image": 1113,
+  "locuteur": "appelant"
+ },
+ {
+  "nom": "Au revoir",
+  "extrait": "C4",
+  "texte": "Au",
+  "debut": 38.186667,
+  "voyelle": null,
+  "image": 1146,
+  "locuteur": "appelant"
+ }
+]

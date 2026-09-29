@@ -11,5 +11,13 @@
   "promesse": {"left": 96, "right": 96, "top": 603, "corps": 72, "interligne": 84, "alignement": "center", "une_ligne": true},
   "offre": {"left": 96, "right": 96, "top": 737, "corps": 52, "interligne": 62, "alignement": "center"},
   "_variante_adoptee": "« 16x9-v3 », adoptée le 28/09/2026 : 3e passe du 16:9 (revues YouTube 7/10 et Florian 7,5/10)"
+ },
+ "variantes": {
+  "9x16-court": {
+   "_note": "Version courte pub Meta (29/09) : bloc de fin remonté de 90 px pour que l'offre et « vokio.fr » restent au-dessus de y 1250 (la légende Instagram Reels couvre le bas ~35 %). Lignes de base de l'offre 1146 et 1210 (avant 1236 et 1300). Le 9:16 de référence ne change pas.",
+   "fin": {"top": 454, "ligne_de_base": 770},
+   "promesse": {"top": 863},
+   "offre": {"top": 1099}
+  }
  }
 }
