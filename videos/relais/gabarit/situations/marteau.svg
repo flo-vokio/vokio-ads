@@ -1,0 +1,26 @@
+<!-- Situation « marteau » (rénovation, un projet de travaux) : une planche, un clou planté droit ; le marteau prend son élan,
+     frappe (deux coups), le clou s'enfonce d'un cran à chaque coup, un peu de poussière, la planche vibre, le marteau rebondit
+     à peine et repart. Animé par marteau.js (lib/fx.js). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="1.25" style="overflow:visible;left:-10px;top:170px;width:680px;height:680px">
+  <g id="ma-planche">
+    <rect x="40" y="420" width="470" height="62" rx="8" fill="#E6D9C0" stroke="#262019" stroke-width="7"/>
+    <path d="M70 442 C 170 436 250 450 350 440 S 450 446 490 440 M100 462 C 200 468 290 456 410 464" fill="none" stroke="#262019" stroke-width="3.5" opacity=".35"/>
+  </g>
+  <g id="ma-clou">
+    <path d="M326 330 H 334 V 414 L 330 428 L 326 414 Z" fill="#262019"/>
+    <rect x="312" y="322" width="36" height="10" rx="4" fill="#262019"/>
+  </g>
+  <g id="ma-marteau">
+    <!-- manche en bois (clair, cerné), poignée sombre au bout ; tête en acier : œil où entre le manche, panne (la face qui
+         frappe, en bas), arrache-clou fendu et recourbé vers le manche (en haut) -->
+    <path d="M60 252 H 312 V 280 H 60 Q 48 280 48 266 Q 48 252 60 252 Z" fill="#E6D9C0" stroke="#262019" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M60 252 H 140 V 280 H 60 Q 48 280 48 266 Q 48 252 60 252 Z" fill="#262019"/>
+    <path d="M300 236 H 360 V 296 H 300 Z" fill="#262019"/>
+    <path d="M308 296 H 352 L 356 318 H 304 Z" fill="#262019"/>
+    <rect x="296" y="316" width="68" height="16" rx="3" fill="#262019"/>
+    <path d="M300 240 C 286 214 262 192 228 180 L 234 166 C 276 176 318 204 350 238 Z" fill="#262019"/>
+    <path d="M292 226 C 280 210 262 196 240 188" fill="none" stroke="#F4F1E8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M308 244 H 352" stroke="#6F695F" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g id="ma-fx"></g>
+</svg>

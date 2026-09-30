@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-onglerie-boucle.mp4",
+   "crf": 18,
+   "octets": 386065
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-onglerie-boucle-poster.webp",
+   "octets": 12338,
+   "t": 1.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-onglerie-boucle-poster.jpg",
+   "octets": 25038,
+   "t": 1.0
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-onglerie-complete.mp4",
+   "crf": 18,
+   "octets": 1758337
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-onglerie-complete-poster.webp",
+   "octets": 9148,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-onglerie-complete-poster.jpg",
+   "octets": 19682,
+   "t": 0.0
+  }
+ }
+}

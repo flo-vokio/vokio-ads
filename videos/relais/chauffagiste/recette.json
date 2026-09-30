@@ -1,0 +1,165 @@
+{
+  "_note": "Chauffagiste « Chaudière en défaut ». Énoncés = le dit (Scribe) ; « Therm’Sud » et la rue tels que sur la page.",
+  "id": "chauffagiste",
+  "carte": "Chaudière en défaut",
+  "audio": "/opt/vokio-site-repo/assets/appel-chauffagiste.mp3",
+  "nom": "relais-chauffagiste",
+  "agente": "Inès",
+  "jour_heure": "Vendredi, 15 h 03.",
+  "phrase": "Inès qualifie la panne sans la basculer en urgence, relève l’adresse et cale le dépannage de samedi matin.",
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Inès, l’assistante vocale de Therm’Sud ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui bonjour, j’ai ma chaudière qui est en défaut depuis ce matin et du coup, j’ai plus de chauffage et je voulais savoir si vous avez une disponibilité pour passer, euh, demain."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord et c’est pour un dépannage de chaudière, c’est bien ça ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui, c’est ça."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je regarde ça. Je vérifie les disponibilités. Je peux vous proposer samedi matin. Cela vous convient ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui."
+    },
+    {
+      "qui": "agente",
+      "texte": "C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, c’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord Florian. Et à quelle adresse doit intervenir le technicien ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, au, au 12 rue des Lices, s’il vous plaît, à Toulon."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. Donc c’est pour Florian, un dépannage chaudière le samedi dix-neuf septembre dans la matinée au douze rue des Lices, quatre-vingt-trois mille Toulon. C’est bien cela ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait. Je vous note ça pour Florian, un dépannage chaudière le samedi dix-neuf septembre dans la matinée. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Ok, merci beaucoup. Bonne journée, au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous. Bonne journée, au revoir."
+    }
+  ],
+  "situation": "chaudiere",
+  "poster_boucle": 0.45,
+  "fiche": {
+    "titre": "Dépannage · samedi 19 septembre",
+    "lignes": [
+      "Dépannage chaudière",
+      "Samedi, dans la matinée",
+      "Florian, adresse relevée"
+    ]
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : dépannage chaudière, le samedi 19 septembre dans la matinée, Therm’Sud. Démo Vokio, RDV fictif.",
+    "souligne": "samedi 19 septembre",
+    "heure": "15:04"
+  },
+  "complete": {
+    "avance": 1.6,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.1
+      ],
+      "decroche": 1.1,
+      "sort": 1.3
+    },
+    "fiche": {
+      "entree": "E2:dépannage",
+      "sortie": "E12:SMS",
+      "lignes": [
+        "E2:chaudière,",
+        "E4:matin.",
+        "E11:Oui."
+      ]
+    },
+    "sms": {
+      "entree": "E12:fin+0.1",
+      "bulle": "E12:fin+0.75",
+      "sortie": "E14:debut-0.55"
+    },
+    "fin": {
+      "entree": "E14:fin+0.45"
+    }
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "Je peux vous proposer samedi matin.",
+        "source": 4,
+        "temps": [
+          2.5,
+          2.65,
+          2.8,
+          3.0,
+          3.45,
+          3.75
+        ]
+      },
+      {
+        "qui": "appelant",
+        "texte": "Euh, oui.",
+        "source": 5,
+        "temps": [
+          4.9,
+          5.2
+        ]
+      }
+    ],
+    "fiche": {
+      "entree": 2.3,
+      "sortie": 8.55,
+      "lignes": [
+        2.6,
+        3.9,
+        5.6
+      ]
+    },
+    "texte_sortie": 7.6
+  }
+}

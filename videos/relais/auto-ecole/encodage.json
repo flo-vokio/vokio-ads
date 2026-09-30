@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-auto-ecole-boucle.mp4",
+   "crf": 18,
+   "octets": 499474
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-auto-ecole-boucle-poster.webp",
+   "octets": 8290,
+   "t": 0.72
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-auto-ecole-boucle-poster.jpg",
+   "octets": 17242,
+   "t": 0.72
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-auto-ecole-complete.mp4",
+   "crf": 18,
+   "octets": 1913068
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-auto-ecole-complete-poster.webp",
+   "octets": 7226,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-auto-ecole-complete-poster.jpg",
+   "octets": 16362,
+   "t": 0.0
+  }
+ }
+}

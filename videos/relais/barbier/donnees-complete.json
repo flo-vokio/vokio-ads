@@ -1,0 +1,685 @@
+{
+ "mode": "complete",
+ "fps": 30,
+ "taille": 1080,
+ "marge": 84,
+ "corps": {
+  "agente": {
+   "seul": 72,
+   "objet": 64
+  },
+  "appelant": {
+   "seul": 86,
+   "objet": 76
+  }
+ },
+ "corps_min": 52,
+ "situation": {
+  "sonne": [
+   0.05,
+   1.3
+  ],
+  "decroche": 1.3,
+  "sort": 1.45,
+  "objet": "lb-rasoir"
+ },
+ "enonces": [
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Bonjour,",
+     "t": 1.68,
+     "t1": 2.04
+    },
+    {
+     "texte": "je",
+     "t": 2.14,
+     "t1": 2.24
+    },
+    {
+     "texte": "suis",
+     "t": 2.28,
+     "t1": 2.4
+    },
+    {
+     "texte": "Nina,",
+     "t": 2.42,
+     "t1": 2.66
+    },
+    {
+     "texte": "l’assistante",
+     "t": 2.82,
+     "t1": 3.24
+    },
+    {
+     "texte": "vocale",
+     "t": 3.26,
+     "t1": 3.54
+    },
+    {
+     "texte": "de",
+     "t": 3.56,
+     "t1": 3.64
+    },
+    {
+     "texte": "Barbier",
+     "t": 3.68,
+     "t1": 3.9
+    },
+    {
+     "texte": "du",
+     "t": 3.92,
+     "t1": 4.15
+    },
+    {
+     "texte": "Cours !",
+     "t": 4.17,
+     "t1": 4.4
+    },
+    {
+     "texte": "Comment",
+     "t": 4.52,
+     "t1": 4.7
+    },
+    {
+     "texte": "puis-je",
+     "t": 4.76,
+     "t1": 4.94
+    },
+    {
+     "texte": "vous",
+     "t": 4.96,
+     "t1": 5.08
+    },
+    {
+     "texte": "aider ?",
+     "t": 5.1,
+     "t1": 5.32
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Bonjour,",
+     "t": 6.7,
+     "t1": 7.0
+    },
+    {
+     "texte": "est-ce",
+     "t": 7.12,
+     "t1": 7.24
+    },
+    {
+     "texte": "que",
+     "t": 7.26,
+     "t1": 7.32
+    },
+    {
+     "texte": "vous",
+     "t": 7.36,
+     "t1": 7.44
+    },
+    {
+     "texte": "aurez",
+     "t": 7.46,
+     "t1": 7.58
+    },
+    {
+     "texte": "de",
+     "t": 7.6,
+     "t1": 7.62
+    },
+    {
+     "texte": "la",
+     "t": 7.66,
+     "t1": 7.72
+    },
+    {
+     "texte": "place",
+     "t": 7.78,
+     "t1": 8.02
+    },
+    {
+     "texte": "demain,",
+     "t": 8.08,
+     "t1": 8.42
+    },
+    {
+     "texte": "euh,",
+     "t": 8.56,
+     "t1": 8.92
+    },
+    {
+     "texte": "pour",
+     "t": 9.08,
+     "t1": 9.18
+    },
+    {
+     "texte": "une",
+     "t": 9.24,
+     "t1": 9.34
+    },
+    {
+     "texte": "coupe",
+     "t": 9.38,
+     "t1": 9.539
+    },
+    {
+     "texte": "et",
+     "t": 9.56,
+     "t1": 9.64
+    },
+    {
+     "texte": "barbe",
+     "t": 9.68,
+     "t1": 9.94
+    },
+    {
+     "texte": "en",
+     "t": 10.56,
+     "t1": 10.82
+    },
+    {
+     "texte": "fin",
+     "t": 10.92,
+     "t1": 11.0
+    },
+    {
+     "texte": "de",
+     "t": 11.02,
+     "t1": 11.08
+    },
+    {
+     "texte": "journée",
+     "t": 11.1,
+     "t1": 11.32
+    },
+    {
+     "texte": "plutôt ?",
+     "t": 11.4,
+     "t1": 11.68
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Je",
+     "t": 12.9,
+     "t1": 12.98
+    },
+    {
+     "texte": "vérifie",
+     "t": 13.02,
+     "t1": 13.32
+    },
+    {
+     "texte": "les",
+     "t": 13.34,
+     "t1": 13.42
+    },
+    {
+     "texte": "disponibilités.",
+     "t": 13.46,
+     "t1": 14.18
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Oui,",
+     "t": 14.6,
+     "t1": 14.82
+    },
+    {
+     "texte": "j’ai",
+     "t": 15.08,
+     "t1": 15.2
+    },
+    {
+     "texte": "des",
+     "t": 15.22,
+     "t1": 15.32
+    },
+    {
+     "texte": "disponibilités",
+     "t": 15.36,
+     "t1": 16.02
+    },
+    {
+     "texte": "demain",
+     "t": 16.06,
+     "t1": 16.36
+    },
+    {
+     "texte": "à",
+     "t": 16.48,
+     "t1": 16.56
+    },
+    {
+     "texte": "quinze",
+     "t": 16.6,
+     "t1": 16.8
+    },
+    {
+     "texte": "heures,",
+     "t": 16.84,
+     "t1": 17.02
+    },
+    {
+     "texte": "seize",
+     "t": 17.1,
+     "t1": 17.3
+    },
+    {
+     "texte": "heures",
+     "t": 17.32,
+     "t1": 17.54
+    },
+    {
+     "texte": "ou",
+     "t": 17.62,
+     "t1": 17.68
+    },
+    {
+     "texte": "dix-sept",
+     "t": 17.719,
+     "t1": 18.06
+    },
+    {
+     "texte": "heures.",
+     "t": 18.08,
+     "t1": 18.26
+    },
+    {
+     "texte": "Qu’est-ce",
+     "t": 18.42,
+     "t1": 18.58
+    },
+    {
+     "texte": "qui",
+     "t": 18.6,
+     "t1": 18.68
+    },
+    {
+     "texte": "vous",
+     "t": 18.7,
+     "t1": 18.8
+    },
+    {
+     "texte": "arrangerait",
+     "t": 18.84,
+     "t1": 19.16
+    },
+    {
+     "texte": "le",
+     "t": 19.18,
+     "t1": 19.26
+    },
+    {
+     "texte": "mieux ?",
+     "t": 19.3,
+     "t1": 19.46
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Euh,",
+     "t": 20.62,
+     "t1": 20.74
+    },
+    {
+     "texte": "seize",
+     "t": 20.82,
+     "t1": 21.02
+    },
+    {
+     "texte": "heures,",
+     "t": 21.04,
+     "t1": 21.16
+    },
+    {
+     "texte": "s’il",
+     "t": 21.22,
+     "t1": 21.34
+    },
+    {
+     "texte": "vous",
+     "t": 21.36,
+     "t1": 21.42
+    },
+    {
+     "texte": "plaît.",
+     "t": 21.46,
+     "t1": 21.62
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Laissez-moi",
+     "t": 23.12,
+     "t1": 23.58
+    },
+    {
+     "texte": "voir.",
+     "t": 23.68,
+     "t1": 24.14
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Très",
+     "t": 25.14,
+     "t1": 25.26
+    },
+    {
+     "texte": "bien.",
+     "t": 25.3,
+     "t1": 25.46
+    },
+    {
+     "texte": "C’est",
+     "t": 25.74,
+     "t1": 25.84
+    },
+    {
+     "texte": "pour",
+     "t": 25.86,
+     "t1": 25.98
+    },
+    {
+     "texte": "quel",
+     "t": 26.0,
+     "t1": 26.16
+    },
+    {
+     "texte": "prénom ?",
+     "t": 26.18,
+     "t1": 26.44
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "C’est",
+     "t": 27.82,
+     "t1": 27.9
+    },
+    {
+     "texte": "pour",
+     "t": 27.94,
+     "t1": 28.04
+    },
+    {
+     "texte": "Florian.",
+     "t": 28.08,
+     "t1": 28.44
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Parfait,",
+     "t": 29.94,
+     "t1": 30.2
+    },
+    {
+     "texte": "je",
+     "t": 30.26,
+     "t1": 30.34
+    },
+    {
+     "texte": "vous",
+     "t": 30.38,
+     "t1": 30.46
+    },
+    {
+     "texte": "note",
+     "t": 30.48,
+     "t1": 30.6
+    },
+    {
+     "texte": "ça",
+     "t": 30.64,
+     "t1": 30.72
+    },
+    {
+     "texte": "pour",
+     "t": 30.78,
+     "t1": 30.92
+    },
+    {
+     "texte": "Florian,",
+     "t": 30.96,
+     "t1": 31.34
+    },
+    {
+     "texte": "pour",
+     "t": 31.42,
+     "t1": 31.52
+    },
+    {
+     "texte": "une",
+     "t": 31.56,
+     "t1": 31.66
+    },
+    {
+     "texte": "coupe",
+     "t": 31.7,
+     "t1": 31.84
+    },
+    {
+     "texte": "et",
+     "t": 31.88,
+     "t1": 31.96
+    },
+    {
+     "texte": "barbe,",
+     "t": 32.0,
+     "t1": 32.34
+    },
+    {
+     "texte": "le",
+     "t": 32.52,
+     "t1": 32.62
+    },
+    {
+     "texte": "samedi",
+     "t": 32.66,
+     "t1": 32.96
+    },
+    {
+     "texte": "dix-neuf",
+     "t": 33.0,
+     "t1": 33.36
+    },
+    {
+     "texte": "septembre",
+     "t": 33.4,
+     "t1": 33.88
+    },
+    {
+     "texte": "à",
+     "t": 33.939,
+     "t1": 33.979
+    },
+    {
+     "texte": "seize",
+     "t": 34.06,
+     "t1": 34.259
+    },
+    {
+     "texte": "heures.",
+     "t": 34.28,
+     "t1": 34.54
+    },
+    {
+     "texte": "Vous",
+     "t": 34.84,
+     "t1": 34.92
+    },
+    {
+     "texte": "recevrez",
+     "t": 34.96,
+     "t1": 35.34
+    },
+    {
+     "texte": "un",
+     "t": 35.38,
+     "t1": 35.42
+    },
+    {
+     "texte": "SMS",
+     "t": 35.52,
+     "t1": 35.8
+    },
+    {
+     "texte": "de",
+     "t": 35.82,
+     "t1": 35.9
+    },
+    {
+     "texte": "confirmation.",
+     "t": 35.94,
+     "t1": 36.54
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Super,",
+     "t": 37.72,
+     "t1": 38.04
+    },
+    {
+     "texte": "merci,",
+     "t": 38.12,
+     "t1": 38.44
+    },
+    {
+     "texte": "bonne",
+     "t": 38.5,
+     "t1": 38.6
+    },
+    {
+     "texte": "journée.",
+     "t": 38.64,
+     "t1": 38.96
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Merci",
+     "t": 40.38,
+     "t1": 40.66
+    },
+    {
+     "texte": "à",
+     "t": 40.72,
+     "t1": 40.76
+    },
+    {
+     "texte": "vous",
+     "t": 40.8,
+     "t1": 40.88
+    },
+    {
+     "texte": "aussi,",
+     "t": 40.9,
+     "t1": 41.12
+    },
+    {
+     "texte": "bonne",
+     "t": 41.16,
+     "t1": 41.3
+    },
+    {
+     "texte": "journée.",
+     "t": 41.34,
+     "t1": 41.62
+    }
+   ]
+  }
+ ],
+ "coupes": [
+  [
+   8,
+   19
+  ]
+ ],
+ "agenda": {
+  "date": "Samedi 19 septembre",
+  "heures": [
+   "15:00",
+   "16:00",
+   "17:00"
+  ],
+  "entree": 12.9,
+  "sortie": 35.52,
+  "touches": [
+   {
+    "t": 16.6,
+    "heure": "15:00"
+   },
+   {
+    "t": 17.1,
+    "heure": "16:00"
+   },
+   {
+    "t": 17.719,
+    "heure": "17:00"
+   },
+   {
+    "t": 20.82,
+    "heure": "16:00"
+   }
+  ],
+  "bloc": {
+   "heure": "16:00",
+   "nom": "Florian",
+   "service": "Coupe et barbe",
+   "ouvre": 25.14,
+   "t_nom": 28.08,
+   "t_service": 31.7
+  }
+ },
+ "sms": {
+  "texte": "Bonjour Florian, votre rendez-vous est confirmé : Coupe et barbe, le samedi 19 septembre à 16:00, Barbier du Cours. Démo Vokio, RDV fictif.",
+  "souligne": "samedi 19 septembre à 16:00",
+  "heure": "14:56",
+  "entree": 36.64,
+  "bulle": 37.29,
+  "sortie": 39.83
+ },
+ "fin": {
+  "entree": 42.07,
+  "point": 43.12
+ },
+ "duree": 44.733333333333334,
+ "texte_sortie": 42.07,
+ "avance": 1.5
+}

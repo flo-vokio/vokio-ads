@@ -1,0 +1,36 @@
+<!-- Situation « évier » (plombier, fuite sous l'évier, v3 du 30/09) : vue de face, grande et simple. L'évier (plan de travail,
+     bac en coupe, robinet col de cygne), sous la bonde le siphon en U et la tuyauterie qui part dans le mur. Une goutte ORANGE
+     grossit au point bas du siphon, s'étire, tombe, s'écrase ; la flaque s'élargit en ondes. La clé à molette (silhouette
+     canonique, vue d'un peu au-dessus) entre, se pose sur l'écrou du siphon, prend son élan et serre (sens horaire vu du
+     dessus : le manche part vers le fond, les pans de l'écrou glissent vers la gauche) ; la goutte suivante ne se forme plus ;
+     la clé ressort. Animé par evier.js (lib/fx.js). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" style="overflow:visible;left:-60px;top:120px;width:720px;height:720px">
+  <path d="M482 196 V 540" stroke="#262019" stroke-width="5" stroke-linecap="round" opacity=".3"/>
+  <path d="M60 540 H 482" stroke="#262019" stroke-width="5" stroke-linecap="round" opacity=".3"/>
+  <g id="ev-flaque"><path id="ev-flaque-p" fill="#EFA424" opacity=".35"/><path id="ev-onde" fill="none" stroke="#EFA424" stroke-width="4"/></g>
+  <!-- robinet col de cygne et sa manette -->
+  <path d="M332 176 V 84 C 332 34 262 34 258 84 V 108" fill="none" stroke="#262019" stroke-width="18" stroke-linecap="round"/>
+  <path d="M352 158 L 380 140" stroke="#262019" stroke-width="12" stroke-linecap="round"/>
+  <!-- plan de travail et bac (en coupe) -->
+  <rect x="90" y="176" width="392" height="22" rx="4" fill="#E6D9C0" stroke="#262019" stroke-width="7"/>
+  <path d="M168 198 V 244 Q 168 290 214 290 H 346 Q 392 290 392 244 V 198" fill="#F4F1E8" stroke="#262019" stroke-width="8" stroke-linejoin="round"/>
+  <!-- bonde, siphon en U, tuyau vers le mur (tuyau à double trait) -->
+  <path id="ev-tuyau" d="M280 290 V 382 C 280 436 350 436 350 382 V 352 H 482" fill="none" stroke="#262019" stroke-width="32" stroke-linejoin="round"/>
+  <path d="M280 290 V 382 C 280 436 350 436 350 382 V 352 H 482" fill="none" stroke="#F4F1E8" stroke-width="18" stroke-linejoin="round"/>
+  <g id="ev-ecrou">
+    <rect x="254" y="326" width="52" height="28" rx="4" fill="#F4F1E8" stroke="#262019" stroke-width="7"/>
+    <g id="ev-pans" stroke="#262019" stroke-width="4"></g>
+  </g>
+  <g id="ev-gouttes"></g>
+  <g id="ev-cle">
+    <!-- repère : centre de l'écrou à l'origine, manche vers la gauche ; tête ouverte à droite (mâchoires), molette sous
+         la gorge, manche droit percé au bout -->
+    <path d="M-36 -34 C -58 -34 -70 -18 -70 0 C -70 18 -58 34 -36 34 L -30 18 L -30 -18 Z" fill="#262019"/>
+    <path d="M-36 -34 H 30 Q 40 -34 40 -26 L 36 -18 H -30 Z" fill="#262019"/>
+    <path d="M-26 18 H 32 Q 42 18 40 28 L 36 36 H -26 Z" fill="#262019"/>
+    <rect x="-40" y="34" width="26" height="18" rx="5" fill="#F4F1E8" stroke="#262019" stroke-width="5"/>
+    <path d="M-33 36 V 50 M-27 36 V 50 M-21 36 V 50" stroke="#262019" stroke-width="3"/>
+    <path d="M-68 -15 L -196 -12 Q -212 0 -196 12 L -68 15 Z" fill="#262019"/>
+    <circle cx="-184" cy="0" r="6" fill="#F4F1E8"/>
+  </g>
+</svg>

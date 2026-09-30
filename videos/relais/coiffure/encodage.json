@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-coiffure-boucle.mp4",
+   "crf": 18,
+   "octets": 512720
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-coiffure-boucle-poster.webp",
+   "octets": 10076,
+   "t": 1.17
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-coiffure-boucle-poster.jpg",
+   "octets": 19702,
+   "t": 1.17
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-coiffure-complete.mp4",
+   "crf": 18,
+   "octets": 1899045
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-coiffure-complete-poster.webp",
+   "octets": 8188,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-coiffure-complete-poster.jpg",
+   "octets": 16573,
+   "t": 0.0
+  }
+ }
+}

@@ -1,0 +1,16 @@
+<!-- Situation « ciseaux » (coiffure) : les deux lames tournent autour de la vis (data-rot = angle min max, data-pivot). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true">
+      <g id="cis-tout" transform="rotate(-28 300 300)">
+        <g id="cis-b" data-rot="1 14" data-pivot="300 300">
+          <path d="M300 300 C 268 268 238 252 214 246" fill="none" stroke="#262019" stroke-width="16" stroke-linecap="round"/>
+          <ellipse cx="170" cy="232" rx="50" ry="40" fill="none" stroke="#262019" stroke-width="13"/>
+          <path d="M292 300 L 596 300 Q 470 322 322 326 Q 300 322 292 300 Z" fill="#262019"/>
+        </g>
+        <g id="cis-a" data-rot="-1 -14" data-pivot="300 300">
+          <path d="M300 300 C 268 332 238 348 214 354" fill="none" stroke="#262019" stroke-width="16" stroke-linecap="round"/>
+          <ellipse cx="170" cy="368" rx="50" ry="40" fill="none" stroke="#262019" stroke-width="13"/>
+          <path d="M292 300 L 596 300 Q 470 278 322 274 Q 300 278 292 300 Z" fill="#262019"/>
+        </g>
+        <circle cx="300" cy="300" r="8" fill="#F4F1E8"/>
+      </g>
+    </svg>

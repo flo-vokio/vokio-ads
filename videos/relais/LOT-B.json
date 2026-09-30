@@ -1,0 +1,533 @@
+{
+ "barbier": {
+  "carte": "Coupe et barbe",
+  "jour_heure": "Vendredi, 14 h 55.",
+  "audio": "/opt/vokio-site-repo/assets/appel-barbier.mp3",
+  "duree_complete_s": 44.733333,
+  "data_duree": "44.73",
+  "temps_affiche": "0:45",
+  "fichiers": {
+   "relais-barbier-boucle-poster.jpg": 28293,
+   "relais-barbier-boucle-poster.webp": 15106,
+   "relais-barbier-boucle.mp4": 561579,
+   "relais-barbier-complete-poster.jpg": 23677,
+   "relais-barbier-complete-poster.webp": 12152,
+   "relais-barbier-complete.mp4": 1602208
+  },
+  "transcription_corrigee": "<p class=\"tr-vokio\"><b>Nina</b>Bonjour, je suis Nina, l’assistante vocale de Barbier du Cours ! Comment puis-je vous aider ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Bonjour, est-ce que vous aurez de la place demain, euh, pour une coupe et barbe en fin de journée plutôt ?</p>\n<p class=\"tr-vokio\"><b>Nina</b>Je vérifie les disponibilités.</p>\n<p class=\"tr-vokio\"><b>Nina</b>Oui, j’ai des disponibilités demain à quinze heures, seize heures ou dix-sept heures. Qu’est-ce qui vous arrangerait le mieux ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, seize heures, s’il vous plaît.</p>\n<p class=\"tr-vokio\"><b>Nina</b>Laissez-moi voir.</p>\n<p class=\"tr-vokio\"><b>Nina</b>Très bien. C’est pour quel prénom ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>C’est pour Florian.</p>\n<p class=\"tr-vokio\"><b>Nina</b>Parfait, je vous note ça pour Florian, pour une coupe et barbe, le samedi dix-neuf septembre à seize heures. Vous recevrez un SMS de confirmation.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Super, merci, bonne journée.</p>\n<p class=\"tr-vokio\"><b>Nina</b>Merci à vous aussi, bonne journée.</p>",
+  "ecarts_avec_la_page": [],
+  "non_sous_titre": "dit pendant l'iPhone, non sous-titré : ['Super, merci, bonne journée.']",
+  "critique": {
+   "geste": 9,
+   "lisibilite_375_sans_son": 8.5,
+   "justesse_rythme_complete": 8.5,
+   "commentaire": "Deux passes de coupe-chou : anticipation, glisse qui découvre la peau, coup de poignet avec traits de vitesse, flocons en smear freinés par l'air."
+  },
+  "a_valider": "SMS supposé (gabarit coiffure) ; « Super, merci, bonne journée. » non sous-titré sous l'iPhone. Texte du SMS/fiche : gabarit supposé, à confirmer.",
+  "poster_boucle_illustration_sans_texte": true
+ },
+ "dentiste": {
+  "carte": "Une douleur, sans gravité",
+  "jour_heure": "Vendredi, 15 h 43.",
+  "audio": "/opt/vokio-site-repo/assets/appel-dentiste.mp3",
+  "duree_complete_s": 87.566667,
+  "data_duree": "87.57",
+  "temps_affiche": "1:28",
+  "fichiers": {
+   "relais-dentiste-boucle-poster.jpg": 23179,
+   "relais-dentiste-boucle-poster.webp": 10322,
+   "relais-dentiste-boucle.mp4": 420268,
+   "relais-dentiste-complete-poster.jpg": 16790,
+   "relais-dentiste-complete-poster.webp": 7260,
+   "relais-dentiste-complete.mp4": 2536239
+  },
+  "transcription_corrigee": "<p class=\"tr-vokio\"><b>Alice</b>Bonjour, je suis Alice, l’assistante vocale du Cabinet dentaire Prado ! Comment puis-je vous aider ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Oui, bonjour, je vous appelle parce que là, depuis cette nuit, j’ai super mal à une dent et je voudrais prendre rendez-vous le plus rapidement possible, s’il vous plaît.</p>\n<p class=\"tr-vokio\"><b>Alice</b>Je comprends. Pour que je puisse vous aider au mieux, j’aurais besoin de votre prénom.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, c’est Florian.</p>\n<p class=\"tr-vokio\"><b>Alice</b>Très bien, Florian. Vous avez mal à une dent, est-ce que votre joue est gonflée ou avez-vous de la fièvre ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, non, aucun des deux.</p>\n<p class=\"tr-vokio\"><b>Alice</b>D’accord. Dans ce cas, il s’agit d’une consultation ordinaire. Quel jour souhaiteriez-vous avoir un rendez-vous ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, ben, lundi, si c’est possible.</p>\n<p class=\"tr-vokio\"><b>Alice</b>Un instant.</p>\n<p class=\"tr-vokio\"><b>Alice</b>Très bien, le lundi vingt et un septembre. Pour une consultation, à quelle heure vous conviendrait-il ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, ben, s’il vous plaît, le, le plus tôt possible. J’ai super mal.</p>\n<p class=\"tr-vokio\"><b>Alice</b>Je vérifie les disponibilités.</p>\n<p class=\"tr-vokio\"><b>Alice</b>Je peux vous proposer lundi matin à huit heures trente, neuf heures trente ou dix heures trente. Qu’est-ce qui vous arrange le mieux ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Ben, huit heures trente.</p>\n<p class=\"tr-vokio\"><b>Alice</b>Laissez-moi voir.</p>\n<p class=\"tr-vokio\"><b>Alice</b>Parfait, je vous note ça pour Florian, pour une consultation, le lundi vingt et un septembre à huit heures trente. Vous recevrez un SMS de confirmation.</p>\n<p class=\"tr-client\"><b>L’appelant</b>OK, super, merci beaucoup. Bonne journée.</p>\n<p class=\"tr-vokio\"><b>Alice</b>Merci à vous, Florian. Bonne journée et à bientôt.</p>",
+  "ecarts_avec_la_page": [
+   {
+    "page": "J’vous",
+    "dit": "je vous",
+    "apres": "Oui , bonjour ,",
+    "enonce": 1
+   },
+   {
+    "page": ", à",
+    "dit": "",
+    "apres": "j’ai super mal à",
+    "enonce": 1
+   },
+   {
+    "page": "j’voudrais",
+    "dit": "je voudrais",
+    "apres": "à une dent et",
+    "enonce": 1
+   },
+   {
+    "page": ", euh ,",
+    "dit": "",
+    "apres": "et je voudrais prendre",
+    "enonce": 1
+   },
+   {
+    "page": "là , je suis pas",
+    "dit": "J’ai super",
+    "apres": "plus tôt possible .",
+    "enonce": 10
+   },
+   {
+    "page": "à",
+    "dit": "",
+    "apres": "mieux ? Ben ,",
+    "enonce": 13
+   }
+  ],
+  "non_sous_titre": "dit pendant l'iPhone, non sous-titré : ['OK, super, merci beaucoup. Bonne journée.']",
+  "critique": {
+   "geste": 9,
+   "lisibilite_375_sans_son": 8,
+   "justesse_rythme_complete": 8,
+   "commentaire": "Vue du fauteuil : la lampe recule, pivote vers nous en perspective, dépasse, s'allume en clignant ; le coup d'arrêt fait plonger le bras et balancer le miroir."
+  },
+  "a_valider": "À l'oreille vers 53 s : « J'ai super mal » (Scribe) ou « là, je suis pas mal » (page). Boucle : « j'ai super mal à une dent » puis « il s'agit d'une consultation ordinaire. » (la question joue/fièvre ne tenait pas en 2 lignes). Texte du SMS/fiche : gabarit supposé, à confirmer.",
+  "poster_boucle_illustration_sans_texte": true
+ },
+ "fleuriste": {
+  "carte": "Une gerbe pour un décès",
+  "jour_heure": "Vendredi, 16 h 41.",
+  "audio": "/opt/vokio-site-repo/assets/appel-fleuriste.mp3",
+  "duree_complete_s": 66.266667,
+  "data_duree": "66.27",
+  "temps_affiche": "1:06",
+  "fichiers": {
+   "relais-fleuriste-boucle-poster.jpg": 32217,
+   "relais-fleuriste-boucle-poster.webp": 18410,
+   "relais-fleuriste-boucle.mp4": 508424,
+   "relais-fleuriste-complete-poster.jpg": 29476,
+   "relais-fleuriste-complete-poster.webp": 16726,
+   "relais-fleuriste-complete.mp4": 1984513
+  },
+  "transcription_corrigee": "<p class=\"tr-vokio\"><b>Émilie</b>Bonjour, je suis Émilie, l’assistante vocale de l’Atelier Pivoine ! Comment puis-je vous aider ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, bonjour, je vous appelle parce que… il me faudrait une gerbe pour un décès pour, euh, pour mardi, s’il vous plaît.</p>\n<p class=\"tr-vokio\"><b>Émilie</b>Je suis désolée pour votre perte. Ce serait pour un retrait en boutique ou pour une livraison ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Un retrait plutôt, ouais.</p>\n<p class=\"tr-vokio\"><b>Émilie</b>D’accord. Et pour quel jour et à quelle heure souhaitez-vous la récupérer ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, ben, ce serait pour mardi, euh, soit neuf heures, soit neuf heures trente.</p>\n<p class=\"tr-vokio\"><b>Émilie</b>Je vérifie les disponibilités. Un instant.</p>\n<p class=\"tr-vokio\"><b>Émilie</b>Très bien, le mardi vingt-deux septembre à neuf heures est disponible. Souhaitez-vous que je vous le réserve pour cet horaire ? Souhaitez-vous que je vous réserve la gerbe pour le mardi vingt-deux septembre à neuf heures ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Oui.</p>\n<p class=\"tr-vokio\"><b>Émilie</b>C’est pour quel prénom ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Florian.</p>\n<p class=\"tr-vokio\"><b>Émilie</b>Un instant.</p>\n<p class=\"tr-vokio\"><b>Émilie</b>Parfait, je vous note ça pour Florian, une gerbe ou un coussin de deuil, le mardi vingt-deux septembre à neuf heures.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Super, merci beaucoup. Au revoir.</p>\n<p class=\"tr-vokio\"><b>Émilie</b>Merci à vous, au revoir.</p>",
+  "ecarts_avec_la_page": [
+   {
+    "page": "j’vous",
+    "dit": "je vous",
+    "apres": "Euh , bonjour ,",
+    "enonce": 1
+   },
+   {
+    "page": ". Pour la gerbe",
+    "dit": "",
+    "apres": "désolée pour votre perte",
+    "enonce": 2
+   },
+   {
+    "page": "bah",
+    "dit": "ben",
+    "apres": "récupérer ? Euh ,",
+    "enonce": 5
+   },
+   {
+    "page": "ça",
+    "dit": "ce",
+    "apres": "Euh , ben ,",
+    "enonce": 5
+   },
+   {
+    "page": "9",
+    "dit": "neuf",
+    "apres": ", euh , soit",
+    "enonce": 5
+   },
+   {
+    "page": "9",
+    "dit": "neuf",
+    "apres": "neuf heures , soit",
+    "enonce": 5
+   },
+   {
+    "page": "30",
+    "dit": "trente",
+    "apres": ", soit neuf heures",
+    "enonce": 5
+   },
+   {
+    "page": "",
+    "dit": "? Souhaitez-vous que je vous réserve la gerbe pour le mardi vingt-deux septembre à neuf heures",
+    "apres": "réserve pour cet horaire",
+    "enonce": 7
+   },
+   {
+    "page": "Vous recevrez un SMS de confirmation . Parfait , je vous note ça pour Florian , une gerbe ou un coussin de deuil , le mardi vingt-deux septembre à neuf heures . Vous recevrez un SMS de confirmation .",
+    "dit": "",
+    "apres": "à neuf heures .",
+    "enonce": 13
+   }
+  ],
+  "non_sous_titre": null,
+  "critique": {
+   "geste": 9,
+   "lisibilite_375_sans_son": 8,
+   "justesse_rythme_complete": 8.5,
+   "commentaire": "Ton sobre : le nœud se fait lentement (boucles décalées), les pans remontent puis se balancent à peine, une feuille se détache et descend en feuille morte. Aucun trait de vitesse."
+  },
+  "a_valider": "Aucun SMS dans l'audio (la page montre « Vous recevrez un SMS » et le dernier paragraphe en double) : résultat en FICHE « Commande de 16 h 41 » (Gerbe de deuil, à retirer / Mardi 22 septembre, 9:00 / Florian). À l'oreille vers 13,5 s : « votre perte » (page) ou « votre père » (Scribe) ; « Pour la gerbe » non relevé. Texte du SMS/fiche : gabarit supposé, à confirmer.",
+  "poster_boucle_illustration_sans_texte": true
+ },
+ "institut-beaute": {
+  "carte": "Épilation demi-jambes",
+  "jour_heure": "Vendredi, 15 h 14.",
+  "audio": "/opt/vokio-site-repo/assets/appel-institut-beaute.mp3",
+  "duree_complete_s": 72.0,
+  "data_duree": "72.00",
+  "temps_affiche": "1:12",
+  "fichiers": {
+   "relais-institut-beaute-boucle-poster.jpg": 18990,
+   "relais-institut-beaute-boucle-poster.webp": 9760,
+   "relais-institut-beaute-boucle.mp4": 475548,
+   "relais-institut-beaute-complete-poster.jpg": 19057,
+   "relais-institut-beaute-complete-poster.webp": 9618,
+   "relais-institut-beaute-complete.mp4": 2332684
+  },
+  "transcription_corrigee": "<p class=\"tr-vokio\"><b>Camille</b>Bonjour, je suis Camille, l’assistante vocale de l’Institut Camélia ! Comment puis-je vous aider ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Oui, bonjour, j’aimerais, euh, réserver pour une prestation, euh, d’épilation, s’il vous plaît.</p>\n<p class=\"tr-vokio\"><b>Camille</b>Très bien. Pour quelle épilation souhaitez-vous prendre rendez-vous ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Pour les jambes, s’il vous plaît.</p>\n<p class=\"tr-vokio\"><b>Camille</b>D’accord, nous proposons l’épilation demi-jambes à vingt-deux euros et l’épilation demi-jambes et maillot à trente-six euros. Laquelle souhaitez-vous ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, demi-jambes à vingt-deux euros, s’il vous plaît.</p>\n<p class=\"tr-vokio\"><b>Camille</b>Très bien. C’est pour quel jour ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, est-ce que vous avez des disponibilités pour demain ?</p>\n<p class=\"tr-vokio\"><b>Camille</b>Demain, nous serons le samedi dix-neuf septembre. À quelle heure souhaiteriez-vous votre rendez-vous ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, vers seize heures.</p>\n<p class=\"tr-vokio\"><b>Camille</b>Je vérifie les disponibilités.</p>\n<p class=\"tr-vokio\"><b>Camille</b>Le samedi dix-neuf septembre à seize heures, c’est disponible. Cela vous convient ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Oui, c’est parfait.</p>\n<p class=\"tr-vokio\"><b>Camille</b>C’est pour quel prénom ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Blandine.</p>\n<p class=\"tr-vokio\"><b>Camille</b>Parfait, je vous note ça pour Blandine, pour une épilation demi-jambes, le samedi dix-neuf septembre à seize heures. Vous recevrez un SMS de confirmation.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Super, merci beaucoup.</p>\n<p class=\"tr-vokio\"><b>Camille</b>De rien. Passez une belle journée.</p>",
+  "ecarts_avec_la_page": [
+   {
+    "page": "",
+    "dit": "Euh ,",
+    "apres": "pour quel jour ?",
+    "enonce": 7
+   },
+   {
+    "page": "difficultés",
+    "dit": "disponibilités",
+    "apres": "que vous avez des",
+    "enonce": 7
+   },
+   {
+    "page": "16 h",
+    "dit": "seize heures",
+    "apres": "? Euh , vers",
+    "enonce": 9
+   },
+   {
+    "page": "Blondine",
+    "dit": "Blandine",
+    "apres": "pour quel prénom ?",
+    "enonce": 14
+   },
+   {
+    "page": "Blondine",
+    "dit": "Blandine",
+    "apres": "vous note ça pour",
+    "enonce": 15
+   }
+  ],
+  "non_sous_titre": "dit pendant l'iPhone, non sous-titré : ['Super, merci beaucoup.']",
+  "critique": {
+   "geste": 9,
+   "lisibilite_375_sans_son": 8,
+   "justesse_rythme_complete": 8.5,
+   "commentaire": "La spatule tourne dans la cire (manche en retard, remous qui suivent), coulures qui respirent, trois fumées au tracé déformé qui montent."
+  },
+  "a_valider": "Prénom « Blandine » (la page écrit Blondine) ; « des disponibilités » (page : difficultés). Texte du SMS/fiche : gabarit supposé, à confirmer.",
+  "poster_boucle_illustration_sans_texte": true
+ },
+ "kine": {
+  "carte": "Une ordonnance de dix séances",
+  "jour_heure": "Vendredi, 15 h 52.",
+  "audio": "/opt/vokio-site-repo/assets/appel-kine.mp3",
+  "duree_complete_s": 59.766667,
+  "data_duree": "59.77",
+  "temps_affiche": "1:00",
+  "fichiers": {
+   "relais-kine-boucle-poster.jpg": 21832,
+   "relais-kine-boucle-poster.webp": 11486,
+   "relais-kine-boucle.mp4": 495702,
+   "relais-kine-complete-poster.jpg": 17563,
+   "relais-kine-complete-poster.webp": 9138,
+   "relais-kine-complete.mp4": 2008677
+  },
+  "transcription_corrigee": "<p class=\"tr-vokio\"><b>Justine</b>Bonjour, je suis Justine, l’assistante vocale du Cabinet Kiné Vauban ! Comment puis-je vous aider ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Bonjour, je vous appelle parce que je voudrais prendre des séances de kiné. J’ai une ordonnance, là, pour dix séances. Euh, en fait, je suis tombé et c’est pour mon épaule droite.</p>\n<p class=\"tr-vokio\"><b>Justine</b>D’accord. Pour commencer, il faut prévoir un bilan initial. C’est pour quel prénom, s’il vous plaît ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, c’est pour Florian.</p>\n<p class=\"tr-vokio\"><b>Justine</b>Très bien, Florian. Quel jour souhaiteriez-vous faire ce bilan initial ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, bah, dès lundi, si c’est possible, à onze heures trente, par exemple.</p>\n<p class=\"tr-vokio\"><b>Justine</b>Je vérifie les disponibilités.</p>\n<p class=\"tr-vokio\"><b>Justine</b>Le lundi vingt et un septembre à onze heures trente, c’est possible pour un bilan initial. Est-ce que cela vous convient ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Oui, c’est parfait.</p>\n<p class=\"tr-vokio\"><b>Justine</b>Parfait, je vous note ça pour Florian, pour un bilan initial, le lundi vingt et un septembre à onze heures trente. Vous recevrez un SMS de confirmation.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Super, merci beaucoup. Bonne journée.</p>\n<p class=\"tr-vokio\"><b>Justine</b>Merci à vous aussi, bonne journée.</p>",
+  "ecarts_avec_la_page": [
+   {
+    "page": ", euh ,",
+    "dit": "",
+    "apres": ", là , pour",
+    "enonce": 1
+   },
+   {
+    "page": "",
+    "dit": "si",
+    "apres": ", dès lundi ,",
+    "enonce": 5
+   },
+   {
+    "page": "euh ,",
+    "dit": "",
+    "apres": "si c’est possible ,",
+    "enonce": 5
+   },
+   {
+    "page": "11 h 30",
+    "dit": "onze heures trente",
+    "apres": "c’est possible , à",
+    "enonce": 5
+   }
+  ],
+  "non_sous_titre": "dit pendant l'iPhone, non sous-titré : ['Super, merci beaucoup. Bonne journée.']",
+  "critique": {
+   "geste": 9,
+   "lisibilite_375_sans_son": 8.5,
+   "justesse_rythme_complete": 8.5,
+   "commentaire": "Refait le 30/09 : deux poings tiennent l'élastique, se rapprochent, l'écartent (il s'amincit à volume constant, tremblement d'effort), relâchent : retour sec, dépassement, rebond amorti, traits de vitesse. Poster = étirement maximal."
+  },
+  "a_valider": "SMS supposé. Texte du SMS/fiche : gabarit supposé, à confirmer.",
+  "poster_boucle_illustration_sans_texte": true
+ },
+ "medecin": {
+  "carte": "Un peu malade, en fin de semaine",
+  "jour_heure": "Vendredi, 15 h 56.",
+  "audio": "/opt/vokio-site-repo/assets/appel-medecin.mp3",
+  "duree_complete_s": 63.066667,
+  "data_duree": "63.07",
+  "temps_affiche": "1:03",
+  "fichiers": {
+   "relais-medecin-boucle-poster.jpg": 23713,
+   "relais-medecin-boucle-poster.webp": 10986,
+   "relais-medecin-boucle.mp4": 480404,
+   "relais-medecin-complete-poster.jpg": 20871,
+   "relais-medecin-complete-poster.webp": 9746,
+   "relais-medecin-complete.mp4": 2120172
+  },
+  "transcription_corrigee": "<p class=\"tr-vokio\"><b>Marie</b>Bonjour, je suis Marie, l’assistante vocale du Cabinet du docteur Sabatier ! Comment puis-je vous aider ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, bonjour, je, je voudrais faire une consultation, s’il vous plaît. Je me sens un petit peu malade. Euh, si vous avez une disponibilité en fin de journée cette semaine, euh, je, je, je suis preneur.</p>\n<p class=\"tr-vokio\"><b>Marie</b>D’accord. Pour une consultation, c’est pour quel prénom ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>C’est pour Florian.</p>\n<p class=\"tr-vokio\"><b>Marie</b>Très bien, Florian. Quel jour de cette semaine vous conviendrait le mieux pour votre consultation en fin de journée ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, ben, samedi, si c’est possible.</p>\n<p class=\"tr-vokio\"><b>Marie</b>Je regarde ça.</p>\n<p class=\"tr-vokio\"><b>Marie</b>Le samedi, nous sommes ouverts de neuf heures à midi. Je peux vous proposer neuf heures, dix heures ou onze heures. Est-ce que l’un de ces créneaux vous convient ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, ben, neuf heures alors, s’il vous plaît.</p>\n<p class=\"tr-vokio\"><b>Marie</b>Un instant.</p>\n<p class=\"tr-vokio\"><b>Marie</b>Parfait, je vous note ça pour Florian, pour une consultation, le samedi dix-neuf septembre à neuf heures. Vous recevrez un SMS de confirmation.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Super, merci beaucoup. Au revoir.</p>\n<p class=\"tr-vokio\"><b>Marie</b>Merci à vous, au revoir.</p>",
+  "ecarts_avec_la_page": [
+   {
+    "page": "une ,",
+    "dit": "",
+    "apres": ", si vous avez",
+    "enonce": 1
+   },
+   {
+    "page": "bah",
+    "dit": "ben ,",
+    "apres": "journée ? Euh ,",
+    "enonce": 5
+   },
+   {
+    "page": "",
+    "dit": ". Le samedi , nous sommes ouverts de neuf heures à midi . Je peux vous proposer neuf heures , dix heures ou onze heures . Est-ce que l’un de ces créneaux vous convient",
+    "apres": ". Je regarde ça",
+    "enonce": 6
+   }
+  ],
+  "non_sous_titre": "dit pendant l'iPhone, non sous-titré : ['Super, merci beaucoup. Au revoir.']",
+  "critique": {
+   "geste": 9,
+   "lisibilite_375_sans_son": 8,
+   "justesse_rythme_complete": 8.5,
+   "commentaire": "Stéthoscope pendu : lyre rigide, tuyau souple dont chaque point suit avec retard, pavillon qui traîne ; la colonne du thermomètre monte de plus en plus lentement puis frémit."
+  },
+  "a_valider": "L'audio contient « Le samedi, nous sommes ouverts de neuf heures à midi… » absent de la transcription de la page (repris dans la boucle). Texte du SMS/fiche : gabarit supposé, à confirmer.",
+  "poster_boucle_illustration_sans_texte": true
+ },
+ "onglerie": {
+  "carte": "Pose de semi-permanent",
+  "jour_heure": "Vendredi, 15 h 16.",
+  "audio": "/opt/vokio-site-repo/assets/appel-onglerie.mp3",
+  "duree_complete_s": 53.233333,
+  "data_duree": "53.23",
+  "temps_affiche": "0:53",
+  "fichiers": {
+   "relais-onglerie-boucle-poster.jpg": 25038,
+   "relais-onglerie-boucle-poster.webp": 12338,
+   "relais-onglerie-boucle.mp4": 386065,
+   "relais-onglerie-complete-poster.jpg": 19682,
+   "relais-onglerie-complete-poster.webp": 9148,
+   "relais-onglerie-complete.mp4": 1758337
+  },
+  "transcription_corrigee": "<p class=\"tr-vokio\"><b>Lola</b>Bonjour, je suis Lola, l’assistante vocale de L’Atelier des Ongles ! Comment puis-je vous aider ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Oui, bonjour, j’aimerais prendre un rendez-vous pour, euh, une pose de semi-permanent, s’il vous plaît.</p>\n<p class=\"tr-vokio\"><b>Lola</b>D’accord. C’est pour quel prénom ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Blandine.</p>\n<p class=\"tr-vokio\"><b>Lola</b>Très bien, Blandine. Pour une pose de semi-permanent, quel jour souhaiteriez-vous votre rendez-vous ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh… est-ce que vous avez une disponibilité pour demain à onze heures ?</p>\n<p class=\"tr-vokio\"><b>Lola</b>Un instant.</p>\n<p class=\"tr-vokio\"><b>Lola</b>Oui, c’est possible. Je peux vous noter ça pour demain, samedi dix-neuf septembre, à onze heures ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Oui, c’est parfait.</p>\n<p class=\"tr-vokio\"><b>Lola</b>Parfait, je vous note ça pour Blandine, pour une pose de semi-permanent, le samedi dix-neuf septembre à onze heures. Vous recevrez un SMS de confirmation.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Merci, bonne journée.</p>\n<p class=\"tr-vokio\"><b>Lola</b>Merci à vous aussi, au revoir.</p>",
+  "ecarts_avec_la_page": [
+   {
+    "page": "semi-permanence",
+    "dit": "semi-permanent",
+    "apres": ", une pose de",
+    "enonce": 1
+   },
+   {
+    "page": "11",
+    "dit": "onze",
+    "apres": "disponibilité pour demain à",
+    "enonce": 5
+   }
+  ],
+  "non_sous_titre": "dit pendant l'iPhone, non sous-titré : ['Merci, bonne journée.']",
+  "critique": {
+   "geste": 9,
+   "lisibilite_375_sans_son": 8,
+   "justesse_rythme_complete": 8.5,
+   "commentaire": "Le pinceau pose le vernis (poils qui plient), se relève : un fil s'étire et casse, la goutte perle et tremble à volume constant ; la lampe UV s'allume en clignant, rayons, reflet sur l'ongle."
+  },
+  "a_valider": "« semi-permanent » (page : semi-permanence). Texte du SMS/fiche : gabarit supposé, à confirmer.",
+  "poster_boucle_illustration_sans_texte": true
+ },
+ "opticien": {
+  "carte": "Un examen de vue, plus tôt",
+  "jour_heure": "Vendredi, 15 h 22.",
+  "audio": "/opt/vokio-site-repo/assets/appel-opticien.mp3",
+  "duree_complete_s": 54.366667,
+  "data_duree": "54.37",
+  "temps_affiche": "0:54",
+  "fichiers": {
+   "relais-opticien-boucle-poster.jpg": 30850,
+   "relais-opticien-boucle-poster.webp": 15756,
+   "relais-opticien-boucle.mp4": 438548,
+   "relais-opticien-complete-poster.jpg": 27850,
+   "relais-opticien-complete-poster.webp": 13670,
+   "relais-opticien-complete.mp4": 1749807
+  },
+  "transcription_corrigee": "<p class=\"tr-vokio\"><b>Élodie</b>Bonjour, je suis Élodie, l’assistante vocale d’Optique du Cours ! Comment puis-je vous aider ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Bonjour, j’ai ma vue qui a baissé récemment et, euh, je voudrais prendre un rendez-vous pour un examen de vue, euh, si c’est possible lundi.</p>\n<p class=\"tr-vokio\"><b>Élodie</b>Très bien. C’est pour quel prénom ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>C’est pour Florian.</p>\n<p class=\"tr-vokio\"><b>Élodie</b>Je vérifie les disponibilités. Je peux vous proposer le lundi vingt et un septembre à neuf heures trente. Cela vous convient ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, vous avez pas dix heures plutôt ?</p>\n<p class=\"tr-vokio\"><b>Élodie</b>Un instant.</p>\n<p class=\"tr-vokio\"><b>Élodie</b>Je peux vous proposer dix heures trente.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Ouais, bah, dix heures trente alors, je préfère.</p>\n<p class=\"tr-vokio\"><b>Élodie</b>Très bien.</p>\n<p class=\"tr-vokio\"><b>Élodie</b>Parfait, je vous note ça pour Florian, pour un examen de vue, le lundi vingt et un septembre à dix heures trente. Vous recevrez un SMS de confirmation.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Merci. Bonne journée, au revoir.</p>\n<p class=\"tr-vokio\"><b>Élodie</b>Merci à vous aussi, au revoir.</p>",
+  "ecarts_avec_la_page": [
+   {
+    "page": "de Optique",
+    "dit": "d’Optique",
+    "apres": "Élodie , l’assistante vocale",
+    "enonce": 0
+   },
+   {
+    "page": "défié",
+    "dit": "baissé",
+    "apres": "ma vue qui a",
+    "enonce": 1
+   },
+   {
+    "page": "j’voudrais",
+    "dit": "je voudrais",
+    "apres": "et , euh ,",
+    "enonce": 1
+   },
+   {
+    "page": "plus tôt",
+    "dit": "plutôt",
+    "apres": "avez pas dix heures",
+    "enonce": 5
+   },
+   {
+    "page": "j’préfère",
+    "dit": "je préfère",
+    "apres": "heures trente alors ,",
+    "enonce": 8
+   }
+  ],
+  "non_sous_titre": "dit pendant l'iPhone, non sous-titré : ['Merci. Bonne journée, au revoir.']",
+  "critique": {
+   "geste": 9,
+   "lisibilite_375_sans_son": 8,
+   "justesse_rythme_complete": 8.5,
+   "commentaire": "Les molettes du réfracteur claquent d'un cran l'une après l'autre (dépassement amorti, traits de choc, l'appareil encaisse), le verre change, un reflet glisse sur chaque verre."
+  },
+  "a_valider": "Le client dit « dix heures plutôt » (on lui propose 9 h 30, il veut plus tard) : le titre de la carte « plus tôt » et sa phrase « cherche plus tôt » sont à revoir. « ma vue qui a baissé » (page : défié). Texte du SMS/fiche : gabarit supposé, à confirmer.",
+  "poster_boucle_illustration_sans_texte": true
+ },
+ "osteopathe": {
+  "carte": "Le dos bloqué",
+  "jour_heure": "Vendredi, 15 h 54.",
+  "audio": "/opt/vokio-site-repo/assets/appel-osteopathe.mp3",
+  "duree_complete_s": 65.266667,
+  "data_duree": "65.27",
+  "temps_affiche": "1:05",
+  "fichiers": {
+   "relais-osteopathe-boucle-poster.jpg": 24948,
+   "relais-osteopathe-boucle-poster.webp": 12846,
+   "relais-osteopathe-boucle.mp4": 509443,
+   "relais-osteopathe-complete-poster.jpg": 25324,
+   "relais-osteopathe-complete-poster.webp": 13414,
+   "relais-osteopathe-complete.mp4": 2153632
+  },
+  "transcription_corrigee": "<p class=\"tr-vokio\"><b>Pauline</b>Bonjour, je suis Pauline, l’assistante vocale du Cabinet Ostéo Paradis ! Comment puis-je vous aider ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Bonjour, euh, en fait, je me suis bloqué le dos, là, euh, dans la nuit et je voulais savoir si vous, si vous aviez un créneau rapidement.</p>\n<p class=\"tr-vokio\"><b>Pauline</b>Je vérifie les disponibilités pour aujourd’hui, vendredi dix-huit septembre. C’est bien ça ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, oui, si c’est possible aujourd’hui, c’est parfait. Sinon, demain matin, ça, c’est bien aussi.</p>\n<p class=\"tr-vokio\"><b>Pauline</b>Très bien. Je regarde pour aujourd’hui.</p>\n<p class=\"tr-vokio\"><b>Pauline</b>Je peux vous proposer un rendez-vous aujourd’hui à seize heures, dix-sept heures ou dix-huit heures. Qu’est-ce qui vous arrangerait le mieux ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, plutôt dix-sept heures, s’il vous plaît.</p>\n<p class=\"tr-vokio\"><b>Pauline</b>D’accord. Le rendez-vous de dix-sept heures est disponible. C’est pour quel prénom ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, c’est pour Florian.</p>\n<p class=\"tr-vokio\"><b>Pauline</b>Très bien, Florian.</p>\n<p class=\"tr-vokio\"><b>Pauline</b>Parfait, je vous note ça pour Florian, pour une séance dos bloqué, le vendredi dix-huit septembre à dix-sept heures. Vous recevrez un SMS de confirmation.</p>\n<p class=\"tr-client\"><b>L’appelant</b>OK, parfait. Merci beaucoup. Bonne journée.</p>\n<p class=\"tr-vokio\"><b>Pauline</b>Merci à vous. Bonne journée.</p>",
+  "ecarts_avec_la_page": [
+   {
+    "page": "j’me",
+    "dit": "je me",
+    "apres": ", en fait ,",
+    "enonce": 1
+   },
+   {
+    "page": "j’voulais",
+    "dit": "je voulais",
+    "apres": "dans la nuit et",
+    "enonce": 1
+   },
+   {
+    "page": "",
+    "dit": "vous",
+    "apres": "je voulais savoir si",
+    "enonce": 1
+   }
+  ],
+  "non_sous_titre": "dit pendant l'iPhone, non sous-titré : ['OK, parfait. Merci beaucoup. Bonne journée.']",
+  "critique": {
+   "geste": 9,
+   "lisibilite_375_sans_son": 8,
+   "justesse_rythme_complete": 8.5,
+   "commentaire": "Six vertèbres décalées, la bloquée tremble avec traits de douleur ; la colonne se tasse, puis les vertèbres se réalignent en cascade du haut vers le bas (dépassement amorti), la colonne s'étire et respire."
+  },
+  "a_valider": "Rendez-vous le jour même (vendredi 18, 17:00). Texte du SMS/fiche : gabarit supposé, à confirmer.",
+  "poster_boucle_illustration_sans_texte": true
+ },
+ "traiteur": {
+  "carte": "Un mariage, quatre-vingt-dix couverts",
+  "jour_heure": "Vendredi, 16 h 06.",
+  "audio": "/opt/vokio-site-repo/assets/appel-traiteur.mp3",
+  "duree_complete_s": 97.233333,
+  "data_duree": "97.23",
+  "temps_affiche": "1:37",
+  "fichiers": {
+   "relais-traiteur-boucle-poster.jpg": 20781,
+   "relais-traiteur-boucle-poster.webp": 10634,
+   "relais-traiteur-boucle.mp4": 425447,
+   "relais-traiteur-complete-poster.jpg": 15062,
+   "relais-traiteur-complete-poster.webp": 7184,
+   "relais-traiteur-complete.mp4": 2624487
+  },
+  "transcription_corrigee": "<p class=\"tr-vokio\"><b>Chloé</b>Bonjour, je suis Chloé, l’assistante vocale de Maison Riva Traiteur ! Comment puis-je vous aider ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, oui, bonjour, je vous appelle parce que je voudrais, euh… en fait, je cherche un traiteur pour notre mariage en marche pro… en mars prochain, pardon. Et ce serait pour environ quatre-vingt-dix personnes sur Cassis.</p>\n<p class=\"tr-vokio\"><b>Chloé</b>Je vois. Pour que l’on puisse organiser au mieux votre événement, j’aurais besoin de quelques précisions. Quelle est la date exacte de votre mariage ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, alors attendez, je vais juste vérifier ça. Euh, ça serait pour le samedi six mars.</p>\n<p class=\"tr-vokio\"><b>Chloé</b>Un instant.</p>\n<p class=\"tr-vokio\"><b>Chloé</b>Très bien, le samedi six mars deux mille vingt-sept.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, c’est ça.</p>\n<p class=\"tr-vokio\"><b>Chloé</b>Parfait. Pour un mariage, nous proposons un rendez-vous dégustation au laboratoire. Cela vous permettra de choisir le menu idéal. Souhaitez-vous que je vous propose un créneau pour cette dégustation ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, oui, je veux bien, s’il vous plaît, oui.</p>\n<p class=\"tr-vokio\"><b>Chloé</b>Très bien. Pour la dégustation, quel jour vous conviendrait le mieux ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, alors, samedi… donc pas celui-là, celui d’après, si c’est possible.</p>\n<p class=\"tr-vokio\"><b>Chloé</b>Je peux vous proposer le vendredi dix-huit septembre à seize heures trente. Cela vous convient-il ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>Euh, oui, c’est parfait.</p>\n<p class=\"tr-vokio\"><b>Chloé</b>C’est pour quel prénom ?</p>\n<p class=\"tr-client\"><b>L’appelant</b>C’est pour Florian.</p>\n<p class=\"tr-vokio\"><b>Chloé</b>Un instant.</p>\n<p class=\"tr-vokio\"><b>Chloé</b>Parfait, je vous note ça pour Florian, un rendez-vous dégustation, le vendredi dix-huit septembre à seize heures trente. Vous recevrez un SMS de confirmation.</p>\n<p class=\"tr-client\"><b>L’appelant</b>Super, merci beaucoup, au revoir.</p>\n<p class=\"tr-vokio\"><b>Chloé</b>Je vous en prie. Au revoir et à bientôt.</p>",
+  "ecarts_avec_la_page": [
+   {
+    "page": "euh",
+    "dit": "",
+    "apres": "voudrais , euh …",
+    "enonce": 1
+   },
+   {
+    "page": "90",
+    "dit": "quatre-vingt-dix",
+    "apres": "ce serait pour environ",
+    "enonce": 1
+   },
+   {
+    "page": ", euh ,",
+    "dit": "",
+    "apres": "pour environ quatre-vingt-dix personnes",
+    "enonce": 1
+   },
+   {
+    "page": "j’aurai",
+    "dit": "j’aurais",
+    "apres": "mieux votre événement ,",
+    "enonce": 2
+   },
+   {
+    "page": "6",
+    "dit": "six",
+    "apres": "serait pour le samedi",
+    "enonce": 3
+   }
+  ],
+  "non_sous_titre": "dit pendant l'iPhone, non sous-titré : ['Super, merci beaucoup, au revoir.']",
+  "critique": {
+   "geste": 9,
+   "lisibilite_375_sans_son": 8,
+   "justesse_rythme_complete": 8,
+   "commentaire": "La cloche se tasse, se lève par le bouton en arc et bascule (elle pend sous la main, dépasse, se stabilise) ; une bouffée s'échappe puis la vapeur monte en ondulant."
+  },
+  "a_valider": "La dégustation est posée le vendredi 18 septembre 16:30, jour même de l'appel, alors que le client demandait le samedi d'après : c'est l'appel réel, à savoir. Complète la plus longue (1:37). Texte du SMS/fiche : gabarit supposé, à confirmer.",
+  "poster_boucle_illustration_sans_texte": true
+ }
+}

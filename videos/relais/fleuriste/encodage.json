@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-fleuriste-boucle.mp4",
+   "crf": 18,
+   "octets": 508424
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-fleuriste-boucle-poster.webp",
+   "octets": 18410,
+   "t": 1.25
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-fleuriste-boucle-poster.jpg",
+   "octets": 32217,
+   "t": 1.25
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-fleuriste-complete.mp4",
+   "crf": 18,
+   "octets": 1984513
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-fleuriste-complete-poster.webp",
+   "octets": 16726,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-fleuriste-complete-poster.jpg",
+   "octets": 29476,
+   "t": 0.0
+  }
+ }
+}

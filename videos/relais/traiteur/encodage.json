@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-traiteur-boucle.mp4",
+   "crf": 18,
+   "octets": 425447
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-traiteur-boucle-poster.webp",
+   "octets": 10634,
+   "t": 0.85
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-traiteur-boucle-poster.jpg",
+   "octets": 20781,
+   "t": 0.85
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-traiteur-complete.mp4",
+   "crf": 20,
+   "octets": 2624487
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-traiteur-complete-poster.webp",
+   "octets": 7184,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-traiteur-complete-poster.jpg",
+   "octets": 15062,
+   "t": 0.0
+  }
+ }
+}

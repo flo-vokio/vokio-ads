@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-dentiste-boucle.mp4",
+   "crf": 18,
+   "octets": 420268
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-dentiste-boucle-poster.webp",
+   "octets": 10322,
+   "t": 0.9
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-dentiste-boucle-poster.jpg",
+   "octets": 23179,
+   "t": 0.9
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-dentiste-complete.mp4",
+   "crf": 19,
+   "octets": 2536239
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-dentiste-complete-poster.webp",
+   "octets": 7260,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-dentiste-complete-poster.jpg",
+   "octets": 16790,
+   "t": 0.0
+  }
+ }
+}

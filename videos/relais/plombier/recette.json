@@ -1,0 +1,159 @@
+{
+  "_note": "Plombier « Fuite sous l’évier ». Énoncés = le dit (Scribe), noms tels que sur la page (Plomberie Azur, rue des Lices).",
+  "id": "plombier",
+  "carte": "Fuite sous l’évier",
+  "audio": "/opt/vokio-site-repo/assets/appel-plombier.mp3",
+  "nom": "relais-plombier",
+  "agente": "Camille",
+  "jour_heure": "Vendredi, 16 h 48.",
+  "phrase": "Camille prend l’urgence, prévient le plombier de garde, relève l’adresse et explique comment couper l’eau.",
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Camille, l’assistante vocale de Plomberie Azur ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, bonjour, je vous appelle parce que j’ai une fuite sous mon évier. Ça goutte pas mal là. Donc, je voulais savoir si c’était possible de passer assez rapidement."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord, je vois. Est-ce que l’eau continue de couler ou est-ce que vous arrivez à la contenir ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh ouais, ça coule là quand même."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord, c’est une urgence. Je préviens le plombier de garde. D’où vient la fuite exactement ? De la robinetterie, de l’arrivée d’eau ou d’autre chose ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh bah, ça doit être la robinetterie, je pense. Je sais pas trop, à vrai dire."
+    },
+    {
+      "qui": "agente",
+      "texte": "Pas de souci. Pour que le plombier puisse intervenir, j’aurais besoin de votre adresse exacte, s’il vous plaît."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Alors, c’est le 12 rue des Lices à Toulon, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. Le douze rue des Lices à Toulon. C’est bien ça ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "C’est ça."
+    },
+    {
+      "qui": "agente",
+      "texte": "Dans ce cas, je vous conseille de fermer le robinet d’arrêt sous l’évier si vous le trouvez ou de couper l’eau au compteur si ce n’est pas possible. C’est transmis. Vous recevrez un SMS et le plombier de garde vous rappellera dans les cinq minutes."
+    },
+    {
+      "qui": "appelant",
+      "texte": "OK, super. Merci beaucoup."
+    },
+    {
+      "qui": "agente",
+      "texte": "De rien. Bonne fin de journée."
+    }
+  ],
+  "situation": "evier",
+  "poster_boucle": 0.5,
+  "fiche": {
+    "titre": "Urgence · fuite sous l’évier",
+    "lignes": [
+      "Plombier de garde prévenu",
+      "Adresse relevée",
+      "Demande transmise"
+    ]
+  },
+  "sms": {
+    "texte": "Bonjour, votre demande est transmise : fuite sous l’évier. Le plombier de garde de Plomberie Azur vous rappelle dans les 5 minutes. Démo Vokio.",
+    "souligne": null,
+    "heure": "16:49"
+  },
+  "complete": {
+    "avance": 1.6,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.1
+      ],
+      "decroche": 1.1,
+      "sort": 1.25
+    },
+    "fiche": {
+      "entree": "E4:urgence.",
+      "sortie": "E10:SMS",
+      "lignes": [
+        "E4:garde.",
+        "E9:ça.",
+        "E10:transmis."
+      ]
+    },
+    "sms": {
+      "entree": "E10:fin+0.1",
+      "bulle": "E10:fin+0.75",
+      "sortie": "E12:debut-0.55"
+    },
+    "fin": {
+      "entree": "E12:fin+0.45"
+    }
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "D’accord, c’est une urgence.",
+        "source": 4,
+        "temps": [
+          2.5,
+          2.8,
+          2.95,
+          3.1
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "Je préviens le plombier de garde.",
+        "source": 4,
+        "temps": [
+          3.95,
+          4.1,
+          4.25,
+          4.4,
+          4.55,
+          4.7
+        ]
+      }
+    ],
+    "fiche": {
+      "entree": 2.3,
+      "sortie": 8.55,
+      "lignes": [
+        4.85,
+        5.8,
+        6.6
+      ]
+    },
+    "texte_sortie": 7.6
+  }
+}

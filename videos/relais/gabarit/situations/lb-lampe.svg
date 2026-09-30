@@ -1,0 +1,32 @@
+<!-- Situation « lb-lampe » (dentiste, lot B), vue du fauteuil : la lampe, tournée vers le haut, recule d'un rien puis
+     pivote sur sa fourche vers nous (on voit sa face grandir en perspective), dépasse, se pose ; elle s'allume en clignant
+     et ses rayons poussent. Le coup d'arrêt fait plonger le bras et balancer le miroir dentaire qui y est accroché
+     (pendule amorti). Animé par lb-lampe.js (fonction pure du temps, sur 10 s : la lampe s'éteint et se relève pendant que
+     la situation est cachée). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="10" style="overflow:visible;left:24px;top:222px;width:700px;height:700px">
+  <g id="la-bras">
+    <path d="M-60 70 L 300 70 M300 70 L 300 106" fill="none" stroke="#262019" stroke-width="18" stroke-linecap="round"/>
+    <path d="M62 76 L 62 96 Q 62 108 50 108" fill="none" stroke="#262019" stroke-width="7" stroke-linecap="round"/>
+    <g id="la-miroir">
+      <path d="M52 108 L 52 290" fill="none" stroke="#262019" stroke-width="12" stroke-linecap="round"/>
+      <path d="M46 146 L 58 146 M46 164 L 58 164 M46 182 L 58 182" fill="none" stroke="#F4F1E8" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M52 286 L 68 318" fill="none" stroke="#262019" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="76" cy="344" r="30" fill="#F4F1E8" stroke="#262019" stroke-width="7"/>
+      <circle cx="76" cy="344" r="19" fill="#FFFFFF"/>
+      <path d="M66 335 L 82 328" fill="none" stroke="#262019" stroke-width="4.5" stroke-linecap="round"/>
+    </g>
+    <path d="M150 250 L 150 132 Q 150 110 172 110 L 428 110 Q 450 110 450 132 L 450 250" fill="none" stroke="#262019" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <g id="la-tete">
+      <g id="la-rayons" fill="none" stroke="#EFA424" stroke-width="8" stroke-linecap="round"></g>
+      <path id="la-coque" fill="#262019" d=""/>
+      <g id="la-face">
+        <rect x="-134" y="-84" width="268" height="168" rx="62" fill="#F4F1E8" stroke="#262019" stroke-width="9"/>
+        <rect id="la-verre" x="-104" y="-56" width="208" height="112" rx="42" fill="#E8E2D5" stroke="#262019" stroke-width="6"/>
+        <rect id="la-leds" x="-66" y="-26" width="132" height="52" rx="22" fill="#F4F1E8" stroke="#262019" stroke-width="5"/>
+        <path id="la-facettes" d="M-40 0 L 40 0" fill="none" stroke="#262019" stroke-width="4" stroke-linecap="round"/>
+      </g>
+    </g>
+    <circle cx="150" cy="250" r="13" fill="#F4F1E8" stroke="#262019" stroke-width="7"/>
+    <circle cx="450" cy="250" r="13" fill="#F4F1E8" stroke="#262019" stroke-width="7"/>
+  </g>
+</svg>

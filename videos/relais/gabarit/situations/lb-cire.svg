@@ -1,0 +1,17 @@
+<!-- Situation « lb-cire » (institut de beauté, lot B) : le pot de cire chaude dans son chauffe-cire, de la cire qui a coulé
+     sur le bord ; la spatule en bois tourne dans la cire (le manche suit avec retard, la cire tourne derrière elle), trois
+     filets de fumée montent doucement, leur tracé se déforme en montant. Animé par lb-cire.js (fonction pure du temps,
+     périodique : 2,5 s par tour). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="2.5" style="overflow:visible;left:-12px;top:196px;width:700px;height:700px">
+  <g id="ci-fumee" fill="none" stroke="#6F695F" stroke-linecap="round" stroke-linejoin="round"></g>
+  <path d="M166 336 L 174 470 L 426 470 L 434 336" fill="#E8E2D5" stroke="#262019" stroke-width="9" stroke-linejoin="round"/>
+  <g id="ci-coulures" fill="#EFA424" stroke="#262019" stroke-width="5" stroke-linejoin="round"></g>
+  <path d="M124 452 L 134 532 Q 136 550 156 550 L 444 550 Q 464 550 466 532 L 476 452 Z" fill="#262019"/>
+  <ellipse cx="300" cy="452" rx="176" ry="26" fill="#262019"/>
+  <circle cx="422" cy="506" r="15" fill="#F4F1E8"/>
+  <path d="M422 494 L 422 506" stroke="#262019" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="300" cy="336" rx="142" ry="34" fill="#F4F1E8" stroke="#262019" stroke-width="10"/>
+  <ellipse id="ci-cire" cx="300" cy="340" rx="122" ry="25" fill="#EFA424" stroke="#262019" stroke-width="5"/>
+  <g id="ci-remous" fill="none" stroke="#F8D69B" stroke-width="5" stroke-linecap="round"></g>
+  <g id="ci-spatule"></g>
+</svg>

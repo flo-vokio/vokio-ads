@@ -1,0 +1,129 @@
+{
+ "echecs": [],
+ "detail": {
+  "boucle": {
+   "trois_elements": {
+    "ok": true,
+    "detail": "max 3 élément(s) ; dépassements : []"
+   },
+   "corps_min": {
+    "ok": true,
+    "detail": "52 px du cadre = 12.7 px à 264 px affichés, 18.1 px à 375"
+   },
+   "marges": {
+    "ok": true,
+    "detail": "[]"
+   },
+   "tiret_cadratin": {
+    "ok": true,
+    "detail": "aucun « — »"
+   },
+   "numero": {
+    "ok": true,
+    "detail": "aucun numéro"
+   },
+   "nom_de_famille": {
+    "ok": true,
+    "detail": "jamais « Alauzet »"
+   },
+   "erreurs_internes": {
+    "ok": true,
+    "detail": "aucune"
+   },
+   "sous_suite": {
+    "ok": true,
+    "detail": "2 pages, hors du dit : []"
+   },
+   "codec": {
+    "ok": true,
+    "detail": "h264 yuv420p 1080×1080 30/1"
+   },
+   "faststart": {
+    "ok": true,
+    "detail": "moov en tête"
+   },
+   "poids": {
+    "ok": true,
+    "detail": "508 Ko (cible ≤ 700 Ko)"
+   },
+   "duree": {
+    "ok": true,
+    "detail": "10.000 s (voulu 10.000)"
+   },
+   "poster_sans_texte": {
+    "ok": true,
+    "detail": "poster à 1.25 s : éléments ['situation', 'point'], texte hors illustration []"
+   },
+   "sans_audio": {
+    "ok": true,
+    "detail": "aucune piste audio"
+   },
+   "raccord": {
+    "ok": true,
+    "detail": "écart dernière → première image 0.34 ; voisines : médiane 0.31, p95 4.82, max 5.11"
+   }
+  },
+  "complete": {
+   "trois_elements": {
+    "ok": true,
+    "detail": "max 3 élément(s) ; dépassements : []"
+   },
+   "corps_min": {
+    "ok": true,
+    "detail": "52 px du cadre = 12.7 px à 264 px affichés, 18.1 px à 375"
+   },
+   "marges": {
+    "ok": true,
+    "detail": "[]"
+   },
+   "tiret_cadratin": {
+    "ok": true,
+    "detail": "aucun « — »"
+   },
+   "numero": {
+    "ok": true,
+    "detail": "aucun numéro"
+   },
+   "nom_de_famille": {
+    "ok": true,
+    "detail": "jamais « Alauzet »"
+   },
+   "erreurs_internes": {
+    "ok": true,
+    "detail": "aucune"
+   },
+   "sous_suite": {
+    "ok": true,
+    "detail": "20 pages, hors du dit : []"
+   },
+   "codec": {
+    "ok": true,
+    "detail": "h264 yuv420p 1080×1080 30/1"
+   },
+   "faststart": {
+    "ok": true,
+    "detail": "moov en tête"
+   },
+   "poids": {
+    "ok": true,
+    "detail": "1985 Ko (cible ≤ 3000 Ko)"
+   },
+   "duree": {
+    "ok": true,
+    "detail": "66.267 s (voulu 66.267)"
+   },
+   "audio": {
+    "ok": true,
+    "detail": "aac 48000 Hz 2 can. 64 kb/s"
+   },
+   "sonie": {
+    "ok": true,
+    "detail": "-16.1 LUFS, crête -3.8 dBTP"
+   },
+   "synchro": {
+    "ok": true,
+    "detail": "image 66.267 s, son 66.266 s"
+   }
+  }
+ }
+}

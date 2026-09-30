@@ -1,0 +1,18 @@
+<!-- Situation « roue » (garage, un bruit au freinage) : la roue tourne vite (le sol défile), l'étrier serre, la roue freine
+     en quelques tours, des étincelles jaillissent du disque au contact, la roue s'arrête. Animé par roue.js (lib/fx.js). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="1.25" style="overflow:visible;left:-20px;top:170px;width:700px;height:700px">
+  <g id="ro-sol" stroke="#262019" stroke-width="6" stroke-linecap="round"><path d="M40 500 H 560" opacity=".3"/><g id="ro-tirets"></g></g>
+  <g id="ro-roue">
+    <circle cx="300" cy="320" r="170" fill="#262019"/>
+    <circle cx="300" cy="320" r="124" fill="#D9D2C4" stroke="#262019" stroke-width="6"/>
+    <circle cx="300" cy="320" r="92" fill="none" stroke="#262019" stroke-width="4" opacity=".35"/>
+    <g id="ro-jante"></g>
+    <circle cx="300" cy="320" r="30" fill="#F4F1E8" stroke="#262019" stroke-width="7"/>
+  </g>
+  <g id="ro-arcs" fill="none" stroke="#F4F1E8" stroke-width="6" stroke-linecap="round"></g>
+  <g id="ro-etrier" transform="rotate(-40 300 320)">
+    <rect x="258" y="190" width="84" height="54" rx="16" fill="#262019" stroke="#F4F1E8" stroke-width="5"/>
+    <rect x="276" y="180" width="48" height="18" rx="7" fill="#262019" stroke="#F4F1E8" stroke-width="4"/>
+  </g>
+  <g id="ro-fx"></g>
+</svg>

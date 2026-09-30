@@ -1,0 +1,132 @@
+{
+  "_note": "Même schéma que coiffure/recette.json (voir son « _note »). Énoncés = texte DIT d'après le relevé Scribe (le site en montre parfois plus : répliques coupées au montage). À FAIRE VALIDER : pas de rendez-vous dans cet appel (l'appelant rappellera) : l'objet est une FICHE d'appel (titre et lignes à valider), la situation « fermé » (pancarte). On écrit « Auto-école du Centre » (décision de Florian du 29/09), Scribe entend « Stand ».",
+  "id": "auto-ecole",
+  "carte": "Après la fermeture",
+  "audio": "/opt/vokio-site-repo/assets/appel-auto-ecole.mp3",
+  "nom": "relais-auto-ecole",
+  "situation": "pancarte",
+  "fiche": {
+    "titre": "Appel de 19 h 18",
+    "lignes": [
+      "Conduite accompagnée",
+      "Florian, première inscription",
+      "Rappellera plus tard"
+    ]
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Auto-école du Centre, bonjour. Moi, c’est Manon, son assistante vocale. Qu’est-ce que je peux faire pour vous ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Bonjour, euh, je voulais savoir si c’était possible de prendre un rendez-vous."
+    },
+    {
+      "qui": "agente",
+      "texte": "Oui, bien sûr. C’est pour une première inscription chez nous ou vous êtes déjà élève à l’auto-école ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, c’est pour une première inscription, ce serait pour mon fils. En fait, il a, il a seize ans, mais je voudrais anticiper, euh, la conduite accompagnée. Je sais pas comment ça se passe."
+    },
+    {
+      "qui": "agente",
+      "texte": "C’est une excellente idée d’anticiper. Pour commencer la conduite accompagnée, nous devons d’abord faire une évaluation de conduite initiale obligatoire avec lui. C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, c’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, Florian. Quel jour vous conviendrait pour cette évaluation de conduite ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, attendez, j’ai un souci. Je vous rappellerai plus tard. Je vous remercie, au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Pas de problème, je comprends tout à fait. N’hésitez pas à nous rappeler quand vous serez disponible. Bonne fin de journée, au revoir."
+    }
+  ],
+  "complete": {
+    "avance": 0.8,
+    "situation": {
+      "sonne": [
+        0.05,
+        0.75
+      ],
+      "decroche": 0.75,
+      "sort": 0.95
+    },
+    "fiche": {
+      "entree": "E3:anticiper",
+      "sortie": "E8:fin+0.45",
+      "lignes": [
+        "E3:accompagnée.",
+        "E5:Florian.",
+        "E7:rappellerai"
+      ]
+    },
+    "fin": {
+      "entree": "E8:fin+0.45"
+    }
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "je voudrais anticiper la conduite accompagnée.",
+        "source": 3,
+        "temps": [
+          2.5,
+          2.7,
+          2.95,
+          3.35,
+          3.5,
+          3.75
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "N’hésitez pas à nous rappeler.",
+        "source": 8,
+        "temps": [
+          5.6,
+          5.85,
+          5.95,
+          6.05,
+          6.2
+        ]
+      }
+    ],
+    "fiche": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "lignes": [
+        3.9,
+        4.8,
+        6.35
+      ]
+    },
+    "texte_sortie": 7.6
+  },
+  "agente": "Manon",
+  "poster_boucle": 0.72
+}

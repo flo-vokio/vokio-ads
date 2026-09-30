@@ -1,0 +1,29 @@
+<!-- Situation « lb-refracteur » (opticien, lot B) : le réfracteur, vu de face ; la molette de gauche tourne d'un cran
+     (coup sec, léger dépassement, le verre change), puis celle de droite ; un reflet glisse sur les deux verres, l'un après
+     l'autre. Animé par lb-refracteur.js (fonction pure du temps, périodique : 2,5 s par séquence, 4 par boucle). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="2.5" style="overflow:visible;left:-60px;top:170px;width:744px;height:744px">
+  <defs>
+    <clipPath id="rf-clip-g"><circle cx="186" cy="330" r="50"/></clipPath>
+    <clipPath id="rf-clip-d"><circle cx="414" cy="330" r="50"/></clipPath>
+  </defs>
+  <g id="rf-tout">
+    <rect x="120" y="146" width="360" height="30" rx="15" fill="#262019"/>
+    <path d="M300 176 L 300 208" stroke="#262019" stroke-width="14" stroke-linecap="round"/>
+    <rect x="252" y="206" width="96" height="160" rx="30" fill="#F4F1E8" stroke="#262019" stroke-width="9"/>
+    <circle cx="300" cy="250" r="14" fill="#262019"/>
+    <path d="M276 300 L 324 300 M276 324 L 324 324" stroke="#262019" stroke-width="6" stroke-linecap="round"/>
+    <g id="rf-g">
+      <circle cx="186" cy="330" r="104" fill="#F4F1E8" stroke="#262019" stroke-width="10"/>
+      <g id="rf-molette-g"></g>
+      <circle cx="186" cy="330" r="50" fill="#E8E2D5" stroke="#262019" stroke-width="8"/>
+      <g clip-path="url(#rf-clip-g)"><g id="rf-verre-g"></g><path id="rf-reflet-g" d="" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round"/></g>
+    </g>
+    <g id="rf-d">
+      <circle cx="414" cy="330" r="104" fill="#F4F1E8" stroke="#262019" stroke-width="10"/>
+      <g id="rf-molette-d"></g>
+      <circle cx="414" cy="330" r="50" fill="#E8E2D5" stroke="#262019" stroke-width="8"/>
+      <g clip-path="url(#rf-clip-d)"><g id="rf-verre-d"></g><path id="rf-reflet-d" d="" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round"/></g>
+    </g>
+    <g id="rf-traits"></g>
+  </g>
+</svg>

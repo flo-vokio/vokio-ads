@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-chauffagiste-boucle.mp4",
+   "crf": 18,
+   "octets": 375351
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-chauffagiste-boucle-poster.webp",
+   "octets": 9670,
+   "t": 0.45
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-chauffagiste-boucle-poster.jpg",
+   "octets": 21766,
+   "t": 0.45
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-chauffagiste-complete.mp4",
+   "crf": 18,
+   "octets": 2406980
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-chauffagiste-complete-poster.webp",
+   "octets": 8736,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-chauffagiste-complete-poster.jpg",
+   "octets": 20302,
+   "t": 0.0
+  }
+ }
+}

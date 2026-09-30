@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-opticien-boucle.mp4",
+   "crf": 18,
+   "octets": 438548
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-opticien-boucle-poster.webp",
+   "octets": 15756,
+   "t": 1.25
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-opticien-boucle-poster.jpg",
+   "octets": 30850,
+   "t": 1.25
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-opticien-complete.mp4",
+   "crf": 18,
+   "octets": 1749807
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-opticien-complete-poster.webp",
+   "octets": 13670,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-opticien-complete-poster.jpg",
+   "octets": 27850,
+   "t": 0.0
+  }
+ }
+}

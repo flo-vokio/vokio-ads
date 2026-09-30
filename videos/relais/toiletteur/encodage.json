@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-toiletteur-boucle.mp4",
+   "crf": 18,
+   "octets": 507105
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-toiletteur-boucle-poster.webp",
+   "octets": 10602,
+   "t": 0.62
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-toiletteur-boucle-poster.jpg",
+   "octets": 21238,
+   "t": 0.62
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-toiletteur-complete.mp4",
+   "crf": 18,
+   "octets": 2300448
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-toiletteur-complete-poster.webp",
+   "octets": 8064,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-toiletteur-complete-poster.jpg",
+   "octets": 17333,
+   "t": 0.0
+  }
+ }
+}

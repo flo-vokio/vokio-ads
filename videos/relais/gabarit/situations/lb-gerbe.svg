@@ -1,0 +1,32 @@
+<!-- Situation « lb-gerbe » (fleuriste, lot B, ton sobre) : une gerbe ; le ruban noue lentement ses deux boucles autour des
+     tiges (les pans remontent d'autant, puis se balancent à peine), et une feuille se détache et descend en se balançant.
+     Aucun trait de vitesse, aucun écrasement : un geste lent. Animé par lb-gerbe.js (fonction pure du temps, sur 10 s : le
+     nœud se défait et la feuille se remet en place pendant que la situation est cachée). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="10" style="overflow:visible;left:0px;top:214px;width:680px;height:680px">
+  <g id="gb-tiges" fill="none" stroke="#262019" stroke-width="7" stroke-linecap="round">
+    <path d="M262 590 C 266 520 268 460 270 404 C 262 330 214 270 170 214"/>
+    <path d="M276 590 C 276 520 276 460 276 404 C 280 320 290 240 300 150"/>
+    <path d="M290 590 C 288 520 284 460 282 404 C 300 330 352 262 410 208"/>
+    <path d="M248 586 C 256 520 262 460 268 404 C 246 346 190 318 136 312"/>
+    <path d="M302 586 C 296 520 290 460 284 404 C 318 356 386 330 450 318"/>
+  </g>
+  <g id="gb-feuilles" fill="#F4F1E8" stroke="#262019" stroke-width="6" stroke-linejoin="round">
+    <path d="M226 296 C 200 262 170 262 150 272 C 172 294 200 304 226 296 Z M226 296 L 170 276"/>
+    <path d="M320 300 C 330 262 360 246 384 246 C 372 272 350 294 320 300 Z M320 300 L 372 256"/>
+    <path d="M288 256 C 262 236 256 204 262 184 C 284 200 294 228 288 256 Z M288 256 L 266 196"/>
+  </g>
+  <g id="gb-fleurs"></g>
+  <g id="gb-feuille"><path d="M0 0 C -18 -30 -10 -64 8 -80 C 26 -60 23 -26 0 0 Z M0 0 L 6 -66" fill="#F4F1E8" stroke="#262019" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/></g>
+  <g id="gb-ruban" transform="translate(276 404)">
+    <g id="gb-pans" fill="#EFA424" stroke="#262019" stroke-width="5.5" stroke-linejoin="round">
+      <path id="gb-pan-g" d="M-8 6 L -40 132 L -26 122 L -18 138 L 6 10 Z"/>
+      <path id="gb-pan-d" d="M8 6 L 38 124 L 24 116 L 14 132 L -6 10 Z"/>
+    </g>
+    <rect x="-40" y="-12" width="80" height="24" rx="8" fill="#EFA424" stroke="#262019" stroke-width="5.5"/>
+    <g id="gb-boucles" fill="#EFA424" stroke="#262019" stroke-width="5.5" stroke-linejoin="round">
+      <path id="gb-boucle-g" d="M0 0 C -30 -44 -88 -46 -86 -10 C -84 22 -34 16 0 0 Z"/>
+      <path id="gb-boucle-d" d="M0 0 C 30 -44 88 -46 86 -10 C 84 22 34 16 0 0 Z"/>
+    </g>
+    <rect id="gb-noeud" x="-15" y="-15" width="30" height="30" rx="9" fill="#EFA424" stroke="#262019" stroke-width="5.5"/>
+  </g>
+</svg>

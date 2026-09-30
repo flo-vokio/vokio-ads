@@ -1,0 +1,30 @@
+<!-- Situation « lb-vernis » (onglerie, lot B) : un doigt vu de dessus ; le pinceau se pose et tire le vernis de la cuticule
+     au bout de l'ongle (les poils plient dans le sens du geste), se relève : un fil de vernis s'étire, casse, et la goutte
+     perle au bout du pinceau (elle tremble, amortie) ; puis la lampe UV s'allume en clignant et ses rayons tombent sur
+     l'ongle, qui brille. Animé par lb-vernis.js (fonction pure du temps, sur 10 s : tout se remet en place, caché). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="10" style="overflow:visible;left:-40px;top:120px;width:760px;height:760px">
+  <defs><clipPath id="vn-clip-ongle"><path d="M246 412 L 302 412 C 322 412 332 426 332 440 C 332 454 322 468 302 468 L 246 468 C 238 454 238 426 246 412 Z"/></clipPath></defs>
+  <g id="vn-lampe">
+    <path d="M496 540 C 540 530 540 430 468 372" fill="none" stroke="#262019" stroke-width="16" stroke-linecap="round"/>
+    <path d="M430 540 L 560 540" fill="none" stroke="#262019" stroke-width="18" stroke-linecap="round"/>
+    <g id="vn-rayons" fill="none" stroke="#EFA424" stroke-width="7" stroke-linecap="round"></g>
+    <g transform="translate(400 316) rotate(40)">
+      <rect x="-86" y="-30" width="172" height="56" rx="24" fill="#F4F1E8" stroke="#262019" stroke-width="9"/>
+      <rect id="vn-led" x="-62" y="14" width="124" height="16" rx="8" fill="#E8E2D5" stroke="#262019" stroke-width="5"/>
+    </g>
+  </g>
+  <path d="M-60 396 L 270 396 C 318 396 350 414 350 440 C 350 466 318 484 270 484 L -60 484" fill="#F4F1E8" stroke="#262019" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M110 412 C 104 426 104 454 110 468 M126 418 C 122 430 122 450 126 462" fill="none" stroke="#262019" stroke-width="5" stroke-linecap="round"/>
+  <path d="M246 412 L 302 412 C 322 412 332 426 332 440 C 332 454 322 468 302 468 L 246 468 C 238 454 238 426 246 412 Z" fill="#F4F1E8" stroke="#262019" stroke-width="6" stroke-linejoin="round"/>
+  <g clip-path="url(#vn-clip-ongle)"><rect id="vn-vernis" x="236" y="404" width="0" height="72" fill="#EFA424"/></g>
+  <path id="vn-reflet" d="M262 424 C 280 420 300 420 314 426" fill="none" stroke="#FFF6E3" stroke-width="6" stroke-linecap="round" opacity="0"/>
+  <path id="vn-contour-ongle" d="M246 412 L 302 412 C 322 412 332 426 332 440 C 332 454 322 468 302 468 L 246 468 C 238 454 238 426 246 412 Z" fill="none" stroke="#262019" stroke-width="6" stroke-linejoin="round"/>
+  <path id="vn-fil" fill="none" stroke="#EFA424" stroke-linecap="round"/>
+  <g id="vn-pinceau">
+    <path id="vn-poils" fill="#EFA424" stroke="#262019" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M0 -44 L 0 -96" fill="none" stroke="#262019" stroke-width="8" stroke-linecap="round"/>
+    <rect x="-20" y="-236" width="40" height="144" rx="12" fill="#262019"/>
+    <path d="M-10 -220 L -10 -120" fill="none" stroke="#F4F1E8" stroke-width="4" stroke-linecap="round"/>
+    <g id="vn-goutte"><path fill="#EFA424" stroke="#262019" stroke-width="5" stroke-linejoin="round"/></g>
+  </g>
+</svg>

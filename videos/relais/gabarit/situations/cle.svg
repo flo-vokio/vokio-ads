@@ -1,0 +1,32 @@
+<!-- Situation « clé » (plombier, fuite sous l'évier) : sous l'évier (cuve, bonde, tuyau d'évacuation vers le mur), l'écrou du
+     raccord vu de face ; une goutte (solaire, pour se lire tout de suite) perle sous le raccord et tombe ; la clé à molette serre l'écrou DANS LE BON SENS : rotation horaire vue de face (le filetage part vers
+     le mur), mâchoire MOBILE du côté où l'on tire (en haut, le manche remonte), mâchoire fixe en bas ; 60° d'un coup, puis la
+     goutte s'arrête. Animé par cle.js (lib/fx.js). -->
+<svg id="objet" viewBox="0 -20 600 600" aria-hidden="true" data-periode="1.25" style="overflow:visible;left:0;top:150px;width:640px;height:640px">
+  <g id="cl-evier">
+    <path d="M170 20 H 560 V 34 H 170 Z" fill="#262019" opacity=".85"/>
+    <path d="M210 34 H 560 Q 552 112 470 118 H 300 Q 218 112 210 34 Z" fill="#F4F1E8" stroke="#262019" stroke-width="8" stroke-linejoin="round"/>
+    <rect x="357" y="116" width="46" height="130" fill="#F4F1E8" stroke="#262019" stroke-width="7"/>
+    <rect x="440" y="276" width="110" height="48" fill="#F4F1E8" stroke="#262019" stroke-width="7"/>
+    <path d="M170 548 H 540" stroke="#262019" stroke-width="5" stroke-linecap="round" opacity=".3"/>
+  </g>
+  <g id="cl-flaque"><path id="cl-flaque-p" fill="#262019" opacity=".16"/></g>
+  <g id="cl-gouttes"></g>
+  <g id="cl-ecrou">
+    <path d="M449 300 L 414.5 359.8 L 345.5 359.8 L 311 300 L 345.5 240.2 L 414.5 240.2 Z" fill="#F4F1E8" stroke="#262019" stroke-width="9" stroke-linejoin="round"/>
+    <circle cx="380" cy="300" r="40" fill="none" stroke="#262019" stroke-width="7"/>
+    <circle cx="380" cy="300" r="24" fill="#262019"/>
+  </g>
+  <g id="cl-cle">
+    <!-- repère : centre de l'écrou (380, 300), manche vers la gauche ; mâchoire fixe EN BAS (solidaire du corps),
+         mâchoire mobile EN HAUT portée par la vis sans fin -->
+    <path d="M292 250 Q 262 252 250 300 Q 262 350 292 352 L 300 318 L 300 284 Z" fill="#262019"/>
+    <path d="M300 360 L 470 360 Q 488 362 486 378 L 482 392 Q 478 400 466 398 L 300 398 Z" fill="#262019"/>
+    <path d="M306 240 L 458 240 Q 474 238 472 224 L 468 212 Q 464 204 452 206 L 306 206 Z" fill="#262019"/>
+    <rect x="262" y="206" width="44" height="30" rx="6" fill="#F4F1E8" stroke="#262019" stroke-width="6"/>
+    <path d="M272 208 V 234 M282 208 V 234 M292 208 V 234" stroke="#262019" stroke-width="4"/>
+    <path d="M262 272 L 28 286 Q 6 300 28 314 L 262 328 Z" fill="#262019"/>
+    <circle cx="44" cy="300" r="9" fill="#F4F1E8"/>
+  </g>
+  <g id="cl-traits"></g>
+</svg>

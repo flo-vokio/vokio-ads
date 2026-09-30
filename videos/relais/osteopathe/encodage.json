@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-osteopathe-boucle.mp4",
+   "crf": 18,
+   "octets": 509443
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-osteopathe-boucle-poster.webp",
+   "octets": 12846,
+   "t": 9.5
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-osteopathe-boucle-poster.jpg",
+   "octets": 24948,
+   "t": 9.5
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-osteopathe-complete.mp4",
+   "crf": 18,
+   "octets": 2153632
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-osteopathe-complete-poster.webp",
+   "octets": 13414,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-osteopathe-complete-poster.jpg",
+   "octets": 25324,
+   "t": 0.0
+  }
+ }
+}

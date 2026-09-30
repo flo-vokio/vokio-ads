@@ -1,0 +1,164 @@
+{
+  "_note": "Électricien « Une panne à chercher ». Énoncés = le dit (Scribe) ; « Élec Faure » tel que sur la page (Scribe : Elecfor).",
+  "id": "electricien",
+  "carte": "Une panne à chercher",
+  "audio": "/opt/vokio-site-repo/assets/appel-electricien.mp3",
+  "nom": "relais-electricien",
+  "agente": "Léa",
+  "jour_heure": "Jeudi, 19 h 12.",
+  "phrase": "Léa note le motif, propose une date, attend l’accord du client et confirme le passage.",
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Léa, l’assistante vocale de Élec Faure ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui bonjour, je vous appelle parce que j’ai mon disjoncteur qui saute de temps en temps depuis quelques jours. Euh, bah, il se remet en marche tout seul hein, mais, euh, je voudrais qu’un électricien passe pour, euh, bah pour regarder si possible demain."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord, je vois. C’est pour une recherche de panne alors ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh oui, c’est ça."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. Demain, c’est vendredi dix-huit septembre. L’intervention est souhaitée le matin ou l’après-midi ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, le matin si c’est possible."
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je peux vous proposer le vendredi dix-huit septembre dans la matinée. Cela vous convient ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui, c’est parfait. Oui."
+    },
+    {
+      "qui": "agente",
+      "texte": "C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "C’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Laissez-moi voir. Parfait, je vous note ça pour Florian pour une recherche de panne le vendredi dix-huit septembre dans la matinée. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci beaucoup, au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "De rien, au revoir."
+    }
+  ],
+  "situation": "disjoncteur",
+  "poster_boucle": 0.4,
+  "fiche": {
+    "titre": "Passage · vendredi 18 septembre",
+    "lignes": [
+      "Recherche de panne",
+      "Dans la matinée",
+      "Florian, passage confirmé"
+    ]
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : recherche de panne, le vendredi 18 septembre dans la matinée, Élec Faure. Démo Vokio, RDV fictif.",
+    "souligne": "vendredi 18 septembre",
+    "heure": "19:13"
+  },
+  "complete": {
+    "avance": 1.6,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.1
+      ],
+      "decroche": 1.1,
+      "sort": 1.3
+    },
+    "fiche": {
+      "entree": "E2:recherche",
+      "sortie": "E11:SMS",
+      "lignes": [
+        "E2:panne",
+        "E7:matinée.",
+        "E11:Parfait,"
+      ]
+    },
+    "sms": {
+      "entree": "E11:fin+0.1",
+      "bulle": "E11:fin+0.75",
+      "sortie": "E13:debut-0.55"
+    },
+    "fin": {
+      "entree": "E13:fin+0.45"
+    }
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "le vendredi dix-huit septembre dans la matinée.",
+        "source": 7,
+        "temps": [
+          2.5,
+          2.65,
+          2.95,
+          3.25,
+          3.6,
+          3.75,
+          3.85
+        ]
+      },
+      {
+        "qui": "appelant",
+        "texte": "Euh, oui, c’est parfait.",
+        "source": 8,
+        "temps": [
+          4.9,
+          5.15,
+          5.35,
+          5.55
+        ]
+      }
+    ],
+    "fiche": {
+      "entree": 2.3,
+      "sortie": 8.55,
+      "lignes": [
+        2.55,
+        3.95,
+        5.9
+      ]
+    },
+    "texte_sortie": 7.6
+  }
+}

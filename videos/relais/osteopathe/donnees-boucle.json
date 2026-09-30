@@ -1,0 +1,152 @@
+{
+ "mode": "boucle",
+ "fps": 30,
+ "taille": 1080,
+ "marge": 84,
+ "corps": {
+  "agente": {
+   "seul": 74,
+   "objet": 74
+  },
+  "appelant": {
+   "seul": 86,
+   "objet": 86
+  }
+ },
+ "corps_min": 52,
+ "situation": {
+  "sonne": [
+   0.15,
+   1.7
+  ],
+  "decroche": 1.7,
+  "sort": 1.95,
+  "revient": 8.75,
+  "objet": "lb-vertebres"
+ },
+ "enonces": [
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "je",
+     "t": 2.5,
+     "t1": 2.7
+    },
+    {
+     "texte": "me",
+     "t": 2.6,
+     "t1": 2.8000000000000003
+    },
+    {
+     "texte": "suis",
+     "t": 2.72,
+     "t1": 2.9200000000000004
+    },
+    {
+     "texte": "bloqué",
+     "t": 2.85,
+     "t1": 3.0500000000000003
+    },
+    {
+     "texte": "le",
+     "t": 3.1,
+     "t1": 3.3000000000000003
+    },
+    {
+     "texte": "dos,",
+     "t": 3.22,
+     "t1": 3.4200000000000004
+    },
+    {
+     "texte": "là,",
+     "t": 3.5,
+     "t1": 3.7
+    },
+    {
+     "texte": "dans",
+     "t": 3.8,
+     "t1": 4.0
+    },
+    {
+     "texte": "la",
+     "t": 3.9,
+     "t1": 4.1
+    },
+    {
+     "texte": "nuit",
+     "t": 4.02,
+     "t1": 4.22
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Le",
+     "t": 4.9,
+     "t1": 5.1000000000000005
+    },
+    {
+     "texte": "rendez-vous",
+     "t": 5.02,
+     "t1": 5.22
+    },
+    {
+     "texte": "de",
+     "t": 5.25,
+     "t1": 5.45
+    },
+    {
+     "texte": "dix-sept",
+     "t": 5.38,
+     "t1": 5.58
+    },
+    {
+     "texte": "heures",
+     "t": 5.62,
+     "t1": 5.82
+    },
+    {
+     "texte": "est",
+     "t": 5.8,
+     "t1": 6.0
+    },
+    {
+     "texte": "disponible.",
+     "t": 5.92,
+     "t1": 6.12
+    }
+   ]
+  }
+ ],
+ "coupes": [],
+ "agenda": {
+  "date": "Vendredi 18 septembre",
+  "heures": [
+   "16:00",
+   "17:00",
+   "18:00"
+  ],
+  "entree": 2.2,
+  "sortie": 8.55,
+  "touches": [
+   {
+    "t": 5.38,
+    "heure": "17:00"
+   }
+  ],
+  "bloc": {
+   "heure": "17:00",
+   "nom": "Florian",
+   "service": "Dos bloqué",
+   "ouvre": 6.22,
+   "t_nom": 6.62,
+   "t_service": 7.07
+  }
+ },
+ "duree": 10.0,
+ "texte_sortie": 7.4,
+ "avance": 0.0
+}

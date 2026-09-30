@@ -1,0 +1,183 @@
+{
+  "_note": "Lot B, carte métier « Une ordonnance de dix séances » (vokio.fr/kine/). Même schéma que coiffure/recette.json. Énoncés = texte DIT (relevé Scribe du 29/09). À FAIRE VALIDER : le texte du SMS, la situation « lb-elastique ».",
+  "id": "kine",
+  "carte": "Une ordonnance de dix séances",
+  "audio": "/opt/vokio-site-repo/assets/appel-kine.mp3",
+  "nom": "relais-kine",
+  "situation": "lb-elastique",
+  "agenda": {
+    "date": "Lundi 21 septembre",
+    "heures": [
+      "10:30",
+      "11:30",
+      "12:30"
+    ],
+    "bloc": {
+      "heure": "11:30",
+      "nom": "Florian",
+      "service": "Bilan initial"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : Bilan initial, le lundi 21 septembre à 11:30, Cabinet Kiné Vauban. Démo Vokio, RDV fictif.",
+    "souligne": "lundi 21 septembre à 11:30",
+    "heure": "15:53"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Justine, l’assistante vocale du Cabinet Kiné Vauban ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Bonjour, je vous appelle parce que je voudrais prendre des séances de kiné. J’ai une ordonnance, là, pour dix séances. Euh, en fait, je suis tombé et c’est pour mon épaule droite."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord. Pour commencer, il faut prévoir un bilan initial. C’est pour quel prénom, s’il vous plaît ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, c’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, Florian. Quel jour souhaiteriez-vous faire ce bilan initial ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, bah, dès lundi, si c’est possible, à onze heures trente, par exemple."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vérifie les disponibilités."
+    },
+    {
+      "qui": "agente",
+      "texte": "Le lundi vingt et un septembre à onze heures trente, c’est possible pour un bilan initial. Est-ce que cela vous convient ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui, c’est parfait."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian, pour un bilan initial, le lundi vingt et un septembre à onze heures trente. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci beaucoup. Bonne journée."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous aussi, bonne journée."
+    }
+  ],
+  "complete": {
+    "avance": 1.5,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.3
+      ],
+      "decroche": 1.3,
+      "sort": 1.45
+    },
+    "agenda": {
+      "entree": "E4:Quel",
+      "sortie": "E9:SMS",
+      "touches": [
+        [
+          "E5:onze",
+          "11:30"
+        ],
+        [
+          "E7:onze",
+          "11:30"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E7:possible",
+        "nom": "E9:Florian,",
+        "service": "E9:bilan"
+      }
+    },
+    "sms": {
+      "entree": "E9:fin+0.1",
+      "bulle": "E9:fin+0.75",
+      "sortie": "E11:debut-0.55"
+    },
+    "fin": {
+      "entree": "E11:fin+0.45"
+    },
+    "coupes": [
+      "E9:le",
+      "E9:Vous#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "J’ai une ordonnance, là, pour dix séances.",
+        "source": 1,
+        "temps": [
+          2.5,
+          2.65,
+          2.8,
+          3.3,
+          3.55,
+          3.7,
+          3.92
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "Pour commencer, il faut prévoir un bilan initial.",
+        "source": 2,
+        "temps": [
+          4.7,
+          4.85,
+          5.15,
+          5.28,
+          5.45,
+          5.7,
+          5.82,
+          6.05
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E1:initial.+0.25",
+          "11:30"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:initial.+0.45",
+        "nom": "E1:initial.+0.85",
+        "service": "E1:initial.+1.25"
+      }
+    },
+    "texte_sortie": 7.5
+  },
+  "agente": "Justine",
+  "poster_boucle": 1.35
+}

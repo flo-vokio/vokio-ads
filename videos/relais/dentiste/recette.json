@@ -1,0 +1,210 @@
+{
+  "_note": "Lot B, carte métier « Une douleur, sans gravité » (vokio.fr/dentiste/). Même schéma que coiffure/recette.json. Énoncés = texte DIT (relevé Scribe du 29/09). À FAIRE VALIDER : le texte du SMS, la situation « lb-lampe », et à l'oreille vers 53 s : « J’ai super mal » (Scribe) contre « là, je suis pas mal » (page).",
+  "id": "dentiste",
+  "carte": "Une douleur, sans gravité",
+  "audio": "/opt/vokio-site-repo/assets/appel-dentiste.mp3",
+  "nom": "relais-dentiste",
+  "situation": "lb-lampe",
+  "agenda": {
+    "date": "Lundi 21 septembre",
+    "heures": [
+      "08:30",
+      "09:30",
+      "10:30"
+    ],
+    "bloc": {
+      "heure": "08:30",
+      "nom": "Florian",
+      "service": "Consultation"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : Consultation, le lundi 21 septembre à 08:30, Cabinet dentaire Prado. Démo Vokio, RDV fictif.",
+    "souligne": "lundi 21 septembre à 08:30",
+    "heure": "15:45"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Alice, l’assistante vocale du Cabinet dentaire Prado ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui, bonjour, je vous appelle parce que là, depuis cette nuit, j’ai super mal à une dent et je voudrais prendre rendez-vous le plus rapidement possible, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je comprends. Pour que je puisse vous aider au mieux, j’aurais besoin de votre prénom."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, c’est Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, Florian. Vous avez mal à une dent, est-ce que votre joue est gonflée ou avez-vous de la fièvre ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, non, aucun des deux."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord. Dans ce cas, il s’agit d’une consultation ordinaire. Quel jour souhaiteriez-vous avoir un rendez-vous ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, ben, lundi, si c’est possible."
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, le lundi vingt et un septembre. Pour une consultation, à quelle heure vous conviendrait-il ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, ben, s’il vous plaît, le, le plus tôt possible. J’ai super mal."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vérifie les disponibilités."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je peux vous proposer lundi matin à huit heures trente, neuf heures trente ou dix heures trente. Qu’est-ce qui vous arrange le mieux ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Ben, huit heures trente."
+    },
+    {
+      "qui": "agente",
+      "texte": "Laissez-moi voir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian, pour une consultation, le lundi vingt et un septembre à huit heures trente. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "OK, super, merci beaucoup. Bonne journée."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous, Florian. Bonne journée et à bientôt."
+    }
+  ],
+  "complete": {
+    "avance": 1.5,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.3
+      ],
+      "decroche": 1.3,
+      "sort": 1.45
+    },
+    "agenda": {
+      "entree": "E9:Très",
+      "sortie": "E15:SMS",
+      "touches": [
+        [
+          "E12:huit",
+          "08:30"
+        ],
+        [
+          "E12:neuf",
+          "09:30"
+        ],
+        [
+          "E12:dix",
+          "10:30"
+        ],
+        [
+          "E13:huit",
+          "08:30"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E13:trente.+0.25",
+        "nom": "E15:Florian,",
+        "service": "E15:consultation,"
+      }
+    },
+    "sms": {
+      "entree": "E15:fin+0.1",
+      "bulle": "E15:fin+0.75",
+      "sortie": "E17:debut-0.55"
+    },
+    "fin": {
+      "entree": "E17:fin+0.45"
+    },
+    "coupes": [
+      "E15:Vous#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "j’ai super mal à une dent",
+        "source": 1,
+        "temps": [
+          2.5,
+          2.72,
+          2.92,
+          3.2,
+          3.35,
+          3.52
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "il s’agit d’une consultation ordinaire.",
+        "source": 6,
+        "temps": [
+          4.6,
+          4.78,
+          5.0,
+          5.25,
+          5.75
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E1:ordinaire.+0.3",
+          "08:30"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:ordinaire.+0.5",
+        "nom": "E1:ordinaire.+0.9",
+        "service": "E1:ordinaire.+1.35"
+      }
+    },
+    "texte_sortie": 7.3
+  },
+  "agente": "Alice",
+  "poster_boucle": 0.9
+}

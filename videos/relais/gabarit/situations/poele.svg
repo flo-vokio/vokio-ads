@@ -1,0 +1,25 @@
+<!-- Situation « poêle » (restaurant, en plein service) : le cuisinier fait sauter. La poêle prend son élan vers l'arrière,
+     donne un coup vers l'avant et remonte ; les trois aliments décollent l'un après l'autre en arc, tournent sur eux-mêmes et
+     retombent avec un écrasement ; trois flammes ondulent dessous (tracé déformé, flammèches), traits de vitesse sur le coup et smear au décollage. Animé par poele.js + lib/fx.js (fonction pure du temps,
+     période data-periode, arrondie pour que la boucle en compte un nombre entier). -->
+<svg id="objet" viewBox="110 90 520 520" aria-hidden="true" data-periode="1.25" style="overflow:visible;left:18px;top:250px;width:600px;height:600px">
+  <g id="po-flammes"></g>
+  <g id="po-aliments">
+    <g class="po-al" data-x="352" data-y="283" data-r="26">
+      <circle r="26" fill="#F4F1E8" stroke="#262019" stroke-width="7"/><circle r="10" fill="none" stroke="#262019" stroke-width="5"/>
+    </g>
+    <g class="po-al" data-x="428" data-y="280" data-r="16">
+      <rect x="-30" y="-16" width="60" height="32" rx="11" fill="#F4F1E8" stroke="#262019" stroke-width="7"/>
+    </g>
+    <g class="po-al" data-x="498" data-y="287" data-r="13">
+      <path d="M-30 0 Q0 -24 30 0 Q0 24 -30 0 Z" fill="#F4F1E8" stroke="#262019" stroke-width="7" stroke-linejoin="round"/>
+      <path d="M-18 0 L18 0" stroke="#262019" stroke-width="5" stroke-linecap="round"/>
+    </g>
+  </g>
+  <g id="po-poele">
+    <path d="M96 318 L 262 312" fill="none" stroke="#262019" stroke-width="22" stroke-linecap="round"/>
+    <path d="M252 300 L 568 300 Q560 372 506 386 L318 386 Q262 372 252 300 Z" fill="#262019"/>
+    <path d="M244 298 L 576 298" stroke="#262019" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <g id="po-traits"></g>
+</svg>

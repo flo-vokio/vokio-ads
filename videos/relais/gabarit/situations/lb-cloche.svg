@@ -1,0 +1,20 @@
+<!-- Situation « lb-cloche » (traiteur, lot B) : le plat sous sa cloche ; la cloche se tasse d'un rien, puis se soulève par
+     son bouton et bascule en arrière (elle pend sous la main : elle traîne, dépasse, se stabilise) ; la vapeur s'échappe
+     d'un coup puis monte en ondulant, son tracé se déforme. Animé par lb-cloche.js (fonction pure du temps, sur 10 s :
+     la cloche se repose pendant que la situation est cachée). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="10" style="overflow:visible;left:-2px;top:196px;width:660px;height:660px">
+  <ellipse cx="300" cy="478" rx="214" ry="34" fill="#F4F1E8" stroke="#262019" stroke-width="9"/>
+  <ellipse cx="300" cy="474" rx="160" ry="20" fill="none" stroke="#262019" stroke-width="5"/>
+  <path d="M188 470 C 196 404 404 404 412 470 Z" fill="#EFA424" stroke="#262019" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M250 432 L 262 452 M296 424 L 300 448 M342 432 L 334 452" fill="none" stroke="#262019" stroke-width="5" stroke-linecap="round"/>
+  <path d="M300 414 C 290 394 296 378 312 370 C 318 390 314 404 300 414 Z" fill="#F4F1E8" stroke="#262019" stroke-width="5" stroke-linejoin="round"/>
+  <g id="cl-cloche">
+    <ellipse id="cl-dedans" cx="0" cy="0" rx="176" ry="10" fill="#262019"/>
+    <path d="M-170 0 C -170 -112 -92 -168 0 -168 C 92 -168 170 -112 170 0 Z" fill="#F4F1E8" stroke="#262019" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M-110 -110 C -86 -134 -54 -146 -22 -150" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+    <rect x="-184" y="-8" width="368" height="18" rx="9" fill="#262019"/>
+    <path d="M0 -168 L 0 -182" stroke="#262019" stroke-width="12"/>
+    <circle cx="0" cy="-192" r="17" fill="#262019"/>
+  </g>
+  <g id="cl-vapeur" fill="none" stroke="#6F695F" stroke-linecap="round" stroke-linejoin="round"></g>
+</svg>

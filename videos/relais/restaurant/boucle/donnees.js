@@ -1,0 +1,107 @@
+window.DONNEES = {
+ "mode": "boucle",
+ "fps": 30,
+ "taille": 1080,
+ "marge": 84,
+ "corps": {
+  "agente": {
+   "seul": 74,
+   "objet": 74
+  },
+  "appelant": {
+   "seul": 88,
+   "objet": 88
+  }
+ },
+ "corps_min": 52,
+ "situation": {
+  "sonne": [
+   0.15,
+   1.7
+  ],
+  "decroche": 1.7,
+  "sort": 1.95,
+  "revient": 8.75,
+  "objet": "poele"
+ },
+ "enonces": [
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Ce",
+     "t": 2.55,
+     "t1": 2.75
+    },
+    {
+     "texte": "serait",
+     "t": 2.72,
+     "t1": 2.9200000000000004
+    },
+    {
+     "texte": "pour",
+     "t": 2.9,
+     "t1": 3.1
+    },
+    {
+     "texte": "six",
+     "t": 3.1,
+     "t1": 3.3000000000000003
+    },
+    {
+     "texte": "personnes.",
+     "t": 3.3,
+     "t1": 3.5
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "D’accord,",
+     "t": 4.4,
+     "t1": 4.6000000000000005
+    },
+    {
+     "texte": "c’est",
+     "t": 4.75,
+     "t1": 4.95
+    },
+    {
+     "texte": "disponible.",
+     "t": 4.95,
+     "t1": 5.15
+    }
+   ]
+  }
+ ],
+ "coupes": [],
+ "agenda": {
+  "date": "Samedi 22 août",
+  "heures": [
+   "19:00",
+   "20:00",
+   "21:00"
+  ],
+  "entree": 2.2,
+  "sortie": 8.55,
+  "touches": [
+   {
+    "t": 4.95,
+    "heure": "20:00"
+   }
+  ],
+  "bloc": {
+   "heure": "20:00",
+   "nom": "Florian",
+   "service": "Table pour 6",
+   "ouvre": 5.25,
+   "t_nom": 5.65,
+   "t_service": 6.1
+  }
+ },
+ "duree": 10.0,
+ "texte_sortie": 7.3,
+ "avance": 0.0
+};

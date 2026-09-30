@@ -1,0 +1,210 @@
+{
+  "_note": "Carte « Les mains prises » de la section #relais de vokio.fr. Les énoncés sont le texte DIT (relevé Scribe du 29/09 relu contre la transcription du site) ; les ancres « E<n>:mot » désignent le mot de l'énoncé n (0 = premier), « #2 » sa deuxième occurrence, « fin » la fin de l'énoncé, « +0.3 » un décalage en secondes.",
+  "id": "coiffure",
+  "carte": "Les mains prises",
+  "audio": "/opt/vokio-site-repo/assets/appel-coiffure.mp3",
+  "nom": "relais-coiffure",
+  "situation": "ciseaux-meches",
+  "agenda": {
+    "date": "Samedi 19 septembre",
+    "heures": [
+      "09:00",
+      "10:00",
+      "11:00"
+    ],
+    "bloc": {
+      "heure": "10:00",
+      "nom": "Camille",
+      "service": "Balayage"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Camille, votre rendez-vous est confirmé : Balayage, le samedi 19 septembre à 10:00, Salon Marchand. Démo Vokio, RDV fictif.",
+    "souligne": "samedi 19 septembre à 10:00",
+    "heure": "15:13"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Blandine, l’assistante vocale du Salon Marchand ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui, bonjour, j’aimerais prendre rendez-vous pour un balayage pour demain, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. C’est pour quelle heure demain, s’il vous plaît ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh… vous avez quoi comme disponibilités ?"
+    },
+    {
+      "qui": "agente",
+      "texte": "Je regarde ça."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je peux vous proposer neuf heures, dix heures ou onze heures. Le dernier créneau possible pour un balayage demain est dix-huit heures trente. Qu’est-ce qui vous arrangerait ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, dix heures, c’est bien."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord. C’est à quel prénom, s’il vous plaît ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Camille."
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Camille, pour un balayage, le samedi dix-neuf septembre à dix heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vous en prie. Passez une belle journée."
+    }
+  ],
+  "complete": {
+    "avance": 0.8,
+    "situation": {
+      "sonne": [
+        0.05,
+        0.75
+      ],
+      "decroche": 0.75,
+      "sort": 0.95
+    },
+    "agenda": {
+      "entree": "E5:Je",
+      "sortie": "E12:SMS",
+      "touches": [
+        [
+          "E6:neuf",
+          "09:00"
+        ],
+        [
+          "E6:dix",
+          "10:00"
+        ],
+        [
+          "E6:onze",
+          "11:00"
+        ],
+        [
+          "E7:dix",
+          "10:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E7:bien.",
+        "nom": "E9:Camille.",
+        "service": "E12:balayage,"
+      }
+    },
+    "sms": {
+      "entree": "E12:fin+0.1",
+      "bulle": "E12:fin+0.75",
+      "sortie": "E14:debut-0.55"
+    },
+    "fin": {
+      "entree": "E14:fin+0.45"
+    },
+    "coupes": [
+      "E12:Vous#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "neuf heures, dix heures ou onze heures.",
+        "source": 6,
+        "temps": [
+          2.55,
+          2.75,
+          3.15,
+          3.35,
+          3.75,
+          3.9,
+          4.1
+        ]
+      },
+      {
+        "qui": "appelant",
+        "texte": "dix heures, c’est bien.",
+        "source": 7,
+        "temps": [
+          4.95,
+          5.15,
+          5.4,
+          5.6
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E0:neuf",
+          "09:00"
+        ],
+        [
+          "E0:dix",
+          "10:00"
+        ],
+        [
+          "E0:onze",
+          "11:00"
+        ],
+        [
+          "E1:dix",
+          "10:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:bien.+0.25",
+        "nom": "E1:bien.+0.65",
+        "service": "E1:bien.+1.1"
+      }
+    },
+    "texte_sortie": 7.3
+  },
+  "agente": "Blandine",
+  "poster_boucle": 1.17
+}

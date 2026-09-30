@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-electricien-boucle.mp4",
+   "crf": 18,
+   "octets": 373918
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-electricien-boucle-poster.webp",
+   "octets": 9886,
+   "t": 0.4
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-electricien-boucle-poster.jpg",
+   "octets": 22821,
+   "t": 0.4
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-electricien-complete.mp4",
+   "crf": 18,
+   "octets": 2105007
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-electricien-complete-poster.webp",
+   "octets": 7750,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-electricien-complete-poster.jpg",
+   "octets": 19996,
+   "t": 0.0
+  }
+ }
+}

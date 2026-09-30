@@ -1,0 +1,18 @@
+<!-- Situation « chaudière » (chauffagiste, chaudière en défaut) : la chaudière, son manomètre, la fenêtre du brûleur et ses
+     flammes bleues. La flamme tousse (deux reprises), s'éteint dans un petit souffle de fumée ; l'aiguille du manomètre tremble
+     puis retombe à zéro. Aucun texte (graduations seules). Animé par chaudiere.js (lib/fx.js). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="1.25" style="overflow:visible;left:-50px;top:150px;width:740px;height:740px">
+  <rect x="150" y="96" width="290" height="460" rx="28" fill="#EDE6D7" stroke="#262019" stroke-width="8"/>
+  <path d="M190 560 V 590 M400 560 V 590" stroke="#262019" stroke-width="10" stroke-linecap="round"/>
+  <g id="ch-mano">
+    <circle cx="295" cy="214" r="70" fill="#F4F1E8" stroke="#262019" stroke-width="8"/>
+    <path id="ch-rouge" fill="none" stroke="#C0452C" stroke-width="9"/>
+    <g id="ch-graduations" stroke="#262019" stroke-width="5" stroke-linecap="round"></g>
+    <path id="ch-aiguille" d="M295 214 L 295 160" stroke="#262019" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="295" cy="214" r="10" fill="#262019"/>
+  </g>
+  <rect x="198" y="330" width="194" height="170" rx="18" fill="#262019"/>
+  <g id="ch-flammes"></g>
+  <rect x="214" y="472" width="162" height="12" rx="6" fill="#6F695F"/>
+  <g id="ch-fx"></g>
+</svg>

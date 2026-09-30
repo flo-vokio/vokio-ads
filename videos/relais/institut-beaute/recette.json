@@ -1,0 +1,203 @@
+{
+  "_note": "Lot B, carte métier « Épilation demi-jambes » (vokio.fr/institut-beaute/). Même schéma que coiffure/recette.json. Énoncés = texte DIT (relevé Scribe du 29/09) : la cliente est « Blandine » (la page écrit « Blondine ») et demande « des disponibilités » (la page écrit « des difficultés »). À FAIRE VALIDER : le texte du SMS, la situation « lb-cire ».",
+  "id": "institut-beaute",
+  "carte": "Épilation demi-jambes",
+  "audio": "/opt/vokio-site-repo/assets/appel-institut-beaute.mp3",
+  "nom": "relais-institut-beaute",
+  "situation": "lb-cire",
+  "agenda": {
+    "date": "Samedi 19 septembre",
+    "heures": [
+      "15:00",
+      "16:00",
+      "17:00"
+    ],
+    "bloc": {
+      "heure": "16:00",
+      "nom": "Blandine",
+      "service": "Demi-jambes"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Blandine, votre rendez-vous est confirmé : Épilation demi-jambes, le samedi 19 septembre à 16:00, Institut Camélia. Démo Vokio, RDV fictif.",
+    "souligne": "samedi 19 septembre à 16:00",
+    "heure": "15:15"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Camille, l’assistante vocale de l’Institut Camélia ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui, bonjour, j’aimerais, euh, réserver pour une prestation, euh, d’épilation, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. Pour quelle épilation souhaitez-vous prendre rendez-vous ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Pour les jambes, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord, nous proposons l’épilation demi-jambes à vingt-deux euros et l’épilation demi-jambes et maillot à trente-six euros. Laquelle souhaitez-vous ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, demi-jambes à vingt-deux euros, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. C’est pour quel jour ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, est-ce que vous avez des disponibilités pour demain ?"
+    },
+    {
+      "qui": "agente",
+      "texte": "Demain, nous serons le samedi dix-neuf septembre. À quelle heure souhaiteriez-vous votre rendez-vous ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, vers seize heures."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vérifie les disponibilités."
+    },
+    {
+      "qui": "agente",
+      "texte": "Le samedi dix-neuf septembre à seize heures, c’est disponible. Cela vous convient ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui, c’est parfait."
+    },
+    {
+      "qui": "agente",
+      "texte": "C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Blandine."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Blandine, pour une épilation demi-jambes, le samedi dix-neuf septembre à seize heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci beaucoup."
+    },
+    {
+      "qui": "agente",
+      "texte": "De rien. Passez une belle journée."
+    }
+  ],
+  "complete": {
+    "avance": 1.5,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.3
+      ],
+      "decroche": 1.3,
+      "sort": 1.45
+    },
+    "agenda": {
+      "entree": "E8:Demain,",
+      "sortie": "E15:SMS",
+      "touches": [
+        [
+          "E9:seize",
+          "16:00"
+        ],
+        [
+          "E11:seize",
+          "16:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E11:disponible.",
+        "nom": "E14:Blandine.",
+        "service": "E15:épilation"
+      }
+    },
+    "sms": {
+      "entree": "E15:fin+0.1",
+      "bulle": "E15:fin+0.75",
+      "sortie": "E17:debut-0.55"
+    },
+    "fin": {
+      "entree": "E17:fin+0.45"
+    },
+    "coupes": [
+      "E15:Vous#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 86
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "demi-jambes à vingt-deux euros, s’il vous plaît.",
+        "source": 5,
+        "temps": [
+          2.5,
+          2.8,
+          2.95,
+          3.25,
+          3.6,
+          3.75,
+          3.9
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "à seize heures, c’est disponible.",
+        "source": 11,
+        "temps": [
+          4.75,
+          4.9,
+          5.15,
+          5.5,
+          5.7
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E1:seize",
+          "16:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:disponible.+0.3",
+        "nom": "E1:disponible.+0.7",
+        "service": "E1:disponible.+1.15"
+      }
+    },
+    "texte_sortie": 7.3
+  },
+  "agente": "Camille",
+  "poster_boucle": 0.9
+}

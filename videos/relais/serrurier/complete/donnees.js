@@ -1,0 +1,728 @@
+window.DONNEES = {
+ "mode": "complete",
+ "fps": 30,
+ "taille": 1080,
+ "marge": 84,
+ "corps": {
+  "agente": {
+   "seul": 72,
+   "objet": 64
+  },
+  "appelant": {
+   "seul": 86,
+   "objet": 76
+  }
+ },
+ "corps_min": 52,
+ "situation": {
+  "sonne": [
+   0.05,
+   1.1
+  ],
+  "decroche": 1.1,
+  "sort": 1.25,
+  "objet": "porte"
+ },
+ "enonces": [
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Bonjour,",
+     "t": 1.78,
+     "t1": 2.2
+    },
+    {
+     "texte": "je",
+     "t": 2.4,
+     "t1": 2.48
+    },
+    {
+     "texte": "suis",
+     "t": 2.52,
+     "t1": 2.62
+    },
+    {
+     "texte": "Manon,",
+     "t": 2.68,
+     "t1": 2.94
+    },
+    {
+     "texte": "l’assistante",
+     "t": 3.16,
+     "t1": 3.56
+    },
+    {
+     "texte": "vocale",
+     "t": 3.6,
+     "t1": 3.86
+    },
+    {
+     "texte": "de",
+     "t": 3.9,
+     "t1": 3.96
+    },
+    {
+     "texte": "la",
+     "t": 4.0,
+     "t1": 4.06
+    },
+    {
+     "texte": "Serrurerie",
+     "t": 4.12,
+     "t1": 4.52
+    },
+    {
+     "texte": "Blanc !",
+     "t": 4.56,
+     "t1": 4.78
+    },
+    {
+     "texte": "Comment",
+     "t": 5.02,
+     "t1": 5.22
+    },
+    {
+     "texte": "puis-je",
+     "t": 5.24,
+     "t1": 5.4
+    },
+    {
+     "texte": "vous",
+     "t": 5.42,
+     "t1": 5.56
+    },
+    {
+     "texte": "aider ?",
+     "t": 5.58,
+     "t1": 5.82
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Euh",
+     "t": 7.08,
+     "t1": 7.5
+    },
+    {
+     "texte": "oui,",
+     "t": 7.58,
+     "t1": 7.74
+    },
+    {
+     "texte": "bonsoir,",
+     "t": 7.78,
+     "t1": 8.04
+    },
+    {
+     "texte": "je",
+     "t": 8.1,
+     "t1": 8.14
+    },
+    {
+     "texte": "vous",
+     "t": 8.18,
+     "t1": 8.28
+    },
+    {
+     "texte": "appelle",
+     "t": 8.32,
+     "t1": 8.56
+    },
+    {
+     "texte": "parce",
+     "t": 8.62,
+     "t1": 8.8
+    },
+    {
+     "texte": "que",
+     "t": 8.84,
+     "t1": 8.92
+    },
+    {
+     "texte": "je",
+     "t": 9.0,
+     "t1": 9.08
+    },
+    {
+     "texte": "suis,",
+     "t": 9.16,
+     "t1": 9.42
+    },
+    {
+     "texte": "euh,",
+     "t": 9.5,
+     "t1": 9.68
+    },
+    {
+     "texte": "sur",
+     "t": 10.26,
+     "t1": 10.4
+    },
+    {
+     "texte": "le",
+     "t": 10.44,
+     "t1": 10.56
+    },
+    {
+     "texte": "palier.",
+     "t": 10.6,
+     "t1": 11.02
+    },
+    {
+     "texte": "En",
+     "t": 11.2,
+     "t1": 11.26
+    },
+    {
+     "texte": "fait,",
+     "t": 11.3,
+     "t1": 11.46
+    },
+    {
+     "texte": "j’ai",
+     "t": 11.72,
+     "t1": 11.84
+    },
+    {
+     "texte": "claqué",
+     "t": 11.88,
+     "t1": 12.14
+    },
+    {
+     "texte": "ma",
+     "t": 12.18,
+     "t1": 12.26
+    },
+    {
+     "texte": "porte",
+     "t": 12.34,
+     "t1": 12.6
+    },
+    {
+     "texte": "et",
+     "t": 12.68,
+     "t1": 12.78
+    },
+    {
+     "texte": "les",
+     "t": 13.06,
+     "t1": 13.18
+    },
+    {
+     "texte": "clés,",
+     "t": 13.22,
+     "t1": 13.4
+    },
+    {
+     "texte": "elles",
+     "t": 13.42,
+     "t1": 13.54
+    },
+    {
+     "texte": "sont",
+     "t": 13.56,
+     "t1": 13.68
+    },
+    {
+     "texte": "à",
+     "t": 13.72,
+     "t1": 13.74
+    },
+    {
+     "texte": "l’intérieur.",
+     "t": 13.78,
+     "t1": 14.34
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "D’accord,",
+     "t": 15.64,
+     "t1": 15.94
+    },
+    {
+     "texte": "c’est",
+     "t": 16.06,
+     "t1": 16.16
+    },
+    {
+     "texte": "une",
+     "t": 16.28,
+     "t1": 16.36
+    },
+    {
+     "texte": "urgence.",
+     "t": 16.42,
+     "t1": 16.84
+    },
+    {
+     "texte": "Je",
+     "t": 17.02,
+     "t1": 17.14
+    },
+    {
+     "texte": "transmets",
+     "t": 17.16,
+     "t1": 17.46
+    },
+    {
+     "texte": "immédiatement.",
+     "t": 17.48,
+     "t1": 17.96
+    },
+    {
+     "texte": "Pour",
+     "t": 18.2,
+     "t1": 18.3
+    },
+    {
+     "texte": "que",
+     "t": 18.32,
+     "t1": 18.38
+    },
+    {
+     "texte": "le",
+     "t": 18.42,
+     "t1": 18.5
+    },
+    {
+     "texte": "serrurier",
+     "t": 18.56,
+     "t1": 18.94
+    },
+    {
+     "texte": "puisse",
+     "t": 18.98,
+     "t1": 19.12
+    },
+    {
+     "texte": "intervenir,",
+     "t": 19.16,
+     "t1": 19.74
+    },
+    {
+     "texte": "pourriez-vous",
+     "t": 19.86,
+     "t1": 20.2
+    },
+    {
+     "texte": "me",
+     "t": 20.24,
+     "t1": 20.32
+    },
+    {
+     "texte": "donner",
+     "t": 20.34,
+     "t1": 20.54
+    },
+    {
+     "texte": "votre",
+     "t": 20.58,
+     "t1": 20.76
+    },
+    {
+     "texte": "adresse",
+     "t": 20.8,
+     "t1": 21.12
+    },
+    {
+     "texte": "exacte,",
+     "t": 21.2,
+     "t1": 21.6
+    },
+    {
+     "texte": "s’il",
+     "t": 21.66,
+     "t1": 21.8
+    },
+    {
+     "texte": "vous",
+     "t": 21.84,
+     "t1": 21.94
+    },
+    {
+     "texte": "plaît ?",
+     "t": 21.98,
+     "t1": 22.12
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Alors,",
+     "t": 23.02,
+     "t1": 23.16
+    },
+    {
+     "texte": "c’est",
+     "t": 23.24,
+     "t1": 23.32
+    },
+    {
+     "texte": "le",
+     "t": 23.36,
+     "t1": 23.48
+    },
+    {
+     "texte": "12",
+     "t": 23.52,
+     "t1": 23.82
+    },
+    {
+     "texte": "rue",
+     "t": 23.88,
+     "t1": 23.98
+    },
+    {
+     "texte": "des",
+     "t": 24.04,
+     "t1": 24.14
+    },
+    {
+     "texte": "Lices,",
+     "t": 24.18,
+     "t1": 24.56
+    },
+    {
+     "texte": "euh,",
+     "t": 24.9,
+     "t1": 25.12
+    },
+    {
+     "texte": "à",
+     "t": 25.24,
+     "t1": 25.28
+    },
+    {
+     "texte": "Toulon.",
+     "t": 25.32,
+     "t1": 25.6
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Le",
+     "t": 26.68,
+     "t1": 26.76
+    },
+    {
+     "texte": "douze",
+     "t": 26.88,
+     "t1": 27.16
+    },
+    {
+     "texte": "rue",
+     "t": 27.24,
+     "t1": 27.4
+    },
+    {
+     "texte": "des",
+     "t": 27.48,
+     "t1": 27.58
+    },
+    {
+     "texte": "Lices",
+     "t": 27.62,
+     "t1": 27.84
+    },
+    {
+     "texte": "à",
+     "t": 27.88,
+     "t1": 27.96
+    },
+    {
+     "texte": "Toulon.",
+     "t": 28.0,
+     "t1": 28.3
+    },
+    {
+     "texte": "Est-ce",
+     "t": 28.64,
+     "t1": 28.78
+    },
+    {
+     "texte": "bien",
+     "t": 28.82,
+     "t1": 28.96
+    },
+    {
+     "texte": "cela ?",
+     "t": 29.02,
+     "t1": 29.3
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Oui,",
+     "t": 30.4,
+     "t1": 30.52
+    },
+    {
+     "texte": "exactement.",
+     "t": 30.68,
+     "t1": 31.18
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Très",
+     "t": 32.34,
+     "t1": 32.46
+    },
+    {
+     "texte": "bien.",
+     "t": 32.5,
+     "t1": 32.68
+    },
+    {
+     "texte": "Surtout,",
+     "t": 32.82,
+     "t1": 33.1
+    },
+    {
+     "texte": "restez",
+     "t": 33.2,
+     "t1": 33.44
+    },
+    {
+     "texte": "en",
+     "t": 33.46,
+     "t1": 33.5
+    },
+    {
+     "texte": "sécurité",
+     "t": 33.56,
+     "t1": 34.0
+    },
+    {
+     "texte": "sur",
+     "t": 34.06,
+     "t1": 34.16
+    },
+    {
+     "texte": "place",
+     "t": 34.24,
+     "t1": 34.52
+    },
+    {
+     "texte": "et",
+     "t": 34.6,
+     "t1": 34.66
+    },
+    {
+     "texte": "n’essayez",
+     "t": 34.68,
+     "t1": 35.12
+    },
+    {
+     "texte": "pas",
+     "t": 35.16,
+     "t1": 35.28
+    },
+    {
+     "texte": "de",
+     "t": 35.32,
+     "t1": 35.4
+    },
+    {
+     "texte": "forcer",
+     "t": 35.44,
+     "t1": 35.68
+    },
+    {
+     "texte": "la",
+     "t": 35.72,
+     "t1": 35.78
+    },
+    {
+     "texte": "porte.",
+     "t": 35.84,
+     "t1": 36.1
+    },
+    {
+     "texte": "C’est",
+     "t": 36.3,
+     "t1": 36.4
+    },
+    {
+     "texte": "transmis.",
+     "t": 36.44,
+     "t1": 36.8
+    },
+    {
+     "texte": "Vous",
+     "t": 37.18,
+     "t1": 37.26
+    },
+    {
+     "texte": "recevrez",
+     "t": 37.28,
+     "t1": 37.64
+    },
+    {
+     "texte": "un",
+     "t": 37.66,
+     "t1": 37.68
+    },
+    {
+     "texte": "SMS",
+     "t": 37.8,
+     "t1": 38.2
+    },
+    {
+     "texte": "et",
+     "t": 38.28,
+     "t1": 38.34
+    },
+    {
+     "texte": "vous",
+     "t": 38.38,
+     "t1": 38.46
+    },
+    {
+     "texte": "serez",
+     "t": 38.5,
+     "t1": 38.66
+    },
+    {
+     "texte": "rappelé",
+     "t": 38.7,
+     "t1": 38.92
+    },
+    {
+     "texte": "très",
+     "t": 38.96,
+     "t1": 39.08
+    },
+    {
+     "texte": "rapidement.",
+     "t": 39.12,
+     "t1": 39.5
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "OK,",
+     "t": 40.66,
+     "t1": 40.84
+    },
+    {
+     "texte": "merci",
+     "t": 40.92,
+     "t1": 41.18
+    },
+    {
+     "texte": "beaucoup.",
+     "t": 41.22,
+     "t1": 41.46
+    },
+    {
+     "texte": "J’attends",
+     "t": 41.5,
+     "t1": 41.74
+    },
+    {
+     "texte": "votre",
+     "t": 41.78,
+     "t1": 41.94
+    },
+    {
+     "texte": "appel.",
+     "t": 41.98,
+     "t1": 42.24
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Je",
+     "t": 43.78,
+     "t1": 43.84
+    },
+    {
+     "texte": "vous",
+     "t": 43.86,
+     "t1": 43.96
+    },
+    {
+     "texte": "en",
+     "t": 44.0,
+     "t1": 44.08
+    },
+    {
+     "texte": "prie.",
+     "t": 44.12,
+     "t1": 44.32
+    },
+    {
+     "texte": "Bonne",
+     "t": 44.52,
+     "t1": 44.66
+    },
+    {
+     "texte": "soirée.",
+     "t": 44.7,
+     "t1": 44.98
+    }
+   ]
+  }
+ ],
+ "coupes": [],
+ "fiche": {
+  "titre": "Urgence · porte claquée",
+  "entree": 16.42,
+  "sortie": 37.8,
+  "lignes": [
+   {
+    "texte": "Adresse relevée",
+    "t": 30.68
+   },
+   {
+    "texte": "Consigne de sécurité donnée",
+    "t": 35.44
+   },
+   {
+    "texte": "Demande transmise",
+    "t": 36.44
+   }
+  ]
+ },
+ "sms": {
+  "texte": "Bonjour, votre demande est transmise : porte claquée. Le serrurier de la Serrurerie Blanc vous rappelle très vite. Restez en sécurité. Démo Vokio.",
+  "souligne": null,
+  "heure": "18:57",
+  "entree": 39.6,
+  "bulle": 40.25,
+  "sortie": 43.23
+ },
+ "fin": {
+  "entree": 45.43,
+  "point": 46.48
+ },
+ "duree": 48.06666666666667,
+ "texte_sortie": 45.43,
+ "avance": 1.6
+};

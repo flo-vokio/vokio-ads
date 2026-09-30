@@ -1,0 +1,25 @@
+<!-- Situation « chat » (vétérinaire, Moka ne mange plus) : Moka assis de profil devant sa gamelle pleine. Il approche le nez,
+     renifle, se détourne en relevant la tête (il boude), une oreille frémit ; la queue balaie lentement le sol, l'onde passe
+     de la base à la pointe (follow-through). Ton sobre. Animé par chat.js (lib/fx.js). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="1.25" style="overflow:visible;left:-70px;top:120px;width:740px;height:740px">
+  <path d="M40 502 H 560" stroke="#262019" stroke-width="5" stroke-linecap="round" opacity=".3"/>
+  <g id="ca-gamelle">
+    <path d="M132 500 L 144 456 H 262 L 274 500 Z" fill="#F4F1E8" stroke="#262019" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M140 456 H 266" stroke="#262019" stroke-width="8" stroke-linecap="round"/>
+    <g fill="#262019"><circle cx="162" cy="448" r="8"/><circle cx="180" cy="442" r="8"/><circle cx="199" cy="446" r="8"/><circle cx="218" cy="441" r="8"/>
+      <circle cx="236" cy="447" r="8"/><circle cx="190" cy="432" r="7"/><circle cx="210" cy="430" r="7"/></g>
+  </g>
+  <path id="ca-queue" fill="none" stroke="#262019" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <g id="ca-corps">
+    <path d="M304 502 C 288 440 296 372 344 338 C 374 318 420 322 442 356 C 470 398 474 462 458 502 Z" fill="#262019"/>
+    <path d="M334 432 V 498" stroke="#F4F1E8" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+  </g>
+  <g id="ca-tete">
+    <path d="M292 300 C 290 266 316 248 344 250 C 372 252 388 274 384 302 C 380 330 356 344 330 342 C 306 340 294 322 292 300 Z" fill="#262019"/>
+    <path d="M300 272 L 304 222 L 332 254 Z" fill="#262019" stroke="#262019" stroke-width="6" stroke-linejoin="round"/>
+    <g id="ca-oreille"><path d="M344 252 L 366 212 L 378 262 Z" fill="#262019" stroke="#262019" stroke-width="6" stroke-linejoin="round"/></g>
+    <path d="M288 306 C 280 308 276 314 282 318" fill="none" stroke="#262019" stroke-width="7" stroke-linecap="round"/>
+    <path id="ca-oeil" d="M304 290 Q 314 296 324 290" fill="none" stroke="#F4F1E8" stroke-width="5" stroke-linecap="round"/>
+    <path d="M282 312 L 246 306 M282 318 L 248 322" stroke="#262019" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+  </g>
+</svg>

@@ -1,0 +1,217 @@
+{
+  "_note": "Vétérinaire « Moka ne mange plus ». Énoncés = le dit (Scribe).",
+  "id": "veterinaire",
+  "carte": "Moka ne mange plus",
+  "audio": "/opt/vokio-site-repo/assets/appel-veterinaire.mp3",
+  "nom": "relais-veterinaire",
+  "agente": "Élise",
+  "jour_heure": "Vendredi, 16 h 51.",
+  "phrase": "Élise vérifie qu’il n’y a pas de signe grave, propose une consultation pour demain et la confirme.",
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Élise, l’assistante vocale de la Clinique vétérinaire du Port ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui bonjour, je vous appelle parce que mon chat, euh, Moka, euh, mange plus depuis hier et il dort beaucoup, je trouve."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vois. Est-ce que Moka présente d’autres symptômes comme une blessure, des saignements, des difficultés à respirer ou un abattement sévère ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Non, non, non, j’ai pas l’impression."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. Dans ce cas, je peux vous proposer un rendez-vous pour une consultation. Quel jour vous conviendrait le mieux ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, demain, vous avez des disponibilités ?"
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Demain, c’est samedi 19 septembre. Pour quelle heure souhaiteriez-vous le rendez-vous ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Bah, le matin."
+    },
+    {
+      "qui": "agente",
+      "texte": "Laissez-moi voir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je peux vous proposer neuf heures, dix heures ou onze heures. Le dernier créneau possible de la journée est onze heures trente. Qu’est-ce qui vous arrangerait ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, bah, neuf heures, c’est parfait."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "C’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian. Pour une consultation vétérinaire le samedi 19 septembre à neuf heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci beaucoup. Au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "De rien. Au revoir."
+    }
+  ],
+  "situation": "chat",
+  "poster_boucle": 0.9,
+  "agenda": {
+    "date": "Samedi 19 septembre",
+    "heures": [
+      "09:00",
+      "10:00",
+      "11:00"
+    ],
+    "bloc": {
+      "heure": "09:00",
+      "nom": "Florian",
+      "service": "Consultation"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : consultation vétérinaire, le samedi 19 septembre à 09:00, Clinique du Port. Démo Vokio, RDV fictif.",
+    "souligne": "samedi 19 septembre à 09:00",
+    "heure": "16:52"
+  },
+  "complete": {
+    "avance": 1.6,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.1
+      ],
+      "decroche": 1.1,
+      "sort": 1.3
+    },
+    "agenda": {
+      "entree": "E9:@0",
+      "sortie": "E14:SMS",
+      "touches": [
+        [
+          "E10:neuf",
+          "09:00"
+        ],
+        [
+          "E10:dix",
+          "10:00"
+        ],
+        [
+          "E10:onze",
+          "11:00"
+        ],
+        [
+          "E11:neuf",
+          "09:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E11:parfait.",
+        "nom": "E13:Florian.",
+        "service": "E14:consultation"
+      }
+    },
+    "sms": {
+      "entree": "E14:fin+0.1",
+      "bulle": "E14:fin+0.75",
+      "sortie": "E16:debut-0.55"
+    },
+    "fin": {
+      "entree": "E16:fin+0.45"
+    }
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "neuf heures, dix heures ou onze heures.",
+        "source": 10,
+        "temps": [
+          2.55,
+          2.75,
+          3.15,
+          3.35,
+          3.75,
+          3.9,
+          4.1
+        ]
+      },
+      {
+        "qui": "appelant",
+        "texte": "neuf heures, c’est parfait.",
+        "source": 11,
+        "temps": [
+          4.95,
+          5.15,
+          5.4,
+          5.6
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E0:neuf",
+          "09:00"
+        ],
+        [
+          "E0:dix",
+          "10:00"
+        ],
+        [
+          "E0:onze",
+          "11:00"
+        ],
+        [
+          "E1:neuf",
+          "09:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:parfait.+0.25",
+        "nom": "E1:parfait.+0.65",
+        "service": "E1:parfait.+1.1"
+      }
+    },
+    "texte_sortie": 7.3
+  }
+}

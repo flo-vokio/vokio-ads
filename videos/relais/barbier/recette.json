@@ -1,0 +1,195 @@
+{
+  "_note": "Lot B, carte métier « Coupe et barbe » (vokio.fr/barbier/). Même schéma que coiffure/recette.json. Énoncés = texte DIT (relevé Scribe du 29/09, établissement écrit comme sur la page : « Barbier du Cours », Scribe entend « Ducourt »). À FAIRE VALIDER : le texte du SMS (gabarit coiffure supposé), la situation « lb-rasoir ».",
+  "id": "barbier",
+  "carte": "Coupe et barbe",
+  "audio": "/opt/vokio-site-repo/assets/appel-barbier.mp3",
+  "nom": "relais-barbier",
+  "situation": "lb-rasoir",
+  "agenda": {
+    "date": "Samedi 19 septembre",
+    "heures": [
+      "15:00",
+      "16:00",
+      "17:00"
+    ],
+    "bloc": {
+      "heure": "16:00",
+      "nom": "Florian",
+      "service": "Coupe et barbe"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : Coupe et barbe, le samedi 19 septembre à 16:00, Barbier du Cours. Démo Vokio, RDV fictif.",
+    "souligne": "samedi 19 septembre à 16:00",
+    "heure": "14:56"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Nina, l’assistante vocale de Barbier du Cours ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Bonjour, est-ce que vous aurez de la place demain, euh, pour une coupe et barbe en fin de journée plutôt ?"
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vérifie les disponibilités."
+    },
+    {
+      "qui": "agente",
+      "texte": "Oui, j’ai des disponibilités demain à quinze heures, seize heures ou dix-sept heures. Qu’est-ce qui vous arrangerait le mieux ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, seize heures, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Laissez-moi voir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "C’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian, pour une coupe et barbe, le samedi dix-neuf septembre à seize heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci, bonne journée."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous aussi, bonne journée."
+    }
+  ],
+  "complete": {
+    "avance": 1.5,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.3
+      ],
+      "decroche": 1.3,
+      "sort": 1.45
+    },
+    "agenda": {
+      "entree": "E2:Je",
+      "sortie": "E8:SMS",
+      "touches": [
+        [
+          "E3:quinze",
+          "15:00"
+        ],
+        [
+          "E3:seize",
+          "16:00"
+        ],
+        [
+          "E3:dix-sept",
+          "17:00"
+        ],
+        [
+          "E4:seize",
+          "16:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E6:Très",
+        "nom": "E7:Florian.",
+        "service": "E8:coupe"
+      }
+    },
+    "sms": {
+      "entree": "E8:fin+0.1",
+      "bulle": "E8:fin+0.75",
+      "sortie": "E10:debut-0.55"
+    },
+    "fin": {
+      "entree": "E10:fin+0.45"
+    },
+    "coupes": [
+      "E8:Vous#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "quinze heures, seize heures ou dix-sept heures.",
+        "source": 3,
+        "temps": [
+          2.55,
+          2.8,
+          3.1,
+          3.35,
+          3.7,
+          3.88,
+          4.2
+        ]
+      },
+      {
+        "qui": "appelant",
+        "texte": "seize heures, s’il vous plaît.",
+        "source": 4,
+        "temps": [
+          4.95,
+          5.2,
+          5.5,
+          5.65,
+          5.82
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E0:quinze",
+          "15:00"
+        ],
+        [
+          "E0:seize",
+          "16:00"
+        ],
+        [
+          "E0:dix-sept",
+          "17:00"
+        ],
+        [
+          "E1:seize",
+          "16:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:plaît.+0.25",
+        "nom": "E1:plaît.+0.65",
+        "service": "E1:plaît.+1.1"
+      }
+    },
+    "texte_sortie": 7.3
+  },
+  "agente": "Nina",
+  "poster_boucle": 1.3
+}

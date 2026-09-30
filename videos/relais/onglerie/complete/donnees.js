@@ -1,0 +1,716 @@
+window.DONNEES = {
+ "mode": "complete",
+ "fps": 30,
+ "taille": 1080,
+ "marge": 84,
+ "corps": {
+  "agente": {
+   "seul": 72,
+   "objet": 64
+  },
+  "appelant": {
+   "seul": 86,
+   "objet": 76
+  }
+ },
+ "corps_min": 52,
+ "situation": {
+  "sonne": [
+   0.05,
+   1.6
+  ],
+  "decroche": 1.6,
+  "sort": 1.75,
+  "objet": "lb-vernis"
+ },
+ "enonces": [
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Bonjour,",
+     "t": 1.98,
+     "t1": 2.38
+    },
+    {
+     "texte": "je",
+     "t": 2.62,
+     "t1": 2.72
+    },
+    {
+     "texte": "suis",
+     "t": 2.76,
+     "t1": 2.9
+    },
+    {
+     "texte": "Lola,",
+     "t": 2.92,
+     "t1": 3.18
+    },
+    {
+     "texte": "l’assistante",
+     "t": 3.48,
+     "t1": 3.96
+    },
+    {
+     "texte": "vocale",
+     "t": 4.0,
+     "t1": 4.32
+    },
+    {
+     "texte": "de",
+     "t": 4.36,
+     "t1": 4.44
+    },
+    {
+     "texte": "L’Atelier",
+     "t": 4.46,
+     "t1": 4.8
+    },
+    {
+     "texte": "des",
+     "t": 4.82,
+     "t1": 4.98
+    },
+    {
+     "texte": "Ongles !",
+     "t": 5.04,
+     "t1": 5.22
+    },
+    {
+     "texte": "Comment",
+     "t": 5.76,
+     "t1": 5.96
+    },
+    {
+     "texte": "puis-je",
+     "t": 6.0,
+     "t1": 6.18
+    },
+    {
+     "texte": "vous",
+     "t": 6.2,
+     "t1": 6.32
+    },
+    {
+     "texte": "aider ?",
+     "t": 6.34,
+     "t1": 6.56
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Oui,",
+     "t": 7.92,
+     "t1": 8.04
+    },
+    {
+     "texte": "bonjour,",
+     "t": 8.08,
+     "t1": 8.28
+    },
+    {
+     "texte": "j’aimerais",
+     "t": 8.34,
+     "t1": 8.62
+    },
+    {
+     "texte": "prendre",
+     "t": 8.66,
+     "t1": 8.88
+    },
+    {
+     "texte": "un",
+     "t": 8.92,
+     "t1": 8.98
+    },
+    {
+     "texte": "rendez-vous",
+     "t": 9.02,
+     "t1": 9.5
+    },
+    {
+     "texte": "pour,",
+     "t": 9.56,
+     "t1": 9.76
+    },
+    {
+     "texte": "euh,",
+     "t": 9.82,
+     "t1": 10.2
+    },
+    {
+     "texte": "une",
+     "t": 10.24,
+     "t1": 10.34
+    },
+    {
+     "texte": "pose",
+     "t": 10.4,
+     "t1": 10.58
+    },
+    {
+     "texte": "de",
+     "t": 10.62,
+     "t1": 10.78
+    },
+    {
+     "texte": "semi-permanent,",
+     "t": 10.84,
+     "t1": 11.46
+    },
+    {
+     "texte": "s’il",
+     "t": 11.54,
+     "t1": 11.62
+    },
+    {
+     "texte": "vous",
+     "t": 11.64,
+     "t1": 11.7
+    },
+    {
+     "texte": "plaît.",
+     "t": 11.74,
+     "t1": 11.98
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "D’accord.",
+     "t": 13.38,
+     "t1": 13.8
+    },
+    {
+     "texte": "C’est",
+     "t": 14.08,
+     "t1": 14.18
+    },
+    {
+     "texte": "pour",
+     "t": 14.2,
+     "t1": 14.32
+    },
+    {
+     "texte": "quel",
+     "t": 14.34,
+     "t1": 14.5
+    },
+    {
+     "texte": "prénom ?",
+     "t": 14.54,
+     "t1": 14.82
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Blandine.",
+     "t": 16.2,
+     "t1": 16.66
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Très",
+     "t": 18.12,
+     "t1": 18.22
+    },
+    {
+     "texte": "bien,",
+     "t": 18.26,
+     "t1": 18.38
+    },
+    {
+     "texte": "Blandine.",
+     "t": 18.44,
+     "t1": 18.94
+    },
+    {
+     "texte": "Pour",
+     "t": 19.22,
+     "t1": 19.32
+    },
+    {
+     "texte": "une",
+     "t": 19.36,
+     "t1": 19.48
+    },
+    {
+     "texte": "pose",
+     "t": 19.52,
+     "t1": 19.66
+    },
+    {
+     "texte": "de",
+     "t": 19.7,
+     "t1": 19.76
+    },
+    {
+     "texte": "semi-permanent,",
+     "t": 19.84,
+     "t1": 20.5
+    },
+    {
+     "texte": "quel",
+     "t": 20.66,
+     "t1": 20.8
+    },
+    {
+     "texte": "jour",
+     "t": 20.84,
+     "t1": 20.98
+    },
+    {
+     "texte": "souhaiteriez-vous",
+     "t": 21.02,
+     "t1": 21.56
+    },
+    {
+     "texte": "votre",
+     "t": 21.6,
+     "t1": 21.82
+    },
+    {
+     "texte": "rendez-vous ?",
+     "t": 21.84,
+     "t1": 22.24
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Euh…",
+     "t": 23.56,
+     "t1": 23.72
+    },
+    {
+     "texte": "est-ce",
+     "t": 23.86,
+     "t1": 23.96
+    },
+    {
+     "texte": "que",
+     "t": 23.98,
+     "t1": 24.06
+    },
+    {
+     "texte": "vous",
+     "t": 24.1,
+     "t1": 24.2
+    },
+    {
+     "texte": "avez",
+     "t": 24.24,
+     "t1": 24.4
+    },
+    {
+     "texte": "une",
+     "t": 24.42,
+     "t1": 24.52
+    },
+    {
+     "texte": "disponibilité",
+     "t": 24.56,
+     "t1": 25.12
+    },
+    {
+     "texte": "pour",
+     "t": 25.26,
+     "t1": 25.42
+    },
+    {
+     "texte": "demain",
+     "t": 25.76,
+     "t1": 26.04
+    },
+    {
+     "texte": "à",
+     "t": 26.08,
+     "t1": 26.16
+    },
+    {
+     "texte": "onze",
+     "t": 26.18,
+     "t1": 26.36
+    },
+    {
+     "texte": "heures ?",
+     "t": 26.38,
+     "t1": 26.6
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Un",
+     "t": 28.02,
+     "t1": 28.08
+    },
+    {
+     "texte": "instant.",
+     "t": 28.12,
+     "t1": 28.46
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Oui,",
+     "t": 29.98,
+     "t1": 30.1
+    },
+    {
+     "texte": "c’est",
+     "t": 30.18,
+     "t1": 30.28
+    },
+    {
+     "texte": "possible.",
+     "t": 30.32,
+     "t1": 30.76
+    },
+    {
+     "texte": "Je",
+     "t": 30.98,
+     "t1": 31.06
+    },
+    {
+     "texte": "peux",
+     "t": 31.12,
+     "t1": 31.22
+    },
+    {
+     "texte": "vous",
+     "t": 31.24,
+     "t1": 31.32
+    },
+    {
+     "texte": "noter",
+     "t": 31.36,
+     "t1": 31.58
+    },
+    {
+     "texte": "ça",
+     "t": 31.66,
+     "t1": 31.74
+    },
+    {
+     "texte": "pour",
+     "t": 31.82,
+     "t1": 31.9
+    },
+    {
+     "texte": "demain,",
+     "t": 31.98,
+     "t1": 32.26
+    },
+    {
+     "texte": "samedi",
+     "t": 32.46,
+     "t1": 32.86
+    },
+    {
+     "texte": "dix-neuf",
+     "t": 32.94,
+     "t1": 33.32
+    },
+    {
+     "texte": "septembre,",
+     "t": 33.36,
+     "t1": 33.9
+    },
+    {
+     "texte": "à",
+     "t": 34.12,
+     "t1": 34.18
+    },
+    {
+     "texte": "onze",
+     "t": 34.22,
+     "t1": 34.38
+    },
+    {
+     "texte": "heures ?",
+     "t": 34.4,
+     "t1": 34.64
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Oui,",
+     "t": 35.7,
+     "t1": 35.78
+    },
+    {
+     "texte": "c’est",
+     "t": 36.0,
+     "t1": 36.1
+    },
+    {
+     "texte": "parfait.",
+     "t": 36.14,
+     "t1": 36.56
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Parfait,",
+     "t": 37.92,
+     "t1": 38.28
+    },
+    {
+     "texte": "je",
+     "t": 38.38,
+     "t1": 38.44
+    },
+    {
+     "texte": "vous",
+     "t": 38.48,
+     "t1": 38.56
+    },
+    {
+     "texte": "note",
+     "t": 38.6,
+     "t1": 38.74
+    },
+    {
+     "texte": "ça",
+     "t": 38.8,
+     "t1": 38.88
+    },
+    {
+     "texte": "pour",
+     "t": 38.94,
+     "t1": 39.06
+    },
+    {
+     "texte": "Blandine,",
+     "t": 39.08,
+     "t1": 39.5
+    },
+    {
+     "texte": "pour",
+     "t": 39.58,
+     "t1": 39.68
+    },
+    {
+     "texte": "une",
+     "t": 39.72,
+     "t1": 39.82
+    },
+    {
+     "texte": "pose",
+     "t": 39.86,
+     "t1": 40.02
+    },
+    {
+     "texte": "de",
+     "t": 40.06,
+     "t1": 40.12
+    },
+    {
+     "texte": "semi-permanent,",
+     "t": 40.18,
+     "t1": 41.02
+    },
+    {
+     "texte": "le",
+     "t": 41.08,
+     "t1": 41.18
+    },
+    {
+     "texte": "samedi",
+     "t": 41.24,
+     "t1": 41.56
+    },
+    {
+     "texte": "dix-neuf",
+     "t": 41.62,
+     "t1": 41.96
+    },
+    {
+     "texte": "septembre",
+     "t": 42.02,
+     "t1": 42.42
+    },
+    {
+     "texte": "à",
+     "t": 42.46,
+     "t1": 42.52
+    },
+    {
+     "texte": "onze",
+     "t": 42.56,
+     "t1": 42.7
+    },
+    {
+     "texte": "heures.",
+     "t": 42.76,
+     "t1": 42.94
+    },
+    {
+     "texte": "Vous",
+     "t": 43.2,
+     "t1": 43.28
+    },
+    {
+     "texte": "recevrez",
+     "t": 43.3,
+     "t1": 43.68
+    },
+    {
+     "texte": "un",
+     "t": 43.72,
+     "t1": 43.76
+    },
+    {
+     "texte": "SMS",
+     "t": 43.86,
+     "t1": 44.12
+    },
+    {
+     "texte": "de",
+     "t": 44.16,
+     "t1": 44.22
+    },
+    {
+     "texte": "confirmation.",
+     "t": 44.26,
+     "t1": 44.82
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Merci,",
+     "t": 46.28,
+     "t1": 46.7
+    },
+    {
+     "texte": "bonne",
+     "t": 46.78,
+     "t1": 46.92
+    },
+    {
+     "texte": "journée.",
+     "t": 46.96,
+     "t1": 47.22
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Merci",
+     "t": 48.74,
+     "t1": 49.0
+    },
+    {
+     "texte": "à",
+     "t": 49.06,
+     "t1": 49.1
+    },
+    {
+     "texte": "vous",
+     "t": 49.14,
+     "t1": 49.22
+    },
+    {
+     "texte": "aussi,",
+     "t": 49.24,
+     "t1": 49.5
+    },
+    {
+     "texte": "au",
+     "t": 49.76,
+     "t1": 49.8
+    },
+    {
+     "texte": "revoir.",
+     "t": 49.84,
+     "t1": 50.14
+    }
+   ]
+  }
+ ],
+ "coupes": [
+  [
+   1,
+   8
+  ],
+  [
+   9,
+   19
+  ]
+ ],
+ "agenda": {
+  "date": "Samedi 19 septembre",
+  "heures": [
+   "10:00",
+   "11:00",
+   "12:00"
+  ],
+  "entree": 23.86,
+  "sortie": 43.86,
+  "touches": [
+   {
+    "t": 26.18,
+    "heure": "11:00"
+   },
+   {
+    "t": 34.22,
+    "heure": "11:00"
+   }
+  ],
+  "bloc": {
+   "heure": "11:00",
+   "nom": "Blandine",
+   "service": "Semi-permanent",
+   "ouvre": 30.32,
+   "t_nom": 39.08,
+   "t_service": 39.86
+  }
+ },
+ "sms": {
+  "texte": "Bonjour Blandine, votre rendez-vous est confirmé : Pose de semi-permanent, le samedi 19 septembre à 11:00, L’Atelier des Ongles. Démo Vokio, RDV fictif.",
+  "souligne": "samedi 19 septembre à 11:00",
+  "heure": "15:17",
+  "entree": 44.92,
+  "bulle": 45.57,
+  "sortie": 48.19
+ },
+ "fin": {
+  "entree": 50.59,
+  "point": 51.64
+ },
+ "duree": 53.233333333333334,
+ "texte_sortie": 50.59,
+ "avance": 1.8
+};

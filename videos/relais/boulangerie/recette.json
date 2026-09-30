@@ -1,0 +1,150 @@
+{
+  "_note": "Boulangerie « Un fraisier pour samedi ». Énoncés = le dit (Scribe).",
+  "id": "boulangerie",
+  "carte": "Un fraisier pour samedi",
+  "audio": "/opt/vokio-site-repo/assets/appel-boulangerie.mp3",
+  "nom": "relais-boulangerie",
+  "agente": "Julie",
+  "jour_heure": "Vendredi, 16 h 20.",
+  "phrase": "Julie prend la commande, demande l’heure de retrait plutôt que d’imposer l’ouverture, et confirme.",
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Julie, l’assistante vocale de la Boulangerie Espiga ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui bonjour, je voudrais vous commander un fraisier, euh, huit parts pour samedi, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord, pour un fraisier huit parts ce samedi. C’est à quel prénom, s’il vous plaît ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien Florian. Un instant. Je vérifie les disponibilités pour un fraisier huit parts ce samedi dix-neuf septembre. Pour quelle heure de retrait ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, bah, si possible vers onze heures."
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian. Un fraisier huit parts le samedi dix-neuf septembre à onze heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "OK, super. Merci beaucoup. Bonne journée."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous. Bonne journée."
+    }
+  ],
+  "situation": "rouleau",
+  "poster_boucle": 0.6,
+  "fiche": {
+    "titre": "Commande · samedi 19 septembre",
+    "lignes": [
+      "Fraisier, huit parts",
+      "Pour Florian",
+      "Retrait à 11:00"
+    ]
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre commande est confirmée : fraisier 8 parts, retrait le samedi 19 septembre à 11:00, Boulangerie Espiga. Démo Vokio, commande fictive.",
+    "souligne": "samedi 19 septembre à 11:00",
+    "heure": "16:21"
+  },
+  "complete": {
+    "avance": 1.6,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.1
+      ],
+      "decroche": 1.1,
+      "sort": 1.3
+    },
+    "fiche": {
+      "entree": "E2:D’accord,",
+      "sortie": "E7:SMS",
+      "lignes": [
+        "E2:parts",
+        "E3:Florian.",
+        "E5:onze"
+      ]
+    },
+    "sms": {
+      "entree": "E7:fin+0.1",
+      "bulle": "E7:fin+0.75",
+      "sortie": "E9:debut-0.55"
+    },
+    "fin": {
+      "entree": "E9:fin+0.45"
+    }
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "je voudrais vous commander un fraisier",
+        "source": 1,
+        "temps": [
+          2.5,
+          2.65,
+          2.85,
+          3.0,
+          3.3,
+          3.45
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "Parfait, je vous note ça pour Florian.",
+        "source": 7,
+        "temps": [
+          4.7,
+          5.0,
+          5.1,
+          5.2,
+          5.35,
+          5.45,
+          5.6
+        ]
+      }
+    ],
+    "fiche": {
+      "entree": 2.3,
+      "sortie": 8.55,
+      "lignes": [
+        3.7,
+        5.8,
+        6.5
+      ]
+    },
+    "texte_sortie": 7.6
+  }
+}

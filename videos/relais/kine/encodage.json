@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-kine-boucle.mp4",
+   "crf": 18,
+   "octets": 495702
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-kine-boucle-poster.webp",
+   "octets": 11486,
+   "t": 1.35
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-kine-boucle-poster.jpg",
+   "octets": 21832,
+   "t": 1.35
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-kine-complete.mp4",
+   "crf": 18,
+   "octets": 2008677
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-kine-complete-poster.webp",
+   "octets": 9138,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-kine-complete-poster.jpg",
+   "octets": 17563,
+   "t": 0.0
+  }
+ }
+}

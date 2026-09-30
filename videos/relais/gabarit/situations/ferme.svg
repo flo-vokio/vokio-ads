@@ -1,0 +1,10 @@
+<!-- Situation « fermé » (auto-école, après la fermeture) : la pancarte « Fermé » accrochée à son clou se balance à peine
+     (pendule autour du clou) ; data-rot = angle min max, data-pivot = le clou. -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true">
+  <circle cx="300" cy="150" r="9" fill="#262019"/>
+  <g data-rot="-3.5 3.5" data-pivot="300 150">
+    <path d="M300 150 L 170 262 M300 150 L 430 262" fill="none" stroke="#262019" stroke-width="6" stroke-linecap="round"/>
+    <rect x="130" y="258" width="340" height="170" rx="22" fill="#F4F1E8" stroke="#262019" stroke-width="9"/>
+    <text x="300" y="372" text-anchor="middle" font-family="Instrument Serif" font-size="104" fill="#262019">Fermé</text>
+  </g>
+</svg>

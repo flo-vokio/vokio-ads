@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-serrurier-boucle.mp4",
+   "crf": 18,
+   "octets": 415057
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-serrurier-boucle-poster.webp",
+   "octets": 6526,
+   "t": 0.66
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-serrurier-boucle-poster.jpg",
+   "octets": 19911,
+   "t": 0.66
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-serrurier-complete.mp4",
+   "crf": 18,
+   "octets": 1654990
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-serrurier-complete-poster.webp",
+   "octets": 7588,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-serrurier-complete-poster.jpg",
+   "octets": 19971,
+   "t": 0.0
+  }
+ }
+}

@@ -1,0 +1,211 @@
+{
+  "_note": "Garage « Un bruit au freinage ». Énoncés = le dit (Scribe).",
+  "id": "garage",
+  "carte": "Un bruit au freinage",
+  "audio": "/opt/vokio-site-repo/assets/appel-garage.mp3",
+  "nom": "relais-garage",
+  "agente": "Sarah",
+  "jour_heure": "Jeudi, 19 h 35.",
+  "phrase": "Sarah note le véhicule et le motif, cherche un créneau à l’atelier et pose le rendez-vous de demain matin.",
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Sarah, l’assistante vocale du Garage du Rond-Point ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Bonjour, j’ai un bruit de, de, un bruit bizarre au freinage, enfin un bruit un peu aigu au freinage, euh, sur ma voiture, là, depuis quelques jours. Je pensais que ça allait partir, mais c’est… ça persiste, donc, euh, je voulais faire vérifier ma voiture."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vois. Nous proposons le contrôle de freinage ou le remplacement des plaquettes de frein. Lequel souhaitez-vous ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, ben en premier, je vais commencer par le contrôle alors, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "C’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, Florian. Pour le contrôle de freinage, quelle est la marque et le modèle de votre véhicule, s’il vous plaît ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, c’est une Clio quatre et, euh, une, la marque, c’est une Renault."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord. Et quand souhaitez-vous prendre rendez-vous pour ce contrôle ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, ben, euh, votre premier créneau, je le prends."
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant. Demain, vendredi dix-huit septembre, je peux vous proposer huit heures, neuf heures ou dix heures. Qu’est-ce qui vous arrangerait le mieux ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Ben huit heures, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian. Pour un contrôle de freinage, le vendredi dix-huit septembre à huit heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Merci, au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous, au revoir."
+    }
+  ],
+  "situation": "roue",
+  "poster_boucle": 0.5,
+  "agenda": {
+    "date": "Vendredi 18 septembre",
+    "heures": [
+      "08:00",
+      "09:00",
+      "10:00"
+    ],
+    "bloc": {
+      "heure": "08:00",
+      "nom": "Florian",
+      "service": "Contrôle de freinage"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : contrôle de freinage, le vendredi 18 septembre à 08:00, Garage du Rond-Point. Démo Vokio, RDV fictif.",
+    "souligne": "vendredi 18 septembre à 08:00",
+    "heure": "19:37"
+  },
+  "complete": {
+    "avance": 1.6,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.1
+      ],
+      "decroche": 1.1,
+      "sort": 1.3
+    },
+    "agenda": {
+      "entree": "E10:Demain,",
+      "sortie": "E12:SMS",
+      "touches": [
+        [
+          "E10:huit",
+          "08:00"
+        ],
+        [
+          "E10:neuf",
+          "09:00"
+        ],
+        [
+          "E10:dix",
+          "10:00"
+        ],
+        [
+          "E11:huit",
+          "08:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E11:plaît.",
+        "nom": "E12:Florian.",
+        "service": "E12:freinage,"
+      }
+    },
+    "sms": {
+      "entree": "E12:fin+0.1",
+      "bulle": "E12:fin+0.75",
+      "sortie": "E14:debut-0.55"
+    },
+    "fin": {
+      "entree": "E14:fin+0.45"
+    }
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "huit heures, neuf heures ou dix heures.",
+        "source": 10,
+        "temps": [
+          2.55,
+          2.75,
+          3.15,
+          3.35,
+          3.75,
+          3.9,
+          4.1
+        ]
+      },
+      {
+        "qui": "appelant",
+        "texte": "Ben huit heures, s’il vous plaît.",
+        "source": 11,
+        "temps": [
+          4.95,
+          5.1,
+          5.3,
+          5.5,
+          5.6,
+          5.75
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E0:huit",
+          "08:00"
+        ],
+        [
+          "E0:neuf",
+          "09:00"
+        ],
+        [
+          "E0:dix",
+          "10:00"
+        ],
+        [
+          "E1:huit",
+          "08:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:plaît.+0.25",
+        "nom": "E1:plaît.+0.65",
+        "service": "E1:plaît.+1.1"
+      }
+    },
+    "texte_sortie": 7.3
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "_note": "Lot B, carte métier « Un peu malade, en fin de semaine » (vokio.fr/medecin/). Même schéma que coiffure/recette.json. Énoncés = texte DIT (relevé Scribe du 29/09) : l'audio contient « Le samedi, nous sommes ouverts de neuf heures à midi. Je peux vous proposer neuf heures, dix heures ou onze heures. Est-ce que l'un de ces créneaux vous convient ? », absent de la transcription de la page. À FAIRE VALIDER : le texte du SMS, la situation « lb-stetho ».",
+  "id": "medecin",
+  "carte": "Un peu malade, en fin de semaine",
+  "audio": "/opt/vokio-site-repo/assets/appel-medecin.mp3",
+  "nom": "relais-medecin",
+  "situation": "lb-stetho",
+  "agenda": {
+    "date": "Samedi 19 septembre",
+    "heures": [
+      "09:00",
+      "10:00",
+      "11:00"
+    ],
+    "bloc": {
+      "heure": "09:00",
+      "nom": "Florian",
+      "service": "Consultation"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : Consultation, le samedi 19 septembre à 09:00, Cabinet du docteur Sabatier. Démo Vokio, RDV fictif.",
+    "souligne": "samedi 19 septembre à 09:00",
+    "heure": "15:57"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Marie, l’assistante vocale du Cabinet du docteur Sabatier ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, bonjour, je, je voudrais faire une consultation, s’il vous plaît. Je me sens un petit peu malade. Euh, si vous avez une disponibilité en fin de journée cette semaine, euh, je, je, je suis preneur."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord. Pour une consultation, c’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "C’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, Florian. Quel jour de cette semaine vous conviendrait le mieux pour votre consultation en fin de journée ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, ben, samedi, si c’est possible."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je regarde ça."
+    },
+    {
+      "qui": "agente",
+      "texte": "Le samedi, nous sommes ouverts de neuf heures à midi. Je peux vous proposer neuf heures, dix heures ou onze heures. Est-ce que l’un de ces créneaux vous convient ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, ben, neuf heures alors, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian, pour une consultation, le samedi dix-neuf septembre à neuf heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci beaucoup. Au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous, au revoir."
+    }
+  ],
+  "complete": {
+    "avance": 1.5,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.3
+      ],
+      "decroche": 1.3,
+      "sort": 1.45
+    },
+    "agenda": {
+      "entree": "E6:Je",
+      "sortie": "E10:SMS",
+      "touches": [
+        [
+          "E7:neuf",
+          "09:00"
+        ],
+        [
+          "E7:neuf#2",
+          "09:00"
+        ],
+        [
+          "E7:dix",
+          "10:00"
+        ],
+        [
+          "E7:onze",
+          "11:00"
+        ],
+        [
+          "E8:neuf",
+          "09:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E8:plaît.+0.2",
+        "nom": "E10:Florian,",
+        "service": "E10:consultation,"
+      }
+    },
+    "sms": {
+      "entree": "E10:fin+0.1",
+      "bulle": "E10:fin+0.75",
+      "sortie": "E12:debut-0.55"
+    },
+    "fin": {
+      "entree": "E12:fin+0.45"
+    },
+    "coupes": [
+      "E10:le",
+      "E10:Vous#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 68,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "Le samedi, nous sommes ouverts de neuf heures à midi.",
+        "source": 7,
+        "temps": [
+          2.5,
+          2.62,
+          2.95,
+          3.08,
+          3.25,
+          3.5,
+          3.62,
+          3.8,
+          4.0,
+          4.12
+        ]
+      },
+      {
+        "qui": "appelant",
+        "texte": "neuf heures alors, s’il vous plaît.",
+        "source": 8,
+        "temps": [
+          5.0,
+          5.2,
+          5.45,
+          5.8,
+          5.95,
+          6.1
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E0:neuf",
+          "09:00"
+        ],
+        [
+          "E1:neuf",
+          "09:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:plaît.+0.25",
+        "nom": "E1:plaît.+0.65",
+        "service": "E1:plaît.+1.1"
+      }
+    },
+    "texte_sortie": 7.4
+  },
+  "agente": "Marie",
+  "poster_boucle": 1.0
+}

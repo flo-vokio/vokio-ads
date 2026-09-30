@@ -1,0 +1,15 @@
+<!-- Situation « pâte » (boulangerie, un fraisier pour samedi) : sur le plan fariné, la pâte étalée ; le coupe-pâte glisse
+     dessous, soulève la moitié et la RABAT par-dessus (elle bascule autour de sa pliure, lâchée en route elle retombe par son
+     poids), la pâte s'écrase à la réception, un petit nuage de farine s'échappe. Animé par pate.js (lib/fx.js). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="1.25" style="overflow:visible;left:-40px;top:110px;width:760px;height:760px">
+  <rect x="30" y="470" width="420" height="34" rx="8" fill="#E6D9C0" stroke="#262019" stroke-width="7"/>
+  <g fill="#FFFFFF" stroke="#B3AB9E" stroke-width="2"><circle cx="96" cy="462" r="4"/><circle cx="120" cy="466" r="3"/><circle cx="412" cy="464" r="4"/>
+    <circle cx="430" cy="466" r="3"/><circle cx="140" cy="463" r="2.5"/></g>
+  <path id="pa-gauche" fill="#EFE3CB" stroke="#262019" stroke-width="7" stroke-linejoin="round"/>
+  <path id="pa-rabat" fill="#EFE3CB" stroke="#262019" stroke-width="7" stroke-linejoin="round"/>
+  <g id="pa-corne">
+    <path d="M0 0 L 104 0" stroke="#262019" stroke-width="12" stroke-linecap="round"/>
+    <path d="M60 -8 Q 70 -48 104 -52 Q 128 -52 132 -30 Q 134 -8 110 -6 Z" fill="#F4F1E8" stroke="#262019" stroke-width="7" stroke-linejoin="round"/>
+  </g>
+  <g id="pa-fx"></g>
+</svg>

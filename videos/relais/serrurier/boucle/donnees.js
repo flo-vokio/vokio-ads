@@ -1,0 +1,102 @@
+window.DONNEES = {
+ "mode": "boucle",
+ "fps": 30,
+ "taille": 1080,
+ "marge": 84,
+ "corps": {
+  "agente": {
+   "seul": 74,
+   "objet": 74
+  },
+  "appelant": {
+   "seul": 88,
+   "objet": 88
+  }
+ },
+ "corps_min": 52,
+ "situation": {
+  "sonne": [
+   0.15,
+   1.7
+  ],
+  "decroche": 1.7,
+  "sort": 1.95,
+  "revient": 8.75,
+  "objet": "porte"
+ },
+ "enonces": [
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "j’ai",
+     "t": 2.5,
+     "t1": 2.7
+    },
+    {
+     "texte": "claqué",
+     "t": 2.65,
+     "t1": 2.85
+    },
+    {
+     "texte": "ma",
+     "t": 2.85,
+     "t1": 3.0500000000000003
+    },
+    {
+     "texte": "porte",
+     "t": 3.05,
+     "t1": 3.25
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "D’accord,",
+     "t": 4.1,
+     "t1": 4.3
+    },
+    {
+     "texte": "c’est",
+     "t": 4.4,
+     "t1": 4.6000000000000005
+    },
+    {
+     "texte": "une",
+     "t": 4.55,
+     "t1": 4.75
+    },
+    {
+     "texte": "urgence.",
+     "t": 4.7,
+     "t1": 4.9
+    }
+   ]
+  }
+ ],
+ "coupes": [],
+ "fiche": {
+  "titre": "Urgence · porte claquée",
+  "entree": 2.3,
+  "sortie": 8.55,
+  "lignes": [
+   {
+    "texte": "Adresse relevée",
+    "t": 4.95
+   },
+   {
+    "texte": "Consigne de sécurité donnée",
+    "t": 5.8
+   },
+   {
+    "texte": "Demande transmise",
+    "t": 6.6
+   }
+  ]
+ },
+ "duree": 10.0,
+ "texte_sortie": 7.6,
+ "avance": 0.0
+};

@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-garage-boucle.mp4",
+   "crf": 18,
+   "octets": 539879
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-garage-boucle-poster.webp",
+   "octets": 12400,
+   "t": 0.5
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-garage-boucle-poster.jpg",
+   "octets": 24395,
+   "t": 0.5
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-garage-complete.mp4",
+   "crf": 19,
+   "octets": 2547605
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-garage-complete-poster.webp",
+   "octets": 11080,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-garage-complete-poster.jpg",
+   "octets": 22535,
+   "t": 0.0
+  }
+ }
+}

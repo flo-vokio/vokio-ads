@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-restaurant-boucle.mp4",
+   "crf": 18,
+   "octets": 471254
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-restaurant-boucle-poster.webp",
+   "octets": 12370,
+   "t": 6.6
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-restaurant-boucle-poster.jpg",
+   "octets": 26371,
+   "t": 6.6
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-restaurant-complete.mp4",
+   "crf": 18,
+   "octets": 1404095
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-restaurant-complete-poster.webp",
+   "octets": 14846,
+   "t": 33.26
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-restaurant-complete-poster.jpg",
+   "octets": 30519,
+   "t": 33.26
+  }
+ }
+}

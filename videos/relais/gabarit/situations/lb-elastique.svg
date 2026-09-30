@@ -1,0 +1,11 @@
+<!-- Situation « lb-elastique » (kiné, lot B) : un élastique de rééducation tenu entre deux poings ; les poings se
+     rapprochent d'un rien, puis écartent l'élastique (il s'allonge et s'amincit à volume constant, tremble au bout de
+     l'effort), puis relâchent d'un coup : les poings reviennent, dépassent, l'élastique détendu ondule et rebondit jusqu'au
+     repos. Animé par lb-elastique.js (fonction pure du temps, périodique : 2,5 s par geste). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="2.5" style="overflow:visible;left:14px;top:246px;width:580px;height:580px">
+  <g id="el-bras"></g>
+  <path id="el-bande-bord" fill="none" stroke="#262019" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="el-bande" fill="none" stroke="#EFA424" stroke-linecap="round" stroke-linejoin="round"/>
+  <g id="el-poings"></g>
+  <g id="el-traits"></g>
+</svg>

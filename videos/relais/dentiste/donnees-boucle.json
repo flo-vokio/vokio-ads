@@ -1,0 +1,122 @@
+{
+ "mode": "boucle",
+ "fps": 30,
+ "taille": 1080,
+ "marge": 84,
+ "corps": {
+  "agente": {
+   "seul": 74,
+   "objet": 74
+  },
+  "appelant": {
+   "seul": 88,
+   "objet": 88
+  }
+ },
+ "corps_min": 52,
+ "situation": {
+  "sonne": [
+   0.15,
+   1.7
+  ],
+  "decroche": 1.7,
+  "sort": 1.95,
+  "revient": 8.75,
+  "objet": "lb-lampe"
+ },
+ "enonces": [
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "j’ai",
+     "t": 2.5,
+     "t1": 2.7
+    },
+    {
+     "texte": "super",
+     "t": 2.72,
+     "t1": 2.9200000000000004
+    },
+    {
+     "texte": "mal",
+     "t": 2.92,
+     "t1": 3.12
+    },
+    {
+     "texte": "à",
+     "t": 3.2,
+     "t1": 3.4000000000000004
+    },
+    {
+     "texte": "une",
+     "t": 3.35,
+     "t1": 3.5500000000000003
+    },
+    {
+     "texte": "dent",
+     "t": 3.52,
+     "t1": 3.72
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "il",
+     "t": 4.6,
+     "t1": 4.8
+    },
+    {
+     "texte": "s’agit",
+     "t": 4.78,
+     "t1": 4.98
+    },
+    {
+     "texte": "d’une",
+     "t": 5.0,
+     "t1": 5.2
+    },
+    {
+     "texte": "consultation",
+     "t": 5.25,
+     "t1": 5.45
+    },
+    {
+     "texte": "ordinaire.",
+     "t": 5.75,
+     "t1": 5.95
+    }
+   ]
+  }
+ ],
+ "coupes": [],
+ "agenda": {
+  "date": "Lundi 21 septembre",
+  "heures": [
+   "08:30",
+   "09:30",
+   "10:30"
+  ],
+  "entree": 2.2,
+  "sortie": 8.55,
+  "touches": [
+   {
+    "t": 6.05,
+    "heure": "08:30"
+   }
+  ],
+  "bloc": {
+   "heure": "08:30",
+   "nom": "Florian",
+   "service": "Consultation",
+   "ouvre": 6.25,
+   "t_nom": 6.65,
+   "t_service": 7.1
+  }
+ },
+ "duree": 10.0,
+ "texte_sortie": 7.3,
+ "avance": 0.0
+}

@@ -1,0 +1,201 @@
+{
+  "_note": "Lot B, carte métier « Le dos bloqué » (vokio.fr/osteopathe/). Même schéma que coiffure/recette.json. Énoncés = texte DIT (relevé Scribe du 29/09). Rendez-vous le jour même (vendredi 18 septembre, 17:00). À FAIRE VALIDER : le texte du SMS, la situation « lb-vertebres ».",
+  "id": "osteopathe",
+  "carte": "Le dos bloqué",
+  "audio": "/opt/vokio-site-repo/assets/appel-osteopathe.mp3",
+  "nom": "relais-osteopathe",
+  "situation": "lb-vertebres",
+  "agenda": {
+    "date": "Vendredi 18 septembre",
+    "heures": [
+      "16:00",
+      "17:00",
+      "18:00"
+    ],
+    "bloc": {
+      "heure": "17:00",
+      "nom": "Florian",
+      "service": "Dos bloqué"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : Séance dos bloqué, le vendredi 18 septembre à 17:00, Cabinet Ostéo Paradis. Démo Vokio, RDV fictif.",
+    "souligne": "vendredi 18 septembre à 17:00",
+    "heure": "15:55"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Pauline, l’assistante vocale du Cabinet Ostéo Paradis ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Bonjour, euh, en fait, je me suis bloqué le dos, là, euh, dans la nuit et je voulais savoir si vous, si vous aviez un créneau rapidement."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vérifie les disponibilités pour aujourd’hui, vendredi dix-huit septembre. C’est bien ça ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui, si c’est possible aujourd’hui, c’est parfait. Sinon, demain matin, ça, c’est bien aussi."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. Je regarde pour aujourd’hui."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je peux vous proposer un rendez-vous aujourd’hui à seize heures, dix-sept heures ou dix-huit heures. Qu’est-ce qui vous arrangerait le mieux ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, plutôt dix-sept heures, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord. Le rendez-vous de dix-sept heures est disponible. C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, c’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian, pour une séance dos bloqué, le vendredi dix-huit septembre à dix-sept heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "OK, parfait. Merci beaucoup. Bonne journée."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous. Bonne journée."
+    }
+  ],
+  "complete": {
+    "avance": 1.5,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.3
+      ],
+      "decroche": 1.3,
+      "sort": 1.45
+    },
+    "agenda": {
+      "entree": "E2:Je",
+      "sortie": "E10:SMS",
+      "touches": [
+        [
+          "E5:seize",
+          "16:00"
+        ],
+        [
+          "E5:dix-sept",
+          "17:00"
+        ],
+        [
+          "E5:dix-huit",
+          "18:00"
+        ],
+        [
+          "E6:dix-sept",
+          "17:00"
+        ],
+        [
+          "E7:dix-sept",
+          "17:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E7:disponible.",
+        "nom": "E8:Florian.",
+        "service": "E10:séance"
+      }
+    },
+    "sms": {
+      "entree": "E10:fin+0.1",
+      "bulle": "E10:fin+0.75",
+      "sortie": "E12:debut-0.55"
+    },
+    "fin": {
+      "entree": "E12:fin+0.45"
+    },
+    "coupes": [
+      "E1:je#2",
+      "E10:Vous#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 86
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "je me suis bloqué le dos, là, dans la nuit",
+        "source": 1,
+        "temps": [
+          2.5,
+          2.6,
+          2.72,
+          2.85,
+          3.1,
+          3.22,
+          3.5,
+          3.8,
+          3.9,
+          4.02
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "Le rendez-vous de dix-sept heures est disponible.",
+        "source": 7,
+        "temps": [
+          4.9,
+          5.02,
+          5.25,
+          5.38,
+          5.62,
+          5.8,
+          5.92
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E1:dix-sept",
+          "17:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:disponible.+0.3",
+        "nom": "E1:disponible.+0.7",
+        "service": "E1:disponible.+1.15"
+      }
+    },
+    "texte_sortie": 7.4
+  },
+  "agente": "Pauline",
+  "poster_boucle": 9.5
+}

@@ -34,3 +34,6 @@ videos/showcase-iphone/son/monde/*.wav
 videos/showcase-iphone/**/__pycache__/
 videos/showcase-iphone/snapshots/
 videos/showcase-iphone/v1/
+
+# relais : caches Python
+__pycache__/

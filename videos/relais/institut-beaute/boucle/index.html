@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1080">
+<title>Le relais · carte vidéo Vokio</title>
+<!-- Gabarit des cartes « Le relais » (vokio.fr, section #relais). NE PAS ÉDITER une copie : ce fichier est copié par
+     outils/relais.py dans <carte>/boucle/ et <carte>/complete/, avec donnees.js (window.DONNEES, tiré de la recette).
+     Tout se lit dans DONNEES : énoncés (mots horodatés), situation, agenda, SMS, fin. Un seul timeline GSAP, en pause,
+     fonction pure du temps (les animations continues passent par un proxy dont onUpdate lit le temps). -->
+<script src="donnees.js"></script>
+<script src="lib/gsap.min.js"></script>
+<script src="lib/fx.js"></script>
+<style>
+@font-face{font-family:"Geist";src:url("fonts/geist.woff2") format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Geist Mono";src:url("fonts/geist-mono.woff2") format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Instrument Serif";src:url("fonts/instrument-serif.woff2") format("woff2");font-style:normal;font-display:block}
+@font-face{font-family:"Instrument Serif";src:url("fonts/instrument-serif-italic.woff2") format("woff2");font-style:italic;font-display:block}
+@font-face{font-family:"Inter";src:url("fonts/Inter-Variable-latin.woff2") format("woff2");font-weight:100 900;font-display:block}
+:root{--papier:#F4F1E8;--encre:#262019;--solaire:#EFA424;--gris:#6F695F;--gris-bloc:#5B554C;--appelant:#57514A;
+  --colonne:#F0EDE3;--filet:#E3E1D6;--bloc:#F0DEBC;--bloc-bord:#EAB964}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1080px;overflow:hidden;background:#F4F1E8}
+#root{position:relative;width:100%;height:100%;overflow:hidden;background:#F4F1E8;color:#262019;
+  -webkit-font-smoothing:antialiased;font-kerning:normal}
+.couche{position:absolute;inset:0}
+/* --- situation (gabarit/situations/<nom>.svg, inséré par relais.py) : l'objet qui occupe les mains, le téléphone qui sonne --- */
+#objet{position:absolute;left:44px;top:262px;width:530px;height:530px;overflow:visible}
+#tel{position:absolute;left:585px;top:196px;width:420px;height:640px;overflow:visible}
+/* --- textes --- */
+.page{position:absolute;left:84px;width:912px}
+.page .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .16em;margin:0 -.02em -.16em}
+.page .i{display:inline-block}
+.agente{font-family:"Geist",sans-serif;font-weight:400;line-height:1.18;letter-spacing:-.012em;color:#262019}
+.appelant{font-family:"Instrument Serif",serif;font-style:italic;line-height:1.08;letter-spacing:-.005em;color:#57514A}
+#mesure{position:absolute;left:84px;top:0;width:912px;visibility:hidden}
+/* --- agenda (redessiné aux couleurs de la vue jour de app.vokio.fr) --- */
+#agenda{position:absolute;left:84px;top:354px;width:912px;height:726px}
+#ag-date{position:absolute;left:0;top:0;font-family:"Geist",sans-serif;font-size:52px;line-height:62px;color:#6F695F;letter-spacing:-.01em}
+#ag-col{position:absolute;left:216px;right:0;top:112px;bottom:0;background:#F0EDE3;
+  -webkit-mask-image:linear-gradient(#000 0,#000 72%,transparent 100%);mask-image:linear-gradient(#000 0,#000 72%,transparent 100%)}
+.ag-filet{position:absolute;left:216px;right:0;height:3px;background:#E3E1D6}
+.ag-h{position:absolute;left:0;font-family:"Geist Mono",monospace;font-size:52px;line-height:60px;color:#6F695F;letter-spacing:-.01em}
+#bloc{position:absolute;left:222px;right:6px;height:156px;border-radius:22px;background:#F0DEBC;border:3px solid #EAB964;
+  padding:16px 28px 0;overflow:hidden}
+#bloc .l1{font-family:"Geist",sans-serif;font-size:60px;line-height:68px;white-space:nowrap}
+#bloc .h{color:#5B554C}
+#bloc .nom{color:#262019;display:inline-block}
+#bloc .l2{font-family:"Geist",sans-serif;font-size:54px;line-height:60px;color:#5B554C;display:inline-block}
+/* --- fiche d'appel (quand l'appel ne pose pas de rendez-vous) : même carte que le bloc de l'agenda --- */
+#fiche{position:absolute;left:84px;top:392px;width:912px;height:688px}
+#fi-titre{position:absolute;left:0;top:0;font-family:"Geist",sans-serif;font-size:52px;line-height:62px;color:#6F695F;letter-spacing:-.01em}
+#fi-carte{position:absolute;left:66px;right:0;top:92px;border-radius:22px;background:#F0DEBC;border:3px solid #EAB964;padding:22px 30px 26px}
+#fi-carte .li{font-family:"Geist",sans-serif;font-size:58px;line-height:72px;color:#262019}
+#fi-carte .li + .li{color:#5B554C;font-size:54px;line-height:68px}
+/* --- SMS : un iPhone réaliste, Messages iOS (repris du showcase « Le point sur le i », showcase-iphone/compositions/
+   s6-sms.html : cotes en points iOS, 1 pt = var(--pt)). Ici 1 pt = 3,06 px pour que le SMS (17 pt) fasse 52 px du cadre :
+   le téléphone est plus large que le cadre, on le voit en gros plan (bord gauche et boutons visibles, droite coupée). --- */
+#sms{position:absolute;inset:0}
+#ip-ombre{position:absolute;border-radius:230px;box-shadow:0 40px 80px -20px rgba(38,32,25,.30),0 12px 26px -8px rgba(38,32,25,.16)}
+#ip-corps{position:absolute;overflow:visible}
+#ip-ecran{position:absolute;overflow:hidden;background:#FFFFFF;font-family:"Inter",sans-serif;font-variation-settings:"opsz" 17;color:#000;
+  -webkit-font-smoothing:antialiased}
+#ip-ecran .pt{position:absolute}
+#ip-heure{left:calc(43.6 * var(--pt));top:calc(21.3 * var(--pt));width:calc(60 * var(--pt));height:calc(22 * var(--pt));
+  font-weight:600;font-size:calc(17 * var(--pt));line-height:calc(22 * var(--pt));letter-spacing:-.01em;text-align:center}
+#ip-etat{left:calc(288.9 * var(--pt));top:calc(26.7 * var(--pt));width:calc(80 * var(--pt));height:calc(12 * var(--pt));overflow:visible}
+#ip-ile{left:calc(138.6 * var(--pt));top:calc(14.6 * var(--pt));width:calc(124.8 * var(--pt));height:calc(36.2 * var(--pt));
+  border-radius:calc(18.1 * var(--pt));background:#000}
+#ip-ile i{position:absolute;right:calc(12.4 * var(--pt));top:calc(12.35 * var(--pt));width:calc(11.5 * var(--pt));height:calc(11.5 * var(--pt));
+  border-radius:50%;background:radial-gradient(circle at 38% 36%,#26304a 0,#10141f 42%,#040508 75%)}
+.ip-verre{background:#F5F5F6;box-shadow:0 0 0 calc(.5 * var(--pt)) rgba(0,0,0,.045),0 calc(1 * var(--pt)) calc(2 * var(--pt)) rgba(0,0,0,.04),
+  0 calc(4 * var(--pt)) calc(14 * var(--pt)) rgba(0,0,0,.075),inset 0 calc(.8 * var(--pt)) calc(.6 * var(--pt)) rgba(255,255,255,.95)}
+#ip-retour{left:calc(16 * var(--pt));top:calc(62.8 * var(--pt));width:calc(44 * var(--pt));height:calc(44 * var(--pt));border-radius:50%}
+#ip-retour svg,#ip-avatar svg{position:absolute;left:0;top:0;width:100%;height:100%}
+#ip-avatar{left:calc(171 * var(--pt));top:calc(62.3 * var(--pt));width:calc(60 * var(--pt));height:calc(60 * var(--pt));border-radius:50%;
+  overflow:hidden;background:linear-gradient(180deg,#A9AEB9 0%,#858A96 100%)}
+#ip-nom{top:calc(118.25 * var(--pt));height:calc(30.3 * var(--pt));border-radius:calc(15.15 * var(--pt));
+  padding:0 calc(11 * var(--pt)) 0 calc(13 * var(--pt));display:flex;align-items:center;gap:calc(4 * var(--pt));
+  font-weight:600;font-size:calc(17 * var(--pt));letter-spacing:-.012em;white-space:nowrap;left:calc(201 * var(--pt));transform:translateX(-50%)}
+#ip-nom svg{width:calc(6.5 * var(--pt));height:calc(11 * var(--pt));flex:none;margin-top:calc(.6 * var(--pt))}
+#ip-mention{left:0;width:calc(402 * var(--pt));top:calc(160 * var(--pt));text-align:center;color:#6C6C70;
+  font-size:calc(11 * var(--pt));line-height:calc(13.5 * var(--pt));font-weight:500;letter-spacing:.005em}
+#ip-mention b{font-weight:600}
+#ip-mention span{font-weight:400}
+#ip-forme{left:0;top:0;overflow:visible}
+#ip-bulle{left:calc(31 * var(--pt));top:calc(203.5 * var(--pt));width:calc(255 * var(--pt));margin:0;
+  font-family:"Inter",sans-serif;font-weight:400;font-size:calc(17 * var(--pt));line-height:calc(22 * var(--pt));letter-spacing:-.013em;color:#000}
+#ip-bulle u{text-decoration-thickness:calc(1 * var(--pt));text-underline-offset:calc(2.5 * var(--pt))}
+/* --- fin : le wordmark --- */
+#marque{position:absolute;left:0;right:0;top:0;height:1080px;display:flex;align-items:center;justify-content:center}
+#mot{font-family:"Instrument Serif",serif;font-size:300px;letter-spacing:-.045em;line-height:.9;display:inline-flex;align-items:baseline;color:#262019}
+#mot .seg{display:inline-block;clip-path:inset(-30% 114% -30% -14%)}
+#mot .i{position:relative;font-style:normal}
+#mot-pt{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;border-radius:50%}
+/* --- LE point : l'agente --- */
+#point{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:#EFA424}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="relais" data-start="0" data-width="1080" data-height="1080" data-duration="10.000000">
+  <div id="situation" class="couche" data-el="situation">
+    <svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="2.5" style="overflow:visible;left:-12px;top:196px;width:700px;height:700px">
+  <g id="ci-fumee" fill="none" stroke="#6F695F" stroke-linecap="round" stroke-linejoin="round"></g>
+  <path d="M166 336 L 174 470 L 426 470 L 434 336" fill="#E8E2D5" stroke="#262019" stroke-width="9" stroke-linejoin="round"/>
+  <g id="ci-coulures" fill="#EFA424" stroke="#262019" stroke-width="5" stroke-linejoin="round"></g>
+  <path d="M124 452 L 134 532 Q 136 550 156 550 L 444 550 Q 464 550 466 532 L 476 452 Z" fill="#262019"/>
+  <ellipse cx="300" cy="452" rx="176" ry="26" fill="#262019"/>
+  <circle cx="422" cy="506" r="15" fill="#F4F1E8"/>
+  <path d="M422 494 L 422 506" stroke="#262019" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="300" cy="336" rx="142" ry="34" fill="#F4F1E8" stroke="#262019" stroke-width="10"/>
+  <ellipse id="ci-cire" cx="300" cy="340" rx="122" ry="25" fill="#EFA424" stroke="#262019" stroke-width="5"/>
+  <g id="ci-remous" fill="none" stroke="#F8D69B" stroke-width="5" stroke-linecap="round"></g>
+  <g id="ci-spatule"></g>
+</svg>
+    <script>
+/* Animateur de la situation « lb-cire » (institut de beauté, lot B). SITUATION_ANIM(t, periode, mode) : fonction pure du
+   temps, périodique (un tour de spatule en 2,5 s, 4 tours par boucle de 10 s ; la fumée a ses périodes, diviseurs de 10).
+   La spatule : son pied décrit l'ellipse de la surface, pousse plus vite devant (la main appuie) ; le manche suit avec un
+   retard d'angle (follow-through) ; le bas est enrobé de cire. La cire : deux arcs de remous qui tournent derrière la
+   spatule, en retard (overlap), et un bourrelet autour du pied. La fumée : trois filets, chacun fait de bouffées qui montent,
+   s'étirent, ondulent (le tracé suit une onde qui monte et dont l'amplitude croît avec la hauteur), s'amincissent et
+   s'effacent en haut. */
+(function () {
+  const REGLAGES = {
+    centre: [300, 340], surface: [82, 17], haut: [112, 24], hauteur: 196, pousse: 0.07, retard: 0.5, largeur: 54, cire: [122, 25],
+    coulures: [[222, 44, 0.0], [300, 70, 0.4], [370, 30, 0.75]],   // [x, longueur, phase] : la cire qui a coulé sur le bord, qui s'allonge à peine
+    remous: [[0.62, 0.5, 1.1], [0.36, 0.3, 1.6]],     // [rayon relatif, retard (tours), longueur d'arc (rad)]
+    fumee: { filets: [[242, 0.0], [300, 0.37], [356, 0.71]], base: 312, montee: 250, vie: 2.5, bouffees: 3, longueur: 70,
+             onde: { longueur: 120, periode: 2.5, amplitude: [4, 26] }, epaisseur: [9, 3] }
+  };
+  const R = REGLAGES, PI = Math.PI, sin = Math.sin, cos = Math.cos;
+  const cl = (x, a, b) => Math.max(a, Math.min(b, x)), f2 = (v) => v.toFixed(2);
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (p, tag, a) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+  const $ = (i) => document.getElementById(i);
+  const gS = $("ci-spatule"), gR = $("ci-remous"), gF = $("ci-fumee");
+  const bourrelet = el(gS, "ellipse", { rx: 26, ry: 6, fill: "#EFA424", stroke: "#262019", "stroke-width": 4 });
+  const baton = el(gS, "path", { fill: "#F4F1E8", stroke: "#262019", "stroke-width": 7, "stroke-linejoin": "round" });
+  const enrobe = el(gS, "path", { fill: "#EFA424", stroke: "#262019", "stroke-width": 5, "stroke-linejoin": "round" });
+  const remous = R.remous.map(() => el(gR, "path", {}));
+  const coulures = R.coulures.map((c) => ({ x: c[0], L: c[1], ph: c[2], p: el($("ci-coulures"), "path", {}) }));
+  const F = R.fumee, bouffees = [];
+  F.filets.forEach((f, i) => { for (let k = 0; k < F.bouffees; k++) bouffees.push({ x: f[0], ph: f[1], k: k, i: i, p: el(gF, "path", {}) }); });
+  const C = R.centre;
+  // bâton de spatule (langue de bois) entre le pied P et le haut H : largeur 26, bout arrondi en haut
+  function langue(P, H, w, de, a) {
+    const dx = H[0] - P[0], dy = H[1] - P[1], L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = -uy * w / 2, ny = ux * w / 2;
+    const A = [P[0] + ux * L * de, P[1] + uy * L * de], B = [P[0] + ux * L * a, P[1] + uy * L * a];
+    const bout = a >= 0.999;
+    let d = "M" + f2(A[0] + nx) + " " + f2(A[1] + ny) + " L" + f2(B[0] + nx) + " " + f2(B[1] + ny);
+    if (bout) d += " A" + f2(w / 2) + " " + f2(w / 2) + " 0 0 0 " + f2(B[0] - nx) + " " + f2(B[1] - ny);
+    else d += " L" + f2(B[0] - nx) + " " + f2(B[1] - ny);
+    return d + " L" + f2(A[0] - nx) + " " + f2(A[1] - ny) + " Z";
+  }
+  window.SITUATION_ANIM = function (t, periode, mode) {
+    const tour = t / periode, th = 2 * PI * (tour + R.pousse * sin(2 * PI * tour));
+    const P = [C[0] + R.surface[0] * cos(th), C[1] + R.surface[1] * sin(th)];
+    const tl = th - R.retard;                         // le manche suit en retard
+    const H = [C[0] + R.haut[0] * cos(tl) * 0.9, C[1] - R.hauteur + R.haut[1] * sin(tl)];
+    // pied derrière (haut de l'ellipse) : on voit moins de bâton ; devant : plus long, il passe devant la cire
+    baton.setAttribute("d", langue(P, H, R.largeur, 0, 1));
+    enrobe.setAttribute("d", langue(P, H, R.largeur + 3, 0, 0.3));
+    coulures.forEach(function (c) {
+      const x = c.x, L = c.L * (1 + 0.08 * sin(2 * PI * (t / 5 + c.ph))), y0 = 360, w = 12;
+      c.p.setAttribute("d", "M" + (x - w) + " " + y0 + " L" + f2(x - w * 0.8) + " " + f2(y0 + L) + " Q" + f2(x - w * 0.8) + " " + f2(y0 + L + w * 1.3) + " " + x + " " + f2(y0 + L + w * 1.3) + " Q" + f2(x + w * 0.8) + " " + f2(y0 + L + w * 1.3) + " " + f2(x + w * 0.8) + " " + f2(y0 + L) + " L" + (x + w) + " " + y0 + " Z");
+    });
+    bourrelet.setAttribute("cx", f2(P[0])); bourrelet.setAttribute("cy", f2(P[1] + 1));
+    remous.forEach(function (p, i) {
+      const r = R.remous[i], a1 = th - 2 * PI * r[1] * 0.25 - 0.35, a0 = a1 - r[2];
+      const rx = R.cire[0] * r[0], ry = R.cire[1] * r[0], x0 = C[0] + rx * cos(a0), y0 = C[1] + ry * sin(a0), x1 = C[0] + rx * cos(a1), y1 = C[1] + ry * sin(a1);
+      p.setAttribute("d", "M" + f2(x0) + " " + f2(y0) + " A" + f2(rx) + " " + f2(ry) + " 0 0 1 " + f2(x1) + " " + f2(y1));
+    });
+    // fumée
+    const O = F.onde;
+    bouffees.forEach(function (b) {
+      const vie = ((t / F.vie + b.ph + b.k / F.bouffees) % 1 + 1) % 1;      // 0 → 1 : de la surface au haut
+      const pts = [], n = 10;
+      for (let q = 0; q <= n; q++) {
+        const h = F.montee * vie - F.longueur * (q / n) * (0.6 + 0.6 * vie);
+        if (h < 0) break;
+        const hr = h / F.montee, amp = O.amplitude[0] + (O.amplitude[1] - O.amplitude[0]) * hr;
+        const x = b.x + amp * sin(2 * PI * (h / O.longueur - t / O.periode + b.i * 0.33)) + 10 * hr * sin(2 * PI * (t / 5 + b.i * 0.2));
+        pts.push(f2(x) + " " + f2(F.base - h));
+      }
+      const alpha = sin(PI * cl(vie, 0, 1)) * cl(vie / 0.15, 0, 1);
+      if (pts.length < 2 || alpha < 0.02) { b.p.setAttribute("d", ""); return; }
+      b.p.setAttribute("d", "M" + pts.join(" L"));
+      b.p.setAttribute("stroke-width", f2(F.epaisseur[0] + (F.epaisseur[1] - F.epaisseur[0]) * vie));
+      b.p.setAttribute("stroke-linejoin", "round");
+      b.p.setAttribute("opacity", (0.75 * alpha).toFixed(3));
+    });
+  };
+})();
+
+    </script>
+    <svg id="tel" viewBox="-60 -60 420 640" aria-hidden="true">
+      <g id="tel-arcs" fill="none" stroke="#262019" stroke-width="7" stroke-linecap="round">
+        <path d="M 318 150 A 190 190 0 0 1 318 290"/><path d="M 350 120 A 240 240 0 0 1 350 320"/>
+        <path d="M -18 150 A 190 190 0 0 0 -18 290"/><path d="M -50 120 A 240 240 0 0 0 -50 320"/>
+      </g>
+      <g id="tel-corps">
+        <rect x="20" y="0" width="260" height="520" rx="48" fill="#F4F1E8" stroke="#262019" stroke-width="8"/>
+        <rect id="tel-ecran" x="36" y="16" width="228" height="488" rx="34" fill="#E8E2D5"/>
+        <rect x="116" y="34" width="68" height="20" rx="10" fill="#262019"/>
+      </g>
+    </svg>
+  </div>
+  <div id="textes" class="couche"></div>
+  <div id="mesure" aria-hidden="true"></div>
+  <div id="agenda" data-el="agenda">
+    <div id="ag-date"></div>
+    <div id="ag-col"></div>
+    <div id="bloc"><div class="l1"><span class="h"></span> <span class="nom"></span></div><div class="l2"></div></div>
+  </div>
+  <div id="fiche" data-el="fiche"><div id="fi-titre"></div><div id="fi-carte"></div></div>
+  <div id="sms" data-el="sms" data-layout-allow-overflow>
+    <div id="ip-ombre" data-layout-allow-overflow></div>
+    <svg id="ip-corps" aria-hidden="true" data-layout-allow-overflow>
+      <defs>
+        <linearGradient id="ip-titane" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3EFE7"/><stop offset=".45" stop-color="#D9D5CD"/><stop offset="1" stop-color="#E7E3DB"/></linearGradient>
+        <linearGradient id="ip-bouton" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9B978F"/><stop offset=".5" stop-color="#D8D4CC"/><stop offset="1" stop-color="#A9A59E"/></linearGradient>
+      </defs>
+      <g id="ip-boutons"></g><g id="ip-couches"></g>
+    </svg>
+    <div id="ip-ecran" data-layout-allow-overflow data-layout-allow-overlap>
+      <div id="ip-heure" class="pt" data-layout-allow-overflow></div>
+      <svg id="ip-etat" class="pt" viewBox="0 0 80 12" aria-hidden="true">
+        <g fill="#000"><rect x="0" y="7.6" width="3.2" height="4.2" rx=".9"/><rect x="4.9" y="5.4" width="3.2" height="6.4" rx=".9"/><rect x="9.8" y="3.1" width="3.2" height="8.7" rx=".9"/><rect x="14.7" y=".8" width="3.2" height="11" rx=".9"/></g>
+        <g fill="none" stroke="#000" stroke-linecap="round"><path d="M27.9 4.35 A10.3 10.3 0 0 1 41.6 4.35" stroke-width="2.05"/><path d="M30.55 7.15 A6.4 6.4 0 0 1 38.95 7.15" stroke-width="2.05"/></g>
+        <path d="M34.75 11.7 L32.45 9.35 A3.3 3.3 0 0 1 37.05 9.35 Z" fill="#000" stroke="#000" stroke-width="1" stroke-linejoin="round"/>
+        <rect x="51.6" y=".75" width="23.4" height="10.9" rx="3.4" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="1"/>
+        <rect x="53.6" y="2.75" width="15.2" height="6.9" rx="1.7" fill="#000"/>
+        <path d="M76.1 4.35 v3.7 a1.95 1.95 0 0 0 0 -3.7 z" fill="#000" fill-opacity=".4"/>
+      </svg>
+      <div id="ip-retour" class="pt ip-verre"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M25.6 13.2 L16.6 22 L25.6 30.8" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div id="ip-avatar" class="pt"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="22.6" r="10.4" fill="#FFFFFF"/><path d="M9.2 52.5 C11.4 41.6 19.6 36.4 30 36.4 C40.4 36.4 48.6 41.6 50.8 52.5 C45.4 57.3 38.1 60 30 60 C21.9 60 14.6 57.3 9.2 52.5 Z" fill="#FFFFFF"/></svg></div>
+      <div id="ip-nom" class="pt ip-verre"><span>Vokio</span><svg viewBox="0 0 6.5 11" aria-hidden="true"><path d="M1.2 1.1 L5.3 5.5 L1.2 9.9" fill="none" stroke="#8A8A8E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div id="ip-mention" class="pt" data-derogation="horodatage iOS 11 pt (validé sur le showcase)">SMS<br><b>Aujourd’hui</b><span></span></div>
+      <svg id="ip-forme" class="pt" aria-hidden="true"><path id="ip-forme-bulle" fill="#E9E9EB" d=""/></svg>
+      <p id="ip-bulle" class="pt"></p>
+      <div id="ip-ile" class="pt"><i></i></div>
+    </div>
+  </div>
+  <div id="marque" data-el="marque"><p id="mot"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p></div>
+  <div id="point" data-el="point"></div>
+</div>
+<script>
+window.__timelines = window.__timelines || {};
+window.__relais = { erreurs: [], pret: false };
+(function () {
+  const D = window.DONNEES, F = D.fps, M = D.marge, R = 20;
+  const $ = (s) => document.querySelector(s);
+  function exiger(c, msg) { if (!c) { window.__relais.erreurs.push(msg); console.error("relais : " + msg); } }
+  const P3o = "power3.out", P3io = "power3.inOut";
+
+  // squircle (repris de showcase-iphone/lib/iphone.js, IPHONE.arrondi : coins continus d'Apple)
+  function arrondi(x, y, w, h, r, xi) {
+    const rad = (d) => d * Math.PI / 180, f = (v) => +v.toFixed(3);
+    const p = Math.min((1 + xi) * r, Math.min(w, h) / 2), arc = 90 * (1 - xi);
+    const lArc = Math.sin(rad(arc / 2)) * r * Math.SQRT2, alpha = (90 - arc) / 2, p34 = r * Math.tan(rad(alpha / 2));
+    const beta = 45 * xi, c = p34 * Math.cos(rad(beta)), d = c * Math.tan(rad(beta)), b = (p - lArc - c - d) / 3, a = 2 * b;
+    return "M" + f(x + w - p) + " " + f(y) + " c" + f(a) + " 0 " + f(a + b) + " 0 " + f(a + b + c) + " " + f(d) + " a" + f(r) + " " + f(r) + " 0 0 1 " + f(lArc) + " " + f(lArc) +
+      " c" + f(d) + " " + f(c) + " " + f(d) + " " + f(b + c) + " " + f(d) + " " + f(a + b + c) + " L" + f(x + w) + " " + f(y + h - p) +
+      " c0 " + f(a) + " 0 " + f(a + b) + " " + f(-d) + " " + f(a + b + c) + " a" + f(r) + " " + f(r) + " 0 0 1 " + f(-lArc) + " " + f(lArc) +
+      " c" + f(-c) + " " + f(d) + " " + f(-(b + c)) + " " + f(d) + " " + f(-(a + b + c)) + " " + f(d) + " L" + f(x + p) + " " + f(y + h) +
+      " c" + f(-a) + " 0 " + f(-(a + b)) + " 0 " + f(-(a + b + c)) + " " + f(-d) + " a" + f(r) + " " + f(r) + " 0 0 1 " + f(-lArc) + " " + f(-lArc) +
+      " c" + f(-d) + " " + f(-c) + " " + f(-d) + " " + f(-(b + c)) + " " + f(-d) + " " + f(-(a + b + c)) + " L" + f(x) + " " + f(y + p) +
+      " c0 " + f(-a) + " 0 " + f(-(a + b)) + " " + f(d) + " " + f(-(a + b + c)) + " a" + f(r) + " " + f(r) + " 0 0 1 " + f(lArc) + " " + f(-lArc) +
+      " c" + f(c) + " " + f(-d) + " " + f(b + c) + " " + f(-d) + " " + f(a + b + c) + " " + f(-d) + " Z";
+  }
+
+  function boite(el) {                 // rectangle d'un élément en px du cadre (indépendant de l'échelle d'aperçu)
+    const r0 = $("#root").getBoundingClientRect(), k = r0.width / 1080, r = el.getBoundingClientRect();
+    return { x: (r.left - r0.left) / k, y: (r.top - r0.top) / k, w: r.width / k, h: r.height / k };
+  }
+
+  function construire() {
+    const tl = gsap.timeline({ paused: true });
+    const T = D.duree;
+    const ft = (el, de, a, t) => tl.fromTo(el, de, Object.assign({ immediateRender: false }, a), t);
+
+    // ---------------- objets et leurs intervalles
+    // l'agenda sort d'abord (trois éléments au plus) : le téléphone entre quand il est parti
+    if (D.sms && D.agenda) D.sms.entree = Math.max(D.sms.entree, D.agenda.sortie + 0.33);
+    if (D.sms) D.sms.bulle = Math.max(D.sms.bulle, D.sms.entree + 0.6);      // la bulle arrive dans un téléphone posé
+    const objets = [];
+    if (D.agenda) objets.push([D.agenda.entree, D.agenda.sortie + 0.35, "agenda", 3]);
+    if (D.fiche) objets.push([D.fiche.entree, D.fiche.sortie + 0.35, "fiche", 3]);
+    if (D.sms) objets.push([D.sms.entree, D.sms.sortie + 0.4, "sms", 0]);
+    const coupes = new Set((D.coupes || []).map((c) => c[0] + ":" + c[1]));
+    const objetA = (t) => objets.find((o) => o[3] > 0 && t >= o[0] - 0.05 && t < o[1]);
+
+    // ---------------- pages de texte : pagination mesurée (polices chargées, déterministe)
+    const mes = $("#mesure");
+    function lignes(mots, cls, corps) {
+      mes.className = "page " + cls; mes.style.fontSize = corps + "px";   // même boîte que la page (marges des mots comprises)
+      mes.innerHTML = mots.map((w) => '<span class="w"><span class="i">' + w.texte + "</span></span>").join(" ");
+      const tops = new Set([].map.call(mes.children, (s) => Math.round(s.offsetTop)));
+      return tops.size;
+    }
+    const pages = [];
+    D.enonces.forEach(function (e, ie) {
+      const cls = e.qui === "agente" ? "agente" : "appelant";
+      const t0 = e.mots[0].t, t1 = e.mots[e.mots.length - 1].t1;
+      const recouvre = objets.filter((o) => o[3] > 0 && t1 > o[0] && t0 < o[1]);
+      const avecObjet = recouvre.length > 0;
+      const max = avecObjet ? Math.min.apply(null, recouvre.map((o) => o[3])) : 4;
+      const corps = D.corps[e.qui][avecObjet ? "objet" : "seul"];
+      exiger(corps >= D.corps_min, "corps " + corps + " sous le plancher " + D.corps_min);
+      let cur = [];
+      const ms = e.mots;
+      for (let k = 0; k < ms.length; k++) {
+        if (coupes.has(ie + ":" + k) && cur.length) { pages.push({ ie, qui: e.qui, cls, corps, mots: cur, objet: avecObjet, max }); cur = []; }
+        const debutPhrase = k > 0 && /[.!?…]$/.test(ms[k - 1].texte);
+        if (debutPhrase && cur.length) {     // une phrase qui ne tient pas dans la page en cours ouvre une page
+          let fin = k; while (fin < ms.length - 1 && !/[.!?…]$/.test(ms[fin].texte)) fin++;
+          if (lignes(cur.concat(ms.slice(k, fin + 1)), cls, corps) > max) { pages.push({ ie, qui: e.qui, cls, corps, mots: cur, objet: avecObjet }); cur = []; }
+        }
+        if (lignes(cur.concat([ms[k]]), cls, corps) > max) {
+          let j = -1;
+          for (let q = cur.length - 1; q >= Math.ceil(cur.length / 2); q--) if (/[,;:.!?…]$/.test(cur[q].texte)) { j = q; break; }
+          const coupe = j >= 0 ? j + 1 : cur.length;
+          pages.push({ ie, qui: e.qui, cls, corps, mots: cur.slice(0, coupe), objet: avecObjet });
+          cur = cur.slice(coupe);
+        }
+        cur.push(ms[k]);
+      }
+      if (cur.length) pages.push({ ie, qui: e.qui, cls, corps, mots: cur, objet: avecObjet });
+    });
+    mes.innerHTML = "";
+    pages.forEach((p) => { p.t_in = p.mots[0].t - 0.08; });
+    // l'iPhone occupe le cadre : les répliques dites pendant qu'il est là ne sont pas sous-titrées (rapportées)
+    window.__relais.non_montres = [];
+    if (D.sms) for (let k = pages.length - 1; k >= 0; k--) {
+      const p = pages[k];
+      if (p.t_in >= D.sms.entree - 0.05 && p.t_in < D.sms.sortie + 0.05) { window.__relais.non_montres.push(p.mots.map((w) => w.texte).join(" ")); pages.splice(k, 1); }
+    }
+    pages.forEach(function (p, k) {
+      const suivante = pages[k + 1];
+      p.t_out = suivante ? suivante.t_in - 0.02 : D.texte_sortie;
+      if (D.sms && p.t_in < D.sms.entree && p.t_out > D.sms.entree) p.t_out = D.sms.entree;
+      const dernier = p.mots[p.mots.length - 1].t1;
+      if (p.t_out - dernier > 3.2) p.t_out = dernier + 2.6;
+    });
+
+    const zone = $("#textes");
+    pages.forEach(function (p, k) {
+      const el = document.createElement("div");
+      el.className = "page " + p.cls; el.style.fontSize = p.corps + "px"; el.dataset.el = "texte"; el.setAttribute("data-layout-allow-overlap", ""); el.setAttribute("data-layout-allow-overflow", "");
+      el.innerHTML = p.mots.map((w) => '<span class="w" data-layout-allow-overflow data-layout-allow-overlap><span class="i" data-layout-allow-overlap>' + w.texte + "</span></span>").join(" ");
+      zone.appendChild(el);
+      const h = el.getBoundingClientRect().height / ($("#root").getBoundingClientRect().width / 1080);
+      p.objet = objets.some((o) => o[3] > 0 && p.t_out > o[0] && p.t_in < o[1]);
+      p.top = p.objet ? 92 : Math.round((1080 - h) / 2 - 12);
+      el.style.top = p.top + "px";
+      p.el = el; p.h = h;
+      const nl = new Set([].map.call(el.children, (s) => Math.round(s.offsetTop))).size;
+      const maxp = p.objet ? Math.min.apply(null, objets.filter((o) => o[3] > 0 && p.t_out > o[0] && p.t_in < o[1]).map((o) => o[3]).concat([3])) : 4;
+      exiger(nl <= maxp, "page " + k + " : " + nl + " lignes (au plus " + maxp + ")");
+      if (p.objet) exiger(p.top + h <= (maxp === 2 ? 292 : 340), "page " + k + " descend sur l'objet (" + Math.round(p.top + h) + " px)");
+      gsap.set(el, { autoAlpha: 0 });
+      ft(el, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.01 }, p.t_in);
+      ft(el, { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -14, duration: 0.18, ease: "power2.in" }, Math.max(p.t_in + 0.2, p.t_out - 0.18));
+      [].forEach.call(el.querySelectorAll(".i"), function (s, q) {
+        const b = boite(s);
+        p.mots[q].bx = b.x + b.w; p.mots[q].by = b.y + b.h * 0.56 - 0.02 * p.corps;
+        gsap.set(s, { yPercent: 104 });
+        ft(s, { yPercent: 104 }, { yPercent: 0, duration: 0.3, ease: P3o }, p.mots[q].t - 0.03);
+      });
+      p.bas = p.top + h;
+      // hors de sa fenêtre, la page n'existe pas (display) : ni recouvrement ni texte caché pour hf check
+      const tFin = Math.max(p.t_in + 0.2, p.t_out - 0.18) + 0.19;
+      tl.set(el, { display: "block" }, p.t_in - 0.001);
+      tl.set(el, { display: "none" }, tFin);
+      p.affiche = el;
+    });
+    pages.forEach((p) => { p.affiche.style.display = "none"; });
+
+    // ---------------- situation
+    const S = D.situation;
+    // période du geste : data-periode de la situation (0,75 s par défaut), arrondie pour que la boucle en compte un nombre entier
+    const p0 = parseFloat(($("#objet") && $("#objet").dataset.periode) || "0.75");
+    const periode = D.mode === "boucle" ? T / Math.round(T / p0) : p0;
+    const proxy = { t: 0 };
+    const tel = $("#tel"), arcs = $("#tel-arcs");
+    const tournants = [].map.call(document.querySelectorAll("#objet [data-rot]"), function (g) {
+      const r = g.dataset.rot.split(" ").map(Number), pv = (g.dataset.pivot || "300 300");
+      return { g: g, a0: r[0], a1: r[1], pv: pv };
+    });
+    function sonne(t) {                         // rafales de vibreur : 0,5 s marche, 0,3 s arrêt
+      if (t < S.sonne[0] || t >= S.sonne[1]) return 0;
+      const u = (t - S.sonne[0]) % 0.8;
+      if (u >= 0.5) return 0;
+      return Math.min(1, u / 0.06, (0.5 - u) / 0.06);
+    }
+    function dessiner(t) {
+      const u = 0.5 - 0.5 * Math.cos(2 * Math.PI * t / periode);          // geste périodique : la boucle se raccorde
+      tournants.forEach((o) => o.g.setAttribute("transform", "rotate(" + (o.a0 + (o.a1 - o.a0) * u).toFixed(3) + " " + o.pv + ")"));
+      // une situation peut porter son animateur (gabarit/situations/<nom>.js) : fonction pure du temps, périodique
+      if (window.SITUATION_ANIM) window.SITUATION_ANIM(t, periode, D.mode);
+      const s = sonne(t), n = Math.round(t * F);
+      const dx = s > 0.5 ? (n % 2 ? 4 : -4) : 0, rot = 7 + (s > 0.5 ? (n % 2 ? 0.9 : -0.9) : 0);
+      tel.style.transform = "translate(" + dx + "px,0) rotate(" + rot + "deg)";
+      arcs.style.opacity = s.toFixed(3);
+    }
+    dessiner(0);
+    tl.to(proxy, { t: T, duration: T, ease: "none", onUpdate: () => dessiner(proxy.t) }, 0);
+    const sit = $("#situation");
+    gsap.set(sit, { opacity: 1, y: 0 });
+    ft(sit, { opacity: 1, y: 0 }, { opacity: 0, y: 18, duration: 0.3, ease: "power2.in" }, S.sort);
+    if (S.revient != null) ft(sit, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: P3o }, S.revient);
+
+    // ---------------- agenda
+    const pts = [];                              // cibles du point : {t, x, y, s, fin (maintien jusqu'à)}
+    const ag = $("#agenda");
+    gsap.set(ag, { opacity: 0 });
+    const rangs = {};
+    if (D.agenda) {
+      const A = D.agenda;
+      $("#ag-date").textContent = A.date;
+      A.heures.forEach(function (h, i) {
+        const yf = 142 + i * 170;
+        const f = document.createElement("div"); f.className = "ag-filet"; f.style.top = yf + "px"; ag.appendChild(f);
+        const l = document.createElement("div"); l.className = "ag-h"; l.textContent = h; l.style.top = (yf - 30) + "px"; ag.appendChild(l);
+        rangs[h] = { yf: yf, lab: l };
+      });
+      const B = A.bloc, rb = rangs[B.heure];
+      exiger(!!rb, "heure du bloc absente de l'agenda : " + B.heure);
+      const bloc = $("#bloc");
+      bloc.style.top = (rb.yf + 8) + "px";
+      bloc.querySelector(".h").textContent = B.heure;
+      bloc.querySelector(".nom").textContent = B.nom;
+      bloc.querySelector(".l2").textContent = B.service;
+      ft(ag, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.5, ease: P3o }, A.entree);
+      ft(ag, { opacity: 1, y: 0 }, { opacity: 0, y: 30, duration: 0.32, ease: "power2.in" }, A.sortie);
+      gsap.set(bloc, { clipPath: "inset(0% 100% 0% 0% round 22px)" });
+      ft(bloc, { clipPath: "inset(0% 100% 0% 0% round 22px)" }, { clipPath: "inset(0% 0% 0% 0% round 22px)", duration: 0.5, ease: P3o }, B.ouvre);
+      const nom = bloc.querySelector(".nom"), l2 = bloc.querySelector(".l2");
+      gsap.set([nom, l2], { opacity: 0, y: 16 });
+      ft(nom, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.3, ease: P3o }, B.t_nom);
+      ft(l2, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.3, ease: P3o }, B.t_service);
+      const ba = boite(ag);
+      A.touches.forEach(function (tc, k) {
+        const r = rangs[tc.heure];
+        const suivant = A.touches[k + 1] ? A.touches[k + 1].t : Infinity;
+        pts.push({ t: tc.t, x: ba.x + 186, y: ba.y + r.yf + 1.5, maintien: Math.min(suivant, tc.heure === B.heure && tc.t < B.ouvre ? B.ouvre : tc.t + 1.1), prio: 2 });
+        ft(r.lab, { color: "#6F695F" }, { color: "#262019", duration: 0.2 }, tc.t);
+        ft(r.lab, { color: "#262019" }, { color: "#6F695F", duration: 0.3 }, Math.min(suivant, tc.t + 1.1));
+      });
+      // le point pose le bloc (coin haut gauche), reste pendant le nom, revient pour le service
+      pts.push({ t: B.ouvre, x: ba.x + 186, y: ba.y + rb.yf + 1.5, maintien: B.t_nom + 0.7, prio: 3 });
+      pts.push({ t: B.t_service, x: ba.x + 186, y: ba.y + rb.yf + 1.5, maintien: B.t_service + 0.8, prio: 3 });
+      A.repos = { x: ba.x + 186, y: ba.y + rangs[A.heures[0]].yf + 1.5 };   // la gouttière de la première heure
+    }
+
+    // ---------------- fiche d'appel
+    const fiche = $("#fiche");
+    gsap.set(fiche, { opacity: 0 });
+    if (D.fiche) {
+      const Fi = D.fiche, carte = $("#fi-carte");
+      $("#fi-titre").textContent = Fi.titre;
+      ft(fiche, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.5, ease: P3o }, Fi.entree);
+      ft(fiche, { opacity: 1, y: 0 }, { opacity: 0, y: 30, duration: 0.32, ease: "power2.in" }, Fi.sortie);
+      // la carte se déplie avec sa première ligne (jamais de carte vide à l'écran)
+      gsap.set(carte, { clipPath: "inset(0% 100% 0% 0% round 22px)" });
+      ft(carte, { clipPath: "inset(0% 100% 0% 0% round 22px)" }, { clipPath: "inset(0% 0% 0% 0% round 22px)", duration: 0.45, ease: P3o }, Fi.lignes[0].t - 0.2);
+      Fi.lignes.forEach(function (l) {
+        const d = document.createElement("div"); d.className = "li"; d.textContent = l.texte; carte.appendChild(d);
+      });
+      const bf = boite(fiche), bc = boite(carte);
+      exiger(bc.y + bc.h <= 1040, "la fiche sort du cadre (" + Math.round(bc.y + bc.h) + ")");
+      [].forEach.call(carte.children, function (d, k) {
+        const l = Fi.lignes[k];
+        gsap.set(d, { opacity: 0, y: 16 });
+        ft(d, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.3, ease: P3o }, l.t);
+        const b = boite(d);
+        pts.push({ t: l.t, x: bc.x - 30, y: b.y + b.h / 2, maintien: l.t + 0.8, prio: 3 });
+      });
+      Fi.repos = { x: bc.x - 30, y: bc.y + 40 };
+    }
+
+    // ---------------- SMS : l'iPhone réaliste (Messages iOS), en gros plan
+    const sms = $("#sms");
+    gsap.set(sms, { opacity: 0 });
+    if (D.sms) {
+      const K = 52 / 17, K0 = 2.124378;                      // px par point ; K0 : l'échelle du showcase (couches en px)
+      const Wt = 431.2 * K, Ht = 902.2 * K, RT = 75.3 * K, BC = 14.6 * K, BH = 14.1 * K, XI = 0.6;
+      const ecr = $("#ip-ecran"), bulle = $("#ip-bulle");
+      ecr.style.setProperty("--pt", K + "px");
+      $("#ip-heure").textContent = D.sms.heure;
+      $("#ip-mention span").textContent = " " + D.sms.heure;
+      const txt = D.sms.texte, sou = D.sms.souligne;
+      if (sou && txt.indexOf(sou) >= 0) {
+        const i = txt.indexOf(sou);
+        bulle.append(txt.slice(0, i)); const u = document.createElement("u"); u.textContent = sou; bulle.append(u, txt.slice(i + sou.length));
+      } else bulle.textContent = txt;
+      // lignes réelles de la bulle (coupe au plus long dans 255 pt, comme Messages) : largeur de la plus longue
+      const rg = document.createRange(); rg.selectNodeContents(bulle);
+      const rects = [].filter.call(rg.getClientRects(), (r) => r.width > 1);
+      const kk = $("#root").getBoundingClientRect().width / 1080;
+      const parLigne = {};
+      rects.forEach(function (r) { const y = Math.round(r.top / kk); parLigne[y] = parLigne[y] || [Infinity, -Infinity];
+        parLigne[y][0] = Math.min(parLigne[y][0], r.left / kk); parLigne[y][1] = Math.max(parLigne[y][1], r.right / kk); });
+      const L = Object.values(parLigne), nL = L.length;
+      const plus = Math.max.apply(null, L.map((l) => l[1] - l[0])) / K;          // pt
+      const bw = (plus + 13 + 15) * K, bh = (nL * 22 + 19) * K, bx = 16 * K, by = 194 * K, rb = 20 * K;
+      // placement : bord gauche du corps à 40 px, bas de la bulle à 1 012 px du cadre
+      const xC = 40, yE = Math.round(1012 - by - bh), xE = xC + BC, yC = yE - BH;
+      exiger(nL >= 3 && nL <= 8, "SMS de " + nL + " lignes");
+      exiger(yE + 118.25 * K >= 20, "le nom de l'expéditeur sort du cadre (SMS trop long)");
+      Object.assign(ecr.style, { left: xE + "px", top: yE + "px", width: 402 * K + "px", height: 874 * K + "px" });
+      ecr.style.clipPath = "path('" + arrondi(0, 0, 402 * K, 874 * K, 61.2 * K, XI) + "')";
+      const corps = $("#ip-corps");
+      Object.assign(corps.style, { left: xC + "px", top: yC + "px", width: Wt + "px", height: Ht + "px" });
+      corps.setAttribute("viewBox", "0 0 " + Wt.toFixed(2) + " " + Ht.toFixed(2));
+      Object.assign($("#ip-ombre").style, { left: xC + "px", top: yC + "px", width: Wt + "px", height: Ht + "px" });
+      const NS = "http://www.w3.org/2000/svg", f = K / K0;
+      [[0, "#8E8A83"], [1.5, "#C9C5BE"], [3, "url(#ip-titane)"], [5.5, "#BDB9B1"], [8.5, "#6A6862"], [10, "#242424"], [12.5, "#050505"]].forEach(function (c) {
+        const e = document.createElementNS(NS, "path"), o = c[0] * f;
+        e.setAttribute("d", arrondi(o, o, Wt - 2 * o, Ht - 2 * o, RT - o, XI)); e.setAttribute("fill", c[1]); $("#ip-couches").appendChild(e);
+      });
+      [[-6, 0.205, 0.2497], [-6, 0.285, 0.359], [-6, 0.380, 0.453], [Wt / f - 4, 0.311, 0.429]].forEach(function (b) {
+        const r = document.createElementNS(NS, "rect");
+        r.setAttribute("x", b[0] * f); r.setAttribute("y", (b[1] * Ht).toFixed(1)); r.setAttribute("width", 10 * f);
+        r.setAttribute("height", ((b[2] - b[1]) * Ht).toFixed(1)); r.setAttribute("rx", 3 * f); r.setAttribute("fill", "url(#ip-bouton)");
+        $("#ip-boutons").appendChild(r);
+      });
+      // la bulle reçue (iOS 26) : coins de 20 pt, queue du coin bas gauche (relevé du showcase, lib/iphone.js)
+      const f3 = (v) => +v.toFixed(3);
+      const q = (u, v) => f3(bx + u * K) + " " + f3(by + bh + v * K);
+      const A = (x, y) => " A" + f3(rb) + " " + f3(rb) + " 0 0 1 " + f3(x) + " " + f3(y);
+      const d = "M" + f3(bx + rb) + " " + f3(by) + " H" + f3(bx + bw - rb) + A(bx + bw, by + rb) +
+        " V" + f3(by + bh - rb) + A(bx + bw - rb, by + bh) + " H" + f3(bx + 24 * K) +
+        " C" + q(20.5, 0) + " " + q(15, 3.6) + " " + q(9.0, 7.1) + " C" + q(8.4, 6.2) + " " + q(10.5, 4.8) + " " + q(10.5, 3.3) +
+        " L" + q(10.5, -(20 - Math.sqrt(400 - Math.pow(9.5, 2)))) + A(bx, by + bh - rb) + " V" + f3(by + rb) + A(bx + rb, by) + " Z";
+      $("#ip-forme-bulle").setAttribute("d", d);
+      const forme = $("#ip-forme"); forme.setAttribute("width", 402 * K); forme.setAttribute("height", 874 * K);
+      const gb = { x: xE + bx, y: yE + by, w: bw, h: bh };
+      exiger(gb.x + gb.w <= 1080 - 70 && gb.y + gb.h + 7.1 * K <= 1040, "la bulle du SMS sort des marges");
+      // entrée (le téléphone monte, posé), bulle (elle éclot de sa queue), sortie
+      ft(sms, { opacity: 0, y: 320 }, { opacity: 1, y: 0, duration: 0.6, ease: P3o }, D.sms.entree);
+      const mention = $("#ip-mention");
+      gsap.set([bulle, mention], { opacity: 0 });
+      gsap.set(forme, { scale: 0.9, opacity: 0, transformOrigin: (bx + 10 * K) + "px " + (by + bh) + "px" });
+      ft(mention, { opacity: 0 }, { opacity: 1, duration: 0.3 }, D.sms.bulle - 0.1);
+      ft(forme, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.32, ease: P3o }, D.sms.bulle);
+      ft(bulle, { opacity: 0 }, { opacity: 1, duration: 0.25 }, D.sms.bulle + 0.12);
+      ft(sms, { opacity: 1, y: 0 }, { opacity: 0, y: 260, duration: 0.4, ease: "power2.in" }, D.sms.sortie);
+      // le point se pose à côté de « Vokio », l'expéditeur : c'est lui qui vient d'envoyer
+      const nb = { x: xE + 201 * K, y: yE + 133.4 * K }, nw = $("#ip-nom").getBoundingClientRect().width / kk;
+      D.sms.repos = { x: nb.x + nw / 2 + 44, y: nb.y };
+      pts.push({ t: D.sms.entree + 0.62, x: D.sms.repos.x, y: D.sms.repos.y, maintien: D.sms.sortie, prio: 3, renait: true, eteint: D.sms.entree });
+    }
+
+    // ---------------- fin : le wordmark
+    const marque = $("#marque");
+    gsap.set(marque, { opacity: 0 });
+    if (D.fin) {
+      const t0 = D.fin.entree + (D.sms && D.sms.sortie + 0.4 > D.fin.entree ? 0.4 : 0.15);   // après la sortie du téléphone
+      ft(marque, { opacity: 0 }, { opacity: 1, duration: 0.01 }, t0);
+      ft("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.6, ease: P3o }, t0);
+      ft(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.4, ease: P3o, stagger: 0.1 }, t0 + 0.3);
+    }
+
+    // ---------------- LE point : décroche, suit la voix de l'agente, travaille sur l'objet, se pose sur le ı
+    const point = $("#point");
+    const ecran = boite($("#tel-ecran"));   // l'écran du téléphone de la situation (qui sonne)
+    const depart = { x: ecran.x + ecran.w / 2, y: ecran.y + ecran.h / 2 };
+    pages.forEach(function (p) {
+      if (p.qui === "agente") p.mots.forEach(function (w, q) {
+        // après le mot ; en bout de ligne (bord droit à moins de 70 px du cadre), au début de la ligne suivante
+        let x = w.bx + 30, y = w.by;
+        if (x + R > 1080 - 70) { x = M + R; y = w.by + p.corps * 1.18; }
+        pts.push({ t: Math.max(p.t_in, w.t - (q ? 0.1 : 0)), x: x, y: y, prio: 1, page: p });
+      });
+      else {
+        const o = objetA(p.t_in) || objets.find((b) => b[3] > 0 && p.t_out > b[0] && p.t_in < b[1]);   // l'objet qui arrive pendant la page
+        const rep = o && o[2] === "agenda" ? D.agenda.repos : o && o[2] === "sms" ? D.sms.repos : o && o[2] === "fiche" ? D.fiche.repos : { x: M + R, y: p.bas + 50 };
+        pts.push({ t: p.t_in, x: rep.x, y: rep.y, prio: 1 });
+      }
+    });
+    // une page de l'agente qui sort sans relève : le point rejoint l'objet à l'écran (il ne reste pas seul dans le vide)
+    pages.forEach(function (p, k) {
+      if (p.qui !== "agente") return;
+      const n = pages[k + 1], o = objetA(p.t_out);
+      if (o && (!n || n.t_in - p.t_out > 0.4)) {
+        const rep = o[2] === "agenda" ? D.agenda.repos : o[2] === "sms" ? D.sms.repos : D.fiche.repos;
+        if (rep) pts.push({ t: p.t_out, x: rep.x, y: rep.y, prio: 1 });
+      }
+    });
+    pts.sort((a, b) => a.t - b.t || b.prio - a.prio);
+    // les maintiens (prio ≥ 2) masquent les cibles de la voix ; à la fin d'un maintien, le point rejoint le dernier mot dit
+    const cibles = [];
+    let maintien = null;
+    pts.forEach(function (c) {
+      if (maintien && c.t < maintien.maintien && c.prio < 2) return;
+      if (maintien && c.t >= maintien.maintien && c.prio < 2) maintien = null;
+      if (c.prio >= 2) maintien = c;
+      cibles.push(c);
+    });
+    // retours après maintien : vers la dernière cible de voix passée si sa page est encore là
+    const finales = [];
+    cibles.forEach(function (c, k) {
+      finales.push(c);
+      if (c.prio >= 2) {
+        const n = cibles[k + 1];
+        if (!n || n.t > c.maintien + 0.05) {
+          const voix = pts.filter((q) => q.prio === 1 && q.t <= c.maintien && q.page && q.page.t_out > c.maintien + 0.3).pop();
+          if (voix) finales.push({ t: c.maintien, x: voix.x, y: voix.y, prio: 1 });
+        }
+      }
+    });
+    gsap.set(point, { x: depart.x, y: depart.y, xPercent: -50, yPercent: -50, scale: 0 });
+    ft(point, { scale: 0 }, { scale: 1, duration: 0.3, ease: P3o }, S.decroche);
+    if (finales.length && finales[0].t > S.sort + 0.35) finales.unshift(Object.assign({}, finales[0], { t: S.sort + 0.3, prio: 1 }));
+    let px = depart.x, py = depart.y, tp = S.decroche + 0.3, dernierePage = null;
+    finales.forEach(function (c, k) {
+      const t = Math.max(c.t, tp);
+      if (Math.abs(c.x - px) < 0.5 && Math.abs(c.y - py) < 0.5) return;
+      const n = finales[k + 1];
+      const d = Math.max(0.12, Math.min(0.34, (n ? n.t - t : 0.34) * 0.85));
+      const ligne = c.renait || (c.prio === 1 && c.page && c.page === dernierePage && Math.abs(c.y - py) > 20);
+      if (ligne) {                // changement de ligne dans la même page : le point s'éteint et renaît, il ne traverse pas les mots
+        const te = c.eteint != null ? Math.max(c.eteint, tp) : t;      // eteint : il s'éteint plus tôt (l'objet arrive dessous)
+        ft(point, { scale: 1 }, { scale: 0, duration: 0.1, ease: "power2.in" }, te);
+        tl.set(point, { x: c.x, y: c.y }, Math.max(te + 0.1, t - 0.001));
+        ft(point, { scale: 0 }, { scale: 1, duration: 0.16, ease: P3o }, Math.max(te + 0.1, t));
+        px = c.x; py = c.y; tp = Math.max(te + 0.1, t) + 0.16; dernierePage = c.page;
+        return;
+      }
+      ft(point, { x: px, y: py }, { x: c.x, y: c.y, duration: d, ease: P3o }, t);
+      px = c.x; py = c.y; tp = t + d; dernierePage = c.page || null;
+    });
+    if (D.fin) {
+      const cible = boite($("#mot-pt"));          // mesuré avant le masque (clip-path ne change pas la boîte)
+      const tv = D.fin.point - 0.55;
+      ft(point, { x: px, y: py, scale: 1 }, { x: cible.x + cible.w / 2, y: cible.y + cible.h / 2, scale: cible.w / 40, duration: 0.55, ease: P3io }, tv);
+      exiger(tv > tp - 0.01, "le point part vers le ı avant d'avoir fini son geste");
+    } else {
+      const ts = D.agenda ? D.agenda.sortie : D.fiche ? D.fiche.sortie : T - 1;
+      ft(point, { scale: 1 }, { scale: 0, duration: 0.3, ease: "power2.in" }, Math.max(ts, tp));
+    }
+
+    // ---------------- contrôles internes (lus par controles_relais.py)
+    exiger(Math.abs(tl.duration() - T) < 0.05 || tl.duration() <= T + 0.05, "le timeline dépasse la durée");
+    pages.forEach((p, k) => exiger(isFinite(p.t_out) && p.t_out > p.t_in, "page " + k + " : fenêtre invalide"));
+    window.__relais.pages = pages.map((p) => ({ qui: p.qui, t_in: +p.t_in.toFixed(3), t_out: +p.t_out.toFixed(3), top: p.top, h: Math.round(p.h),
+      texte: p.mots.map((w) => w.texte).join(" ") }));
+    window.__relais.cibles = finales.map((c) => ({ t: c.t, x: Math.round(c.x), y: Math.round(c.y) }));
+    window.__timelines["relais"] = tl;
+    window.__relais.pret = true;
+  }
+  Promise.all(["52px Geist", "52px 'Geist Mono'", "52px 'Instrument Serif'", "italic 52px 'Instrument Serif'", "52px Inter"]
+    .map((f) => document.fonts.load(f))).then(() => document.fonts.ready).then(construire);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+[
+ {
+  "largeur": 320,
+  "reduit": false,
+  "videos_chargees_avant_scroll": [],
+  "erreurs_js": [],
+  "mesure": {
+   "page_scroll": 320,
+   "fenetre": 320,
+   "cartes": {
+    "relais-restaurant": {
+     "carte": [
+      264,
+      592
+     ],
+     "video": [
+      262,
+      262
+     ]
+    },
+    "relais-coiffure": {
+     "carte": [
+      264,
+      616
+     ],
+     "video": [
+      262,
+      262
+     ]
+    },
+    "relais-auto-ecole": {
+     "carte": [
+      264,
+      592
+     ],
+     "video": [
+      262,
+      262
+     ]
+    }
+   },
+   "debords_carte": []
+  },
+  "jouent_a_l_ecran": [
+   "relais-coiffure-boucle.mp4"
+  ],
+  "a_l_ecran": {
+   "paused": false,
+   "muted": true,
+   "loop": true,
+   "src": "relais-coiffure-boucle.mp4",
+   "t": 0.75,
+   "poster": "relais-coiffure-boucle-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "hors_ecran": {
+   "paused": true,
+   "muted": true,
+   "loop": true,
+   "src": "relais-coiffure-boucle.mp4",
+   "t": 2.33,
+   "poster": "relais-coiffure-boucle-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "apres_toucher": {
+   "paused": false,
+   "muted": false,
+   "loop": false,
+   "src": "relais-coiffure-complete.mp4",
+   "t": 2.25,
+   "poster": "relais-coiffure-complete-poster.webp",
+   "lecteur": "lecteur joue"
+  },
+  "jouent_apres_toucher": [
+   "relais-coiffure-complete.mp4"
+  ],
+  "apres_pause": {
+   "paused": true,
+   "muted": false,
+   "loop": false,
+   "src": "relais-coiffure-complete.mp4",
+   "t": 4.39,
+   "poster": "relais-coiffure-complete-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "deux_appels": {
+   "cible": {
+    "paused": true,
+    "muted": false,
+    "loop": false,
+    "src": "relais-coiffure-complete.mp4",
+    "t": 6.57,
+    "poster": "relais-coiffure-complete-poster.webp",
+    "lecteur": "lecteur"
+   },
+   "jouent": [
+    "relais-restaurant-complete.mp4"
+   ]
+  },
+  "echecs": []
+ },
+ {
+  "largeur": 390,
+  "reduit": false,
+  "videos_chargees_avant_scroll": [],
+  "erreurs_js": [],
+  "mesure": {
+   "page_scroll": 390,
+   "fenetre": 390,
+   "cartes": {
+    "relais-restaurant": {
+     "carte": [
+      334,
+      639
+     ],
+     "video": [
+      332,
+      332
+     ]
+    },
+    "relais-coiffure": {
+     "carte": [
+      334,
+      639
+     ],
+     "video": [
+      332,
+      332
+     ]
+    },
+    "relais-auto-ecole": {
+     "carte": [
+      334,
+      639
+     ],
+     "video": [
+      332,
+      332
+     ]
+    }
+   },
+   "debords_carte": []
+  },
+  "jouent_a_l_ecran": [
+   "relais-coiffure-boucle.mp4"
+  ],
+  "a_l_ecran": {
+   "paused": false,
+   "muted": true,
+   "loop": true,
+   "src": "relais-coiffure-boucle.mp4",
+   "t": 0.81,
+   "poster": "relais-coiffure-boucle-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "hors_ecran": {
+   "paused": true,
+   "muted": true,
+   "loop": true,
+   "src": "relais-coiffure-boucle.mp4",
+   "t": 2.41,
+   "poster": "relais-coiffure-boucle-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "apres_toucher": {
+   "paused": false,
+   "muted": false,
+   "loop": false,
+   "src": "relais-coiffure-complete.mp4",
+   "t": 2.32,
+   "poster": "relais-coiffure-complete-poster.webp",
+   "lecteur": "lecteur joue"
+  },
+  "jouent_apres_toucher": [
+   "relais-coiffure-complete.mp4"
+  ],
+  "apres_pause": {
+   "paused": true,
+   "muted": false,
+   "loop": false,
+   "src": "relais-coiffure-complete.mp4",
+   "t": 2.48,
+   "poster": "relais-coiffure-complete-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "deux_appels": {
+   "cible": {
+    "paused": true,
+    "muted": false,
+    "loop": false,
+    "src": "relais-coiffure-complete.mp4",
+    "t": 4.64,
+    "poster": "relais-coiffure-complete-poster.webp",
+    "lecteur": "lecteur"
+   },
+   "jouent": [
+    "relais-restaurant-complete.mp4"
+   ]
+  },
+  "echecs": []
+ },
+ {
+  "largeur": 768,
+  "reduit": false,
+  "videos_chargees_avant_scroll": [],
+  "erreurs_js": [],
+  "mesure": {
+   "page_scroll": 768,
+   "fenetre": 768,
+   "cartes": {
+    "relais-restaurant": {
+     "carte": [
+      712,
+      330
+     ],
+     "video": [
+      328,
+      300
+     ]
+    },
+    "relais-coiffure": {
+     "carte": [
+      712,
+      330
+     ],
+     "video": [
+      328,
+      300
+     ]
+    },
+    "relais-auto-ecole": {
+     "carte": [
+      712,
+      330
+     ],
+     "video": [
+      328,
+      300
+     ]
+    }
+   },
+   "debords_carte": []
+  },
+  "jouent_a_l_ecran": [
+   "relais-coiffure-boucle.mp4"
+  ],
+  "a_l_ecran": {
+   "paused": false,
+   "muted": true,
+   "loop": true,
+   "src": "relais-coiffure-boucle.mp4",
+   "t": 0.92,
+   "poster": "relais-coiffure-boucle-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "hors_ecran": {
+   "paused": true,
+   "muted": true,
+   "loop": true,
+   "src": "relais-coiffure-boucle.mp4",
+   "t": 2.52,
+   "poster": "relais-coiffure-boucle-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "apres_toucher": {
+   "paused": false,
+   "muted": false,
+   "loop": false,
+   "src": "relais-coiffure-complete.mp4",
+   "t": 2.31,
+   "poster": "relais-coiffure-complete-poster.webp",
+   "lecteur": "lecteur joue"
+  },
+  "jouent_apres_toucher": [
+   "relais-coiffure-complete.mp4"
+  ],
+  "apres_pause": {
+   "paused": true,
+   "muted": false,
+   "loop": false,
+   "src": "relais-coiffure-complete.mp4",
+   "t": 2.5,
+   "poster": "relais-coiffure-complete-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "deux_appels": {
+   "cible": {
+    "paused": true,
+    "muted": false,
+    "loop": false,
+    "src": "relais-coiffure-complete.mp4",
+    "t": 4.01,
+    "poster": "relais-coiffure-complete-poster.webp",
+    "lecteur": "lecteur"
+   },
+   "jouent": [
+    "relais-restaurant-complete.mp4"
+   ]
+  },
+  "echecs": []
+ },
+ {
+  "largeur": 1440,
+  "reduit": false,
+  "videos_chargees_avant_scroll": [],
+  "erreurs_js": [],
+  "mesure": {
+   "page_scroll": 1440,
+   "fenetre": 1440,
+   "cartes": {
+    "relais-restaurant": {
+     "carte": [
+      343,
+      648
+     ],
+     "video": [
+      341,
+      341
+     ]
+    },
+    "relais-coiffure": {
+     "carte": [
+      343,
+      648
+     ],
+     "video": [
+      341,
+      341
+     ]
+    },
+    "relais-auto-ecole": {
+     "carte": [
+      343,
+      648
+     ],
+     "video": [
+      341,
+      341
+     ]
+    }
+   },
+   "debords_carte": []
+  },
+  "jouent_a_l_ecran": [
+   "relais-auto-ecole-boucle.mp4"
+  ],
+  "a_l_ecran": {
+   "paused": true,
+   "muted": true,
+   "loop": true,
+   "src": "",
+   "t": 0,
+   "poster": "relais-coiffure-boucle-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "hors_ecran": {
+   "paused": true,
+   "muted": true,
+   "loop": true,
+   "src": "",
+   "t": 0,
+   "poster": "relais-coiffure-boucle-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "apres_toucher": {
+   "paused": false,
+   "muted": false,
+   "loop": false,
+   "src": "relais-coiffure-complete.mp4",
+   "t": 2.27,
+   "poster": "relais-coiffure-complete-poster.webp",
+   "lecteur": "lecteur joue"
+  },
+  "jouent_apres_toucher": [
+   "relais-coiffure-complete.mp4"
+  ],
+  "apres_pause": {
+   "paused": true,
+   "muted": false,
+   "loop": false,
+   "src": "relais-coiffure-complete.mp4",
+   "t": 2.43,
+   "poster": "relais-coiffure-complete-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "deux_appels": {
+   "cible": {
+    "paused": true,
+    "muted": false,
+    "loop": false,
+    "src": "relais-coiffure-complete.mp4",
+    "t": 3.84,
+    "poster": "relais-coiffure-complete-poster.webp",
+    "lecteur": "lecteur"
+   },
+   "jouent": [
+    "relais-restaurant-complete.mp4"
+   ]
+  },
+  "echecs": []
+ },
+ {
+  "largeur": 390,
+  "reduit": true,
+  "videos_chargees_avant_scroll": [],
+  "erreurs_js": [],
+  "mesure": {
+   "page_scroll": 390,
+   "fenetre": 390,
+   "cartes": {
+    "relais-restaurant": {
+     "carte": [
+      334,
+      639
+     ],
+     "video": [
+      332,
+      332
+     ]
+    },
+    "relais-coiffure": {
+     "carte": [
+      334,
+      639
+     ],
+     "video": [
+      332,
+      332
+     ]
+    },
+    "relais-auto-ecole": {
+     "carte": [
+      334,
+      639
+     ],
+     "video": [
+      332,
+      332
+     ]
+    }
+   },
+   "debords_carte": []
+  },
+  "jouent_a_l_ecran": [],
+  "a_l_ecran": {
+   "paused": true,
+   "muted": true,
+   "loop": true,
+   "src": "",
+   "t": 0,
+   "poster": "relais-coiffure-boucle-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "hors_ecran": {
+   "paused": true,
+   "muted": true,
+   "loop": true,
+   "src": "",
+   "t": 0,
+   "poster": "relais-coiffure-boucle-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "apres_toucher": {
+   "paused": false,
+   "muted": false,
+   "loop": false,
+   "src": "relais-coiffure-complete.mp4",
+   "t": 2.32,
+   "poster": "relais-coiffure-complete-poster.webp",
+   "lecteur": "lecteur joue"
+  },
+  "jouent_apres_toucher": [
+   "relais-coiffure-complete.mp4"
+  ],
+  "apres_pause": {
+   "paused": true,
+   "muted": false,
+   "loop": false,
+   "src": "relais-coiffure-complete.mp4",
+   "t": 2.36,
+   "poster": "relais-coiffure-complete-poster.webp",
+   "lecteur": "lecteur"
+  },
+  "deux_appels": {
+   "cible": {
+    "paused": true,
+    "muted": false,
+    "loop": false,
+    "src": "relais-coiffure-complete.mp4",
+    "t": 4.5,
+    "poster": "relais-coiffure-complete-poster.webp",
+    "lecteur": "lecteur"
+   },
+   "jouent": [
+    "relais-restaurant-complete.mp4"
+   ]
+  },
+  "echecs": []
+ }
+]

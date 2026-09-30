@@ -1,0 +1,166 @@
+{
+  "_note": "Lot B, carte métier « Une gerbe pour un décès » (vokio.fr/fleuriste/), ton sobre. Même schéma que auto-ecole/recette.json : l'audio ne contient PAS « Vous recevrez un SMS de confirmation » (la page le montre, en double) : le résultat est une FICHE de commande, pas un SMS. Énoncés = texte DIT (relevé Scribe du 29/09). À FAIRE VALIDER à l'oreille vers 13,5 s : « désolée pour votre perte » (page) ou « père » (Scribe) ; la fiche (titre « Commande de 16 h 41 », heure de l'appel sur la page, et lignes), la situation « lb-gerbe ».",
+  "id": "fleuriste",
+  "carte": "Une gerbe pour un décès",
+  "audio": "/opt/vokio-site-repo/assets/appel-fleuriste.mp3",
+  "nom": "relais-fleuriste",
+  "situation": "lb-gerbe",
+  "fiche": {
+    "titre": "Commande de 16 h 41",
+    "lignes": [
+      "Gerbe de deuil, à retirer",
+      "Mardi 22 septembre, 9:00",
+      "Florian"
+    ]
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Émilie, l’assistante vocale de l’Atelier Pivoine ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, bonjour, je vous appelle parce que… il me faudrait une gerbe pour un décès pour, euh, pour mardi, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je suis désolée pour votre perte. Ce serait pour un retrait en boutique ou pour une livraison ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Un retrait plutôt, ouais."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord. Et pour quel jour et à quelle heure souhaitez-vous la récupérer ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, ben, ce serait pour mardi, euh, soit neuf heures, soit neuf heures trente."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vérifie les disponibilités. Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, le mardi vingt-deux septembre à neuf heures est disponible. Souhaitez-vous que je vous le réserve pour cet horaire ? Souhaitez-vous que je vous réserve la gerbe pour le mardi vingt-deux septembre à neuf heures ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui."
+    },
+    {
+      "qui": "agente",
+      "texte": "C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian, une gerbe ou un coussin de deuil, le mardi vingt-deux septembre à neuf heures."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci beaucoup. Au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous, au revoir."
+    }
+  ],
+  "complete": {
+    "avance": 2.0,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.8
+      ],
+      "decroche": 1.8,
+      "sort": 1.95
+    },
+    "fiche": {
+      "entree": "E3:Un",
+      "sortie": "E14:fin+0.45",
+      "lignes": [
+        "E3:retrait",
+        "E7:disponible.",
+        "E10:Florian."
+      ]
+    },
+    "fin": {
+      "entree": "E14:fin+0.45"
+    },
+    "coupes": [
+      "E7:Souhaitez-vous#2",
+      "E7:pour#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 68,
+      "appelant": 86
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "il me faudrait une gerbe pour un décès",
+        "source": 1,
+        "temps": [
+          2.5,
+          2.66,
+          2.8,
+          3.05,
+          3.2,
+          3.45,
+          3.6,
+          3.75
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "le mardi vingt-deux septembre à neuf heures est disponible.",
+        "source": 7,
+        "temps": [
+          4.6,
+          4.78,
+          4.95,
+          5.25,
+          5.45,
+          5.6,
+          5.8,
+          6.0,
+          6.15
+        ]
+      }
+    ],
+    "fiche": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "lignes": [
+        4.2,
+        6.55,
+        7.0
+      ]
+    },
+    "texte_sortie": 7.7
+  },
+  "agente": "Émilie",
+  "poster_boucle": 1.25
+}

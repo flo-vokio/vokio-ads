@@ -1,0 +1,137 @@
+{
+ "echecs": [],
+ "detail": {
+  "boucle": {
+   "trois_elements": {
+    "ok": true,
+    "detail": "max 3 élément(s) ; dépassements : []"
+   },
+   "corps_min": {
+    "ok": true,
+    "detail": "52 px du cadre = 12.7 px à 264 px affichés, 18.1 px à 375"
+   },
+   "marges": {
+    "ok": true,
+    "detail": "[]"
+   },
+   "tiret_cadratin": {
+    "ok": true,
+    "detail": "aucun « — »"
+   },
+   "numero": {
+    "ok": true,
+    "detail": "aucun numéro"
+   },
+   "nom_de_famille": {
+    "ok": true,
+    "detail": "jamais « Alauzet »"
+   },
+   "erreurs_internes": {
+    "ok": true,
+    "detail": "aucune"
+   },
+   "sous_suite": {
+    "ok": true,
+    "detail": "2 pages, hors du dit : []"
+   },
+   "codec": {
+    "ok": true,
+    "detail": "h264 yuv420p 1080×1080 30/1"
+   },
+   "faststart": {
+    "ok": true,
+    "detail": "moov en tête"
+   },
+   "poids": {
+    "ok": true,
+    "detail": "439 Ko (cible ≤ 700 Ko)"
+   },
+   "duree": {
+    "ok": true,
+    "detail": "10.000 s (voulu 10.000)"
+   },
+   "poster_sans_texte": {
+    "ok": true,
+    "detail": "poster à 1.25 s : éléments ['situation', 'point'], texte hors illustration []"
+   },
+   "sans_audio": {
+    "ok": true,
+    "detail": "aucune piste audio"
+   },
+   "raccord": {
+    "ok": true,
+    "detail": "écart dernière → première image 0.07 ; voisines : médiane 0.13, p95 4.82, max 6.80"
+   }
+  },
+  "complete": {
+   "trois_elements": {
+    "ok": true,
+    "detail": "max 3 élément(s) ; dépassements : []"
+   },
+   "corps_min": {
+    "ok": true,
+    "detail": "52 px du cadre = 12.7 px à 264 px affichés, 18.1 px à 375"
+   },
+   "marges": {
+    "ok": true,
+    "detail": "[]"
+   },
+   "tiret_cadratin": {
+    "ok": true,
+    "detail": "aucun « — »"
+   },
+   "numero": {
+    "ok": true,
+    "detail": "aucun numéro"
+   },
+   "nom_de_famille": {
+    "ok": true,
+    "detail": "jamais « Alauzet »"
+   },
+   "erreurs_internes": {
+    "ok": true,
+    "detail": "aucune"
+   },
+   "sous_suite": {
+    "ok": true,
+    "detail": "18 pages, hors du dit : []"
+   },
+   "non_sous_titre": {
+    "ok": true,
+    "detail": "dit pendant l'iPhone, non sous-titré : ['Merci. Bonne journée, au revoir.']"
+   },
+   "derogations": {
+    "ok": true,
+    "detail": "['horodatage iOS 11 pt (validé sur le showcase)']"
+   },
+   "codec": {
+    "ok": true,
+    "detail": "h264 yuv420p 1080×1080 30/1"
+   },
+   "faststart": {
+    "ok": true,
+    "detail": "moov en tête"
+   },
+   "poids": {
+    "ok": true,
+    "detail": "1750 Ko (cible ≤ 3000 Ko)"
+   },
+   "duree": {
+    "ok": true,
+    "detail": "54.367 s (voulu 54.367)"
+   },
+   "audio": {
+    "ok": true,
+    "detail": "aac 48000 Hz 2 can. 62 kb/s"
+   },
+   "sonie": {
+    "ok": true,
+    "detail": "-16.2 LUFS, crête -3.5 dBTP"
+   },
+   "synchro": {
+    "ok": true,
+    "detail": "image 54.367 s, son 54.366 s"
+   }
+  }
+ }
+}

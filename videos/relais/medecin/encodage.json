@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-medecin-boucle.mp4",
+   "crf": 18,
+   "octets": 480404
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-medecin-boucle-poster.webp",
+   "octets": 10986,
+   "t": 1.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-medecin-boucle-poster.jpg",
+   "octets": 23713,
+   "t": 1.0
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-medecin-complete.mp4",
+   "crf": 18,
+   "octets": 2120172
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-medecin-complete-poster.webp",
+   "octets": 9746,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-medecin-complete-poster.jpg",
+   "octets": 20871,
+   "t": 0.0
+  }
+ }
+}

@@ -1,0 +1,8 @@
+<!-- Situation « lb-vertebres » (ostéopathe, lot B) : une colonne de six vertèbres, de profil, décalées (le dos bloqué :
+     traits de douleur qui tremblent) ; la colonne se tasse d'un rien, puis les vertèbres se remettent en place en cascade,
+     du haut vers le bas, chacune avec un léger dépassement ; les traits s'éteignent, la colonne s'étire et respire. Animé
+     par lb-vertebres.js (fonction pure du temps, sur 10 s : la colonne se rebloque pendant que la situation est cachée). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="10" style="overflow:visible;left:-12px;top:120px;width:780px;height:780px">
+  <g id="vb-colonne"></g>
+  <g id="vb-douleur" fill="none" stroke="#262019" stroke-width="6" stroke-linecap="round"></g>
+</svg>

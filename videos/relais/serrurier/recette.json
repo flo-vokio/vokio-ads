@@ -1,0 +1,141 @@
+{
+  "_note": "Serrurier « Porte claquée ». Énoncés = le dit (Scribe), noms et rue tels que sur la page.",
+  "id": "serrurier",
+  "carte": "Porte claquée",
+  "audio": "/opt/vokio-site-repo/assets/appel-serrurier.mp3",
+  "nom": "relais-serrurier",
+  "agente": "Manon",
+  "jour_heure": "Jeudi, 18 h 56.",
+  "phrase": "Manon prend l’urgence, relève l’adresse et donne la consigne de sécurité en attendant le serrurier.",
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Manon, l’assistante vocale de la Serrurerie Blanc ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh oui, bonsoir, je vous appelle parce que je suis, euh, sur le palier. En fait, j’ai claqué ma porte et les clés, elles sont à l’intérieur."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord, c’est une urgence. Je transmets immédiatement. Pour que le serrurier puisse intervenir, pourriez-vous me donner votre adresse exacte, s’il vous plaît ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Alors, c’est le 12 rue des Lices, euh, à Toulon."
+    },
+    {
+      "qui": "agente",
+      "texte": "Le douze rue des Lices à Toulon. Est-ce bien cela ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui, exactement."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. Surtout, restez en sécurité sur place et n’essayez pas de forcer la porte. C’est transmis. Vous recevrez un SMS et vous serez rappelé très rapidement."
+    },
+    {
+      "qui": "appelant",
+      "texte": "OK, merci beaucoup. J’attends votre appel."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vous en prie. Bonne soirée."
+    }
+  ],
+  "situation": "porte",
+  "poster_boucle": 0.66,
+  "fiche": {
+    "titre": "Urgence · porte claquée",
+    "lignes": [
+      "Adresse relevée",
+      "Consigne de sécurité donnée",
+      "Demande transmise"
+    ]
+  },
+  "sms": {
+    "texte": "Bonjour, votre demande est transmise : porte claquée. Le serrurier de la Serrurerie Blanc vous rappelle très vite. Restez en sécurité. Démo Vokio.",
+    "souligne": null,
+    "heure": "18:57"
+  },
+  "complete": {
+    "avance": 1.6,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.1
+      ],
+      "decroche": 1.1,
+      "sort": 1.25
+    },
+    "fiche": {
+      "entree": "E2:urgence.",
+      "sortie": "E6:SMS",
+      "lignes": [
+        "E5:exactement.",
+        "E6:forcer",
+        "E6:transmis."
+      ]
+    },
+    "sms": {
+      "entree": "E6:fin+0.1",
+      "bulle": "E6:fin+0.75",
+      "sortie": "E8:debut-0.55"
+    },
+    "fin": {
+      "entree": "E8:fin+0.45"
+    }
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "j’ai claqué ma porte",
+        "source": 1,
+        "temps": [
+          2.5,
+          2.65,
+          2.85,
+          3.05
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "D’accord, c’est une urgence.",
+        "source": 2,
+        "temps": [
+          4.1,
+          4.4,
+          4.55,
+          4.7
+        ]
+      }
+    ],
+    "fiche": {
+      "entree": 2.3,
+      "sortie": 8.55,
+      "lignes": [
+        4.95,
+        5.8,
+        6.6
+      ]
+    },
+    "texte_sortie": 7.6
+  }
+}

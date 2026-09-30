@@ -1,0 +1,852 @@
+{
+ "rapport": [
+  "apparié à l'oreille : « onze » ≈ Scribe « 11 »",
+  "apparié à l'oreille : « heures » ≈ Scribe « h »",
+  "apparié à l'oreille : « trente » ≈ Scribe « 30 »",
+  "non relevés par Scribe : ['vingt', 'et', 'un'] (Scribe : ['21']) : temps interpolés",
+  "apparié à l'oreille : « onze » ≈ Scribe « 11 »",
+  "apparié à l'oreille : « heures » ≈ Scribe « h »",
+  "apparié à l'oreille : « trente » ≈ Scribe « 30 »",
+  "non relevés par Scribe : ['vingt', 'et', 'un'] (Scribe : ['21']) : temps interpolés",
+  "apparié à l'oreille : « onze » ≈ Scribe « 11 »",
+  "apparié à l'oreille : « heures » ≈ Scribe « h »",
+  "apparié à l'oreille : « trente » ≈ Scribe « 30 »"
+ ],
+ "enonces": [
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Bonjour,",
+     "t": 0.2,
+     "t1": 0.58
+    },
+    {
+     "texte": "je",
+     "t": 0.82,
+     "t1": 0.92
+    },
+    {
+     "texte": "suis",
+     "t": 0.98,
+     "t1": 1.1
+    },
+    {
+     "texte": "Justine,",
+     "t": 1.14,
+     "t1": 1.52
+    },
+    {
+     "texte": "l’assistante",
+     "t": 1.7,
+     "t1": 2.12
+    },
+    {
+     "texte": "vocale",
+     "t": 2.14,
+     "t1": 2.42
+    },
+    {
+     "texte": "du",
+     "t": 2.46,
+     "t1": 2.54
+    },
+    {
+     "texte": "Cabinet",
+     "t": 2.56,
+     "t1": 2.92
+    },
+    {
+     "texte": "Kiné",
+     "t": 2.94,
+     "t1": 3.16
+    },
+    {
+     "texte": "Vauban !",
+     "t": 3.2,
+     "t1": 3.46
+    },
+    {
+     "texte": "Comment",
+     "t": 3.74,
+     "t1": 3.94
+    },
+    {
+     "texte": "puis-je",
+     "t": 3.96,
+     "t1": 4.14
+    },
+    {
+     "texte": "vous",
+     "t": 4.16,
+     "t1": 4.28
+    },
+    {
+     "texte": "aider ?",
+     "t": 4.3,
+     "t1": 4.54
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Bonjour,",
+     "t": 5.9,
+     "t1": 6.12
+    },
+    {
+     "texte": "je",
+     "t": 6.16,
+     "t1": 6.18
+    },
+    {
+     "texte": "vous",
+     "t": 6.18,
+     "t1": 6.3
+    },
+    {
+     "texte": "appelle",
+     "t": 6.34,
+     "t1": 6.56
+    },
+    {
+     "texte": "parce",
+     "t": 6.62,
+     "t1": 6.8
+    },
+    {
+     "texte": "que",
+     "t": 6.84,
+     "t1": 6.98
+    },
+    {
+     "texte": "je",
+     "t": 7.32,
+     "t1": 7.36
+    },
+    {
+     "texte": "voudrais",
+     "t": 7.38,
+     "t1": 7.66
+    },
+    {
+     "texte": "prendre",
+     "t": 7.76,
+     "t1": 8.119
+    },
+    {
+     "texte": "des",
+     "t": 8.3,
+     "t1": 8.44
+    },
+    {
+     "texte": "séances",
+     "t": 8.52,
+     "t1": 8.78
+    },
+    {
+     "texte": "de",
+     "t": 8.82,
+     "t1": 8.92
+    },
+    {
+     "texte": "kiné.",
+     "t": 8.96,
+     "t1": 9.28
+    },
+    {
+     "texte": "J’ai",
+     "t": 9.92,
+     "t1": 10.04
+    },
+    {
+     "texte": "une",
+     "t": 10.06,
+     "t1": 10.14
+    },
+    {
+     "texte": "ordonnance,",
+     "t": 10.2,
+     "t1": 10.64
+    },
+    {
+     "texte": "là,",
+     "t": 10.8,
+     "t1": 10.88
+    },
+    {
+     "texte": "pour",
+     "t": 10.98,
+     "t1": 11.14
+    },
+    {
+     "texte": "dix",
+     "t": 11.42,
+     "t1": 11.56
+    },
+    {
+     "texte": "séances.",
+     "t": 11.62,
+     "t1": 12.16
+    },
+    {
+     "texte": "Euh,",
+     "t": 12.24,
+     "t1": 12.46
+    },
+    {
+     "texte": "en",
+     "t": 12.82,
+     "t1": 12.86
+    },
+    {
+     "texte": "fait,",
+     "t": 12.92,
+     "t1": 13.02
+    },
+    {
+     "texte": "je",
+     "t": 13.08,
+     "t1": 13.1
+    },
+    {
+     "texte": "suis",
+     "t": 13.12,
+     "t1": 13.3
+    },
+    {
+     "texte": "tombé",
+     "t": 13.5,
+     "t1": 13.84
+    },
+    {
+     "texte": "et",
+     "t": 14.4,
+     "t1": 14.48
+    },
+    {
+     "texte": "c’est",
+     "t": 14.52,
+     "t1": 14.64
+    },
+    {
+     "texte": "pour",
+     "t": 14.68,
+     "t1": 14.8
+    },
+    {
+     "texte": "mon",
+     "t": 14.84,
+     "t1": 14.94
+    },
+    {
+     "texte": "épaule",
+     "t": 15.0,
+     "t1": 15.22
+    },
+    {
+     "texte": "droite.",
+     "t": 15.26,
+     "t1": 15.68
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "D’accord.",
+     "t": 16.96,
+     "t1": 17.36
+    },
+    {
+     "texte": "Pour",
+     "t": 17.64,
+     "t1": 17.74
+    },
+    {
+     "texte": "commencer,",
+     "t": 17.78,
+     "t1": 18.1
+    },
+    {
+     "texte": "il",
+     "t": 18.14,
+     "t1": 18.18
+    },
+    {
+     "texte": "faut",
+     "t": 18.24,
+     "t1": 18.34
+    },
+    {
+     "texte": "prévoir",
+     "t": 18.38,
+     "t1": 18.66
+    },
+    {
+     "texte": "un",
+     "t": 18.7,
+     "t1": 18.78
+    },
+    {
+     "texte": "bilan",
+     "t": 18.8,
+     "t1": 19.02
+    },
+    {
+     "texte": "initial.",
+     "t": 19.06,
+     "t1": 19.54
+    },
+    {
+     "texte": "C’est",
+     "t": 19.78,
+     "t1": 19.86
+    },
+    {
+     "texte": "pour",
+     "t": 19.9,
+     "t1": 20.0
+    },
+    {
+     "texte": "quel",
+     "t": 20.04,
+     "t1": 20.16
+    },
+    {
+     "texte": "prénom,",
+     "t": 20.22,
+     "t1": 20.48
+    },
+    {
+     "texte": "s’il",
+     "t": 20.56,
+     "t1": 20.7
+    },
+    {
+     "texte": "vous",
+     "t": 20.72,
+     "t1": 20.82
+    },
+    {
+     "texte": "plaît ?",
+     "t": 20.86,
+     "t1": 21.0
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Euh,",
+     "t": 22.08,
+     "t1": 22.26
+    },
+    {
+     "texte": "c’est",
+     "t": 22.36,
+     "t1": 22.46
+    },
+    {
+     "texte": "pour",
+     "t": 22.48,
+     "t1": 22.6
+    },
+    {
+     "texte": "Florian.",
+     "t": 22.64,
+     "t1": 23.02
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Très",
+     "t": 24.18,
+     "t1": 24.32
+    },
+    {
+     "texte": "bien,",
+     "t": 24.36,
+     "t1": 24.48
+    },
+    {
+     "texte": "Florian.",
+     "t": 24.56,
+     "t1": 24.86
+    },
+    {
+     "texte": "Quel",
+     "t": 25.08,
+     "t1": 25.22
+    },
+    {
+     "texte": "jour",
+     "t": 25.28,
+     "t1": 25.44
+    },
+    {
+     "texte": "souhaiteriez-vous",
+     "t": 25.48,
+     "t1": 26.02
+    },
+    {
+     "texte": "faire",
+     "t": 26.08,
+     "t1": 26.2
+    },
+    {
+     "texte": "ce",
+     "t": 26.24,
+     "t1": 26.32
+    },
+    {
+     "texte": "bilan",
+     "t": 26.34,
+     "t1": 26.54
+    },
+    {
+     "texte": "initial ?",
+     "t": 26.56,
+     "t1": 26.98
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Euh,",
+     "t": 28.36,
+     "t1": 28.56
+    },
+    {
+     "texte": "bah,",
+     "t": 28.66,
+     "t1": 28.78
+    },
+    {
+     "texte": "dès",
+     "t": 28.88,
+     "t1": 28.98
+    },
+    {
+     "texte": "lundi,",
+     "t": 29.02,
+     "t1": 29.38
+    },
+    {
+     "texte": "si",
+     "t": 29.54,
+     "t1": 29.54
+    },
+    {
+     "texte": "c’est",
+     "t": 29.58,
+     "t1": 29.7
+    },
+    {
+     "texte": "possible,",
+     "t": 29.72,
+     "t1": 30.18
+    },
+    {
+     "texte": "à",
+     "t": 30.52,
+     "t1": 30.56
+    },
+    {
+     "texte": "onze",
+     "t": 30.6,
+     "t1": 30.74
+    },
+    {
+     "texte": "heures",
+     "t": 30.76,
+     "t1": 30.86
+    },
+    {
+     "texte": "trente,",
+     "t": 31.0,
+     "t1": 31.12
+    },
+    {
+     "texte": "par",
+     "t": 31.2,
+     "t1": 31.3
+    },
+    {
+     "texte": "exemple.",
+     "t": 31.34,
+     "t1": 31.66
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Je",
+     "t": 33.1,
+     "t1": 33.16
+    },
+    {
+     "texte": "vérifie",
+     "t": 33.2,
+     "t1": 33.5
+    },
+    {
+     "texte": "les",
+     "t": 33.54,
+     "t1": 33.62
+    },
+    {
+     "texte": "disponibilités.",
+     "t": 33.66,
+     "t1": 34.38
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Le",
+     "t": 34.98,
+     "t1": 35.04
+    },
+    {
+     "texte": "lundi",
+     "t": 35.08,
+     "t1": 35.32
+    },
+    {
+     "texte": "vingt",
+     "t": 35.34,
+     "t1": 35.57
+    },
+    {
+     "texte": "et",
+     "t": 35.59,
+     "t1": 35.72
+    },
+    {
+     "texte": "un",
+     "t": 35.74,
+     "t1": 35.72
+    },
+    {
+     "texte": "septembre",
+     "t": 35.72,
+     "t1": 36.16
+    },
+    {
+     "texte": "à",
+     "t": 36.18,
+     "t1": 36.24
+    },
+    {
+     "texte": "onze",
+     "t": 36.26,
+     "t1": 36.38
+    },
+    {
+     "texte": "heures",
+     "t": 36.42,
+     "t1": 36.54
+    },
+    {
+     "texte": "trente,",
+     "t": 36.68,
+     "t1": 36.82
+    },
+    {
+     "texte": "c’est",
+     "t": 36.9,
+     "t1": 37.02
+    },
+    {
+     "texte": "possible",
+     "t": 37.04,
+     "t1": 37.46
+    },
+    {
+     "texte": "pour",
+     "t": 37.54,
+     "t1": 37.64
+    },
+    {
+     "texte": "un",
+     "t": 37.68,
+     "t1": 37.74
+    },
+    {
+     "texte": "bilan",
+     "t": 37.76,
+     "t1": 37.94
+    },
+    {
+     "texte": "initial.",
+     "t": 37.98,
+     "t1": 38.46
+    },
+    {
+     "texte": "Est-ce",
+     "t": 38.7,
+     "t1": 38.82
+    },
+    {
+     "texte": "que",
+     "t": 38.86,
+     "t1": 38.92
+    },
+    {
+     "texte": "cela",
+     "t": 38.98,
+     "t1": 39.18
+    },
+    {
+     "texte": "vous",
+     "t": 39.22,
+     "t1": 39.32
+    },
+    {
+     "texte": "convient ?",
+     "t": 39.34,
+     "t1": 39.66
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Oui,",
+     "t": 40.84,
+     "t1": 40.94
+    },
+    {
+     "texte": "c’est",
+     "t": 41.02,
+     "t1": 41.1
+    },
+    {
+     "texte": "parfait.",
+     "t": 41.14,
+     "t1": 41.5
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Parfait,",
+     "t": 42.66,
+     "t1": 43.04
+    },
+    {
+     "texte": "je",
+     "t": 43.24,
+     "t1": 43.32
+    },
+    {
+     "texte": "vous",
+     "t": 43.36,
+     "t1": 43.44
+    },
+    {
+     "texte": "note",
+     "t": 43.48,
+     "t1": 43.62
+    },
+    {
+     "texte": "ça",
+     "t": 43.66,
+     "t1": 43.74
+    },
+    {
+     "texte": "pour",
+     "t": 43.82,
+     "t1": 43.94
+    },
+    {
+     "texte": "Florian,",
+     "t": 43.98,
+     "t1": 44.34
+    },
+    {
+     "texte": "pour",
+     "t": 44.54,
+     "t1": 44.62
+    },
+    {
+     "texte": "un",
+     "t": 44.66,
+     "t1": 44.72
+    },
+    {
+     "texte": "bilan",
+     "t": 44.76,
+     "t1": 44.98
+    },
+    {
+     "texte": "initial,",
+     "t": 45.02,
+     "t1": 45.52
+    },
+    {
+     "texte": "le",
+     "t": 45.64,
+     "t1": 45.7
+    },
+    {
+     "texte": "lundi",
+     "t": 45.74,
+     "t1": 46.0
+    },
+    {
+     "texte": "vingt",
+     "t": 46.02,
+     "t1": 46.25
+    },
+    {
+     "texte": "et",
+     "t": 46.27,
+     "t1": 46.42
+    },
+    {
+     "texte": "un",
+     "t": 46.44,
+     "t1": 46.42
+    },
+    {
+     "texte": "septembre",
+     "t": 46.42,
+     "t1": 46.82
+    },
+    {
+     "texte": "à",
+     "t": 46.86,
+     "t1": 46.9
+    },
+    {
+     "texte": "onze",
+     "t": 46.94,
+     "t1": 47.06
+    },
+    {
+     "texte": "heures",
+     "t": 47.08,
+     "t1": 47.18
+    },
+    {
+     "texte": "trente.",
+     "t": 47.36,
+     "t1": 47.54
+    },
+    {
+     "texte": "Vous",
+     "t": 47.8,
+     "t1": 47.86
+    },
+    {
+     "texte": "recevrez",
+     "t": 47.9,
+     "t1": 48.3
+    },
+    {
+     "texte": "un",
+     "t": 48.32,
+     "t1": 48.38
+    },
+    {
+     "texte": "SMS",
+     "t": 48.48,
+     "t1": 48.76
+    },
+    {
+     "texte": "de",
+     "t": 48.8,
+     "t1": 48.86
+    },
+    {
+     "texte": "confirmation.",
+     "t": 48.9,
+     "t1": 49.5
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "Super,",
+     "t": 50.78,
+     "t1": 51.12
+    },
+    {
+     "texte": "merci",
+     "t": 51.2,
+     "t1": 51.42
+    },
+    {
+     "texte": "beaucoup.",
+     "t": 51.46,
+     "t1": 51.76
+    },
+    {
+     "texte": "Bonne",
+     "t": 51.82,
+     "t1": 51.94
+    },
+    {
+     "texte": "journée.",
+     "t": 51.98,
+     "t1": 52.24
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "Merci",
+     "t": 53.8,
+     "t1": 54.04
+    },
+    {
+     "texte": "à",
+     "t": 54.1,
+     "t1": 54.16
+    },
+    {
+     "texte": "vous",
+     "t": 54.18,
+     "t1": 54.3
+    },
+    {
+     "texte": "aussi,",
+     "t": 54.34,
+     "t1": 54.62
+    },
+    {
+     "texte": "bonne",
+     "t": 54.68,
+     "t1": 54.82
+    },
+    {
+     "texte": "journée.",
+     "t": 54.86,
+     "t1": 55.16
+    }
+   ]
+  }
+ ]
+}

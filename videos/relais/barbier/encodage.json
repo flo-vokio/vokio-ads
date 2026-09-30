@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-barbier-boucle.mp4",
+   "crf": 18,
+   "octets": 561579
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-barbier-boucle-poster.webp",
+   "octets": 15106,
+   "t": 1.3
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-barbier-boucle-poster.jpg",
+   "octets": 28293,
+   "t": 1.3
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-barbier-complete.mp4",
+   "crf": 18,
+   "octets": 1602208
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-barbier-complete-poster.webp",
+   "octets": 12152,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-barbier-complete-poster.jpg",
+   "octets": 23677,
+   "t": 0.0
+  }
+ }
+}

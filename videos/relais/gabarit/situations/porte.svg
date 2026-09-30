@@ -1,0 +1,30 @@
+<!-- Situation « porte » (serrurier, porte claquée) : vue de l'intérieur, la porte est entrouverte, le trousseau pend à la
+     serrure ; un courant d'air passe, la porte prend un peu d'élan puis claque (accélère jusqu'au choc), le chambranle
+     tremble, un peu de poussière, et le trousseau se balance longuement (pendule amorti). Animé par porte.js (lib/fx.js). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="1.25" style="overflow:visible;left:-40px;top:170px;width:720px;height:720px">
+  <g id="po-cadre">
+    <path d="M150 572 V 40 H 452 V 572" fill="none" stroke="#262019" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M110 572 H 492" stroke="#262019" stroke-width="6" stroke-linecap="round" opacity=".3"/>
+    <path id="po-battant" fill="#EDE6D7" stroke="#262019" stroke-width="8" stroke-linejoin="round"/>
+    <path id="po-panneau1" fill="none" stroke="#262019" stroke-width="5" stroke-linejoin="round" opacity=".55"/>
+    <path id="po-panneau2" fill="none" stroke="#262019" stroke-width="5" stroke-linejoin="round" opacity=".55"/>
+    <g id="po-serrure">
+      <rect x="-14" y="-40" width="28" height="92" rx="12" fill="#F4F1E8" stroke="#262019" stroke-width="6"/>
+      <path d="M0 -26 H -46" stroke="#262019" stroke-width="12" stroke-linecap="round"/>
+      <circle cx="0" cy="24" r="6" fill="#262019"/>
+      <g id="po-cle">
+        <path d="M0 24 V 40" stroke="#262019" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="0" cy="50" r="11" fill="#F4F1E8" stroke="#262019" stroke-width="6"/>
+        <g id="po-trousseau">
+          <circle cx="0" cy="78" r="18" fill="none" stroke="#262019" stroke-width="5"/>
+          <g transform="rotate(-18 0 96)"><circle cx="0" cy="106" r="11" fill="#F4F1E8" stroke="#262019" stroke-width="6"/>
+            <path d="M0 117 V 160 M0 146 H 9 M0 156 H 7" stroke="#262019" stroke-width="7" stroke-linecap="round"/></g>
+          <g transform="rotate(22 0 96)"><rect x="-10" y="96" width="20" height="18" rx="6" fill="#F4F1E8" stroke="#262019" stroke-width="6"/>
+            <path d="M0 114 V 150 M0 140 H -8" stroke="#262019" stroke-width="7" stroke-linecap="round"/></g>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g id="po-air" fill="none" stroke="#262019" stroke-width="5" stroke-linecap="round"></g>
+  <g id="po-fx"></g>
+</svg>

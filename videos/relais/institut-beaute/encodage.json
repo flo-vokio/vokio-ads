@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-institut-beaute-boucle.mp4",
+   "crf": 18,
+   "octets": 475548
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-institut-beaute-boucle-poster.webp",
+   "octets": 9760,
+   "t": 0.9
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-institut-beaute-boucle-poster.jpg",
+   "octets": 18990,
+   "t": 0.9
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-institut-beaute-complete.mp4",
+   "crf": 18,
+   "octets": 2332684
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-institut-beaute-complete-poster.webp",
+   "octets": 9618,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-institut-beaute-complete-poster.jpg",
+   "octets": 19057,
+   "t": 0.0
+  }
+ }
+}

@@ -1,0 +1,19 @@
+<!-- Situation « lb-stetho » (médecin, lot B) : le stéthoscope pendu à sa patère se balance (le tuyau est souple : chaque
+     point suit le balancement avec un retard qui croît le long du tuyau, le pavillon lourd traîne) ; à côté, le thermomètre :
+     la colonne monte, de plus en plus lentement, et s'arrête haut. Animé par lb-stetho.js (fonction pure du temps, sur 10 s :
+     la colonne redescend pendant que la situation est cachée). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="10" style="overflow:visible;left:-150px;top:140px;width:810px;height:810px">
+  <path d="M150 64 L 290 64 M212 64 L 212 64" fill="none" stroke="#262019" stroke-width="16" stroke-linecap="round"/>
+  <path d="M212 64 L 212 118" fill="none" stroke="#262019" stroke-width="9" stroke-linecap="round"/>
+  <g id="st-steto" fill="none" stroke-linecap="round" stroke-linejoin="round"></g>
+  <g id="st-thermo" transform="translate(16 0)">
+    <rect x="404" y="92" width="52" height="336" rx="26" fill="#F4F1E8" stroke="#262019" stroke-width="8"/>
+    <circle cx="430" cy="452" r="40" fill="#EFA424" stroke="#262019" stroke-width="8"/>
+    <rect id="st-colonne" x="419" y="200" width="22" height="240" rx="11" fill="#EFA424"/>
+    <circle cx="430" cy="452" r="32" fill="#EFA424"/>
+    <path d="M418 440 Q 430 432 442 440" fill="none" stroke="#F8D69B" stroke-width="5" stroke-linecap="round"/>
+    <g fill="none" stroke="#262019" stroke-width="5" stroke-linecap="round">
+      <path d="M456 140 L 476 140 M456 180 L 470 180 M456 220 L 476 220 M456 260 L 470 260 M456 300 L 476 300 M456 340 L 470 340 M456 380 L 476 380"/>
+    </g>
+  </g>
+</svg>

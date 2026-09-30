@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-veterinaire-boucle.mp4",
+   "crf": 18,
+   "octets": 377061
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-veterinaire-boucle-poster.webp",
+   "octets": 7058,
+   "t": 0.9
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-veterinaire-boucle-poster.jpg",
+   "octets": 14929,
+   "t": 0.9
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-veterinaire-complete.mp4",
+   "crf": 18,
+   "octets": 2440574
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-veterinaire-complete-poster.webp",
+   "octets": 6962,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-veterinaire-complete-poster.jpg",
+   "octets": 15011,
+   "t": 0.0
+  }
+ }
+}

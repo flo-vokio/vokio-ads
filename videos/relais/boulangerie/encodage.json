@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-boulangerie-boucle.mp4",
+   "crf": 18,
+   "octets": 374343
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-boulangerie-boucle-poster.webp",
+   "octets": 8248,
+   "t": 0.6
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-boulangerie-boucle-poster.jpg",
+   "octets": 18693,
+   "t": 0.6
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-boulangerie-complete.mp4",
+   "crf": 18,
+   "octets": 1651419
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-boulangerie-complete-poster.webp",
+   "octets": 6902,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-boulangerie-complete-poster.jpg",
+   "octets": 15980,
+   "t": 0.0
+  }
+ }
+}

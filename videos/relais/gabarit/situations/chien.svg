@@ -1,0 +1,25 @@
+<!-- Situation « chien » (toiletteur, toilettage complet) : un Staffie dans le bac, mousse au bord. Il se tasse (élan), puis
+     S'ÉBROUE : le corps tourne de gauche à droite, la tête et l'oreille suivent en retard (follow-through), l'eau part en
+     gerbes d'arcs de chaque côté et la mousse saute ; il se calme. Animé par chien.js (lib/fx.js). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="1.25" style="overflow:visible;left:-40px;top:150px;width:720px;height:720px">
+  <g id="cn-fx-arriere"></g>
+  <g id="cn-chien">
+    <path id="cn-queue" d="M466 346 C 492 330 500 304 492 284" fill="none" stroke="#262019" stroke-width="15" stroke-linecap="round"/>
+    <path d="M248 400 C 244 330 286 292 352 290 C 420 288 462 312 470 350 C 474 372 474 392 472 400 Z" fill="#262019"/>
+    <g id="cn-tete">
+      <path d="M244 300 C 268 330 262 364 250 400 L 302 400 C 302 350 296 318 280 294 Z" fill="#262019"/>
+      <path d="M166 264 C 164 222 198 198 238 200 C 276 202 298 228 296 264 C 294 298 270 318 238 318 L 186 314 C 166 312 154 296 160 280 Z" fill="#262019"/>
+      <path d="M172 266 C 150 266 136 280 138 296 C 140 310 156 316 178 312 Z" fill="#262019"/>
+      <circle cx="143" cy="286" r="9" fill="#262019" stroke="#F4F1E8" stroke-width="3"/>
+      <path d="M150 304 C 162 310 176 310 188 304" fill="none" stroke="#F4F1E8" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+      <circle cx="206" cy="246" r="6.5" fill="#F4F1E8"/>
+      <g id="cn-oreille"><path d="M248 210 C 258 186 284 180 292 194 C 294 212 280 226 262 228 Z" fill="#262019" stroke="#F4F1E8" stroke-width="3.5"/></g>
+    </g>
+  </g>
+  <g id="cn-bac">
+    <path d="M150 398 H 522 L 502 520 Q 498 542 476 542 H 196 Q 174 542 170 520 Z" fill="#F4F1E8" stroke="#262019" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M140 398 H 532" stroke="#262019" stroke-width="12" stroke-linecap="round"/>
+    <g id="cn-mousse" fill="#F4F1E8" stroke="#262019" stroke-width="4"></g>
+  </g>
+  <g id="cn-fx"></g>
+</svg>

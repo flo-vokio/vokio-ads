@@ -1,0 +1,139 @@
+{
+ "mode": "boucle",
+ "fps": 30,
+ "taille": 1080,
+ "marge": 84,
+ "corps": {
+  "agente": {
+   "seul": 74,
+   "objet": 74
+  },
+  "appelant": {
+   "seul": 88,
+   "objet": 88
+  }
+ },
+ "corps_min": 52,
+ "situation": {
+  "sonne": [
+   0.15,
+   1.7
+  ],
+  "decroche": 1.7,
+  "sort": 1.95,
+  "revient": 8.75,
+  "objet": "lb-rasoir"
+ },
+ "enonces": [
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "quinze",
+     "t": 2.55,
+     "t1": 2.75
+    },
+    {
+     "texte": "heures,",
+     "t": 2.8,
+     "t1": 3.0
+    },
+    {
+     "texte": "seize",
+     "t": 3.1,
+     "t1": 3.3000000000000003
+    },
+    {
+     "texte": "heures",
+     "t": 3.35,
+     "t1": 3.5500000000000003
+    },
+    {
+     "texte": "ou",
+     "t": 3.7,
+     "t1": 3.9000000000000004
+    },
+    {
+     "texte": "dix-sept",
+     "t": 3.88,
+     "t1": 4.08
+    },
+    {
+     "texte": "heures.",
+     "t": 4.2,
+     "t1": 4.4
+    }
+   ]
+  },
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "seize",
+     "t": 4.95,
+     "t1": 5.15
+    },
+    {
+     "texte": "heures,",
+     "t": 5.2,
+     "t1": 5.4
+    },
+    {
+     "texte": "s’il",
+     "t": 5.5,
+     "t1": 5.7
+    },
+    {
+     "texte": "vous",
+     "t": 5.65,
+     "t1": 5.8500000000000005
+    },
+    {
+     "texte": "plaît.",
+     "t": 5.82,
+     "t1": 6.0200000000000005
+    }
+   ]
+  }
+ ],
+ "coupes": [],
+ "agenda": {
+  "date": "Samedi 19 septembre",
+  "heures": [
+   "15:00",
+   "16:00",
+   "17:00"
+  ],
+  "entree": 2.2,
+  "sortie": 8.55,
+  "touches": [
+   {
+    "t": 2.55,
+    "heure": "15:00"
+   },
+   {
+    "t": 3.1,
+    "heure": "16:00"
+   },
+   {
+    "t": 3.88,
+    "heure": "17:00"
+   },
+   {
+    "t": 4.95,
+    "heure": "16:00"
+   }
+  ],
+  "bloc": {
+   "heure": "16:00",
+   "nom": "Florian",
+   "service": "Coupe et barbe",
+   "ouvre": 6.07,
+   "t_nom": 6.47,
+   "t_service": 6.92
+  }
+ },
+ "duree": 10.0,
+ "texte_sortie": 7.3,
+ "avance": 0.0
+}

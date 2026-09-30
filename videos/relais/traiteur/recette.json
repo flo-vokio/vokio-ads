@@ -1,0 +1,205 @@
+{
+  "_note": "Lot B, carte métier « Un mariage, quatre-vingt-dix couverts » (vokio.fr/traiteur/). Même schéma que coiffure/recette.json. Énoncés = texte DIT (relevé Scribe du 29/09 ; les « -- » d'hésitation de Scribe sont écrits « … »). Le rendez-vous dégustation est proposé le vendredi 18 septembre à 16:30, le jour même de l'appel (le client demandait le samedi d'après) : c'est l'appel réel, à signaler. À FAIRE VALIDER : le texte du SMS, la situation « lb-cloche ».",
+  "id": "traiteur",
+  "carte": "Un mariage, quatre-vingt-dix couverts",
+  "audio": "/opt/vokio-site-repo/assets/appel-traiteur.mp3",
+  "nom": "relais-traiteur",
+  "situation": "lb-cloche",
+  "agenda": {
+    "date": "Vendredi 18 septembre",
+    "heures": [
+      "15:30",
+      "16:30",
+      "17:30"
+    ],
+    "bloc": {
+      "heure": "16:30",
+      "nom": "Florian",
+      "service": "Dégustation"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : Dégustation, le vendredi 18 septembre à 16:30, Maison Riva Traiteur. Démo Vokio, RDV fictif.",
+    "souligne": "vendredi 18 septembre à 16:30",
+    "heure": "16:08"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Chloé, l’assistante vocale de Maison Riva Traiteur ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui, bonjour, je vous appelle parce que je voudrais, euh… en fait, je cherche un traiteur pour notre mariage en marche pro… en mars prochain, pardon. Et ce serait pour environ quatre-vingt-dix personnes sur Cassis."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vois. Pour que l’on puisse organiser au mieux votre événement, j’aurais besoin de quelques précisions. Quelle est la date exacte de votre mariage ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, alors attendez, je vais juste vérifier ça. Euh, ça serait pour le samedi six mars."
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, le samedi six mars deux mille vingt-sept."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, c’est ça."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait. Pour un mariage, nous proposons un rendez-vous dégustation au laboratoire. Cela vous permettra de choisir le menu idéal. Souhaitez-vous que je vous propose un créneau pour cette dégustation ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui, je veux bien, s’il vous plaît, oui."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. Pour la dégustation, quel jour vous conviendrait le mieux ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, alors, samedi… donc pas celui-là, celui d’après, si c’est possible."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je peux vous proposer le vendredi dix-huit septembre à seize heures trente. Cela vous convient-il ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui, c’est parfait."
+    },
+    {
+      "qui": "agente",
+      "texte": "C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "C’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian, un rendez-vous dégustation, le vendredi dix-huit septembre à seize heures trente. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci beaucoup, au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vous en prie. Au revoir et à bientôt."
+    }
+  ],
+  "complete": {
+    "avance": 1.5,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.3
+      ],
+      "decroche": 1.3,
+      "sort": 1.45
+    },
+    "agenda": {
+      "entree": "E9:Très",
+      "sortie": "E16:SMS",
+      "touches": [
+        [
+          "E11:seize",
+          "16:30"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E12:parfait.",
+        "nom": "E14:Florian.",
+        "service": "E16:dégustation,"
+      }
+    },
+    "sms": {
+      "entree": "E16:fin+0.1",
+      "bulle": "E16:fin+0.75",
+      "sortie": "E18:debut-0.55"
+    },
+    "fin": {
+      "entree": "E18:fin+0.45"
+    },
+    "coupes": [
+      "E1:Et",
+      "E16:Vous#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 66,
+      "appelant": 78
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "pour environ quatre-vingt-dix personnes sur Cassis.",
+        "source": 1,
+        "temps": [
+          2.5,
+          2.65,
+          2.9,
+          3.3,
+          3.55,
+          3.7
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "nous proposons un rendez-vous dégustation au laboratoire.",
+        "source": 7,
+        "temps": [
+          4.7,
+          4.85,
+          5.1,
+          5.22,
+          5.5,
+          5.85,
+          5.97
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E1:laboratoire.+0.25",
+          "16:30"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:laboratoire.+0.45",
+        "nom": "E1:laboratoire.+0.85",
+        "service": "E1:laboratoire.+1.3"
+      }
+    },
+    "texte_sortie": 7.5
+  },
+  "agente": "Chloé",
+  "poster_boucle": 0.85
+}

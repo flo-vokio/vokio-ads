@@ -1,0 +1,178 @@
+{
+  "_note": "Lot B, carte métier « Pose de semi-permanent » (vokio.fr/onglerie/). Même schéma que coiffure/recette.json. Énoncés = texte DIT (relevé Scribe du 29/09) : la cliente dit « semi-permanent » (la page écrit « semi-permanence »). À FAIRE VALIDER : le texte du SMS, la situation « lb-vernis ».",
+  "id": "onglerie",
+  "carte": "Pose de semi-permanent",
+  "audio": "/opt/vokio-site-repo/assets/appel-onglerie.mp3",
+  "nom": "relais-onglerie",
+  "situation": "lb-vernis",
+  "agenda": {
+    "date": "Samedi 19 septembre",
+    "heures": [
+      "10:00",
+      "11:00",
+      "12:00"
+    ],
+    "bloc": {
+      "heure": "11:00",
+      "nom": "Blandine",
+      "service": "Semi-permanent"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Blandine, votre rendez-vous est confirmé : Pose de semi-permanent, le samedi 19 septembre à 11:00, L’Atelier des Ongles. Démo Vokio, RDV fictif.",
+    "souligne": "samedi 19 septembre à 11:00",
+    "heure": "15:17"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Lola, l’assistante vocale de L’Atelier des Ongles ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui, bonjour, j’aimerais prendre un rendez-vous pour, euh, une pose de semi-permanent, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord. C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Blandine."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, Blandine. Pour une pose de semi-permanent, quel jour souhaiteriez-vous votre rendez-vous ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh… est-ce que vous avez une disponibilité pour demain à onze heures ?"
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Oui, c’est possible. Je peux vous noter ça pour demain, samedi dix-neuf septembre, à onze heures ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Oui, c’est parfait."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Blandine, pour une pose de semi-permanent, le samedi dix-neuf septembre à onze heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Merci, bonne journée."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous aussi, au revoir."
+    }
+  ],
+  "complete": {
+    "avance": 1.8,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.6
+      ],
+      "decroche": 1.6,
+      "sort": 1.75
+    },
+    "agenda": {
+      "entree": "E5:est-ce",
+      "sortie": "E9:SMS",
+      "touches": [
+        [
+          "E5:onze",
+          "11:00"
+        ],
+        [
+          "E7:onze",
+          "11:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E7:possible.",
+        "nom": "E9:Blandine,",
+        "service": "E9:pose"
+      }
+    },
+    "sms": {
+      "entree": "E9:fin+0.1",
+      "bulle": "E9:fin+0.75",
+      "sortie": "E11:debut-0.55"
+    },
+    "fin": {
+      "entree": "E11:fin+0.45"
+    },
+    "coupes": [
+      "E1:une",
+      "E9:Vous#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 80
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "une pose de semi-permanent, s’il vous plaît.",
+        "source": 1,
+        "temps": [
+          2.5,
+          2.64,
+          2.82,
+          2.95,
+          3.55,
+          3.7,
+          3.85
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "Oui, c’est possible.",
+        "source": 7,
+        "temps": [
+          4.8,
+          5.2,
+          5.42
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E1:possible.+0.3",
+          "11:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:possible.+0.5",
+        "nom": "E1:possible.+0.9",
+        "service": "E1:possible.+1.35"
+      }
+    },
+    "texte_sortie": 7.3
+  },
+  "agente": "Lola",
+  "poster_boucle": 1.0
+}

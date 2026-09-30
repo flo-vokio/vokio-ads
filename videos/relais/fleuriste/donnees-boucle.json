@@ -1,0 +1,147 @@
+{
+ "mode": "boucle",
+ "fps": 30,
+ "taille": 1080,
+ "marge": 84,
+ "corps": {
+  "agente": {
+   "seul": 68,
+   "objet": 68
+  },
+  "appelant": {
+   "seul": 86,
+   "objet": 86
+  }
+ },
+ "corps_min": 52,
+ "situation": {
+  "sonne": [
+   0.15,
+   1.7
+  ],
+  "decroche": 1.7,
+  "sort": 1.95,
+  "revient": 8.75,
+  "objet": "lb-gerbe"
+ },
+ "enonces": [
+  {
+   "qui": "appelant",
+   "mots": [
+    {
+     "texte": "il",
+     "t": 2.5,
+     "t1": 2.7
+    },
+    {
+     "texte": "me",
+     "t": 2.66,
+     "t1": 2.8600000000000003
+    },
+    {
+     "texte": "faudrait",
+     "t": 2.8,
+     "t1": 3.0
+    },
+    {
+     "texte": "une",
+     "t": 3.05,
+     "t1": 3.25
+    },
+    {
+     "texte": "gerbe",
+     "t": 3.2,
+     "t1": 3.4000000000000004
+    },
+    {
+     "texte": "pour",
+     "t": 3.45,
+     "t1": 3.6500000000000004
+    },
+    {
+     "texte": "un",
+     "t": 3.6,
+     "t1": 3.8000000000000003
+    },
+    {
+     "texte": "décès",
+     "t": 3.75,
+     "t1": 3.95
+    }
+   ]
+  },
+  {
+   "qui": "agente",
+   "mots": [
+    {
+     "texte": "le",
+     "t": 4.6,
+     "t1": 4.8
+    },
+    {
+     "texte": "mardi",
+     "t": 4.78,
+     "t1": 4.98
+    },
+    {
+     "texte": "vingt-deux",
+     "t": 4.95,
+     "t1": 5.15
+    },
+    {
+     "texte": "septembre",
+     "t": 5.25,
+     "t1": 5.45
+    },
+    {
+     "texte": "à",
+     "t": 5.45,
+     "t1": 5.65
+    },
+    {
+     "texte": "neuf",
+     "t": 5.6,
+     "t1": 5.8
+    },
+    {
+     "texte": "heures",
+     "t": 5.8,
+     "t1": 6.0
+    },
+    {
+     "texte": "est",
+     "t": 6.0,
+     "t1": 6.2
+    },
+    {
+     "texte": "disponible.",
+     "t": 6.15,
+     "t1": 6.3500000000000005
+    }
+   ]
+  }
+ ],
+ "coupes": [],
+ "fiche": {
+  "titre": "Commande de 16 h 41",
+  "entree": 2.2,
+  "sortie": 8.55,
+  "lignes": [
+   {
+    "texte": "Gerbe de deuil, à retirer",
+    "t": 4.2
+   },
+   {
+    "texte": "Mardi 22 septembre, 9:00",
+    "t": 6.55
+   },
+   {
+    "texte": "Florian",
+    "t": 7.0
+   }
+  ]
+ },
+ "duree": 10.0,
+ "texte_sortie": 7.7,
+ "avance": 0.0
+}

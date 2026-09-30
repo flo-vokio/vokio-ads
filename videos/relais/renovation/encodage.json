@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-renovation-boucle.mp4",
+   "crf": 18,
+   "octets": 426572
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-renovation-boucle-poster.webp",
+   "octets": 6918,
+   "t": 0.75
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-renovation-boucle-poster.jpg",
+   "octets": 15183,
+   "t": 0.75
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-renovation-complete.mp4",
+   "crf": 18,
+   "octets": 2188424
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-renovation-complete-poster.webp",
+   "octets": 7376,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-renovation-complete-poster.jpg",
+   "octets": 16730,
+   "t": 0.0
+  }
+ }
+}

@@ -1,0 +1,36 @@
+{
+ "boucle": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-plombier-boucle.mp4",
+   "crf": 18,
+   "octets": 381120
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-plombier-boucle-poster.webp",
+   "octets": 9818,
+   "t": 0.5
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-plombier-boucle-poster.jpg",
+   "octets": 22078,
+   "t": 0.5
+  }
+ },
+ "complete": {
+  "h264": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-plombier-complete.mp4",
+   "crf": 18,
+   "octets": 2369692
+  },
+  "poster_webp": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-plombier-complete-poster.webp",
+   "octets": 7404,
+   "t": 0.0
+  },
+  "poster_jpg": {
+   "fichier": "/root/vokio-uploads/videos/relais/relais-plombier-complete-poster.jpg",
+   "octets": 17871,
+   "t": 0.0
+  }
+ }
+}

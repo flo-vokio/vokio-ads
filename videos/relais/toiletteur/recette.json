@@ -1,0 +1,195 @@
+{
+  "_note": "Toiletteur « Toilettage complet ». Énoncés = le dit (Scribe) ; heures et dates écrites en toutes lettres comme dites.",
+  "id": "toiletteur",
+  "carte": "Toilettage complet",
+  "audio": "/opt/vokio-site-repo/assets/appel-toiletteur.mp3",
+  "nom": "relais-toiletteur",
+  "agente": "Agathe",
+  "jour_heure": "Vendredi, 15 h 59.",
+  "phrase": "Agathe demande la taille du chien, respecte le créneau du matin et confirme le rendez-vous de onze heures.",
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Agathe, l’assistante vocale de Toutou Prop’ ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui bonjour, je vous appelle parce que je voudrais faire un, un toilettage complet pour mon Staffie et ça serait, enfin, si vous avez une disponibilité, euh, le matin en fin de semaine prochaine, je, je prends."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. Pour le toilettage complet de votre Staffie, il me faudrait d’abord votre prénom."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Alors, c’est Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien Florian. Un instant. Je vérifie les disponibilités pour un toilettage complet pour un grand chien le vendredi vingt-cinq septembre. C’est bien cela ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, c’est plutôt un chien moyen, mais oui, c’est ça."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vous propose le vendredi vingt-cinq septembre à neuf heures, dix heures ou onze heures. Qu’est-ce qui vous conviendrait le mieux ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, onze heures, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian. Un toilettage complet chien moyen le vendredi vingt-cinq septembre à onze heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci beaucoup. Au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Au revoir et à bientôt."
+    }
+  ],
+  "situation": "chien",
+  "poster_boucle": 0.62,
+  "agenda": {
+    "date": "Vendredi 25 septembre",
+    "heures": [
+      "09:00",
+      "10:00",
+      "11:00"
+    ],
+    "bloc": {
+      "heure": "11:00",
+      "nom": "Florian",
+      "service": "Toilettage complet"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : toilettage complet chien moyen, le vendredi 25 septembre à 11:00, Toutou Prop’. Démo Vokio, RDV fictif.",
+    "souligne": "vendredi 25 septembre à 11:00",
+    "heure": "16:00"
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "neuf heures, dix heures ou onze heures.",
+        "source": 6,
+        "temps": [
+          2.55,
+          2.75,
+          3.15,
+          3.35,
+          3.75,
+          3.9,
+          4.1
+        ]
+      },
+      {
+        "qui": "appelant",
+        "texte": "Euh, onze heures, s’il vous plaît.",
+        "source": 7,
+        "temps": [
+          4.9,
+          5.1,
+          5.3,
+          5.5,
+          5.6,
+          5.75
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E0:neuf",
+          "09:00"
+        ],
+        [
+          "E0:dix",
+          "10:00"
+        ],
+        [
+          "E0:onze",
+          "11:00"
+        ],
+        [
+          "E1:onze",
+          "11:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:plaît.+0.25",
+        "nom": "E1:plaît.+0.65",
+        "service": "E1:plaît.+1.1"
+      }
+    },
+    "texte_sortie": 7.3
+  },
+  "complete": {
+    "avance": 1.6,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.1
+      ],
+      "decroche": 1.1,
+      "sort": 1.3
+    },
+    "agenda": {
+      "entree": "E4:Un",
+      "sortie": "E8:SMS",
+      "touches": [
+        [
+          "E6:neuf",
+          "09:00"
+        ],
+        [
+          "E6:dix",
+          "10:00"
+        ],
+        [
+          "E6:onze",
+          "11:00"
+        ],
+        [
+          "E7:onze",
+          "11:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E7:plaît.",
+        "nom": "E8:Florian.",
+        "service": "E8:complet"
+      }
+    },
+    "sms": {
+      "entree": "E8:fin+0.1",
+      "bulle": "E8:fin+0.75",
+      "sortie": "E10:debut-0.55"
+    },
+    "fin": {
+      "entree": "E10:fin+0.45"
+    }
+  }
+}

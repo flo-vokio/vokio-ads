@@ -1,0 +1,194 @@
+{
+  "_note": "Rénovation « Un projet de travaux ». Énoncés = le dit (Scribe).",
+  "id": "renovation",
+  "carte": "Un projet de travaux",
+  "audio": "/opt/vokio-site-repo/assets/appel-renovation.mp3",
+  "nom": "relais-renovation",
+  "agente": "Léa",
+  "jour_heure": "Vendredi, 16 h 50.",
+  "phrase": "Léa note le projet, propose une visite technique pour le devis et la confirme pour lundi neuf heures.",
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Léa, l’assistante vocale de Roux Rénovation ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, oui bonjour, je voudrais faire un devis, s’il vous plaît. Ça serait pour refaire une salle de bain. Euh, elle fait environ six mètres carrés."
+    },
+    {
+      "qui": "agente",
+      "texte": "On commence toujours par une visite technique gratuite sur place pour établir un devis précis envoyé sous quarante-huit heures. La visite dure environ une heure. C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, c’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien, Florian. Quel jour vous conviendrait pour la visite ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, bah, c’est quoi votre prochain créneau, enfin, le, le créneau le plus rapide lundi ?"
+    },
+    {
+      "qui": "agente",
+      "texte": "Je regarde ça. Je peux vous proposer lundi vingt-et-un septembre à huit heures, neuf heures ou dix heures. Qu’est-ce qui vous arrangerait le mieux ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, ouais, bah, neuf heures, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. Je vous note ça pour Florian. Visite technique pour devis le lundi vingt-et-un septembre à neuf heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Super, merci beaucoup. Au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Au revoir."
+    }
+  ],
+  "situation": "marteau",
+  "poster_boucle": 0.75,
+  "agenda": {
+    "date": "Lundi 21 septembre",
+    "heures": [
+      "08:00",
+      "09:00",
+      "10:00"
+    ],
+    "bloc": {
+      "heure": "09:00",
+      "nom": "Florian",
+      "service": "Visite technique"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : visite technique pour devis, le lundi 21 septembre à 09:00, Roux Rénovation. Démo Vokio, RDV fictif.",
+    "souligne": "lundi 21 septembre à 09:00",
+    "heure": "16:51"
+  },
+  "complete": {
+    "avance": 1.6,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.1
+      ],
+      "decroche": 1.1,
+      "sort": 1.3
+    },
+    "agenda": {
+      "entree": "E6:Je",
+      "sortie": "E8:SMS",
+      "touches": [
+        [
+          "E6:huit",
+          "08:00"
+        ],
+        [
+          "E6:neuf",
+          "09:00"
+        ],
+        [
+          "E6:dix",
+          "10:00"
+        ],
+        [
+          "E7:neuf",
+          "09:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E7:plaît.",
+        "nom": "E8:Florian.",
+        "service": "E8:technique"
+      }
+    },
+    "sms": {
+      "entree": "E8:fin+0.1",
+      "bulle": "E8:fin+0.75",
+      "sortie": "E10:debut-0.55"
+    },
+    "fin": {
+      "entree": "E10:fin+0.45"
+    }
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "huit heures, neuf heures ou dix heures.",
+        "source": 6,
+        "temps": [
+          2.55,
+          2.75,
+          3.15,
+          3.35,
+          3.75,
+          3.9,
+          4.1
+        ]
+      },
+      {
+        "qui": "appelant",
+        "texte": "neuf heures, s’il vous plaît.",
+        "source": 7,
+        "temps": [
+          4.95,
+          5.15,
+          5.4,
+          5.5,
+          5.65
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E0:huit",
+          "08:00"
+        ],
+        [
+          "E0:neuf",
+          "09:00"
+        ],
+        [
+          "E0:dix",
+          "10:00"
+        ],
+        [
+          "E1:neuf",
+          "09:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:plaît.+0.25",
+        "nom": "E1:plaît.+0.65",
+        "service": "E1:plaît.+1.1"
+      }
+    },
+    "texte_sortie": 7.3
+  }
+}

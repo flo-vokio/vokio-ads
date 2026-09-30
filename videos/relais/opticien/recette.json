@@ -1,0 +1,197 @@
+{
+  "_note": "Lot B, carte métier « Un examen de vue, plus tôt » (vokio.fr/opticien/). Même schéma que coiffure/recette.json. Énoncés = texte DIT (relevé Scribe du 29/09) : « ma vue qui a baissé » (la page écrit « défié ») ; le client demande « dix heures plutôt » (pas « plus tôt » : on lui a proposé 9 h 30, il veut plus tard) ; l'agente dit « d’Optique du Cours ». À FAIRE VALIDER : le texte du SMS, la situation « lb-refracteur », le titre de la carte (« plus tôt »).",
+  "id": "opticien",
+  "carte": "Un examen de vue, plus tôt",
+  "audio": "/opt/vokio-site-repo/assets/appel-opticien.mp3",
+  "nom": "relais-opticien",
+  "situation": "lb-refracteur",
+  "agenda": {
+    "date": "Lundi 21 septembre",
+    "heures": [
+      "09:30",
+      "10:00",
+      "10:30"
+    ],
+    "bloc": {
+      "heure": "10:30",
+      "nom": "Florian",
+      "service": "Examen de vue"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre rendez-vous est confirmé : Examen de vue, le lundi 21 septembre à 10:30, Optique du Cours. Démo Vokio, RDV fictif.",
+    "souligne": "lundi 21 septembre à 10:30",
+    "heure": "15:23"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Élodie, l’assistante vocale d’Optique du Cours ! Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Bonjour, j’ai ma vue qui a baissé récemment et, euh, je voudrais prendre un rendez-vous pour un examen de vue, euh, si c’est possible lundi."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien. C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "C’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je vérifie les disponibilités. Je peux vous proposer le lundi vingt et un septembre à neuf heures trente. Cela vous convient ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, vous avez pas dix heures plutôt ?"
+    },
+    {
+      "qui": "agente",
+      "texte": "Un instant."
+    },
+    {
+      "qui": "agente",
+      "texte": "Je peux vous proposer dix heures trente."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Ouais, bah, dix heures trente alors, je préfère."
+    },
+    {
+      "qui": "agente",
+      "texte": "Très bien."
+    },
+    {
+      "qui": "agente",
+      "texte": "Parfait, je vous note ça pour Florian, pour un examen de vue, le lundi vingt et un septembre à dix heures trente. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Merci. Bonne journée, au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous aussi, au revoir."
+    }
+  ],
+  "complete": {
+    "avance": 1.5,
+    "situation": {
+      "sonne": [
+        0.05,
+        1.3
+      ],
+      "decroche": 1.3,
+      "sort": 1.45
+    },
+    "agenda": {
+      "entree": "E4:Je",
+      "sortie": "E10:SMS",
+      "touches": [
+        [
+          "E4:neuf",
+          "09:30"
+        ],
+        [
+          "E5:dix",
+          "10:00"
+        ],
+        [
+          "E7:dix",
+          "10:30"
+        ],
+        [
+          "E8:dix",
+          "10:30"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E8:préfère.",
+        "nom": "E10:Florian,",
+        "service": "E10:examen"
+      }
+    },
+    "sms": {
+      "entree": "E10:fin+0.1",
+      "bulle": "E10:fin+0.75",
+      "sortie": "E12:debut-0.55"
+    },
+    "fin": {
+      "entree": "E12:fin+0.45"
+    },
+    "coupes": [
+      "E1:je",
+      "E10:Vous#2"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "agente",
+        "texte": "Je peux vous proposer dix heures trente.",
+        "source": 7,
+        "temps": [
+          2.5,
+          2.62,
+          2.74,
+          2.88,
+          3.3,
+          3.45,
+          3.62
+        ]
+      },
+      {
+        "qui": "appelant",
+        "texte": "dix heures trente alors, je préfère.",
+        "source": 8,
+        "temps": [
+          4.8,
+          4.98,
+          5.15,
+          5.4,
+          5.72,
+          5.86
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E0:dix",
+          "10:30"
+        ],
+        [
+          "E1:dix",
+          "10:30"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:préfère.+0.25",
+        "nom": "E1:préfère.+0.65",
+        "service": "E1:préfère.+1.1"
+      }
+    },
+    "texte_sortie": 7.3
+  },
+  "agente": "Élodie",
+  "poster_boucle": 1.25
+}

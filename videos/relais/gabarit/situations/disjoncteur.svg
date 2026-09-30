@@ -1,0 +1,19 @@
+<!-- Situation « disjoncteur » (électricien, une panne à chercher) : le tableau, quatre disjoncteurs, l'ampoule allumée au
+     plafond. Le troisième tremble, SAUTE (levier qui claque vers le bas) avec une étincelle qui change de forme à chaque image,
+     l'ampoule vacille et s'éteint ; puis le levier se rebascule tout seul et la lumière revient. Animé par disjoncteur.js. -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" data-periode="1.25" style="overflow:visible;left:0;top:190px;width:660px;height:660px">
+  <g id="dj-ampoule">
+    <path d="M300 0 V 58" stroke="#262019" stroke-width="5"/>
+    <rect x="286" y="56" width="28" height="22" rx="4" fill="#262019"/>
+    <path id="dj-verre" d="M300 142 C 268 142 256 118 262 100 C 268 86 282 80 300 80 C 318 80 332 86 338 100 C 344 118 332 142 300 142 Z" stroke="#262019" stroke-width="6"/>
+    <g id="dj-rayons" stroke="#EFA424" stroke-width="7" stroke-linecap="round">
+      <path d="M232 110 H 212"/><path d="M368 110 H 388"/><path d="M246 64 L 232 50"/><path d="M354 64 L 368 50"/><path d="M252 156 L 238 170"/><path d="M348 156 L 362 170"/>
+    </g>
+  </g>
+  <g id="dj-tableau">
+    <rect x="96" y="226" width="408" height="300" rx="22" fill="#EDE6D7" stroke="#262019" stroke-width="8"/>
+    <rect x="120" y="318" width="360" height="16" fill="#262019" opacity=".22"/>
+    <g id="dj-modules"></g>
+  </g>
+  <g id="dj-fx"></g>
+</svg>

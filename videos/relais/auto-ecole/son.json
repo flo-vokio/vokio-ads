@@ -1,0 +1,20 @@
+{
+ "voix_source": {
+  "lufs": -16.4,
+  "lra": 5.2,
+  "crete_dbtp": -4.8
+ },
+ "gain_voix_db": 0.4,
+ "signature": {
+  "fichier": "/root/vokio-uploads/videos/showcase/point-solaire-signature-courte-v2.wav",
+  "gain_db": -7.9,
+  "debut_s": 54.359,
+  "attaque_s": 54.36
+ },
+ "mix": {
+  "lufs": -16.1,
+  "lra": 5.2,
+  "crete_dbtp": -4.4
+ },
+ "traitement_de_la_voix": "gain seul (aucun filtre, compresseur ni limiteur)"
+}

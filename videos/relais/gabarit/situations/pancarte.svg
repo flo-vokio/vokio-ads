@@ -1,0 +1,14 @@
+<!-- Situation « pancarte » (auto-école, après la fermeture) : la pancarte pend à son clou, face « Ouvert ». On la RETOURNE :
+     elle pivote sur sa ficelle (face qui s'amincit puis l'autre face, « Fermé »), puis se balance au bout de sa ficelle
+     (pendule amorti). Animé par pancarte.js (lib/fx.js). -->
+<svg id="objet" viewBox="0 0 600 600" aria-hidden="true" style="overflow:visible;left:-20px;top:170px;width:680px;height:680px">
+  <path d="M110 110 H 490" stroke="#262019" stroke-width="5" stroke-linecap="round" opacity=".3"/>
+  <circle cx="300" cy="150" r="10" fill="#262019"/>
+  <g id="pc-pendule">
+    <path id="pc-ficelles" d="M300 150 L 176 262 M300 150 L 424 262" fill="none" stroke="#262019" stroke-width="6" stroke-linecap="round"/>
+    <g id="pc-plaque">
+      <rect id="pc-fond" x="130" y="258" width="340" height="170" rx="22" fill="#F4F1E8" stroke="#262019" stroke-width="9"/>
+      <text id="pc-texte" x="300" y="372" text-anchor="middle" font-family="Instrument Serif" font-size="104" fill="#262019">Ouvert</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,176 @@
+<!-- Blocs RELAIS-VIDEO à reporter dans /opt/vokio-site-repo/index.html (générés par outils/maquette.py). -->
+<!-- 1. CSS : à coller juste avant le premier </style> -->
+<style>
+  /* RELAIS-VIDEO · vidéo en tête de carte (les trois cartes de la section relais, 29/09) */
+  .temps-card .rv{position:relative;margin:-32px -28px 26px;aspect-ratio:1/1;overflow:hidden;
+    border-radius:var(--r-sm) var(--r-sm) 0 0;background:#F4F1E8;cursor:pointer}
+  .temps-card .rv video,.temps-card .rv img{display:block;width:100%;height:100%;object-fit:cover}
+  .rv-appel{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;
+    padding:8px 13px 8px 10px;border-radius:999px;background:var(--noir);color:var(--ivoire);
+    font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;transition:opacity .2s ease}
+  .rv-appel svg{flex:none}
+  .rv.complete .rv-appel{opacity:0;pointer-events:none}
+  .rv:focus-visible,.rv-appel:focus-visible{outline:2px solid var(--solaire-2);outline-offset:2px}
+  /* sur tablette (une colonne, carte large) : la vidéo ne dépasse pas 440 px, à gauche du texte */
+  @media (min-width:560px) and (max-width:860px){
+    .temps-card:has(.rv){display:grid;grid-template-columns:minmax(0,300px) 1fr;column-gap:28px;align-items:start}
+    .temps-card:has(.rv) .rv{grid-row:1 / span 6;margin:-32px 0 -32px -28px;border-radius:var(--r-sm) 0 0 var(--r-sm);height:100%;aspect-ratio:auto;min-height:300px}
+    .temps-card:has(.rv) > :not(.rv){grid-column:2}
+  }
+  @media (prefers-reduced-motion:reduce){.rv-appel{transition:none}}
+</style>
+<!-- 2. Dans chaque carte, juste après <div class="temps-card"> : la figure ; dans le lecteur de la carte, remplacer <div class="lecteur" par <div class="lecteur" data-video et le temps affiché par la durée ci-dessous ; remplacer le contenu de <details class="tr"> (après </summary>) par les paragraphes ci-dessous -->
+<!-- carte « En plein service » : durée affichée 0:44 -->
+        <!-- RELAIS-VIDEO · En plein service -->
+        <figure class="rv" data-base="/assets/relais/relais-restaurant" data-duree="43.93" tabindex="0" role="button" aria-label="Voir et écouter l’appel en entier, avec le son">
+          <video muted playsinline loop preload="none" disablepictureinpicture aria-hidden="true" poster="/assets/relais/relais-restaurant-boucle-poster.webp"></video>
+          <span class="rv-appel" aria-hidden="true"><svg width="9" height="10" viewBox="0 0 13 15" fill="currentColor"><path d="M1 1.2 12 7.5 1 13.8Z"/></svg>Écouter l’appel</span>
+        </figure>
+        <!-- transcription (texte dit) -->
+        <p class="tr-vokio"><b>Clara</b>Bonjour, je suis Clara, l’assistante vocale de La Table des Halles. Comment puis-je vous aider ?</p>
+        <p class="tr-client"><b>L’appelant</b>Euh, bonjour, je voudrais réserver une table pour, euh, samedi soir, s’il vous plaît.</p>
+        <p class="tr-vokio"><b>Clara</b>Ce serait pour combien de personnes ?</p>
+        <p class="tr-client"><b>L’appelant</b>Ce serait pour, euh, six personnes.</p>
+        <p class="tr-vokio"><b>Clara</b>Pour six personnes, le samedi vingt-deux août au soir, c’est bien cela ?</p>
+        <p class="tr-client"><b>L’appelant</b>C’est ça.</p>
+        <p class="tr-vokio"><b>Clara</b>D’accord, c’est disponible. C’est pour quel prénom ?</p>
+        <p class="tr-client"><b>L’appelant</b>C’est pour Florian.</p>
+        <p class="tr-vokio"><b>Clara</b>C’est réservé, Florian. Une table pour six le samedi vingt-deux août à vingt heures. Vous recevrez un SMS de confirmation.</p>
+        <p class="tr-client"><b>L’appelant</b>Merci, au revoir.</p>
+        <p class="tr-vokio"><b>Clara</b>Merci à vous. Au revoir.</p>
+<!-- carte « Les mains prises » : durée affichée 0:57 -->
+        <!-- RELAIS-VIDEO · Les mains prises -->
+        <figure class="rv" data-base="/assets/relais/relais-coiffure" data-duree="56.87" tabindex="0" role="button" aria-label="Voir et écouter l’appel en entier, avec le son">
+          <video muted playsinline loop preload="none" disablepictureinpicture aria-hidden="true" poster="/assets/relais/relais-coiffure-boucle-poster.webp"></video>
+          <span class="rv-appel" aria-hidden="true"><svg width="9" height="10" viewBox="0 0 13 15" fill="currentColor"><path d="M1 1.2 12 7.5 1 13.8Z"/></svg>Écouter l’appel</span>
+        </figure>
+        <!-- transcription (texte dit) -->
+        <p class="tr-vokio"><b>Blandine</b>Bonjour, je suis Blandine, l’assistante vocale du Salon Marchand ! Comment puis-je vous aider ?</p>
+        <p class="tr-client"><b>L’appelant</b>Oui, bonjour, j’aimerais prendre rendez-vous pour un balayage pour demain, s’il vous plaît.</p>
+        <p class="tr-vokio"><b>Blandine</b>Un instant.</p>
+        <p class="tr-vokio"><b>Blandine</b>Très bien. C’est pour quelle heure demain, s’il vous plaît ?</p>
+        <p class="tr-client"><b>L’appelant</b>Euh… vous avez quoi comme disponibilités ?</p>
+        <p class="tr-vokio"><b>Blandine</b>Je regarde ça.</p>
+        <p class="tr-vokio"><b>Blandine</b>Je peux vous proposer neuf heures, dix heures ou onze heures. Le dernier créneau possible pour un balayage demain est dix-huit heures trente. Qu’est-ce qui vous arrangerait ?</p>
+        <p class="tr-client"><b>L’appelant</b>Euh, dix heures, c’est bien.</p>
+        <p class="tr-vokio"><b>Blandine</b>D’accord. C’est à quel prénom, s’il vous plaît ?</p>
+        <p class="tr-client"><b>L’appelant</b>Camille.</p>
+        <p class="tr-vokio"><b>Blandine</b>Un instant.</p>
+        <p class="tr-vokio"><b>Blandine</b>Parfait.</p>
+        <p class="tr-vokio"><b>Blandine</b>Parfait, je vous note ça pour Camille, pour un balayage, le samedi dix-neuf septembre à dix heures. Vous recevrez un SMS de confirmation.</p>
+        <p class="tr-client"><b>L’appelant</b>Super, merci.</p>
+        <p class="tr-vokio"><b>Blandine</b>Je vous en prie. Passez une belle journée.</p>
+<!-- carte « Après la fermeture » : durée affichée 0:56 -->
+        <!-- RELAIS-VIDEO · Après la fermeture -->
+        <figure class="rv" data-base="/assets/relais/relais-auto-ecole" data-duree="55.97" tabindex="0" role="button" aria-label="Voir et écouter l’appel en entier, avec le son">
+          <video muted playsinline loop preload="none" disablepictureinpicture aria-hidden="true" poster="/assets/relais/relais-auto-ecole-boucle-poster.webp"></video>
+          <span class="rv-appel" aria-hidden="true"><svg width="9" height="10" viewBox="0 0 13 15" fill="currentColor"><path d="M1 1.2 12 7.5 1 13.8Z"/></svg>Écouter l’appel</span>
+        </figure>
+        <!-- transcription (texte dit) -->
+        <p class="tr-vokio"><b>Manon</b>Auto-école du Centre, bonjour. Moi, c’est Manon, son assistante vocale. Qu’est-ce que je peux faire pour vous ?</p>
+        <p class="tr-client"><b>L’appelant</b>Bonjour, euh, je voulais savoir si c’était possible de prendre un rendez-vous.</p>
+        <p class="tr-vokio"><b>Manon</b>Oui, bien sûr. C’est pour une première inscription chez nous ou vous êtes déjà élève à l’auto-école ?</p>
+        <p class="tr-client"><b>L’appelant</b>Euh, c’est pour une première inscription, ce serait pour mon fils. En fait, il a, il a seize ans, mais je voudrais anticiper, euh, la conduite accompagnée. Je sais pas comment ça se passe.</p>
+        <p class="tr-vokio"><b>Manon</b>C’est une excellente idée d’anticiper. Pour commencer la conduite accompagnée, nous devons d’abord faire une évaluation de conduite initiale obligatoire avec lui. C’est pour quel prénom ?</p>
+        <p class="tr-client"><b>L’appelant</b>Euh, c’est pour Florian.</p>
+        <p class="tr-vokio"><b>Manon</b>Très bien, Florian. Quel jour vous conviendrait pour cette évaluation de conduite ?</p>
+        <p class="tr-client"><b>L’appelant</b>Euh, attendez, j’ai un souci. Je vous rappellerai plus tard. Je vous remercie, au revoir.</p>
+        <p class="tr-vokio"><b>Manon</b>Pas de problème, je comprends tout à fait. N’hésitez pas à nous rappeler quand vous serez disponible. Bonne fin de journée, au revoir.</p>
+<!-- 3. Script du lecteur audio existant : trois lignes -->
+<!--   a) var lecteurs = [].slice.call(document.querySelectorAll('.lecteur:not([data-video])')); /* RELAIS-VIDEO */
+       b) après son.play().catch(…); : document.dispatchEvent(new CustomEvent('vk-lecture', {detail: 'audio'})); /* RELAIS-VIDEO */
+       c) après son.addEventListener('timeupdate', peindre); : document.addEventListener('vk-lecture', function(ev){ if(ev.detail === 'video') son.pause(); }); /* RELAIS-VIDEO */ -->
+<!-- 4. JS : à coller à la fin du dernier <script> (avant son </script>) -->
+<script>
+  /* RELAIS-VIDEO · cartes vidéo de la section relais (maquette du 29/09).
+     Boucle muette : jouée seulement quand la carte est à l'écran (IntersectionObserver), une seule vidéo à la fois
+     (la plus visible), jamais si prefers-reduced-motion (poster fixe). Au toucher : l'appel complet, avec le son ;
+     le lecteur de la carte devient son contrôle. Rien ne se charge avant d'être visible (preload="none"). */
+  (function(){
+    var cartes = [].slice.call(document.querySelectorAll('.rv'));
+    if(!cartes.length) return;
+    var reduit = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var ratio = new Map(), actif = null;
+    function mmss(t){ t = Math.max(0, Math.round(t || 0)); return Math.floor(t / 60) + ':' + ('0' + (t % 60)).slice(-2); }
+    function charger(c, mode){
+      var v = c.v, base = c.fig.dataset.base;
+      if(c.mode === mode) return;
+      c.mode = mode;
+      v.pause(); v.removeAttribute('src'); while(v.firstChild) v.removeChild(v.firstChild);
+      v.poster = base + '-' + mode + '-poster.webp';
+      var m = document.createElement('source'); m.src = base + '-' + mode + '.mp4'; m.type = 'video/mp4'; v.appendChild(m);
+      v.muted = mode === 'boucle'; v.loop = mode === 'boucle';
+      c.fig.classList.toggle('complete', mode === 'complete');
+      v.load();
+    }
+    function pauseAutres(sauf){
+      cartes.forEach(function(c){ if(c !== sauf && !c.v.paused) c.v.pause(); });
+      document.dispatchEvent(new CustomEvent('vk-lecture', {detail: 'video'}));
+    }
+    function elire(){                          // la boucle à jouer : la carte la plus visible (≥ 50 %)
+      if(reduit) return;
+      if(cartes.some(function(c){ return c.mode === 'complete' && !c.v.paused; })) return;
+      var meilleure = null, r = 0.5;
+      // une carte passée en version complète reste comme la personne l'a laissée (en pause, à sa place) jusqu'à la fin
+      cartes.forEach(function(c){ var x = ratio.get(c) || 0; if(c.mode !== 'complete' && x >= r){ r = x; meilleure = c; } });
+      cartes.forEach(function(c){
+        if(c.mode === 'complete') return;
+        if(c === meilleure){ charger(c, 'boucle'); if(c.v.paused) c.v.play().catch(function(){}); }
+        else if(c.mode === 'boucle' && !c.v.paused) c.v.pause();
+      });
+      actif = meilleure;
+    }
+    function complete(c){
+      if(c.mode !== 'complete'){ charger(c, 'complete'); }
+      pauseAutres(c);
+      c.v.muted = false;
+      c.v.play().catch(function(){});
+    }
+    function basculer(c){
+      if(c.mode === 'complete' && !c.v.paused){ c.v.pause(); return; }
+      complete(c);
+    }
+    cartes.forEach(function(fig){
+      var carte = fig.closest('.temps-card');
+      var c = {fig: fig, v: fig.querySelector('video'), mode: null, lec: carte.querySelector('.lecteur[data-video]')};
+      fig.__rv = c; cartes[cartes.indexOf(fig)] = c;
+      c.v.poster = fig.dataset.base + '-boucle-poster.webp';
+      fig.addEventListener('click', function(){ basculer(c); });
+      fig.addEventListener('keydown', function(ev){ if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); basculer(c); } });
+      var lec = c.lec;
+      if(lec){
+        var btn = lec.querySelector('.lec-btn'), piste = lec.querySelector('.lec-piste'),
+            avance = lec.querySelector('.lec-avance'), temps = lec.querySelector('.lec-temps');
+        var total = parseFloat(fig.dataset.duree) || 0;
+        btn.addEventListener('click', function(ev){ ev.stopPropagation(); basculer(c); });
+        piste.addEventListener('click', function(ev){
+          if(c.mode !== 'complete') return;
+          var r = piste.getBoundingClientRect();
+          c.v.currentTime = Math.min(total, Math.max(0, (ev.clientX - r.left) / r.width) * total);
+        });
+        c.v.addEventListener('timeupdate', function(){
+          if(c.mode !== 'complete') return;
+          avance.style.width = (c.v.currentTime / total * 100) + '%';
+          temps.textContent = mmss(total - c.v.currentTime);
+        });
+        c.v.addEventListener('play', function(){ if(c.mode === 'complete'){ lec.classList.add('joue'); lec.classList.remove('lec-inerte'); btn.setAttribute('aria-pressed', 'true'); } });
+        c.v.addEventListener('pause', function(){ lec.classList.remove('joue'); btn.setAttribute('aria-pressed', 'false'); });
+        c.v.addEventListener('ended', function(){
+          if(c.mode !== 'complete') return;
+          avance.style.width = '0'; temps.textContent = mmss(total);
+          charger(c, 'boucle'); elire();
+        });
+      }
+    });
+    document.addEventListener('vk-lecture', function(ev){      // un appel audio démarre : on coupe la vidéo parlante
+      if(ev.detail === 'audio') cartes.forEach(function(c){ if(c.mode === 'complete' && !c.v.paused) c.v.pause(); });
+    });
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ ratio.set(e.target.__rv, e.isIntersecting ? e.intersectionRatio : 0); });
+      elire();
+    }, {threshold: [0, .25, .5, .75, 1]});
+    cartes.forEach(function(c){ io.observe(c.fig); });
+    window.__rv = cartes;
+  })();
+</script>
+<!-- 5. Fichiers : /root/vokio-uploads/videos/relais/relais-<carte>-{boucle,complete}.mp4 et -{boucle,complete}-poster.webp vers /assets/relais/ du site (les .jpg sont des posters de secours, non référencés). -->

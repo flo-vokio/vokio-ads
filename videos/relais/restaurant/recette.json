@@ -1,0 +1,166 @@
+{
+  "_note": "Même schéma que coiffure/recette.json (voir son « _note »). Énoncés = texte DIT d'après le relevé Scribe (le site en montre parfois plus : répliques coupées au montage). À FAIRE VALIDER : le texte du SMS (gabarit restaurant supposé), la situation « poêle ».",
+  "id": "restaurant",
+  "carte": "En plein service",
+  "audio": "/opt/vokio-site-repo/assets/appel-restaurant.mp3",
+  "nom": "relais-restaurant",
+  "situation": "poele",
+  "agenda": {
+    "date": "Samedi 22 août",
+    "heures": [
+      "19:00",
+      "20:00",
+      "21:00"
+    ],
+    "bloc": {
+      "heure": "20:00",
+      "nom": "Florian",
+      "service": "Table pour 6"
+    }
+  },
+  "sms": {
+    "texte": "Bonjour Florian, votre réservation est confirmée : table pour 6, le samedi 22 août à 20:00, La Table des Halles. Démo Vokio, RDV fictif.",
+    "souligne": "samedi 22 août à 20:00",
+    "heure": "20:08"
+  },
+  "enonces": [
+    {
+      "qui": "agente",
+      "texte": "Bonjour, je suis Clara, l’assistante vocale de La Table des Halles. Comment puis-je vous aider ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Euh, bonjour, je voudrais réserver une table pour, euh, samedi soir, s’il vous plaît."
+    },
+    {
+      "qui": "agente",
+      "texte": "Ce serait pour combien de personnes ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "Ce serait pour, euh, six personnes."
+    },
+    {
+      "qui": "agente",
+      "texte": "Pour six personnes, le samedi vingt-deux août au soir, c’est bien cela ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "C’est ça."
+    },
+    {
+      "qui": "agente",
+      "texte": "D’accord, c’est disponible. C’est pour quel prénom ?"
+    },
+    {
+      "qui": "appelant",
+      "texte": "C’est pour Florian."
+    },
+    {
+      "qui": "agente",
+      "texte": "C’est réservé, Florian. Une table pour six le samedi vingt-deux août à vingt heures. Vous recevrez un SMS de confirmation."
+    },
+    {
+      "qui": "appelant",
+      "texte": "Merci, au revoir."
+    },
+    {
+      "qui": "agente",
+      "texte": "Merci à vous. Au revoir."
+    }
+  ],
+  "complete": {
+    "avance": 1.3,
+    "situation": {
+      "sonne": [
+        0.05,
+        0.9
+      ],
+      "decroche": 0.9,
+      "sort": 1.05
+    },
+    "agenda": {
+      "entree": "E4:Pour",
+      "sortie": "E8:SMS",
+      "touches": [
+        [
+          "E6:disponible.",
+          "20:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E6:disponible.+0.2",
+        "nom": "E7:Florian.",
+        "service": "E8:six"
+      }
+    },
+    "sms": {
+      "entree": "E8:fin+0.1",
+      "bulle": "E8:fin+0.75",
+      "sortie": "E10:debut-0.55"
+    },
+    "fin": {
+      "entree": "E10:fin+0.45"
+    },
+    "coupes": [
+      "E8:Vous"
+    ]
+  },
+  "boucle": {
+    "duree": 10.0,
+    "corps": {
+      "agente": 74,
+      "appelant": 88
+    },
+    "situation": {
+      "sonne": [
+        0.15,
+        1.7
+      ],
+      "decroche": 1.7,
+      "sort": 1.95,
+      "revient": 8.75
+    },
+    "enonces": [
+      {
+        "qui": "appelant",
+        "texte": "Ce serait pour six personnes.",
+        "source": 3,
+        "temps": [
+          2.55,
+          2.72,
+          2.9,
+          3.1,
+          3.3
+        ]
+      },
+      {
+        "qui": "agente",
+        "texte": "D’accord, c’est disponible.",
+        "source": 6,
+        "temps": [
+          4.4,
+          4.75,
+          4.95
+        ]
+      }
+    ],
+    "agenda": {
+      "entree": 2.2,
+      "sortie": 8.55,
+      "touches": [
+        [
+          "E1:disponible.",
+          "20:00"
+        ]
+      ],
+      "bloc": {
+        "ouvre": "E1:disponible.+0.3",
+        "nom": "E1:disponible.+0.7",
+        "service": "E1:disponible.+1.15"
+      }
+    },
+    "texte_sortie": 7.3
+  },
+  "agente": "Clara"
+}
