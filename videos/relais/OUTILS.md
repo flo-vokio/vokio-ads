@@ -30,3 +30,8 @@ Tout se lance depuis `/opt/vokio-ads/videos/relais`. Une carte = un dossier = UN
 - **Son** : le vrai appel reçoit un GAIN seul (−16 LUFS), la signature courte se pose quand le point se pose sur le ı.
 - **Livrables** : `/root/vokio-uploads/videos/relais/` ; rendus de travail dans `/dev/shm/relais-<id>/` (`purger`).
 - Jamais `hf skills update` ni `audio.mjs sync-durations`. Rendu sous flock (outil `rendre.py` du showcase).
+
+## Rendre depuis Claude Code cloud
+
+Rends comme d'habitude avec `outils/relais.py`, puis copie les fichiers finis dans `videos/relais/<metier>/sortie/` (`relais-<metier>-{boucle,complete}.mp4` et leurs posters), mets `LOT-*.json` à jour, commit et push. Sur le VPS, `python3 /root/vokio-deploy/relais-metiers-300926/recuperer_cloud.py --go` les récupère et les branche sur la page. La mise en ligne passe ensuite par deployer.py, sur go.
+Attention : le cloud n'a pas les audios des appels (`/opt/vokio-site-repo/assets/appel-*.mp3`). Il faut les copier dans le dépôt avant un rendu complet.
