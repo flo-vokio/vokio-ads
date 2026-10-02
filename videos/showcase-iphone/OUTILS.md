@@ -394,3 +394,16 @@ Règles de la recette : la tête est libre (le court commence où l'on veut) ; c
 musique garde sa grille (même phase dans la mesure des deux côtés, la grosse caisse et le ré du logo retombent sur leurs temps) ;
 seul l'accord peut changer au milieu d'une mesure (fondu de 50 ms). `controles.py` sur le court : les contrôles de minutage du
 film long (D, S, V…) n'ont pas de sens après montage ; les contrôles de mise en page se jugent sur le LONG du format.
+
+## 9. Version télévision avec QR code (02/10)
+
+Sur une télé, on ne clique pas : on scanne. Cette version ne sert QUE dans une campagne YouTube réservée aux écrans de télévision (sur mobile, un QR est inutile).
+
+| Besoin | Commande |
+|---|---|
+| Poser le QR sur le carton de fin et prolonger le dernier plan | `python3 outils/qr_fin.py /root/vokio-uploads/videos/showcase/le-point-sur-le-i-16x9.mp4 youtube/qr-tv.png -o /root/vokio-uploads/videos/showcase/le-point-sur-le-i-16x9-tv-qr.mp4 --debut 48.0 --marge 80` |
+
+- Le film n'est ni coupé ni recomposé : QR en fondu à 48,0 s (arrivée de l'offre), arrêt sur image de 6 s, silence ajouté ⇒ 56,1 s. Avant 48 s, image identique (PSNR 59,5 dB), son −14 LUFS inchangé.
+- `youtube/qr-tv.png` : `https://vokio.fr/?utm_source=youtube&utm_medium=tv&utm_campaign=point-sur-le-i`, correction **L** (33 modules au lieu de 37 en M) × 8 px = 264 px, encre #271d17 sur le crème #f4efe8 du film, coin bas droit à 80 px des bords (zone libre : la promesse finit en y 683, l'offre en x 1386).
+- Contrôle : décoder le QR sur une image EXTRAITE de la sortie, à 1920, 960, 640 et 480 px de large (480 px ≈ scan depuis le canapé). En M × 6 px, il échouait à 480 px : c'est ce test qui a fait passer en L × 8 px.
+- Fabriquer un autre QR : paquet npm `qrcode` dans un dossier jetable (pas de pip sur le VPS), décodage par `jsqr` + `pngjs` (voir l'en-tête de `outils/qr_fin.py`).
