@@ -1,0 +1,47 @@
+{
+ "id": "v2",
+ "texte": "Vokio prend le rendez-vous dans votre agenda Google.",
+ "duree": 2.600646,
+ "mots": [
+  {
+   "texte": "Vokio",
+   "t": 0.0,
+   "t1": 0.372
+  },
+  {
+   "texte": "prend",
+   "t": 0.406,
+   "t1": 0.58
+  },
+  {
+   "texte": "le",
+   "t": 0.604,
+   "t1": 0.662
+  },
+  {
+   "texte": "rendez-vous",
+   "t": 0.697,
+   "t1": 1.091
+  },
+  {
+   "texte": "dans",
+   "t": 1.115,
+   "t1": 1.219
+  },
+  {
+   "texte": "votre",
+   "t": 1.242,
+   "t1": 1.463
+  },
+  {
+   "texte": "agenda",
+   "t": 1.498,
+   "t1": 1.823
+  },
+  {
+   "texte": "Google.",
+   "t": 1.881,
+   "t1": 2.601
+  }
+ ]
+}

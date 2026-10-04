@@ -1,0 +1,52 @@
+{
+ "id": "v6",
+ "texte": "Et chaque appel vous attend, résumé, dans votre espace.",
+ "duree": 2.972167,
+ "mots": [
+  {
+   "texte": "Et",
+   "t": 0.0,
+   "t1": 0.151
+  },
+  {
+   "texte": "chaque",
+   "t": 0.186,
+   "t1": 0.43
+  },
+  {
+   "texte": "appel",
+   "t": 0.453,
+   "t1": 0.639
+  },
+  {
+   "texte": "vous",
+   "t": 0.697,
+   "t1": 0.813
+  },
+  {
+   "texte": "attend,",
+   "t": 0.871,
+   "t1": 1.207
+  },
+  {
+   "texte": "résumé,",
+   "t": 1.312,
+   "t1": 1.834
+  },
+  {
+   "texte": "dans",
+   "t": 1.858,
+   "t1": 1.974
+  },
+  {
+   "texte": "votre",
+   "t": 1.997,
+   "t1": 2.229
+  },
+  {
+   "texte": "espace.",
+   "t": 2.252,
+   "t1": 2.972
+  }
+ ]
+}

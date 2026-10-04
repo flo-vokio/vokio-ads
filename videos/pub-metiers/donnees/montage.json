@@ -1,0 +1,611 @@
+{
+ "duree": 36.148,
+ "fps": 30,
+ "segments": [
+  {
+   "nom": "plombier",
+   "type": "decroche",
+   "etiquette": "Plombier",
+   "film": [
+    0.0,
+    0.79
+   ],
+   "texte": "Plomberie Azur !"
+  },
+  {
+   "nom": "coiffure",
+   "type": "decroche",
+   "etiquette": "Coiffure",
+   "film": [
+    0.83,
+    1.54
+   ],
+   "texte": "Salon Marchand !"
+  },
+  {
+   "nom": "garage",
+   "type": "decroche",
+   "etiquette": "Garage",
+   "film": [
+    1.58,
+    2.41
+   ],
+   "texte": "Garage du Rond-Point !"
+  },
+  {
+   "nom": "restaurant",
+   "type": "decroche",
+   "etiquette": "Restaurant",
+   "film": [
+    2.45,
+    3.26
+   ],
+   "texte": "La Table des Halles."
+  },
+  {
+   "nom": "v1",
+   "type": "voix",
+   "film": [
+    3.5,
+    6.147
+   ],
+   "texte": "Aucun d'eux n'a décroché. C'est Vokio qui a répondu."
+  },
+  {
+   "nom": "v2",
+   "type": "voix",
+   "film": [
+    6.5,
+    9.101
+   ],
+   "texte": "Vokio prend le rendez-vous dans votre agenda Google."
+  },
+  {
+   "nom": "v3",
+   "type": "voix",
+   "film": [
+    9.5,
+    11.822
+   ],
+   "texte": "Confirme par SMS, et rappelle la veille."
+  },
+  {
+   "nom": "v4",
+   "type": "voix",
+   "film": [
+    12.5,
+    13.615
+   ],
+   "texte": "Prend les commandes."
+  },
+  {
+   "nom": "v5",
+   "type": "voix",
+   "film": [
+    14.0,
+    16.183
+   ],
+   "texte": "Gère les urgences, même à vingt-trois heures."
+  },
+  {
+   "nom": "v6",
+   "type": "voix",
+   "film": [
+    16.5,
+    19.472
+   ],
+   "texte": "Et chaque appel vous attend, résumé, dans votre espace."
+  },
+  {
+   "nom": "v7",
+   "type": "voix",
+   "film": [
+    20.0,
+    25.341
+   ],
+   "texte": "Plombier, coiffeur, garagiste, dentiste, restaurant… Vokio parle votre métier."
+  },
+  {
+   "nom": "v8",
+   "type": "voix",
+   "film": [
+    28.05,
+    31.069
+   ],
+   "texte": "Vokio. Votre ligne répond, même quand vous ne pouvez pas."
+  },
+  {
+   "nom": "v9",
+   "type": "voix",
+   "film": [
+    31.369,
+    34.248
+   ],
+   "texte": "Créez votre espace gratuitement, sur vokio point F R."
+  }
+ ],
+ "mots": [
+  {
+   "seg": "v1",
+   "texte": "Aucun",
+   "t": 3.5,
+   "t1": 3.802
+  },
+  {
+   "seg": "v1",
+   "texte": "d'eux",
+   "t": 3.86,
+   "t1": 3.976
+  },
+  {
+   "seg": "v1",
+   "texte": "n'a",
+   "t": 4.046,
+   "t1": 4.127
+  },
+  {
+   "seg": "v1",
+   "texte": "décroché.",
+   "t": 4.173,
+   "t1": 4.742
+  },
+  {
+   "seg": "v1",
+   "texte": "C'est",
+   "t": 4.777,
+   "t1": 4.963
+  },
+  {
+   "seg": "v1",
+   "texte": "Vokio",
+   "t": 4.986,
+   "t1": 5.265
+  },
+  {
+   "seg": "v1",
+   "texte": "qui",
+   "t": 5.311,
+   "t1": 5.381
+  },
+  {
+   "seg": "v1",
+   "texte": "a",
+   "t": 5.404,
+   "t1": 5.427
+  },
+  {
+   "seg": "v1",
+   "texte": "répondu.",
+   "t": 5.45,
+   "t1": 6.147
+  },
+  {
+   "seg": "v2",
+   "texte": "Vokio",
+   "t": 6.5,
+   "t1": 6.872
+  },
+  {
+   "seg": "v2",
+   "texte": "prend",
+   "t": 6.906,
+   "t1": 7.08
+  },
+  {
+   "seg": "v2",
+   "texte": "le",
+   "t": 7.104,
+   "t1": 7.162
+  },
+  {
+   "seg": "v2",
+   "texte": "rendez-vous",
+   "t": 7.197,
+   "t1": 7.591
+  },
+  {
+   "seg": "v2",
+   "texte": "dans",
+   "t": 7.615,
+   "t1": 7.719
+  },
+  {
+   "seg": "v2",
+   "texte": "votre",
+   "t": 7.742,
+   "t1": 7.963
+  },
+  {
+   "seg": "v2",
+   "texte": "agenda",
+   "t": 7.998,
+   "t1": 8.323
+  },
+  {
+   "seg": "v2",
+   "texte": "Google.",
+   "t": 8.381,
+   "t1": 9.101
+  },
+  {
+   "seg": "v3",
+   "texte": "Confirme",
+   "t": 9.5,
+   "t1": 9.941
+  },
+  {
+   "seg": "v3",
+   "texte": "par",
+   "t": 9.964,
+   "t1": 10.104
+  },
+  {
+   "seg": "v3",
+   "texte": "SMS,",
+   "t": 10.185,
+   "t1": 10.696
+  },
+  {
+   "seg": "v3",
+   "texte": "et",
+   "t": 10.742,
+   "t1": 10.812
+  },
+  {
+   "seg": "v3",
+   "texte": "rappelle",
+   "t": 10.847,
+   "t1": 11.149
+  },
+  {
+   "seg": "v3",
+   "texte": "la",
+   "t": 11.172,
+   "t1": 11.23
+  },
+  {
+   "seg": "v3",
+   "texte": "veille.",
+   "t": 11.288,
+   "t1": 11.822
+  },
+  {
+   "seg": "v4",
+   "texte": "Prend",
+   "t": 12.5,
+   "t1": 12.779
+  },
+  {
+   "seg": "v4",
+   "texte": "les",
+   "t": 12.802,
+   "t1": 12.883
+  },
+  {
+   "seg": "v4",
+   "texte": "commandes.",
+   "t": 12.918,
+   "t1": 13.615
+  },
+  {
+   "seg": "v5",
+   "texte": "Gère",
+   "t": 14.0,
+   "t1": 14.232
+  },
+  {
+   "seg": "v5",
+   "texte": "les",
+   "t": 14.255,
+   "t1": 14.372
+  },
+  {
+   "seg": "v5",
+   "texte": "urgences,",
+   "t": 14.43,
+   "t1": 14.859
+  },
+  {
+   "seg": "v5",
+   "texte": "même",
+   "t": 14.94,
+   "t1": 15.138
+  },
+  {
+   "seg": "v5",
+   "texte": "à",
+   "t": 15.161,
+   "t1": 15.184
+  },
+  {
+   "seg": "v5",
+   "texte": "vingt-trois",
+   "t": 15.231,
+   "t1": 15.614
+  },
+  {
+   "seg": "v5",
+   "texte": "heures.",
+   "t": 15.66,
+   "t1": 16.183
+  },
+  {
+   "seg": "v6",
+   "texte": "Et",
+   "t": 16.5,
+   "t1": 16.651
+  },
+  {
+   "seg": "v6",
+   "texte": "chaque",
+   "t": 16.686,
+   "t1": 16.93
+  },
+  {
+   "seg": "v6",
+   "texte": "appel",
+   "t": 16.953,
+   "t1": 17.139
+  },
+  {
+   "seg": "v6",
+   "texte": "vous",
+   "t": 17.197,
+   "t1": 17.313
+  },
+  {
+   "seg": "v6",
+   "texte": "attend,",
+   "t": 17.371,
+   "t1": 17.707
+  },
+  {
+   "seg": "v6",
+   "texte": "résumé,",
+   "t": 17.812,
+   "t1": 18.334
+  },
+  {
+   "seg": "v6",
+   "texte": "dans",
+   "t": 18.358,
+   "t1": 18.474
+  },
+  {
+   "seg": "v6",
+   "texte": "votre",
+   "t": 18.497,
+   "t1": 18.729
+  },
+  {
+   "seg": "v6",
+   "texte": "espace.",
+   "t": 18.752,
+   "t1": 19.472
+  },
+  {
+   "seg": "v7",
+   "texte": "Plombier,",
+   "t": 20.0,
+   "t1": 20.522
+  },
+  {
+   "seg": "v7",
+   "texte": "coiffeur,",
+   "t": 20.569,
+   "t1": 21.091
+  },
+  {
+   "seg": "v7",
+   "texte": "garagiste,",
+   "t": 21.149,
+   "t1": 21.811
+  },
+  {
+   "seg": "v7",
+   "texte": "dentiste,",
+   "t": 21.869,
+   "t1": 22.438
+  },
+  {
+   "seg": "v7",
+   "texte": "restaurant…",
+   "t": 22.508,
+   "t1": 23.204
+  },
+  {
+   "seg": "v7",
+   "texte": "Vokio",
+   "t": 23.564,
+   "t1": 24.005
+  },
+  {
+   "seg": "v7",
+   "texte": "parle",
+   "t": 24.098,
+   "t1": 24.365
+  },
+  {
+   "seg": "v7",
+   "texte": "votre",
+   "t": 24.4,
+   "t1": 24.644
+  },
+  {
+   "seg": "v7",
+   "texte": "métier.",
+   "t": 24.69,
+   "t1": 25.341
+  },
+  {
+   "seg": "v8",
+   "texte": "Vokio.",
+   "t": 28.05,
+   "t1": 28.572
+  },
+  {
+   "seg": "v8",
+   "texte": "Votre",
+   "t": 28.654,
+   "t1": 28.944
+  },
+  {
+   "seg": "v8",
+   "texte": "ligne",
+   "t": 28.979,
+   "t1": 29.165
+  },
+  {
+   "seg": "v8",
+   "texte": "répond,",
+   "t": 29.211,
+   "t1": 29.536
+  },
+  {
+   "seg": "v8",
+   "texte": "même",
+   "t": 29.583,
+   "t1": 29.768
+  },
+  {
+   "seg": "v8",
+   "texte": "quand",
+   "t": 29.791,
+   "t1": 29.908
+  },
+  {
+   "seg": "v8",
+   "texte": "vous",
+   "t": 29.942,
+   "t1": 30.047
+  },
+  {
+   "seg": "v8",
+   "texte": "ne",
+   "t": 30.07,
+   "t1": 30.14
+  },
+  {
+   "seg": "v8",
+   "texte": "pouvez",
+   "t": 30.198,
+   "t1": 30.476
+  },
+  {
+   "seg": "v8",
+   "texte": "pas.",
+   "t": 30.523,
+   "t1": 31.069
+  },
+  {
+   "seg": "v9",
+   "texte": "Créez",
+   "t": 31.369,
+   "t1": 31.636
+  },
+  {
+   "seg": "v9",
+   "texte": "votre",
+   "t": 31.659,
+   "t1": 31.891
+  },
+  {
+   "seg": "v9",
+   "texte": "espace",
+   "t": 31.915,
+   "t1": 32.17
+  },
+  {
+   "seg": "v9",
+   "texte": "gratuitement,",
+   "t": 32.193,
+   "t1": 32.774
+  },
+  {
+   "seg": "v9",
+   "texte": "sur",
+   "t": 32.832,
+   "t1": 32.971
+  },
+  {
+   "seg": "v9",
+   "texte": "vokio.fr",
+   "t": 33.018,
+   "t1": 34.248
+  }
+ ],
+ "temps": {
+  "plume": 26.2,
+  "plume_fin": 26.9,
+  "la": 27.0,
+  "sol": 27.24,
+  "re": 27.6
+ },
+ "voix": {
+  "v1": {
+   "debut": 3.5,
+   "fin": 6.147
+  },
+  "v2": {
+   "debut": 6.5,
+   "fin": 9.101
+  },
+  "v3": {
+   "debut": 9.5,
+   "fin": 11.822
+  },
+  "v4": {
+   "debut": 12.5,
+   "fin": 13.615
+  },
+  "v5": {
+   "debut": 14.0,
+   "fin": 16.183
+  },
+  "v6": {
+   "debut": 16.5,
+   "fin": 19.472
+  },
+  "v7": {
+   "debut": 20.0,
+   "fin": 25.341
+  },
+  "v8": {
+   "debut": 28.05,
+   "fin": 31.069
+  },
+  "v9": {
+   "debut": 31.369,
+   "fin": 34.248
+  }
+ },
+ "metiers": [
+  "Auto-école",
+  "Barbier",
+  "Boulangerie",
+  "Chauffagiste",
+  "Coiffure",
+  "Dentiste",
+  "Électricien",
+  "Fleuriste",
+  "Garage",
+  "Institut de beauté",
+  "Kiné",
+  "Médecin",
+  "Onglerie",
+  "Opticien",
+  "Ostéopathe",
+  "Plombier",
+  "Rénovation",
+  "Restaurant",
+  "Serrurier",
+  "Toiletteur",
+  "Traiteur",
+  "Vétérinaire"
+ ],
+ "fin_accroche": 3.3,
+ "son": {
+  "lufs": -14.0,
+  "crete_dbfs": -1.6
+ }
+}

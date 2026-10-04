@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Ils ont tous la même assistante · pub Vokio 9:16</title>
+<!-- Pub multi-métiers 9:16 (04/10/2026). GÉNÉRÉ par construire.py depuis gabarit.src.html (+ pièces iPhone reprises du
+     gabarit de pub-secretaire) : éditer la source, jamais index.html. Minutage : donnees/donnees.js (son/monter.py).
+     Zones Meta Reels : rien d'important au-dessus de y = 250 ni sous y = 1250. -->
+<script src="donnees/donnees.js"></script>
+<script src="lib/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Geist";src:url("fonts/geist.woff2") format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Geist Mono";src:url("fonts/geist-mono.woff2") format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Instrument Serif";src:url("fonts/instrument-serif.woff2") format("woff2");font-style:normal;font-display:block}
+@font-face{font-family:"Instrument Serif";src:url("fonts/instrument-serif-italic.woff2") format("woff2");font-style:italic;font-display:block}
+@font-face{font-family:"Inter";src:url("fonts/Inter-Variable-latin.woff2") format("woff2");font-weight:100 900;font-display:block}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
+#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:#F4F1E8;color:#262019;-webkit-font-smoothing:antialiased;font-kerning:normal}
+.abs{position:absolute}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .03em .18em;margin:0 -.03em -.18em}
+.i{display:inline-block}
+.ptf{display:inline-block;width:.13em;height:.13em;margin-left:.02em}   /* place du point final (le point solaire s'y pose) */
+/* accroche */
+#titre1{left:84px;width:912px;top:300px;text-align:center;font-family:"Instrument Serif",serif;font-size:112px;line-height:1.0;letter-spacing:-.025em}
+#titre1 em{font-style:italic}
+.etab{position:absolute;left:84px;width:912px;text-align:center}
+.etab .lab{font-family:"Geist Mono",monospace;font-size:40px;letter-spacing:.14em;text-transform:uppercase;color:#6F695F;margin-bottom:18px}
+.etab .nom{white-space:nowrap;font-family:"Geist",sans-serif;font-weight:500;font-size:112px;line-height:1.05;letter-spacing:-.03em;color:#262019}
+/* voix off : le récit (Instrument Serif droit) */
+.page{position:absolute;left:84px;width:912px;font-family:"Instrument Serif",serif;letter-spacing:-.02em;color:#262019}
+.page.haut{top:290px;font-size:80px;line-height:1.02}
+.page.centre{font-size:104px;line-height:1.0;text-align:center}
+.page em{font-style:italic}
+/* agenda (vue jour de app.vokio.fr, redessinée comme dans le relais) */
+#agenda{position:absolute;left:84px;top:540px;width:912px;height:690px}
+#ag-date{position:absolute;left:0;top:0;font-family:"Geist",sans-serif;font-size:50px;line-height:60px;color:#6F695F;letter-spacing:-.01em}
+#ag-col{position:absolute;left:216px;right:0;top:100px;bottom:0;background:#F0EDE3;-webkit-mask-image:linear-gradient(#000 0,#000 72%,transparent 100%);mask-image:linear-gradient(#000 0,#000 72%,transparent 100%)}
+.ag-filet{position:absolute;left:216px;right:0;height:3px;background:#E3E1D6}
+.ag-h{position:absolute;left:0;font-family:"Geist Mono",monospace;font-size:50px;line-height:60px;color:#6F695F;letter-spacing:-.01em}
+#bloc{position:absolute;left:222px;right:6px;height:156px;border-radius:22px;background:#F0DEBC;border:3px solid #EAB964;padding:16px 28px 0;overflow:hidden}
+#bloc .l1{font-family:"Geist",sans-serif;font-size:60px;line-height:68px;white-space:nowrap}
+#bloc .h{color:#5B554C}
+#bloc .l2{font-family:"Geist",sans-serif;font-size:54px;line-height:60px;color:#5B554C}
+/* commande */
+#commande{left:84px;top:560px;width:912px}
+#co-titre{font-family:"Geist",sans-serif;font-size:48px;line-height:58px;color:#6F695F;letter-spacing:-.01em;margin-bottom:24px}
+#co-carte{border-radius:26px;background:#F0DEBC;border:3px solid #EAB964;padding:22px 34px 24px}
+.li{position:relative;padding-left:58px;font-family:"Geist",sans-serif;font-size:60px;line-height:94px;color:#262019;letter-spacing:-.015em;white-space:nowrap}
+.li .puce{position:absolute;left:4px;top:35px;width:24px;height:24px;border-radius:50%;background:#EFA424}
+/* espace client : vraies captures de app.vokio.fr (établissement fictif), échelle FIXE */
+#espace{left:84px;top:480px;width:912px;height:760px}
+#espace .cap{position:absolute;left:0;width:1044px;transform-origin:0 0}
+#esp-resume{position:absolute;left:114px;top:103px;width:820px;font-family:"Geist",sans-serif;font-size:42px;line-height:68.25px;color:rgb(78,73,66)}
+/* les métiers */
+#mur{left:84px;top:330px;width:912px;height:900px}
+.met{position:absolute;font-family:"Geist",sans-serif;font-size:46px;line-height:60px;color:#6F695F;letter-spacing:-.01em;white-space:nowrap}
+.met.on{color:#262019;font-weight:600}
+/* iPhone */
+__CSS_IPHONE__
+/* fin */
+#marque{position:absolute;left:0;right:0;top:430px;height:300px;display:flex;align-items:center;justify-content:center}
+#mot{font-family:"Instrument Serif",serif;font-size:300px;letter-spacing:-.045em;line-height:.9;display:inline-flex;align-items:baseline;color:#262019}
+#mot .seg{display:inline-block}
+#mot .i{position:relative;font-style:normal}
+#mot-pt{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;border-radius:50%}
+#promesse{position:absolute;left:84px;width:912px;top:790px;text-align:center;font-family:"Instrument Serif",serif;font-size:68px;line-height:1.05;letter-spacing:-.02em;color:#262019}
+#cta{position:absolute;left:84px;width:912px;top:1000px;text-align:center;font-family:"Geist",sans-serif;font-size:46px;line-height:1.3;color:#5B554C;letter-spacing:-.012em}
+#cta .url{display:inline-block;font-weight:600;font-size:80px;line-height:1.15;color:#262019;letter-spacing:-.025em}
+#offre{position:absolute;left:84px;width:912px;top:1180px;text-align:center;font-family:"Geist",sans-serif;font-size:40px;line-height:1.2;color:#6F695F}
+#point{position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;background:#EFA424}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="pub" data-start="0" data-width="1080" data-height="1920" data-duration="__DUREE__">
+  <div id="titre1" class="abs">Ils ont tous<br>la même <em>assistante<span class="ptf" id="t1-pt"></span></em></div>
+  <div id="etabs" class="abs" style="inset:0"></div>
+  <div id="textes" class="abs" style="inset:0"></div>
+  <div id="agenda">
+    <div id="ag-date">Samedi 19 septembre</div><div id="ag-col"></div>
+    <div id="bloc"><div class="l1"><span class="h">10:00</span> <span class="nom">Camille</span></div><div class="l2">Balayage</div></div>
+  </div>
+  <div id="commande" class="abs"><div id="co-titre">Commande · samedi 19 septembre</div><div id="co-carte"></div></div>
+  <div id="espace" class="abs">
+    <img class="cap" id="esp-entete" src="assets/plombier-entete-net.png" alt="">
+    <div class="cap" id="esp-panneau"><img src="assets/plombier-panneau.png" alt="" style="display:block;width:1044px"><div id="esp-resume"></div></div>
+  </div>
+  <div id="mur" class="abs"></div>
+__HTML_IPHONE__
+  <div id="marque"><p id="mot"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span><span id="mot-base" style="display:inline-block;width:0;height:0"></span></p></div>
+  <div id="promesse"></div>
+  <div id="cta"></div>
+  <div id="offre">59 €/mois · sans engagement</div>
+  <div id="point"></div>
+</div>
+<script>
+window.__timelines = window.__timelines || {};
+window.__pub = { erreurs: [], pret: false };
+(function () {
+  const D = window.MONTAGE, T = D.duree, TT = D.temps, R = 22, M = 84;
+  const $ = (s) => document.querySelector(s);
+  const P3o = "power3.out", P3io = "power3.inOut";
+  function exiger(c, msg) { if (!c) { window.__pub.erreurs.push(msg); console.error("pub : " + msg); } }
+  function boite(el) { const r = el.getBoundingClientRect(), r0 = $("#root").getBoundingClientRect(), k = r0.width / 1080;
+    return { x: (r.left - r0.left) / k, y: (r.top - r0.top) / k, w: r.width / k, h: r.height / k }; }
+  const seg = (n) => D.segments.find((s) => s.nom === n);
+  const motsDe = (n) => D.mots.filter((w) => w.seg === n);
+  const tMot = (n, texte) => { const w = motsDe(n).find((w) => w.texte.replace(/[.,…!?]/g, "") === texte); exiger(!!w, "mot absent : " + n + " " + texte); return w ? w.t : 0; };
+__ARRONDI__
+  function construire() {
+    const tl = gsap.timeline({ paused: true });
+    const ft = (el, de, a, t) => tl.fromTo(el, de, Object.assign({ immediateRender: false }, a), t);
+    const fenetres = []; const montrer = (el, t0, t1) => fenetres.push([el, t0, t1]);
+    const entre = (el, t, dy) => ft(el, { autoAlpha: 0, y: dy || 40 }, { autoAlpha: 1, y: 0, duration: 0.42, ease: P3o }, t);
+    const sort = (el, t) => ft(el, { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -40, duration: 0.22, ease: "power2.in" }, t);
+    const V = (n) => seg(n).film;
+    const pts = [];          // cibles du point {t, x, y, s (diamètre px), d (durée), renait}
+
+    // ================= ACCROCHE : composée dès l'image 0, les vrais décrochés défilent dessous
+    const decs = D.segments.filter((s) => s.type === "decroche");
+    const finAcc = V("v1")[0] - 0.12;
+    const t1 = $("#titre1");
+    montrer(t1, 0, finAcc + 0.25); sort(t1, finAcc);
+    decs.forEach(function (s, k) {
+      const el = document.createElement("div"); el.className = "etab";
+      el.innerHTML = '<div class="lab">' + s.etiquette + '</div><div class="nom">' + s.texte.replace(/\s*[!.]$/, "") + "</div>";
+      $("#etabs").appendChild(el);
+      const nom = el.querySelector(".nom");
+      for (let fs = 112; fs > 64 && boite(nom).w > 0 && nom.scrollWidth > 912; fs -= 4) nom.style.fontSize = fs + "px";
+      exiger(nom.scrollWidth <= 912, "nom trop large : " + s.texte);
+      const h = boite(el).h; el.style.top = Math.round(800 - h / 2) + "px";
+      const t0 = Math.max(0, s.film[0] - 0.02), t1e = k < decs.length - 1 ? decs[k + 1].film[0] - 0.02 : finAcc;
+      montrer(el, t0, t1e + 0.12);
+      if (k === 0) gsap.set(el, { autoAlpha: 1 });       // l'image 0 montre déjà le premier établissement
+      else ft(el, { autoAlpha: 0, y: 70 }, { autoAlpha: 1, y: 0, duration: 0.16, ease: P3o }, t0);
+      ft(el, { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -70, duration: 0.1, ease: "power2.in" }, t1e);
+    });
+
+    // ================= VOIX OFF : pages du récit, mots révélés quand ils sont dits
+    const pages = [];
+    function page(n, mots, cls, top, t_out, idPt) {
+      const el = document.createElement("div"); el.className = "page " + cls;
+      el.innerHTML = mots.map((w, q) => '<span class="w"><span class="i">' + (idPt && q === mots.length - 1
+        ? w.texte.replace(/\.$/, "") + '<span class="ptf" id="' + idPt + '"></span>' : w.texte) + "</span></span>").join(" ");
+      $("#textes").appendChild(el);
+      const h = boite(el).h;
+      el.style.top = (top === "centre" ? Math.round(700 - h / 2) : top) + "px";
+      const t_in = mots[0].t - 0.08;
+      montrer(el, t_in, t_out + 0.24); sort(el, t_out);
+      const nl = new Set([].map.call(el.children, (c) => Math.round(c.offsetTop))).size;
+      exiger(nl <= 3, "page « " + el.textContent.slice(0, 30) + " » : " + nl + " lignes");
+      exiger(boite(el).y + h <= 1250, "page sous 1250 : " + el.textContent.slice(0, 30));
+      [].forEach.call(el.querySelectorAll(".i"), function (sp, q) {
+        gsap.set(sp, { yPercent: 104 });
+        ft(sp, { yPercent: 104 }, { yPercent: 0, duration: 0.28, ease: P3o }, mots[q].t - 0.03);
+      });
+      const p = { el, mots, t_in, t_out }; pages.push(p); return p;
+    }
+    // v1 : deux phrases, au centre ; le point devient le point final de « répondu. »
+    const m1 = motsDe("v1"), k1 = m1.findIndex((w) => w.texte === "C'est");
+    page("v1", m1.slice(0, k1), "centre", "centre", m1[k1].t - 0.12);
+    page("v1", m1.slice(k1), "centre", "centre", V("v2")[0] - 0.16, "v1-pt");
+    // v2 à v6 : en haut, l'objet dessous
+    const fin = { v2: V("v3")[0] - 0.12, v3: V("v4")[0] - 0.12, v4: V("v5")[0] - 0.12, v5: V("v6")[0] - 0.12, v6: V("v7")[0] - 0.12 };
+    ["v2", "v3", "v4", "v5", "v6"].forEach((n) => page(n, motsDe(n), "haut", 290, fin[n]));
+
+    // ================= AGENDA (v2) : le point touche 10:00, le rendez-vous s'inscrit
+    const ag = $("#agenda");
+    ["09:00", "10:00", "11:00"].forEach(function (h, i) {
+      const yf = 130 + i * 175;
+      const f = document.createElement("div"); f.className = "ag-filet"; f.style.top = yf + "px"; ag.appendChild(f);
+      const l = document.createElement("div"); l.className = "ag-h"; l.textContent = h; l.style.top = (yf - 30) + "px"; ag.appendChild(l);
+      if (h === "10:00") { $("#bloc").style.top = (yf + 8) + "px"; ag.dataset.y10 = yf; }
+    });
+    const tAg0 = V("v2")[0] - 0.1, tBloc = tMot("v2", "agenda");
+    montrer(ag, tAg0, fin.v2 + 0.3); entre(ag, tAg0); sort(ag, fin.v2);
+    const bloc = $("#bloc");
+    gsap.set(bloc, { clipPath: "inset(0% 100% 0% 0% round 22px)" });
+    ft(bloc, { clipPath: "inset(0% 100% 0% 0% round 22px)" }, { clipPath: "inset(0% 0% 0% 0% round 22px)", duration: 0.45, ease: P3o }, tBloc);
+    const bAg = boite(ag);
+    pts.push({ t: tMot("v2", "rendez-vous"), x: bAg.x + 186, y: bAg.y + (+ag.dataset.y10) + 1.5, s: 44 });
+
+    // ================= SMS (v3) : l'iPhone, la confirmation au client
+    const ip = { entree: V("v3")[0] - 0.1, sortie: fin.v3, K: 2.2, yE: 520, heure: "15:13",
+      txt: "Bonjour Camille, votre rendez-vous est confirmé : Balayage, le samedi 19 septembre à 10:00, Salon Marchand. Démo Vokio, RDV fictif." };
+    ip.bulle = tMot("v3", "SMS");
+__JS_IPHONE__
+    pts.push({ t: ip.entree + 0.5, x: ip.repos.x, y: ip.repos.y, s: 44, renait: true, eteint: ip.entree - 0.04 });
+
+    // ================= COMMANDE (v4)
+    const co = $("#commande"), coc = $("#co-carte");
+    const lignes = ["Fraisier, huit parts", "Pour Florian", "Retrait à 11:00"];
+    lignes.forEach((l) => { const d = document.createElement("div"); d.className = "li"; d.innerHTML = '<span class="puce"></span>' + l; coc.appendChild(d); });
+    const tCo = V("v4")[0] - 0.1, tCom = tMot("v4", "commandes");
+    montrer(co, tCo, fin.v4 + 0.3); entre(co, tCo); sort(co, fin.v4);
+    const puces = [], hLi = boite(coc.children[0]).h, padCo = 22 + 24 + 6;
+    gsap.set(coc, { height: padCo + hLi });
+    [].forEach.call(coc.children, function (li, k) {
+      const t = tCom - 0.1 + k * 0.22;
+      if (k > 0) ft(coc, { height: padCo + hLi * k }, { height: padCo + hLi * (k + 1), duration: 0.22, ease: P3o }, t - 0.12);
+      gsap.set(li, { clipPath: "inset(0% 100% 0% 0%)" }); gsap.set(li.firstChild, { scale: 0 });
+      ft(li, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: P3o }, t);
+      ft(li.firstChild, { scale: 0 }, { scale: 1, duration: 0.12, ease: P3o }, t);
+      const b = boite(li.firstChild); puces.push({ t, x: b.x + b.w / 2, y: b.y + b.h / 2 });
+    });
+    pts.push({ t: puces[0].t - 0.2, x: puces[0].x, y: puces[0].y, s: 44, renait: true, eteint: ip.sortie - 0.02 });
+    puces.slice(1).forEach((p) => pts.push({ t: p.t - 0.12, x: p.x, y: p.y, s: 44, d: 0.14 }));
+
+    // ================= ESPACE CLIENT (v5 + v6) : la fiche urgence, puis le résumé qui s'écrit (le point écrit)
+    const esp = $("#espace"), ent = $("#esp-entete"), pan = $("#esp-panneau"), S = 912 / 1044;
+    ent.style.transform = "scale(" + S + ")"; pan.style.transform = "scale(" + S + ")";
+    ent.style.top = "0px"; pan.style.top = Math.round(216 * S) + "px";
+    const res = $("#esp-resume");
+    const resume = "M. Lefèvre a une fuite sous l'évier. Le geste d'urgence lui a été donné au téléphone. Intervention calée demain matin 8 h 30. SMS de confirmation envoyé.".split(" ");
+    res.innerHTML = resume.map((w) => "<span>" + w + "</span>").join(" ");
+    const tEsp = V("v5")[0] - 0.1, tPan = V("v6")[0] - 0.05, tEcr0 = tMot("v6", "résumé") - 0.1, tEcr1 = V("v6")[1] + 0.25;
+    montrer(esp, tEsp, fin.v6 + 0.3); sort(esp, fin.v6);
+    ft(ent, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.42, ease: P3o }, tMot("v5", "urgences") - 0.1);
+    gsap.set(ent, { autoAlpha: 0 });
+    gsap.set(pan, { clipPath: "inset(0% 0% 100% 0% round 30px)" });
+    ft(pan, { clipPath: "inset(0% 0% 100% 0% round 30px)" }, { clipPath: "inset(0% 0% 0% 0% round 30px)", duration: 0.45, ease: P3o }, tPan);
+    exiger(boite(esp).y + (216 + 647) * S <= 1250, "l'espace descend sous 1250");
+    const bEnt = boite(ent);
+    pts.push({ t: tMot("v5", "urgences"), x: bEnt.x + bEnt.w - 70, y: bEnt.y + 90 * S, s: 44, renait: true, eteint: fin.v4 - 0.02 });
+    const spans = [].slice.call(res.children);
+    spans.forEach(function (sp, k) {
+      const t = tEcr0 + (tEcr1 - tEcr0) * k / spans.length;
+      gsap.set(sp, { opacity: 0 }); ft(sp, { opacity: 0 }, { opacity: 1, duration: 0.06 }, t);
+      const b = boite(sp);
+      pts.push({ t, x: b.x + b.w + 24, y: b.y + b.h * 0.55, s: 30, d: 0.08, ligne: true });
+    });
+
+    // ================= LES MÉTIERS (v7) : le mur des 22, le point se pose sur ceux qu'on cite
+    const mur = $("#mur");
+    const cites = { "Plombier": "Plombier", "coiffeur": "Coiffure", "garagiste": "Garage", "dentiste": "Dentiste", "restaurant": "Restaurant" };
+    const tMur0 = V("v7")[0] - 0.15, tVokio = tMot("v7", "Vokio"), finMur = tVokio - 0.12;
+    const els = {};
+    D.metiers.forEach(function (m, k) {
+      const d = document.createElement("div"); d.className = "met"; d.textContent = m;
+      const col = k % 2, row = Math.floor(k / 2);
+      d.style.left = (col ? 470 : 0) + "px"; d.style.top = (row * 78) + "px";
+      mur.appendChild(d); els[m] = d;
+      ft(d, { autoAlpha: 0, x: col ? 30 : -30 }, { autoAlpha: 1, x: 0, duration: 0.3, ease: P3o }, tMur0 + k * 0.05);
+      gsap.set(d, { autoAlpha: 0 });
+    });
+    exiger(boite(mur).y + Math.ceil(D.metiers.length / 2) * 78 <= 1250, "le mur descend sous 1250");
+    montrer(mur, tMur0, finMur + 0.3); sort(mur, finMur);
+    motsDe("v7").forEach(function (w) {
+      const cle = w.texte.replace(/[,…]/g, ""), m = cites[cle];
+      if (!m) return;
+      const d = els[m];
+      tl.call(() => d.classList.add("on"), null, w.t); tl.call(() => d.classList.remove("on"), null, w.t - 0.001);
+      d.classList.remove("on");
+      const b = boite(d);
+      pts.push({ t: w.t - 0.06, x: b.x - 30, y: b.y + b.h / 2, s: 30, d: 0.14 });
+    });
+    const mFin = motsDe("v7").filter((w) => motsDe("v7").indexOf(w) >= motsDe("v7").findIndex((x) => x.texte === "Vokio"));
+    page("v7", mFin, "centre", "centre", TT.plume - 0.58, "v7-pt");
+
+    // ================= FIN : le point écrit Vokıo puis se pose sur le ı (signature du film long)
+    const marque = $("#marque"), mot = $("#mot");
+    montrer(marque, TT.plume, null);
+    const bMot = boite(mot), base = boite($("#mot-base")).y;
+    const encre0 = boite($("#mot-a")).x, encre1 = boite($("#mot-o")).x + boite($("#mot-o")).w;
+    const stylo = { x0: encre0 - 34, x1: encre1 + 30, y: base + 32 };
+    const L_ENCRE = 40, EASE_PLUME = gsap.parseEase("sine.inOut");
+    function encre(xp) { const xl = xp - bMot.x; const m = "linear-gradient(90deg,#000 0,#000 " + (xl - L_ENCRE).toFixed(1) + "px,transparent " + xl.toFixed(1) + "px)"; mot.style.webkitMaskImage = m; mot.style.maskImage = m; }
+    encre(stylo.x0);
+    const plume = { u: 0 };
+    tl.fromTo(plume, { u: 0 }, { u: 1, duration: TT.plume_fin - TT.plume, ease: "none", immediateRender: false,
+      onUpdate: () => encre(stylo.x0 + (stylo.x1 + L_ENCRE - stylo.x0) * EASE_PLUME(plume.u)) }, TT.plume);
+    tl.call(() => encre(stylo.x1 + L_ENCRE), null, TT.plume_fin - 0.001);
+    tl.call(() => { mot.style.webkitMaskImage = "none"; mot.style.maskImage = "none"; }, null, TT.plume_fin + 0.001);
+    // promesse (v8, sans le « Vokio. » que le logo dit déjà) puis l'appel à l'action (v9)
+    const m8 = motsDe("v8").slice(1), prom = $("#promesse");
+    prom.innerHTML = m8.map((w) => '<span class="w"><span class="i">' + w.texte + "</span></span>").join(" ");
+    montrer(prom, m8[0].t - 0.05, null);
+    [].forEach.call(prom.querySelectorAll(".i"), (sp, q) => { gsap.set(sp, { yPercent: 104 }); ft(sp, { yPercent: 104 }, { yPercent: 0, duration: 0.28, ease: P3o }, m8[q].t - 0.03); });
+    const m9 = motsDe("v9"), cta = $("#cta");
+    cta.innerHTML = m9.map((w) => '<span class="w"><span class="i' + (w.texte === "vokio.fr" ? " url" : "") + '">' + w.texte + "</span></span>").join(" ").replace(' <span class="w"><span class="i url">', '<br><span class="w"><span class="i url">');
+    montrer(cta, m9[0].t - 0.05, null);
+    [].forEach.call(cta.querySelectorAll(".i"), (sp, q) => { gsap.set(sp, { yPercent: 104 }); ft(sp, { yPercent: 104 }, { yPercent: 0, duration: 0.3, ease: P3o }, m9[q].t - 0.03); });
+    const off = $("#offre"); montrer(off, V("v9")[1] + 0.1, null); entre(off, V("v9")[1] + 0.1, 24);
+    exiger(boite(off).y + boite(off).h <= 1250, "l'offre descend sous 1250");
+
+    // ================= LE POINT
+    const point = $("#point");
+    const c = (el) => { const b = boite(el); return { x: b.x + b.w / 2, y: b.y + b.h / 2, s: b.w }; };
+    const P1 = c($("#t1-pt")), Pv1 = c($("#v1-pt")), Pv7 = c($("#v7-pt")), PI = c($("#mot-pt"));
+    gsap.set(point, { x: P1.x, y: P1.y, xPercent: -50, yPercent: -50, scale: P1.s / 44 });
+    // il bat à chaque décroché : c'est lui qui répond
+    decs.forEach(function (s) {
+      ft(point, { scale: P1.s / 44 }, { scale: P1.s / 44 * 1.6, duration: 0.08, ease: "power2.out" }, s.film[0]);
+      ft(point, { scale: P1.s / 44 * 1.6 }, { scale: P1.s / 44, duration: 0.25, ease: "power2.in" }, s.film[0] + 0.08);
+    });
+    ft(point, { scale: P1.s / 44 }, { scale: 0, duration: 0.18, ease: "power2.in" }, finAcc);
+    // point final de « répondu. »
+    const tRep = m1[m1.length - 1].t1 - 0.05;
+    tl.set(point, { x: Pv1.x, y: Pv1.y }, tRep - 0.01);
+    ft(point, { scale: 0 }, { scale: Pv1.s / 44, duration: 0.2, ease: P3o }, tRep);
+    let px = Pv1.x, py = Pv1.y, ps = Pv1.s, tp = tRep + 0.2;
+    pts.sort((a, b) => a.t - b.t);
+    pts.forEach(function (q, k) {
+      const t = Math.max(q.t, tp);
+      if (q.renait || q.ligne && Math.abs(q.y - py) > 20) {
+        const te = q.eteint != null ? Math.max(q.eteint, tp) : t;
+        ft(point, { scale: ps / 44 }, { scale: 0, duration: 0.1, ease: "power2.in" }, te);
+        tl.set(point, { x: q.x, y: q.y }, Math.max(te + 0.1, t - 0.001));
+        ft(point, { scale: 0 }, { scale: q.s / 44, duration: 0.16, ease: P3o }, Math.max(te + 0.1, t));
+        px = q.x; py = q.y; ps = q.s; tp = Math.max(te + 0.1, t) + 0.16; return;
+      }
+      const d = q.d || 0.3;
+      ft(point, { x: px, y: py, scale: ps / 44 }, { x: q.x, y: q.y, scale: q.s / 44, duration: d, ease: P3o }, t);
+      px = q.x; py = q.y; ps = q.s; tp = t + d;
+    });
+    // il quitte l'espace, attend le mur, puis devient le point final de « métier. »
+    const tMet = mFin[mFin.length - 1].t1 - 0.05;
+    exiger(tMet > tp, "le point arrive sur « métier. » avant d'avoir fini");
+    ft(point, { scale: ps / 44 }, { scale: 0, duration: 0.12, ease: "power2.in" }, Math.max(tp, finMur));
+    tl.set(point, { x: Pv7.x, y: Pv7.y }, tMet - 0.01);
+    ft(point, { scale: 0 }, { scale: Pv7.s / 44, duration: 0.2, ease: P3o }, tMet);
+    // signature
+    exiger(TT.plume - 0.3 > tMet + 0.3, "pas le temps de poser « métier. »");
+    ft(point, { x: Pv7.x, y: Pv7.y, scale: Pv7.s / 44 }, { x: stylo.x0, y: stylo.y, scale: 1, duration: 0.3, ease: P3io }, TT.plume - 0.3);
+    const xPlume = { u: 0 };
+    tl.fromTo(xPlume, { u: 0 }, { u: 1, duration: TT.plume_fin - TT.plume, ease: "none", immediateRender: false,
+      onUpdate: () => gsap.set(point, { x: stylo.x0 + (stylo.x1 - stylo.x0) * EASE_PLUME(xPlume.u), y: stylo.y }) }, TT.plume);
+    const sI = PI.s / 44, BOND = 110;
+    ft(point, { x: stylo.x1, scale: 1 }, { x: PI.x, scale: sI * 1.15, duration: TT.sol - TT.la, ease: "power2.out" }, TT.la);
+    ft(point, { y: stylo.y }, { y: PI.y - BOND, duration: TT.sol - TT.la, ease: "power2.out" }, TT.la);
+    ft(point, { y: PI.y - BOND }, { y: PI.y - BOND - 8, duration: 0.16, ease: "sine.inOut" }, TT.sol);
+    ft(point, { y: PI.y - BOND - 8, scale: sI * 1.15 }, { y: PI.y, scale: sI, duration: TT.re - TT.sol - 0.16, ease: "power2.in" }, TT.sol + 0.16);
+    ft(point, { scaleX: sI, scaleY: sI }, { scaleX: sI * 1.28, scaleY: sI * 0.74, duration: 0.067, ease: "power2.out" }, TT.re);
+    ft(point, { scaleX: sI * 1.28, scaleY: sI * 0.74 }, { scaleX: sI, scaleY: sI, duration: 0.1, ease: "power2.out" }, TT.re + 0.067);
+
+    fenetres.forEach(function (f) {
+      const el = f[0], t0 = f[1], t1 = f[2];
+      if (t0 > 0.001) { gsap.set(el, { display: "none" }); tl.set(el, { display: "" }, t0 - 0.001); }
+      if (t1 != null) tl.set(el, { display: "none" }, t1);
+    });
+    exiger(tl.duration() <= T + 0.05, "le timeline dépasse la durée (" + tl.duration().toFixed(2) + ")");
+    window.__pub.pages = pages.map((p) => ({ t_in: +p.t_in.toFixed(2), t_out: +p.t_out.toFixed(2), texte: p.mots.map((w) => w.texte).join(" ") }));
+    window.__timelines["pub"] = tl;
+    window.__pub.pret = true;
+  }
+  Promise.all(["52px Geist", "52px 'Geist Mono'", "52px 'Instrument Serif'", "italic 52px 'Instrument Serif'", "52px Inter"].map((f) => document.fonts.load(f)))
+    .then(() => Promise.all([].map.call(document.images, (im) => im.complete ? 0 : new Promise((r) => { im.onload = im.onerror = r; }))))
+    .then(() => document.fonts.ready).then(construire);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+ "id": "v3",
+ "texte": "Confirme par SMS, et rappelle la veille.",
+ "duree": 2.322,
+ "mots": [
+  {
+   "texte": "Confirme",
+   "t": 0.0,
+   "t1": 0.441
+  },
+  {
+   "texte": "par",
+   "t": 0.464,
+   "t1": 0.604
+  },
+  {
+   "texte": "SMS,",
+   "t": 0.685,
+   "t1": 1.196
+  },
+  {
+   "texte": "et",
+   "t": 1.242,
+   "t1": 1.312
+  },
+  {
+   "texte": "rappelle",
+   "t": 1.347,
+   "t1": 1.649
+  },
+  {
+   "texte": "la",
+   "t": 1.672,
+   "t1": 1.73
+  },
+  {
+   "texte": "veille.",
+   "t": 1.788,
+   "t1": 2.322
+  }
+ ]
+}

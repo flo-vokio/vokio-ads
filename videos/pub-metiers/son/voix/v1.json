@@ -1,0 +1,52 @@
+{
+ "id": "v1",
+ "texte": "Aucun d'eux n'a décroché. C'est Vokio qui a répondu.",
+ "duree": 2.647083,
+ "mots": [
+  {
+   "texte": "Aucun",
+   "t": 0.0,
+   "t1": 0.302
+  },
+  {
+   "texte": "d'eux",
+   "t": 0.36,
+   "t1": 0.476
+  },
+  {
+   "texte": "n'a",
+   "t": 0.546,
+   "t1": 0.627
+  },
+  {
+   "texte": "décroché.",
+   "t": 0.673,
+   "t1": 1.242
+  },
+  {
+   "texte": "C'est",
+   "t": 1.277,
+   "t1": 1.463
+  },
+  {
+   "texte": "Vokio",
+   "t": 1.486,
+   "t1": 1.765
+  },
+  {
+   "texte": "qui",
+   "t": 1.811,
+   "t1": 1.881
+  },
+  {
+   "texte": "a",
+   "t": 1.904,
+   "t1": 1.927
+  },
+  {
+   "texte": "répondu.",
+   "t": 1.95,
+   "t1": 2.647
+  }
+ ]
+}

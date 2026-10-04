@@ -1,0 +1,22 @@
+{
+ "id": "v4",
+ "texte": "Prend les commandes.",
+ "duree": 1.114563,
+ "mots": [
+  {
+   "texte": "Prend",
+   "t": 0.0,
+   "t1": 0.279
+  },
+  {
+   "texte": "les",
+   "t": 0.302,
+   "t1": 0.383
+  },
+  {
+   "texte": "commandes.",
+   "t": 0.418,
+   "t1": 1.115
+  }
+ ]
+}

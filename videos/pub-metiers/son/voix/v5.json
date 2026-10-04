@@ -1,0 +1,42 @@
+{
+ "id": "v5",
+ "texte": "Gère les urgences, même à vingt-trois heures.",
+ "duree": 2.182688,
+ "mots": [
+  {
+   "texte": "Gère",
+   "t": 0.0,
+   "t1": 0.232
+  },
+  {
+   "texte": "les",
+   "t": 0.255,
+   "t1": 0.372
+  },
+  {
+   "texte": "urgences,",
+   "t": 0.43,
+   "t1": 0.859
+  },
+  {
+   "texte": "même",
+   "t": 0.94,
+   "t1": 1.138
+  },
+  {
+   "texte": "à",
+   "t": 1.161,
+   "t1": 1.184
+  },
+  {
+   "texte": "vingt-trois",
+   "t": 1.231,
+   "t1": 1.614
+  },
+  {
+   "texte": "heures.",
+   "t": 1.66,
+   "t1": 2.183
+  }
+ ]
+}
