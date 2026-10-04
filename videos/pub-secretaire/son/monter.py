@@ -4,8 +4,10 @@
 dans relais/plombier/alignement.json).
 
 Le vrai appel reçoit des COUPES et un gain, rien d'autre (aucun filtre, compresseur ni limiteur sur la voix). Dessous :
-la nappe du showcase (même univers sonore), un battement doux qui donne l'allant, un toc discret à chaque ligne que
-l'agente coche, la signature courte la · sol · ré quand le point se pose sur le ı.
+une musique rythmée (ElevenLabs, 118 BPM, la majeur, son/musique-elevenlabs.wav, retour Florian du 04/10 « une musique
+plus dynamique »), calée pour qu'un temps tombe sur le la de la signature, baissée sous la voix, coupée net au la ;
+un toc discret à chaque ligne cochée ; la signature LONGUE la · sol · ré (comme le film long) : la quand le point
+s'envole du bout du mot, sol au sommet au-dessus du ı, ré au contact.
 
 Écrit : son/dialogue.wav, son/mix.wav (-14 LUFS, crête -1 dBTP, 48 kHz stéréo), donnees/montage.json (segments,
 mots en temps film, instants des objets) que lit index.html via donnees/donnees.js.
@@ -22,8 +24,8 @@ import numpy as np
 ICI = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APPEL = "/opt/vokio-site-repo/assets/appel-plombier.mp3"
 ALIGN = "/opt/vokio-ads/videos/relais/plombier/alignement.json"
-NAPPE = "/opt/vokio-ads/videos/showcase/son/stems/nappe.wav"
-SIGNATURE = "/root/vokio-uploads/videos/showcase/point-solaire-signature-courte-v2.wav"
+MUSIQUE = os.path.join(ICI, "son", "musique-elevenlabs.wav")
+SIGNATURE = "/root/vokio-uploads/videos/showcase/point-solaire-signature-v2.wav"   # la à 0, sol à 0,240, ré à 0,600
 SR = 48000
 
 # (énoncé, premier mot, dernier mot, marge avant, marge après, silence avant) : le texte montré sera exactement ces mots
@@ -79,12 +81,16 @@ def main():
     temps = {
         "titre_ia": round(G + 0.40, 3),          # « Camille est une IA. »
         "titre_ia_2": round(G + 1.15, 3),        # « Elle décroche quand vous ne pouvez pas. »
-        "marque": round(G + 3.05, 3),            # le wordmark s'écrit
-        "point_i": round(G + 3.65, 3),           # le point se pose sur le ı : signature
-        "cta": round(G + 4.25, 3),               # « Essayez-la… »
-        "cta_2": round(G + 4.85, 3),             # vokio.fr · 59 €/mois
+        "plume": round(G + 3.05, 3),             # le point écrit « Vokıo » sous la ligne de base (0,70 s, film long)
+        "plume_fin": round(G + 3.75, 3),
+        "la": round(G + 3.85, 3),                # le point s'envole du bout du mot
+        "sol": round(G + 4.09, 3),               # sommet au-dessus du ı
+        "re": round(G + 4.45, 3),                # contact : le point est le point du ı
+        "cta": round(G + 5.05, 3),               # « Essayez-la… »
+        "cta_2": round(G + 5.65, 3),             # vokio.fr · 59 €/mois
     }
-    duree = round(G + 8.2, 3)
+    temps["point_i"] = temps["re"]
+    duree = round(G + 8.6, 3)
 
     n = int(round(duree * SR))
     dia = np.zeros(n, dtype=np.float32)
@@ -100,37 +106,32 @@ def main():
     gain_voix = 10 ** (0.5 / 20)
     dia *= gain_voix
 
-    # ---- nappe du showcase : en boucle douce, baissée sous la voix (enveloppe calculée sur les segments)
-    nap = lire(NAPPE, 2)
-    reps = int(np.ceil(n / len(nap))) + 1
-    nap = np.concatenate([nap] * reps)[:n]
+    # ---- musique : un temps sur le la (période mesurée 0,51 s), départ sur une attaque, coupée net au la
+    mus = lire(MUSIQUE, 2)
+    mono_m = mus.mean(axis=1)
+    h = 480
+    e = np.sqrt(np.convolve(mono_m ** 2, np.ones(h) / h, mode="same")[::h])
+    attaques = np.maximum(0, np.diff(np.log(e + 1e-6)))
+    t_b0 = float(np.argmax(attaques[:200] > 0.5 * attaques[:200].max())) * h / SR    # première attaque forte
+    P = 60 / 117.6
+    s0 = t_b0 + ((-temps["la"]) % P)
+    o = int(s0 * SR)
+    musique = np.zeros((n, 2), dtype=np.float32)
+    m = min(n, len(mus) - o); musique[:m] = mus[o:o + m]
+    coupe = int((temps["la"] - 0.03) * SR)
+    rampe = int(0.03 * SR)
+    musique[coupe:coupe + rampe] *= np.linspace(1, 0, rampe)[:, None]
+    musique[coupe + rampe:] = 0
     env = np.full(n, 1.0, dtype=np.float32)
-    for s in segs:
-        a, b = int((s["film"][0] - 0.12) * SR), int((s["film"][1] + 0.18) * SR)
-        env[max(0, a):b] = 0.42
-    k = int(0.09 * SR); noyau = np.ones(k, dtype=np.float32) / k
-    env = np.convolve(env, noyau, mode="same")
+    for sg in segs:
+        a, b = int((sg["film"][0] - 0.10) * SR), int((sg["film"][1] + 0.15) * SR)
+        env[max(0, a):b] = 10 ** (-6 / 20)           # sous la voix : 6 dB plus bas que dans les respirations
+    # sans voix (révélation, écriture du mot) : la musique passe devant, +5 dB
+    env[int((segs[-1]["film"][1] + 0.2) * SR):int(temps["la"] * SR)] *= 10 ** (5 / 20)
+    k = int(0.08 * SR); env = np.convolve(env, np.ones(k, dtype=np.float32) / k, mode="same")
+    musique *= env[:, None] * 10 ** (-8.5 / 20)
 
-    # ---- battement : 100 BPM, un « tum » grave et doux (55 Hz, décroissance rapide) sur les temps, plus clair sur les titres
-    bpm = 100.0
-    battement = np.zeros(n, dtype=np.float32)
-    tt = np.arange(int(0.42 * SR)) / SR
-    tum = (np.sin(2 * np.pi * (55 + 40 * np.exp(-tt * 30)) * tt) * np.exp(-tt * 9)).astype(np.float32)
-    t_b = 0.0
-    while t_b < temps["point_i"] - 0.1:
-        o = int(t_b * SR)
-        m = min(len(tum), n - o)
-        battement[o:o + m] += tum[:m] * 0.55
-        t_b += 60 / bpm
-    # tic léger sur les contretemps (bruit filtré, 12 ms)
-    rng = np.random.default_rng(4)
-    tic = rng.standard_normal(int(0.012 * SR)).astype(np.float32)
-    tic = np.diff(np.concatenate([[0], tic])) * np.exp(-np.arange(len(tic)) / (0.003 * SR))
-    t_b = 30 / bpm
-    while t_b < temps["point_i"] - 0.1:
-        o = int(t_b * SR); battement[o:o + len(tic)] += tic * 0.05; t_b += 60 / bpm
-
-    # ---- tocs des lignes cochées (instants fixés par index.html : on les lit dans le montage, voir COCHES)
+    # ---- tocs des lignes cochées
     coches = coches_film(segs, mots)
     toc = np.zeros(n, dtype=np.float32)
     tt = np.arange(int(0.09 * SR)) / SR
@@ -138,25 +139,24 @@ def main():
     for c in coches:
         o = int(c["t"] * SR); m = min(len(son_toc), n - o); toc[o:o + m] += son_toc[:m]
 
-    # ---- signature courte au point sur le ı
+    # ---- signature longue : le la à l'envol
     sig = lire(SIGNATURE, 2)
     sigpiste = np.zeros((n, 2), dtype=np.float32)
-    o = int((temps["point_i"] - 0.02) * SR); m = min(len(sig), n - o)
+    o = int(temps["la"] * SR); m = min(len(sig), n - o)
     sigpiste[o:o + m] = sig[:m]
 
     mono = lambda x: np.stack([x, x], axis=1)
-    fondu_fin = np.ones(n, dtype=np.float32)
-    ff = int(1.2 * SR); fondu_fin[-ff:] = np.linspace(1, 0, ff)
-    musique = (nap * 10 ** (-3 / 20) + mono(battement) * 10 ** (-14 / 20)) * env[:, None]
-    # la musique s'efface sous la signature, puis revient en coussin pour le carton
-    mix = mono(dia) + musique * fondu_fin[:, None] + mono(toc) * 10 ** (-22 / 20) + sigpiste * 10 ** (-4 / 20)
+    mix = mono(dia) + musique + mono(toc) * 10 ** (-20 / 20) + sigpiste * 10 ** (-7 / 20)
 
     os.makedirs(f"{ICI}/donnees", exist_ok=True)
     ecrire(f"{ICI}/son/dialogue.wav", mono(dia))
     brut = f"/dev/shm/pub-secretaire-mix-brut.wav"
     ecrire(brut, mix)
     i, pk = mesure(brut)
-    g = -14.0 - i
+    g = min(-14.0 - i, -1.2 - pk)      # -14 LUFS visé, mais la crête de la voix (non limitée) passe avant
+    pics = {"voix": 20 * np.log10(np.abs(dia).max()), "musique": 20 * np.log10(np.abs(musique).max() + 1e-9),
+            "signature": 20 * np.log10(np.abs(sigpiste).max() * 10 ** (-7 / 20) + 1e-9)}
+    print("crêtes avant gain (dBFS) :", {k: round(v, 1) for k, v in pics.items()}, "gain", round(g, 1))
     if pk + g > -1.2:
         sys.exit(f"crête trop haute après gain : {pk + g:.1f} dBTP (gain voix seul, on ne limite pas la voix)")
     ecrire(f"{ICI}/son/mix.wav", mix * 10 ** (g / 20))

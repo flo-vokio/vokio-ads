@@ -111,7 +111,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   </div>
   <div id="titre2" class="titre" style="top:560px">Camille est <em>une IA<span class="pt" id="t2-pt"></span></em></div>
   <div id="sous2" class="sous" style="top:740px">Elle décroche quand vous ne pouvez pas.</div>
-  <div id="marque"><p id="mot"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p></div>
+  <div id="marque"><p id="mot"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span><span id="mot-base" style="display:inline-block;width:0;height:0"></span></p></div>
   <div id="cta" class="sous" style="color:#262019">Essayez-la : laissez votre numéro,<br>elle vous rappelle en 10 secondes.</div>
   <div id="offre"><div class="url">vokio.fr</div><div class="prix">59 €/mois · sans engagement</div></div>
   <div id="point"></div>
@@ -311,15 +311,31 @@ window.__pub = { erreurs: [], pret: false };
 
     // ---------------- la révélation, puis la fin
     const t2 = $("#titre2"), s2 = $("#sous2");
-    const fin2 = TT.marque - 0.3;
+    const fin2 = TT.plume - 0.58;          // les titres sont partis quand le point descend (il ne traverse pas le texte)
     montrer(t2, TT.titre_ia, fin2 + 0.3); montrer(s2, TT.titre_ia_2, fin2 + 0.3);
     ft(t2, { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: P3o }, TT.titre_ia);
     ft(s2, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: P3o }, TT.titre_ia_2);
     ft([t2, s2], { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -30, duration: 0.26, ease: "power2.in" }, fin2);
-    const marque = $("#marque");
-    montrer(marque, TT.marque, null);
-    ft("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.6, ease: P3o }, TT.marque);
-    ft(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.4, ease: P3o, stagger: 0.1 }, TT.marque + 0.3);
+    // le mot s'écrit derrière le point, comme de l'encre (film long, s7) : masque opaque jusqu'à xp − 40, transparent dès xp
+    const marque = $("#marque"), mot = $("#mot");
+    montrer(marque, TT.plume, null);
+    gsap.set(["#mot-a", "#mot-i", "#mot-o"], { clipPath: "none" });
+    const bMot = boite(mot), base = boite($("#mot-base")).y;
+    const encre0 = boite($("#mot-a")).x, encre1 = boite($("#mot-o")).x + boite($("#mot-o")).w;
+    const stylo = { x0: encre0 - 34, x1: encre1 + 30, y: base + 32 };
+    exiger(stylo.y - 22 >= base, "le stylo touche la ligne de base");
+    const L_ENCRE = 40, EASE_PLUME = gsap.parseEase("sine.inOut");
+    function encre(xp) {
+      const xl = xp - bMot.x;
+      const m = "linear-gradient(90deg,#000 0," + "#000 " + (xl - L_ENCRE).toFixed(1) + "px,transparent " + xl.toFixed(1) + "px)";
+      mot.style.webkitMaskImage = m; mot.style.maskImage = m;
+    }
+    encre(stylo.x0);
+    const plume = { u: 0 };
+    tl.fromTo(plume, { u: 0 }, { u: 1, duration: TT.plume_fin - TT.plume, ease: "none", immediateRender: false,
+      onUpdate: () => encre(stylo.x0 + (stylo.x1 + L_ENCRE - stylo.x0) * EASE_PLUME(plume.u)) }, TT.plume);
+    tl.call(() => { mot.style.webkitMaskImage = "none"; mot.style.maskImage = "none"; }, null, TT.plume_fin + 0.001);
+    tl.call(() => encre(stylo.x1 + L_ENCRE), null, TT.plume_fin - 0.001);
     const cta = $("#cta"), offre = $("#offre");
     montrer(cta, TT.cta, null); montrer(offre, TT.cta_2, null);
     ft(cta, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: P3o }, TT.cta);
@@ -388,8 +404,22 @@ window.__pub = { erreurs: [], pret: false };
     const tIA = TT.titre_ia + 0.3;
     exiger(tIA > tp, "le point part vers « IA. » avant d'avoir fini");
     ft(point, { x: px, y: py, scale: 1 }, { x: pt2.x + pt2.w / 2, y: pt2.y + pt2.h / 2, scale: s2p, duration: 0.5, ease: P3io }, tIA);
-    // puis il se pose sur le ı de Vokıo (signature la · sol · ré)
-    ft(point, { x: pt2.x + pt2.w / 2, y: pt2.y + pt2.h / 2, scale: s2p }, { x: ptI.x + ptI.w / 2, y: ptI.y + ptI.h / 2, scale: ptI.w / 44, duration: 0.6, ease: P3io }, TT.point_i - 0.6);
+    // il descend sous la ligne de base, ÉCRIT le mot, puis met le point sur le ı : la (envol), sol (sommet), ré (contact)
+    exiger(TT.plume - 0.3 > fin2 + 0.27 && TT.plume - 0.3 > tIA + 0.5, "le point quitte « IA. » avant d'y être posé");
+    ft(point, { x: pt2.x + pt2.w / 2, y: pt2.y + pt2.h / 2, scale: s2p }, { x: stylo.x0, y: stylo.y, scale: 1, duration: 0.3, ease: P3io }, TT.plume - 0.3);
+    // même courbe que l'encre : la plume et le bord du masque avancent ensemble (le bord a L_ENCRE d'avance au bout)
+    const xPlume = { u: 0 };
+    tl.fromTo(xPlume, { u: 0 }, { u: 1, duration: TT.plume_fin - TT.plume, ease: "none", immediateRender: false,
+      onUpdate: () => gsap.set(point, { x: stylo.x0 + (stylo.x1 - stylo.x0) * EASE_PLUME(xPlume.u), y: stylo.y }) }, TT.plume);
+    const cI = { x: ptI.x + ptI.w / 2, y: ptI.y + ptI.h / 2 }, sI = ptI.w / 44, BOND = 110;
+    ft(point, { x: stylo.x1, scale: 1 }, { x: cI.x, scale: sI * 1.15, duration: TT.sol - TT.la, ease: "power2.out" }, TT.la);
+    ft(point, { y: stylo.y }, { y: cI.y - BOND, duration: TT.sol - TT.la, ease: "power2.out" }, TT.la);
+    ft(point, { y: cI.y - BOND }, { y: cI.y - BOND - 8, duration: 0.16, ease: "sine.inOut" }, TT.sol);
+    ft(point, { y: cI.y - BOND - 8, scale: sI * 1.15 }, { y: cI.y, scale: sI, duration: TT.re - TT.sol - 0.16, ease: "power2.in" }, TT.sol + 0.16);
+    // écrasement au contact (2 images), rond à la 3e
+    ft(point, { scaleX: sI, scaleY: sI }, { scaleX: sI * 1.28, scaleY: sI * 0.74, duration: 0.067, ease: "power2.out" }, TT.re);
+    ft(point, { scaleX: sI * 1.28, scaleY: sI * 0.74 }, { scaleX: sI, scaleY: sI, duration: 0.1, ease: "power2.out" }, TT.re + 0.067);
+    exiger(cI.y - BOND - 30 > 250, "le bond sort de la zone utile");
 
     fenetres.forEach(function (f) {
       const el = f[0], t0 = f[1], t1 = f[2];

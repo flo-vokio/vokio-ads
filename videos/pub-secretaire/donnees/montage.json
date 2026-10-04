@@ -1,5 +1,5 @@
 {
- "duree": 28.18,
+ "duree": 28.58,
  "fps": 30,
  "segments": [
   {
@@ -547,10 +547,14 @@
  "temps": {
   "titre_ia": 20.38,
   "titre_ia_2": 21.13,
-  "marque": 23.03,
-  "point_i": 23.63,
-  "cta": 24.23,
-  "cta_2": 24.83
+  "plume": 23.03,
+  "plume_fin": 23.73,
+  "la": 23.83,
+  "sol": 24.07,
+  "re": 24.43,
+  "cta": 25.03,
+  "cta_2": 25.63,
+  "point_i": 24.43
  },
  "coches": [
   {
@@ -576,8 +580,8 @@
  ],
  "fin_dialogue": 19.98,
  "son": {
-  "lufs": -14.0,
-  "crete_dbfs": -1.7,
-  "gain_applique_db": -0.9
+  "lufs": -14.4,
+  "crete_dbfs": -1.2,
+  "gain_applique_db": -0.7
  }
 }
