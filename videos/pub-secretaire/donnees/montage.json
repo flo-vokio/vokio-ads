@@ -1,0 +1,583 @@
+{
+ "duree": 28.18,
+ "fps": 30,
+ "segments": [
+  {
+   "nom": "A",
+   "qui": "agente",
+   "src": [
+    0.1,
+    1.56
+   ],
+   "film": [
+    0.0,
+    1.46
+   ]
+  },
+  {
+   "nom": "B",
+   "qui": "appelant",
+   "src": [
+    6.91,
+    9.94
+   ],
+   "film": [
+    1.76,
+    4.79
+   ]
+  },
+  {
+   "nom": "C",
+   "qui": "agente",
+   "src": [
+    21.47,
+    23.96
+   ],
+   "film": [
+    5.13,
+    7.62
+   ]
+  },
+  {
+   "nom": "D",
+   "qui": "agente",
+   "src": [
+    44.37,
+    47.18
+   ],
+   "film": [
+    7.96,
+    10.77
+   ]
+  },
+  {
+   "nom": "E",
+   "qui": "agente",
+   "src": [
+    50.57,
+    52.94
+   ],
+   "film": [
+    11.07,
+    13.44
+   ]
+  },
+  {
+   "nom": "F",
+   "qui": "agente",
+   "src": [
+    55.93,
+    60.26
+   ],
+   "film": [
+    13.74,
+    18.07
+   ]
+  },
+  {
+   "nom": "G",
+   "qui": "appelant",
+   "src": [
+    61.47,
+    63.02
+   ],
+   "film": [
+    18.43,
+    19.98
+   ]
+  }
+ ],
+ "mots": [
+  {
+   "seg": "A",
+   "qui": "agente",
+   "texte": "Bonjour,",
+   "t": 0.1,
+   "t1": 0.46
+  },
+  {
+   "seg": "A",
+   "qui": "agente",
+   "texte": "je",
+   "t": 0.74,
+   "t1": 0.88
+  },
+  {
+   "seg": "A",
+   "qui": "agente",
+   "texte": "suis",
+   "t": 0.9,
+   "t1": 1.02
+  },
+  {
+   "seg": "A",
+   "qui": "agente",
+   "texte": "Camille,",
+   "t": 1.06,
+   "t1": 1.38
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "j’ai",
+   "t": 1.83,
+   "t1": 1.97
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "une",
+   "t": 1.97,
+   "t1": 2.09
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "fuite",
+   "t": 2.15,
+   "t1": 2.41
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "sous",
+   "t": 2.75,
+   "t1": 2.99
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "mon",
+   "t": 3.27,
+   "t1": 3.41
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "évier.",
+   "t": 3.47,
+   "t1": 3.75
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "Ça",
+   "t": 3.87,
+   "t1": 3.97
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "goutte",
+   "t": 4.01,
+   "t1": 4.17
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "pas",
+   "t": 4.21,
+   "t1": 4.31
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "mal",
+   "t": 4.35,
+   "t1": 4.53
+  },
+  {
+   "seg": "B",
+   "qui": "appelant",
+   "texte": "là.",
+   "t": 4.57,
+   "t1": 4.69
+  },
+  {
+   "seg": "C",
+   "qui": "agente",
+   "texte": "D’accord,",
+   "t": 5.2,
+   "t1": 5.46
+  },
+  {
+   "seg": "C",
+   "qui": "agente",
+   "texte": "c’est",
+   "t": 5.5,
+   "t1": 5.64
+  },
+  {
+   "seg": "C",
+   "qui": "agente",
+   "texte": "une",
+   "t": 5.68,
+   "t1": 5.74
+  },
+  {
+   "seg": "C",
+   "qui": "agente",
+   "texte": "urgence.",
+   "t": 5.9,
+   "t1": 6.28
+  },
+  {
+   "seg": "C",
+   "qui": "agente",
+   "texte": "Je",
+   "t": 6.44,
+   "t1": 6.52
+  },
+  {
+   "seg": "C",
+   "qui": "agente",
+   "texte": "préviens",
+   "t": 6.56,
+   "t1": 6.78
+  },
+  {
+   "seg": "C",
+   "qui": "agente",
+   "texte": "le",
+   "t": 6.8,
+   "t1": 6.84
+  },
+  {
+   "seg": "C",
+   "qui": "agente",
+   "texte": "plombier",
+   "t": 6.86,
+   "t1": 7.08
+  },
+  {
+   "seg": "C",
+   "qui": "agente",
+   "texte": "de",
+   "t": 7.12,
+   "t1": 7.18
+  },
+  {
+   "seg": "C",
+   "qui": "agente",
+   "texte": "garde.",
+   "t": 7.22,
+   "t1": 7.5
+  },
+  {
+   "seg": "D",
+   "qui": "agente",
+   "texte": "Très",
+   "t": 8.03,
+   "t1": 8.15
+  },
+  {
+   "seg": "D",
+   "qui": "agente",
+   "texte": "bien.",
+   "t": 8.19,
+   "t1": 8.39
+  },
+  {
+   "seg": "D",
+   "qui": "agente",
+   "texte": "Le",
+   "t": 8.71,
+   "t1": 8.83
+  },
+  {
+   "seg": "D",
+   "qui": "agente",
+   "texte": "douze",
+   "t": 8.97,
+   "t1": 9.29
+  },
+  {
+   "seg": "D",
+   "qui": "agente",
+   "texte": "rue",
+   "t": 9.35,
+   "t1": 9.49
+  },
+  {
+   "seg": "D",
+   "qui": "agente",
+   "texte": "des",
+   "t": 9.57,
+   "t1": 9.69
+  },
+  {
+   "seg": "D",
+   "qui": "agente",
+   "texte": "Lices",
+   "t": 9.75,
+   "t1": 10.09
+  },
+  {
+   "seg": "D",
+   "qui": "agente",
+   "texte": "à",
+   "t": 10.23,
+   "t1": 10.33
+  },
+  {
+   "seg": "D",
+   "qui": "agente",
+   "texte": "Toulon.",
+   "t": 10.35,
+   "t1": 10.65
+  },
+  {
+   "seg": "E",
+   "qui": "agente",
+   "texte": "je",
+   "t": 11.12,
+   "t1": 11.18
+  },
+  {
+   "seg": "E",
+   "qui": "agente",
+   "texte": "vous",
+   "t": 11.22,
+   "t1": 11.3
+  },
+  {
+   "seg": "E",
+   "qui": "agente",
+   "texte": "conseille",
+   "t": 11.34,
+   "t1": 11.58
+  },
+  {
+   "seg": "E",
+   "qui": "agente",
+   "texte": "de",
+   "t": 11.62,
+   "t1": 11.68
+  },
+  {
+   "seg": "E",
+   "qui": "agente",
+   "texte": "fermer",
+   "t": 11.76,
+   "t1": 11.98
+  },
+  {
+   "seg": "E",
+   "qui": "agente",
+   "texte": "le",
+   "t": 12.02,
+   "t1": 12.1
+  },
+  {
+   "seg": "E",
+   "qui": "agente",
+   "texte": "robinet",
+   "t": 12.14,
+   "t1": 12.42
+  },
+  {
+   "seg": "E",
+   "qui": "agente",
+   "texte": "d’arrêt",
+   "t": 12.48,
+   "t1": 12.74
+  },
+  {
+   "seg": "E",
+   "qui": "agente",
+   "texte": "sous",
+   "t": 12.86,
+   "t1": 12.96
+  },
+  {
+   "seg": "E",
+   "qui": "agente",
+   "texte": "l’évier",
+   "t": 13.0,
+   "t1": 13.32
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "C’est",
+   "t": 13.81,
+   "t1": 13.91
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "transmis.",
+   "t": 13.95,
+   "t1": 14.37
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "Vous",
+   "t": 14.73,
+   "t1": 14.79
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "recevrez",
+   "t": 14.83,
+   "t1": 15.21
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "un",
+   "t": 15.23,
+   "t1": 15.29
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "SMS",
+   "t": 15.33,
+   "t1": 15.69
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "et",
+   "t": 15.87,
+   "t1": 15.91
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "le",
+   "t": 15.95,
+   "t1": 16.03
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "plombier",
+   "t": 16.07,
+   "t1": 16.31
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "de",
+   "t": 16.35,
+   "t1": 16.41
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "garde",
+   "t": 16.47,
+   "t1": 16.69
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "vous",
+   "t": 16.73,
+   "t1": 16.79
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "rappellera",
+   "t": 16.83,
+   "t1": 17.19
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "dans",
+   "t": 17.23,
+   "t1": 17.29
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "les",
+   "t": 17.33,
+   "t1": 17.41
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "cinq",
+   "t": 17.45,
+   "t1": 17.57
+  },
+  {
+   "seg": "F",
+   "qui": "agente",
+   "texte": "minutes.",
+   "t": 17.59,
+   "t1": 17.93
+  },
+  {
+   "seg": "G",
+   "qui": "appelant",
+   "texte": "OK,",
+   "t": 18.5,
+   "t1": 18.72
+  },
+  {
+   "seg": "G",
+   "qui": "appelant",
+   "texte": "super.",
+   "t": 18.8,
+   "t1": 19.14
+  },
+  {
+   "seg": "G",
+   "qui": "appelant",
+   "texte": "Merci",
+   "t": 19.24,
+   "t1": 19.46
+  },
+  {
+   "seg": "G",
+   "qui": "appelant",
+   "texte": "beaucoup.",
+   "t": 19.48,
+   "t1": 19.84
+  }
+ ],
+ "temps": {
+  "titre_ia": 20.38,
+  "titre_ia_2": 21.13,
+  "marque": 23.03,
+  "point_i": 23.63,
+  "cta": 24.23,
+  "cta_2": 24.83
+ },
+ "coches": [
+  {
+   "texte": "Urgence repérée",
+   "t": 5.9
+  },
+  {
+   "texte": "Plombier de garde prévenu",
+   "t": 7.22
+  },
+  {
+   "texte": "Adresse notée",
+   "t": 10.35
+  },
+  {
+   "texte": "Bon geste conseillé",
+   "t": 12.14
+  },
+  {
+   "texte": "SMS envoyé au client",
+   "t": 15.33
+  }
+ ],
+ "fin_dialogue": 19.98,
+ "son": {
+  "lufs": -14.0,
+  "crete_dbfs": -1.7,
+  "gain_applique_db": -0.9
+ }
+}
