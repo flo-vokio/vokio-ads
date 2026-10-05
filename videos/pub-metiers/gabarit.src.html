@@ -112,8 +112,9 @@ __ARRONDI__
     const tl = gsap.timeline({ paused: true });
     const ft = (el, de, a, t) => tl.fromTo(el, de, Object.assign({ immediateRender: false }, a), t);
     const fenetres = []; const montrer = (el, t0, t1) => fenetres.push([el, t0, t1]);
-    const entre = (el, t, dy) => ft(el, { autoAlpha: 0, y: dy || 40 }, { autoAlpha: 1, y: 0, duration: 0.42, ease: P3o }, t);
-    const sort = (el, t) => ft(el, { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -40, duration: 0.22, ease: "power2.in" }, t);
+    // caché AVANT son entrée (sinon une image pleine apparaît juste avant le fondu : le clignotement vu par Florian)
+    const entre = (el, t, dy) => { gsap.set(el, { autoAlpha: 0 }); return ft(el, { autoAlpha: 0, y: dy || 40 }, { autoAlpha: 1, y: 0, duration: 0.42, ease: P3o }, t); };
+    const sort = (el, t) => ft(el, { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -40, duration: 0.18, ease: "power2.in" }, t);
     const V = (n) => seg(n).film;
     const pts = [];          // cibles du point {t, x, y, s (diamètre px), d (durée), renait}
 
@@ -164,9 +165,9 @@ __ARRONDI__
     }
     // v1 : au centre ; le point devient le point final de « répond. »
     const m1 = motsDe("v1");
-    page("v1", m1, "centre", "centre", V("v2")[0] - 0.16, "v1-pt");
+    page("v1", m1, "centre", "centre", V("v2")[0] - 0.3, "v1-pt");
     // v2 à v6 : en haut, l'objet dessous
-    const fin = { v2: V("v3")[0] - 0.12, v3: V("v4")[0] - 0.12, v4: V("v5")[0] - 0.12, v5: V("v6")[0] - 0.12, v6: V("v7")[0] - 0.12 };
+    const fin = { v2: V("v3")[0] - 0.3, v3: V("v4")[0] - 0.3, v4: V("v5")[0] - 0.3, v5: V("v6")[0] - 0.3, v6: V("v7")[0] - 0.3 };
     ["v2", "v3", "v4", "v5", "v6"].forEach((n) => page(n, motsDe(n), "haut", 290, fin[n]));
 
     // ================= AGENDA (v2) : le point touche 10:00, le rendez-vous s'inscrit
@@ -191,12 +192,13 @@ __ARRONDI__
     ip.bulle = tMot("v3", "SMS");
 __JS_IPHONE__
     pts.push({ t: ip.entree + 0.15, x: ip.repos.x, y: ip.repos.y, s: 44 });
+    gsap.set($("#sms"), { autoAlpha: 0 });       // caché avant son entrée (pas d'image pleine juste avant le fondu)
 
     // ================= COMMANDE (v4)
     const co = $("#commande"), coc = $("#co-carte");
     const lignes = ["Fraisier, huit parts", "Pour Florian", "Retrait à 11:00"];
     lignes.forEach((l) => { const d = document.createElement("div"); d.className = "li"; d.innerHTML = '<span class="puce"></span>' + l; coc.appendChild(d); });
-    const tCo = Math.max(V("v4")[0] - 0.1, ip.sortie + 0.32), tCom = tMot("v4", "commandes");   // après la sortie de l'iPhone
+    const tCo = Math.max(V("v4")[0] - 0.1, ip.sortie + 0.42), tCom = tMot("v4", "commandes");   // après la sortie de l'iPhone
     montrer(co, tCo, fin.v4 + 0.3); entre(co, tCo); sort(co, fin.v4);
     const puces = [], hLi = boite(coc.children[0]).h, padCo = 22 + 24 + 6;
     gsap.set(coc, { height: padCo + hLi });
