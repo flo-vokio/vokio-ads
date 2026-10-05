@@ -74,26 +74,17 @@ def main():
     pistes = []          # (début film, signal mono, nature)
     mots, segs = [], []
     t = 0.0
-    # ---- accroche : cinq décrochés
-    for m, lab, w0, w1 in DECROCHES:
-        al = json.load(open(f"{RELAIS}/{m}/alignement.json"))["enonces"][0]["mots"]
-        nt = lambda x: "".join(ch for ch in x if ch.isalnum())
-        i0 = next(k for k, w in enumerate(al) if nt(w["texte"]) == nt(w0) and w["t"] > 2)
-        i1 = next(k for k in range(i0, len(al)) if nt(al[k]["texte"]) == nt(w1))
-        s0, s1 = al[i0]["t"] - 0.04, al[i1]["t1"] + 0.07
-        x = lire(f"{APPELS}/appel-{m}.mp3", 1)[int(s0 * SR):int(s1 * SR), 0]
-        segs.append({"nom": m, "type": "decroche", "etiquette": lab, "film": [round(t, 3), round(t + s1 - s0, 3)],
-                     "texte": " ".join(w["texte"] for w in al[i0:i1 + 1])})
-        pistes.append((t, x, "appel:" + m))
-        t += (s1 - s0) + 0.04
-    fin_accroche = t
+    # ---- accroche (retour de Florian, 05/10) : plus de décrochés d'établissements (« ça parle à personne ») ;
+    # la voix cite les métiers dès l'image 0, sur le mur des 22
+    t = 0.0
+    fin_accroche = 0.0
 
     # ---- voix off, chaque réplique sur un temps
     vo = {}
-    for rid in ["v1", "v2", "v3", "v4", "v5", "v6", "v7"]:
+    for rid in ["v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7"]:
         d = json.load(open(f"{ICI}/son/voix/{rid}.json"))
-        ecart = {"v1": 0.12, "v4": 0.25, "v6": 0.2}.get(rid, 0.3)
-        t0 = sur_temps(t + ecart)
+        ecart = {"v1": 0.2, "v4": 0.25, "v6": 0.2}.get(rid, 0.3)
+        t0 = 0.08 if rid == "v0" else sur_temps(t + ecart)
         x = voix_off(rid)
         vo[rid] = {"debut": t0, "fin": round(t0 + d["duree"], 3)}
         segs.append({"nom": rid, "type": "voix", "film": [t0, round(t0 + d["duree"], 3)], "texte": d["texte"]})

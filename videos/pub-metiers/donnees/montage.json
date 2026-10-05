@@ -1,55 +1,24 @@
 {
- "duree": 37.287,
+ "duree": 33.787,
  "fps": 30,
  "segments": [
   {
-   "nom": "plombier",
-   "type": "decroche",
-   "etiquette": "Plombier",
+   "nom": "v0",
+   "type": "voix",
    "film": [
-    0.0,
-    0.79
+    0.08,
+    3.517
    ],
-   "texte": "Plomberie Azur !"
-  },
-  {
-   "nom": "coiffure",
-   "type": "decroche",
-   "etiquette": "Coiffure",
-   "film": [
-    0.83,
-    1.54
-   ],
-   "texte": "Salon Marchand !"
-  },
-  {
-   "nom": "garage",
-   "type": "decroche",
-   "etiquette": "Garage",
-   "film": [
-    1.58,
-    2.41
-   ],
-   "texte": "Garage du Rond-Point !"
-  },
-  {
-   "nom": "restaurant",
-   "type": "decroche",
-   "etiquette": "Restaurant",
-   "film": [
-    2.45,
-    3.26
-   ],
-   "texte": "La Table des Halles."
+   "texte": "Plombier, coiffeur, garagiste, dentiste, restaurant…"
   },
   {
    "nom": "v1",
    "type": "voix",
    "film": [
-    3.5,
-    6.519
+    4.0,
+    6.647
    ],
-   "texte": "Aucun d'eux n'a décroché. C'est Vokio qui a répondu."
+   "texte": "Quand vous ne pouvez pas décrocher, c'est Vokio qui répond."
   },
   {
    "nom": "v2",
@@ -101,16 +70,16 @@
    "type": "voix",
    "film": [
     21.0,
-    26.341
+    22.533
    ],
-   "texte": "Plombier, coiffeur, garagiste, dentiste, restaurant… Vokio parle votre métier."
+   "texte": "Vokio parle votre métier."
   },
   {
    "nom": "v8",
    "type": "voix",
    "film": [
-    29.05,
-    32.161
+    25.55,
+    28.661
    ],
    "texte": "Vokio. Votre ligne répond, même quand vous ne pouvez pas."
   },
@@ -118,66 +87,102 @@
    "nom": "v9",
    "type": "voix",
    "film": [
-    32.461,
-    35.387
+    28.961,
+    31.887
    ],
    "texte": "Créez votre espace gratuitement, sur vokio point F R."
   }
  ],
  "mots": [
   {
-   "seg": "v1",
-   "texte": "Aucun",
-   "t": 3.5,
-   "t1": 3.813
+   "seg": "v0",
+   "texte": "Plombier,",
+   "t": 0.08,
+   "t1": 0.649
+  },
+  {
+   "seg": "v0",
+   "texte": "coiffeur,",
+   "t": 0.742,
+   "t1": 1.276
+  },
+  {
+   "seg": "v0",
+   "texte": "garagiste,",
+   "t": 1.357,
+   "t1": 1.984
+  },
+  {
+   "seg": "v0",
+   "texte": "dentiste,",
+   "t": 2.054,
+   "t1": 2.588
+  },
+  {
+   "seg": "v0",
+   "texte": "restaurant…",
+   "t": 2.692,
+   "t1": 3.517
   },
   {
    "seg": "v1",
-   "texte": "d'eux",
-   "t": 3.86,
-   "t1": 3.976
+   "texte": "Quand",
+   "t": 4.0,
+   "t1": 4.186
   },
   {
    "seg": "v1",
-   "texte": "n'a",
-   "t": 4.011,
-   "t1": 4.092
+   "texte": "vous",
+   "t": 4.209,
+   "t1": 4.313
   },
   {
    "seg": "v1",
-   "texte": "décroché.",
-   "t": 4.139,
-   "t1": 4.684
+   "texte": "ne",
+   "t": 4.337,
+   "t1": 4.395
   },
   {
    "seg": "v1",
-   "texte": "C'est",
-   "t": 4.986,
-   "t1": 5.172
+   "texte": "pouvez",
+   "t": 4.453,
+   "t1": 4.639
+  },
+  {
+   "seg": "v1",
+   "texte": "pas",
+   "t": 4.662,
+   "t1": 4.766
+  },
+  {
+   "seg": "v1",
+   "texte": "décrocher,",
+   "t": 4.789,
+   "t1": 5.347
+  },
+  {
+   "seg": "v1",
+   "texte": "c'est",
+   "t": 5.416,
+   "t1": 5.579
   },
   {
    "seg": "v1",
    "texte": "Vokio",
-   "t": 5.195,
-   "t1": 5.509
+   "t": 5.602,
+   "t1": 5.869
   },
   {
    "seg": "v1",
    "texte": "qui",
-   "t": 5.555,
-   "t1": 5.648
+   "t": 5.916,
+   "t1": 6.009
   },
   {
    "seg": "v1",
-   "texte": "a",
-   "t": 5.694,
-   "t1": 5.718
-  },
-  {
-   "seg": "v1",
-   "texte": "répondu.",
-   "t": 5.752,
-   "t1": 6.519
+   "texte": "répond.",
+   "t": 6.055,
+   "t1": 6.647
   },
   {
    "seg": "v2",
@@ -385,166 +390,140 @@
   },
   {
    "seg": "v7",
-   "texte": "Plombier,",
-   "t": 21.0,
-   "t1": 21.546
-  },
-  {
-   "seg": "v7",
-   "texte": "coiffeur,",
-   "t": 21.65,
-   "t1": 22.184
-  },
-  {
-   "seg": "v7",
-   "texte": "garagiste,",
-   "t": 22.277,
-   "t1": 22.927
-  },
-  {
-   "seg": "v7",
-   "texte": "dentiste,",
-   "t": 23.02,
-   "t1": 23.589
-  },
-  {
-   "seg": "v7",
-   "texte": "restaurant…",
-   "t": 23.682,
-   "t1": 24.32
-  },
-  {
-   "seg": "v7",
    "texte": "Vokio",
-   "t": 24.738,
-   "t1": 25.11
+   "t": 21.0,
+   "t1": 21.372
   },
   {
    "seg": "v7",
    "texte": "parle",
-   "t": 25.156,
-   "t1": 25.354
+   "t": 21.418,
+   "t1": 21.615
   },
   {
    "seg": "v7",
    "texte": "votre",
-   "t": 25.377,
-   "t1": 25.632
+   "t": 21.639,
+   "t1": 21.871
   },
   {
    "seg": "v7",
    "texte": "métier.",
-   "t": 25.679,
-   "t1": 26.341
+   "t": 21.917,
+   "t1": 22.533
   },
   {
    "seg": "v8",
    "texte": "Vokio.",
-   "t": 29.05,
-   "t1": 29.561
+   "t": 25.55,
+   "t1": 26.061
   },
   {
    "seg": "v8",
    "texte": "Votre",
-   "t": 29.619,
-   "t1": 29.909
+   "t": 26.119,
+   "t1": 26.409
   },
   {
    "seg": "v8",
    "texte": "ligne",
-   "t": 29.956,
-   "t1": 30.141
+   "t": 26.456,
+   "t1": 26.641
   },
   {
    "seg": "v8",
    "texte": "répond,",
-   "t": 30.176,
-   "t1": 30.606
+   "t": 26.676,
+   "t1": 27.106
   },
   {
    "seg": "v8",
    "texte": "même",
-   "t": 30.71,
-   "t1": 30.919
+   "t": 27.21,
+   "t1": 27.419
   },
   {
    "seg": "v8",
    "texte": "quand",
-   "t": 30.942,
-   "t1": 31.082
+   "t": 27.442,
+   "t1": 27.582
   },
   {
    "seg": "v8",
    "texte": "vous",
-   "t": 31.117,
-   "t1": 31.233
+   "t": 27.617,
+   "t1": 27.733
   },
   {
    "seg": "v8",
    "texte": "ne",
-   "t": 31.256,
-   "t1": 31.337
+   "t": 27.756,
+   "t1": 27.837
   },
   {
    "seg": "v8",
    "texte": "pouvez",
-   "t": 31.372,
-   "t1": 31.639
+   "t": 27.872,
+   "t1": 28.139
   },
   {
    "seg": "v8",
    "texte": "pas.",
-   "t": 31.674,
-   "t1": 32.161
+   "t": 28.174,
+   "t1": 28.661
   },
   {
    "seg": "v9",
    "texte": "Créez",
-   "t": 32.461,
-   "t1": 32.751
+   "t": 28.961,
+   "t1": 29.251
   },
   {
    "seg": "v9",
    "texte": "votre",
-   "t": 32.774,
-   "t1": 32.983
+   "t": 29.274,
+   "t1": 29.483
   },
   {
    "seg": "v9",
    "texte": "espace",
-   "t": 33.007,
-   "t1": 33.297
+   "t": 29.507,
+   "t1": 29.797
   },
   {
    "seg": "v9",
    "texte": "gratuitement,",
-   "t": 33.32,
-   "t1": 33.924
+   "t": 29.82,
+   "t1": 30.424
   },
   {
    "seg": "v9",
    "texte": "sur",
-   "t": 34.017,
-   "t1": 34.156
+   "t": 30.517,
+   "t1": 30.656
   },
   {
    "seg": "v9",
    "texte": "vokio.fr",
-   "t": 34.202,
-   "t1": 35.387
+   "t": 30.702,
+   "t1": 31.887
   }
  ],
  "temps": {
-  "plume": 27.2,
-  "plume_fin": 27.9,
-  "la": 28.0,
-  "sol": 28.24,
-  "re": 28.6
+  "plume": 23.7,
+  "plume_fin": 24.4,
+  "la": 24.5,
+  "sol": 24.74,
+  "re": 25.1
  },
  "voix": {
+  "v0": {
+   "debut": 0.08,
+   "fin": 3.517
+  },
   "v1": {
-   "debut": 3.5,
-   "fin": 6.519
+   "debut": 4.0,
+   "fin": 6.647
   },
   "v2": {
    "debut": 7.0,
@@ -568,15 +547,15 @@
   },
   "v7": {
    "debut": 21.0,
-   "fin": 26.341
+   "fin": 22.533
   },
   "v8": {
-   "debut": 29.05,
-   "fin": 32.161
+   "debut": 25.55,
+   "fin": 28.661
   },
   "v9": {
-   "debut": 32.461,
-   "fin": 35.387
+   "debut": 28.961,
+   "fin": 31.887
   }
  },
  "metiers": [
@@ -603,9 +582,9 @@
   "Traiteur",
   "Vétérinaire"
  ],
- "fin_accroche": 3.3,
+ "fin_accroche": 0.0,
  "son": {
   "lufs": -14.0,
-  "crete_dbfs": -2.5
+  "crete_dbfs": -3.3
  }
 }

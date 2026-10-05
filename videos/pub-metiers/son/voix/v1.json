@@ -1,52 +1,57 @@
 {
  "id": "v1",
- "texte": "Aucun d'eux n'a décroché. C'est Vokio qui a répondu.",
- "duree": 3.018604,
+ "texte": "Quand vous ne pouvez pas décrocher, c'est Vokio qui répond.",
+ "duree": 2.647083,
  "mots": [
   {
-   "texte": "Aucun",
+   "texte": "Quand",
    "t": 0.0,
+   "t1": 0.186
+  },
+  {
+   "texte": "vous",
+   "t": 0.209,
    "t1": 0.313
   },
   {
-   "texte": "d'eux",
-   "t": 0.36,
-   "t1": 0.476
+   "texte": "ne",
+   "t": 0.337,
+   "t1": 0.395
   },
   {
-   "texte": "n'a",
-   "t": 0.511,
-   "t1": 0.592
+   "texte": "pouvez",
+   "t": 0.453,
+   "t1": 0.639
   },
   {
-   "texte": "décroché.",
-   "t": 0.639,
-   "t1": 1.184
+   "texte": "pas",
+   "t": 0.662,
+   "t1": 0.766
   },
   {
-   "texte": "C'est",
-   "t": 1.486,
-   "t1": 1.672
+   "texte": "décrocher,",
+   "t": 0.789,
+   "t1": 1.347
+  },
+  {
+   "texte": "c'est",
+   "t": 1.416,
+   "t1": 1.579
   },
   {
    "texte": "Vokio",
-   "t": 1.695,
-   "t1": 2.009
+   "t": 1.602,
+   "t1": 1.869
   },
   {
    "texte": "qui",
+   "t": 1.916,
+   "t1": 2.009
+  },
+  {
+   "texte": "répond.",
    "t": 2.055,
-   "t1": 2.148
-  },
-  {
-   "texte": "a",
-   "t": 2.194,
-   "t1": 2.218
-  },
-  {
-   "texte": "répondu.",
-   "t": 2.252,
-   "t1": 3.019
+   "t1": 2.647
   }
  ]
 }

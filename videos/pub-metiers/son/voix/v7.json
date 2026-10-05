@@ -1,52 +1,27 @@
 {
  "id": "v7",
- "texte": "Plombier, coiffeur, garagiste, dentiste, restaurant… Vokio parle votre métier.",
- "duree": 5.340604,
+ "texte": "Vokio parle votre métier.",
+ "duree": 1.532521,
  "mots": [
   {
-   "texte": "Plombier,",
-   "t": 0.0,
-   "t1": 0.546
-  },
-  {
-   "texte": "coiffeur,",
-   "t": 0.65,
-   "t1": 1.184
-  },
-  {
-   "texte": "garagiste,",
-   "t": 1.277,
-   "t1": 1.927
-  },
-  {
-   "texte": "dentiste,",
-   "t": 2.02,
-   "t1": 2.589
-  },
-  {
-   "texte": "restaurant…",
-   "t": 2.682,
-   "t1": 3.32
-  },
-  {
    "texte": "Vokio",
-   "t": 3.738,
-   "t1": 4.11
+   "t": 0.0,
+   "t1": 0.372
   },
   {
    "texte": "parle",
-   "t": 4.156,
-   "t1": 4.354
+   "t": 0.418,
+   "t1": 0.615
   },
   {
    "texte": "votre",
-   "t": 4.377,
-   "t1": 4.632
+   "t": 0.639,
+   "t1": 0.871
   },
   {
    "texte": "métier.",
-   "t": 4.679,
-   "t1": 5.341
+   "t": 0.917,
+   "t1": 1.533
   }
  ]
 }

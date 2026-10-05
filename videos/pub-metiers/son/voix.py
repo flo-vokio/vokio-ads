@@ -19,13 +19,14 @@ MODELE = "eleven_multilingual_v2"
 REGLAGES = {"stability": 0.42, "similarity_boost": 0.8, "style": 0.35, "use_speaker_boost": True, "speed": 1.06}
 
 REPLIQUES = [
-    ("v1", "Aucun d'eux n'a décroché. C'est Vokio qui a répondu."),
+    ("v0", "Plombier, coiffeur, garagiste, dentiste, restaurant…"),
+    ("v1", "Quand vous ne pouvez pas décrocher, c'est Vokio qui répond."),
     ("v2", "Vokio prend le rendez-vous dans votre agenda Google."),
     ("v3", "Confirme par SMS, et rappelle la veille."),
     ("v4", "Prend les commandes."),
     ("v5", "Gère les urgences, même à vingt-trois heures."),
     ("v6", "Et chaque appel vous attend, résumé, dans votre espace."),
-    ("v7", "Plombier, coiffeur, garagiste, dentiste, restaurant… Vokio parle votre métier."),
+    ("v7", "Vokio parle votre métier."),
     ("v8", "Vokio. Votre ligne répond, même quand vous ne pouvez pas."),
     ("v9", "Créez votre espace gratuitement, sur vokio point F R."),
 ]
