@@ -152,8 +152,8 @@ __ARRONDI__
       exiger(nl <= 3, "page « " + el.textContent.slice(0, 30) + " » : " + nl + " lignes");
       exiger(boite(el).y + h <= 1250, "page sous 1250 : " + el.textContent.slice(0, 30));
       [].forEach.call(el.querySelectorAll(".i"), function (sp, q) {
-        gsap.set(sp, { yPercent: 104 });
-        ft(sp, { yPercent: 104 }, { yPercent: 0, duration: 0.28, ease: P3o }, mots[q].t - 0.03);
+        gsap.set(sp, { yPercent: 150 });
+        ft(sp, { yPercent: 150 }, { yPercent: 0, duration: 0.28, ease: P3o }, mots[q].t - 0.03);
       });
       const p = { el, mots, t_in, t_out }; pages.push(p); return p;
     }
@@ -276,11 +276,11 @@ __JS_IPHONE__
     const m8 = motsDe("v8").slice(1), prom = $("#promesse");
     prom.innerHTML = m8.map((w) => '<span class="w"><span class="i">' + w.texte + "</span></span>").join(" ");
     montrer(prom, m8[0].t - 0.05, null);
-    [].forEach.call(prom.querySelectorAll(".i"), (sp, q) => { gsap.set(sp, { yPercent: 104 }); ft(sp, { yPercent: 104 }, { yPercent: 0, duration: 0.28, ease: P3o }, m8[q].t - 0.03); });
+    [].forEach.call(prom.querySelectorAll(".i"), (sp, q) => { gsap.set(sp, { yPercent: 150 }); ft(sp, { yPercent: 150 }, { yPercent: 0, duration: 0.28, ease: P3o }, m8[q].t - 0.03); });
     const m9 = motsDe("v9"), cta = $("#cta");
     cta.innerHTML = m9.map((w) => '<span class="w"><span class="i' + (w.texte === "vokio.fr" ? " url" : "") + '">' + w.texte + "</span></span>").join(" ").replace(' <span class="w"><span class="i url">', '<br><span class="w"><span class="i url">');
     montrer(cta, m9[0].t - 0.05, null);
-    [].forEach.call(cta.querySelectorAll(".i"), (sp, q) => { gsap.set(sp, { yPercent: 104 }); ft(sp, { yPercent: 104 }, { yPercent: 0, duration: 0.3, ease: P3o }, m9[q].t - 0.03); });
+    [].forEach.call(cta.querySelectorAll(".i"), (sp, q) => { gsap.set(sp, { yPercent: 150 }); ft(sp, { yPercent: 150 }, { yPercent: 0, duration: 0.3, ease: P3o }, m9[q].t - 0.03); });
     const off = $("#offre"); montrer(off, V("v9")[1] + 0.1, null); entre(off, V("v9")[1] + 0.1, 24);
     exiger(boite(off).y + boite(off).h <= 1250, "l'offre descend sous 1250");
 

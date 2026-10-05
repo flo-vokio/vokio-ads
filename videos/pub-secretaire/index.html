@@ -245,8 +245,8 @@ window.__pub = { erreurs: [], pret: false };
       [].forEach.call(el.querySelectorAll(".i"), function (sp, q) {
         const b = boite(sp), corps = parseFloat(getComputedStyle(el).fontSize);
         p.mots[q].bx = b.x + b.w; p.mots[q].by = b.y + b.h * 0.56 - 0.02 * corps; p.mots[q].lh = corps * 1.2;
-        gsap.set(sp, { yPercent: 104 });
-        ft(sp, { yPercent: 104 }, { yPercent: 0, duration: 0.3, ease: P3o }, Math.max(0.0, p.mots[q].t - 0.03));
+        gsap.set(sp, { yPercent: 150 });
+        ft(sp, { yPercent: 150 }, { yPercent: 0, duration: 0.3, ease: P3o }, Math.max(0.0, p.mots[q].t - 0.03));
       });
     });
 
