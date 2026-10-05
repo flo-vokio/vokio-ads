@@ -56,10 +56,11 @@ def sonie(x):
     return float(b.split("I:")[1].split("LUFS")[0]), float(b.split("Peak:")[1].split("dBFS")[0])
 
 
-def voix_off(rid):
+def voix_off(rid, gain_db=0.0):
     """Voix off lue APRÈS une compression douce et un limiteur (voix de pub ; les VRAIS appels, eux, ne sont jamais traités)."""
     brut = subprocess.run(["ffmpeg", "-v", "error", "-i", f"{ICI}/son/voix/{rid}.wav", "-af",
-                           "highpass=f=70,acompressor=threshold=-22dB:ratio=3:attack=4:release=90:makeup=3,alimiter=limit=0.6:attack=2:release=40",
+                           "highpass=f=70,acompressor=threshold=-22dB:ratio=3:attack=4:release=90:makeup=3,alimiter=limit=0.6:attack=2:release=40"
+                           + f",volume={gain_db:.2f}dB,alimiter=limit=0.5:attack=2:release=60:level=disabled",
                            "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"], capture_output=True, check=True).stdout
     return np.frombuffer(brut, dtype=np.float32).copy()
 
@@ -98,7 +99,7 @@ def main():
         segs.append({"nom": rid, "type": "voix", "film": [t0, round(t0 + d["duree"], 3)], "texte": d["texte"]})
         for w in d["mots"]:
             mots.append({"seg": rid, "texte": w["texte"], "t": round(t0 + w["t"], 3), "t1": round(t0 + w["t1"], 3)})
-        pistes.append((t0, x, "voix"))
+        pistes.append((t0, x, "voix:" + rid))
         t = t0 + d["duree"]
 
     # ---- signature : le la sur un temps, la plume 0,70 s avant + 0,10 de ı sans point
@@ -117,7 +118,7 @@ def main():
             ws = ws[:k] + [{"texte": "vokio.fr", "t": ws[k]["t"], "t1": ws[-1]["t1"]}]
         for w in ws:
             mots.append({"seg": rid, "texte": w["texte"], "t": round(t0 + w["t"], 3), "t1": round(t0 + w["t1"], 3)})
-        pistes.append((t0, x, "voix"))
+        pistes.append((t0, x, "voix:" + rid))
         t = t0 + d["duree"] + 0.3
     duree = round(t + 1.6, 3)
     n = int(duree * SR)
@@ -125,10 +126,12 @@ def main():
     # ---- niveaux : voix off à -15 LUFS, appels à -16 (la voix de pub est devant)
     voix = np.zeros(n, dtype=np.float32)
     # une seule mesure pour toute la voix off (les répliques gardent leurs écarts naturels) ; les appels sur l'appel entier
-    i_vo, _ = sonie(np.concatenate([x for _, x, nat in pistes if nat == "voix"]))
+    # gain de la voix off appliqué AVANT son dernier limiteur (crête bornée quelle que soit la voix choisie)
+    i_vo, _ = sonie(np.concatenate([x for _, x, nat in pistes if nat.startswith("voix")]))
+    pistes = [(t0, voix_off(nat.split(":")[1], -15.0 - i_vo) if nat.startswith("voix") else x, nat) for t0, x, nat in pistes]
     for t0, x, nat in pistes:
-        if nat == "voix":
-            g = 10 ** ((-15.0 - i_vo) / 20)
+        if nat.startswith("voix"):
+            g = 1.0
         else:
             i, _ = sonie(lire(f"{APPELS}/appel-{nat.split(':')[1]}.mp3", 1)[:, 0])
             g = 10 ** ((-15.5 - i) / 20)
