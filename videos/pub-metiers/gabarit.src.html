@@ -190,16 +190,18 @@ __ARRONDI__
       txt: "Bonjour Camille, votre rendez-vous est confirmé : Balayage, le samedi 19 septembre à 10:00, Salon Marchand. Démo Vokio, RDV fictif." };
     ip.bulle = tMot("v3", "SMS");
 __JS_IPHONE__
-    pts.push({ t: ip.entree + 0.5, x: ip.repos.x, y: ip.repos.y, s: 44, renait: true, eteint: ip.entree - 0.04 });
+    pts.push({ t: ip.entree + 0.15, x: ip.repos.x, y: ip.repos.y, s: 44 });
 
     // ================= COMMANDE (v4)
     const co = $("#commande"), coc = $("#co-carte");
     const lignes = ["Fraisier, huit parts", "Pour Florian", "Retrait à 11:00"];
     lignes.forEach((l) => { const d = document.createElement("div"); d.className = "li"; d.innerHTML = '<span class="puce"></span>' + l; coc.appendChild(d); });
-    const tCo = V("v4")[0] - 0.1, tCom = tMot("v4", "commandes");
+    const tCo = Math.max(V("v4")[0] - 0.1, ip.sortie + 0.32), tCom = tMot("v4", "commandes");   // après la sortie de l'iPhone
     montrer(co, tCo, fin.v4 + 0.3); entre(co, tCo); sort(co, fin.v4);
     const puces = [], hLi = boite(coc.children[0]).h, padCo = 22 + 24 + 6;
     gsap.set(coc, { height: padCo + hLi });
+    // la carte n'apparaît qu'avec sa première ligne (jamais de carte vide)
+    gsap.set(coc, { autoAlpha: 0 }); ft(coc, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 }, tCom - 0.2);
     [].forEach.call(coc.children, function (li, k) {
       const t = tCom - 0.1 + k * 0.22;
       if (k > 0) ft(coc, { height: padCo + hLi * k }, { height: padCo + hLi * (k + 1), duration: 0.22, ease: P3o }, t - 0.12);
@@ -208,8 +210,8 @@ __JS_IPHONE__
       ft(li.firstChild, { scale: 0 }, { scale: 1, duration: 0.12, ease: P3o }, t);
       const b = boite(li.firstChild); puces.push({ t, x: b.x + b.w / 2, y: b.y + b.h / 2 });
     });
-    pts.push({ t: puces[0].t - 0.2, x: puces[0].x, y: puces[0].y, s: 44, renait: true, eteint: ip.sortie - 0.02 });
-    puces.slice(1).forEach((p) => pts.push({ t: p.t - 0.12, x: p.x, y: p.y, s: 44, d: 0.14 }));
+    { const r = document.createRange(); r.selectNodeContents($("#co-titre")); const bt = r.getBoundingClientRect(), k0 = $("#root").getBoundingClientRect();
+      pts.push({ t: tCo + 0.05, x: (bt.right - k0.left) + 40, y: (bt.top - k0.top) + bt.height / 2, s: 44 }); }
 
     // ================= ESPACE CLIENT (v5 + v6) : la fiche urgence, puis le résumé qui s'écrit (le point écrit)
     const esp = $("#espace"), ent = $("#esp-entete"), pan = $("#esp-panneau"), S = 912 / 1044;
@@ -226,13 +228,12 @@ __JS_IPHONE__
     ft(pan, { clipPath: "inset(0% 0% 100% 0% round 30px)" }, { clipPath: "inset(0% 0% 0% 0% round 30px)", duration: 0.45, ease: P3o }, tPan);
     exiger(boite(esp).y + (216 + 647) * S <= 1250, "l'espace descend sous 1250");
     const bEnt = boite(ent);
-    pts.push({ t: tMot("v5", "urgences"), x: bEnt.x + bEnt.w - 70, y: bEnt.y + 90 * S, s: 44, renait: true, eteint: fin.v4 - 0.02 });
+    pts.push({ t: tMot("v5", "urgences") + 0.1, x: bEnt.x + bEnt.w - 70, y: bEnt.y + 90 * S, s: 44 });   // l'en-tête est déjà là
     const spans = [].slice.call(res.children);
     spans.forEach(function (sp, k) {
       const t = tEcr0 + (tEcr1 - tEcr0) * k / spans.length;
       gsap.set(sp, { opacity: 0 }); ft(sp, { opacity: 0 }, { opacity: 1, duration: 0.06 }, t);
-      const b = boite(sp);
-      pts.push({ t, x: b.x + b.w + 24, y: b.y + b.h * 0.55, s: 30, d: 0.08, ligne: true });
+
     });
 
     // ================= « Vokio parle votre métier. » (v7) : rappel de l'accroche, juste avant la signature
@@ -267,12 +268,13 @@ __JS_IPHONE__
 
     // ================= LE POINT
     const point = $("#point");
-    const c = (el) => { const b = boite(el); return { x: b.x + b.w / 2, y: b.y + b.h / 2, s: b.w }; };
+    const c = (el) => { const i = el.closest(".i"); if (i) gsap.set(i, { yPercent: 0 });
+      const b = boite(el); if (i) gsap.set(i, { yPercent: 150 }); return { x: b.x + b.w / 2, y: b.y + b.h / 2, s: b.w }; };
     const Pv1 = c($("#v1-pt")), Pv7 = c($("#v7-pt")), PI = c($("#mot-pt"));
     // accroche : il naît sur le premier métier cité, saute sur les suivants, s'éteint avec le mur
     gsap.set(point, { x: ptsMur[0].x, y: ptsMur[0].y, xPercent: -50, yPercent: -50, scale: 0 });
     ft(point, { scale: 0 }, { scale: 30 / 44, duration: 0.14, ease: P3o }, ptsMur[0].t);
-    ptsMur.slice(1).forEach((q, k) => ft(point, { x: ptsMur[k].x, y: ptsMur[k].y }, { x: q.x, y: q.y, duration: 0.14, ease: P3o }, q.t));
+    ptsMur.slice(1).forEach((q, k) => ft(point, { x: ptsMur[k].x, y: ptsMur[k].y }, { x: q.x, y: q.y, duration: 0.26, ease: P3io }, q.t - 0.08));
     ft(point, { scale: 30 / 44 }, { scale: 0, duration: 0.14, ease: "power2.in" }, finAcc);
     // point final de « répond. »
     const tRep = m1[m1.length - 1].t1 - 0.05;
@@ -280,25 +282,17 @@ __JS_IPHONE__
     ft(point, { scale: 0 }, { scale: Pv1.s / 44, duration: 0.2, ease: P3o }, tRep);
     let px = Pv1.x, py = Pv1.y, ps = Pv1.s, tp = tRep + 0.2;
     pts.sort((a, b) => a.t - b.t);
-    pts.forEach(function (q, k) {
-      const t = Math.max(q.t, tp);
-      if (q.renait || q.ligne && Math.abs(q.y - py) > 20) {
-        const te = q.eteint != null ? Math.max(q.eteint, tp) : t;
-        ft(point, { scale: ps / 44 }, { scale: 0, duration: 0.1, ease: "power2.in" }, te);
-        tl.set(point, { x: q.x, y: q.y }, Math.max(te + 0.1, t - 0.001));
-        ft(point, { scale: 0 }, { scale: q.s / 44, duration: 0.16, ease: P3o }, Math.max(te + 0.1, t));
-        px = q.x; py = q.y; ps = q.s; tp = Math.max(te + 0.1, t) + 0.16; return;
-      }
-      const d = q.d || 0.3;
-      ft(point, { x: px, y: py, scale: ps / 44 }, { x: q.x, y: q.y, scale: q.s / 44, duration: d, ease: P3o }, t);
+    pts.forEach(function (q) {
+      // un seul geste : il se DÉPLACE d'un objet à l'autre (jamais de téléportation), plus lentement s'il va loin
+      const t = Math.max(q.t, tp), dist = Math.hypot(q.x - px, q.y - py);
+      const d = Math.min(0.65, Math.max(0.35, 0.3 + dist / 2200));
+      ft(point, { x: px, y: py, scale: ps / 44 }, { x: q.x, y: q.y, scale: q.s / 44, duration: d, ease: P3io }, t);
       px = q.x; py = q.y; ps = q.s; tp = t + d;
     });
     // il quitte l'espace, attend le mur, puis devient le point final de « métier. »
     const tMet = mFin[mFin.length - 1].t1 - 0.05;
     exiger(tMet > tp, "le point arrive sur « métier. » avant d'avoir fini");
-    ft(point, { scale: ps / 44 }, { scale: 0, duration: 0.12, ease: "power2.in" }, Math.max(tp, V("v7")[0] - 0.2));
-    tl.set(point, { x: Pv7.x, y: Pv7.y }, tMet - 0.01);
-    ft(point, { scale: 0 }, { scale: Pv7.s / 44, duration: 0.2, ease: P3o }, tMet);
+    ft(point, { x: px, y: py, scale: ps / 44 }, { x: Pv7.x, y: Pv7.y, scale: Pv7.s / 44, duration: 0.55, ease: P3io }, Math.max(tp, tMet - 0.5));
     // signature
     exiger(TT.plume - 0.3 > tMet + 0.3, "pas le temps de poser « métier. »");
     ft(point, { x: Pv7.x, y: Pv7.y, scale: Pv7.s / 44 }, { x: stylo.x0, y: stylo.y, scale: 1, duration: 0.3, ease: P3io }, TT.plume - 0.3);

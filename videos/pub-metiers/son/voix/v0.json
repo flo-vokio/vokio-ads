@@ -1,32 +1,32 @@
 {
  "id": "v0",
  "texte": "Plombier, coiffeur, garagiste, dentiste, restaurant…",
- "duree": 3.436563,
+ "duree": 4.421,
  "mots": [
   {
    "texte": "Plombier,",
    "t": 0.0,
-   "t1": 0.569
+   "t1": 0.65
   },
   {
    "texte": "coiffeur,",
-   "t": 0.662,
-   "t1": 1.196
+   "t": 0.731,
+   "t1": 1.451
   },
   {
    "texte": "garagiste,",
-   "t": 1.277,
-   "t1": 1.904
+   "t": 1.614,
+   "t1": 2.45
   },
   {
    "texte": "dentiste,",
-   "t": 1.974,
-   "t1": 2.508
+   "t": 2.566,
+   "t1": 3.32
   },
   {
    "texte": "restaurant…",
-   "t": 2.612,
-   "t1": 3.437
+   "t": 3.518,
+   "t1": 4.261
   }
  ]
 }

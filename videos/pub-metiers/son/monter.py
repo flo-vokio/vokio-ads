@@ -83,8 +83,14 @@ def main():
     vo = {}
     for rid in ["v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7"]:
         d = json.load(open(f"{ICI}/son/voix/{rid}.json"))
-        ecart = {"v1": 0.2, "v4": 0.25, "v6": 0.2}.get(rid, 0.3)
-        t0 = 0.08 if rid == "v0" else sur_temps(t + ecart)
+        # v3 à v6 continuent la phrase de v2 : on garde la respiration naturelle (une seule génération, une seule
+        # intonation) ; les autres répliques partent sur un temps de la musique
+        if rid == "v0":
+            t0 = 0.08
+        elif rid in ("v3", "v4", "v5", "v6"):
+            t0 = round(t + {"v4": 0.22}.get(rid, 0.1), 3)
+        else:
+            t0 = sur_temps(t + 0.25)
         x = voix_off(rid)
         vo[rid] = {"debut": t0, "fin": round(t0 + d["duree"], 3)}
         segs.append({"nom": rid, "type": "voix", "film": [t0, round(t0 + d["duree"], 3)], "texte": d["texte"]})

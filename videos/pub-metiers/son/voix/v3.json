@@ -1,42 +1,57 @@
 {
  "id": "v3",
- "texte": "Confirme par SMS, et rappelle la veille.",
- "duree": 1.996917,
+ "texte": "le confirme par SMS, et rappelle votre client la veille.",
+ "duree": 3.726,
  "mots": [
   {
-   "texte": "Confirme",
-   "t": 0.0,
-   "t1": 0.43
+   "texte": "le",
+   "t": 0.06,
+   "t1": 0.188
+  },
+  {
+   "texte": "confirme",
+   "t": 0.246,
+   "t1": 0.71
   },
   {
    "texte": "par",
-   "t": 0.453,
-   "t1": 0.592
+   "t": 0.757,
+   "t1": 0.908
   },
   {
    "texte": "SMS,",
-   "t": 0.627,
-   "t1": 1.01
+   "t": 0.977,
+   "t1": 1.593
   },
   {
    "texte": "et",
-   "t": 1.033,
-   "t1": 1.126
+   "t": 1.755,
+   "t1": 1.894
   },
   {
    "texte": "rappelle",
-   "t": 1.161,
-   "t1": 1.474
+   "t": 1.941,
+   "t1": 2.243
+  },
+  {
+   "texte": "votre",
+   "t": 2.266,
+   "t1": 2.521
+  },
+  {
+   "texte": "client",
+   "t": 2.568,
+   "t1": 2.893
   },
   {
    "texte": "la",
-   "t": 1.498,
-   "t1": 1.567
+   "t": 2.916,
+   "t1": 2.974
   },
   {
    "texte": "veille.",
-   "t": 1.614,
-   "t1": 1.997
+   "t": 3.032,
+   "t1": 3.566
   }
  ]
 }

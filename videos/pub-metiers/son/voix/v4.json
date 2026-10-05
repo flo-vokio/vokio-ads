@@ -1,22 +1,32 @@
 {
  "id": "v4",
- "texte": "Prend les commandes.",
- "duree": 1.114563,
+ "texte": "Il prend aussi les commandes,",
+ "duree": 1.575,
  "mots": [
   {
-   "texte": "Prend",
-   "t": 0.0,
-   "t1": 0.221
+   "texte": "Il",
+   "t": 0.06,
+   "t1": 0.199
+  },
+  {
+   "texte": "prend",
+   "t": 0.269,
+   "t1": 0.443
+  },
+  {
+   "texte": "aussi",
+   "t": 0.501,
+   "t1": 0.675
   },
   {
    "texte": "les",
-   "t": 0.244,
-   "t1": 0.337
+   "t": 0.721,
+   "t1": 0.803
   },
   {
-   "texte": "commandes.",
-   "t": 0.372,
-   "t1": 1.115
+   "texte": "commandes,",
+   "t": 0.826,
+   "t1": 1.453
   }
  ]
 }
