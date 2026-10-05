@@ -264,7 +264,8 @@ __JS_IPHONE__
     cta.innerHTML = m9.map((w) => '<span class="w"><span class="i">' + w.texte + "</span></span>").join(" ") + '<br><span class="w"><span class="i url">vokio.fr</span></span>';
     montrer(cta, m9[0].t - 0.05, null);
     [].forEach.call(cta.querySelectorAll(".i"), (sp, q) => { gsap.set(sp, { yPercent: 150 }); ft(sp, { yPercent: 150 }, { yPercent: 0, duration: 0.3, ease: P3o }, q < m9.length ? m9[q].t - 0.03 : m9[m9.length - 1].t1 + 0.1); });
-    const off = $("#offre"); montrer(off, V("v9")[1] + 0.1, null); entre(off, V("v9")[1] + 0.1, 24);
+    const tOff = m9[m9.length - 1].t1 + 0.55;          // l'offre APRÈS vokio.fr
+    const off = $("#offre"); montrer(off, tOff, null); entre(off, tOff, 24);
     exiger(boite(off).y + boite(off).h <= 1250, "l'offre descend sous 1250");
 
     // ================= LE POINT

@@ -59,8 +59,8 @@ def sonie(x):
 def voix_off(rid, gain_db=0.0):
     """Voix off lue APRÈS une compression douce et un limiteur (voix de pub ; les VRAIS appels, eux, ne sont jamais traités)."""
     brut = subprocess.run(["ffmpeg", "-v", "error", "-i", f"{ICI}/son/voix/{rid}.wav", "-af",
-                           "highpass=f=70,acompressor=threshold=-22dB:ratio=3:attack=4:release=90:makeup=3,alimiter=limit=0.6:attack=2:release=40"
-                           + f",volume={gain_db:.2f}dB,alimiter=limit=0.5:attack=2:release=60:level=disabled",
+                           "highpass=f=70,acompressor=threshold=-20dB:ratio=2:attack=10:release=150:makeup=1.5"
+                           + f",volume={gain_db:.2f}dB,alimiter=limit=0.89:attack=5:release=80:level=disabled",
                            "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"], capture_output=True, check=True).stdout
     return np.frombuffer(brut, dtype=np.float32).copy()
 
@@ -79,41 +79,34 @@ def main():
     t = 0.0
     fin_accroche = 0.0
 
-    # ---- voix off, chaque réplique sur un temps
+    # ---- voix off : v0 à v7 sont UNE prise continue (découpée au milieu des silences) : posées bout à bout, sans
+    # attente ni recollage audible (retour de Florian 05/10 : « droit au but », mauvaise coupe entre deux répliques)
     vo = {}
     for rid in ["v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7"]:
         d = json.load(open(f"{ICI}/son/voix/{rid}.json"))
-        # v3 à v6 continuent la phrase de v2 : on garde la respiration naturelle (une seule génération, une seule
-        # intonation) ; les autres répliques partent sur un temps de la musique
-        if rid == "v0":
-            t0 = 0.08
-        elif rid in ("v3", "v4", "v5", "v6"):
-            t0 = round(t + {"v4": 0.22}.get(rid, 0.1), 3)
-        else:
-            t0 = sur_temps(t + 0.25)
+        t0 = 0.0 if rid == "v0" else round(t, 4)
         x = voix_off(rid)
-        vo[rid] = {"debut": t0, "fin": round(t0 + d["duree"], 3)}
-        segs.append({"nom": rid, "type": "voix", "film": [t0, round(t0 + d["duree"], 3)], "texte": d["texte"]})
+        vo[rid] = {"debut": t0, "fin": round(t0 + d["duree"], 4)}
+        segs.append({"nom": rid, "type": "voix", "film": [t0, round(t0 + d["duree"], 4)], "texte": d["texte"]})
         for w in d["mots"]:
             mots.append({"seg": rid, "texte": w["texte"], "t": round(t0 + w["t"], 3), "t1": round(t0 + w["t1"], 3)})
         pistes.append((t0, x, "voix:" + rid))
         t = t0 + d["duree"]
 
     # ---- signature : le la sur un temps, la plume 0,70 s avant + 0,10 de ı sans point
-    la = sur_temps(t + 0.75 + 0.80)
+    la = sur_temps(t + 1.15)            # le point se pose sur « métier. », descend, écrit Vokıo (0,8 s), s'envole sur un temps
     T = {"plume": round(la - 0.80, 3), "plume_fin": round(la - 0.10, 3), "la": la, "sol": round(la + 0.24, 3), "re": round(la + 0.60, 3)}
-    t = T["re"] + 0.45
-    for rid in ["v8", "v9"]:
+    t = T["re"] + 0.3
+    for rid in ["v8", "v9"]:          # v8 puis v9 bout à bout : « Créez votre espace gratuitement » d'une traite
         d = json.load(open(f"{ICI}/son/voix/{rid}.json"))
-        t0 = round(t, 3)
+        t0 = round(t, 4)
         x = voix_off(rid)
-        vo[rid] = {"debut": t0, "fin": round(t0 + d["duree"], 3)}
-        segs.append({"nom": rid, "type": "voix", "film": [t0, round(t0 + d["duree"], 3)], "texte": d["texte"]})
-        ws = d["mots"]
-        for w in ws:
+        vo[rid] = {"debut": t0, "fin": round(t0 + d["duree"], 4)}
+        segs.append({"nom": rid, "type": "voix", "film": [t0, round(t0 + d["duree"], 4)], "texte": d["texte"]})
+        for w in d["mots"]:
             mots.append({"seg": rid, "texte": w["texte"], "t": round(t0 + w["t"], 3), "t1": round(t0 + w["t1"], 3)})
         pistes.append((t0, x, "voix:" + rid))
-        t = t0 + d["duree"] + 0.3
+        t = t0 + d["duree"]
     duree = round(t + 2.2, 3)          # vokio.fr écrit (non dit) : le temps de le lire
     n = int(duree * SR)
 
@@ -129,8 +122,8 @@ def main():
         else:
             i, _ = sonie(lire(f"{APPELS}/appel-{nat.split(':')[1]}.mp3", 1)[:, 0])
             g = 10 ** ((-15.5 - i) / 20)
-        f = int(0.008 * SR); y = x.copy(); r = np.linspace(0, 1, f, dtype=np.float32); y[:f] *= r; y[-f:] *= r[::-1]
-        o = int(t0 * SR); voix[o:o + len(y)] += y * g
+        y = x.copy()
+        o = int(round(t0 * SR)); voix[o:o + len(y)] += y[:max(0, min(len(y), n - o))] * g
 
     # ---- musique : grosse caisse sur 0, baissée sous les voix, coupée net au la, reprise douce après le ré
     mus = lire(MUSIQUE, 2)
@@ -157,10 +150,17 @@ def main():
     pc = lambda x: round(20 * np.log10(np.abs(x).max() + 1e-9), 1)
     print("crêtes : voix", pc(voix), "musique", pc(musique), "signature", pc(sp * 10 ** (-6 / 20)))
     i, pk = sonie(mix)
-    g = min(-14.0 - i, -1.2 - pk)
-    mix *= 10 ** (g / 20)
-    ecrire(f"{ICI}/son/mix.wav", mix)
-    i2, pk2 = sonie(mix)
+    # mastering : plus aucun VRAI appel dans ce film (voix off et musique seulement) ⇒ limiteur de bus léger pour
+    # atteindre -14 LUFS sans écrêter (≈ 2 dB de réduction sur les seules crêtes)
+    brut = "/dev/shm/pub-metiers-mix-brut.wav"; ecrire(brut, mix)
+    g = -14.0 - i
+    for _ in range(3):
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", brut, "-af", f"volume={g:.2f}dB,alimiter=limit=0.84:attack=5:release=80:level=disabled",
+                        "-ar", str(SR), "-c:a", "pcm_s24le", f"{ICI}/son/mix.wav"], check=True)
+        i2, pk2 = sonie(lire(f"{ICI}/son/mix.wav", 2))
+        if abs(i2 + 14.0) < 0.15: break
+        g += -14.0 - i2
+    os.remove(brut)
 
     montage = {"duree": duree, "fps": 30, "segments": segs, "mots": mots, "temps": T, "voix": vo, "metiers": METIERS,
                "fin_accroche": round(fin_accroche, 3), "son": {"lufs": i2, "crete_dbfs": pk2}}

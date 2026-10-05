@@ -14,9 +14,9 @@ import subprocess
 import urllib.request
 
 ICI = os.path.dirname(os.path.abspath(__file__))
-VOIX = os.environ.get("VOIX", "BUJMBsQ3Oq4cEeWSb48y")          # Sébastien, voix française homme 35 ans (pub)
+VOIX = os.environ.get("VOIX", "m5U7XCsc8v988k2RJAqN")          # Manon (retenue par Florian le 05/10)
 MODELE = "eleven_multilingual_v2"
-REGLAGES = {"stability": 0.55, "similarity_boost": 0.8, "style": 0.25, "use_speaker_boost": True, "speed": 1.05}   # plus stable : une intonation suivie
+REGLAGES = {"stability": 0.6, "similarity_boost": 0.8, "style": 0.2, "use_speaker_boost": True, "speed": 1.1}   # stable et vif (pub)   # plus stable : une intonation suivie
 
 # Retour Florian 05/10 : intonation sans continuité (« Prend les commandes » sonnait surpris) ⇒ UNE seule génération
 # pour tout le texte (une seule courbe d'intonation), découpée ensuite réplique par réplique sur les temps des caractères ;
@@ -73,24 +73,50 @@ def generer_tout():
         else: cur[1]["texte"] += c; cur[1]["t1"] = b
     if cur: mots[cur[0]].append(cur[1])
     import numpy as np
-    x = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", wav, "-f", "f32le", "-ac", "1", "-ar", "48000", "-"],
+    SR = 48000
+    x = np.frombuffer(subprocess.run(["ffmpeg", "-v", "error", "-i", wav, "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"],
                                      capture_output=True, check=True).stdout, dtype=np.float32)
     ids = [r for r, _ in REPLIQUES]
+    tous = [(rid, m) for rid in ids for m in mots[rid]]
+    # ---- « droit au but » (Florian, 05/10) : les silences entre mots sont raccourcis DANS la prise, sans recoller
+    # de voix (on retire le milieu du silence, fondu de 10 ms) : virgule 0,14 s, fin de phrase 0,24 s, sinon 0,07 s
+    def plafond(texte):
+        return 0.24 if texte[-1] in ".…!?" else 0.14 if texte[-1] in ",;:" else 0.07
+    morceaux, decal, pos = [], [], 0.0      # decal : (instant source à partir duquel, retrait cumulé)
+    retrait, curseur = 0.0, 0.0
+    f = int(0.010 * SR); rampe = np.linspace(0, 1, f, dtype=np.float32)
+    for k in range(len(tous) - 1):
+        a, b = tous[k][1]["t1"], tous[k + 1][1]["t"]
+        trop = (b - a) - plafond(tous[k][1]["texte"])
+        if trop > 0.02:
+            c0 = a + (b - a - trop) / 2; c1 = c0 + trop          # on retire [c0, c1], au milieu du silence
+            y = x[int(curseur * SR):int(c0 * SR)].copy()
+            if morceaux: y[:f] *= rampe
+            y[-f:] *= rampe[::-1]
+            morceaux.append(y); curseur = c1; retrait += trop; decal.append((c1, retrait))
+    y = x[int(curseur * SR):].copy(); y[:f] *= rampe; morceaux.append(y)
+    x = np.concatenate(morceaux)
+    def nouveau(t):
+        r = 0.0
+        for c1, rr in decal:
+            if t >= c1 - 1e-6: r = rr
+        return t - r
+    for rid, m in tous:
+        m["t"], m["t1"] = nouveau(m["t"]), nouveau(m["t1"])
+    # ---- découpe au MILIEU des silences : rien n'est rogné, recollées bout à bout les répliques redonnent la prise
     sortie = []
     for q, rid in enumerate(ids):
         ms = mots[rid]
-        a = max(0.0, ms[0]["t"] - 0.06)
-        b = ms[-1]["t1"] + 0.16
-        if q + 1 < len(ids):
-            b = min(b, mots[ids[q + 1]][0]["t"] - 0.04)
-        y = x[int(a * 48000):int(b * 48000)].copy()
-        f = int(0.012 * 48000); r = np.linspace(0, 1, f, dtype=np.float32); y[:f] *= r; y[-f:] *= r[::-1]
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ac", "1", "-ar", "48000", "-i", "-", "-c:a", "pcm_s24le",
+        a = max(0.0, ms[0]["t"] - 0.08) if q == 0 else (mots[ids[q - 1]][-1]["t1"] + ms[0]["t"]) / 2
+        b = ms[-1]["t1"] + 0.25 if q + 1 == len(ids) else (ms[-1]["t1"] + mots[ids[q + 1]][0]["t"]) / 2
+        y = x[int(round(a * SR)):int(round(b * SR))].copy()
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ac", "1", "-ar", str(SR), "-i", "-", "-c:a", "pcm_s24le",
                         os.path.join(dossier, f"{rid}.wav")], input=y.tobytes(), check=True)
-        json.dump({"id": rid, "texte": dict(REPLIQUES)[rid], "duree": round(len(y) / 48000, 3),
+        json.dump({"id": rid, "texte": dict(REPLIQUES)[rid], "duree": round(len(y) / SR, 4), "debut_prise": round(a, 4),
                    "mots": [{"texte": m["texte"], "t": round(m["t"] - a, 3), "t1": round(m["t1"] - a, 3)} for m in ms]},
                   open(os.path.join(dossier, f"{rid}.json"), "w"), ensure_ascii=False, indent=1)
-        sortie.append((rid, len(y) / 48000, ms, a))
+        sortie.append((rid, len(y) / SR, ms, a))
+    print(f"silences retirés : {retrait:.2f} s")
     return sortie
 
 
