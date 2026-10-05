@@ -1,42 +1,42 @@
 {
  "id": "v5",
- "texte": "gère les urgences, même à vingt-trois heures,",
- "duree": 3.248,
+ "texte": "gère les urgences même à vingt-trois heures,",
+ "duree": 2.308,
  "mots": [
   {
    "texte": "gère",
    "t": 0.06,
-   "t1": 0.374
+   "t1": 0.327
   },
   {
    "texte": "les",
-   "t": 0.397,
-   "t1": 0.513
+   "t": 0.351,
+   "t1": 0.467
   },
   {
-   "texte": "urgences,",
-   "t": 0.583,
-   "t1": 1.256
+   "texte": "urgences",
+   "t": 0.525,
+   "t1": 0.989
   },
   {
    "texte": "même",
-   "t": 1.488,
-   "t1": 1.79
+   "t": 1.105,
+   "t1": 1.337
   },
   {
    "texte": "à",
-   "t": 1.86,
-   "t1": 1.93
+   "t": 1.361,
+   "t1": 1.384
   },
   {
    "texte": "vingt-trois",
-   "t": 2.092,
-   "t1": 2.673
+   "t": 1.442,
+   "t1": 1.848
   },
   {
    "texte": "heures,",
-   "t": 2.742,
-   "t1": 3.172
+   "t": 1.918,
+   "t1": 2.185
   }
  ]
 }

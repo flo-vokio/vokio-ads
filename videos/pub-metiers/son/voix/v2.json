@@ -1,47 +1,42 @@
 {
  "id": "v2",
- "texte": "Il prend le rendez-vous dans votre agenda Google,",
- "duree": 2.516,
+ "texte": "Il prend le rendez-vous dans votre agenda,",
+ "duree": 2.157,
  "mots": [
   {
    "texte": "Il",
    "t": 0.06,
-   "t1": 0.199
+   "t1": 0.2
   },
   {
    "texte": "prend",
    "t": 0.269,
-   "t1": 0.408
+   "t1": 0.42
   },
   {
    "texte": "le",
-   "t": 0.431,
-   "t1": 0.478
+   "t": 0.444,
+   "t1": 0.513
   },
   {
    "texte": "rendez-vous",
-   "t": 0.524,
-   "t1": 0.965
+   "t": 0.56,
+   "t1": 1.001
   },
   {
    "texte": "dans",
-   "t": 1.0,
+   "t": 1.024,
    "t1": 1.14
   },
   {
    "texte": "votre",
    "t": 1.163,
-   "t1": 1.383
+   "t1": 1.407
   },
   {
-   "texte": "agenda",
-   "t": 1.441,
-   "t1": 1.825
-  },
-  {
-   "texte": "Google,",
-   "t": 1.883,
-   "t1": 2.44
+   "texte": "agenda,",
+   "t": 1.477,
+   "t1": 2.057
   }
  ]
 }

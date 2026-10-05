@@ -216,6 +216,7 @@ __JS_IPHONE__
     // ================= ESPACE CLIENT (v5 + v6) : la fiche urgence, puis le résumé qui s'écrit (le point écrit)
     const esp = $("#espace"), ent = $("#esp-entete"), pan = $("#esp-panneau"), S = 912 / 1044;
     ent.style.transform = "scale(" + S + ")"; pan.style.transform = "scale(" + S + ")";
+    ent.style.clipPath = "inset(46px 10px 0 10px)";     // coins arrondis de la carte parente, présents dans la capture
     ent.style.top = "0px"; pan.style.top = Math.round(216 * S) + "px";
     const res = $("#esp-resume");
     const resume = "M. Lefèvre a une fuite sous l'évier. Le geste d'urgence lui a été donné au téléphone. Intervention calée demain matin 8 h 30. SMS de confirmation envoyé.".split(" ");
@@ -260,15 +261,15 @@ __JS_IPHONE__
     montrer(prom, m8[0].t - 0.05, null);
     [].forEach.call(prom.querySelectorAll(".i"), (sp, q) => { gsap.set(sp, { yPercent: 150 }); ft(sp, { yPercent: 150 }, { yPercent: 0, duration: 0.28, ease: P3o }, m8[q].t - 0.03); });
     const m9 = motsDe("v9"), cta = $("#cta");
-    cta.innerHTML = m9.map((w) => '<span class="w"><span class="i' + (w.texte === "vokio.fr" ? " url" : "") + '">' + w.texte + "</span></span>").join(" ").replace(' <span class="w"><span class="i url">', '<br><span class="w"><span class="i url">');
+    cta.innerHTML = m9.map((w) => '<span class="w"><span class="i">' + w.texte + "</span></span>").join(" ") + '<br><span class="w"><span class="i url">vokio.fr</span></span>';
     montrer(cta, m9[0].t - 0.05, null);
-    [].forEach.call(cta.querySelectorAll(".i"), (sp, q) => { gsap.set(sp, { yPercent: 150 }); ft(sp, { yPercent: 150 }, { yPercent: 0, duration: 0.3, ease: P3o }, m9[q].t - 0.03); });
+    [].forEach.call(cta.querySelectorAll(".i"), (sp, q) => { gsap.set(sp, { yPercent: 150 }); ft(sp, { yPercent: 150 }, { yPercent: 0, duration: 0.3, ease: P3o }, q < m9.length ? m9[q].t - 0.03 : m9[m9.length - 1].t1 + 0.1); });
     const off = $("#offre"); montrer(off, V("v9")[1] + 0.1, null); entre(off, V("v9")[1] + 0.1, 24);
     exiger(boite(off).y + boite(off).h <= 1250, "l'offre descend sous 1250");
 
     // ================= LE POINT
     const point = $("#point");
-    const c = (el) => { const i = el.closest(".i"); if (i) gsap.set(i, { yPercent: 0 });
+    const c = (el) => { const i = el.closest(".w > .i"); if (i) gsap.set(i, { yPercent: 0 });
       const b = boite(el); if (i) gsap.set(i, { yPercent: 150 }); return { x: b.x + b.w / 2, y: b.y + b.h / 2, s: b.w }; };
     const Pv1 = c($("#v1-pt")), Pv7 = c($("#v7-pt")), PI = c($("#mot-pt"));
     // accroche : il naît sur le premier métier cité, saute sur les suivants, s'éteint avec le mur

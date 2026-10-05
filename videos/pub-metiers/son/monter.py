@@ -110,14 +110,11 @@ def main():
         vo[rid] = {"debut": t0, "fin": round(t0 + d["duree"], 3)}
         segs.append({"nom": rid, "type": "voix", "film": [t0, round(t0 + d["duree"], 3)], "texte": d["texte"]})
         ws = d["mots"]
-        if rid == "v9":       # « vokio point F R. » se lit vokio.fr
-            k = next(i for i, w in enumerate(ws) if w["texte"] == "vokio")
-            ws = ws[:k] + [{"texte": "vokio.fr", "t": ws[k]["t"], "t1": ws[-1]["t1"]}]
         for w in ws:
             mots.append({"seg": rid, "texte": w["texte"], "t": round(t0 + w["t"], 3), "t1": round(t0 + w["t1"], 3)})
         pistes.append((t0, x, "voix:" + rid))
         t = t0 + d["duree"] + 0.3
-    duree = round(t + 1.6, 3)
+    duree = round(t + 2.2, 3)          # vokio.fr écrit (non dit) : le temps de le lire
     n = int(duree * SR)
 
     # ---- niveaux : voix off à -15 LUFS, appels à -16 (la voix de pub est devant)

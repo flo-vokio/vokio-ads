@@ -1,52 +1,27 @@
 {
  "id": "v9",
- "texte": "Créez votre espace gratuitement, sur vokio point F R.",
- "duree": 5.622,
+ "texte": "Créez votre espace gratuitement.",
+ "duree": 2.138,
  "mots": [
   {
    "texte": "Créez",
    "t": 0.06,
-   "t1": 0.432
+   "t1": 0.361
   },
   {
    "texte": "votre",
-   "t": 0.478,
-   "t1": 0.722
+   "t": 0.396,
+   "t1": 0.628
   },
   {
    "texte": "espace",
-   "t": 0.745,
-   "t1": 1.198
+   "t": 0.652,
+   "t1": 1.151
   },
   {
-   "texte": "gratuitement,",
-   "t": 1.279,
-   "t1": 2.173
-  },
-  {
-   "texte": "sur",
-   "t": 2.533,
-   "t1": 2.963
-  },
-  {
-   "texte": "vokio",
-   "t": 3.381,
-   "t1": 3.938
-  },
-  {
-   "texte": "point",
-   "t": 4.008,
-   "t1": 4.344
-  },
-  {
-   "texte": "F",
-   "t": 4.379,
-   "t1": 4.611
-  },
-  {
-   "texte": "R.",
-   "t": 4.843,
-   "t1": 5.621
+   "texte": "gratuitement.",
+   "t": 1.232,
+   "t1": 2.138
   }
  ]
 }

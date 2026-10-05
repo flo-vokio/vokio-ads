@@ -24,14 +24,14 @@ REGLAGES = {"stability": 0.55, "similarity_boost": 0.8, "style": 0.25, "use_spea
 REPLIQUES = [
     ("v0", "Plombier, coiffeur, garagiste, dentiste, restaurant…"),
     ("v1", "Quand vous ne pouvez pas décrocher, c'est Vokio qui répond."),
-    ("v2", "Il prend le rendez-vous dans votre agenda Google,"),
-    ("v3", "le confirme par SMS, et rappelle votre client la veille."),
+    ("v2", "Il prend le rendez-vous dans votre agenda,"),
+    ("v3", "le confirme par SMS, et notifie votre client la veille."),
     ("v4", "Il prend aussi les commandes,"),
-    ("v5", "gère les urgences, même à vingt-trois heures,"),
+    ("v5", "gère les urgences même à vingt-trois heures,"),
     ("v6", "et chaque appel vous attend, résumé, dans votre espace."),
     ("v7", "Vokio parle votre métier."),
-    ("v8", "Vokio. Votre ligne répond, même quand vous ne pouvez pas."),
-    ("v9", "Créez votre espace gratuitement, sur vokio point F R."),
+    ("v8", "Vokio. Votre ligne répond même quand vous ne pouvez pas."),
+    ("v9", "Créez votre espace gratuitement.")   # vokio.fr écrit, pas dit (« pointe.fr » à l'oral),
 ]
 
 

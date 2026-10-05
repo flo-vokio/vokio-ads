@@ -1,57 +1,57 @@
 {
  "id": "v8",
- "texte": "Vokio. Votre ligne répond, même quand vous ne pouvez pas.",
- "duree": 5.061,
+ "texte": "Vokio. Votre ligne répond même quand vous ne pouvez pas.",
+ "duree": 3.447,
  "mots": [
   {
    "texte": "Vokio.",
    "t": 0.06,
-   "t1": 0.722
+   "t1": 0.617
   },
   {
    "texte": "Votre",
-   "t": 1.499,
-   "t1": 1.825
+   "t": 0.78,
+   "t1": 1.105
   },
   {
    "texte": "ligne",
-   "t": 1.859,
-   "t1": 2.184
+   "t": 1.151,
+   "t1": 1.36
   },
   {
-   "texte": "répond,",
-   "t": 2.347,
-   "t1": 2.974
+   "texte": "répond",
+   "t": 1.395,
+   "t1": 1.674
   },
   {
    "texte": "même",
-   "t": 3.136,
-   "t1": 3.52
+   "t": 1.708,
+   "t1": 2.057
   },
   {
    "texte": "quand",
-   "t": 3.578,
-   "t1": 3.775
+   "t": 2.173,
+   "t1": 2.335
   },
   {
    "texte": "vous",
-   "t": 3.81,
-   "t1": 3.938
+   "t": 2.359,
+   "t1": 2.463
   },
   {
    "texte": "ne",
-   "t": 3.961,
-   "t1": 4.054
+   "t": 2.498,
+   "t1": 2.579
   },
   {
    "texte": "pouvez",
-   "t": 4.135,
-   "t1": 4.46
+   "t": 2.626,
+   "t1": 2.893
   },
   {
    "texte": "pas.",
-   "t": 4.506,
-   "t1": 4.901
+   "t": 2.939,
+   "t1": 3.287
   }
  ]
 }

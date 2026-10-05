@@ -1,5 +1,5 @@
 {
- "duree": 38.239,
+ "duree": 35.435,
  "fps": 30,
  "segments": [
   {
@@ -7,7 +7,7 @@
    "type": "voix",
    "film": [
     0.08,
-    4.127
+    4.257
    ],
    "texte": "Plombier, coiffeur, garagiste, dentiste, restaurant…"
   },
@@ -15,8 +15,8 @@
    "nom": "v1",
    "type": "voix",
    "film": [
-    4.5,
-    7.48
+    5.0,
+    7.806
    ],
    "texte": "Quand vous ne pouvez pas décrocher, c'est Vokio qui répond."
   },
@@ -24,26 +24,26 @@
    "nom": "v2",
    "type": "voix",
    "film": [
-    8.0,
-    10.621
+    8.5,
+    10.657
    ],
-   "texte": "Il prend le rendez-vous dans votre agenda Google,"
+   "texte": "Il prend le rendez-vous dans votre agenda,"
   },
   {
    "nom": "v3",
    "type": "voix",
    "film": [
-    10.721,
-    14.192
+    10.757,
+    14.086
    ],
-   "texte": "le confirme par SMS, et rappelle votre client la veille."
+   "texte": "le confirme par SMS, et notifie votre client la veille."
   },
   {
    "nom": "v4",
    "type": "voix",
    "film": [
-    14.412,
-    16.071
+    14.306,
+    15.823
    ],
    "texte": "Il prend aussi les commandes,"
   },
@@ -51,17 +51,17 @@
    "nom": "v5",
    "type": "voix",
    "film": [
-    16.171,
-    18.78
+    15.923,
+    18.231
    ],
-   "texte": "gère les urgences, même à vingt-trois heures,"
+   "texte": "gère les urgences même à vingt-trois heures,"
   },
   {
    "nom": "v6",
    "type": "voix",
    "film": [
-    18.88,
-    22.478
+    18.331,
+    21.79
    ],
    "texte": "et chaque appel vous attend, résumé, dans votre espace."
   },
@@ -69,8 +69,8 @@
    "nom": "v7",
    "type": "voix",
    "film": [
-    23.0,
-    24.985
+    22.5,
+    24.331
    ],
    "texte": "Vokio parle votre métier."
   },
@@ -78,19 +78,19 @@
    "nom": "v8",
    "type": "voix",
    "film": [
-    28.05,
-    31.672
+    27.05,
+    30.497
    ],
-   "texte": "Vokio. Votre ligne répond, même quand vous ne pouvez pas."
+   "texte": "Vokio. Votre ligne répond même quand vous ne pouvez pas."
   },
   {
    "nom": "v9",
    "type": "voix",
    "film": [
-    31.972,
-    36.339
+    30.797,
+    32.935
    ],
-   "texte": "Créez votre espace gratuitement, sur vokio point F R."
+   "texte": "Créez votre espace gratuitement."
   }
  ],
  "mots": [
@@ -98,494 +98,476 @@
    "seg": "v0",
    "texte": "Plombier,",
    "t": 0.08,
-   "t1": 0.719
+   "t1": 0.73
   },
   {
    "seg": "v0",
    "texte": "coiffeur,",
-   "t": 0.835,
-   "t1": 1.438
+   "t": 0.962,
+   "t1": 1.589
   },
   {
    "seg": "v0",
    "texte": "garagiste,",
-   "t": 1.554,
-   "t1": 2.332
+   "t": 1.705,
+   "t1": 2.506
   },
   {
    "seg": "v0",
    "texte": "dentiste,",
-   "t": 2.448,
-   "t1": 3.087
+   "t": 2.623,
+   "t1": 3.284
   },
   {
    "seg": "v0",
    "texte": "restaurant…",
-   "t": 3.203,
-   "t1": 3.969
+   "t": 3.4,
+   "t1": 4.097
   },
   {
    "seg": "v1",
    "texte": "Quand",
-   "t": 4.56,
-   "t1": 4.745
+   "t": 5.06,
+   "t1": 5.234
   },
   {
    "seg": "v1",
    "texte": "vous",
-   "t": 4.78,
-   "t1": 4.885
+   "t": 5.269,
+   "t1": 5.374
   },
   {
    "seg": "v1",
    "texte": "ne",
-   "t": 4.92,
-   "t1": 5.001
+   "t": 5.397,
+   "t1": 5.478
   },
   {
    "seg": "v1",
    "texte": "pouvez",
-   "t": 5.047,
-   "t1": 5.268
+   "t": 5.524,
+   "t1": 5.745
   },
   {
    "seg": "v1",
    "texte": "pas",
-   "t": 5.303,
-   "t1": 5.43
+   "t": 5.78,
+   "t1": 5.896
   },
   {
    "seg": "v1",
    "texte": "décrocher,",
-   "t": 5.454,
-   "t1": 6.104
+   "t": 5.919,
+   "t1": 6.511
   },
   {
    "seg": "v1",
    "texte": "c'est",
-   "t": 6.22,
-   "t1": 6.406
+   "t": 6.627,
+   "t1": 6.802
   },
   {
    "seg": "v1",
    "texte": "Vokio",
-   "t": 6.429,
-   "t1": 6.754
+   "t": 6.825,
+   "t1": 7.127
   },
   {
    "seg": "v1",
    "texte": "qui",
-   "t": 6.812,
-   "t1": 6.917
+   "t": 7.173,
+   "t1": 7.278
   },
   {
    "seg": "v1",
    "texte": "répond.",
-   "t": 6.963,
-   "t1": 7.358
+   "t": 7.324,
+   "t1": 7.707
   },
   {
    "seg": "v2",
    "texte": "Il",
-   "t": 8.06,
-   "t1": 8.2
+   "t": 8.56,
+   "t1": 8.7
   },
   {
    "seg": "v2",
    "texte": "prend",
-   "t": 8.281,
-   "t1": 8.432
+   "t": 8.769,
+   "t1": 8.92
   },
   {
    "seg": "v2",
    "texte": "le",
-   "t": 8.455,
-   "t1": 8.525
+   "t": 8.944,
+   "t1": 9.013
   },
   {
    "seg": "v2",
    "texte": "rendez-vous",
-   "t": 8.583,
-   "t1": 9.035
+   "t": 9.06,
+   "t1": 9.501
   },
   {
    "seg": "v2",
    "texte": "dans",
-   "t": 9.059,
-   "t1": 9.186
+   "t": 9.524,
+   "t1": 9.64
   },
   {
    "seg": "v2",
    "texte": "votre",
-   "t": 9.21,
-   "t1": 9.465
+   "t": 9.663,
+   "t1": 9.907
   },
   {
    "seg": "v2",
-   "texte": "agenda",
-   "t": 9.523,
-   "t1": 9.918
-  },
-  {
-   "seg": "v2",
-   "texte": "Google,",
-   "t": 9.988,
-   "t1": 10.464
+   "texte": "agenda,",
+   "t": 9.977,
+   "t1": 10.557
   },
   {
    "seg": "v3",
    "texte": "le",
-   "t": 10.781,
-   "t1": 10.874
+   "t": 10.817,
+   "t1": 10.921
   },
   {
    "seg": "v3",
    "texte": "confirme",
-   "t": 10.932,
-   "t1": 11.373
+   "t": 10.968,
+   "t1": 11.397
   },
   {
    "seg": "v3",
    "texte": "par",
-   "t": 11.419,
-   "t1": 11.57
+   "t": 11.444,
+   "t1": 11.595
   },
   {
    "seg": "v3",
    "texte": "SMS,",
-   "t": 11.628,
-   "t1": 12.186
+   "t": 11.641,
+   "t1": 12.094
   },
   {
    "seg": "v3",
    "texte": "et",
-   "t": 12.383,
-   "t1": 12.499
+   "t": 12.291,
+   "t1": 12.407
   },
   {
    "seg": "v3",
-   "texte": "rappelle",
-   "t": 12.557,
-   "t1": 12.906
+   "texte": "notifie",
+   "t": 12.454,
+   "t1": 12.848
   },
   {
    "seg": "v3",
    "texte": "votre",
-   "t": 12.929,
-   "t1": 13.173
+   "t": 12.883,
+   "t1": 13.104
   },
   {
    "seg": "v3",
    "texte": "client",
-   "t": 13.219,
-   "t1": 13.498
+   "t": 13.15,
+   "t1": 13.406
   },
   {
    "seg": "v3",
    "texte": "la",
-   "t": 13.521,
-   "t1": 13.602
+   "t": 13.429,
+   "t1": 13.51
   },
   {
    "seg": "v3",
    "texte": "veille.",
-   "t": 13.672,
-   "t1": 14.032
+   "t": 13.58,
+   "t1": 13.928
   },
   {
    "seg": "v4",
    "texte": "Il",
-   "t": 14.472,
-   "t1": 14.611
+   "t": 14.366,
+   "t1": 14.493
   },
   {
    "seg": "v4",
    "texte": "prend",
-   "t": 14.681,
-   "t1": 14.843
+   "t": 14.563,
+   "t1": 14.737
   },
   {
    "seg": "v4",
    "texte": "aussi",
-   "t": 14.913,
-   "t1": 15.192
+   "t": 14.807,
+   "t1": 15.051
   },
   {
    "seg": "v4",
    "texte": "les",
-   "t": 15.25,
-   "t1": 15.342
+   "t": 15.109,
+   "t1": 15.202
   },
   {
    "seg": "v4",
    "texte": "commandes,",
-   "t": 15.377,
-   "t1": 15.911
+   "t": 15.236,
+   "t1": 15.747
   },
   {
    "seg": "v5",
    "texte": "gère",
-   "t": 16.231,
-   "t1": 16.498
+   "t": 15.983,
+   "t1": 16.25
   },
   {
    "seg": "v5",
    "texte": "les",
-   "t": 16.521,
-   "t1": 16.637
+   "t": 16.274,
+   "t1": 16.39
   },
   {
    "seg": "v5",
-   "texte": "urgences,",
-   "t": 16.707,
-   "t1": 17.345
+   "texte": "urgences",
+   "t": 16.448,
+   "t1": 16.912
   },
   {
    "seg": "v5",
    "texte": "même",
-   "t": 17.542,
-   "t1": 17.775
+   "t": 17.028,
+   "t1": 17.26
   },
   {
    "seg": "v5",
    "texte": "à",
-   "t": 17.798,
-   "t1": 17.821
+   "t": 17.284,
+   "t1": 17.307
   },
   {
    "seg": "v5",
    "texte": "vingt-trois",
-   "t": 17.891,
-   "t1": 18.32
+   "t": 17.365,
+   "t1": 17.771
   },
   {
    "seg": "v5",
    "texte": "heures,",
-   "t": 18.402,
-   "t1": 18.657
+   "t": 17.841,
+   "t1": 18.108
   },
   {
    "seg": "v6",
    "texte": "et",
-   "t": 18.94,
-   "t1": 19.067
+   "t": 18.391,
+   "t1": 18.53
   },
   {
    "seg": "v6",
    "texte": "chaque",
-   "t": 19.114,
-   "t1": 19.369
+   "t": 18.565,
+   "t1": 18.82
   },
   {
    "seg": "v6",
    "texte": "appel",
-   "t": 19.392,
-   "t1": 19.671
+   "t": 18.843,
+   "t1": 19.064
   },
   {
    "seg": "v6",
    "texte": "vous",
-   "t": 19.741,
-   "t1": 19.892
+   "t": 19.134,
+   "t1": 19.261
   },
   {
    "seg": "v6",
    "texte": "attend,",
-   "t": 19.961,
-   "t1": 20.391
+   "t": 19.319,
+   "t1": 19.772
   },
   {
    "seg": "v6",
    "texte": "résumé,",
-   "t": 20.507,
-   "t1": 21.134
+   "t": 19.888,
+   "t1": 20.492
   },
   {
    "seg": "v6",
    "texte": "dans",
-   "t": 21.296,
-   "t1": 21.459
+   "t": 20.608,
+   "t1": 20.759
   },
   {
    "seg": "v6",
    "texte": "votre",
-   "t": 21.482,
-   "t1": 21.726
+   "t": 20.782,
+   "t1": 21.014
   },
   {
    "seg": "v6",
    "texte": "espace.",
-   "t": 21.749,
-   "t1": 22.318
+   "t": 21.038,
+   "t1": 21.63
   },
   {
    "seg": "v7",
    "texte": "Vokio",
-   "t": 23.06,
-   "t1": 23.571
+   "t": 22.56,
+   "t1": 23.059
   },
   {
    "seg": "v7",
    "texte": "parle",
-   "t": 23.768,
-   "t1": 24.035
+   "t": 23.198,
+   "t1": 23.442
   },
   {
    "seg": "v7",
    "texte": "votre",
-   "t": 24.07,
-   "t1": 24.314
+   "t": 23.465,
+   "t1": 23.721
   },
   {
    "seg": "v7",
    "texte": "métier.",
-   "t": 24.372,
-   "t1": 24.825
+   "t": 23.767,
+   "t1": 24.231
   },
   {
    "seg": "v8",
    "texte": "Vokio.",
-   "t": 28.11,
-   "t1": 28.644
+   "t": 27.11,
+   "t1": 27.667
   },
   {
    "seg": "v8",
    "texte": "Votre",
-   "t": 28.876,
-   "t1": 29.19
+   "t": 27.83,
+   "t1": 28.155
   },
   {
    "seg": "v8",
    "texte": "ligne",
-   "t": 29.236,
-   "t1": 29.457
+   "t": 28.201,
+   "t1": 28.41
   },
   {
    "seg": "v8",
-   "texte": "répond,",
-   "t": 29.492,
-   "t1": 29.956
+   "texte": "répond",
+   "t": 28.445,
+   "t1": 28.724
   },
   {
    "seg": "v8",
    "texte": "même",
-   "t": 30.188,
-   "t1": 30.42
+   "t": 28.758,
+   "t1": 29.107
   },
   {
    "seg": "v8",
    "texte": "quand",
-   "t": 30.444,
-   "t1": 30.594
+   "t": 29.223,
+   "t1": 29.385
   },
   {
    "seg": "v8",
    "texte": "vous",
-   "t": 30.618,
-   "t1": 30.734
+   "t": 29.409,
+   "t1": 29.513
   },
   {
    "seg": "v8",
    "texte": "ne",
-   "t": 30.769,
-   "t1": 30.85
+   "t": 29.548,
+   "t1": 29.629
   },
   {
    "seg": "v8",
    "texte": "pouvez",
-   "t": 30.908,
-   "t1": 31.175
+   "t": 29.676,
+   "t1": 29.943
   },
   {
    "seg": "v8",
    "texte": "pas.",
-   "t": 31.221,
-   "t1": 31.512
+   "t": 29.989,
+   "t1": 30.337
   },
   {
    "seg": "v9",
    "texte": "Créez",
-   "t": 32.032,
-   "t1": 32.392
+   "t": 30.857,
+   "t1": 31.158
   },
   {
    "seg": "v9",
    "texte": "votre",
-   "t": 32.426,
-   "t1": 32.67
+   "t": 31.193,
+   "t1": 31.425
   },
   {
    "seg": "v9",
    "texte": "espace",
-   "t": 32.693,
-   "t1": 33.158
+   "t": 31.449,
+   "t1": 31.948
   },
   {
    "seg": "v9",
-   "texte": "gratuitement,",
-   "t": 33.193,
-   "t1": 33.878
-  },
-  {
-   "seg": "v9",
-   "texte": "sur",
-   "t": 34.11,
-   "t1": 34.33
-  },
-  {
-   "seg": "v9",
-   "texte": "vokio.fr",
-   "t": 34.412,
-   "t1": 36.339
+   "texte": "gratuitement.",
+   "t": 32.029,
+   "t1": 32.935
   }
  ],
  "temps": {
-  "plume": 26.2,
-  "plume_fin": 26.9,
-  "la": 27.0,
-  "sol": 27.24,
-  "re": 27.6
+  "plume": 25.2,
+  "plume_fin": 25.9,
+  "la": 26.0,
+  "sol": 26.24,
+  "re": 26.6
  },
  "voix": {
   "v0": {
    "debut": 0.08,
-   "fin": 4.127
+   "fin": 4.257
   },
   "v1": {
-   "debut": 4.5,
-   "fin": 7.48
+   "debut": 5.0,
+   "fin": 7.806
   },
   "v2": {
-   "debut": 8.0,
-   "fin": 10.621
+   "debut": 8.5,
+   "fin": 10.657
   },
   "v3": {
-   "debut": 10.721,
-   "fin": 14.192
+   "debut": 10.757,
+   "fin": 14.086
   },
   "v4": {
-   "debut": 14.412,
-   "fin": 16.071
+   "debut": 14.306,
+   "fin": 15.823
   },
   "v5": {
-   "debut": 16.171,
-   "fin": 18.78
+   "debut": 15.923,
+   "fin": 18.231
   },
   "v6": {
-   "debut": 18.88,
-   "fin": 22.478
+   "debut": 18.331,
+   "fin": 21.79
   },
   "v7": {
-   "debut": 23.0,
-   "fin": 24.985
+   "debut": 22.5,
+   "fin": 24.331
   },
   "v8": {
-   "debut": 28.05,
-   "fin": 31.672
+   "debut": 27.05,
+   "fin": 30.497
   },
   "v9": {
-   "debut": 31.972,
-   "fin": 36.339
+   "debut": 30.797,
+   "fin": 32.935
   }
  },
  "metiers": [
@@ -615,6 +597,6 @@
  "fin_accroche": 0.0,
  "son": {
   "lufs": -14.0,
-  "crete_dbfs": -3.0
+  "crete_dbfs": -2.9
  }
 }
