@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1080">
+<title>Comment ça marche · boucle vokio.fr/avis (1:1)</title>
+<!-- Boucle de 12 s pour la section « Comment ça marche » de vokio.fr/avis/ (06/10/2026) : trois chapitres de 4 s, calés
+     sur les trois cartes (la page allume la carte du chapitre en cours : window.__avis.chapitres). Règles de Florian :
+     trois éléments au plus à l'écran, une information à la fois, aucune interface copiée ; la saisie reprend la vraie
+     page /avis de l'espace client. Boucle sans raccord : première et dernière image = fond seul. -->
+<script src="lib/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Geist";src:url("fonts/geist.woff2") format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Geist Mono";src:url("fonts/geist-mono.woff2") format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Instrument Serif";src:url("fonts/instrument-serif.woff2") format("woff2");font-style:normal;font-display:block}
+@font-face{font-family:"Instrument Serif";src:url("fonts/instrument-serif-italic.woff2") format("woff2");font-style:italic;font-display:block}
+@font-face{font-family:"Inter";src:url("fonts/Inter-Variable-latin.woff2") format("woff2");font-weight:100 900;font-display:block}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1080px;overflow:hidden;background:#F4F1E8}
+#root{position:relative;width:1080px;height:1080px;overflow:hidden;background:#F4F1E8;color:#262019;-webkit-font-smoothing:antialiased;font-family:"Geist",sans-serif}
+.abs{position:absolute}
+/* l'étiquette du chapitre : le seul usage de la mono à l'écran */
+.chap{position:absolute;left:0;right:0;top:118px;text-align:center;font-family:"Geist Mono",monospace;font-size:34px;letter-spacing:.16em;text-transform:uppercase;color:#6F695F}
+.chap b{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:rgba(239,164,36,.18);color:#E5701F;font-weight:600;margin-right:20px;letter-spacing:0;vertical-align:middle}
+/* 1 · la saisie, comme sur app.vokio.fr/avis */
+#carte{left:110px;top:345px;width:860px;padding:52px 56px 56px;background:#FBF9F2;border-radius:44px;
+  box-shadow:0 2px 4px rgba(60,42,22,.04),0 20px 44px -18px rgba(60,42,22,.14),0 60px 120px -60px rgba(60,42,22,.22)}
+#carte .lab{font-family:"Geist Mono",monospace;font-size:24px;letter-spacing:.18em;text-transform:uppercase;color:#8A8478;opacity:0}
+#champ{margin-top:20px;height:122px;border-radius:26px;border:3px solid rgba(38,32,25,.12);background:#FFFFFF;display:flex;align-items:center;padding:0 34px;font-size:64px;font-weight:500;letter-spacing:-.01em;font-variant-numeric:tabular-nums;color:#262019}
+#champ.focus{border-color:#E5701F;box-shadow:0 0 0 7px rgba(229,112,31,.12)}
+#saisie{white-space:pre}
+#caret{display:inline-block;width:4px;height:64px;background:#E5701F;margin-left:4px;border-radius:2px}
+#bouton{margin-top:30px;height:116px;border-radius:30px;background:linear-gradient(135deg,#EFA424,#E5701F);color:#FBF9F2;font-size:44px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:18px;box-shadow:0 10px 30px -10px rgba(229,112,31,.45)}
+#bouton .ok{display:none}
+#bouton svg{width:44px;height:44px}
+/* 2 · l'heure */
+#horloge{left:60px;right:60px;top:345px;text-align:center;font-family:"Instrument Serif",serif;font-size:330px;line-height:1;letter-spacing:-.02em}
+#horloge .roue{display:inline-block;height:1em;overflow:hidden;vertical-align:top}
+#horloge .roue span{display:block;height:1em}
+#horloge .deux{color:#E5701F}
+#nuit{left:60px;right:60px;top:780px;text-align:center;font-size:44px;color:#5E584E;display:flex;align-items:center;justify-content:center;gap:20px}
+#nuit svg{width:46px;height:46px}
+/* 3 · le SMS, puis l'avis */
+#bulle{left:150px;top:300px;width:780px;background:#E9E9EB;color:#1c1c1e;border-radius:52px 52px 52px 16px;padding:38px 46px;font-family:"Inter",sans-serif;font-size:44px;line-height:1.38;letter-spacing:-.012em}
+#bulle .lien{position:relative;color:#0A66D0;text-decoration:underline;text-underline-offset:5px}
+#tap{position:absolute;left:50%;top:50%;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:rgba(10,102,208,.24);pointer-events:none}
+#exp{left:174px;top:248px;font-family:"Geist",sans-serif;font-size:30px;color:#8A8478}
+#avis{left:60px;right:60px;top:690px;text-align:center}
+#etoiles{display:flex;justify-content:center;gap:26px}
+#etoiles svg{width:118px;height:118px;overflow:visible}
+#etoiles .vide{fill:none;stroke:#C9C3B6;stroke-width:1.2}
+#etoiles .plein{fill:#FBBC04;stroke:#FBBC04;stroke-width:1.2;stroke-linejoin:round;transform-origin:50% 55%}
+#publie{margin-top:34px;font-size:44px;font-weight:500;color:#262019}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="avis-etapes" data-start="0" data-width="1080" data-height="1080" data-duration="12">
+  <div class="chap" id="c1"><b>1</b>Au comptoir</div>
+  <div class="chap" id="c2"><b>2</b>Deux heures plus tard</div>
+  <div class="chap" id="c3"><b>3</b>Un toucher, un avis</div>
+
+  <div id="carte" class="abs">
+    <p class="lab">Numéro de téléphone du client</p>
+    <div id="champ"><span id="saisie"></span><span id="caret"></span></div>
+    <div id="bouton"><span class="txt">Demander un avis</span><span class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#FBF9F2" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Programmé · 14:30</span></div>
+  </div>
+
+  <div id="horloge" class="abs"><span class="roue"><span>1</span></span><span class="roue" id="roue2"><span>2</span><span class="deux">4</span></span><span>:30</span></div>
+  <div id="nuit" class="abs"><svg viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="#8A8478" stroke-width="1.8" stroke-linejoin="round"/></svg>Jamais entre 20 h et 9 h</div>
+
+  <div id="exp" class="abs">Vokio</div>
+  <div id="bulle" class="abs">Bonjour Julie, merci pour votre visite. Votre avis compte beaucoup pour Institut Camélia : <span class="lien">app.vokio.fr/a/k3Fz7Q<span id="tap"></span></span></div>
+  <div id="avis" class="abs"><div id="etoiles"></div><p id="publie">Avis publié sur Google</p></div>
+</div>
+<script>
+window.__timelines = window.__timelines || {};
+window.__pub = { erreurs: [], pret: false };
+(function () {
+  const T = 12;
+  const $ = (s) => document.querySelector(s);
+  const P3o = "power3.out";
+  function exiger(c, msg) { if (!c) { window.__pub.erreurs.push(msg); console.error("avis-etapes : " + msg); } }
+  function construire() {
+    const tl = gsap.timeline({ paused: true });
+    const ft = (el, de, a, t) => tl.fromTo(el, de, Object.assign({ immediateRender: false }, a), t);
+    const entre = (el, t, dy) => { gsap.set(el, { autoAlpha: 0 }); return ft(el, { autoAlpha: 0, y: dy == null ? 34 : dy }, { autoAlpha: 1, y: 0, duration: 0.5, ease: P3o }, t); };
+    const sort = (el, t) => ft(el, { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -26, duration: 0.32, ease: "power2.in" }, t);
+
+    // étiquettes de chapitre : une seule à la fois, la suivante entre quand la précédente est partie
+    [["#c1", 0.15, 3.55], ["#c2", 4.1, 7.55], ["#c3", 8.1, 11.45]].forEach((c) => { entre(c[0], c[1], 18); sort(c[0], c[2]); });
+
+    // 1 · au comptoir : le numéro se tape, on demande, c'est programmé
+    const carte = $("#carte"), champ = $("#champ"), saisie = $("#saisie"), caret = $("#caret");
+    entre(carte, 0.3);
+    ft("#carte .lab", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.55);
+    // états discrets (texte tapé, curseur, focus, bouton) : UN pilote, fonction pure du temps, juste quel que soit le
+    // sens du seek (HyperFrames rend image par image, l'aperçu saute dans tous les sens)
+    const num = "06 12 34 56 78", T_TAPE = 0.95, PAS = 0.085, T_OK = 2.64;
+    const txt = $("#bouton .txt"), ok = $("#bouton .ok");
+    function etat(s) {
+      const n = Math.max(0, Math.min(10, Math.floor((s - T_TAPE) / PAS) + 1));
+      let v = "", c = 0;
+      for (const ch of num) { if (ch !== " ") { if (c === n) break; c++; } v += ch; }
+      saisie.textContent = s < T_TAPE ? "" : v.replace(/ $/, "");
+      champ.classList.toggle("focus", s >= 0.8 && s < 2.45);
+      caret.style.opacity = (s >= 0.8 && s < 2.45 && (s < T_TAPE + 10 * PAS || Math.floor((s - 0.8) / 0.5) % 2 === 0)) ? 1 : 0;
+      txt.style.display = s < T_OK ? "" : "none"; ok.style.display = s < T_OK ? "none" : "inline-flex";
+    }
+    const pilote = { s: 0 };
+    tl.fromTo(pilote, { s: 0 }, { s: T, duration: T, ease: "none", immediateRender: false, onUpdate: () => etat(pilote.s) }, 0);
+    etat(0);
+    const bouton = $("#bouton");
+    ft(bouton, { scale: 1 }, { scale: 0.96, duration: 0.1, ease: "power1.out" }, 2.5);
+    ft(bouton, { scale: 0.96 }, { scale: 1, duration: 0.16, ease: "power1.out" }, 2.6);
+    sort(carte, 3.5);
+
+    // 2 · deux heures plus tard : 12:30 devient 14:30, puis la règle de la nuit
+    const hor = $("#horloge"), roue = $("#roue2 span"), nuit = $("#nuit");
+    entre(hor, 4.25, 40);
+    ft("#roue2 span", { yPercent: 0 }, { yPercent: -100, duration: 0.9, ease: "power3.inOut" }, 5.0);
+    entre(nuit, 6.15, 20);
+    sort(hor, 7.45); sort(nuit, 7.45);
+
+    // 3 · le SMS arrive, il touche le lien, l'avis est publié
+    const bulle = $("#bulle"), exp = $("#exp"), avis = $("#avis");
+    gsap.set(bulle, { transformOrigin: "0% 100%" });
+    gsap.set([bulle, exp], { autoAlpha: 0 });
+    ft(exp, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, 8.3);
+    ft(bulle, { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, duration: 0.42, ease: P3o }, 8.35);
+    gsap.set("#tap", { scale: 0.3, opacity: 0 });
+    ft("#tap", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: P3o }, 9.05);
+    ft("#tap", { scale: 1, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.42, ease: "power2.out" }, 9.23);
+    ft(bulle, { opacity: 1 }, { opacity: 0.4, duration: 0.4 }, 9.45);
+    ft(exp, { opacity: 1 }, { opacity: 0.4, duration: 0.4 }, 9.45);
+    const ET = "M12 2.6l2.85 5.9 6.45.85-4.72 4.48 1.2 6.4L12 17.1l-5.78 3.13 1.2-6.4L2.7 9.35l6.45-.85z";
+    const pleins = [];
+    for (let i = 0; i < 5; i++) {
+      const s = document.createElementNS("http://www.w3.org/2000/svg", "svg"); s.setAttribute("viewBox", "0 0 24 24");
+      s.innerHTML = '<path class="vide" d="' + ET + '"/><path class="plein" d="' + ET + '"/>';
+      $("#etoiles").appendChild(s); pleins.push(s.querySelector(".plein"));
+    }
+    entre(avis, 9.5, 30);
+    gsap.set(pleins, { scale: 0, opacity: 0 });
+    pleins.forEach((p, i) => ft(p, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.32, ease: "back.out(2.4)" }, 9.9 + i * 0.15));
+    gsap.set("#publie", { autoAlpha: 0 });
+    ft("#publie", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: P3o }, 10.75);
+    sort(bulle, 11.35); sort(exp, 11.35); sort(avis, 11.4);
+    tl.set({}, {}, T);
+
+    // contrôles : trois éléments au plus (étiquette comprise), rien hors cadre
+    const r0 = $("#root").getBoundingClientRect();
+    [carte, hor, nuit, bulle, avis].forEach((el) => { const r = el.getBoundingClientRect();
+      exiger(r.left >= r0.left + 60 && r.right <= r0.right - 60 && r.bottom <= r0.bottom - 60, "hors marges : #" + el.id); });
+    exiger(bulle.getBoundingClientRect().bottom + 30 <= avis.getBoundingClientRect().top, "la bulle touche les étoiles");
+    exiger(Math.abs(tl.duration() - T) < 0.02, "durée " + tl.duration().toFixed(2));
+    window.__avis = { chapitres: [0, 4, 8, 12] };
+    window.__timelines["avis-etapes"] = tl;
+    window.__pub.pret = true;
+  }
+  Promise.all(["52px Geist", "52px 'Geist Mono'", "52px 'Instrument Serif'", "52px Inter"].map((f) => document.fonts.load(f)))
+    .then(() => document.fonts.ready).then(construire);
+})();
+</script>
+</body>
+</html>
