@@ -1,6 +1,10 @@
 # Films de vokio.fr/avis/ (06/10/2026)
 
-Deux boucles muettes, carrées, rendues par HyperFrames et posées sur vokio.fr/avis/ :
+Deux animations carrées pour vokio.fr/avis/. **Sur le site, ce ne sont PAS des vidéos** (07/10/2026) : la composition elle-même est copiée dans `assets/avis/films/<film>/` et jouée EN DIRECT par sa timeline GSAP, dans un cadre mis à l'échelle. C'est le principe des animations de l'accueil. Un iPhone en économie d'énergie refusait la lecture automatique des MP4. Les MP4 restent utiles pour les réseaux sociaux.
+
+**Mise à jour sur le site :** copier `<film>/index.html`, `lib/` et `fonts/` dans un NOUVEAU dossier (`films/<film>-v2/`, cache de 30 jours sur /assets/), avec `<meta name="robots" content="noindex">`, puis changer le `src` de l'iframe dans avis/index.html. Le pilote de la page lit `window.__pub.pret` et `window.__timelines[id]`, et prend les chapitres du film d'étapes à 0, 4 et 8 s.
+
+Les films :
 
 | Film | Ce qu'il montre | Durée |
 |---|---|---|
