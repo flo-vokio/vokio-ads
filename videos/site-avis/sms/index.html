@@ -127,7 +127,7 @@ window.__pub = { erreurs: [], pret: false };
     const montrer = () => {};
     // paramètres lus par la pièce iPhone (même interface que la pub multi-métiers)
     const ip = { entree: 0, bulle: 0.55, sortie: 7, K: 1.9, yE: 64, heure: "14:30",
-                 txt: "Bonjour Julie, merci pour votre visite. Votre avis compte beaucoup pour Institut Camélia : app.vokio.fr/a/k3Fz7Q" };
+                 txt: "Bonjour Julie, merci pour votre visite. Votre avis compte beaucoup pour Institut Camélia : vokio.fr/a/k3Fz7Q" };
     const sms = $("#sms");
     montrer(sms, ip.entree, ip.sortie + 0.45);
     {
@@ -189,7 +189,7 @@ window.__pub = { erreurs: [], pret: false };
     ft = ftTl;
     const K = ip.K, ecr = $("#ip-ecran"), bulle = $("#ip-bulle");
     // le lien du SMS, souligné comme sur iOS
-    bulle.innerHTML = bulle.textContent.replace("app.vokio.fr/a/k3Fz7Q", '<span class="lien">app.vokio.fr/a/k3Fz7Q</span>');
+    bulle.innerHTML = bulle.textContent.replace("vokio.fr/a/k3Fz7Q", '<span class="lien">vokio.fr/a/k3Fz7Q</span>');
     const lien = $("#ip-bulle .lien");
     const rE = ecr.getBoundingClientRect(), rL = lien.getBoundingClientRect(), k = $("#root").getBoundingClientRect().width / 1080;
     const tap = document.createElement("div"); tap.id = "tap"; ecr.appendChild(tap);
