@@ -77,7 +77,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="32.4" data-width="1080" data-height="1920">
 
-  <section id="s-horloge" class="scene clip" data-start="0" data-duration="25.2" data-track-index="0">
+  <section id="s-horloge" class="scene clip" data-start="0" data-duration="23.6" data-track-index="0">
     <div id="horloge" class="serif">
       <div class="col" id="c0"><div class="bande"></div></div>
       <div class="col" id="c1"><div class="bande"></div></div>
@@ -87,11 +87,11 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
     </div>
   </section>
 
-  <section id="s-appels" class="scene clip" data-start="0" data-duration="25.2" data-track-index="1">
+  <section id="s-appels" class="scene clip" data-start="0" data-duration="23.6" data-track-index="1">
     <div id="appels"></div>
   </section>
 
-  <section id="s-bilan" class="scene clip" data-start="24.9" data-duration="3.0" data-track-index="2">
+  <section id="s-bilan" class="scene clip" data-start="23.3" data-duration="2.95" data-track-index="2">
     <p id="bilan-t" class="serif"><span class="l1"><span class="m" data-layout-allow-overflow><span class="w b">Chaque</span></span> <span class="m" data-layout-allow-overflow><span class="w b">appel</span></span> <span class="m" data-layout-allow-overflow><span class="w b">décroché.</span></span></span> <em><span class="m" data-layout-allow-overflow><span class="w b2">Chaque</span></span> <span class="m" data-layout-allow-overflow><span class="w b2">rendez-vous</span></span> <span class="m" data-layout-allow-overflow><span class="w b2">posé.</span></span></em></p>
     <div id="pile">
       <div class="ent"><img src="assets/captures/institut_beaute-entete.png" alt=""></div>
@@ -101,11 +101,11 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
     </div>
   </section>
 
-  <section id="s-halo" class="scene clip" data-start="27.3" data-duration="5.1" data-track-index="3">
+  <section id="s-halo" class="scene clip" data-start="25.85" data-duration="6.55" data-track-index="3">
     <div id="halo"></div>
   </section>
 
-  <section id="s-fin" class="scene clip" data-start="27.5" data-duration="4.9" data-track-index="4">
+  <section id="s-fin" class="scene clip" data-start="26.0" data-duration="6.4" data-track-index="4">
     <div id="fin">
       <p id="mot" class="serif"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p>
       <p id="prix" class="serif"><span class="m" data-layout-allow-overflow><span class="w p">Votre</span></span> <span class="m" data-layout-allow-overflow><span class="w p">ligne</span></span> <span class="m" data-layout-allow-overflow><span class="w p">répond</span></span> <em><span class="m" data-layout-allow-overflow><span class="w p">même</span></span> <span class="m" data-layout-allow-overflow><span class="w p">quand</span></span> <span class="m" data-layout-allow-overflow><span class="w p">vous</span></span> <span class="m" data-layout-allow-overflow><span class="w p">ne</span></span> <span class="m" data-layout-allow-overflow><span class="w p">pouvez</span></span> <span class="m" data-layout-allow-overflow><span class="w p">pas.</span></span></em></p>
@@ -174,9 +174,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   // Un appel, 6 s : la situation, la ligne repliée qui arrive et se laisse lire, puis elle
   // s'ouvre comme dans l'app (chevron qui pivote, aperçu qui disparaît, volet qui se déplie)
   // et le résumé s'écrit PENDANT l'ouverture ; le volet a fini avant le texte, l'œil se pose.
-  const BEAT = 6.0, MOT = 0.045;
+  // 07/10 : calé sur la voix du doubleur (07_10_2026_24H_Vokio_Sound) : chaque situation s'affiche quand elle est dite
+  // (début des répliques mesuré par Scribe : 0,54 · 5,62 · 10,68 · 17,70 · bilan 23,48 · « Vokio » 26,34). Le texte de
+  // la situation apparaît à S + 0,35, donc S = début de réplique − 0,45. Appels de 5 à 7 s au lieu de 6 fixes.
+  const DEBUTS = [0.1, 5.17, 10.23, 17.25], FIN_APPELS = 23.4, MOT = 0.045;
   APPELS.forEach((a, k) => {
-    const S = 1.0 + BEAT * k, O = S + 1.7;
+    const S = DEBUTS[k], BEAT = (k + 1 < DEBUTS.length ? DEBUTS[k + 1] : FIN_APPELS) - S, O = S + 1.7;
     const c = `#carte${k}`;
     if (k > 0) {
       a.h.split("").forEach((ch, i) => {
@@ -212,20 +215,20 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   });
 
   // 5 · le bilan : l'horloge s'efface, les quatre en-têtes du même jour s'empilent
-  tl.to("#horloge", { y: -50, opacity: 0, duration: 0.4, ease: P3i }, 24.5);
-  tl.fromTo("#bilan-t .b", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, 25.0);
-  tl.fromTo("#bilan-t .b2", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, 25.35);
-  tl.fromTo("#pile .ent", { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o, stagger: 0.12 }, 25.3);
-  tl.to(["#bilan-t", "#pile"], { y: -50, opacity: 0, duration: 0.42, ease: P3i, stagger: 0.05 }, 27.3);
+  tl.to("#horloge", { y: -50, opacity: 0, duration: 0.4, ease: P3i }, 22.95);
+  tl.fromTo("#bilan-t .b", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, 23.4);
+  tl.fromTo("#bilan-t .b2", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, 24.75);
+  tl.fromTo("#pile .ent", { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o, stagger: 0.12 }, 23.7);
+  tl.to(["#bilan-t", "#pile"], { y: -50, opacity: 0, duration: 0.42, ease: P3i, stagger: 0.05 }, 25.75);
 
   // 6 · la fin
-  tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.4, ease: "sine.out" }, 27.35);
-  tl.fromTo("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 27.8);
-  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 28.25);
-  tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 28.75);
-  tl.fromTo("#prix .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 28.45);
-  tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 29.25);
-  tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 29.7);
+  tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.4, ease: "sine.out" }, 25.9);
+  tl.fromTo("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 26.3);
+  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 26.75);
+  tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 27.25);
+  tl.fromTo("#prix .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 27.0);
+  tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 29.75);
+  tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 30.85);
   tl.to({}, { duration: 0.01 }, 32.39);
 
   window.__timelines = window.__timelines || {};
