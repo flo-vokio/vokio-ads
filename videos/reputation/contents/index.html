@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>Vokio Réputation · Vos clients contents</title>
+<!-- Pub Vokio Réputation n° 1 (20/10/2026), même recette que 24 h chez Vokio : fond Plein Jour, serif, vraies captures
+     de app.vokio.fr (espace de démo « Institut Camélia », outils/filmer.py), une info à la fois. Muette (doublage
+     éventuel plus tard : le texte affiché sert de script). Accroche choisie par Florian : « Vos clients contents ne
+     laissent pas d'avis. » ; « pour l'Institut Camélia » dans le SMS (demande de Florian, plus léger à lire). -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/GeistMono-Regular.woff2") format("woff2");}
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2");}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
+#root{position:relative;width:100%;height:100%;overflow:hidden;background:#F4F1E8;color:#262019;
+      font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-kerning:normal}
+.scene{position:absolute;inset:0}
+.m{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .06em .14em;margin:0 -.06em -.14em}
+.w{display:inline-block}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+
+/* l'accroche : présente dès la première image */
+#acc{position:absolute;left:70px;right:60px;top:470px;font-size:178px;line-height:.98;letter-spacing:-.025em}
+#acc em{font-style:italic;display:block}
+
+/* l'horloge de 24 h chez Vokio : quatre bandes qui roulent vers l'avant */
+#horloge{position:absolute;left:70px;top:150px;height:200px;display:flex;align-items:flex-start;
+         font-size:200px;line-height:200px;letter-spacing:-.03em}
+.col{height:200px;overflow:hidden;clip-path:inset(0 -10% 0 -10%)}
+.bande{display:flex;flex-direction:column}
+.bande span{display:block;height:200px;text-align:center}
+#dp{padding:0 .02em;height:200px}
+
+.situ{position:absolute;left:70px;right:60px;top:410px;font-size:80px;line-height:1.08;letter-spacing:-.014em}
+.situ em{font-style:italic;display:block}
+
+/* une carte de l'app : l'intérieur vient de la capture, le cadre (.card-v à l'échelle ×3) est redessiné ici */
+.carte{position:absolute;left:70px;overflow:hidden;border-radius:48px;border:3px solid rgba(38,32,25,.10);
+       background:#F4F1E8;box-shadow:0 3px 9px rgba(38,32,25,.06);transform-origin:0 0}
+.carte img{display:block;position:absolute;left:0;top:0}
+#form{top:640px;width:1050px;height:777px;transform:scale(.9)}
+#liste{top:640px;width:1050px;height:735px;transform:scale(.8)}
+#liste .avant{top:0}
+#liste .claire{top:0;opacity:0}
+
+/* le SMS : une bulle reçue, sans téléphone autour (aucun chrome factice) */
+#exp{position:absolute;left:70px;top:700px;font-family:"Geist Mono",monospace;font-size:32px;letter-spacing:.16em;
+     text-transform:uppercase;color:#6F695F}
+#bulle{position:absolute;left:70px;top:760px;width:900px;padding:44px 50px 48px;background:#E8E3D6;
+       border-radius:52px 52px 52px 14px;font-size:50px;line-height:1.34;letter-spacing:-.005em;color:#262019}
+#lien{background-image:linear-gradient(#EFA424,#EFA424);background-repeat:no-repeat;background-position:0 96%;
+      background-size:0% 6px;padding-bottom:2px}
+
+/* les étoiles */
+#etoiles{position:absolute;left:70px;top:780px;display:flex;gap:34px}
+#etoiles svg{width:150px;height:150px;overflow:visible}
+#etoiles .fond{fill:none;stroke:rgba(38,32,25,.22);stroke-width:1.2}
+#etoiles .plein{fill:#EFA424}
+
+/* la fin */
+#halo{position:absolute;left:-160px;top:-40px;width:1400px;height:1100px;
+      background:radial-gradient(50% 50% at 50% 50%,rgba(239,164,36,.30) 0%,rgba(248,214,155,.26) 34%,rgba(245,198,119,.12) 62%,rgba(244,241,232,0) 100%)}
+#fin{position:absolute;left:0;right:0;top:330px;text-align:center}
+#mot{font-size:220px;letter-spacing:-.045em;line-height:.9;display:inline-flex;align-items:baseline}
+#mot .seg{display:inline-block;clip-path:inset(-30% -14% -30% -14%)}
+#mot .i{position:relative;font-style:normal}
+#mot-pt{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;border-radius:50%;background:#EFA424}
+#sous{margin-top:6px;font-size:120px;line-height:1;font-style:italic;letter-spacing:-.02em}
+#phrase{margin:64px auto 0;width:900px;font-size:76px;line-height:1.1;letter-spacing:-.012em}
+#phrase em{font-style:italic}
+#cta{margin-top:58px;display:inline-block;padding:30px 56px;border-radius:999px;background:#262019;color:#F4F1E8;font-size:40px}
+#site{margin-top:34px;font-family:"Geist Mono",monospace;font-size:36px;letter-spacing:.14em;text-transform:uppercase;color:#6F695F}
+
+#mention{position:absolute;left:0;right:0;top:1456px;text-align:center;font-size:36px;line-height:1;color:#6F695F}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="31" data-width="1080" data-height="1920">
+
+  <section id="s-acc" class="scene clip" data-start="0" data-duration="2.75" data-track-index="0">
+    <p id="acc" class="serif"><span class="l1"><span class="m" data-layout-allow-overflow><span class="w a1">Vos</span></span> <span class="m" data-layout-allow-overflow><span class="w a1">clients</span></span> <span class="m" data-layout-allow-overflow><span class="w a1">contents</span></span></span> <em><span class="m" data-layout-allow-overflow><span class="w a2">ne</span></span> <span class="m" data-layout-allow-overflow><span class="w a2">laissent</span></span> <span class="m" data-layout-allow-overflow><span class="w a2">pas</span></span> <span class="m" data-layout-allow-overflow><span class="w a2">d'avis.</span></span></em></p>
+  </section>
+
+  <section id="s-horloge" class="scene clip" data-start="2.6" data-duration="15.5" data-track-index="1">
+    <div id="horloge" class="serif">
+      <div class="col" id="c0"><div class="bande"></div></div>
+      <div class="col" id="c1"><div class="bande"></div></div>
+      <div class="col" id="dp">:</div>
+      <div class="col" id="c2"><div class="bande"></div></div>
+      <div class="col" id="c3"><div class="bande"></div></div>
+    </div>
+  </section>
+
+  <section id="s-saisie" class="scene clip" data-start="2.6" data-duration="6" data-track-index="2">
+    <p class="situ serif" id="situ-saisie"></p>
+    <div class="carte" id="form"></div>
+  </section>
+
+  <section id="s-liste" class="scene clip" data-start="8.3" data-duration="3.7" data-track-index="3">
+    <p class="situ serif" id="situ-liste"></p>
+    <div class="carte" id="liste">
+      <img class="avant" src="assets/captures/lignes-suite-net.png" alt="">
+      <img class="claire" src="assets/captures/ligne-claire-net.png" alt="">
+    </div>
+  </section>
+
+  <section id="s-sms" class="scene clip" data-start="11.75" data-duration="6.4" data-track-index="4">
+    <p class="situ serif" id="situ-sms"></p>
+    <p id="exp">Vokio</p>
+    <p id="bulle">Bonjour Claire, merci pour votre visite. Votre avis compte beaucoup pour l'Institut Camélia : <span id="lien">https://vokio.fr/a/k7Qm2Xe</span></p>
+  </section>
+
+  <section id="s-etoiles" class="scene clip" data-start="18.0" data-duration="4.1" data-track-index="5">
+    <p class="situ serif" id="situ-etoiles"></p>
+    <div id="etoiles"></div>
+  </section>
+
+  <section id="s-bilan" class="scene clip" data-start="22.0" data-duration="3.4" data-track-index="6">
+    <p class="situ serif" id="situ-bilan"></p>
+    <div class="carte" id="liste2" style="top:640px;width:1050px;height:735px;transform:scale(.9)">
+      <img src="assets/captures/liste-avant-net.png" alt="">
+    </div>
+  </section>
+
+  <section id="s-halo" class="scene clip" data-start="25.15" data-duration="5.85" data-track-index="7">
+    <div id="halo"></div>
+  </section>
+
+  <section id="s-fin" class="scene clip" data-start="25.3" data-duration="5.7" data-track-index="8">
+    <div id="fin">
+      <p id="mot" class="serif"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p>
+      <p id="sous" class="serif"><span class="m" data-layout-allow-overflow><span class="w r">Réputation</span></span></p>
+      <p id="phrase" class="serif"><span class="m" data-layout-allow-overflow><span class="w p">Des</span></span> <span class="m" data-layout-allow-overflow><span class="w p">avis</span></span> <span class="m" data-layout-allow-overflow><span class="w p">Google,</span></span> <em><span class="m" data-layout-allow-overflow><span class="w p">sans</span></span> <span class="m" data-layout-allow-overflow><span class="w p">y</span></span> <span class="m" data-layout-allow-overflow><span class="w p">penser.</span></span></em></p>
+      <p><span id="cta">19,99 €/mois · 14 jours d'essai</span></p>
+      <p id="site">vokio.fr/avis</p>
+    </div>
+  </section>
+
+  <section id="s-mention" class="scene clip" data-start="0" data-duration="31" data-track-index="9">
+    <p id="mention">Établissement fictif · captures réelles de app.vokio.fr</p>
+  </section>
+</div>
+<script>
+(function(){
+  const mots = (t, cls) => t.split(" ").map(w => `<span class="m" data-layout-allow-overflow><span class="w ${cls}">${w}</span></span>`).join(" ");
+  const situ = (id, l1, l2) => { document.getElementById(id).innerHTML = `<span class="l1">${mots(l1, "s1")}</span> <em>${mots(l2, "s2")}</em>`; };
+  situ("situ-saisie", "À l'encaissement,", "vous tapez son numéro.");
+  situ("situ-liste", "Elle repart.", "Le SMS est programmé.");
+  situ("situ-sms", "Deux heures plus tard,", "elle reçoit ce SMS.");
+  situ("situ-etoiles", "Un toucher sur le lien,", "elle laisse son avis Google.");
+  situ("situ-bilan", "Vous, vous n'avez", "rien fait de plus.");
+
+  // le formulaire : une image par état filmé (filmer.py) ; une seule visible à la fois
+  const ETATS = [];
+  for (let n = 0; n <= 20; n++) ETATS.push(`saisie-${String(n).padStart(2, "0")}`);
+  ETATS.push("saisie-pleine", "saisie-presse", "saisie-note");
+  const form = document.getElementById("form");
+  ETATS.forEach(e => form.insertAdjacentHTML("beforeend", `<img id="i-${e}" src="assets/captures/${e}-net.png" alt="" style="visibility:hidden">`));
+
+  // les étoiles (même tracé, contour puis remplissage)
+  const ETOILE = "M50 4l13.5 28.4 31.1 3.9-22.9 21.4 5.9 30.8L50 73.4 22.4 88.5l5.9-30.8L5.4 36.3l31.1-3.9z";
+  const et = document.getElementById("etoiles");
+  for (let k = 0; k < 5; k++) et.insertAdjacentHTML("beforeend",
+    `<svg viewBox="0 0 100 100"><path class="fond" d="${ETOILE}"/><path class="plein" id="e${k}" d="${ETOILE}"/></svg>`);
+
+  // l'horloge
+  const cols = ["#c0", "#c1", "#c2", "#c3"].map(s => document.querySelector(s + " .bande"));
+  cols.forEach(b => { for (let r = 0; r < 3; r++) for (let d = 0; d < 10; d++) b.insertAdjacentHTML("beforeend", `<span>${d}</span>`); });
+
+  const tl = gsap.timeline({ paused: true });
+  const P3o = "power3.out", P3i = "power3.in";
+  const entre = (id, t) => {
+    tl.fromTo(`#${id} .s1`, { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, t);
+    tl.fromTo(`#${id} .s2`, { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, t + 0.35);
+  };
+  const sort = (sel, t) => tl.to(sel, { y: -50, opacity: 0, duration: 0.4, ease: P3i, stagger: 0.05 }, t);
+
+  // 0 · l'accroche : visible dès la première image, puis elle s'en va par le haut
+  tl.set("#acc .w", { yPercent: 0 }, 0);
+  sort("#acc", 2.3);
+
+  // 1 · 10:42, la saisie au comptoir
+  [1, 0, 4, 2].forEach((d, i) => tl.set(cols[i], { y: -200 * d }, 0));
+  tl.fromTo("#horloge", { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.9, ease: "power4.out" }, 2.75);
+  entre("situ-saisie", 3.0);
+  tl.set("#i-saisie-00", { visibility: "visible" }, 0);
+  tl.fromTo("#form", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o }, 3.55);
+  const montre = (e, t) => { tl.set("#form img", { visibility: "hidden" }, t); tl.set(`#i-${e}`, { visibility: "visible" }, t); };
+  // un caractère toutes les 0,09 s pour le numéro (14), 0,1 s pour le prénom (6), une petite pause entre les deux
+  for (let n = 1; n <= 14; n++) montre(`saisie-${String(n).padStart(2, "0")}`, 4.35 + 0.09 * (n - 1));
+  for (let n = 15; n <= 20; n++) montre(`saisie-${String(n).padStart(2, "0")}`, 5.85 + 0.1 * (n - 15));
+  montre("saisie-pleine", 6.6);
+  montre("saisie-presse", 7.0);
+  montre("saisie-note", 7.2);
+  tl.to("#form", { height: 861, duration: 0.35, ease: P3o }, 7.2);   // « C'est noté… » allonge la carte, comme dans l'app
+  sort(["#situ-saisie", "#form"], 8.0);
+
+  // 2 · la demande rejoint la liste, en tête, comme dans l'app
+  entre("situ-liste", 8.45);
+  tl.fromTo("#liste", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o }, 9.0);
+  tl.to("#liste", { height: 942, duration: 0.7, ease: "power3.inOut" }, 9.7);
+  tl.to("#liste .avant", { y: 207, duration: 0.7, ease: "power3.inOut" }, 9.7);
+  tl.fromTo("#liste .claire", { opacity: 0, y: -24 }, { opacity: 1, y: 0, duration: 0.55, ease: P3o }, 10.0);
+  sort(["#situ-liste", "#liste"], 11.4);
+
+  // 3 · deux heures plus tard : 10:42 → 12:42 (seul le chiffre des heures roule)
+  tl.to(cols[1], { y: -200 * 2, duration: 0.85, ease: "power3.inOut" }, 11.85);
+  entre("situ-sms", 12.0);
+  tl.fromTo("#exp", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: P3o }, 13.0);
+  tl.fromTo("#bulle", { opacity: 0, y: 40, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: P3o, transformOrigin: "0% 100%" }, 13.1);
+  tl.to("#lien", { backgroundSize: "100% 6px", duration: 0.8, ease: P3o }, 15.0);
+  sort(["#horloge", "#situ-sms", "#exp", "#bulle"], 17.55);
+
+  // 4 · le toucher, les étoiles
+  entre("situ-etoiles", 18.15);
+  tl.fromTo("#etoiles svg", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: P3o, stagger: 0.05 }, 18.7);
+  tl.set(".plein", { scale: 0, transformOrigin: "50% 55%" }, 0);
+  for (let k = 0; k < 5; k++) tl.to(`#e${k}`, { scale: 1, duration: 0.35, ease: P3o }, 19.45 + 0.17 * k);
+  sort(["#situ-etoiles", "#etoiles"], 21.6);
+
+  // 5 · le bilan : les liens ouverts
+  entre("situ-bilan", 22.1);
+  tl.fromTo("#liste2", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o }, 22.6);
+  sort(["#situ-bilan", "#liste2"], 24.95);
+
+  // 6 · la fin
+  tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.4, ease: "sine.out" }, 25.2);
+  tl.fromTo("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 25.5);
+  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 25.95);
+  tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 26.45);
+  tl.fromTo("#sous .r", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o }, 26.3);
+  tl.fromTo("#phrase .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 27.0);
+  tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 28.3);
+  tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 29.1);
+  tl.to({}, { duration: 0.01 }, 30.99);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+})();
+</script>
+</body>
+</html>

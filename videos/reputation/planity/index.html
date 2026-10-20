@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>Vokio Réputation · Planity et Google</title>
+<!-- Pub Vokio Réputation n° 2, ciblage salons sous Planity (20/10/2026). Idée de Florian : « vos clients réservent sur
+     Planity, les nouveaux cherchent sur Google », mettre en avant l'importance des avis Google. Mêmes vraies captures
+     que le n° 1 (../contents). Aucune promesse d'intégration Planity (fermée aux intégrations, voir la fiche mémoire) :
+     Vokio fonctionne À CÔTÉ, sans changer de logiciel. Les deux fiches de comparaison sont fictives (mention en bas). -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/GeistMono-Regular.woff2") format("woff2");}
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2");}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
+#root{position:relative;width:100%;height:100%;overflow:hidden;background:#F4F1E8;color:#262019;
+      font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-kerning:normal}
+.scene{position:absolute;inset:0}
+.m{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .06em .14em;margin:0 -.06em -.14em}
+.w{display:inline-block}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+
+#acc{position:absolute;left:70px;right:60px;top:430px;font-size:138px;line-height:1;letter-spacing:-.022em}
+#acc .l1{display:block;margin-bottom:40px}
+#acc em{font-style:italic;display:block}
+
+.situ{position:absolute;left:70px;right:60px;top:330px;font-size:80px;line-height:1.08;letter-spacing:-.014em}
+.situ em{font-style:italic;display:block}
+
+/* les deux fiches comparées : des cartes de la DA, pas une copie de Google */
+.fiche{position:absolute;left:70px;width:940px;padding:44px 54px 46px;border-radius:48px;border:3px solid rgba(38,32,25,.10);
+       background:#F4F1E8;box-shadow:0 3px 9px rgba(38,32,25,.06)}
+#fA{top:660px} #fB{top:990px}
+.fiche .nom{font-size:46px;line-height:1.2}
+.fiche .ligne{display:flex;align-items:center;gap:22px;margin-top:22px}
+.fiche .note{font-family:"Instrument Serif",Georgia,serif;font-size:86px;line-height:1;letter-spacing:-.02em}
+.fiche .et{display:flex;gap:8px}
+.fiche .et svg{width:50px;height:50px}
+.fiche .nb{font-size:44px;color:#6F695F;margin-left:6px}
+.fiche .nb b{font-weight:400;color:#262019}
+.vide{fill:rgba(38,32,25,.14)} .sol{fill:#EFA424}
+
+/* une carte de l'app : intérieur filmé, cadre redessiné (.card-v ×3) */
+.carte{position:absolute;left:70px;overflow:hidden;border-radius:48px;border:3px solid rgba(38,32,25,.10);
+       background:#F4F1E8;box-shadow:0 3px 9px rgba(38,32,25,.06);transform-origin:0 0}
+.carte img{display:block;position:absolute;left:0;top:0}
+#form{top:620px;width:1050px;height:777px;transform:scale(.9)}
+
+#exp{position:absolute;left:70px;top:640px;font-family:"Geist Mono",monospace;font-size:32px;letter-spacing:.16em;
+     text-transform:uppercase;color:#6F695F}
+#bulle{position:absolute;left:70px;top:700px;width:900px;padding:44px 50px 48px;background:#E8E3D6;
+       border-radius:52px 52px 52px 14px;font-size:50px;line-height:1.34;letter-spacing:-.005em;color:#262019}
+#lien{background-image:linear-gradient(#EFA424,#EFA424);background-repeat:no-repeat;background-position:0 96%;
+      background-size:0% 6px;padding-bottom:2px}
+
+#etoiles{position:absolute;left:70px;top:720px;display:flex;gap:34px}
+#etoiles svg{width:150px;height:150px;overflow:visible}
+#etoiles .fond{fill:none;stroke:rgba(38,32,25,.22);stroke-width:1.2}
+#etoiles .plein{fill:#EFA424}
+
+/* le compteur de la fiche qui monte, chiffre par chiffre (bandes de l'horloge) */
+#fC{top:660px}
+.cpt{display:inline-flex;height:1.2em;overflow:hidden;vertical-align:bottom}
+.cpt .bande{display:flex;flex-direction:column}
+.cpt .bande span{display:block;height:1.2em;line-height:1.2em}
+
+#halo{position:absolute;left:-160px;top:-40px;width:1400px;height:1100px;
+      background:radial-gradient(50% 50% at 50% 50%,rgba(239,164,36,.30) 0%,rgba(248,214,155,.26) 34%,rgba(245,198,119,.12) 62%,rgba(244,241,232,0) 100%)}
+#fin{position:absolute;left:0;right:0;top:330px;text-align:center}
+#mot{font-size:220px;letter-spacing:-.045em;line-height:.9;display:inline-flex;align-items:baseline}
+#mot .seg{display:inline-block;clip-path:inset(-30% -14% -30% -14%)}
+#mot .i{position:relative;font-style:normal}
+#mot-pt{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;border-radius:50%;background:#EFA424}
+#sous{margin-top:6px;font-size:120px;line-height:1;font-style:italic;letter-spacing:-.02em}
+#phrase{margin:64px auto 0;width:900px;font-size:76px;line-height:1.1;letter-spacing:-.012em}
+#phrase em{font-style:italic;display:block}
+#cta{margin-top:58px;display:inline-block;padding:30px 56px;border-radius:999px;background:#262019;color:#F4F1E8;font-size:40px}
+#site{margin-top:34px;font-family:"Geist Mono",monospace;font-size:36px;letter-spacing:.14em;text-transform:uppercase;color:#6F695F}
+
+#mention{position:absolute;left:0;right:0;top:1456px;text-align:center;font-size:36px;line-height:1;color:#6F695F}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="31" data-width="1080" data-height="1920">
+
+  <section id="s-acc" class="scene clip" data-start="0" data-duration="3.25" data-track-index="0">
+    <p id="acc" class="serif"></p>
+  </section>
+
+  <section id="s-compare" class="scene clip" data-start="3.1" data-duration="5.3" data-track-index="1">
+    <p class="situ serif" id="situ-compare"></p>
+    <div class="fiche" id="fA"></div>
+    <div class="fiche" id="fB"></div>
+  </section>
+
+  <section id="s-saisie" class="scene clip" data-start="8.3" data-duration="5.2" data-track-index="2">
+    <p class="situ serif" id="situ-saisie"></p>
+    <div class="carte" id="form"></div>
+  </section>
+
+  <section id="s-sms" class="scene clip" data-start="13.4" data-duration="4.9" data-track-index="3">
+    <p class="situ serif" id="situ-sms"></p>
+    <p id="exp">Vokio</p>
+    <p id="bulle">Bonjour Claire, merci pour votre visite. Votre avis compte beaucoup pour l'Institut Camélia : <span id="lien">https://vokio.fr/a/k7Qm2Xe</span></p>
+  </section>
+
+  <section id="s-etoiles" class="scene clip" data-start="18.2" data-duration="3.6" data-track-index="4">
+    <p class="situ serif" id="situ-etoiles"></p>
+    <div id="etoiles"></div>
+  </section>
+
+  <section id="s-compte" class="scene clip" data-start="21.7" data-duration="3.6" data-track-index="5">
+    <p class="situ serif" id="situ-compte"></p>
+    <div class="fiche" id="fC"></div>
+  </section>
+
+  <section id="s-halo" class="scene clip" data-start="25.15" data-duration="5.85" data-track-index="6">
+    <div id="halo"></div>
+  </section>
+
+  <section id="s-fin" class="scene clip" data-start="25.3" data-duration="5.7" data-track-index="7">
+    <div id="fin">
+      <p id="mot" class="serif"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p>
+      <p id="sous" class="serif"><span class="m" data-layout-allow-overflow><span class="w r">Réputation</span></span></p>
+      <p id="phrase" class="serif"></p>
+      <p><span id="cta">19,99 €/mois · 14 jours d'essai</span></p>
+      <p id="site">vokio.fr/avis</p>
+    </div>
+  </section>
+
+  <section id="s-mention" class="scene clip" data-start="0" data-duration="31" data-track-index="8">
+    <p id="mention">Établissements fictifs · captures réelles de app.vokio.fr</p>
+  </section>
+</div>
+<script>
+(function(){
+  const mots = (t, cls) => t.split(" ").map(w => `<span class="m" data-layout-allow-overflow><span class="w ${cls}">${w}</span></span>`).join(" ");
+  const situ = (id, l1, l2) => { document.getElementById(id).innerHTML = `<span class="l1">${mots(l1, "s1")}</span> <em>${mots(l2, "s2")}</em>`; };
+  document.getElementById("acc").innerHTML = `<span class="l1">${mots("Vos clients réservent sur Planity.", "a1")}</span><em>${mots("Les nouveaux vous cherchent sur Google.", "a2")}</em>`;
+  document.getElementById("phrase").innerHTML = `${mots("Des avis Google,", "p")} <em>${mots("sans changer de logiciel.", "p")}</em>`;
+  situ("situ-compare", "Avant de réserver,", "ils comparent les avis.");
+  situ("situ-saisie", "Après chaque rendez-vous,", "vous tapez son numéro.");
+  situ("situ-sms", "Deux heures plus tard,", "elle reçoit ce SMS.");
+  situ("situ-etoiles", "Un toucher sur le lien,", "elle laisse son avis Google.");
+  situ("situ-compte", "Avis après avis,", "votre fiche se remplit.");
+
+  // étoiles de fiche : n pleines, la dernière remplie à la fraction près
+  const ETOILE = "M50 4l13.5 28.4 31.1 3.9-22.9 21.4 5.9 30.8L50 73.4 22.4 88.5l5.9-30.8L5.4 36.3l31.1-3.9z";
+  let uid = 0;
+  const rangee = note => Array.from({ length: 5 }, (_, k) => {
+    const f = Math.max(0, Math.min(1, note - k)), id = "cp" + (uid++);
+    return `<svg viewBox="0 0 100 100"><defs><clipPath id="${id}"><rect x="0" y="0" width="${100 * f}" height="100"/></clipPath></defs>` +
+      `<path class="vide" d="${ETOILE}"/><path class="sol" clip-path="url(#${id})" d="${ETOILE}"/></svg>`;
+  }).join("");
+  const fiche = (el, nom, note, nb) => {
+    document.getElementById(el).innerHTML = `<p class="nom">${nom}</p><div class="ligne"><span class="note">${note.toFixed(1).replace(".", ",")}</span>` +
+      `<span class="et">${rangee(note)}</span><span class="nb">${nb}</span></div>`;
+  };
+  fiche("fA", "Institut Camélia", 4.9, "<b>9</b> avis");
+  fiche("fB", "L'institut d'à côté", 4.6, "<b>186</b> avis");
+  // la fiche de l'institut, dont le compteur monte de 9 à 14
+  fiche("fC", "Institut Camélia", 4.9, `<b class="cpt" id="cpt"><span class="col"><span class="bande" id="b1"></span></span><span class="col"><span class="bande" id="b0"></span></span></b> avis`);
+  const b1 = document.getElementById("b1"), b0 = document.getElementById("b0");
+  b1.insertAdjacentHTML("beforeend", `<span>&#8203;</span><span>1</span>`);
+  for (let d = 9; d <= 14; d++) b0.insertAdjacentHTML("beforeend", `<span>${d % 10}</span>`);
+
+  const ETATS = [];
+  for (let n = 0; n <= 20; n++) ETATS.push(`saisie-${String(n).padStart(2, "0")}`);
+  ETATS.push("saisie-pleine", "saisie-presse", "saisie-note");
+  const form = document.getElementById("form");
+  ETATS.forEach(e => form.insertAdjacentHTML("beforeend", `<img id="i-${e}" src="assets/captures/${e}-net.png" alt="" style="visibility:hidden">`));
+
+  const et = document.getElementById("etoiles");
+  for (let k = 0; k < 5; k++) et.insertAdjacentHTML("beforeend",
+    `<svg viewBox="0 0 100 100"><path class="fond" d="${ETOILE}"/><path class="plein" id="e${k}" d="${ETOILE}"/></svg>`);
+
+  const tl = gsap.timeline({ paused: true });
+  const P3o = "power3.out", P3i = "power3.in";
+  const entre = (id, t) => {
+    tl.fromTo(`#${id} .s1`, { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, t);
+    tl.fromTo(`#${id} .s2`, { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, t + 0.35);
+  };
+  const sort = (sel, t) => tl.to(sel, { y: -50, opacity: 0, duration: 0.4, ease: P3i, stagger: 0.05 }, t);
+
+  // 0 · l'accroche : la 1re ligne est là dès la première image, la 2e arrive vite
+  tl.fromTo("#acc .a2", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.06 }, 0.75);
+  sort("#acc", 2.85);
+
+  // 1 · la comparaison
+  entre("situ-compare", 3.2);
+  tl.fromTo(["#fA", "#fB"], { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o, stagger: 0.25 }, 3.9);
+  tl.fromTo("#fB .nb b", { color: "#262019" }, { color: "#C77A0E", duration: 0.4, ease: "power2.out" }, 5.4);
+  tl.fromTo("#fA", { opacity: 1 }, { opacity: 0.55, duration: 0.5, ease: "power2.out", immediateRender: false }, 5.4);
+  sort(["#situ-compare", "#fA", "#fB"], 7.9);
+
+  // 2 · la saisie (plus rapide que dans le n° 1)
+  entre("situ-saisie", 8.4);
+  tl.set("#i-saisie-00", { visibility: "visible" }, 0);
+  tl.fromTo("#form", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o }, 8.9);
+  const montre = (e, t) => { tl.set("#form img", { visibility: "hidden" }, t); tl.set(`#i-${e}`, { visibility: "visible" }, t); };
+  for (let n = 1; n <= 14; n++) montre(`saisie-${String(n).padStart(2, "0")}`, 9.6 + 0.075 * (n - 1));
+  for (let n = 15; n <= 20; n++) montre(`saisie-${String(n).padStart(2, "0")}`, 10.85 + 0.085 * (n - 15));
+  montre("saisie-pleine", 11.45);
+  montre("saisie-presse", 11.8);
+  montre("saisie-note", 12.0);
+  tl.to("#form", { height: 861, duration: 0.35, ease: P3o }, 12.0);
+  sort(["#situ-saisie", "#form"], 13.0);
+
+  // 3 · le SMS
+  entre("situ-sms", 13.5);
+  tl.fromTo("#exp", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: P3o }, 14.3);
+  tl.fromTo("#bulle", { opacity: 0, y: 40, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: P3o, transformOrigin: "0% 100%" }, 14.4);
+  tl.to("#lien", { backgroundSize: "100% 6px", duration: 0.8, ease: P3o }, 15.9);
+  sort(["#situ-sms", "#exp", "#bulle"], 17.75);
+
+  // 4 · les étoiles
+  entre("situ-etoiles", 18.3);
+  tl.fromTo("#etoiles svg", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: P3o, stagger: 0.05 }, 18.85);
+  tl.set(".plein", { scale: 0, transformOrigin: "50% 55%" }, 0);
+  for (let k = 0; k < 5; k++) tl.to(`#e${k}`, { scale: 1, duration: 0.35, ease: P3o }, 19.5 + 0.17 * k);
+  sort(["#situ-etoiles", "#etoiles"], 21.3);
+
+  // 5 · la fiche se remplit : 9 → 14 avis (une ligne de compteur = 1,2 em de 44 px)
+  entre("situ-compte", 21.8);
+  tl.fromTo("#fC", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o }, 22.4);
+  const PAS = 1.2 * 44;
+  for (let k = 1; k <= 5; k++) {
+    const t = 23.0 + 0.28 * (k - 1);
+    tl.to("#b0", { y: -PAS * k, duration: 0.24, ease: "power3.inOut" }, t);
+    if (k === 1) tl.to("#b1", { y: -PAS, duration: 0.24, ease: "power3.inOut" }, t);
+  }
+  tl.fromTo("#cpt", { color: "#262019" }, { color: "#C77A0E", duration: 0.3 }, 23.0);
+  sort(["#situ-compte", "#fC"], 24.95);
+
+  // 6 · la fin
+  tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.4, ease: "sine.out" }, 25.2);
+  tl.fromTo("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 25.5);
+  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 25.95);
+  tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 26.45);
+  tl.fromTo("#sous .r", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o }, 26.3);
+  tl.fromTo("#phrase .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 27.0);
+  tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 28.3);
+  tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 29.1);
+  tl.to({}, { duration: 0.01 }, 30.99);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+})();
+</script>
+</body>
+</html>
