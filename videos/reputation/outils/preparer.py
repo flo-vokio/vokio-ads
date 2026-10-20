@@ -30,4 +30,14 @@ interieur("liste-apres.png", "ligne-claire-net.png", haut=210)     # la ligne de
 # les quatre lignes suivantes, prises dans liste-apres (sans les coins du haut de la carte : la jointure ne se voit pas)
 im = Image.open(C / "liste-apres.png")
 im.crop((B, 210, im.width - B, im.height - B)).save(C / "lignes-suite-net.png")
-print("ok", len(list(C.glob("*-net.png"))))
+# Planche unique des états du formulaire (21/10, retour Florian « le champ scintille ») : une image par état
+# donnait de temps en temps une image VIDE au rendu (image suivante pas encore décodée au moment de la capture).
+# Une seule image, toujours peinte, qu'on fait défiler d'un état à l'autre : plus rien à décoder en cours de route.
+ETATS = [f"saisie-{n:02d}" for n in range(21)] + ["saisie-pleine", "saisie-presse", "saisie-note"]
+H = 858   # hauteur intérieure du plus grand état (saisie-note : 861 - 3)
+ims = [Image.open(C / f"{e}-net.png") for e in ETATS]
+planche = Image.new("RGB", (ims[0].width, H * len(ims)), (244, 241, 232))
+for k, im in enumerate(ims):
+    planche.paste(im, (0, H * k))
+planche.save(C / "saisie-planche.png")
+print("ok", len(list(C.glob("*-net.png"))), "planche", planche.size)

@@ -159,7 +159,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   for (let n = 0; n <= 20; n++) ETATS.push(`saisie-${String(n).padStart(2, "0")}`);
   ETATS.push("saisie-pleine", "saisie-presse", "saisie-note");
   const form = document.getElementById("form");
-  ETATS.forEach(e => form.insertAdjacentHTML("beforeend", `<img id="i-${e}" src="assets/captures/${e}-net.png" alt="" style="visibility:hidden">`));
+  // une seule planche de tous les états (outils/preparer.py), qu'on fait défiler : jamais d'image à décoder pendant le rendu
+  form.insertAdjacentHTML("beforeend", `<img id="planche" src="assets/captures/saisie-planche.png" alt="">`);
+  const H = 858;
 
   // les étoiles (même tracé, contour puis remplissage)
   const ETOILE = "M50 4l13.5 28.4 31.1 3.9-22.9 21.4 5.9 30.8L50 73.4 22.4 88.5l5.9-30.8L5.4 36.3l31.1-3.9z";
@@ -187,9 +189,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   [1, 0, 4, 2].forEach((d, i) => tl.set(cols[i], { y: -200 * d }, 0));
   tl.fromTo("#horloge", { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.9, ease: "power4.out" }, 2.75);
   entre("situ-saisie", 3.0);
-  tl.set("#i-saisie-00", { visibility: "visible" }, 0);
+  tl.set("#planche", { y: 0 }, 0);
   tl.fromTo("#form", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: P3o }, 3.55);
-  const montre = (e, t) => { tl.set("#form img", { visibility: "hidden" }, t); tl.set(`#i-${e}`, { visibility: "visible" }, t); };
+  const montre = (e, t) => tl.set("#planche", { y: -H * ETATS.indexOf(e) }, t);
   // un caractère toutes les 0,09 s pour le numéro (14), 0,1 s pour le prénom (6), une petite pause entre les deux
   for (let n = 1; n <= 14; n++) montre(`saisie-${String(n).padStart(2, "0")}`, 4.35 + 0.09 * (n - 1));
   for (let n = 15; n <= 20; n++) montre(`saisie-${String(n).padStart(2, "0")}`, 5.85 + 0.1 * (n - 15));
