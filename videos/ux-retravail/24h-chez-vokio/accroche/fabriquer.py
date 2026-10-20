@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Accroche « Votre téléphone sonne. » (1,6 s) collée devant la pub 24 h chez Vokio doublée (20/10/2026).
+"""Accroche « Votre téléphone sonne. » (1,9 s) enchaînée en fondu devant la pub 24 h chez Vokio doublée (20/10/2026).
 
     /root/.pwtest/bin/python /opt/vokio-ads/videos/ux-retravail/24h-chez-vokio/accroche/fabriquer.py [source.mp4]
 
 Source par défaut : /root/vokio-uploads/videos/24h/24h-chez-vokio-9x16-voix.mp4 (la vidéo publiée, jamais modifiée).
-Le film perd ses 0,3 premières secondes (fond vide, avant la voix). Sortie : rendus/ à côté de ce script : accroche.mp4 (seule) et 24h-chez-vokio-9x16-voix-accroche.mp4 (accroche + film).
-Image : index.html filmé à 30 i/s par window.poser(t). Son : sonnerie électronique neutre synthétisée ici (pas de
-sonnerie de marque), seule sur la piste ; la musique et la voix démarrent à la coupe.
+Fondu enchaîné image ET son de 0,4 s entre l'accroche et le film (v1 coupait sec, jugé brutal par Florian le 20/10). Sortie : rendus/ à côté de ce script : accroche.mp4 (seule) et 24h-chez-vokio-9x16-voix-accroche.mp4 (accroche + film).
+Image : index.html filmé à 30 i/s par window.poser(t). Son : petit motif de marimba synthétisé ici (notes douces qui
+s'éteignent seules ; la trille électronique de la v1 était désagréable), seul sur la piste jusqu'au fondu.
 """
 import subprocess
 import sys
@@ -20,25 +20,26 @@ from playwright.sync_api import sync_playwright
 ICI = Path(__file__).resolve().parent
 SOURCE = Path(sys.argv[1] if len(sys.argv) > 1 else "/root/vokio-uploads/videos/24h/24h-chez-vokio-9x16-voix.mp4")
 RENDUS = ICI / "rendus"
-DUREE, IPS, FE = 1.6, 30, 48000
-SONNERIES = [(0.0, 0.62), (0.82, 1.6)]     # mêmes bornes que index.html
-ROGNE = 0.3   # début du film retiré : 0,3 s de fond vide avant l'horloge (la voix démarre à 0,54 s, intacte)
+DUREE, IPS, FE = 1.9, 30, 48000
+SONNERIES = [0.0, 0.8]     # départ de chaque sonnerie (vibrations de index.html : 0-0,55 et 0,8-1,2)
+FONDU = 0.4   # fondu enchaîné sur les 0,4 dernières secondes de l'accroche ; la voix du film démarre à 0,54 s, après
 CHROMIUM = "/opt/pw-browsers/chromium" if Path("/opt/pw-browsers/chromium").is_file() else None
 
 
 def sonnerie():
-    """Trille électronique : deux notes qui alternent 24 fois par seconde, harmoniques douces, attaque nette."""
+    """Motif de marimba : quatre notes montantes (sol, si, ré, sol), attaque feutrée, extinction naturelle, léger écho."""
     t = np.arange(int(DUREE * FE)) / FE
     son = np.zeros_like(t)
-    for a, b in SONNERIES:
-        m = (t >= a) & (t < b)
-        u = t[m] - a
-        f = np.where((np.floor(u * 24) % 2) == 0, 1320.0, 1660.0)
-        phase = 2 * np.pi * np.cumsum(f) / FE
-        onde = np.sin(phase) + 0.35 * np.sin(2 * phase) + 0.12 * np.sin(3 * phase)
-        env = np.minimum(1, u / 0.008) * np.minimum(1, (b - t[m]) / 0.015)
-        son[m] = onde * env
-    son *= 10 ** (-19 / 20) / np.sqrt(np.mean(son[son != 0] ** 2))   # ≈ -19 dBFS efficace, au niveau du film (-16)
+    for a in SONNERIES:
+        for k, f in enumerate((784.0, 987.8, 1174.7, 1568.0)):
+            u = t - (a + 0.11 * k)
+            m = u >= 0
+            env = np.minimum(1, u[m] / 0.004)
+            son[m] += env * (np.sin(2 * np.pi * f * u[m]) * np.exp(-u[m] / 0.16)
+                             + 0.18 * np.sin(2 * np.pi * 4 * f * u[m]) * np.exp(-u[m] / 0.03)) * (0.9 if k < 3 else 1.0)
+    d = int(0.07 * FE)
+    son[d:] += 0.18 * son[:-d]
+    son *= 10 ** (-23 / 20) / np.sqrt(np.mean(son[np.abs(son) > 1e-3] ** 2))   # ≈ -23 dBFS efficace, sous le film (-16)
     return np.clip(son, -0.98, 0.98)
 
 
@@ -66,9 +67,10 @@ def main():
                         "-ac", "2", "-shortest", str(acc)], check=True)
         sortie = RENDUS / "24h-chez-vokio-9x16-voix-accroche.mp4"
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(acc), "-i", str(SOURCE), "-filter_complex",
-                        f"[1:v]trim=start={ROGNE},setpts=PTS-STARTPTS,fps=30,format=yuv420p,setsar=1[v1];[0:v]setsar=1[v0];"
-                        f"[1:a]atrim=start={ROGNE},asetpts=PTS-STARTPTS,afade=t=in:d=0.04,aresample=48000,aformat=channel_layouts=stereo[a1];[0:a]aformat=channel_layouts=stereo[a0];"
-                        "[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]",
+                        "[1:v]fps=30,format=yuv420p,setsar=1,settb=1/30[v1];[0:v]fps=30,format=yuv420p,setsar=1,settb=1/30[v0];"
+                        f"[v0][v1]xfade=transition=fade:duration={FONDU}:offset={DUREE - FONDU:.2f}[v];"
+                        "[1:a]aresample=48000,aformat=channel_layouts=stereo[a1];[0:a]aformat=channel_layouts=stereo[a0];"
+                        f"[a0][a1]acrossfade=d={FONDU}:c1=qsin:c2=qsin[a]",
                         "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "slow", "-crf", "18",
                         "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "256k", "-movflags", "+faststart", str(sortie)],
                        check=True)
