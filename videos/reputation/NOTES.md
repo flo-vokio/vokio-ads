@@ -26,3 +26,5 @@ Drive : « Vokio · Réputation · pubs vidéo ».
 
 ## Contrôle obligatoire après rendu
 `python3 outils/flashs.py <rendu>.mp4` : doit répondre « aucun ». Une image par état (img cachées puis montrées) donnait des images VIDES au rendu (retour Florian 21/10) ; doù
+## Version Instagram avec musique (24/10/2026)
+`outils/musique.py contents --prise 1` puis `--mixer` (idem `planity --prise 0`) : ElevenLabs Music, sections calées sur les plans, -14 LUFS visés, fondu final. Rendus `*-musique.mp4`. ⚠️ section >= 3 s exigée par l'API ; la prise 0 de contents s'éteignait à 26,5 s (4 s de silence sur le logo), d'où la prise 1 « final chord held until the very end ». Pas de voix vérifié par transcription (seul « [outro jingle] »). Crédits : 6 872 → 8 170. Couvertures = 1re image (accroche entière dans le recadrage 3:4 de la grille). Textes des posts : Google Doc du dossier Drive.

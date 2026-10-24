@@ -1,0 +1,124 @@
+{
+ "composition_plan": {
+  "positive_global_styles": [
+   "warm modern instrumental pop",
+   "100 BPM, steady tempo",
+   "F major",
+   "plucked guitar, felt piano, soft marimba, light claps and a gentle kick, warm bass",
+   "bright, friendly, optimistic, confident",
+   "clean social media background music",
+   "instrumental"
+  ],
+  "negative_global_styles": [
+   "vocals",
+   "choir",
+   "humming",
+   "spoken word",
+   "EDM drop",
+   "heavy drums",
+   "distorted guitar",
+   "minor key",
+   "trailer sounds",
+   "tempo change",
+   "sad"
+  ],
+  "sections": [
+   {
+    "section_name": "Hook, a question hanging",
+    "positive_local_styles": [
+     "sparse plucked guitar motif",
+     "light and curious",
+     "no drums yet"
+    ],
+    "negative_local_styles": [
+     "drums"
+    ],
+    "duration_ms": 3000,
+    "lines": []
+   },
+   {
+    "section_name": "Typing at the counter",
+    "positive_local_styles": [
+     "gentle groove starts",
+     "soft kick and claps enter",
+     "marimba pulse"
+    ],
+    "negative_local_styles": [
+     "big drums"
+    ],
+    "duration_ms": 5300,
+    "lines": []
+   },
+   {
+    "section_name": "Request scheduled",
+    "positive_local_styles": [
+     "groove settles",
+     "warm bass joins"
+    ],
+    "negative_local_styles": [
+     "crash cymbal"
+    ],
+    "duration_ms": 3450,
+    "lines": []
+   },
+   {
+    "section_name": "Two hours later, the text arrives",
+    "positive_local_styles": [
+     "small lift",
+     "piano chords join",
+     "brighter, building softly"
+    ],
+    "negative_local_styles": [
+     "drop"
+    ],
+    "duration_ms": 6250,
+    "lines": []
+   },
+   {
+    "section_name": "Five stars, the high point",
+    "positive_local_styles": [
+     "fullest moment",
+     "joyful",
+     "all instruments together"
+    ],
+    "negative_local_styles": [
+     "drop",
+     "vocals"
+    ],
+    "duration_ms": 4000,
+    "lines": []
+   },
+   {
+    "section_name": "Nothing more to do, calm",
+    "positive_local_styles": [
+     "relaxed",
+     "drums thin out",
+     "warm"
+    ],
+    "negative_local_styles": [
+     "new instruments"
+    ],
+    "duration_ms": 3300,
+    "lines": []
+   },
+   {
+    "section_name": "Logo, resolution",
+    "positive_local_styles": [
+     "warm full band keeps playing",
+     "lands on the home chord in the last two seconds",
+     "final chord held until the very end"
+    ],
+    "negative_local_styles": [
+     "silence",
+     "early fade out",
+     "abrupt cut",
+     "new melody"
+    ],
+    "duration_ms": 5700,
+    "lines": []
+   }
+  ]
+ },
+ "respect_sections_durations": true,
+ "prise": 1
+}

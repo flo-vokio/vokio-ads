@@ -1,0 +1,122 @@
+{
+ "composition_plan": {
+  "positive_global_styles": [
+   "warm modern instrumental pop",
+   "100 BPM, steady tempo",
+   "F major",
+   "plucked guitar, felt piano, soft marimba, light claps and a gentle kick, warm bass",
+   "bright, friendly, optimistic, confident",
+   "clean social media background music",
+   "instrumental"
+  ],
+  "negative_global_styles": [
+   "vocals",
+   "choir",
+   "humming",
+   "spoken word",
+   "EDM drop",
+   "heavy drums",
+   "distorted guitar",
+   "minor key",
+   "trailer sounds",
+   "tempo change",
+   "sad"
+  ],
+  "sections": [
+   {
+    "section_name": "Hook, a question hanging",
+    "positive_local_styles": [
+     "sparse plucked guitar motif",
+     "light and curious",
+     "no drums yet"
+    ],
+    "negative_local_styles": [
+     "drums"
+    ],
+    "duration_ms": 3100,
+    "lines": []
+   },
+   {
+    "section_name": "Comparing reviews",
+    "positive_local_styles": [
+     "gentle groove starts",
+     "soft kick and claps enter",
+     "a little tension"
+    ],
+    "negative_local_styles": [
+     "big drums"
+    ],
+    "duration_ms": 5200,
+    "lines": []
+   },
+   {
+    "section_name": "Typing after the appointment",
+    "positive_local_styles": [
+     "groove settles",
+     "marimba pulse",
+     "warm bass joins"
+    ],
+    "negative_local_styles": [
+     "crash cymbal"
+    ],
+    "duration_ms": 5100,
+    "lines": []
+   },
+   {
+    "section_name": "The text arrives",
+    "positive_local_styles": [
+     "small lift",
+     "piano chords join",
+     "brighter"
+    ],
+    "negative_local_styles": [
+     "drop"
+    ],
+    "duration_ms": 4800,
+    "lines": []
+   },
+   {
+    "section_name": "Five stars, the high point",
+    "positive_local_styles": [
+     "fullest moment",
+     "joyful",
+     "all instruments together"
+    ],
+    "negative_local_styles": [
+     "drop",
+     "vocals"
+    ],
+    "duration_ms": 3500,
+    "lines": []
+   },
+   {
+    "section_name": "Reviews add up",
+    "positive_local_styles": [
+     "confident, rising slightly",
+     "energetic but soft"
+    ],
+    "negative_local_styles": [
+     "new instruments"
+    ],
+    "duration_ms": 3500,
+    "lines": []
+   },
+   {
+    "section_name": "Logo, resolution",
+    "positive_local_styles": [
+     "resolves on the home chord",
+     "final chord rings then fades out",
+     "clean ending"
+    ],
+    "negative_local_styles": [
+     "abrupt cut",
+     "new melody"
+    ],
+    "duration_ms": 5800,
+    "lines": []
+   }
+  ]
+ },
+ "respect_sections_durations": true,
+ "prise": 0
+}
