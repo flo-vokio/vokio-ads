@@ -33,3 +33,6 @@ Drive : « Vokio · Réputation · pubs vidéo ».
 - Écran de fin aéré sur toute la hauteur (« ça fait groupé »).
 - Mention « Établissement(s) fictif(s) » tout en bas (top 1840 ; masquée en partie par l'interface Reels, accepté).
 - Micro-coupure musique vers 9-10 s (vidéo 1) : la prise 1 s'effondrait à -36 dB puis repartait d'un coup. Prise 2 (« seamless transitions ») + enveloppe de gain au mixage (`LISSAGES` : queue de note +12 dB, entrée du rythme -8 dB rendue à 0 dB à 10,15 s). Contrôle : `outils/musique.py --controle <wav>` (creux >= 0,25 s sous -28 dB suivi de +18 dB) ; il trouvait la coupure de la prise 1, rien sur le mix final.
+
+## 24/10 (suite) : bruitages discrets
+`outils/bruitages.py contents|planity` → `son/<film>-bruitages.wav`, ajouté sous la musique par `musique.py --mixer`. Touches du clavier, clic du bouton, glissement (ligne de Claire), notification synthétisée (fa-do aigus), 5 notes d'étoiles en fa majeur, tics du compteur (n° 2), scintillement du logo. Chaque bruitage calé sur le niveau de la musique à son instant (`ECARTS`). Synchro mesurée : attaques à 0-40 ms de l'image.

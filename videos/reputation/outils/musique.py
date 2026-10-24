@@ -109,9 +109,16 @@ def mixer(film, k):
         vol = f"if(between(t,{t0},{t1}),pow(10,({g0}+({g1 - g0})*(t-{t0})/{t1 - t0})/20),{vol})"
     muet = RENDUS / f"{NOMS[film]}.mp4"
     sortie = RENDUS / f"{NOMS[film]}-musique.mp4"
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(muet), "-i", str(src), "-filter_complex",
-                    f"[1:a]atrim=0:31,asetpts=PTS-STARTPTS,volume='{vol}':eval=frame,afade=t=out:st=29.8:d=1.2,"
-                    "loudnorm=I=-14:TP=-1:LRA=11,aresample=48000[a]",
+    # bruitages (outils/bruitages.py, 24/10) posés sous la musique s'ils existent ; la fin en fondu touche les deux
+    br = SON / f"{film}-bruitages.wav"
+    entrees, graphe = ["-i", str(muet), "-i", str(src)], f"[1:a]atrim=0:31,asetpts=PTS-STARTPTS,volume='{vol}':eval=frame[m];"
+    if br.exists():
+        entrees += ["-i", str(br)]
+        graphe += "[2:a]atrim=0:31,asetpts=PTS-STARTPTS[s];[m][s]amix=inputs=2:normalize=0[ms];"
+    else:
+        graphe += "[m]anull[ms];"
+    graphe += "[ms]afade=t=out:st=29.8:d=1.2,loudnorm=I=-14:TP=-1:LRA=11,aresample=48000[a]"
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", *entrees, "-filter_complex", graphe,
                     "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "256k", "-shortest",
                     "-movflags", "+faststart", str(sortie)], check=True)
     return sortie
