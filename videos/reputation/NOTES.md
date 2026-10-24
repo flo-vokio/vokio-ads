@@ -28,3 +28,8 @@ Drive : « Vokio · Réputation · pubs vidéo ».
 `python3 outils/flashs.py <rendu>.mp4` : doit répondre « aucun ». Une image par état (img cachées puis montrées) donnait des images VIDES au rendu (retour Florian 21/10) ; doù
 ## Version Instagram avec musique (24/10/2026)
 `outils/musique.py contents --prise 1` puis `--mixer` (idem `planity --prise 0`) : ElevenLabs Music, sections calées sur les plans, -14 LUFS visés, fondu final. Rendus `*-musique.mp4`. ⚠️ section >= 3 s exigée par l'API ; la prise 0 de contents s'éteignait à 26,5 s (4 s de silence sur le logo), d'où la prise 1 « final chord held until the very end ». Pas de voix vérifié par transcription (seul « [outro jingle] »). Crédits : 6 872 → 8 170. Couvertures = 1re image (accroche entière dans le recadrage 3:4 de la grille). Textes des posts : Google Doc du dossier Drive.
+
+## 24/10 (suite) : retours de Florian
+- Écran de fin aéré sur toute la hauteur (« ça fait groupé »).
+- Mention « Établissement(s) fictif(s) » tout en bas (top 1840 ; masquée en partie par l'interface Reels, accepté).
+- Micro-coupure musique vers 9-10 s (vidéo 1) : la prise 1 s'effondrait à -36 dB puis repartait d'un coup. Prise 2 (« seamless transitions ») + enveloppe de gain au mixage (`LISSAGES` : queue de note +12 dB, entrée du rythme -8 dB rendue à 0 dB à 10,15 s). Contrôle : `outils/musique.py --controle <wav>` (creux >= 0,25 s sous -28 dB suivi de +18 dB) ; il trouvait la coupure de la prise 1, rien sur le mix final.

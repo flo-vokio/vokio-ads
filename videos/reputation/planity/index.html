@@ -67,20 +67,23 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
 .cpt .bande{display:flex;flex-direction:column}
 .cpt .bande span{display:block;height:1.2em;line-height:1.2em}
 
-#halo{position:absolute;left:-160px;top:-40px;width:1400px;height:1100px;
+/* la fin, aérée sur toute la hauteur (retour Florian 24/10 : « ça fait groupé, aère et occupe l'espace ») */
+#halo{position:absolute;left:-260px;top:40px;width:1600px;height:1300px;
       background:radial-gradient(50% 50% at 50% 50%,rgba(239,164,36,.30) 0%,rgba(248,214,155,.26) 34%,rgba(245,198,119,.12) 62%,rgba(244,241,232,0) 100%)}
-#fin{position:absolute;left:0;right:0;top:330px;text-align:center}
-#mot{font-size:220px;letter-spacing:-.045em;line-height:.9;display:inline-flex;align-items:baseline}
+#fin{position:absolute;inset:0;text-align:center}
+#fin > p{position:absolute;left:0;right:0}
+#mot{top:330px;font-size:270px;letter-spacing:-.045em;line-height:.9;display:flex;justify-content:center;align-items:baseline}
 #mot .seg{display:inline-block;clip-path:inset(-30% -14% -30% -14%)}
 #mot .i{position:relative;font-style:normal}
 #mot-pt{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;border-radius:50%;background:#EFA424}
-#sous{margin-top:6px;font-size:120px;line-height:1;font-style:italic;letter-spacing:-.02em}
-#phrase{margin:64px auto 0;width:900px;font-size:76px;line-height:1.1;letter-spacing:-.012em}
+#sous{top:600px;font-size:150px;line-height:1;font-style:italic;letter-spacing:-.02em}
+#phrase{top:880px;margin:0 auto;width:960px;font-size:92px;line-height:1.08;letter-spacing:-.012em}
 #phrase em{font-style:italic;display:block}
-#cta{margin-top:58px;display:inline-block;padding:30px 56px;border-radius:999px;background:#262019;color:#F4F1E8;font-size:40px}
-#site{margin-top:34px;font-family:"Geist Mono",monospace;font-size:36px;letter-spacing:.14em;text-transform:uppercase;color:#6F695F}
+#fin > p.cta-l{top:1170px}
+#cta{display:inline-block;padding:34px 64px;border-radius:999px;background:#262019;color:#F4F1E8;font-size:46px}
+#site{top:1325px;font-family:"Geist Mono",monospace;font-size:40px;letter-spacing:.14em;text-transform:uppercase;color:#6F695F}
 
-#mention{position:absolute;left:0;right:0;top:1456px;text-align:center;font-size:36px;line-height:1;color:#6F695F}
+#mention{position:absolute;left:0;right:0;top:1840px;text-align:center;font-size:36px;line-height:1;color:#6F695F}
 </style>
 </head>
 <body>
@@ -126,7 +129,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
       <p id="mot" class="serif"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p>
       <p id="sous" class="serif"><span class="m" data-layout-allow-overflow><span class="w r">Réputation</span></span></p>
       <p id="phrase" class="serif"></p>
-      <p><span id="cta">19,99 €/mois · 14 jours d'essai</span></p>
+      <p class="cta-l"><span id="cta">19,99 €/mois · 14 jours d'essai</span></p>
       <p id="site">vokio.fr/avis</p>
     </div>
   </section>
