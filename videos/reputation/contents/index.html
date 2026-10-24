@@ -179,8 +179,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   const tl = gsap.timeline({ paused: true });
   const P3o = "power3.out", P3i = "power3.in";
   const entre = (id, t) => {
-    tl.fromTo(`#${id} .s1`, { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, t);
-    tl.fromTo(`#${id} .s2`, { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, t + 0.35);
+    tl.fromTo(`#${id} .s1`, { yPercent: 160 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.07 }, t);
+    tl.fromTo(`#${id} .s2`, { yPercent: 160 }, { yPercent: 0, duration: 0.75, ease: P3o, stagger: 0.07 }, t + 0.35);
   };
   const sort = (sel, t) => tl.to(sel, { y: -50, opacity: 0, duration: 0.4, ease: P3i, stagger: 0.05 }, t);
 
@@ -237,8 +237,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#F4F1E8}
   tl.fromTo("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, 25.5);
   tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, 25.95);
   tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, 26.45);
-  tl.fromTo("#sous .r", { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: P3o }, 26.3);
-  tl.fromTo("#phrase .p", { yPercent: 110 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 27.0);
+  tl.fromTo("#sous .r", { yPercent: 160 }, { yPercent: 0, duration: 0.75, ease: P3o }, 26.3);
+  tl.fromTo("#phrase .p", { yPercent: 160 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.055 }, 27.0);
   tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.65, ease: P3o }, 28.3);
   tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 29.1);
   tl.to({}, { duration: 0.01 }, 30.99);

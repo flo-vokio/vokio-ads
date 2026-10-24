@@ -36,3 +36,6 @@ Drive : « Vokio · Réputation · pubs vidéo ».
 
 ## 24/10 (suite) : bruitages discrets
 `outils/bruitages.py contents|planity` → `son/<film>-bruitages.wav`, ajouté sous la musique par `musique.py --mixer`. Touches du clavier, clic du bouton, glissement (ligne de Claire), notification synthétisée (fa-do aigus), 5 notes d'étoiles en fa majeur, tics du compteur (n° 2), scintillement du logo. Chaque bruitage calé sur le niveau de la musique à son instant (`ECARTS`). Synchro mesurée : attaques à 0-40 ms de l'image.
+
+## 24/10 (suite) : accent du « À » qui dépassait
+Avant leur entrée, les mots attendaient à yPercent 110 sous leur cache : l'accent du « À » (très haut sur la capitale) dépassait du cache, visible sous l'horloge. Départ passé à yPercent 160 partout (les deux films). Contrôle : aucun pixel sombre dans la zone des phrases 0,04 s avant chaque entrée.
