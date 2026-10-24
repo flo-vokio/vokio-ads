@@ -58,6 +58,26 @@ def note_etoile(f):
     return normal(labo.reverbe(np.stack([s, s], 1), secondes=1.4, mix=0.22))
 
 
+def montee():
+    """Un seul son doux qui monte sur les étoiles (retour Florian 24/10 : « pas 5 sons, 1 son bien smooth qui monte, mais
+    pas trop dans les aigus ») : accord de fa majeur (fa4, la4, do5) qui glisse d'une quinte en 1,1 s (courbe douce),
+    attaque lente, sommet vers 1,0 s puis queue de 0,9 s ; peu d'harmoniques, léger chorus, réverbe. Sommet vers 790 Hz."""
+    d = 2.0
+    t = np.arange(int(d * SR)) / SR
+    glis = np.clip(t / 1.1, 0, 1)
+    glis = glis * glis * (3 - 2 * glis)                    # départ et arrivée en douceur
+    rapport = 2 ** (7 / 12 * glis)                          # une quinte au total
+    env = np.where(t < 1.0, (t / 1.0) ** 1.6, np.exp(-(t - 1.0) / 0.35))
+    s = np.zeros_like(t)
+    for f0, g in ((349.2, 1.0), (440.0, 0.7), (523.3, 0.55)):
+        for dec in (-0.25, 0.25):                             # deux voix un peu désaccordées : chorus
+            f = f0 * rapport * 2 ** (dec / 1200 * 8)
+            ph = 2 * np.pi * np.cumsum(f) / SR
+            s += g * (np.sin(ph) + 0.18 * np.sin(2 * ph) + 0.05 * np.sin(3 * ph))
+    s *= env
+    return normal(labo.reverbe(np.stack([s, s * 0.98], 1), secondes=1.6, mix=0.25))
+
+
 def tic():
     """Petit tic sec de compteur : bruit filtré très court."""
     n = int(0.03 * SR)
@@ -93,7 +113,7 @@ TEMPS = {
 MUSIQUE = {"contents": SON / "contents-2.wav", "planity": SON / "planity-0.wav"}
 # Écart visé (dB) entre la crête du bruitage et le niveau efficace de la musique autour de l'instant (± 0,15 s) :
 # discret mais audible (mesuré le 24/10 : à gain fixe, le clic sortait à +12 dB sur la vidéo 1, les touches à -11 sur la 2).
-ECARTS = {"touche": -6.0, "clic": 3.0, "glisse": -3.0, "notif": 3.0, "etoile": 2.0, "tic": -5.0, "logo": -2.0}
+ECARTS = {"touche": -6.0, "clic": 3.0, "glisse": -3.0, "notif": 3.0, "etoile": 0.0, "tic": -5.0, "logo": -2.0}
 
 
 def fabriquer(film):
@@ -118,8 +138,7 @@ def fabriquer(film):
     for t in T["glisse"]:
         poser(glisse, t - 0.08, "glisse")
     poser(notification(), T["notif"], "notif")
-    for k, t in enumerate(T["etoiles"]):
-        poser(note_etoile(NOTES_ETOILES[k]), t, "etoile", pan=-0.3 + 0.15 * k)
+    poser(montee(), T["etoiles"][0] - 0.05, "etoile")       # un seul son pour les 5 étoiles (24/10)
     for t in T["tics"]:
         poser(tic(), t, "tic")
     poser(scintillement(), T["logo"], "logo")
