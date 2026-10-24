@@ -41,4 +41,4 @@ Drive : « Vokio · Réputation · pubs vidéo ».
 Avant leur entrée, les mots attendaient à yPercent 110 sous leur cache : l'accent du « À » (très haut sur la capitale) dépassait du cache, visible sous l'horloge. Départ passé à yPercent 160 partout (les deux films). Contrôle : aucun pixel sombre dans la zone des phrases 0,04 s avant chaque entrée.
 
 ## 24/10 (suite) : un seul son sur les étoiles
-Retour Florian : « pas 5 sons, 1 son bien smooth qui monte, pas trop dans les aigus ». `montee()` : accord de fa majeur (fa4, la4, do5) qui glisse d'une quinte en 1,1 s, attaque lente, sommet à 1 s, queue 0,9 s ; fréquence dominante 390 → 520 Hz (les anciennes notes montaient à 1 400 Hz). Écart visé 0 dB sous la musique.
+Retour Florian : « pas 5 sons, 1 son bien smooth qui monte, pas trop dans les aigus ». `montee()` : accord de fa majeur (fa4, la4, do5) qui glisse d'une quinte en 1,1 s, attaque lente, sommet à 1 s, queue 0,9 s ; fréquence dominante 390 → 520 Hz (les anciennes notes montaient à 1 400 Hz). Calé en niveau EFFICACE sur toute sa durée, 6 dB sous la musique (calé sur la crête au départ, il sortait 12 à 16 dB sous la musique : inaudible).

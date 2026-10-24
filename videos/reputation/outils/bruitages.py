@@ -138,7 +138,13 @@ def fabriquer(film):
     for t in T["glisse"]:
         poser(glisse, t - 0.08, "glisse")
     poser(notification(), T["notif"], "notif")
-    poser(montee(), T["etoiles"][0] - 0.05, "etoile")       # un seul son pour les 5 étoiles (24/10)
+    # un seul son pour les 5 étoiles (24/10). Son attaque est lente : on le cale en niveau EFFICACE sur toute sa durée
+    # (6 dB sous la musique), pas sur la crête au départ (mesuré : 12 à 16 dB sous la musique, à peine audible).
+    m = normal(montee())
+    t0 = T["etoiles"][0] - 0.05
+    i, j = int(t0 * SR), int((t0 + 1.6) * SR)
+    rms = lambda z: 20 * np.log10(np.sqrt((z ** 2).mean()) + 1e-9)
+    labo.placer(piste, m, t0, gain_db=rms(mus[i:j]) - 6.0 - rms(m[:int(1.6 * SR)].mean(axis=1)))
     for t in T["tics"]:
         poser(tic(), t, "tic")
     poser(scintillement(), T["logo"], "logo")
