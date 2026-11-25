@@ -57,15 +57,46 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#E8E1D3}
 .carte img{display:block;position:absolute;left:0;top:0}
 #form{top:640px;width:1050px;height:777px;transform:scale(.9)}
 
-/* ── le téléphone : une silhouette sobre, l'écran, la bulle ; aucun élément d'interface imité ── */
-#tel{position:absolute;left:150px;top:690px;width:780px;height:1500px;border-radius:118px;background:#1F1C19;
-     box-shadow:0 30px 60px rgba(38,32,25,.18)}
-#ecran{position:absolute;left:22px;top:22px;right:22px;bottom:22px;border-radius:98px;background:#FBFAF6;overflow:hidden}
-#exp{position:absolute;left:0;right:0;top:78px;text-align:center;font-size:34px;color:#6F695F}
-#bulle{position:absolute;left:44px;top:160px;width:620px;padding:34px 40px 38px;background:#E9E4D8;
-       border-radius:46px 46px 46px 14px;font-size:44px;line-height:1.34;letter-spacing:-.005em;color:#262019}
-#lien{background-image:linear-gradient(#EFA424,#EFA424);background-repeat:no-repeat;background-position:0 96%;
-      background-size:0% 6px;padding-bottom:2px}
+/* ── le téléphone : un VRAI iPhone (règle Florian 25/11 : jamais de silhouette), proportions d'un iPhone 15/16 Pro
+   en points iOS (écran 393 × 852 pt, verre noir 10 pt, cadre titane 6 pt, coins d'écran 55 pt, Dynamic Island
+   126 × 37 pt à 11 pt du haut) × K = 2,3 px/pt. Messages d'iOS en clair, texte « plus grand » (19 pt) pour être
+   lisible sur un téléphone ; le bas de l'iPhone sort du cadre (cadrage serré, pas de grand blanc). ── */
+@font-face{font-family:"Inter";font-weight:100 900;font-style:normal;font-display:block;src:url("assets/fonts/Inter-Variable-latin.woff2") format("woff2");}
+#tel{--k:2.3;position:absolute;left:51px;top:690px;width:calc(425 * var(--k) * 1px);height:calc(884 * var(--k) * 1px);
+     border-radius:calc(71 * var(--k) * 1px);
+     background:linear-gradient(90deg,#77736D 0%,#C9C5BE 1.2%,#9C9891 3%,#8E8A84 50%,#9C9891 97%,#C9C5BE 98.8%,#77736D 100%);
+     box-shadow:0 40px 80px rgba(38,32,25,.22),0 8px 20px rgba(38,32,25,.14);font-family:"Inter",system-ui,sans-serif}
+#tel::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+     background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 6%,rgba(255,255,255,0) 94%,rgba(0,0,0,.12) 100%)}
+.bouton{position:absolute;width:calc(3 * var(--k) * 1px);border-radius:3px;background:linear-gradient(90deg,#6E6A64,#B3AFA8)}
+#verre{position:absolute;inset:calc(6 * var(--k) * 1px);border-radius:calc(65 * var(--k) * 1px);background:#0A0A0B}
+#ecran{position:absolute;inset:calc(16 * var(--k) * 1px);border-radius:calc(55 * var(--k) * 1px);background:#FFFFFF;overflow:hidden;color:#000}
+#ecran > *{position:absolute}
+#ile{left:calc(133.5 * var(--k) * 1px);top:calc(11 * var(--k) * 1px);width:calc(126 * var(--k) * 1px);height:calc(37 * var(--k) * 1px);
+     border-radius:calc(18.5 * var(--k) * 1px);background:#000;z-index:3}
+#entete{left:0;right:0;top:0;height:calc(134 * var(--k) * 1px);background:rgba(246,246,246,.96);border-bottom:1px solid rgba(60,60,67,.18)}
+#heure{left:calc(30 * var(--k) * 1px);width:calc(72 * var(--k) * 1px);top:calc(17 * var(--k) * 1px);text-align:center;
+       font-size:calc(17 * var(--k) * 1px);font-weight:600;letter-spacing:-.01em;line-height:1.3}
+#etat{right:calc(26 * var(--k) * 1px);top:calc(21 * var(--k) * 1px);height:calc(13 * var(--k) * 1px);display:flex;align-items:center;gap:calc(5 * var(--k) * 1px)}
+#etat svg{height:100%;width:auto;display:block}
+#retour{left:calc(9 * var(--k) * 1px);top:calc(66 * var(--k) * 1px);height:calc(22 * var(--k) * 1px);width:auto}
+#pastille{left:calc(174.5 * var(--k) * 1px);top:calc(58 * var(--k) * 1px);width:calc(44 * var(--k) * 1px);height:calc(44 * var(--k) * 1px);border-radius:50%;
+          background:linear-gradient(180deg,#A6ABB7,#868A96);color:#fff;font-size:calc(21 * var(--k) * 1px);font-weight:500;
+          display:flex;align-items:center;justify-content:center;letter-spacing:.01em}
+#nom{left:0;right:0;top:calc(106 * var(--k) * 1px);text-align:center;font-size:calc(13 * var(--k) * 1px);line-height:1.2;color:#000}
+#nom span{color:#A1A1A6;font-size:.9em;margin-left:.2em}
+#horo{left:0;right:0;top:calc(146 * var(--k) * 1px);text-align:center;font-size:calc(12.5 * var(--k) * 1px);line-height:1.3;color:#8A8A8E}
+#horo b{font-weight:600}
+#bulle{left:calc(18 * var(--k) * 1px);top:calc(186 * var(--k) * 1px);max-width:calc(285 * var(--k) * 1px);
+       padding:calc(8 * var(--k) * 1px) calc(13 * var(--k) * 1px) calc(9 * var(--k) * 1px);background:#E9E9EB;
+       border-radius:calc(19 * var(--k) * 1px);font-size:calc(19 * var(--k) * 1px);line-height:1.27;letter-spacing:-.012em;color:#000}
+/* la queue de bulle d'iOS : un quart de disque de la couleur de la bulle, découpé par un second de la couleur du fond */
+#bulle::before{content:"";position:absolute;left:calc(-7 * var(--k) * 1px);bottom:0;width:calc(20 * var(--k) * 1px);height:calc(20 * var(--k) * 1px);
+       background:#E9E9EB;border-bottom-right-radius:calc(16 * var(--k) * 1px)}
+#bulle::after{content:"";position:absolute;left:calc(-10 * var(--k) * 1px);bottom:0;width:calc(10 * var(--k) * 1px);height:calc(20 * var(--k) * 1px);
+       background:#FFFFFF;border-bottom-right-radius:calc(10 * var(--k) * 1px)}
+#situ-sms{top:410px}
+#lien{color:#0A6CDC;text-decoration:underline;text-decoration-thickness:calc(1 * var(--k) * 1px);text-underline-offset:.12em}
 
 /* ── la semaine : le compteur d'avis (DA Vokio), la pile de tickets ── */
 #compteur{position:absolute;left:0;right:0;top:250px;display:flex;justify-content:center;align-items:baseline;gap:30px}
@@ -122,10 +153,28 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#E8E1D3}
   <!-- 3 bis · deux heures plus tard, le SMS -->
   <section id="s-sms" class="scene clip" data-start="11.8" data-duration="4.0" data-track-index="2">
     <p class="situ serif" id="situ-sms"></p>
-    <div id="tel"><div id="ecran">
-      <p id="exp">Vokio</p>
-      <p id="bulle">Bonjour Claire, merci pour votre visite. Votre avis compte beaucoup pour l'Institut Camélia : <span id="lien">https://vokio.fr/a/k7Qm2Xe</span></p>
-    </div></div>
+    <div id="tel">
+      <i class="bouton" style="left:-6px;top:calc(124 * var(--k) * 1px);height:calc(32 * var(--k) * 1px)"></i>
+      <i class="bouton" style="left:-6px;top:calc(178 * var(--k) * 1px);height:calc(62 * var(--k) * 1px)"></i>
+      <i class="bouton" style="left:-6px;top:calc(252 * var(--k) * 1px);height:calc(62 * var(--k) * 1px)"></i>
+      <i class="bouton" style="right:-6px;top:calc(208 * var(--k) * 1px);height:calc(98 * var(--k) * 1px)"></i>
+      <div id="verre"></div>
+      <div id="ecran">
+        <div id="entete"></div>
+        <div id="ile"></div>
+        <p id="heure">12:42</p>
+        <div id="etat">
+          <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="5" y="5.5" width="3" height="6.5" rx=".8"/><rect x="10" y="3" width="3" height="9" rx=".8"/><rect x="15" y="0" width="3" height="12" rx=".8"/></svg>
+          <svg viewBox="0 0 16 12"><path d="M8 2.6c2.3 0 4.4.9 6 2.4l1.2-1.3A10.4 10.4 0 0 0 8 .8 10.4 10.4 0 0 0 .8 3.7L2 5c1.6-1.5 3.7-2.4 6-2.4zm0 3.6c1.3 0 2.5.5 3.4 1.3l1.2-1.3A6.6 6.6 0 0 0 8 4.4c-1.8 0-3.4.7-4.6 1.8l1.2 1.3c.9-.8 2.1-1.3 3.4-1.3zM8 9.8c.6 0 1.1.2 1.5.6L8 12l-1.5-1.6c.4-.4.9-.6 1.5-.6z"/></svg>
+          <svg viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.6" fill="none" stroke="#000" stroke-opacity=".36"/><rect x="2" y="2" width="16" height="9" rx="2.2"/><path d="M25 4.3v4.4c.9-.3 1.5-1.2 1.5-2.2S25.9 4.6 25 4.3z" fill-opacity=".4"/></svg>
+        </div>
+        <svg id="retour" viewBox="0 0 12 22"><path d="M10.5 1.5 1.5 11l9 9.5" fill="none" stroke="#0A7AFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div id="pastille">V</div>
+        <p id="nom">Vokio<span>›</span></p>
+        <p id="horo">SMS<br><b>Aujourd’hui</b> 12:42</p>
+        <p id="bulle">Bonjour Claire, merci pour votre visite. Votre avis compte beaucoup pour l'Institut Camélia : <span id="lien">https://vokio.fr/a/k7Qm2Xe</span></p>
+      </div>
+    </div>
   </section>
 
   <!-- 4 · la semaine -->
@@ -235,7 +284,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#E8E1D3}
   const situ = (id, l1, l2) => { document.getElementById(id).innerHTML = `<span class="l1">${mots(l1, "s1")}</span> <em>${mots(l2, "s2")}</em>`; };
   situ("situ-geste", "À l'encaissement,", "son numéro.");
   situ("situ-sms", "Deux heures plus tard,", "elle reçoit ce SMS.");
-  document.getElementById("phrase").innerHTML = `${mots("Une cliente part,", "p")} <em>${mots("une demande.", "p")}</em>`;
+  document.getElementById("phrase").innerHTML = `${mots("Une cliente,", "p")} <em>${mots("un avis.", "p")}</em>`;
 
   // ── compteur : bandes de chiffres qui roulent vers l'avant ──
   const dz = document.querySelector("#dz .bande"), un = document.querySelector("#un .bande");
@@ -281,6 +330,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#E8E1D3}
   const p1 = avances("#tk1", leve(M.ticket1.visibles), M.ticket1.avances, 1);
   console.assert(p1 === h1, "ticket 1 : la coupe doit tomber au ras de la fente", p1, h1);
   retire("#tk1", p1, M.ticket1.coupe, M.ticket1.retire);
+  // retiré = parti : il disparaît une fois hors champ (sinon la sortie du poste, qui descend de 1 500 px, le ramenait
+  // dans l'image et on le voyait retomber vers 6 s : retour Florian du 25/11)
+  tl.set("#tk1", { autoAlpha: 0 }, T(M.ticket1.retire) + 0.62);
   // l'ombre de la lèvre sur le papier : seulement quand du papier sort de la fente
   tl.to("#ombre1", { opacity: 0, duration: 0.12 }, T(M.ticket1.retire) + 0.1);
   tl.to("#ombre1", { opacity: 1, duration: 0.1 }, T(M.ticket2.avances[0][0]));
@@ -309,12 +361,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#E8E1D3}
   // 3 bis · le SMS
   const S = M.sms;
   entre("situ-sms", T(S.legende));
-  tl.fromTo("#tel", { y: 900 }, { y: 0, duration: 0.75, ease: "power3.out" }, T(S.telephone));
-  tl.fromTo("#exp", { opacity: 0 }, { opacity: 1, duration: 0.3 }, T(S.telephone) + 0.4);
-  tl.fromTo("#bulle", { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: P3o, transformOrigin: "0% 100%" }, Ti(S.bulle));
-  tl.to("#lien", { backgroundSize: "100% 6px", duration: 0.7, ease: P3o }, T(S.bulle) + 1.0);
+  tl.fromTo("#tel", { y: 1450 }, { y: 0, duration: 0.75, ease: "power3.out" }, T(S.telephone));
+  // le message arrive comme dans Messages : l'horodatage et la bulle ensemble, la bulle grandit depuis sa queue
+  tl.fromTo("#horo", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" }, Ti(S.bulle));
+  tl.fromTo("#bulle", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.38, ease: "back.out(1.4)", transformOrigin: "0% 100%" }, Ti(S.bulle));
   sort(["#situ-sms"], T(S.sortie));
-  tl.to("#tel", { y: 1300, duration: 0.45, ease: "power2.in" }, T(S.sortie));
+  tl.to("#tel", { y: 1450, duration: 0.45, ease: "power2.in" }, T(S.sortie));
 
   // 4 · la semaine
   const W = M.semaine;
