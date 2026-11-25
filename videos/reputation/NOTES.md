@@ -42,3 +42,10 @@ Avant leur entrée, les mots attendaient à yPercent 110 sous leur cache : l'acc
 
 ## 24/10 (suite) : un seul son sur les étoiles
 Retour Florian : « pas 5 sons, 1 son bien smooth qui monte, pas trop dans les aigus ». `montee()` : accord de fa majeur (fa4, la4, do5) qui glisse d'une quinte en 1,1 s, attaque lente, sommet à 1 s, queue 0,9 s ; fréquence dominante 390 → 520 Hz (les anciennes notes montaient à 1 400 Hz). Calé en niveau EFFICACE sur toute sa durée, 6 dB sous la musique (calé sur la crête au départ, il sortait 12 à 16 dB sous la musique : inaudible).
+
+## 25/11/2026 : version 16:9 du film n° 1 (Capterra / GetApp / G2, lecteur YouTube)
+`contents-16x9/` : RECOMPOSÉ pour le paysage (leçon du showcase : le 9:16 translaté valait 5,5/10). Même minutage à l'image près que `contents/`, seule la mise en page change : texte (horloge + phrase) en colonne gauche à x 150, objet (carte de l'app à l'échelle 0,8, bulle SMS, étoiles) en colonne droite à x 960, haut de carte aligné sur le haut de l'horloge (y 195) ; accroche sur deux lignes à 196 px ; fin en deux blocs (wordmark + « Réputation » à gauche sous le halo, promesse + prix + vokio.fr/avis à droite) ; mention en bas à 26 px.
+Rendu : `flock /tmp/hf-rendu.lock bin/hf render videos/reputation/contents-16x9 --fps 30 -o /root/vokio-uploads/videos/reputation/reputation-clients-contents-16x9.mp4`, puis la bande son de la version Instagram COPIÉE telle quelle (même mix, -12,8 LUFS, crête -0,9 dBFS ; bruitages toujours synchrones puisque le minutage est identique) :
+`ffmpeg -i reputation-clients-contents-16x9.mp4 -i reputation-clients-contents-9x16-musique.mp4 -map 0:v -map 1:a -c copy -shortest -movflags +faststart "Réputation 1 · Vos clients contents · 16x9 (musique).mp4"`.
+Vignette YouTube 1280×720 = image à 1 s (accroche). Drive « Vokio · Réputation · pubs vidéo/16x9/ ». `flashs.py` : aucun. Faits revérifiés le 25/11 (19,99 €/mois Essentiel, 14 jours d'essai, SMS 2 h après, texte de lib/avis.ts, lien https://vokio.fr/a/) : rien à corriger.
+⚠️ `hf snapshot` lance une analyse Gemini PAYANTE si GEMINI_API_KEY est posée : toujours `--describe false`.
