@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>Vokio Réputation · Le ticket</title>
+<!-- Pub Vokio Réputation n° 3 « Le ticket » (25/11/2026). Fil rouge : le ticket de caisse thermique d'un institut de
+     beauté fictif (Institut Camélia, Marseille). Tout le minutage vient de minutage.js (en temps de musique, 96 BPM),
+     que outils/salon.py lit aussi pour poser les sons du salon sur les mêmes instants. Trois éléments à l'écran au plus,
+     une info à la fois. Le papier sort de l'imprimante par à-coups, une rangée par pas de moteur ; il ne lévite jamais. -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<script src="minutage.js"></script>
+<style>
+@font-face{font-family:"Ticket";font-weight:700;font-style:normal;font-display:block;src:url("assets/fonts/DejaVuSansMono-Bold.ttf") format("truetype");}
+@font-face{font-family:"Geist Mono";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/GeistMono-Regular.woff2") format("woff2");}
+@font-face{font-family:"Geist";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/Geist-Regular.woff2") format("woff2");}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:normal;font-display:block;src:url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");}
+@font-face{font-family:"Instrument Serif";font-weight:400;font-style:italic;font-display:block;src:url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#E8E1D3}
+#root{position:relative;width:100%;height:100%;overflow:hidden;background:#E8E1D3 url("assets/textures/comptoir.png") 0 0/1080px 1920px;
+      color:#262019;font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased;font-kerning:normal}
+.scene{position:absolute;inset:0}
+.m{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .06em .14em;margin:0 -.06em -.14em}
+.w{display:inline-block}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+
+/* ── le ticket thermique ─────────────────────────────────────────────── */
+.tk{position:absolute;left:60px;width:960px;filter:drop-shadow(0 2px 2px rgba(38,32,25,.10)) drop-shadow(0 14px 22px rgba(38,32,25,.10))}
+.papier{position:relative;width:960px;background:#FAF8F2 url("assets/textures/papier.png") 0 0/960px auto;overflow:hidden}
+.encre{position:absolute;left:37px;top:30px;width:886px;color:#211F1B;font-family:"Ticket",monospace;font-weight:700;
+       font-size:46px;line-height:62px;white-space:pre;letter-spacing:0;
+       -webkit-mask-image:url("assets/textures/encre.png");mask-image:url("assets/textures/encre.png");
+       -webkit-mask-size:886px auto;mask-size:886px auto;filter:blur(.35px)}
+.encre .r{height:62px;overflow:visible}
+.encre .d{height:124px;font-size:92px;line-height:118px}
+.encre .c{text-align:center}
+/* le papier qui sort de la fente prend un peu d'ombre de la lèvre de l'imprimante */
+.fente-ombre{position:absolute;left:60px;width:960px;top:1284px;height:36px;background:linear-gradient(rgba(38,32,25,0),rgba(38,32,25,.16))}
+
+/* ── l'imprimante, vue de face : un corps sombre, une fente, rien d'autre ── */
+.poste{position:absolute;inset:0}
+.imp-dos{position:absolute;left:30px;width:1020px;top:1292px;height:60px;border-radius:30px 30px 0 0;
+         background:linear-gradient(#45403A,#2E2A26)}
+.imp{position:absolute;left:20px;width:1040px;top:1320px;height:640px;border-radius:44px 44px 0 0;
+     background:linear-gradient(180deg,#3A3631 0px,#2A2723 18px,#221F1C 120px,#1C1A17 100%);
+     box-shadow:0 -1px 0 rgba(255,255,255,.08) inset, 0 -6px 18px rgba(38,32,25,.18)}
+.imp::before{content:"";position:absolute;left:44px;right:44px;top:7px;height:3px;border-radius:2px;background:rgba(255,255,255,.10)}
+
+/* ── légendes ─────────────────────────────────────────────────────────── */
+.situ{position:absolute;left:70px;right:60px;top:300px;font-size:86px;line-height:1.08;letter-spacing:-.014em}
+.situ em{font-style:italic;display:block}
+
+/* une carte de l'app : l'intérieur vient de la capture, le cadre est redessiné (comme les films 1 et 2) */
+.carte{position:absolute;left:70px;overflow:hidden;border-radius:48px;border:3px solid rgba(38,32,25,.10);
+       background:#F4F1E8;box-shadow:0 3px 9px rgba(38,32,25,.08),0 18px 40px rgba(38,32,25,.08);transform-origin:0 0}
+.carte img{display:block;position:absolute;left:0;top:0}
+#form{top:640px;width:1050px;height:777px;transform:scale(.9)}
+
+/* ── le téléphone : une silhouette sobre, l'écran, la bulle ; aucun élément d'interface imité ── */
+#tel{position:absolute;left:150px;top:690px;width:780px;height:1500px;border-radius:118px;background:#1F1C19;
+     box-shadow:0 30px 60px rgba(38,32,25,.18)}
+#ecran{position:absolute;left:22px;top:22px;right:22px;bottom:22px;border-radius:98px;background:#FBFAF6;overflow:hidden}
+#exp{position:absolute;left:0;right:0;top:78px;text-align:center;font-size:34px;color:#6F695F}
+#bulle{position:absolute;left:44px;top:160px;width:620px;padding:34px 40px 38px;background:#E9E4D8;
+       border-radius:46px 46px 46px 14px;font-size:44px;line-height:1.34;letter-spacing:-.005em;color:#262019}
+#lien{background-image:linear-gradient(#EFA424,#EFA424);background-repeat:no-repeat;background-position:0 96%;
+      background-size:0% 6px;padding-bottom:2px}
+
+/* ── la semaine : le compteur d'avis (DA Vokio), la pile de tickets ── */
+#compteur{position:absolute;left:0;right:0;top:250px;display:flex;justify-content:center;align-items:baseline;gap:30px}
+#chiffres{display:flex;font-size:250px;line-height:250px;height:250px;letter-spacing:-.03em}
+.col{height:250px;overflow:hidden}
+.bande{display:flex;flex-direction:column}
+.bande span{display:block;height:250px;text-align:center}
+#mot-avis{font-size:120px;font-style:italic;line-height:1}
+#etoile{width:84px;height:84px;align-self:center;margin-top:40px;overflow:visible}
+#etoile .fond{fill:none;stroke:rgba(38,32,25,.28);stroke-width:2.2}
+#etoile .plein{fill:#EFA424}
+#pile{position:absolute;inset:0}
+#pile .tk{top:760px}
+
+/* ── la fin (même construction que les films 1 et 2, aérée sur toute la hauteur) ── */
+#fond-fin{position:absolute;inset:0;background:#F4F1E8}
+#halo{position:absolute;left:-260px;top:40px;width:1600px;height:1300px;
+      background:radial-gradient(50% 50% at 50% 50%,rgba(239,164,36,.30) 0%,rgba(248,214,155,.26) 34%,rgba(245,198,119,.12) 62%,rgba(244,241,232,0) 100%)}
+#fin{position:absolute;inset:0;text-align:center}
+#fin > p{position:absolute;left:0;right:0}
+#mot{top:330px;font-size:270px;letter-spacing:-.045em;line-height:.9;display:flex;justify-content:center;align-items:baseline}
+#mot .seg{display:inline-block;clip-path:inset(-30% -14% -30% -14%)}
+#mot .i{position:relative;font-style:normal}
+#mot-pt{position:absolute;left:63.5%;margin-left:-.055em;top:.13em;width:.11em;height:.11em;border-radius:50%;background:#EFA424}
+#sous{top:600px;font-size:150px;line-height:1;font-style:italic;letter-spacing:-.02em}
+#phrase{top:880px;margin:0 auto;width:960px;font-size:92px;line-height:1.08;letter-spacing:-.012em}
+#phrase em{font-style:italic;display:block}
+#fin > p.cta-l{top:1170px}
+#cta{display:inline-block;padding:34px 64px;border-radius:999px;background:#262019;color:#F4F1E8;font-size:46px}
+#site{top:1325px;font-family:"Geist Mono",monospace;font-size:40px;letter-spacing:.14em;text-transform:uppercase;color:#6F695F}
+#mention{position:absolute;left:0;right:0;top:1840px;text-align:center;font-size:36px;line-height:1;color:#6F695F}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="31.25" data-width="1080" data-height="1920">
+
+  <!-- 1 + 2 · l'accroche : le ticket de la cliente, puis le petit mot de l'imprimante -->
+  <section id="s-poste1" class="scene clip" data-start="0" data-duration="6.5" data-track-index="0">
+    <div class="poste" id="poste1">
+      <div class="imp-dos"></div>
+      <div class="tk" id="tk1"></div>
+      <div class="tk" id="tk2"></div>
+      <div class="fente-ombre" id="ombre1"></div>
+      <div class="imp"></div>
+    </div>
+  </section>
+
+  <!-- 3 · le geste, à la caisse : la vraie app -->
+  <section id="s-geste" class="scene clip" data-start="6.1" data-duration="5.85" data-track-index="1">
+    <p class="situ serif" id="situ-geste"></p>
+    <div class="carte" id="form"><img id="planche" src="assets/captures/saisie-planche.png" alt=""></div>
+  </section>
+
+  <!-- 3 bis · deux heures plus tard, le SMS -->
+  <section id="s-sms" class="scene clip" data-start="11.8" data-duration="4.0" data-track-index="2">
+    <p class="situ serif" id="situ-sms"></p>
+    <div id="tel"><div id="ecran">
+      <p id="exp">Vokio</p>
+      <p id="bulle">Bonjour Claire, merci pour votre visite. Votre avis compte beaucoup pour l'Institut Camélia : <span id="lien">https://vokio.fr/a/k7Qm2Xe</span></p>
+    </div></div>
+  </section>
+
+  <!-- 4 · la semaine -->
+  <section id="s-semaine" class="scene clip" data-start="15.4" data-duration="7.5" data-track-index="3">
+    <div id="pile"></div>
+    <div id="compteur" class="serif">
+      <div id="chiffres"><div class="col" id="dz"><div class="bande"></div></div><div class="col" id="un"><div class="bande"></div></div></div>
+      <span id="mot-avis">avis</span>
+      <svg id="etoile" viewBox="0 0 100 100"><path class="fond" d="M50 4l13.5 28.4 31.1 3.9-22.9 21.4 5.9 30.8L50 73.4 22.4 88.5l5.9-30.8L5.4 36.3l31.1-3.9z"/><path class="plein" id="etoile-plein" d="M50 4l13.5 28.4 31.1 3.9-22.9 21.4 5.9 30.8L50 73.4 22.4 88.5l5.9-30.8L5.4 36.3l31.1-3.9z"/></svg>
+    </div>
+  </section>
+
+  <!-- 5 · la chute : le total de la semaine -->
+  <section id="s-chute" class="scene clip" data-start="22.3" data-duration="4.4" data-track-index="4">
+    <div class="poste" id="poste2">
+      <div class="imp-dos"></div>
+      <div class="tk" id="tk3"></div>
+      <div class="fente-ombre" id="ombre2"></div>
+      <div class="imp"></div>
+    </div>
+  </section>
+
+  <!-- 6 · la fin -->
+  <section id="s-fin" class="scene clip" data-start="25.9" data-duration="5.35" data-track-index="5">
+    <div id="fond-fin"></div>
+    <div id="halo"></div>
+    <div id="fin">
+      <p id="mot" class="serif"><span class="seg" id="mot-a">Vok</span><span class="seg i" id="mot-i">ı<span id="mot-pt"></span></span><span class="seg" id="mot-o">o</span></p>
+      <p id="sous" class="serif"><span class="m" data-layout-allow-overflow><span class="w r">Réputation</span></span></p>
+      <p id="phrase" class="serif"></p>
+      <p class="cta-l"><span id="cta">19,99 € par mois · 14 jours d'essai</span></p>
+      <p id="site">vokio.fr/avis</p>
+    </div>
+    <p id="mention">Établissement fictif</p>
+  </section>
+</div>
+<script>
+(function(){
+  const M = window.MINUTAGE;
+  const T = b => b * 60 / M.bpm;
+  // un geste qui fait du bruit démarre 20 ms avant son temps : l'image qui porte le saut tombe alors au plus près du son
+  // (une image = 33 ms ; mesuré par outils/synchro.py)
+  const Ti = b => T(b) - 0.02;
+  const COLS = 32, RANG = 62, MARGE = 30, FENTE = 1320, SUITE = 420;
+
+  // ── les lignes d'un ticket : n = normale, d = double hauteur et largeur (16 colonnes), c = centrée ──
+  const just = (g, d) => g + " ".repeat(Math.max(1, COLS - g.length - d.length)) + d;
+  const L = {
+    n: t => ({ t, k: "r" }), c: t => ({ t, k: "r c" }), d: t => ({ t, k: "r d c" }), v: () => ({ t: "", k: "r" }),
+    j: (g, d) => ({ t: just(g, d), k: "r" }), tirets: () => ({ t: "-".repeat(COLS), k: "r" })
+  };
+  const rangs = ls => ls.reduce((s, l) => s + (l.k.includes("d") ? 2 : 1), 0);
+
+  // bord de coupe : petites dents irrégulières (graine fixe : même dentelure à chaque rendu)
+  function hasard(graine) { let s = graine; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+  function dentelure(h, graine, haut, bas) {
+    const r = hasard(graine), pts = [], W = 960, pas = 9;
+    for (let x = 0; x <= W; x += pas) pts.push(`${x}px ${haut ? (r() * 5).toFixed(1) : 0}px`);
+    for (let x = W; x >= 0; x -= pas) pts.push(`${x}px ${(h - (bas ? r() * 5 : 0)).toFixed(1)}px`);
+    return `polygon(${pts.join(",")})`;
+  }
+  // opts.rouleau : le ticket est encore attaché au rouleau (papier qui continue dans l'imprimante, sans bord) jusqu'à
+  // sa coupe, où la dentelure du bas apparaît au ras de la fente (COUPES[id], posée par la timeline)
+  const COUPES = {};
+  function ticket(id, lignes, graine, opts = {}) {
+    const el = document.getElementById(id);
+    const h = MARGE + rangs(lignes) * RANG + (opts.basMarge || 0);
+    const long = opts.rouleau ? h + SUITE : h;
+    COUPES[id] = dentelure(h, graine, true, true);
+    el.innerHTML = `<div class="papier" style="height:${long}px;clip-path:${opts.rouleau ? dentelure(long, graine, true, false) : COUPES[id]}">
+      <div class="encre">${lignes.map(l => `<div class="${l.k}">${l.t.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</div>`).join("")}</div></div>`;
+    return h;
+  }
+  const leve = px => MARGE + px * RANG;
+
+  // ── ticket 1 : la cliente de 10:42 ──
+  const T1 = [L.d("INSTITUT CAMÉLIA"), L.c("Marseille"), L.j("mer. 25/11/2026", "10:42"),
+              L.j("Soin visage", "45,00 €"), L.j("TOTAL", "45,00 €"), L.v(), L.d("Elle a adoré."), L.v()];
+  // ── ticket 2 : la ligne qui n'a rien à faire sur un ticket ──
+  const T2 = [L.v(), L.d("Google ne le"), L.d("sait pas encore."), L.v()];
+  // ── ticket 3 : le total de la semaine ──
+  const T3 = [L.c("Semaine du 23 au 28/11"), L.tirets(), L.v(), L.n("TOTAL DE LA SEMAINE"), L.d("9 nouveaux avis"), L.v()];
+  const h1 = ticket("tk1", T1, 7, { rouleau: true });
+  const h2 = ticket("tk2", T2, 19, { rouleau: true });
+  const h3 = ticket("tk3", T3, 31, { rouleau: true });
+
+  // ── la semaine : un ticket par jour, la dernière ligne dit l'essentiel ──
+  const JOURS = [
+    ["lun. 23/11/2026", "11:05", "Épilation jambes", "28,00 €"],
+    ["mar. 24/11/2026", "17:30", "Manucure", "30,00 €"],
+    ["mer. 25/11/2026", "10:42", "Soin visage", "45,00 €"],
+    ["jeu. 26/11/2026", "14:15", "Beauté des pieds", "38,00 €"],
+    ["ven. 27/11/2026", "18:10", "Massage dos", "60,00 €"],
+    ["sam. 28/11/2026", "12:20", "Rehaussement cils", "55,00 €"]
+  ];
+  // position finale sur la pile (x, y, rotation) : les tickets se recouvrent presque, seuls les bords dépassent
+  // (une pile en escalier répétait six fois « Demande d'avis envoyée » à moitié cachée : du bruit)
+  const POSE = [[-16, 14, -2.6], [18, 9, 2.1], [-10, 4, -1.3], [14, -1, 2.4], [-18, -6, -1.8], [4, -10, 0.9]];
+  const pile = document.getElementById("pile");
+  JOURS.forEach((j, k) => {
+    pile.insertAdjacentHTML("beforeend", `<div class="tk" id="jour${k}"></div>`);
+    ticket(`jour${k}`, [L.c("INSTITUT CAMÉLIA"), L.j(j[0], j[1]), L.j(j[2], j[3]), L.tirets(), L.n("Demande d'avis envoyée")], 101 + k, { basMarge: 18 });
+  });
+
+  // ── légendes ──
+  const mots = (t, cls) => t.split(" ").map(w => `<span class="m" data-layout-allow-overflow><span class="w ${cls}">${w}</span></span>`).join(" ");
+  const situ = (id, l1, l2) => { document.getElementById(id).innerHTML = `<span class="l1">${mots(l1, "s1")}</span> <em>${mots(l2, "s2")}</em>`; };
+  situ("situ-geste", "À l'encaissement,", "son numéro.");
+  situ("situ-sms", "Deux heures plus tard,", "elle reçoit ce SMS.");
+  document.getElementById("phrase").innerHTML = `${mots("Une cliente part,", "p")} <em>${mots("une demande.", "p")}</em>`;
+
+  // ── compteur : bandes de chiffres qui roulent vers l'avant ──
+  const dz = document.querySelector("#dz .bande"), un = document.querySelector("#un .bande");
+  for (let d = 0; d < 10; d++) dz.insertAdjacentHTML("beforeend", `<span>${d}</span>`);
+  for (let r = 0; r < 3; r++) for (let d = 0; d < 10; d++) un.insertAdjacentHTML("beforeend", `<span>${d}</span>`);
+
+  const tl = gsap.timeline({ paused: true });
+  const P3o = "power3.out", P3i = "power3.in";
+  const entre = (id, t) => {
+    tl.fromTo(`#${id} .s1`, { yPercent: 160 }, { yPercent: 0, duration: 0.6, ease: P3o, stagger: 0.06 }, t);
+    tl.fromTo(`#${id} .s2`, { yPercent: 160 }, { yPercent: 0, duration: 0.65, ease: P3o, stagger: 0.06 }, t + 0.3);
+  };
+  const sort = (sel, t) => tl.to(sel, { y: -50, opacity: 0, duration: 0.35, ease: P3i, stagger: 0.04 }, t);
+
+  // le papier avance d'une rangée par pas : départ sec, petite inertie (le papier léger fléchit un rien puis revient)
+  function avances(sel, depart, liste, signe) {
+    let px = depart;
+    gsap.set(sel, { y: -px });
+    liste.forEach(([b, n], k) => {
+      const t = Ti(b);
+      px += n * RANG;
+      tl.to(sel, { y: -px, duration: 0.075, ease: "power2.out" }, t);
+      const s = (k % 2 ? -1 : 1) * signe;
+      tl.set(sel, { transformOrigin: `480px ${px}px` }, t);
+      tl.to(sel, { keyframes: [{ rotation: 0.32 * s, duration: 0.07, ease: "power1.out" },
+                               { rotation: -0.14 * s, duration: 0.2, ease: "sine.inOut" },
+                               { rotation: 0, duration: 0.28, ease: "sine.inOut" }] }, t + 0.02);
+    });
+    return px;
+  }
+  // ticket coupé puis retiré : la coupe libère le papier (il tombe de 4 px), puis une main le tire vers le haut
+  // (valeurs absolues, jamais relatives : la timeline doit donner la même image quel que soit l'ordre des seek)
+  function retire(sel, px, bCoupe, bRetire) {
+    tl.set(`${sel} .papier`, { clipPath: COUPES[sel.slice(1)], height: px }, Ti(bCoupe));
+    tl.to(sel, { y: -px + 4, duration: 0.05, ease: "power1.in" }, Ti(bCoupe));
+    tl.to(sel, { y: -px + 4 - 1500, x: 50, rotation: -4, duration: 0.6, ease: "power2.in" }, T(bRetire));
+  }
+
+  // 1 · l'accroche
+  gsap.set("#tk1", { top: FENTE });
+  gsap.set("#tk2", { top: FENTE });
+  gsap.set("#tk3", { top: FENTE });
+  const p1 = avances("#tk1", leve(M.ticket1.visibles), M.ticket1.avances, 1);
+  console.assert(p1 === h1, "ticket 1 : la coupe doit tomber au ras de la fente", p1, h1);
+  retire("#tk1", p1, M.ticket1.coupe, M.ticket1.retire);
+  // l'ombre de la lèvre sur le papier : seulement quand du papier sort de la fente
+  tl.to("#ombre1", { opacity: 0, duration: 0.12 }, T(M.ticket1.retire) + 0.1);
+  tl.to("#ombre1", { opacity: 1, duration: 0.1 }, T(M.ticket2.avances[0][0]));
+  // 2 · « Google ne le sait pas encore. » (le bord d'attaque sort de la fente à la première avance)
+  avances("#tk2", MARGE - RANG, M.ticket2.avances, -1);
+  tl.to("#poste1", { y: 1500, duration: 0.5, ease: "power2.in" }, T(M.ticket2.sortie));
+
+  // 3 · le geste
+  const G = M.geste;
+  entre("situ-geste", T(G.legende));
+  tl.fromTo("#form", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: P3o }, T(G.carte));
+  const ETATS = [];
+  for (let n = 0; n <= 20; n++) ETATS.push(`saisie-${String(n).padStart(2, "0")}`);
+  ETATS.push("saisie-pleine", "saisie-presse", "saisie-note");
+  const H = 858;
+  const montre = (e, t) => tl.set("#planche", { y: -H * ETATS.indexOf(e) }, t);
+  gsap.set("#planche", { y: 0 });
+  for (let n = 1; n <= 14; n++) montre(`saisie-${String(n).padStart(2, "0")}`, T(G.numero + G.pas * (n - 1)));
+  for (let n = 15; n <= 20; n++) montre(`saisie-${String(n).padStart(2, "0")}`, T(G.prenom + G.pas * (n - 15)));
+  montre("saisie-pleine", T(G.pleine));
+  montre("saisie-presse", Ti(G.presse));
+  montre("saisie-note", T(G.note));
+  tl.to("#form", { height: 861, duration: 0.3, ease: P3o }, T(G.note));
+  sort(["#situ-geste", "#form"], T(G.sortie));
+
+  // 3 bis · le SMS
+  const S = M.sms;
+  entre("situ-sms", T(S.legende));
+  tl.fromTo("#tel", { y: 900 }, { y: 0, duration: 0.75, ease: "power3.out" }, T(S.telephone));
+  tl.fromTo("#exp", { opacity: 0 }, { opacity: 1, duration: 0.3 }, T(S.telephone) + 0.4);
+  tl.fromTo("#bulle", { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: P3o, transformOrigin: "0% 100%" }, Ti(S.bulle));
+  tl.to("#lien", { backgroundSize: "100% 6px", duration: 0.7, ease: P3o }, T(S.bulle) + 1.0);
+  sort(["#situ-sms"], T(S.sortie));
+  tl.to("#tel", { y: 1300, duration: 0.45, ease: "power2.in" }, T(S.sortie));
+
+  // 4 · la semaine
+  const W = M.semaine;
+  tl.fromTo("#compteur", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: P3o }, T(W.compteur));
+  gsap.set("#dz .bande", { y: -250 * 4 });
+  gsap.set("#un .bande", { y: -250 * 7 });
+  gsap.set("#etoile-plein", { scale: 0, transformOrigin: "50% 55%" });
+  W.tickets.forEach((b, k) => {
+    const [x, y, r] = POSE[k], cote = k % 2 ? -1 : 1;
+    // glissé sur le comptoir : élan puis frottement (décélération), la rotation se règle en même temps
+    tl.fromTo(`#jour${k}`, { x: cote * 1150, y: y + 40, rotation: r + cote * 7 },
+              { x, y, rotation: r, duration: 0.5, ease: "power2.out" }, T(b) - 0.5);
+  });
+  W.paliers.forEach(([b, v]) => {
+    const t = T(b);
+    // le chiffre roule en butée (départ franc, arrivée douce) : le gros du mouvement tombe sur la sonnette
+    tl.to("#dz .bande", { y: -250 * Math.floor(v / 10), duration: 0.38, ease: "power3.out" }, t - 0.03);
+    tl.to("#un .bande", { y: -250 * (v % 10 + (v >= 50 ? 10 : 0)), duration: 0.38, ease: "power3.out" }, t - 0.03);
+    tl.set("#etoile-plein", { scale: 0 }, t - 0.03);
+    tl.to("#etoile-plein", { keyframes: [{ scale: 1.18, duration: 0.18, ease: "power2.out" }, { scale: 1, duration: 0.25, ease: "sine.inOut" }] }, t - 0.03);
+    tl.to("#etoile-plein", { scale: 0, duration: 0.35, ease: "power2.in" }, t + 0.75);
+  });
+  tl.to(["#compteur", "#pile"], { y: 1400, duration: 0.5, ease: "power2.in", stagger: 0.04 }, T(W.sortie));
+
+  // 5 · la chute
+  const C = M.chute;
+  tl.fromTo("#poste2", { y: 700 }, { y: 0, duration: 0.6, ease: "power3.out" }, T(C.imprimante));
+  const p3 = avances("#tk3", MARGE - RANG + RANG, C.avances, 1);
+  console.assert(p3 === h3, "ticket 3 : la coupe doit tomber au ras de la fente", p3, h3);
+  tl.set("#tk3 .papier", { clipPath: COUPES.tk3, height: p3 }, Ti(C.coupe));
+  tl.to("#tk3", { y: -p3 + 4, duration: 0.05, ease: "power1.in" }, Ti(C.coupe));
+  tl.to("#ombre2", { opacity: 0, duration: 0.12 }, T(C.retire) + 0.1);
+  tl.fromTo("#s-chute .poste", { scale: 1 }, { keyframes: [{ scale: 1.035, duration: 0.09, ease: "power2.out" }, { scale: 1, duration: 0.6, ease: "sine.out" }], transformOrigin: "50% 60%" }, Ti(C.coupe));
+  tl.to("#tk3", { y: -p3 + 4 - 1600, x: -40, rotation: 3, duration: 0.6, ease: "power2.in" }, T(C.retire));
+  tl.to("#poste2 .imp, #poste2 .imp-dos", { y: 700, duration: 0.5, ease: "power2.in" }, T(C.retire) + 0.15);
+
+  // 6 · la fin
+  const F = M.fin;
+  tl.fromTo("#fond-fin", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "sine.inOut" }, T(F.halo) - 0.35);
+  tl.fromTo("#halo", { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 1.4, ease: "sine.out" }, T(F.halo));
+  tl.fromTo("#mot-a", { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.75, ease: P3o }, T(F.mot));
+  tl.fromTo(["#mot-i", "#mot-o"], { clipPath: "inset(-30% 114% -30% -14%)" }, { clipPath: "inset(-30% -14% -30% -14%)", duration: 0.45, ease: P3o, stagger: 0.12 }, T(F.mot) + 0.45);
+  tl.fromTo("#mot-pt", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P3o }, T(F.mot) + 0.85);
+  tl.fromTo("#sous .r", { yPercent: 160 }, { yPercent: 0, duration: 0.75, ease: P3o }, T(F.sous));
+  tl.fromTo("#phrase .p", { yPercent: 160 }, { yPercent: 0, duration: 0.7, ease: P3o, stagger: 0.06 }, T(F.phrase));
+  tl.fromTo("#cta", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.6, ease: P3o }, T(F.cta));
+  tl.fromTo("#site", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, T(F.site));
+  tl.fromTo("#mention", { opacity: 0 }, { opacity: 1, duration: 0.6 }, T(F.mention));
+  tl.to({}, { duration: 0.01 }, 31.24);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+})();
+</script>
+</body>
+</html>

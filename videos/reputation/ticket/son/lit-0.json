@@ -1,0 +1,107 @@
+{
+ "composition_plan": {
+  "positive_global_styles": [
+   "warm organic instrumental neo-soul groove",
+   "96 BPM, steady tempo, 4/4",
+   "F major",
+   "Rhodes electric piano, upright double bass, soft brushed drums",
+   "intimate, warm, human, analog, played by real musicians",
+   "instrumental"
+  ],
+  "negative_global_styles": [
+   "vocals",
+   "choir",
+   "humming",
+   "spoken word",
+   "synth lead",
+   "EDM",
+   "trap hi-hats",
+   "tempo change",
+   "minor key",
+   "distorted guitar",
+   "trailer sounds",
+   "silent gaps"
+  ],
+  "sections": [
+   {
+    "section_name": "Receipt prints, intimate opening",
+    "positive_local_styles": [
+     "Rhodes chords alone, soft and warm",
+     "upright bass enters gently on the second bar",
+     "no drums yet",
+     "playful"
+    ],
+    "negative_local_styles": [
+     "drums",
+     "big"
+    ],
+    "duration_ms": 6250,
+    "lines": []
+   },
+   {
+    "section_name": "At the till, the gesture",
+    "positive_local_styles": [
+     "soft brushed drums groove enters",
+     "walking upright bass",
+     "Rhodes comping",
+     "relaxed and confident"
+    ],
+    "negative_local_styles": [
+     "crash cymbal",
+     "drop"
+    ],
+    "duration_ms": 8750,
+    "lines": []
+   },
+   {
+    "section_name": "The week builds",
+    "positive_local_styles": [
+     "building energy",
+     "brushes get busier",
+     "warm piano joins the Rhodes",
+     "rising, crescendo"
+    ],
+    "negative_local_styles": [
+     "drop",
+     "breakdown"
+    ],
+    "duration_ms": 6250,
+    "lines": []
+   },
+   {
+    "section_name": "Tension before the total",
+    "positive_local_styles": [
+     "drums stop",
+     "sustained Rhodes chord keeps ringing",
+     "bass climbs upward step by step",
+     "suspense, building to a big hit"
+    ],
+    "negative_local_styles": [
+     "silence",
+     "full drums"
+    ],
+    "duration_ms": 3750,
+    "lines": []
+   },
+   {
+    "section_name": "The total, full band and resolution",
+    "positive_local_styles": [
+     "big warm hit on the first beat",
+     "full band groove, joyful",
+     "resolves on the home chord F major",
+     "final chord held and ringing until the very end"
+    ],
+    "negative_local_styles": [
+     "silence",
+     "early fade out",
+     "abrupt cut",
+     "new melody"
+    ],
+    "duration_ms": 6250,
+    "lines": []
+   }
+  ]
+ },
+ "respect_sections_durations": true,
+ "prise": 0
+}
